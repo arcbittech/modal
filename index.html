@@ -618,11 +618,11 @@
                 <i class="fas fa-building"></i>
                 Office Details
             </div>
-            <div class="modal-tab active" onclick="switchModalTab('group')">
+            <div class="modal-tab" onclick="switchModalTab('group')">
                 <i class="fas fa-users"></i>
                 Group Details
             </div>
-            <div class="modal-tab" onclick="switchModalTab('provider')">
+            <div class="modal-tab active" onclick="switchModalTab('provider')">
                 <i class="fas fa-user-md"></i>
                 Provider Details
             </div>
@@ -774,7 +774,7 @@
             overlay.classList.add('show');
             
             // Load OFFICE details by default (changed from member)
-            loadGroupDetails(authNumber)
+            loadProviderDetails(authNumber)
         }
 
         // Close modal
