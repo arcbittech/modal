@@ -4,7 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Auth Details Modal - Medical Software</title>
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Open+Sans:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <style>
         * {
@@ -14,7 +14,7 @@
         }
 
         body {
-            font-family: 'Inter', sans-serif;
+            font-family: 'Open Sans', sans-serif; /* Changed from Inter to Open Sans */
             background: #f5f7fa;
             padding: 20px;
         }
@@ -610,11 +610,11 @@
 
         <!-- Modal Tabs -->
         <div class="modal-tabs">
-            <div class="modal-tab" active onclick="switchModalTab('member')">
+            <div class="modal-tab" onclick="switchModalTab('member')">
                 <i class="fas fa-user"></i>
                 Member Details
             </div>
-            <div class="modal-tab" onclick="switchModalTab('office')">
+            <div class="modal-tab active" onclick="switchModalTab('office')">
                 <i class="fas fa-building"></i>
                 Office Details
             </div>
@@ -758,7 +758,7 @@
             }
         };
 
-        // ⭐ AUTO-OPEN MODAL ON PAGE LOAD - THIS IS THE KEY CHANGE
+        // ⭐ AUTO-OPEN MODAL WITH OFFICE DETAILS TAB
         document.addEventListener('DOMContentLoaded', function() {
             openAuthDetailsModal('AUTH-2024-001');
         });
@@ -773,8 +773,8 @@
             modal.classList.add('show');
             overlay.classList.add('show');
             
-            // Load member details by default
-            loadMemberDetails(authNumber);
+            // Load OFFICE details by default (changed from member)
+            loadOfficeDetails(authNumber);
         }
 
         // Close modal
