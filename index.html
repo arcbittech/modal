@@ -135,6 +135,7 @@
             background: #f8f9fa;
             border-bottom: 2px solid #e9ecef;
             padding: 0 20px;
+            overflow-x: auto;
         }
 
         .modal-tab {
@@ -148,6 +149,7 @@
             display: flex;
             align-items: center;
             gap: 8px;
+            white-space: nowrap;
         }
 
         .modal-tab:hover {
@@ -168,15 +170,6 @@
             max-height: calc(90vh - 180px);
         }
 
-        .tab-panel {
-            display: none;
-        }
-
-        .tab-panel.active {
-            display: block;
-            animation: fadeIn 0.3s;
-        }
-
         /* Section Styles */
         .detail-section {
             background: #f8f9fa;
@@ -188,10 +181,17 @@
         .section-header {
             display: flex;
             align-items: center;
+            justify-content: space-between;
             gap: 12px;
             margin-bottom: 20px;
             padding-bottom: 15px;
             border-bottom: 2px solid #e9ecef;
+        }
+
+        .section-header-left {
+            display: flex;
+            align-items: center;
+            gap: 12px;
         }
 
         .section-icon {
@@ -215,6 +215,42 @@
         .section-title p {
             font-size: 12px;
             color: #6c757d;
+        }
+
+        .section-actions {
+            display: flex;
+            gap: 8px;
+        }
+
+        .btn-sm {
+            padding: 6px 12px;
+            border: none;
+            border-radius: 6px;
+            font-size: 12px;
+            font-weight: 600;
+            cursor: pointer;
+            display: inline-flex;
+            align-items: center;
+            gap: 6px;
+            transition: all 0.3s;
+        }
+
+        .btn-refresh {
+            background: #3498db;
+            color: white;
+        }
+
+        .btn-refresh:hover {
+            background: #2980b9;
+        }
+
+        .btn-expand {
+            background: #95a5a6;
+            color: white;
+        }
+
+        .btn-expand:hover {
+            background: #7f8c8d;
         }
 
         /* Info Grid */
@@ -254,6 +290,415 @@
             font-style: italic;
         }
 
+        /* Workflow Process Styles */
+        .workflow-timeline {
+            position: relative;
+            padding-left: 30px;
+        }
+
+        .workflow-item {
+            position: relative;
+            padding: 15px 0;
+        }
+
+        .workflow-item::before {
+            content: '';
+            position: absolute;
+            left: -22px;
+            top: 25px;
+            width: 2px;
+            height: 100%;
+            background: #e9ecef;
+        }
+
+        .workflow-item:last-child::before {
+            display: none;
+        }
+
+        .workflow-marker {
+            position: absolute;
+            left: -30px;
+            top: 15px;
+            width: 16px;
+            height: 16px;
+            border-radius: 50%;
+            border: 3px solid white;
+            box-shadow: 0 0 0 2px #e9ecef;
+        }
+
+        .workflow-marker.completed {
+            background: #27ae60;
+            box-shadow: 0 0 0 2px #27ae60;
+        }
+
+        .workflow-marker.in-progress {
+            background: #3498db;
+            box-shadow: 0 0 0 2px #3498db;
+        }
+
+        .workflow-marker.pending {
+            background: #f39c12;
+            box-shadow: 0 0 0 2px #f39c12;
+        }
+
+        .workflow-marker.failed {
+            background: #e74c3c;
+            box-shadow: 0 0 0 2px #e74c3c;
+        }
+
+        .workflow-content {
+            background: white;
+            padding: 15px;
+            border-radius: 8px;
+            border: 1px solid #e9ecef;
+        }
+
+        .workflow-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: flex-start;
+            margin-bottom: 10px;
+        }
+
+        .workflow-title {
+            font-size: 14px;
+            font-weight: 600;
+            color: #2c3e50;
+            margin-bottom: 4px;
+        }
+
+        .workflow-subtitle {
+            font-size: 12px;
+            color: #6c757d;
+        }
+
+        .workflow-status {
+            padding: 4px 10px;
+            border-radius: 4px;
+            font-size: 11px;
+            font-weight: 600;
+            text-transform: uppercase;
+        }
+
+        .status-completed {
+            background: #d1f2eb;
+            color: #0a6c53;
+        }
+
+        .status-in-progress {
+            background: #e3f2fd;
+            color: #1565c0;
+        }
+
+        .status-pending {
+            background: #ffeaa7;
+            color: #856404;
+        }
+
+        .status-failed {
+            background: #fab1a0;
+            color: #c0392b;
+        }
+
+        .workflow-details {
+            font-size: 13px;
+            color: #495057;
+            line-height: 1.6;
+            margin-top: 10px;
+        }
+
+        .workflow-expand {
+            margin-top: 10px;
+            padding-top: 10px;
+            border-top: 1px solid #e9ecef;
+            display: none;
+        }
+
+        .workflow-expand.show {
+            display: block;
+        }
+
+        .btn-run {
+            background: #27ae60;
+            color: white;
+            padding: 6px 12px;
+            border: none;
+            border-radius: 6px;
+            font-size: 12px;
+            font-weight: 600;
+            cursor: pointer;
+            display: inline-flex;
+            align-items: center;
+            gap: 6px;
+            margin-top: 10px;
+        }
+
+        .btn-run:hover {
+            background: #229954;
+        }
+
+        /* Service Details Table */
+        .service-table {
+            width: 100%;
+            background: white;
+            border-radius: 8px;
+            overflow: hidden;
+            border: 1px solid #e9ecef;
+        }
+
+        .service-table table {
+            width: 100%;
+            border-collapse: collapse;
+        }
+
+        .service-table th {
+            background: #f8f9fa;
+            padding: 12px;
+            text-align: left;
+            font-size: 12px;
+            font-weight: 600;
+            color: #495057;
+            text-transform: uppercase;
+            border-bottom: 2px solid #e9ecef;
+        }
+
+        .service-table td {
+            padding: 12px;
+            font-size: 13px;
+            color: #2c3e50;
+            border-bottom: 1px solid #f8f9fa;
+        }
+
+        .service-table tr:last-child td {
+            border-bottom: none;
+        }
+
+        .service-table select {
+            width: 100%;
+            padding: 6px 10px;
+            border: 1px solid #ced4da;
+            border-radius: 6px;
+            font-size: 13px;
+            font-family: 'Open Sans', sans-serif;
+        }
+
+        .service-table select:focus {
+            outline: none;
+            border-color: #3498db;
+            box-shadow: 0 0 0 3px rgba(52,152,219,0.1);
+        }
+
+        /* Document Styles */
+        .document-list {
+            display: flex;
+            flex-direction: column;
+            gap: 10px;
+        }
+
+        .document-item {
+            background: white;
+            padding: 15px;
+            border-radius: 8px;
+            border: 1px solid #e9ecef;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            transition: all 0.3s;
+        }
+
+        .document-item:hover {
+            box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+        }
+
+        .document-info {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            flex: 1;
+        }
+
+        .document-icon {
+            width: 40px;
+            height: 40px;
+            background: #e3f2fd;
+            color: #3498db;
+            border-radius: 8px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 18px;
+        }
+
+        .document-details h4 {
+            font-size: 14px;
+            color: #2c3e50;
+            margin-bottom: 4px;
+        }
+
+        .document-details p {
+            font-size: 12px;
+            color: #6c757d;
+        }
+
+        .document-actions {
+            display: flex;
+            gap: 8px;
+        }
+
+        .btn-icon {
+            width: 32px;
+            height: 32px;
+            border: none;
+            border-radius: 6px;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 14px;
+            transition: all 0.3s;
+        }
+
+        .btn-open {
+            background: #e3f2fd;
+            color: #3498db;
+        }
+
+        .btn-open:hover {
+            background: #3498db;
+            color: white;
+        }
+
+        .btn-view {
+            background: #d1f2eb;
+            color: #27ae60;
+        }
+
+        .btn-view:hover {
+            background: #27ae60;
+            color: white;
+        }
+
+        .btn-download {
+            background: #ffeaa7;
+            color: #f39c12;
+        }
+
+        .btn-download:hover {
+            background: #f39c12;
+            color: white;
+        }
+
+        .btn-remove {
+            background: #fab1a0;
+            color: #e74c3c;
+        }
+
+        .btn-remove:hover {
+            background: #e74c3c;
+            color: white;
+        }
+
+        /* Case History Table */
+        .history-table {
+            width: 100%;
+            background: white;
+            border-radius: 8px;
+            overflow: hidden;
+            border: 1px solid #e9ecef;
+        }
+
+        .history-table table {
+            width: 100%;
+            border-collapse: collapse;
+        }
+
+        .history-table th {
+            background: #f8f9fa;
+            padding: 12px;
+            text-align: left;
+            font-size: 12px;
+            font-weight: 600;
+            color: #495057;
+            text-transform: uppercase;
+            border-bottom: 2px solid #e9ecef;
+        }
+
+        .history-table td {
+            padding: 12px;
+            font-size: 13px;
+            color: #2c3e50;
+            border-bottom: 1px solid #f8f9fa;
+        }
+
+        .history-table tr:last-child td {
+            border-bottom: none;
+        }
+
+        /* Notes Section */
+        .notes-section {
+            background: white;
+            padding: 20px;
+            border-radius: 8px;
+            border: 1px solid #e9ecef;
+        }
+
+        .notes-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 15px;
+        }
+
+        .notes-header h4 {
+            font-size: 14px;
+            color: #2c3e50;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .notes-content {
+            min-height: 100px;
+            padding: 15px;
+            background: #f8f9fa;
+            border-radius: 6px;
+            font-size: 13px;
+            color: #495057;
+            line-height: 1.6;
+        }
+
+        .notes-empty {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            padding: 30px;
+            color: #95a5a6;
+        }
+
+        .notes-empty i {
+            font-size: 32px;
+            margin-bottom: 10px;
+        }
+
+        .btn-add-note {
+            background: #3498db;
+            color: white;
+            padding: 6px 12px;
+            border: none;
+            border-radius: 6px;
+            font-size: 12px;
+            font-weight: 600;
+            cursor: pointer;
+            display: inline-flex;
+            align-items: center;
+            gap: 6px;
+        }
+
+        .btn-add-note:hover {
+            background: #2980b9;
+        }
+
         /* Badge Styles */
         .status-badge {
             display: inline-block;
@@ -264,248 +709,19 @@
             text-transform: uppercase;
         }
 
+        .status-new {
+            background: #e3f2fd;
+            color: #1565c0;
+        }
+
         .status-active {
             background: #d1f2eb;
             color: #0a6c53;
         }
 
-        .status-inactive {
-            background: #f8d7da;
-            color: #721c24;
-        }
-
-        .status-pending {
-            background: #ffeaa7;
-            color: #856404;
-        }
-
-        /* Risk Score Card */
-        .risk-score-card {
-            background: white;
-            border: 1px solid #e9ecef;
-            border-radius: 8px;
-            padding: 15px;
-            display: flex;
-            align-items: center;
-            gap: 15px;
-        }
-
-        .risk-score-icon {
-            width: 60px;
-            height: 60px;
-            border-radius: 10px;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            font-size: 24px;
-            font-weight: 700;
-            flex-shrink: 0;
-        }
-
-        .risk-low {
+        .status-completed {
             background: #d1f2eb;
             color: #0a6c53;
-        }
-
-        .risk-medium {
-            background: #ffeaa7;
-            color: #856404;
-        }
-
-        .risk-high {
-            background: #fab1a0;
-            color: #c0392b;
-        }
-
-        .risk-score-info {
-            flex: 1;
-        }
-
-        .risk-score-title {
-            font-size: 13px;
-            color: #6c757d;
-            margin-bottom: 4px;
-        }
-
-        .risk-score-label {
-            font-size: 11px;
-            font-weight: 600;
-            padding: 2px 8px;
-            border-radius: 4px;
-            display: inline-block;
-            margin-top: 4px;
-        }
-
-        /* List Styles */
-        .info-list {
-            list-style: none;
-            margin: 0;
-            padding: 0;
-        }
-
-        .info-list li {
-            padding: 8px 0;
-            border-bottom: 1px solid #e9ecef;
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-        }
-
-        .info-list li:last-child {
-            border-bottom: none;
-        }
-
-        .list-label {
-            font-size: 13px;
-            color: #6c757d;
-            font-weight: 500;
-        }
-
-        .list-value {
-            font-size: 13px;
-            color: #2c3e50;
-            font-weight: 600;
-        }
-
-        /* Enrollment Period Card */
-        .enrollment-card {
-            background: white;
-            border: 1px solid #e9ecef;
-            border-radius: 8px;
-            padding: 15px;
-            margin-bottom: 15px;
-        }
-
-        .enrollment-header {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            margin-bottom: 12px;
-            padding-bottom: 10px;
-            border-bottom: 1px solid #e9ecef;
-        }
-
-        .enrollment-dates {
-            font-size: 13px;
-            font-weight: 600;
-            color: #2c3e50;
-        }
-
-        .coverage-tags {
-            display: flex;
-            flex-wrap: wrap;
-            gap: 8px;
-            margin-top: 10px;
-        }
-
-        .coverage-tag {
-            padding: 4px 10px;
-            border-radius: 4px;
-            font-size: 11px;
-            font-weight: 600;
-            background: #e3f2fd;
-            color: #1565c0;
-        }
-
-        .coverage-tag.inactive {
-            background: #f8f9fa;
-            color: #95a5a6;
-            text-decoration: line-through;
-        }
-
-        /* Provider Card */
-        .provider-card {
-            background: white;
-            border: 1px solid #e9ecef;
-            border-radius: 8px;
-            padding: 15px;
-            margin-bottom: 15px;
-            display: flex;
-            gap: 15px;
-            align-items: flex-start;
-        }
-
-        .provider-avatar {
-            width: 50px;
-            height: 50px;
-            background: #e3f2fd;
-            color: #3498db;
-            border-radius: 10px;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            font-size: 20px;
-            font-weight: 600;
-            flex-shrink: 0;
-        }
-
-        .provider-info {
-            flex: 1;
-        }
-
-        .provider-name {
-            font-size: 15px;
-            font-weight: 600;
-            color: #2c3e50;
-            margin-bottom: 4px;
-        }
-
-        .provider-specialty {
-            font-size: 12px;
-            color: #6c757d;
-            margin-bottom: 8px;
-        }
-
-        .provider-meta {
-            display: flex;
-            gap: 15px;
-            font-size: 12px;
-            color: #95a5a6;
-        }
-
-        /* Contact Info */
-        .contact-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
-            gap: 15px;
-        }
-
-        .contact-item {
-            display: flex;
-            align-items: center;
-            gap: 10px;
-            padding: 12px;
-            background: white;
-            border-radius: 8px;
-            border: 1px solid #e9ecef;
-        }
-
-        .contact-icon {
-            width: 36px;
-            height: 36px;
-            background: #e3f2fd;
-            color: #3498db;
-            border-radius: 8px;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            font-size: 16px;
-        }
-
-        .contact-details {
-            flex: 1;
-        }
-
-        .contact-label {
-            font-size: 11px;
-            color: #6c757d;
-            margin-bottom: 2px;
-        }
-
-        .contact-value {
-            font-size: 13px;
-            color: #2c3e50;
-            font-weight: 600;
         }
 
         /* Loading State */
@@ -533,140 +749,6 @@
             100% { transform: rotate(360deg); }
         }
 
-        /* Permissions Grid */
-        .permissions-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
-            gap: 15px;
-        }
-
-        .permission-item {
-            background: white;
-            border: 1px solid #e9ecef;
-            border-radius: 8px;
-            padding: 15px;
-            display: flex;
-            align-items: center;
-            justify-content: space-between;
-        }
-
-        .permission-label {
-            font-size: 13px;
-            color: #495057;
-            font-weight: 500;
-            display: flex;
-            align-items: center;
-            gap: 8px;
-        }
-
-        .permission-status {
-            width: 20px;
-            height: 20px;
-            border-radius: 50%;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            font-size: 12px;
-        }
-
-        .permission-status.enabled {
-            background: #d1f2eb;
-            color: #0a6c53;
-        }
-
-        .permission-status.disabled {
-            background: #f8d7da;
-            color: #721c24;
-        }
-
-        /* Family Member Card */
-        .family-member-card {
-            background: white;
-            border: 1px solid #e9ecef;
-            border-radius: 8px;
-            padding: 15px;
-            margin-bottom: 10px;
-            display: flex;
-            align-items: center;
-            gap: 15px;
-        }
-
-        .family-avatar {
-            width: 45px;
-            height: 45px;
-            background: #e3f2fd;
-            color: #3498db;
-            border-radius: 50%;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            font-size: 18px;
-        }
-
-        .family-info h4 {
-            font-size: 14px;
-            color: #2c3e50;
-            margin-bottom: 4px;
-        }
-
-        .family-info p {
-            font-size: 12px;
-            color: #6c757d;
-        }
-
-        /* Notes Box */
-        .notes-box {
-            background: #fff3cd;
-            border-left: 4px solid #ffc107;
-            padding: 15px;
-            border-radius: 6px;
-        }
-
-        .notes-box h4 {
-            color: #856404;
-            font-size: 14px;
-            margin-bottom: 8px;
-            display: flex;
-            align-items: center;
-            gap: 8px;
-        }
-
-        .notes-box p {
-            color: #856404;
-            font-size: 13px;
-            line-height: 1.6;
-        }
-
-        /* Office Hours */
-        .hours-list {
-            background: white;
-            border-radius: 8px;
-            padding: 15px;
-            border: 1px solid #e9ecef;
-        }
-
-        .hours-item {
-            display: flex;
-            justify-content: space-between;
-            padding: 10px 0;
-            border-bottom: 1px solid #f8f9fa;
-        }
-
-        .hours-item:last-child {
-            border-bottom: none;
-        }
-
-        .hours-day {
-            font-size: 13px;
-            font-weight: 600;
-            color: #495057;
-        }
-
-        .hours-time {
-            font-size: 13px;
-            color: #6c757d;
-        }
-
         /* Responsive */
         @media (max-width: 768px) {
             .auth-details-modal {
@@ -679,23 +761,15 @@
 
             .modal-body {
                 max-height: calc(100vh - 180px);
-            }
-
-            .modal-tabs {
-                overflow-x: auto;
-                padding: 0 10px;
-            }
-
-            .modal-tab {
-                white-space: nowrap;
+                padding: 20px;
             }
 
             .info-grid {
                 grid-template-columns: 1fr;
             }
 
-            .contact-grid {
-                grid-template-columns: 1fr;
+            .document-actions {
+                flex-wrap: wrap;
             }
         }
     </style>
@@ -725,7 +799,11 @@
 
         <!-- Modal Tabs -->
         <div class="modal-tabs">
-            <div class="modal-tab active" onclick="switchModalTab('member')">
+            <div class="modal-tab active" onclick="switchModalTab('case')">
+                <i class="fas fa-folder-open"></i>
+                Case Details
+            </div>
+            <div class="modal-tab" onclick="switchModalTab('member')">
                 <i class="fas fa-user"></i>
                 Member Details
             </div>
@@ -750,153 +828,136 @@
     </div>
 
     <script>
-        // Sample data structure with complete member data
-        const authData = {
-            'AUTH-2024-001': {
-                member: {
-                    member_number: "MBR123456",
-                    first_name: "John",
-                    last_name: "Doe",
-                    date_of_birth: "1985-07-22",
-                    street_address_1: "123 Main Street",
-                    city: "Los Angeles",
-                    state: "CA",
-                    zip_code: "90001",
-                    primary_language: "English",
-                    hicn: "123-45-6789",
-                    home_phone: "555-123-4567",
-                    cell_phone: "555-987-6543",
-                    email: "john.doe@example.com",
-                    ga_fulfillment_email: "john.doe@ga.com",
-                    written_language: "English",
-                    spoken_language: "English",
-                    preferred_contact_method: "Email",
-                    ga_fulfillment_method: "Email",
-                    robo_call_opt_out: false,
-                    email_permission: true,
-                    sms_permission: true,
-                    apd_status: "Active",
-                    special_needs_indicator: true,
-                    location_code: "LOC-CA-05",
-                    member_representative_document_type: "POA",
-                    member_representative_received_date: "2024-02-10",
-                    notes: "High-risk member. Requires monthly follow-up.",
-                    member_caries_risk_score: 7.2,
-                    office_caries_risk_score: 6.5,
-                    perio_risk_score: 5.8,
-                    teledental_risk_score: 6.9,
-                    member_enrollment_periods: [
-                        {
-                            member_effective_date: "2023-01-01",
-                            member_expiration_date: "2023-12-31",
-                            contract_id: "CON123",
-                            plan_benefit_id: "PLAN001",
-                            group_number: "GRP789",
-                            group_name: "Health Advantage Group",
-                            benefit_coverage: {
-                                medical: true,
-                                dental: true,
-                                vision: false
-                            }
-                        },
-                        {
-                            member_effective_date: "2024-01-01",
-                            member_expiration_date: "2025-12-31",
-                            contract_id: "CON456",
-                            plan_benefit_id: "PLAN002",
-                            group_number: "GRP456",
-                            group_name: "Senior Wellness Group",
-                            benefit_coverage: {
-                                medical: true,
-                                dental: true,
-                                vision: true
-                            }
-                        }
-                    ],
-                    assigned_providers: [
-                        {
-                            provider_name: "Dr. Jane Smith",
-                            specialty: "Primary Care",
-                            npi: "1234567890"
-                        }
-                    ],
-                    alternate_address: {
-                        street_address_1: "PO Box 789",
-                        city: "Pasadena",
-                        state: "CA",
-                        zip_code: "91101"
-                    },
-                    member_family_details: [
-                        { name: "Mary Doe", relation: "Spouse" },
-                        { name: "Jane Doe", relation: "Daughter" }
-                    ]
+        // Sample case data
+        const caseData = {
+            general_information: {
+                case_received_date: "12/10/2025",
+                created_by_employee: "System Admin",
+                last_modification: "12/15/2025 10:30 AM",
+                date_of_accident: "11/25/2025",
+                estimated_date_of_birth: "05/15/1985",
+                ica_code: "ICA12345"
+            },
+            referral_service_type: {
+                service_requested: "Standard",
+                request_type: "Expedited",
+                referred_denied_type_requested: "Standard",
+                support_unit: "Unit A",
+                followup_appt_number: "APT-789"
+            },
+            workflow_process: [
+                {
+                    step: "NEXT STEP 1",
+                    title: "Waiting Document (case creation failed / Waiting Documents (Group code))",
+                    status: "completed",
+                    details: "Document verification completed successfully."
                 },
-                office: {
-                    office_name: "Downtown Health Clinic",
-                    office_number: "OFF-789",
-                    office_npi: "1456789123",
-                    office_address1: "123 Main Street",
-                    office_state: "CA",
-                    office_zip: "90001",
-                    office_county: "Los Angeles",
-                    office_medicaid_id: "MED123456",
-                    contact_name: "Jane Smith",
-                    contact_phone: "555-123-4567",
-                    contact_email: "contact@downtownhealth.com",
-                    contact_fax: "555-987-6543",
-                    dcm_status: "Active",
-                    last_on_site_audit: "2024-09-15",
-                    pr_rep: "Robert Brown",
-                    national_dso: "CareWell Network",
-                    ages_seen: "All Ages",
-                    wheelchair_access: true,
-                    public_transportation: "Metro line stop within 200m",
-                    special_arrangement_note: "Wheelchair ramp and ASL interpreter available",
-                    office_hours: {
-                        monday: "9:00 AM - 5:00 PM",
-                        tuesday: "9:00 AM - 5:00 PM",
-                        wednesday: "9:00 AM - 5:00 PM",
-                        thursday: "9:00 AM - 5:00 PM",
-                        friday: "9:00 AM - 4:00 PM",
-                        saturday: "Closed",
-                        sunday: "Closed"
-                    },
-                    office_languages: ["English", "Spanish"],
-                    office_providers: [
-                        {
-                            provider_name: "Dr. Maria Lopez",
-                            specialty: "Pediatrics",
-                            npi: "1987654321"
-                        }
-                    ]
+                {
+                    step: "NEXT STEP 2",
+                    title: "UDICS CHECK (UDICS CHECK passed)",
+                    status: "completed",
+                    details: "UDICS validation passed."
                 },
-                group: {
-                    group_number: "GRP789",
-                    group_name: "Health Advantage Group",
-                    contract_id: "CON123",
-                    plan_benefit_id: "PLAN001",
-                    effective_date: "2023-01-01",
-                    expiration_date: "2023-12-31",
-                    status: "Active"
+                {
+                    step: "CURRENT STEP",
+                    title: "Case Under Review",
+                    status: "in-progress",
+                    details: "Case is currently under medical review by Dr. Johnson."
                 },
-                provider: {
-                    provider_name: "Dr. Jane Smith",
-                    specialty: "Primary Care",
-                    npi: "1234567890",
-                    provider_type: "MD",
-                    phone: "555-123-4567",
-                    email: "dr.smith@healthcare.com",
-                    office_address: "123 Main Street, Los Angeles, CA 90001"
+                {
+                    step: "PENDING STEP",
+                    title: "Final Approval Pending",
+                    status: "pending",
+                    details: "Awaiting final authorization approval."
                 }
-            }
+            ],
+            service_details: [
+                {
+                    code: "D1234",
+                    description: "Dental Exam - Complete",
+                    tooth: "N/A",
+                    quantity: "1",
+                    place: "Office",
+                    unit: "12",
+                    available: "Y",
+                    status: "Requested",
+                    reason: "Created by AI..."
+                },
+                {
+                    code: "D5678",
+                    description: "Periodontal Scaling - Full",
+                    tooth: "12-15",
+                    quantity: "4",
+                    place: "Office",
+                    unit: "8",
+                    available: "Y",
+                    status: "Requested",
+                    reason: "Created by AI..."
+                }
+            ],
+            provider_info: {
+                provider_name: "Dr. Sarah Johnson",
+                tax_number: "12345",
+                npi_number: "1234567890",
+                tin: "987654321",
+                address: "123 Medical Plaza",
+                city: "Los Angeles",
+                state: "CA",
+                office_contact_phone: "555-123-4567"
+            },
+            servicing_provider: {
+                provider_id: "PRV-001",
+                provider_name: "Dr. Michael Chen",
+                first_name: "Michael",
+                last_name: "Chen",
+                npi: "9876543210",
+                tin: "123456789",
+                address: "456 Health Ave",
+                phone: "555-987-6543"
+            },
+            attached_documents: [
+                {
+                    id: 1,
+                    name: "DEMO_GAT_No_surface_verified.pdf",
+                    size: "2.4 MB",
+                    uploaded: "12/10/2025"
+                },
+                {
+                    id: 2,
+                    name: "Medical_Records_Patient_001.pdf",
+                    size: "3.8 MB",
+                    uploaded: "12/11/2025"
+                },
+                {
+                    id: 3,
+                    name: "Lab_Results_2025.pdf",
+                    size: "1.2 MB",
+                    uploaded: "12/12/2025"
+                }
+            ],
+            case_history: [
+                {
+                    date: "12/15/2025 10:28:38",
+                    description: "Auto-assigning case on cases assigned.ct (PreAssignmentCheck)@mediclaim.com",
+                    action: "System AI",
+                    role: "System AI",
+                    time: "10:00"
+                },
+                {
+                    date: "12/15/2025 10:28:38",
+                    description: "Auto-assigning case on cases assigned.ct (PreAssignmentCheck)@mediclaim.com",
+                    action: "System AI",
+                    role: "System AI",
+                    time: "10:00"
+                }
+            ]
         };
 
-        // ⭐ AUTO-OPEN MODAL WITH MEMBER DETAILS TAB (DEFAULT)
+        // Auto-open modal with Case Details tab
         document.addEventListener('DOMContentLoaded', function() {
             openAuthDetailsModal('AUTH-2024-001');
         });
 
-        // Open modal
         function openAuthDetailsModal(authNumber) {
             const modal = document.getElementById('authDetailsModal');
             const overlay = document.getElementById('modalOverlay');
@@ -906,11 +967,9 @@
             modal.classList.add('show');
             overlay.classList.add('show');
             
-            // Load MEMBER details by default
-            loadMemberDetails(authNumber);
+            loadCaseDetails(authNumber);
         }
 
-        // Close modal
         function closeAuthDetailsModal() {
             const modal = document.getElementById('authDetailsModal');
             const overlay = document.getElementById('modalOverlay');
@@ -919,14 +978,6 @@
             overlay.classList.remove('show');
         }
 
-        // Get risk level based on score
-        function getRiskLevel(score) {
-            if (score >= 7) return { level: 'high', class: 'risk-high', label: 'High Risk' };
-            if (score >= 5) return { level: 'medium', class: 'risk-medium', label: 'Medium Risk' };
-            return { level: 'low', class: 'risk-low', label: 'Low Risk' };
-        }
-
-        // Switch tabs
         function switchModalTab(tabName) {
             document.querySelectorAll('.modal-tab').forEach(tab => {
                 tab.classList.remove('active');
@@ -936,6 +987,9 @@
             const authNumber = 'AUTH-2024-001';
             
             switch(tabName) {
+                case 'case':
+                    loadCaseDetails(authNumber);
+                    break;
                 case 'member':
                     loadMemberDetails(authNumber);
                     break;
@@ -951,704 +1005,482 @@
             }
         }
 
-        // Load Member Details (COMPLETE VERSION)
-        function loadMemberDetails(authNumber) {
+        // Load Case Details
+        function loadCaseDetails(authNumber) {
             const content = document.getElementById('modalBodyContent');
-            content.innerHTML = '<div class="loading-state"><div class="loading-spinner"></div><p>Loading member details...</p></div>';
+            content.innerHTML = '<div class="loading-state"><div class="loading-spinner"></div><p>Loading case details...</p></div>';
             
             setTimeout(() => {
-                const data = authData[authNumber].member;
-                const cariesRisk = getRiskLevel(data.member_caries_risk_score);
-                const officeRisk = getRiskLevel(data.office_caries_risk_score);
-                const perioRisk = getRiskLevel(data.perio_risk_score);
-                const teledentalRisk = getRiskLevel(data.teledental_risk_score);
-                
                 content.innerHTML = `
-                    <!-- Basic Information -->
+                    <!-- General Information -->
                     <div class="detail-section">
                         <div class="section-header">
-                            <div class="section-icon">
-                                <i class="fas fa-id-card"></i>
-                            </div>
-                            <div class="section-title">
-                                <h3>Basic Information</h3>
-                                <p>Primary member identification details</p>
+                            <div class="section-header-left">
+                                <div class="section-icon">
+                                    <i class="fas fa-info-circle"></i>
+                                </div>
+                                <div class="section-title">
+                                    <h3>General Information</h3>
+                                    <p>Basic case details and dates</p>
+                                </div>
                             </div>
                         </div>
                         <div class="info-grid">
                             <div class="info-item">
-                                <div class="info-label"><i class="fas fa-hashtag"></i> Member Number</div>
-                                <div class="info-value">${data.member_number}</div>
+                                <div class="info-label"><i class="fas fa-calendar"></i> Case Received Date</div>
+                                <div class="info-value">${caseData.general_information.case_received_date}</div>
                             </div>
                             <div class="info-item">
-                                <div class="info-label"><i class="fas fa-user"></i> Full Name</div>
-                                <div class="info-value">${data.first_name} ${data.last_name}</div>
+                                <div class="info-label"><i class="fas fa-user-check"></i> Created By Employee</div>
+                                <div class="info-value">${caseData.general_information.created_by_employee}</div>
                             </div>
                             <div class="info-item">
-                                <div class="info-label"><i class="fas fa-birthday-cake"></i> Date of Birth</div>
-                                <div class="info-value">${data.date_of_birth}</div>
+                                <div class="info-label"><i class="fas fa-clock"></i> Last Modification</div>
+                                <div class="info-value">${caseData.general_information.last_modification}</div>
                             </div>
                             <div class="info-item">
-                                <div class="info-label"><i class="fas fa-id-badge"></i> HICN</div>
-                                <div class="info-value">${data.hicn}</div>
+                                <div class="info-label"><i class="fas fa-exclamation-triangle"></i> Date of Accident</div>
+                                <div class="info-value">${caseData.general_information.date_of_accident}</div>
                             </div>
                             <div class="info-item">
-                                <div class="info-label"><i class="fas fa-check-circle"></i> APD Status</div>
-                                <div class="info-value"><span class="status-badge status-active">${data.apd_status}</span></div>
+                                <div class="info-label"><i class="fas fa-birthday-cake"></i> Estimated DOB</div>
+                                <div class="info-value">${caseData.general_information.estimated_date_of_birth}</div>
                             </div>
                             <div class="info-item">
-                                <div class="info-label"><i class="fas fa-map-marker-alt"></i> Location Code</div>
-                                <div class="info-value">${data.location_code}</div>
+                                <div class="info-label"><i class="fas fa-barcode"></i> ICA Code</div>
+                                <div class="info-value">${caseData.general_information.ica_code}</div>
                             </div>
                         </div>
                     </div>
 
-                    <!-- Contact Information -->
+                    <!-- Referral/Service Type Requested -->
                     <div class="detail-section">
                         <div class="section-header">
-                            <div class="section-icon">
-                                <i class="fas fa-phone-alt"></i>
-                            </div>
-                            <div class="section-title">
-                                <h3>Contact Information</h3>
-                                <p>Phone numbers, email, and contact preferences</p>
-                            </div>
-                        </div>
-                        <div class="contact-grid">
-                            <div class="contact-item">
-                                <div class="contact-icon">
-                                    <i class="fas fa-phone"></i>
+                            <div class="section-header-left">
+                                <div class="section-icon">
+                                    <i class="fas fa-clipboard-list"></i>
                                 </div>
-                                <div class="contact-details">
-                                    <div class="contact-label">Home Phone</div>
-                                    <div class="contact-value">${data.home_phone}</div>
+                                <div class="section-title">
+                                    <h3>Referral/Service Type Requested</h3>
+                                    <p>Service request details</p>
                                 </div>
-                            </div>
-                            <div class="contact-item">
-                                <div class="contact-icon">
-                                    <i class="fas fa-mobile-alt"></i>
-                                </div>
-                                <div class="contact-details">
-                                    <div class="contact-label">Cell Phone</div>
-                                    <div class="contact-value">${data.cell_phone}</div>
-                                </div>
-                            </div>
-                            <div class="contact-item">
-                                <div class="contact-icon">
-                                    <i class="fas fa-envelope"></i>
-                                </div>
-                                <div class="contact-details">
-                                    <div class="contact-label">Email</div>
-                                    <div class="contact-value">${data.email}</div>
-                                </div>
-                            </div>
-                            <div class="contact-item">
-                                <div class="contact-icon">
-                                    <i class="fas fa-envelope-open-text"></i>
-                                </div>
-                                <div class="contact-details">
-                                    <div class="contact-label">GA Fulfillment Email</div>
-                                    <div class="contact-value">${data.ga_fulfillment_email}</div>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="info-grid" style="margin-top: 20px;">
-                            <div class="info-item">
-                                <div class="info-label"><i class="fas fa-comments"></i> Preferred Contact Method</div>
-                                <div class="info-value">${data.preferred_contact_method}</div>
-                            </div>
-                            <div class="info-item">
-                                <div class="info-label"><i class="fas fa-paper-plane"></i> GA Fulfillment Method</div>
-                                <div class="info-value">${data.ga_fulfillment_method}</div>
-                            </div>
-                        </div>
-                    </div>
-
-                    <!-- Address Information -->
-                    <div class="detail-section">
-                        <div class="section-header">
-                            <div class="section-icon">
-                                <i class="fas fa-home"></i>
-                            </div>
-                            <div class="section-title">
-                                <h3>Address Information</h3>
-                                <p>Primary and alternate addresses</p>
                             </div>
                         </div>
                         <div class="info-grid">
                             <div class="info-item">
-                                <div class="info-label"><i class="fas fa-map-marker-alt"></i> Primary Address</div>
-                                <div class="info-value">${data.street_address_1}<br>${data.city}, ${data.state} ${data.zip_code}</div>
+                                <div class="info-label"><i class="fas fa-stethoscope"></i> Service Requested</div>
+                                <div class="info-value">${caseData.referral_service_type.service_requested}</div>
                             </div>
                             <div class="info-item">
-                                <div class="info-label"><i class="fas fa-map-marker"></i> Alternate Address</div>
-                                <div class="info-value">${data.alternate_address.street_address_1}<br>${data.alternate_address.city}, ${data.alternate_address.state} ${data.alternate_address.zip_code}</div>
+                                <div class="info-label"><i class="fas fa-bolt"></i> Request Type</div>
+                                <div class="info-value">${caseData.referral_service_type.request_type}</div>
+                            </div>
+                            <div class="info-item">
+                                <div class="info-label"><i class="fas fa-file-medical"></i> Referred Denied Type</div>
+                                <div class="info-value">${caseData.referral_service_type.referred_denied_type_requested}</div>
+                            </div>
+                            <div class="info-item">
+                                <div class="info-label"><i class="fas fa-cubes"></i> Support Unit</div>
+                                <div class="info-value">${caseData.referral_service_type.support_unit}</div>
+                            </div>
+                            <div class="info-item">
+                                <div class="info-label"><i class="fas fa-calendar-check"></i> Followup Appt Number</div>
+                                <div class="info-value">${caseData.referral_service_type.followup_appt_number}</div>
                             </div>
                         </div>
                     </div>
 
-                    <!-- Language & Communication Preferences -->
+                    <!-- Workflow Process -->
                     <div class="detail-section">
                         <div class="section-header">
-                            <div class="section-icon">
-                                <i class="fas fa-language"></i>
-                            </div>
-                            <div class="section-title">
-                                <h3>Language & Communication Preferences</h3>
-                                <p>Language preferences and permissions</p>
-                            </div>
-                        </div>
-                        <div class="info-grid">
-                            <div class="info-item">
-                                <div class="info-label"><i class="fas fa-globe"></i> Primary Language</div>
-                                <div class="info-value">${data.primary_language}</div>
-                            </div>
-                            <div class="info-item">
-                                <div class="info-label"><i class="fas fa-book"></i> Written Language</div>
-                                <div class="info-value">${data.written_language}</div>
-                            </div>
-                            <div class="info-item">
-                                <div class="info-label"><i class="fas fa-microphone"></i> Spoken Language</div>
-                                <div class="info-value">${data.spoken_language}</div>
-                            </div>
-                        </div>
-                        
-                        <div class="permissions-grid" style="margin-top: 20px;">
-                            <div class="permission-item">
-                                <span class="permission-label">
-                                    <i class="fas fa-envelope"></i> Email Permission
-                                </span>
-                                <span class="permission-status ${data.email_permission ? 'enabled' : 'disabled'}">
-                                    <i class="fas fa-${data.email_permission ? 'check' : 'times'}"></i>
-                                </span>
-                            </div>
-                            <div class="permission-item">
-                                <span class="permission-label">
-                                    <i class="fas fa-sms"></i> SMS Permission
-                                </span>
-                                <span class="permission-status ${data.sms_permission ? 'enabled' : 'disabled'}">
-                                    <i class="fas fa-${data.sms_permission ? 'check' : 'times'}"></i>
-                                </span>
-                            </div>
-                            <div class="permission-item">
-                                <span class="permission-label">
-                                    <i class="fas fa-phone"></i> Robo Call Opt-Out
-                                </span>
-                                <span class="permission-status ${!data.robo_call_opt_out ? 'enabled' : 'disabled'}">
-                                    <i class="fas fa-${!data.robo_call_opt_out ? 'check' : 'times'}"></i>
-                                </span>
-                            </div>
-                        </div>
-                    </div>
-
-                    <!-- Risk Scores -->
-                    <div class="detail-section">
-                        <div class="section-header">
-                            <div class="section-icon">
-                                <i class="fas fa-chart-line"></i>
-                            </div>
-                            <div class="section-title">
-                                <h3>Risk Scores</h3>
-                                <p>Clinical risk assessment scores</p>
-                            </div>
-                        </div>
-                        <div class="info-grid">
-                            <div class="risk-score-card">
-                                <div class="risk-score-icon ${cariesRisk.class}">
-                                    ${data.member_caries_risk_score}
+                            <div class="section-header-left">
+                                <div class="section-icon">
+                                    <i class="fas fa-project-diagram"></i>
                                 </div>
-                                <div class="risk-score-info">
-                                    <div class="risk-score-title">Member Caries Risk Score</div>
-                                    <span class="risk-score-label ${cariesRisk.class}">${cariesRisk.label}</span>
+                                <div class="section-title">
+                                    <h3>Workflow Process</h3>
+                                    <p>Case processing timeline</p>
                                 </div>
                             </div>
-                            <div class="risk-score-card">
-                                <div class="risk-score-icon ${officeRisk.class}">
-                                    ${data.office_caries_risk_score}
-                                </div>
-                                <div class="risk-score-info">
-                                    <div class="risk-score-title">Office Caries Risk Score</div>
-                                    <span class="risk-score-label ${officeRisk.class}">${officeRisk.label}</span>
-                                </div>
-                            </div>
-                            <div class="risk-score-card">
-                                <div class="risk-score-icon ${perioRisk.class}">
-                                    ${data.perio_risk_score}
-                                </div>
-                                <div class="risk-score-info">
-                                    <div class="risk-score-title">Perio Risk Score</div>
-                                    <span class="risk-score-label ${perioRisk.class}">${perioRisk.label}</span>
-                                </div>
-                            </div>
-                            <div class="risk-score-card">
-                                <div class="risk-score-icon ${teledentalRisk.class}">
-                                    ${data.teledental_risk_score}
-                                </div>
-                                <div class="risk-score-info">
-                                    <div class="risk-score-title">Teledental Risk Score</div>
-                                    <span class="risk-score-label ${teledentalRisk.class}">${teledentalRisk.label}</span>
-                                </div>
+                            <div class="section-actions">
+                                <button class="btn-sm btn-refresh" onclick="refreshWorkflow()">
+                                    <i class="fas fa-sync-alt"></i> Refresh
+                                </button>
+                                <button class="btn-sm btn-expand" onclick="toggleWorkflowExpand()">
+                                    <i class="fas fa-expand"></i> Expand All
+                                </button>
                             </div>
                         </div>
-                    </div>
-
-                    <!-- Special Indicators -->
-                    <div class="detail-section">
-                        <div class="section-header">
-                            <div class="section-icon">
-                                <i class="fas fa-exclamation-triangle"></i>
-                            </div>
-                            <div class="section-title">
-                                <h3>Special Indicators</h3>
-                                <p>Important member status flags</p>
-                            </div>
-                        </div>
-                        <div class="info-grid">
-                            <div class="info-item">
-                                <div class="info-label"><i class="fas fa-wheelchair"></i> Special Needs Indicator</div>
-                                <div class="info-value">${data.special_needs_indicator ? 'Yes' : 'No'}</div>
-                            </div>
-                            <div class="info-item">
-                                <div class="info-label"><i class="fas fa-file-contract"></i> Representative Document Type</div>
-                                <div class="info-value">${data.member_representative_document_type}</div>
-                            </div>
-                            <div class="info-item">
-                                <div class="info-label"><i class="fas fa-calendar-check"></i> Representative Doc Received</div>
-                                <div class="info-value">${data.member_representative_received_date}</div>
-                            </div>
-                        </div>
-                    </div>
-
-                    <!-- Member Notes -->
-                    ${data.notes ? `
-                    <div class="detail-section">
-                        <div class="notes-box">
-                            <h4><i class="fas fa-sticky-note"></i> Important Notes</h4>
-                            <p>${data.notes}</p>
-                        </div>
-                    </div>
-                    ` : ''}
-
-                    <!-- Enrollment Periods -->
-                    <div class="detail-section">
-                        <div class="section-header">
-                            <div class="section-icon">
-                                <i class="fas fa-calendar-alt"></i>
-                            </div>
-                            <div class="section-title">
-                                <h3>Enrollment Periods</h3>
-                                <p>Member enrollment history and benefit coverage</p>
-                            </div>
-                        </div>
-                        ${data.member_enrollment_periods.map(period => `
-                            <div class="enrollment-card">
-                                <div class="enrollment-header">
-                                    <div class="enrollment-dates">
-                                        <i class="fas fa-calendar"></i> 
-                                        ${period.member_effective_date} to ${period.member_expiration_date}
+                        <div class="workflow-timeline">
+                            ${caseData.workflow_process.map((step, index) => `
+                                <div class="workflow-item">
+                                    <div class="workflow-marker ${step.status}"></div>
+                                    <div class="workflow-content">
+                                        <div class="workflow-header">
+                                            <div>
+                                                <div class="workflow-title">${step.step}</div>
+                                                <div class="workflow-subtitle">${step.title}</div>
+                                            </div>
+                                            <span class="workflow-status status-${step.status}">${step.status.replace('-', ' ')}</span>
+                                        </div>
+                                        <div class="workflow-details">${step.details}</div>
+                                        ${step.status === 'failed' ? `
+                                            <button class="btn-run" onclick="rerunWorkflow(${index})">
+                                                <i class="fas fa-play"></i> Re-run Process
+                                            </button>
+                                        ` : ''}
+                                        <div class="workflow-expand" id="workflow-expand-${index}">
+                                            <p style="font-size: 12px; color: #6c757d; margin-top: 10px;">
+                                                <strong>Started:</strong> 12/15/2025 09:00 AM<br>
+                                                <strong>Duration:</strong> 15 minutes<br>
+                                                <strong>Processed By:</strong> Automated System
+                                            </p>
+                                        </div>
                                     </div>
-                                    <span class="status-badge status-active">Active</span>
-                                </div>
-                                <div class="info-list">
-                                    <li>
-                                        <span class="list-label">Contract ID</span>
-                                        <span class="list-value">${period.contract_id}</span>
-                                    </li>
-                                    <li>
-                                        <span class="list-label">Plan Benefit ID</span>
-                                        <span class="list-value">${period.plan_benefit_id}</span>
-                                    </li>
-                                    <li>
-                                        <span class="list-label">Group Number</span>
-                                        <span class="list-value">${period.group_number}</span>
-                                    </li>
-                                    <li>
-                                        <span class="list-label">Group Name</span>
-                                        <span class="list-value">${period.group_name}</span>
-                                    </li>
-                                </div>
-                                <div class="coverage-tags">
-                                    ${Object.entries(period.benefit_coverage).map(([key, value]) => 
-                                        `<span class="coverage-tag ${!value ? 'inactive' : ''}">${key.charAt(0).toUpperCase() + key.slice(1)}</span>`
-                                    ).join('')}
-                                </div>
-                            </div>
-                        `).join('')}
-                    </div>
-
-                    <!-- Family Members -->
-                    ${data.member_family_details && data.member_family_details.length > 0 ? `
-                    <div class="detail-section">
-                        <div class="section-header">
-                            <div class="section-icon">
-                                <i class="fas fa-users"></i>
-                            </div>
-                            <div class="section-title">
-                                <h3>Family Members</h3>
-                                <p>Related family member information</p>
-                            </div>
-                        </div>
-                        ${data.member_family_details.map(family => `
-                            <div class="family-member-card">
-                                <div class="family-avatar">
-                                    <i class="fas fa-user"></i>
-                                </div>
-                                <div class="family-info">
-                                    <h4>${family.name}</h4>
-                                    <p>${family.relation}</p>
-                                </div>
-                            </div>
-                        `).join('')}
-                    </div>
-                    ` : ''}
-
-                    <!-- Assigned Providers -->
-                    <div class="detail-section">
-                        <div class="section-header">
-                            <div class="section-icon">
-                                <i class="fas fa-user-md"></i>
-                            </div>
-                            <div class="section-title">
-                                <h3>Assigned Providers</h3>
-                                <p>Primary care and specialist assignments</p>
-                            </div>
-                        </div>
-                        ${data.assigned_providers.map(provider => `
-                            <div class="provider-card">
-                                <div class="provider-avatar">
-                                    <i class="fas fa-user-md"></i>
-                                </div>
-                                <div class="provider-info">
-                                    <div class="provider-name">${provider.provider_name}</div>
-                                    <div class="provider-specialty">${provider.specialty}</div>
-                                    <div class="provider-meta">
-                                        <span><i class="fas fa-id-card"></i> NPI: ${provider.npi || 'N/A'}</span>
-                                    </div>
-                                </div>
-                            </div>
-                        `).join('')}
-                    </div>
-                `;
-            }, 500);
-        }
-
-        // Load Office Details (keeping existing function)
-        function loadOfficeDetails(authNumber) {
-            const content = document.getElementById('modalBodyContent');
-            content.innerHTML = '<div class="loading-state"><div class="loading-spinner"></div><p>Loading office details...</p></div>';
-            
-            setTimeout(() => {
-                const data = authData[authNumber].office;
-                
-                content.innerHTML = `
-                    <div class="detail-section">
-                        <div class="section-header">
-                            <div class="section-icon">
-                                <i class="fas fa-building"></i>
-                            </div>
-                            <div class="section-title">
-                                <h3>Office Information</h3>
-                                <p>Basic office identification and location</p>
-                            </div>
-                        </div>
-                        <div class="info-grid">
-                            <div class="info-item">
-                                <div class="info-label"><i class="fas fa-hospital"></i> Office Name</div>
-                                <div class="info-value">${data.office_name}</div>
-                            </div>
-                            <div class="info-item">
-                                <div class="info-label"><i class="fas fa-hashtag"></i> Office Number</div>
-                                <div class="info-value">${data.office_number}</div>
-                            </div>
-                            <div class="info-item">
-                                <div class="info-label"><i class="fas fa-id-card"></i> Office NPI</div>
-                                <div class="info-value">${data.office_npi}</div>
-                            </div>
-                            <div class="info-item">
-                                <div class="info-label"><i class="fas fa-id-badge"></i> Medicaid ID</div>
-                                <div class="info-value">${data.office_medicaid_id}</div>
-                            </div>
-                            <div class="info-item">
-                                <div class="info-label"><i class="fas fa-check-circle"></i> DCM Status</div>
-                                <div class="info-value"><span class="status-badge status-active">${data.dcm_status}</span></div>
-                            </div>
-                            <div class="info-item">
-                                <div class="info-label"><i class="fas fa-calendar-check"></i> Last Audit</div>
-                                <div class="info-value">${data.last_on_site_audit}</div>
-                            </div>
-                        </div>
-                    </div>
-
-                    <div class="detail-section">
-                        <div class="section-header">
-                            <div class="section-icon">
-                                <i class="fas fa-map-marker-alt"></i>
-                            </div>
-                            <div class="section-title">
-                                <h3>Office Location</h3>
-                                <p>Physical address and accessibility</p>
-                            </div>
-                        </div>
-                        <div class="info-grid">
-                            <div class="info-item">
-                                <div class="info-label"><i class="fas fa-map"></i> Full Address</div>
-                                <div class="info-value">${data.office_address1}<br>${data.office_county} County<br>${data.office_state} ${data.office_zip}</div>
-                            </div>
-                            <div class="info-item">
-                                <div class="info-label"><i class="fas fa-wheelchair"></i> Wheelchair Access</div>
-                                <div class="info-value">${data.wheelchair_access ? 'Yes' : 'No'}</div>
-                            </div>
-                            <div class="info-item">
-                                <div class="info-label"><i class="fas fa-bus"></i> Public Transportation</div>
-                                <div class="info-value">${data.public_transportation}</div>
-                            </div>
-                            <div class="info-item">
-                                <div class="info-label"><i class="fas fa-info-circle"></i> Special Arrangements</div>
-                                <div class="info-value">${data.special_arrangement_note}</div>
-                            </div>
-                        </div>
-                    </div>
-
-                    <div class="detail-section">
-                        <div class="section-header">
-                            <div class="section-icon">
-                                <i class="fas fa-address-book"></i>
-                            </div>
-                            <div class="section-title">
-                                <h3>Contact Information</h3>
-                                <p>Office contact details and representatives</p>
-                            </div>
-                        </div>
-                        <div class="contact-grid">
-                            <div class="contact-item">
-                                <div class="contact-icon">
-                                    <i class="fas fa-user"></i>
-                                </div>
-                                <div class="contact-details">
-                                    <div class="contact-label">Contact Person</div>
-                                    <div class="contact-value">${data.contact_name}</div>
-                                </div>
-                            </div>
-                            <div class="contact-item">
-                                <div class="contact-icon">
-                                    <i class="fas fa-phone"></i>
-                                </div>
-                                <div class="contact-details">
-                                    <div class="contact-label">Phone</div>
-                                    <div class="contact-value">${data.contact_phone}</div>
-                                </div>
-                            </div>
-                            <div class="contact-item">
-                                <div class="contact-icon">
-                                    <i class="fas fa-envelope"></i>
-                                </div>
-                                <div class="contact-details">
-                                    <div class="contact-label">Email</div>
-                                    <div class="contact-value">${data.contact_email}</div>
-                                </div>
-                            </div>
-                            <div class="contact-item">
-                                <div class="contact-icon">
-                                    <i class="fas fa-fax"></i>
-                                </div>
-                                <div class="contact-details">
-                                    <div class="contact-label">Fax</div>
-                                    <div class="contact-value">${data.contact_fax}</div>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="info-grid" style="margin-top: 20px;">
-                            <div class="info-item">
-                                <div class="info-label"><i class="fas fa-user-tie"></i> PR Representative</div>
-                                <div class="info-value">${data.pr_rep}</div>
-                            </div>
-                            <div class="info-item">
-                                <div class="info-label"><i class="fas fa-network-wired"></i> National DSO</div>
-                                <div class="info-value">${data.national_dso}</div>
-                            </div>
-                        </div>
-                    </div>
-
-                    <div class="detail-section">
-                        <div class="section-header">
-                            <div class="section-icon">
-                                <i class="fas fa-clock"></i>
-                            </div>
-                            <div class="section-title">
-                                <h3>Office Hours</h3>
-                                <p>Weekly operating schedule</p>
-                            </div>
-                        </div>
-                        <div class="hours-list">
-                            ${Object.entries(data.office_hours).map(([day, hours]) => `
-                                <div class="hours-item">
-                                    <span class="hours-day">${day.charAt(0).toUpperCase() + day.slice(1)}</span>
-                                    <span class="hours-time">${hours}</span>
                                 </div>
                             `).join('')}
                         </div>
                     </div>
 
+                    <!-- Service Details -->
                     <div class="detail-section">
                         <div class="section-header">
-                            <div class="section-icon">
-                                <i class="fas fa-info-circle"></i>
+                            <div class="section-header-left">
+                                <div class="section-icon">
+                                    <i class="fas fa-list-alt"></i>
+                                </div>
+                                <div class="section-title">
+                                    <h3>Service Details</h3>
+                                    <p>Requested services and approval status</p>
+                                </div>
                             </div>
-                            <div class="section-title">
-                                <h3>Additional Information</h3>
-                                <p>Languages, age groups, and providers</p>
+                        </div>
+                        <div class="service-table">
+                            <table>
+                                <thead>
+                                    <tr>
+                                        <th>SERVICE CODE</th>
+                                        <th>SERVICE DESCRIPTION</th>
+                                        <th>TOOTH/QUADRANT</th>
+                                        <th>PLACE OF SERVICE</th>
+                                        <th>REQUESTED UNIT</th>
+                                        <th>AVAILABLE UNIT</th>
+                                        <th>STATUS</th>
+                                        <th>APPROVAL/DENIAL REASON</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    ${caseData.service_details.map((service, index) => `
+                                        <tr>
+                                            <td>${service.code}</td>
+                                            <td>${service.description}</td>
+                                            <td>${service.tooth}</td>
+                                            <td>${service.place}</td>
+                                            <td>${service.unit}</td>
+                                            <td>${service.available}</td>
+                                            <td><span class="status-badge status-new">${service.status}</span></td>
+                                            <td>
+                                                <select onchange="updateServiceReason(${index}, this.value)">
+                                                    <option value="${service.reason}">${service.reason}</option>
+                                                    <option value="Approved - Medical Necessity">Approved - Medical Necessity</option>
+                                                    <option value="Denied - Insufficient Documentation">Denied - Insufficient Documentation</option>
+                                                    <option value="Pending - Additional Review">Pending - Additional Review</option>
+                                                    <option value="Approved - Standard Protocol">Approved - Standard Protocol</option>
+                                                </select>
+                                            </td>
+                                        </tr>
+                                    `).join('')}
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+
+                    <!-- Provider Information -->
+                    <div class="detail-section">
+                        <div class="section-header">
+                            <div class="section-header-left">
+                                <div class="section-icon">
+                                    <i class="fas fa-user-md"></i>
+                                </div>
+                                <div class="section-title">
+                                    <h3>Provider Information</h3>
+                                    <p>Primary provider details</p>
+                                </div>
                             </div>
                         </div>
                         <div class="info-grid">
                             <div class="info-item">
-                                <div class="info-label"><i class="fas fa-language"></i> Languages Spoken</div>
-                                <div class="info-value">${data.office_languages.join(', ')}</div>
+                                <div class="info-label"><i class="fas fa-user-md"></i> Provider Name</div>
+                                <div class="info-value">${caseData.provider_info.provider_name}</div>
                             </div>
                             <div class="info-item">
-                                <div class="info-label"><i class="fas fa-users"></i> Ages Seen</div>
-                                <div class="info-value">${data.ages_seen}</div>
+                                <div class="info-label"><i class="fas fa-hashtag"></i> Tax Number</div>
+                                <div class="info-value">${caseData.provider_info.tax_number}</div>
+                            </div>
+                            <div class="info-item">
+                                <div class="info-label"><i class="fas fa-id-card"></i> NPI Number</div>
+                                <div class="info-value">${caseData.provider_info.npi_number}</div>
+                            </div>
+                            <div class="info-item">
+                                <div class="info-label"><i class="fas fa-id-badge"></i> TIN</div>
+                                <div class="info-value">${caseData.provider_info.tin}</div>
+                            </div>
+                            <div class="info-item">
+                                <div class="info-label"><i class="fas fa-map-marker-alt"></i> Address</div>
+                                <div class="info-value">${caseData.provider_info.address}, ${caseData.provider_info.city}, ${caseData.provider_info.state}</div>
+                            </div>
+                            <div class="info-item">
+                                <div class="info-label"><i class="fas fa-phone"></i> Office Contact</div>
+                                <div class="info-value">${caseData.provider_info.office_contact_phone}</div>
                             </div>
                         </div>
+                    </div>
 
-                        <h4 style="margin: 20px 0 15px 0; font-size: 14px; color: #2c3e50;">Office Providers</h4>
-                        ${data.office_providers.map(provider => `
-                            <div class="provider-card">
-                                <div class="provider-avatar">
-                                    ${provider.provider_name.split(' ')[1].charAt(0)}
+                    <!-- Servicing Provider/Facility -->
+                    <div class="detail-section">
+                        <div class="section-header">
+                            <div class="section-header-left">
+                                <div class="section-icon">
+                                    <i class="fas fa-hospital"></i>
                                 </div>
-                                <div class="provider-info">
-                                    <div class="provider-name">${provider.provider_name}</div>
-                                    <div class="provider-specialty">${provider.specialty}</div>
-                                    <div class="provider-meta">
-                                        <span><i class="fas fa-id-card"></i> NPI: ${provider.npi}</span>
+                                <div class="section-title">
+                                    <h3>Servicing Provider/Facility</h3>
+                                    <p>Service delivery location</p>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="info-grid">
+                            <div class="info-item">
+                                <div class="info-label"><i class="fas fa-id-card"></i> Provider ID</div>
+                                <div class="info-value">${caseData.servicing_provider.provider_id}</div>
+                            </div>
+                            <div class="info-item">
+                                <div class="info-label"><i class="fas fa-user"></i> Provider Name</div>
+                                <div class="info-value">${caseData.servicing_provider.provider_name}</div>
+                            </div>
+                            <div class="info-item">
+                                <div class="info-label"><i class="fas fa-id-badge"></i> NPI</div>
+                                <div class="info-value">${caseData.servicing_provider.npi}</div>
+                            </div>
+                            <div class="info-item">
+                                <div class="info-label"><i class="fas fa-hashtag"></i> TIN</div>
+                                <div class="info-value">${caseData.servicing_provider.tin}</div>
+                            </div>
+                            <div class="info-item">
+                                <div class="info-label"><i class="fas fa-map-marker-alt"></i> Address</div>
+                                <div class="info-value">${caseData.servicing_provider.address}</div>
+                            </div>
+                            <div class="info-item">
+                                <div class="info-label"><i class="fas fa-phone"></i> Phone</div>
+                                <div class="info-value">${caseData.servicing_provider.phone}</div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- UM Coordinator Notes -->
+                    <div class="detail-section">
+                        <div class="notes-section">
+                            <div class="notes-header">
+                                <h4><i class="fas fa-sticky-note"></i> UM Coordinator Notes</h4>
+                                <button class="btn-add-note" onclick="addNote('coordinator')">
+                                    <i class="fas fa-plus"></i> Add Note
+                                </button>
+                            </div>
+                            <div class="notes-content">
+                                <div class="notes-empty">
+                                    <i class="fas fa-inbox"></i>
+                                    <p>No notes yet</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- UM Nurse Notes -->
+                    <div class="detail-section">
+                        <div class="notes-section">
+                            <div class="notes-header">
+                                <h4><i class="fas fa-user-nurse"></i> UM Nurse Notes</h4>
+                                <button class="btn-add-note" onclick="addNote('nurse')">
+                                    <i class="fas fa-plus"></i> Add Note
+                                </button>
+                            </div>
+                            <div class="notes-content">
+                                <div class="notes-empty">
+                                    <i class="fas fa-inbox"></i>
+                                    <p>No notes yet</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- UM Dental Director Notes -->
+                    <div class="detail-section">
+                        <div class="notes-section">
+                            <div class="notes-header">
+                                <h4><i class="fas fa-user-md"></i> UM Dental Director Notes</h4>
+                                <button class="btn-add-note" onclick="addNote('director')">
+                                    <i class="fas fa-plus"></i> Add Note
+                                </button>
+                            </div>
+                            <div class="notes-content">
+                                <div class="notes-empty">
+                                    <i class="fas fa-inbox"></i>
+                                    <p>No notes yet</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Attached Documents -->
+                    <div class="detail-section">
+                        <div class="section-header">
+                            <div class="section-header-left">
+                                <div class="section-icon">
+                                    <i class="fas fa-paperclip"></i>
+                                </div>
+                                <div class="section-title">
+                                    <h3>Attached Documents</h3>
+                                    <p>Case related files and documents</p>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="document-list">
+                            ${caseData.attached_documents.map(doc => `
+                                <div class="document-item">
+                                    <div class="document-info">
+                                        <div class="document-icon">
+                                            <i class="fas fa-file-pdf"></i>
+                                        </div>
+                                        <div class="document-details">
+                                            <h4>${doc.name}</h4>
+                                            <p>${doc.size} • Uploaded: ${doc.uploaded}</p>
+                                        </div>
+                                    </div>
+                                    <div class="document-actions">
+                                        <button class="btn-icon btn-open" onclick="openNewTab(${doc.id})" title="Open in New Tab">
+                                            <i class="fas fa-external-link-alt"></i>
+                                        </button>
+                                        <button class="btn-icon btn-view" onclick="viewDocument(${doc.id})" title="View">
+                                            <i class="fas fa-eye"></i>
+                                        </button>
+                                        <button class="btn-icon btn-download" onclick="downloadDocument(${doc.id})" title="Download">
+                                            <i class="fas fa-download"></i>
+                                        </button>
+                                        <button class="btn-icon btn-remove" onclick="removeDocument(${doc.id})" title="Remove">
+                                            <i class="fas fa-trash"></i>
+                                        </button>
                                     </div>
                                 </div>
+                            `).join('')}
+                        </div>
+                    </div>
+
+                    <!-- Case History -->
+                    <div class="detail-section">
+                        <div class="section-header">
+                            <div class="section-header-left">
+                                <div class="section-icon">
+                                    <i class="fas fa-history"></i>
+                                </div>
+                                <div class="section-title">
+                                    <h3>Case History</h3>
+                                    <p>Timeline of case activities</p>
+                                </div>
                             </div>
-                        `).join('')}
+                        </div>
+                        <div class="history-table">
+                            <table>
+                                <thead>
+                                    <tr>
+                                        <th>DATE</th>
+                                        <th>DESCRIPTION</th>
+                                        <th>ACTION BY</th>
+                                        <th>ROLE</th>
+                                        <th>TIME TAKEN</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    ${caseData.case_history.map(history => `
+                                        <tr>
+                                            <td>${history.date}</td>
+                                            <td>${history.description}</td>
+                                            <td>${history.action}</td>
+                                            <td>${history.role}</td>
+                                            <td>${history.time}</td>
+                                        </tr>
+                                    `).join('')}
+                                </tbody>
+                            </table>
+                        </div>
                     </div>
                 `;
             }, 500);
         }
 
-        // Load Group Details
+        // Workflow functions
+        function refreshWorkflow() {
+            alert('Refreshing workflow process...');
+        }
+
+        function toggleWorkflowExpand() {
+            const expands = document.querySelectorAll('.workflow-expand');
+            expands.forEach(expand => {
+                expand.classList.toggle('show');
+            });
+        }
+
+        function rerunWorkflow(index) {
+            alert(`Re-running workflow step ${index + 1}...`);
+        }
+
+        // Service details function
+        function updateServiceReason(index, value) {
+            console.log(`Updated service ${index} reason to: ${value}`);
+        }
+
+        // Notes functions
+        function addNote(type) {
+            alert(`Adding ${type} note...`);
+        }
+
+        // Document functions
+        function openNewTab(docId) {
+            window.open('#', '_blank');
+        }
+
+        function viewDocument(docId) {
+            alert(`Viewing document ${docId}...`);
+        }
+
+        function downloadDocument(docId) {
+            alert(`Downloading document ${docId}...`);
+        }
+
+        function removeDocument(docId) {
+            if (confirm('Are you sure you want to remove this document?')) {
+                alert(`Document ${docId} removed.`);
+            }
+        }
+
+        // Placeholder functions for other tabs (keep your existing implementations)
+        function loadMemberDetails(authNumber) {
+            const content = document.getElementById('modalBodyContent');
+            content.innerHTML = '<div class="loading-state"><p>Member details loading...</p></div>';
+        }
+
+        function loadOfficeDetails(authNumber) {
+            const content = document.getElementById('modalBodyContent');
+            content.innerHTML = '<div class="loading-state"><p>Office details loading...</p></div>';
+        }
+
         function loadGroupDetails(authNumber) {
             const content = document.getElementById('modalBodyContent');
-            content.innerHTML = '<div class="loading-state"><div class="loading-spinner"></div><p>Loading group details...</p></div>';
-            
-            setTimeout(() => {
-                const data = authData[authNumber].group;
-                
-                content.innerHTML = `
-                    <div class="detail-section">
-                        <div class="section-header">
-                            <div class="section-icon">
-                                <i class="fas fa-users"></i>
-                            </div>
-                            <div class="section-title">
-                                <h3>Group Information</h3>
-                                <p>Insurance group and plan details</p>
-                            </div>
-                        </div>
-                        <div class="info-grid">
-                            <div class="info-item">
-                                <div class="info-label"><i class="fas fa-hashtag"></i> Group Number</div>
-                                <div class="info-value">${data.group_number}</div>
-                            </div>
-                            <div class="info-item">
-                                <div class="info-label"><i class="fas fa-building"></i> Group Name</div>
-                                <div class="info-value">${data.group_name}</div>
-                            </div>
-                            <div class="info-item">
-                                <div class="info-label"><i class="fas fa-file-contract"></i> Contract ID</div>
-                                <div class="info-value">${data.contract_id}</div>
-                            </div>
-                            <div class="info-item">
-                                <div class="info-label"><i class="fas fa-id-badge"></i> Plan Benefit ID</div>
-                                <div class="info-value">${data.plan_benefit_id}</div>
-                            </div>
-                            <div class="info-item">
-                                <div class="info-label"><i class="fas fa-calendar-alt"></i> Effective Date</div>
-                                <div class="info-value">${data.effective_date}</div>
-                            </div>
-                            <div class="info-item">
-                                <div class="info-label"><i class="fas fa-calendar-times"></i> Expiration Date</div>
-                                <div class="info-value">${data.expiration_date}</div>
-                            </div>
-                            <div class="info-item">
-                                <div class="info-label"><i class="fas fa-check-circle"></i> Status</div>
-                                <div class="info-value"><span class="status-badge status-active">${data.status}</span></div>
-                            </div>
-                        </div>
-                    </div>
-                `;
-            }, 500);
+            content.innerHTML = '<div class="loading-state"><p>Group details loading...</p></div>';
         }
 
-        // Load Provider Details
         function loadProviderDetails(authNumber) {
             const content = document.getElementById('modalBodyContent');
-            content.innerHTML = '<div class="loading-state"><div class="loading-spinner"></div><p>Loading provider details...</p></div>';
-            
-            setTimeout(() => {
-                const data = authData[authNumber].provider;
-                
-                content.innerHTML = `
-                    <div class="detail-section">
-                        <div class="section-header">
-                            <div class="section-icon">
-                                <i class="fas fa-user-md"></i>
-                            </div>
-                            <div class="section-title">
-                                <h3>Provider Information</h3>
-                                <p>Primary provider details and contact information</p>
-                            </div>
-                        </div>
-                        
-                        <div class="provider-card" style="margin-bottom: 20px;">
-                            <div class="provider-avatar" style="width: 80px; height: 80px; font-size: 32px;">
-                                <i class="fas fa-user-md"></i>
-                            </div>
-                            <div class="provider-info">
-                                <div class="provider-name" style="font-size: 20px;">${data.provider_name}</div>
-                                <div class="provider-specialty" style="font-size: 14px;">${data.specialty} • ${data.provider_type}</div>
-                                <div class="provider-meta" style="margin-top: 10px; font-size: 13px;">
-                                    <span><i class="fas fa-id-card"></i> NPI: ${data.npi}</span>
-                                </div>
-                            </div>
-                        </div>
-
-                        <div class="contact-grid">
-                            <div class="contact-item">
-                                <div class="contact-icon">
-                                    <i class="fas fa-phone"></i>
-                                </div>
-                                <div class="contact-details">
-                                    <div class="contact-label">Phone</div>
-                                    <div class="contact-value">${data.phone}</div>
-                                </div>
-                            </div>
-                            <div class="contact-item">
-                                <div class="contact-icon">
-                                    <i class="fas fa-envelope"></i>
-                                </div>
-                                <div class="contact-details">
-                                    <div class="contact-label">Email</div>
-                                    <div class="contact-value">${data.email}</div>
-                                </div>
-                            </div>
-                            <div class="contact-item" style="grid-column: 1 / -1;">
-                                <div class="contact-icon">
-                                    <i class="fas fa-map-marker-alt"></i>
-                                </div>
-                                <div class="contact-details">
-                                    <div class="contact-label">Office Address</div>
-                                    <div class="contact-value">${data.office_address}</div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                `;
-            }, 500);
+            content.innerHTML = '<div class="loading-state"><p>Provider details loading...</p></div>';
         }
 
         // Close modal on Escape key
