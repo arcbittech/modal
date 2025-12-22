@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Auth Details Modal - Medical Software</title>
+    <title>Case Details - Medical Software</title>
     <link href="https://fonts.googleapis.com/css2?family=Open+Sans:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <style>
@@ -19,182 +19,83 @@
             padding: 20px;
         }
 
-        /* Modal Overlay */
-        .modal-overlay {
-            display: none;
-            position: fixed;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            background: rgba(0,0,0,0.5);
-            z-index: 9998;
-            animation: fadeIn 0.3s;
-        }
-
-        .modal-overlay.show {
-            display: block;
-        }
-
-        /* Main Modal */
-        .auth-details-modal {
-            display: none;
-            position: fixed;
-            top: 50%;
-            left: 50%;
-            transform: translate(-50%, -50%);
-            width: 95%;
-            max-width: 1400px;
-            max-height: 90vh;
+        .container {
+            max-width: 1820px;
+            margin: 0 auto;
             background: white;
             border-radius: 12px;
-            box-shadow: 0 10px 40px rgba(0,0,0,0.2);
-            z-index: 9999;
-            overflow: hidden;
-            animation: slideIn 0.3s;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.08);
         }
 
-        .auth-details-modal.show {
-            display: flex;
-            flex-direction: column;
-        }
-
-        @keyframes fadeIn {
-            from { opacity: 0; }
-            to { opacity: 1; }
-        }
-
-        @keyframes slideIn {
-            from {
-                opacity: 0;
-                transform: translate(-50%, -45%);
-            }
-            to {
-                opacity: 1;
-                transform: translate(-50%, -50%);
-            }
-        }
-
-        /* Modal Header */
-        .modal-header {
+        /* Header */
+        .page-header {
             background: #2c3e50;
             color: white;
             padding: 20px 30px;
+            border-radius: 12px 12px 0 0;
             display: flex;
             justify-content: space-between;
             align-items: center;
-            border-bottom: 1px solid #e9ecef;
         }
 
-        .modal-header-left {
+        .page-header h1 {
+            font-size: 20px;
+            font-weight: 600;
+        }
+
+        .header-meta {
             display: flex;
+            gap: 30px;
+            font-size: 13px;
+        }
+
+        .header-meta-item {
+            display: flex;
+            flex-direction: column;
+            gap: 4px;
+        }
+
+        .header-meta-label {
+            opacity: 0.8;
+            font-size: 11px;
+        }
+
+        .header-meta-value {
+            font-weight: 600;
+        }
+
+        /* Content Area */
+        .content-area {
+            padding: 30px;
+        }
+
+        /* Workflow Section */
+        .workflow-section {
+            background: #f8f9fa;
+            border: 1px solid #e9ecef;
+            border-radius: 12px;
+            margin-bottom: 20px;
+            overflow: hidden;
+        }
+
+        .workflow-header {
+            padding: 20px 25px;
+            background: white;
+            border-bottom: 1px solid #e9ecef;
+            display: flex;
+            justify-content: space-between;
             align-items: center;
+            flex-wrap: wrap;
             gap: 15px;
         }
 
-        .modal-icon {
-            width: 50px;
-            height: 50px;
-            background: rgba(255,255,255,0.1);
-            border-radius: 10px;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            font-size: 24px;
-        }
-
-        .modal-title-group h2 {
-            font-size: 20px;
-            margin-bottom: 4px;
-        }
-
-        .modal-title-group p {
-            font-size: 13px;
-            opacity: 0.9;
-        }
-
-        .modal-close {
-            background: rgba(255,255,255,0.1);
-            border: none;
-            color: white;
-            width: 36px;
-            height: 36px;
-            border-radius: 8px;
-            cursor: pointer;
-            font-size: 20px;
-            transition: all 0.3s;
-        }
-
-        .modal-close:hover {
-            background: rgba(255,255,255,0.2);
-        }
-
-        /* Modal Tabs */
-        .modal-tabs {
-            display: flex;
-            background: #f8f9fa;
-            border-bottom: 2px solid #e9ecef;
-            padding: 0 20px;
-            overflow-x: auto;
-        }
-
-        .modal-tab {
-            padding: 15px 25px;
-            cursor: pointer;
-            font-weight: 600;
-            font-size: 14px;
-            color: #6c757d;
-            border-bottom: 3px solid transparent;
-            transition: all 0.3s;
-            display: flex;
-            align-items: center;
-            gap: 8px;
-            white-space: nowrap;
-        }
-
-        .modal-tab:hover {
-            color: #2c3e50;
-            background: rgba(52,152,219,0.05);
-        }
-
-        .modal-tab.active {
-            color: #2c3e50;
-            border-bottom-color: #3498db;
-            background: white;
-        }
-
-        /* Modal Body */
-        .modal-body {
-            padding: 30px;
-            overflow-y: auto;
-            max-height: calc(90vh - 180px);
-        }
-
-        /* Section Styles */
-        .detail-section {
-            background: #f8f9fa;
-            border-radius: 12px;
-            padding: 25px;
-            margin-bottom: 20px;
-        }
-
-        .section-header {
-            display: flex;
-            align-items: center;
-            justify-content: space-between;
-            gap: 12px;
-            margin-bottom: 20px;
-            padding-bottom: 15px;
-            border-bottom: 2px solid #e9ecef;
-        }
-
-        .section-header-left {
+        .workflow-header-left {
             display: flex;
             align-items: center;
             gap: 12px;
         }
 
-        .section-icon {
+        .workflow-icon {
             width: 40px;
             height: 40px;
             background: #e3f2fd;
@@ -204,180 +105,145 @@
             align-items: center;
             justify-content: center;
             font-size: 18px;
+            flex-shrink: 0;
         }
 
-        .section-title h3 {
+        .workflow-title h3 {
             font-size: 16px;
             color: #2c3e50;
             margin-bottom: 4px;
         }
 
-        .section-title p {
+        .workflow-title p {
             font-size: 12px;
             color: #6c757d;
         }
 
-        .section-actions {
+        .workflow-actions {
             display: flex;
-            gap: 8px;
+            gap: 10px;
+            flex-wrap: wrap;
         }
 
-        .btn-sm {
-            padding: 6px 12px;
+        .btn-action {
+            padding: 8px 16px;
             border: none;
             border-radius: 6px;
-            font-size: 12px;
+            font-size: 13px;
             font-weight: 600;
             cursor: pointer;
             display: inline-flex;
             align-items: center;
-            gap: 6px;
+            gap: 8px;
             transition: all 0.3s;
+            white-space: nowrap;
         }
 
-        .btn-refresh {
+        .btn-view-full {
             background: #3498db;
             color: white;
         }
 
-        .btn-refresh:hover {
+        .btn-view-full:hover {
             background: #2980b9;
         }
 
-        .btn-expand {
+        .btn-collapse {
             background: #95a5a6;
             color: white;
         }
 
-        .btn-expand:hover {
+        .btn-collapse:hover {
             background: #7f8c8d;
         }
 
-        /* Info Grid */
-        .info-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
-            gap: 20px;
-        }
-
-        .info-item {
-            background: white;
-            padding: 15px;
-            border-radius: 8px;
-            border: 1px solid #e9ecef;
-        }
-
-        .info-label {
-            font-size: 11px;
-            font-weight: 600;
-            color: #6c757d;
-            text-transform: uppercase;
-            letter-spacing: 0.5px;
-            margin-bottom: 6px;
+        /* Collapsed Workflow (Horizontal) */
+        .workflow-collapsed {
+            padding: 25px;
             display: flex;
-            align-items: center;
-            gap: 6px;
+            justify-content: space-between;
+            gap: 20px;
+            align-items: stretch;
+            overflow-x: auto;
         }
 
-        .info-value {
-            font-size: 14px;
-            color: #2c3e50;
-            font-weight: 500;
-        }
-
-        .info-value.empty {
-            color: #95a5a6;
-            font-style: italic;
-        }
-
-        /* Workflow Process Styles */
-        .workflow-timeline {
+        .workflow-step-horizontal {
+            flex: 1;
+            min-width: 250px;
+            background: white;
+            border: 2px solid #e9ecef;
+            border-radius: 10px;
+            padding: 20px;
             position: relative;
-            padding-left: 30px;
+            transition: all 0.3s;
         }
 
-        .workflow-item {
-            position: relative;
-            padding: 15px 0;
+        .workflow-step-horizontal:hover {
+            box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+            transform: translateY(-2px);
         }
 
-        .workflow-item::before {
-            content: '';
+        .workflow-step-horizontal::after {
+            content: '→';
             position: absolute;
-            left: -22px;
-            top: 25px;
-            width: 2px;
-            height: 100%;
-            background: #e9ecef;
+            right: -30px;
+            top: 50%;
+            transform: translateY(-50%);
+            font-size: 20px;
+            color: #e9ecef;
         }
 
-        .workflow-item:last-child::before {
+        .workflow-step-horizontal:last-child::after {
             display: none;
         }
 
-        .workflow-marker {
-            position: absolute;
-            left: -30px;
-            top: 15px;
-            width: 16px;
-            height: 16px;
-            border-radius: 50%;
-            border: 3px solid white;
-            box-shadow: 0 0 0 2px #e9ecef;
+        .workflow-step-horizontal.last-processed {
+            border-color: #27ae60;
+            background: #f0fdf4;
         }
 
-        .workflow-marker.completed {
-            background: #27ae60;
-            box-shadow: 0 0 0 2px #27ae60;
+        .workflow-step-horizontal.current {
+            border-color: #3498db;
+            background: #eff6ff;
         }
 
-        .workflow-marker.in-progress {
-            background: #3498db;
-            box-shadow: 0 0 0 2px #3498db;
+        .workflow-step-horizontal.next {
+            border-color: #f39c12;
+            background: #fffbeb;
         }
 
-        .workflow-marker.pending {
-            background: #f39c12;
-            box-shadow: 0 0 0 2px #f39c12;
-        }
-
-        .workflow-marker.failed {
-            background: #e74c3c;
-            box-shadow: 0 0 0 2px #e74c3c;
-        }
-
-        .workflow-content {
-            background: white;
-            padding: 15px;
-            border-radius: 8px;
-            border: 1px solid #e9ecef;
-        }
-
-        .workflow-header {
+        .step-header-horizontal {
             display: flex;
             justify-content: space-between;
             align-items: flex-start;
-            margin-bottom: 10px;
+            margin-bottom: 12px;
+            gap: 10px;
         }
 
-        .workflow-title {
+        .step-label {
+            font-size: 11px;
+            font-weight: 700;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+            color: #6c757d;
+            margin-bottom: 8px;
+        }
+
+        .step-name {
             font-size: 14px;
             font-weight: 600;
             color: #2c3e50;
-            margin-bottom: 4px;
+            line-height: 1.4;
         }
 
-        .workflow-subtitle {
-            font-size: 12px;
-            color: #6c757d;
-        }
-
-        .workflow-status {
+        .step-status-badge {
             padding: 4px 10px;
             border-radius: 4px;
             font-size: 11px;
             font-weight: 600;
             text-transform: uppercase;
+            white-space: nowrap;
+            flex-shrink: 0;
         }
 
         .status-completed {
@@ -395,71 +261,386 @@
             color: #856404;
         }
 
-        .status-failed {
-            background: #fab1a0;
-            color: #c0392b;
+        .step-message {
+            font-size: 12px;
+            color: #6c757d;
+            line-height: 1.5;
+            margin-top: 8px;
         }
 
-        .workflow-details {
+        /* Expanded Workflow (Vertical) */
+        .workflow-expanded {
+            padding: 25px 40px 25px 60px;
+            position: relative;
+        }
+
+        .workflow-timeline {
+            position: relative;
+        }
+
+        .workflow-timeline::before {
+            content: '';
+            position: absolute;
+            left: -35px;
+            top: 0;
+            bottom: 0;
+            width: 2px;
+            background: #e9ecef;
+        }
+
+        .workflow-step-vertical {
+            position: relative;
+            padding: 20px;
+            background: white;
+            border: 1px solid #e9ecef;
+            border-radius: 10px;
+            margin-bottom: 20px;
+            transition: all 0.3s;
+        }
+
+        .workflow-step-vertical:hover {
+            box-shadow: 0 4px 12px rgba(0,0,0,0.08);
+        }
+
+        .workflow-step-vertical::before {
+            content: '';
+            position: absolute;
+            left: -43px;
+            top: 28px;
+            width: 16px;
+            height: 16px;
+            border-radius: 50%;
+            border: 3px solid white;
+            box-shadow: 0 0 0 2px #e9ecef;
+            z-index: 1;
+        }
+
+        .workflow-step-vertical.completed::before {
+            background: #27ae60;
+            box-shadow: 0 0 0 2px #27ae60;
+        }
+
+        .workflow-step-vertical.in-progress::before {
+            background: #3498db;
+            box-shadow: 0 0 0 2px #3498db;
+        }
+
+        .workflow-step-vertical.pending::before {
+            background: #f39c12;
+            box-shadow: 0 0 0 2px #f39c12;
+        }
+
+        .step-header-vertical {
+            display: flex;
+            justify-content: space-between;
+            align-items: flex-start;
+            margin-bottom: 12px;
+            gap: 10px;
+        }
+
+        .step-date {
+            font-size: 12px;
+            font-weight: 600;
+            color: #6c757d;
+            margin-bottom: 8px;
+        }
+
+        .step-title-vertical {
+            font-size: 14px;
+            font-weight: 700;
+            color: #2c3e50;
+            margin-bottom: 8px;
+        }
+
+        .step-description {
             font-size: 13px;
             color: #495057;
             line-height: 1.6;
-            margin-top: 10px;
+            margin-bottom: 12px;
         }
 
-        .workflow-expand {
-            margin-top: 10px;
-            padding-top: 10px;
-            border-top: 1px solid #e9ecef;
-            display: none;
+        /* Detail Sections */
+        .detail-section {
+            background: #f8f9fa;
+            border: 1px solid #e9ecef;
+            border-radius: 12px;
+            padding: 25px;
+            margin-bottom: 20px;
         }
 
-        .workflow-expand.show {
-            display: block;
+        .section-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 20px;
+            padding-bottom: 15px;
+            border-bottom: 2px solid #e9ecef;
+            flex-wrap: wrap;
+            gap: 15px;
         }
 
-        .btn-run {
-            background: #27ae60;
-            color: white;
-            padding: 6px 12px;
-            border: none;
-            border-radius: 6px;
+        .section-header-left {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            flex: 1;
+            min-width: 200px;
+        }
+
+        .section-icon {
+            width: 40px;
+            height: 40px;
+            background: #e3f2fd;
+            color: #3498db;
+            border-radius: 8px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 18px;
+            flex-shrink: 0;
+        }
+
+        .section-title h3 {
+            font-size: 16px;
+            color: #2c3e50;
+            margin-bottom: 4px;
+        }
+
+        .section-title p {
             font-size: 12px;
+            color: #6c757d;
+        }
+
+        .info-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 20px;
+        }
+
+        .info-item {
+            background: white;
+            padding: 15px;
+            border-radius: 8px;
+            border: 1px solid #e9ecef;
+        }
+
+        .info-label {
+            font-size: 11px;
             font-weight: 600;
-            cursor: pointer;
+            color: #6c757d;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+            margin-bottom: 8px;
+            display: flex;
+            align-items: center;
+            gap: 6px;
+        }
+
+        .info-label i {
+            font-size: 13px;
+        }
+
+        .info-value {
+            font-size: 14px;
+            color: #2c3e50;
+            font-weight: 500;
+            word-break: break-word;
+        }
+
+        /* AI Generated Badge */
+        .ai-generated-badge {
             display: inline-flex;
             align-items: center;
             gap: 6px;
-            margin-top: 10px;
+            background: #e3f2fd;
+            color: #1565c0;
+            padding: 6px 12px;
+            border-radius: 6px;
+            font-size: 12px;
+            font-weight: 600;
+            flex-shrink: 0;
         }
 
-        .btn-run:hover {
-            background: #229954;
+        /* AI Content Box */
+        .ai-content-box {
+            background: white;
+            border: 2px solid #e3f2fd;
+            border-radius: 8px;
+            padding: 20px;
+            position: relative;
         }
 
-        /* Service Details Table */
+        .ai-content-box::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 4px;
+            height: 100%;
+            background: #3498db;
+            border-radius: 8px 0 0 8px;
+        }
+
+        .ai-content-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 15px;
+            flex-wrap: wrap;
+            gap: 10px;
+        }
+
+        .ai-content-text {
+            font-size: 13px;
+            color: #495057;
+            line-height: 1.8;
+            margin-bottom: 10px;
+        }
+
+        .ai-footer-note {
+            font-size: 11px;
+            color: #95a5a6;
+            font-style: italic;
+            margin-top: 15px;
+            display: flex;
+            align-items: center;
+            gap: 6px;
+        }
+
+        /* Supporting Information Section */
+        .supporting-info-form {
+            background: white;
+            padding: 20px;
+            border-radius: 8px;
+            border: 1px solid #e9ecef;
+        }
+
+        .radio-group {
+            display: flex;
+            gap: 30px;
+            margin-bottom: 20px;
+            flex-wrap: wrap;
+        }
+
+        .radio-option {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            cursor: pointer;
+        }
+
+        .radio-option input[type="radio"] {
+            width: 18px;
+            height: 18px;
+            cursor: pointer;
+            flex-shrink: 0;
+        }
+
+        .radio-option label {
+            font-size: 14px;
+            font-weight: 500;
+            color: #2c3e50;
+            cursor: pointer;
+        }
+
+        .conditional-fields {
+            display: none;
+            margin-top: 20px;
+            padding-top: 20px;
+            border-top: 1px solid #e9ecef;
+        }
+
+        .conditional-fields.show {
+            display: block;
+        }
+
+        .form-row {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 20px;
+            margin-bottom: 20px;
+        }
+
+        .form-group {
+            display: flex;
+            flex-direction: column;
+        }
+
+        .form-group label {
+            font-size: 12px;
+            font-weight: 600;
+            color: #495057;
+            margin-bottom: 8px;
+            display: flex;
+            align-items: center;
+            gap: 6px;
+        }
+
+        .form-group select,
+        .form-group input {
+            padding: 10px 12px;
+            border: 1px solid #ced4da;
+            border-radius: 6px;
+            font-size: 13px;
+            font-family: 'Open Sans', sans-serif;
+            transition: all 0.3s;
+        }
+
+        .form-group select:focus,
+        .form-group input:focus {
+            outline: none;
+            border-color: #3498db;
+            box-shadow: 0 0 0 3px rgba(52,152,219,0.1);
+        }
+
+        .checkbox-group {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            margin-top: 15px;
+            flex-wrap: wrap;
+        }
+
+        .checkbox-group input[type="checkbox"] {
+            width: 18px;
+            height: 18px;
+            cursor: pointer;
+            flex-shrink: 0;
+        }
+
+        .checkbox-group label {
+            font-size: 14px;
+            font-weight: 500;
+            color: #2c3e50;
+            cursor: pointer;
+        }
+
+        /* Service Table */
         .service-table {
             width: 100%;
             background: white;
             border-radius: 8px;
             overflow: hidden;
             border: 1px solid #e9ecef;
+            overflow-x: auto;
         }
 
         .service-table table {
             width: 100%;
             border-collapse: collapse;
+            min-width: 700px;
         }
 
         .service-table th {
             background: #f8f9fa;
             padding: 12px;
             text-align: left;
-            font-size: 12px;
+            font-size: 11px;
             font-weight: 600;
             color: #495057;
             text-transform: uppercase;
             border-bottom: 2px solid #e9ecef;
+            white-space: nowrap;
         }
 
         .service-table td {
@@ -469,30 +650,11 @@
             border-bottom: 1px solid #f8f9fa;
         }
 
-        .service-table tr:last-child td {
-            border-bottom: none;
-        }
-
-        .service-table select {
-            width: 100%;
-            padding: 6px 10px;
-            border: 1px solid #ced4da;
-            border-radius: 6px;
-            font-size: 13px;
-            font-family: 'Open Sans', sans-serif;
-        }
-
-        .service-table select:focus {
-            outline: none;
-            border-color: #3498db;
-            box-shadow: 0 0 0 3px rgba(52,152,219,0.1);
-        }
-
-        /* Document Styles */
+        /* Document List */
         .document-list {
             display: flex;
             flex-direction: column;
-            gap: 10px;
+            gap: 12px;
         }
 
         .document-item {
@@ -504,6 +666,8 @@
             justify-content: space-between;
             align-items: center;
             transition: all 0.3s;
+            flex-wrap: wrap;
+            gap: 15px;
         }
 
         .document-item:hover {
@@ -515,6 +679,7 @@
             align-items: center;
             gap: 12px;
             flex: 1;
+            min-width: 200px;
         }
 
         .document-icon {
@@ -527,22 +692,13 @@
             align-items: center;
             justify-content: center;
             font-size: 18px;
-        }
-
-        .document-details h4 {
-            font-size: 14px;
-            color: #2c3e50;
-            margin-bottom: 4px;
-        }
-
-        .document-details p {
-            font-size: 12px;
-            color: #6c757d;
+            flex-shrink: 0;
         }
 
         .document-actions {
             display: flex;
             gap: 8px;
+            flex-wrap: wrap;
         }
 
         .btn-icon {
@@ -556,71 +712,39 @@
             justify-content: center;
             font-size: 14px;
             transition: all 0.3s;
+            flex-shrink: 0;
         }
 
-        .btn-open {
-            background: #e3f2fd;
-            color: #3498db;
+        .btn-icon:hover {
+            transform: scale(1.1);
         }
 
-        .btn-open:hover {
-            background: #3498db;
-            color: white;
-        }
-
-        .btn-view {
-            background: #d1f2eb;
-            color: #27ae60;
-        }
-
-        .btn-view:hover {
-            background: #27ae60;
-            color: white;
-        }
-
-        .btn-download {
-            background: #ffeaa7;
-            color: #f39c12;
-        }
-
-        .btn-download:hover {
-            background: #f39c12;
-            color: white;
-        }
-
-        .btn-remove {
-            background: #fab1a0;
-            color: #e74c3c;
-        }
-
-        .btn-remove:hover {
-            background: #e74c3c;
-            color: white;
-        }
-
-        /* Case History Table */
+        /* History Table */
         .history-table {
             width: 100%;
             background: white;
             border-radius: 8px;
             overflow: hidden;
             border: 1px solid #e9ecef;
+            overflow-x: auto;
         }
 
         .history-table table {
             width: 100%;
             border-collapse: collapse;
+            min-width: 700px;
         }
 
         .history-table th {
             background: #f8f9fa;
             padding: 12px;
             text-align: left;
-            font-size: 12px;
+            font-size: 11px;
             font-weight: 600;
             color: #495057;
             text-transform: uppercase;
             border-bottom: 2px solid #e9ecef;
+            white-space: nowrap;
         }
 
         .history-table td {
@@ -628,10 +752,6 @@
             font-size: 13px;
             color: #2c3e50;
             border-bottom: 1px solid #f8f9fa;
-        }
-
-        .history-table tr:last-child td {
-            border-bottom: none;
         }
 
         /* Notes Section */
@@ -647,6 +767,8 @@
             justify-content: space-between;
             align-items: center;
             margin-bottom: 15px;
+            flex-wrap: wrap;
+            gap: 10px;
         }
 
         .notes-header h4 {
@@ -657,16 +779,6 @@
             gap: 8px;
         }
 
-        .notes-content {
-            min-height: 100px;
-            padding: 15px;
-            background: #f8f9fa;
-            border-radius: 6px;
-            font-size: 13px;
-            color: #495057;
-            line-height: 1.6;
-        }
-
         .notes-empty {
             display: flex;
             flex-direction: column;
@@ -674,6 +786,8 @@
             justify-content: center;
             padding: 30px;
             color: #95a5a6;
+            background: #f8f9fa;
+            border-radius: 6px;
         }
 
         .notes-empty i {
@@ -693,802 +807,1054 @@
             display: inline-flex;
             align-items: center;
             gap: 6px;
+            white-space: nowrap;
+            flex-shrink: 0;
         }
 
-        .btn-add-note:hover {
-            background: #2980b9;
+        /* Hidden class for toggle */
+        .hidden {
+            display: none !important;
         }
 
-        /* Badge Styles */
-        .status-badge {
-            display: inline-block;
-            padding: 4px 10px;
-            border-radius: 4px;
-            font-size: 11px;
-            font-weight: 600;
-            text-transform: uppercase;
-        }
-
-        .status-new {
-            background: #e3f2fd;
-            color: #1565c0;
-        }
-
-        .status-active {
-            background: #d1f2eb;
-            color: #0a6c53;
-        }
-
-        .status-completed {
-            background: #d1f2eb;
-            color: #0a6c53;
-        }
-
-        /* Loading State */
-        .loading-state {
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            justify-content: center;
-            padding: 60px 20px;
-            color: #6c757d;
-        }
-
-        .loading-spinner {
-            width: 50px;
-            height: 50px;
-            border: 4px solid #f3f3f3;
-            border-top: 4px solid #3498db;
-            border-radius: 50%;
-            animation: spin 1s linear infinite;
-            margin-bottom: 20px;
-        }
-
-        @keyframes spin {
-            0% { transform: rotate(0deg); }
-            100% { transform: rotate(360deg); }
-        }
-
-        /* Responsive */
-        @media (max-width: 768px) {
-            .auth-details-modal {
-                width: 100%;
+        /* Responsive Design */
+        @media (max-width: 1280px) {
+            .container {
                 max-width: 100%;
-                height: 100vh;
-                max-height: 100vh;
-                border-radius: 0;
             }
 
-            .modal-body {
-                max-height: calc(100vh - 180px);
+            .page-header {
+                flex-direction: column;
+                align-items: flex-start;
+                gap: 15px;
+            }
+
+            .header-meta {
+                flex-direction: column;
+                gap: 15px;
+                width: 100%;
+            }
+
+            .info-grid {
+                grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            }
+
+            .workflow-collapsed {
+                flex-direction: column;
+            }
+
+            .workflow-step-horizontal {
+                min-width: 100%;
+            }
+
+            .workflow-step-horizontal::after {
+                display: none;
+            }
+        }
+
+        @media (max-width: 768px) {
+            .content-area {
                 padding: 20px;
+            }
+
+            .page-header {
+                padding: 15px 20px;
+            }
+
+            .page-header h1 {
+                font-size: 18px;
+            }
+
+            .header-meta {
+                flex-direction: column;
+                gap: 10px;
+                font-size: 12px;
+            }
+
+            .workflow-header {
+                flex-direction: column;
+                align-items: flex-start;
+            }
+
+            .workflow-header-left {
+                width: 100%;
+            }
+
+            .workflow-actions {
+                width: 100%;
+                justify-content: flex-start;
+            }
+
+            .btn-action {
+                font-size: 12px;
+                padding: 6px 12px;
+            }
+
+            .section-header {
+                flex-direction: column;
+                align-items: flex-start;
+                gap: 10px;
+            }
+
+            .section-header-left {
+                width: 100%;
             }
 
             .info-grid {
                 grid-template-columns: 1fr;
             }
 
+            .form-row {
+                grid-template-columns: 1fr;
+                gap: 15px;
+            }
+
+            .radio-group {
+                gap: 15px;
+            }
+
+            .detail-section {
+                padding: 15px;
+            }
+
+            .workflow-expanded {
+                padding: 20px 20px 20px 50px;
+            }
+
+            .workflow-timeline::before {
+                left: -25px;
+            }
+
+            .workflow-step-vertical::before {
+                left: -33px;
+            }
+
+            .document-item {
+                flex-direction: column;
+                align-items: flex-start;
+            }
+
             .document-actions {
-                flex-wrap: wrap;
+                width: 100%;
+                justify-content: flex-start;
+            }
+
+            .notes-header {
+                flex-direction: column;
+                align-items: flex-start;
+            }
+        }
+
+        @media (max-width: 480px) {
+            body {
+                padding: 10px;
+            }
+
+            .container {
+                border-radius: 8px;
+            }
+
+            .page-header {
+                padding: 12px 15px;
+                border-radius: 8px 8px 0 0;
+            }
+
+            .page-header h1 {
+                font-size: 16px;
+            }
+
+            .header-meta {
+                gap: 10px;
+                font-size: 11px;
+            }
+
+            .content-area {
+                padding: 15px;
+            }
+
+            .detail-section {
+                padding: 12px;
+                margin-bottom: 15px;
+                border-radius: 8px;
+            }
+
+            .section-header {
+                margin-bottom: 15px;
+                padding-bottom: 10px;
+                gap: 8px;
+            }
+
+            .section-icon {
+                width: 36px;
+                height: 36px;
+                font-size: 16px;
+            }
+
+            .section-title h3 {
+                font-size: 14px;
+            }
+
+            .section-title p {
+                font-size: 11px;
+            }
+
+            .info-grid {
+                gap: 12px;
+            }
+
+            .info-item {
+                padding: 12px;
+            }
+
+            .info-label {
+                font-size: 10px;
+                margin-bottom: 6px;
+            }
+
+            .info-value {
+                font-size: 13px;
+            }
+
+            .workflow-header {
+                padding: 12px;
+            }
+
+            .workflow-collapsed {
+                padding: 15px;
+                gap: 12px;
+            }
+
+            .workflow-expanded {
+                padding: 15px 15px 15px 40px;
+            }
+
+            .ai-content-box {
+                padding: 15px;
+            }
+
+            .ai-content-text {
+                font-size: 12px;
+            }
+
+            .service-table table {
+                min-width: 600px;
+            }
+
+            .history-table table {
+                min-width: 600px;
             }
         }
     </style>
 </head>
 <body>
-
-    <!-- Modal Overlay -->
-    <div class="modal-overlay" id="modalOverlay" onclick="closeAuthDetailsModal()"></div>
-
-    <!-- Auth Details Modal -->
-    <div class="auth-details-modal" id="authDetailsModal">
-        <!-- Modal Header -->
-        <div class="modal-header">
-            <div class="modal-header-left">
-                <div class="modal-icon">
-                    <i class="fas fa-file-medical-alt"></i>
+    <div class="container">
+        <!-- Page Header -->
+        <div class="page-header">
+            <h1><i class="fas fa-folder-open"></i> Case Details</h1>
+            <div class="header-meta">
+                <div class="header-meta-item">
+                    <span class="header-meta-label">Case ID</span>
+                    <span class="header-meta-value">DA000000000017</span>
                 </div>
-                <div class="modal-title-group">
-                    <h2 id="modalAuthNumber">Authorization Details</h2>
-                    <p>Complete information for this authorization</p>
+                <div class="header-meta-item">
+                    <span class="header-meta-label">Member</span>
+                    <span class="header-meta-value">Alice Johnson</span>
                 </div>
-            </div>
-            <button class="modal-close" onclick="closeAuthDetailsModal()">
-                <i class="fas fa-times"></i>
-            </button>
-        </div>
-
-        <!-- Modal Tabs -->
-        <div class="modal-tabs">
-            <div class="modal-tab active" onclick="switchModalTab('case')">
-                <i class="fas fa-folder-open"></i>
-                Case Details
-            </div>
-            <div class="modal-tab" onclick="switchModalTab('member')">
-                <i class="fas fa-user"></i>
-                Member Details
-            </div>
-            <div class="modal-tab" onclick="switchModalTab('office')">
-                <i class="fas fa-building"></i>
-                Office Details
-            </div>
-            <div class="modal-tab" onclick="switchModalTab('group')">
-                <i class="fas fa-users"></i>
-                Group Details
-            </div>
-            <div class="modal-tab" onclick="switchModalTab('provider')">
-                <i class="fas fa-user-md"></i>
-                Provider Details
+                <div class="header-meta-item">
+                    <span class="header-meta-label">Status</span>
+                    <span class="header-meta-value">In Progress</span>
+                </div>
             </div>
         </div>
 
-        <!-- Modal Body -->
-        <div class="modal-body" id="modalBodyContent">
-            <!-- Content will be loaded here -->
+        <!-- Content Area -->
+        <div class="content-area">
+            <!-- Workflow Section -->
+            <div class="workflow-section">
+                <div class="workflow-header">
+                    <div class="workflow-header-left">
+                        <div class="workflow-icon">
+                            <i class="fas fa-project-diagram"></i>
+                        </div>
+                        <div class="workflow-title">
+                            <h3>Workflow Process</h3>
+                            <p>Case processing timeline and status</p>
+                        </div>
+                    </div>
+                    <div class="workflow-actions">
+                        <button class="btn-action btn-view-full" id="btnViewFull" onclick="expandWorkflow()">
+                            <i class="fas fa-expand"></i> View Full Workflow
+                        </button>
+                        <button class="btn-action btn-collapse hidden" id="btnCollapse" onclick="collapseWorkflow()">
+                            <i class="fas fa-compress"></i> Collapse
+                        </button>
+                    </div>
+                </div>
+
+                <!-- Collapsed View (Horizontal) -->
+                <div class="workflow-collapsed" id="workflowCollapsed">
+                    <div class="workflow-step-horizontal last-processed">
+                        <div class="step-header-horizontal">
+                            <div>
+                                <div class="step-label">Last Processed</div>
+                                <div class="step-name">UDICS CHECK</div>
+                            </div>
+                            <span class="step-status-badge status-completed">Completed</span>
+                        </div>
+                        <div class="step-message">
+                            Successfully validated identification documents.
+                        </div>
+                    </div>
+
+                    <div class="workflow-step-horizontal current">
+                        <div class="step-header-horizontal">
+                            <div>
+                                <div class="step-label">Current Step</div>
+                                <div class="step-name">MISSING DOCUMENT CHECK</div>
+                            </div>
+                            <span class="step-status-badge status-in-progress">In Progress</span>
+                        </div>
+                        <div class="step-message">
+                            Awaiting additional documentation from provider.
+                        </div>
+                    </div>
+
+                    <div class="workflow-step-horizontal next">
+                        <div class="step-header-horizontal">
+                            <div>
+                                <div class="step-label">Next Step</div>
+                                <div class="step-name">RECOMMENDATION CHECK</div>
+                            </div>
+                            <span class="step-status-badge status-pending">Pending</span>
+                        </div>
+                        <div class="step-message">
+                            Will proceed to AI recommendation analysis.
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Expanded View (Vertical) -->
+                <div class="workflow-expanded hidden" id="workflowExpanded">
+                    <div class="workflow-timeline">
+                        <div class="workflow-step-vertical completed">
+                            <div class="step-date">Dec 12, 2025 10:15 AM</div>
+                            <div class="step-header-vertical">
+                                <div>
+                                    <div class="step-title-vertical">INTAKE AUDIT</div>
+                                    <div class="step-description">
+                                        Successfully completed intake audit. All required fields populated correctly and data integrity validated.
+                                    </div>
+                                </div>
+                                <span class="step-status-badge status-completed">Completed</span>
+                            </div>
+                        </div>
+
+                        <div class="workflow-step-vertical completed">
+                            <div class="step-date">Dec 12, 2025 10:18 AM</div>
+                            <div class="step-header-vertical">
+                                <div>
+                                    <div class="step-title-vertical">UDICS CHECK</div>
+                                    <div class="step-description">
+                                        Universal Data Integrity Check System validation completed. Member identification verified and eligibility confirmed.
+                                    </div>
+                                </div>
+                                <span class="step-status-badge status-completed">Completed</span>
+                            </div>
+                        </div>
+
+                        <div class="workflow-step-vertical in-progress">
+                            <div class="step-date">Dec 12, 2025 10:25 AM</div>
+                            <div class="step-header-vertical">
+                                <div>
+                                    <div class="step-title-vertical">MISSING DOCUMENT CHECK</div>
+                                    <div class="step-description">
+                                        System detected missing clinical documentation. Automated notification sent to provider requesting required documents.
+                                    </div>
+                                </div>
+                                <span class="step-status-badge status-in-progress">In Progress</span>
+                            </div>
+                        </div>
+
+                        <div class="workflow-step-vertical pending">
+                            <div class="step-date">Pending</div>
+                            <div class="step-header-vertical">
+                                <div>
+                                    <div class="step-title-vertical">RECOMMENDATION CHECK</div>
+                                    <div class="step-description">
+                                        AI system will analyze documentation to provide medical necessity recommendation.
+                                    </div>
+                                </div>
+                                <span class="step-status-badge status-pending">Pending</span>
+                            </div>
+                        </div>
+
+                        <div class="workflow-step-vertical pending">
+                            <div class="step-date">Pending</div>
+                            <div class="step-header-vertical">
+                                <div>
+                                    <div class="step-title-vertical">CLINICAL REVIEW</div>
+                                    <div class="step-description">
+                                        Clinical review by licensed medical professional to validate AI recommendation.
+                                    </div>
+                                </div>
+                                <span class="step-status-badge status-pending">Pending</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Case SLA -->
+            <div class="detail-section">
+                <div class="section-header">
+                    <div class="section-header-left">
+                        <div class="section-icon">
+                            <i class="fas fa-clock"></i>
+                        </div>
+                        <div class="section-title">
+                            <h3>Case SLA</h3>
+                            <p>Service level agreement timelines</p>
+                        </div>
+                    </div>
+                </div>
+                <div class="info-grid">
+                    <div class="info-item">
+                        <div class="info-label"><i class="fas fa-info-circle"></i> Status</div>
+                        <div class="info-value">On Time</div>
+                    </div>
+                    <div class="info-item">
+                        <div class="info-label"><i class="fas fa-calendar-times"></i> SLA Expiration</div>
+                        <div class="info-value">12/15/2025 11:40 AM</div>
+                    </div>
+                    <div class="info-item">
+                        <div class="info-label"><i class="fas fa-calendar-check"></i> Actual SLA Date</div>
+                        <div class="info-value">-</div>
+                    </div>
+                    <div class="info-item">
+                        <div class="info-label"><i class="fas fa-calendar-alt"></i> Completed SLA Date</div>
+                        <div class="info-value">-</div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Provider Details -->
+            <div class="detail-section">
+                <div class="section-header">
+                    <div class="section-header-left">
+                        <div class="section-icon">
+                            <i class="fas fa-user-md"></i>
+                        </div>
+                        <div class="section-title">
+                            <h3>Provider Details</h3>
+                            <p>Requesting provider information</p>
+                        </div>
+                    </div>
+                </div>
+                <div class="info-grid">
+                    <div class="info-item">
+                        <div class="info-label"><i class="fas fa-user-md"></i> Provider Name</div>
+                        <div class="info-value">Dr. John Peters</div>
+                    </div>
+                    <div class="info-item">
+                        <div class="info-label"><i class="fas fa-id-card"></i> NPI</div>
+                        <div class="info-value">1234567890</div>
+                    </div>
+                    <div class="info-item">
+                        <div class="info-label"><i class="fas fa-hashtag"></i> Tax ID</div>
+                        <div class="info-value">XX-XXXXXXX</div>
+                    </div>
+                    <div class="info-item">
+                        <div class="info-label"><i class="fas fa-stethoscope"></i> Specialty</div>
+                        <div class="info-value">Primary Care Physician</div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Member Details -->
+            <div class="detail-section">
+                <div class="section-header">
+                    <div class="section-header-left">
+                        <div class="section-icon">
+                            <i class="fas fa-user"></i>
+                        </div>
+                        <div class="section-title">
+                            <h3>Member Details</h3>
+                            <p>Patient information</p>
+                        </div>
+                    </div>
+                </div>
+                <div class="info-grid">
+                    <div class="info-item">
+                        <div class="info-label"><i class="fas fa-id-badge"></i> Member ID</div>
+                        <div class="info-value">12312312312</div>
+                    </div>
+                    <div class="info-item">
+                        <div class="info-label"><i class="fas fa-user"></i> Member Name</div>
+                        <div class="info-value">Alice Johnson</div>
+                    </div>
+                    <div class="info-item">
+                        <div class="info-label"><i class="fas fa-birthday-cake"></i> Date of Birth</div>
+                        <div class="info-value">05/15/1985</div>
+                    </div>
+                    <div class="info-item">
+                        <div class="info-label"><i class="fas fa-briefcase"></i> Member LOB</div>
+                        <div class="info-value">Medicaid</div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Case Details -->
+            <div class="detail-section">
+                <div class="section-header">
+                    <div class="section-header-left">
+                        <div class="section-icon">
+                            <i class="fas fa-info-circle"></i>
+                        </div>
+                        <div class="section-title">
+                            <h3>Case Details</h3>
+                            <p>Authorization request information</p>
+                        </div>
+                    </div>
+                </div>
+                <div class="info-grid">
+                    <div class="info-item">
+                        <div class="info-label"><i class="fas fa-hashtag"></i> Case Number</div>
+                        <div class="info-value">Case #1</div>
+                    </div>
+                    <div class="info-item">
+                        <div class="info-label"><i class="fas fa-calendar-plus"></i> Case Received Date</div>
+                        <div class="info-value">12/12/2025 9:30 AM</div>
+                    </div>
+                    <div class="info-item">
+                        <div class="info-label"><i class="fas fa-clock"></i> Last Modified</div>
+                        <div class="info-value">12/12/2025 10:30 AM</div>
+                    </div>
+                    <div class="info-item">
+                        <div class="info-label"><i class="fas fa-map-marker-alt"></i> Service Location</div>
+                        <div class="info-value">Office</div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Authorization/Claim Details -->
+            <div class="detail-section">
+                <div class="section-header">
+                    <div class="section-header-left">
+                        <div class="section-icon">
+                            <i class="fas fa-file-medical"></i>
+                        </div>
+                        <div class="section-title">
+                            <h3>Authorization/Claim Details</h3>
+                            <p>Service authorization information</p>
+                        </div>
+                    </div>
+                </div>
+                <div class="service-table">
+                    <table>
+                        <thead>
+                            <tr>
+                                <th>Claim Line</th>
+                                <th>Billed Amount</th>
+                                <th>Place of Service</th>
+                                <th>Service Type</th>
+                                <th>Service Code</th>
+                                <th>Service Description</th>
+                                <th>Status</th>
+                                <th>Resolution</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td>12345</td>
+                                <td>$250.00</td>
+                                <td>Office</td>
+                                <td>Eval & Tx</td>
+                                <td>D0150</td>
+                                <td>PROSSO-ORAL EVALUATION</td>
+                                <td>Requested</td>
+                                <td>As Requested</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+
+            <!-- Case Information -->
+            <div class="detail-section">
+                <div class="section-header">
+                    <div class="section-header-left">
+                        <div class="section-icon">
+                            <i class="fas fa-clipboard"></i>
+                        </div>
+                        <div class="section-title">
+                            <h3>Case Information</h3>
+                            <p>Additional case details and clinical context</p>
+                        </div>
+                    </div>
+                </div>
+                <div class="info-item">
+                    <div class="info-label"><i class="fas fa-notes-medical"></i> Clinical Context</div>
+                    <div class="info-value">
+                        Patient has been referred for evaluation of complex dental concerns. Multiple procedures may be required based on comprehensive oral examination findings. Authorization requested for diagnostic services and potential treatment plan development.
+                    </div>
+                </div>
+            </div>
+
+            <!-- Case History -->
+            <div class="detail-section">
+                <div class="section-header">
+                    <div class="section-header-left">
+                        <div class="section-icon">
+                            <i class="fas fa-history"></i>
+                        </div>
+                        <div class="section-title">
+                            <h3>Case History</h3>
+                            <p>Audit trail of case activities</p>
+                        </div>
+                    </div>
+                </div>
+                <div class="history-table">
+                    <table>
+                        <thead>
+                            <tr>
+                                <th>Date</th>
+                                <th>Description</th>
+                                <th>Action By</th>
+                                <th>Role</th>
+                                <th>Time Taken</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td>12/12/2025 10:28:38</td>
+                                <td>Auto-assigning case on cases assigned.ct (@PreassignmentCheck)@mediclaimLLM.com</td>
+                                <td>System AI</td>
+                                <td>System AI</td>
+                                <td>00:00</td>
+                            </tr>
+                            <tr>
+                                <td>12/12/2025 10:15:12</td>
+                                <td>Missing documents check call completed</td>
+                                <td>System AI</td>
+                                <td>System AI</td>
+                                <td>N/A</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+
+            <!-- Workflow SLA Details -->
+            <div class="detail-section">
+                <div class="section-header">
+                    <div class="section-header-left">
+                        <div class="section-icon">
+                            <i class="fas fa-stopwatch"></i>
+                        </div>
+                        <div class="section-title">
+                            <h3>Workflow SLA Details</h3>
+                            <p>Service level performance metrics</p>
+                        </div>
+                    </div>
+                </div>
+                <div class="info-grid">
+                    <div class="info-item">
+                        <div class="info-label"><i class="fas fa-tasks"></i> Status</div>
+                        <div class="info-value">Analyst Review</div>
+                    </div>
+                    <div class="info-item">
+                        <div class="info-label"><i class="fas fa-calendar-day"></i> Actual SLA Date</div>
+                        <div class="info-value">12/15/2025 11:40:12</div>
+                    </div>
+                    <div class="info-item">
+                        <div class="info-label"><i class="fas fa-calendar-check"></i> Completed SLA Date</div>
+                        <div class="info-value">-</div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Supporting Information -->
+            <div class="detail-section">
+                <div class="section-header">
+                    <div class="section-header-left">
+                        <div class="section-icon">
+                            <i class="fas fa-clipboard-list"></i>
+                        </div>
+                        <div class="section-title">
+                            <h3>Supporting Information</h3>
+                            <p>Additional request information and selections</p>
+                        </div>
+                    </div>
+                </div>
+                <div class="supporting-info-form">
+                    <div class="radio-group">
+                        <div class="radio-option">
+                            <input type="radio" id="standard" name="request-type" value="standard" onchange="toggleConditionalFields()" checked>
+                            <label for="standard"><i class="fas fa-check-circle"></i> Standard</label>
+                        </div>
+                        <div class="radio-option">
+                            <input type="radio" id="expedited" name="request-type" value="expedited" onchange="toggleConditionalFields()">
+                            <label for="expedited"><i class="fas fa-bolt"></i> Expedited</label>
+                        </div>
+                    </div>
+
+                    <!-- Standard Fields -->
+                    <div id="standard-fields" class="conditional-fields show">
+                        <div class="form-row">
+                            <div class="form-group">
+                                <label><i class="fas fa-check"></i> Resolution</label>
+                                <select>
+                                    <option value="">Select Resolution</option>
+                                    <option value="dental-request">Dental Request</option>
+                                    <option value="approved">Approved</option>
+                                    <option value="pending">Pending Review</option>
+                                </select>
+                            </div>
+                            <div class="form-group">
+                                <label><i class="fas fa-times-circle"></i> Denial Reason</label>
+                                <select>
+                                    <option value="">Select Denial Reason</option>
+                                    <option value="insufficient-docs">Insufficient Documentation</option>
+                                    <option value="not-covered">Not Covered</option>
+                                    <option value="duplicate">Duplicate Request</option>
+                                </select>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Expedited Fields -->
+                    <div id="expedited-fields" class="conditional-fields">
+                        <div class="form-row">
+                            <div class="form-group">
+                                <label><i class="fas fa-bolt"></i> Expedited Status</label>
+                                <select>
+                                    <option value="">Select Status</option>
+                                    <option value="urgent">Urgent - 24hrs</option>
+                                    <option value="emergency">Emergency - Immediate</option>
+                                    <option value="standard-expedited">Standard Expedited</option>
+                                </select>
+                            </div>
+                            <div class="form-group">
+                                <label><i class="fas fa-check"></i> Resolution</label>
+                                <select>
+                                    <option value="">Select Resolution</option>
+                                    <option value="dental-request">Dental Request</option>
+                                    <option value="approved">Approved</option>
+                                    <option value="pending">Pending Review</option>
+                                </select>
+                            </div>
+                            <div class="form-group">
+                                <label><i class="fas fa-times-circle"></i> Denial Reason</label>
+                                <select>
+                                    <option value="">Select Denial Reason</option>
+                                    <option value="insufficient-docs">Insufficient Documentation</option>
+                                    <option value="not-covered">Not Covered</option>
+                                    <option value="duplicate">Duplicate Request</option>
+                                </select>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Effectuation Checkbox (Always visible) -->
+                    <div class="checkbox-group">
+                        <input type="checkbox" id="effectuation">
+                        <label for="effectuation"><i class="fas fa-flag"></i> Effectuation Needed</label>
+                    </div>
+                </div>
+            </div>
+
+            <!-- CASE SUMMARY (AI Generated) -->
+            <div class="detail-section">
+                <div class="section-header">
+                    <div class="section-header-left">
+                        <div class="section-icon">
+                            <i class="fas fa-file-alt"></i>
+                        </div>
+                        <div class="section-title">
+                            <h3>Case Summary</h3>
+                            <p>AI-generated comprehensive case overview</p>
+                        </div>
+                    </div>
+                    <span class="ai-generated-badge">
+                        <i class="fas fa-robot"></i> Generated by AI
+                    </span>
+                </div>
+                <div class="ai-content-box">
+                    <div class="ai-content-header">
+                        <h4 style="color: #1565c0; font-size: 14px;">
+                            <i class="fas fa-brain"></i> Automated Case Analysis
+                        </h4>
+                    </div>
+                    <div class="ai-content-text">
+                        <strong>Duplicate Case Check:</strong> Evidence of a duplicate claim connected by the System on on December 17, 2025. The following activities were recorded:
+                    </div>
+                    <div class="ai-content-text">
+                        <strong>Eligibility Confirmation:</strong> The patient's eligibility status has been successfully verified. No eligibility issues or barriers detected during the review period.
+                    </div>
+                    <div class="ai-content-text">
+                        <strong>Missing Documents Check:</strong> The system has completed a missing document scan. A scan was done concurrently with no close taken records.
+                    </div>
+                    <div class="ai-content-text">
+                        <strong>Service Verification:</strong> All requested services have been verified against policy guidelines. The requested procedure D0150 (Comprehensive Oral Evaluation) aligns with the member's current benefit structure and clinical necessity criteria.
+                    </div>
+                    <div class="ai-content-text">
+                        <strong>Case Assignment:</strong> This case was automatically assigned to an analyst with oral surgical/diagnostic evaluation experience. All tasks orders during the sequence of events.
+                    </div>
+                    <div class="ai-footer-note">
+                        <i class="fas fa-info-circle"></i>
+                        This summary was automatically generated using AI analysis and should be reviewed by clinical staff before final determination.
+                    </div>
+                </div>
+            </div>
+
+            <!-- PAST SUMMARY (AI Generated) -->
+            <div class="detail-section">
+                <div class="section-header">
+                    <div class="section-header-left">
+                        <div class="section-icon">
+                            <i class="fas fa-history"></i>
+                        </div>
+                        <div class="section-title">
+                            <h3>Past Summary</h3>
+                            <p>AI-generated historical case analysis</p>
+                        </div>
+                    </div>
+                    <span class="ai-generated-badge">
+                        <i class="fas fa-robot"></i> Generated by AI
+                    </span>
+                </div>
+                <div class="ai-content-box">
+                    <div class="ai-content-header">
+                        <h4 style="color: #1565c0; font-size: 14px;">
+                            <i class="fas fa-chart-line"></i> Historical Context & Patterns
+                        </h4>
+                    </div>
+                    <div class="ai-content-text">
+                        The past claim shows Susan Last LOB, represented by Dr. John Peters, regarding the denial of Evidence-of-Coverage (EOC) has based on eligibility, which is not supported by the clinical context providers.
+                    </div>
+                    <div class="ai-content-text">
+                        <strong>Previous Authorizations:</strong> Member Pats, 2021, where a daughter's grandmother received oral and gingival treatments (D4341, D4342). These procedures were initially pended but ultimately approved after provider consultation.
+                    </div>
+                    <div class="ai-content-text">
+                        <strong>Provider History:</strong> Dr. John Peters has an approval rate of 94% for similar diagnostic procedures. Historical data shows consistent documentation quality and timely response to additional information requests.
+                    </div>
+                    <div class="ai-content-text">
+                        <strong>Member Utilization:</strong> This member has had 3 prior authorizations in the past 18 months, all approved. No patterns of inappropriate utilization detected. Member has been compliant with all follow-up care recommendations.
+                    </div>
+                    <div class="ai-content-text">
+                        <strong>Claim Patterns:</strong> Analysis indicates standard preventive care patterns with no red flags. The current request aligns with expected care progression based on member's dental history and age demographics.
+                    </div>
+                    <div class="ai-footer-note">
+                        <i class="fas fa-info-circle"></i>
+                        Historical analysis is based on claims data, provider records, and member utilization patterns. Clinical judgment should be exercised for final determination.
+                    </div>
+                </div>
+            </div>
+
+            <!-- AI RECOMMENDATION -->
+            <div class="detail-section">
+                <div class="section-header">
+                    <div class="section-header-left">
+                        <div class="section-icon">
+                            <i class="fas fa-robot"></i>
+                        </div>
+                        <div class="section-title">
+                            <h3>AI Recommendation</h3>
+                            <p>Intelligent decision support recommendation</p>
+                        </div>
+                    </div>
+                    <span class="ai-generated-badge">
+                        <i class="fas fa-robot"></i> Generated by AI
+                    </span>
+                </div>
+                <div class="ai-content-box">
+                    <div class="ai-content-header">
+                        <h4 style="color: #1565c0; font-size: 14px;">
+                            <i class="fas fa-lightbulb"></i> Clinical Decision Support Recommendation
+                        </h4>
+                    </div>
+                    <div class="ai-content-text">
+                        <strong style="color: #27ae60; font-size: 16px;">
+                            <i class="fas fa-check-circle"></i> RECOMMENDATION: APPROVE
+                        </strong>
+                    </div>
+                    <div class="ai-content-text">
+                        <strong>Recommendation Summary:</strong> The dental unit of care should be allowed for this person, as indicated by oral treatments or the medical necessity of the service. There is no indication that this patient meets criteria for specialist evaluation. All basic and conservative treatments have been properly documented by the attending provider.
+                    </div>
+                    <div class="ai-content-text">
+                        <strong>Overall Recommendation:</strong> Overridden
+                    </div>
+                    <div class="ai-content-text">
+                        <strong>Interim Recommendation:</strong> UnderControl
+                    </div>
+                    <div class="ai-content-text">
+                        <strong>Overall Justification:</strong> Periodic oral evaluations or specifically necessary based on patient's coverage design in terms of medical necessity of the service. There is a justification that the patient is legible for coverage of the oral health services and typically permitted services by in plain provisions of EOCs.
+                    </div>
+                    <div class="ai-content-text">
+                        <strong>Procedure Description:</strong> PRESIO-ORA (Orchard, part providers, and specialty evidence) for the patient assessment show that the member's coverage design in terms of medical structure or plan generally encourages standard periodontal review—whether that be dental plan policy, current plans or specialty.
+                    </div>
+                    <div class="ai-content-text">
+                        <strong>Recommendation Notation:</strong> Periodic oral evaluations are specifically necessary based on the patient's coverage design in terms of medical necessity of the service. There is a notification that the patient is eligible for coverage of the oral and typically permitted services as per the provisions of the EOC (Evidence of Coverage) and specialty policy guidelines.
+                    </div>
+                    <div class="ai-content-text">
+                        <strong>Clinical Justification:</strong> Periodic oral examinations are preventive in nature under Plan policy guidelines. Patient has maintained regular dental care patterns and shows compliance with recommended treatment schedules. The requested evaluation (D0150) is a standard diagnostic procedure that is typically covered under basic benefit provisions.
+                    </div>
+                    <div class="ai-content-text">
+                        <strong>Clinic Classification:</strong> Periodic oral evaluations are standard preventive services for eligible plan covered patients.
+                    </div>
+                    <div class="ai-footer-note">
+                        <i class="fas fa-info-circle"></i>
+                        AI recommendations are advisory only. Final authorization decisions must be made by qualified clinical reviewers in accordance with plan policies and clinical guidelines.
+                    </div>
+                </div>
+            </div>
+
+            <!-- Analyst Notes -->
+            <div class="detail-section">
+                <div class="notes-section">
+                    <div class="notes-header">
+                        <h4><i class="fas fa-sticky-note"></i> Analyst Notes</h4>
+                        <button class="btn-add-note">
+                            <i class="fas fa-plus"></i> Add Note
+                        </button>
+                    </div>
+                    <div class="notes-empty">
+                        <i class="fas fa-inbox"></i>
+                        <p>No analyst notes yet</p>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Clinical Analyst Notes -->
+            <div class="detail-section">
+                <div class="notes-section">
+                    <div class="notes-header">
+                        <h4><i class="fas fa-user-md"></i> Clinical Analyst Notes</h4>
+                        <button class="btn-add-note">
+                            <i class="fas fa-plus"></i> Add Note
+                        </button>
+                    </div>
+                    <div class="notes-empty">
+                        <i class="fas fa-inbox"></i>
+                        <p>No clinical notes yet</p>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Claims Coordinator Notes -->
+            <div class="detail-section">
+                <div class="notes-section">
+                    <div class="notes-header">
+                        <h4><i class="fas fa-clipboard-list"></i> Claims Coordinator Notes</h4>
+                        <button class="btn-add-note">
+                            <i class="fas fa-plus"></i> Add Note
+                        </button>
+                    </div>
+                    <div class="notes-empty">
+                        <i class="fas fa-inbox"></i>
+                        <p>No coordinator notes yet</p>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Administrative Analyst Notes -->
+            <div class="detail-section">
+                <div class="notes-section">
+                    <div class="notes-header">
+                        <h4><i class="fas fa-user-tie"></i> Administrative Analyst Notes</h4>
+                        <button class="btn-add-note">
+                            <i class="fas fa-plus"></i> Add Note
+                        </button>
+                    </div>
+                    <div class="notes-empty">
+                        <i class="fas fa-inbox"></i>
+                        <p>No administrative notes yet</p>
+                    </div>
+                </div>
+            </div>
+
+            <!-- UM Coordinator Notes -->
+            <div class="detail-section">
+                <div class="notes-section">
+                    <div class="notes-header">
+                        <h4><i class="fas fa-user-nurse"></i> UM Coordinator Notes</h4>
+                        <button class="btn-add-note">
+                            <i class="fas fa-plus"></i> Add Note
+                        </button>
+                    </div>
+                    <div class="notes-empty">
+                        <i class="fas fa-inbox"></i>
+                        <p>No UM coordinator notes yet</p>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Attached Documents -->
+            <div class="detail-section">
+                <div class="section-header">
+                    <div class="section-header-left">
+                        <div class="section-icon">
+                            <i class="fas fa-paperclip"></i>
+                        </div>
+                        <div class="section-title">
+                            <h3>Attached Documents</h3>
+                            <p>Case supporting documentation</p>
+                        </div>
+                    </div>
+                </div>
+                <div class="document-list">
+                    <div class="document-item">
+                        <div class="document-info">
+                            <div class="document-icon">
+                                <i class="fas fa-file-pdf"></i>
+                            </div>
+                            <div class="document-details">
+                                <h4>F49-07 Appeal Request.docx</h4>
+                            </div>
+                        </div>
+                        <div class="document-actions">
+                            <button class="btn-icon" style="background: #e3f2fd; color: #3498db;" title="Open in New Tab">
+                                <i class="fas fa-external-link-alt"></i>
+                            </button>
+                            <button class="btn-icon" style="background: #d1f2eb; color: #27ae60;" title="View">
+                                <i class="fas fa-eye"></i>
+                            </button>
+                        </div>
+                    </div>
+                </div>
+            </div>
         </div>
     </div>
 
     <script>
-        // Sample case data
-        const caseData = {
-            general_information: {
-                case_received_date: "12/10/2025",
-                created_by_employee: "System Admin",
-                last_modification: "12/15/2025 10:30 AM",
-                date_of_accident: "11/25/2025",
-                estimated_date_of_birth: "05/15/1985",
-                ica_code: "ICA12345"
-            },
-            referral_service_type: {
-                service_requested: "Standard",
-                request_type: "Expedited",
-                referred_denied_type_requested: "Standard",
-                support_unit: "Unit A",
-                followup_appt_number: "APT-789"
-            },
-            workflow_process: [
-                {
-                    step: "NEXT STEP 1",
-                    title: "Waiting Document (case creation failed / Waiting Documents (Group code))",
-                    status: "completed",
-                    details: "Document verification completed successfully."
-                },
-                {
-                    step: "NEXT STEP 2",
-                    title: "UDICS CHECK (UDICS CHECK passed)",
-                    status: "completed",
-                    details: "UDICS validation passed."
-                },
-                {
-                    step: "CURRENT STEP",
-                    title: "Case Under Review",
-                    status: "in-progress",
-                    details: "Case is currently under medical review by Dr. Johnson."
-                },
-                {
-                    step: "PENDING STEP",
-                    title: "Final Approval Pending",
-                    status: "pending",
-                    details: "Awaiting final authorization approval."
-                }
-            ],
-            service_details: [
-                {
-                    code: "D1234",
-                    description: "Dental Exam - Complete",
-                    tooth: "N/A",
-                    quantity: "1",
-                    place: "Office",
-                    unit: "12",
-                    available: "Y",
-                    status: "Requested",
-                    reason: "Created by AI..."
-                },
-                {
-                    code: "D5678",
-                    description: "Periodontal Scaling - Full",
-                    tooth: "12-15",
-                    quantity: "4",
-                    place: "Office",
-                    unit: "8",
-                    available: "Y",
-                    status: "Requested",
-                    reason: "Created by AI..."
-                }
-            ],
-            provider_info: {
-                provider_name: "Dr. Sarah Johnson",
-                tax_number: "12345",
-                npi_number: "1234567890",
-                tin: "987654321",
-                address: "123 Medical Plaza",
-                city: "Los Angeles",
-                state: "CA",
-                office_contact_phone: "555-123-4567"
-            },
-            servicing_provider: {
-                provider_id: "PRV-001",
-                provider_name: "Dr. Michael Chen",
-                first_name: "Michael",
-                last_name: "Chen",
-                npi: "9876543210",
-                tin: "123456789",
-                address: "456 Health Ave",
-                phone: "555-987-6543"
-            },
-            attached_documents: [
-                {
-                    id: 1,
-                    name: "DEMO_GAT_No_surface_verified.pdf",
-                    size: "2.4 MB",
-                    uploaded: "12/10/2025"
-                },
-                {
-                    id: 2,
-                    name: "Medical_Records_Patient_001.pdf",
-                    size: "3.8 MB",
-                    uploaded: "12/11/2025"
-                },
-                {
-                    id: 3,
-                    name: "Lab_Results_2025.pdf",
-                    size: "1.2 MB",
-                    uploaded: "12/12/2025"
-                }
-            ],
-            case_history: [
-                {
-                    date: "12/15/2025 10:28:38",
-                    description: "Auto-assigning case on cases assigned.ct (PreAssignmentCheck)@mediclaim.com",
-                    action: "System AI",
-                    role: "System AI",
-                    time: "10:00"
-                },
-                {
-                    date: "12/15/2025 10:28:38",
-                    description: "Auto-assigning case on cases assigned.ct (PreAssignmentCheck)@mediclaim.com",
-                    action: "System AI",
-                    role: "System AI",
-                    time: "10:00"
-                }
-            ]
-        };
-
-        // Auto-open modal with Case Details tab
-        document.addEventListener('DOMContentLoaded', function() {
-            openAuthDetailsModal('AUTH-2024-001');
-        });
-
-        function openAuthDetailsModal(authNumber) {
-            const modal = document.getElementById('authDetailsModal');
-            const overlay = document.getElementById('modalOverlay');
-            
-            document.getElementById('modalAuthNumber').textContent = `Authorization: ${authNumber}`;
-            
-            modal.classList.add('show');
-            overlay.classList.add('show');
-            
-            loadCaseDetails(authNumber);
+        function expandWorkflow() {
+            document.getElementById('workflowCollapsed').classList.add('hidden');
+            document.getElementById('workflowExpanded').classList.remove('hidden');
+            document.getElementById('btnViewFull').classList.add('hidden');
+            document.getElementById('btnCollapse').classList.remove('hidden');
         }
 
-        function closeAuthDetailsModal() {
-            const modal = document.getElementById('authDetailsModal');
-            const overlay = document.getElementById('modalOverlay');
-            
-            modal.classList.remove('show');
-            overlay.classList.remove('show');
+        function collapseWorkflow() {
+            document.getElementById('workflowCollapsed').classList.remove('hidden');
+            document.getElementById('workflowExpanded').classList.add('hidden');
+            document.getElementById('btnViewFull').classList.remove('hidden');
+            document.getElementById('btnCollapse').classList.add('hidden');
         }
 
-        function switchModalTab(tabName) {
-            document.querySelectorAll('.modal-tab').forEach(tab => {
-                tab.classList.remove('active');
-            });
-            event.target.closest('.modal-tab').classList.add('active');
+        function toggleConditionalFields() {
+            const standard = document.getElementById('standard').checked;
+            const expedited = document.getElementById('expedited').checked;
             
-            const authNumber = 'AUTH-2024-001';
-            
-            switch(tabName) {
-                case 'case':
-                    loadCaseDetails(authNumber);
-                    break;
-                case 'member':
-                    loadMemberDetails(authNumber);
-                    break;
-                case 'office':
-                    loadOfficeDetails(authNumber);
-                    break;
-                case 'group':
-                    loadGroupDetails(authNumber);
-                    break;
-                case 'provider':
-                    loadProviderDetails(authNumber);
-                    break;
+            const standardFields = document.getElementById('standard-fields');
+            const expeditedFields = document.getElementById('expedited-fields');
+
+            if (standard) {
+                standardFields.classList.add('show');
+                expeditedFields.classList.remove('show');
+            } else if (expedited) {
+                standardFields.classList.remove('show');
+                expeditedFields.classList.add('show');
             }
         }
-
-        // Load Case Details
-        function loadCaseDetails(authNumber) {
-            const content = document.getElementById('modalBodyContent');
-            content.innerHTML = '<div class="loading-state"><div class="loading-spinner"></div><p>Loading case details...</p></div>';
-            
-            setTimeout(() => {
-                content.innerHTML = `
-                    <!-- General Information -->
-                    <div class="detail-section">
-                        <div class="section-header">
-                            <div class="section-header-left">
-                                <div class="section-icon">
-                                    <i class="fas fa-info-circle"></i>
-                                </div>
-                                <div class="section-title">
-                                    <h3>General Information</h3>
-                                    <p>Basic case details and dates</p>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="info-grid">
-                            <div class="info-item">
-                                <div class="info-label"><i class="fas fa-calendar"></i> Case Received Date</div>
-                                <div class="info-value">${caseData.general_information.case_received_date}</div>
-                            </div>
-                            <div class="info-item">
-                                <div class="info-label"><i class="fas fa-user-check"></i> Created By Employee</div>
-                                <div class="info-value">${caseData.general_information.created_by_employee}</div>
-                            </div>
-                            <div class="info-item">
-                                <div class="info-label"><i class="fas fa-clock"></i> Last Modification</div>
-                                <div class="info-value">${caseData.general_information.last_modification}</div>
-                            </div>
-                            <div class="info-item">
-                                <div class="info-label"><i class="fas fa-exclamation-triangle"></i> Date of Accident</div>
-                                <div class="info-value">${caseData.general_information.date_of_accident}</div>
-                            </div>
-                            <div class="info-item">
-                                <div class="info-label"><i class="fas fa-birthday-cake"></i> Estimated DOB</div>
-                                <div class="info-value">${caseData.general_information.estimated_date_of_birth}</div>
-                            </div>
-                            <div class="info-item">
-                                <div class="info-label"><i class="fas fa-barcode"></i> ICA Code</div>
-                                <div class="info-value">${caseData.general_information.ica_code}</div>
-                            </div>
-                        </div>
-                    </div>
-
-                    <!-- Referral/Service Type Requested -->
-                    <div class="detail-section">
-                        <div class="section-header">
-                            <div class="section-header-left">
-                                <div class="section-icon">
-                                    <i class="fas fa-clipboard-list"></i>
-                                </div>
-                                <div class="section-title">
-                                    <h3>Referral/Service Type Requested</h3>
-                                    <p>Service request details</p>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="info-grid">
-                            <div class="info-item">
-                                <div class="info-label"><i class="fas fa-stethoscope"></i> Service Requested</div>
-                                <div class="info-value">${caseData.referral_service_type.service_requested}</div>
-                            </div>
-                            <div class="info-item">
-                                <div class="info-label"><i class="fas fa-bolt"></i> Request Type</div>
-                                <div class="info-value">${caseData.referral_service_type.request_type}</div>
-                            </div>
-                            <div class="info-item">
-                                <div class="info-label"><i class="fas fa-file-medical"></i> Referred Denied Type</div>
-                                <div class="info-value">${caseData.referral_service_type.referred_denied_type_requested}</div>
-                            </div>
-                            <div class="info-item">
-                                <div class="info-label"><i class="fas fa-cubes"></i> Support Unit</div>
-                                <div class="info-value">${caseData.referral_service_type.support_unit}</div>
-                            </div>
-                            <div class="info-item">
-                                <div class="info-label"><i class="fas fa-calendar-check"></i> Followup Appt Number</div>
-                                <div class="info-value">${caseData.referral_service_type.followup_appt_number}</div>
-                            </div>
-                        </div>
-                    </div>
-
-                    <!-- Workflow Process -->
-                    <div class="detail-section">
-                        <div class="section-header">
-                            <div class="section-header-left">
-                                <div class="section-icon">
-                                    <i class="fas fa-project-diagram"></i>
-                                </div>
-                                <div class="section-title">
-                                    <h3>Workflow Process</h3>
-                                    <p>Case processing timeline</p>
-                                </div>
-                            </div>
-                            <div class="section-actions">
-                                <button class="btn-sm btn-refresh" onclick="refreshWorkflow()">
-                                    <i class="fas fa-sync-alt"></i> Refresh
-                                </button>
-                                <button class="btn-sm btn-expand" onclick="toggleWorkflowExpand()">
-                                    <i class="fas fa-expand"></i> Expand All
-                                </button>
-                            </div>
-                        </div>
-                        <div class="workflow-timeline">
-                            ${caseData.workflow_process.map((step, index) => `
-                                <div class="workflow-item">
-                                    <div class="workflow-marker ${step.status}"></div>
-                                    <div class="workflow-content">
-                                        <div class="workflow-header">
-                                            <div>
-                                                <div class="workflow-title">${step.step}</div>
-                                                <div class="workflow-subtitle">${step.title}</div>
-                                            </div>
-                                            <span class="workflow-status status-${step.status}">${step.status.replace('-', ' ')}</span>
-                                        </div>
-                                        <div class="workflow-details">${step.details}</div>
-                                        ${step.status === 'failed' ? `
-                                            <button class="btn-run" onclick="rerunWorkflow(${index})">
-                                                <i class="fas fa-play"></i> Re-run Process
-                                            </button>
-                                        ` : ''}
-                                        <div class="workflow-expand" id="workflow-expand-${index}">
-                                            <p style="font-size: 12px; color: #6c757d; margin-top: 10px;">
-                                                <strong>Started:</strong> 12/15/2025 09:00 AM<br>
-                                                <strong>Duration:</strong> 15 minutes<br>
-                                                <strong>Processed By:</strong> Automated System
-                                            </p>
-                                        </div>
-                                    </div>
-                                </div>
-                            `).join('')}
-                        </div>
-                    </div>
-
-                    <!-- Service Details -->
-                    <div class="detail-section">
-                        <div class="section-header">
-                            <div class="section-header-left">
-                                <div class="section-icon">
-                                    <i class="fas fa-list-alt"></i>
-                                </div>
-                                <div class="section-title">
-                                    <h3>Service Details</h3>
-                                    <p>Requested services and approval status</p>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="service-table">
-                            <table>
-                                <thead>
-                                    <tr>
-                                        <th>SERVICE CODE</th>
-                                        <th>SERVICE DESCRIPTION</th>
-                                        <th>TOOTH/QUADRANT</th>
-                                        <th>PLACE OF SERVICE</th>
-                                        <th>REQUESTED UNIT</th>
-                                        <th>AVAILABLE UNIT</th>
-                                        <th>STATUS</th>
-                                        <th>APPROVAL/DENIAL REASON</th>
-                                    </tr>
-                                </thead>
-                                <tbody>
-                                    ${caseData.service_details.map((service, index) => `
-                                        <tr>
-                                            <td>${service.code}</td>
-                                            <td>${service.description}</td>
-                                            <td>${service.tooth}</td>
-                                            <td>${service.place}</td>
-                                            <td>${service.unit}</td>
-                                            <td>${service.available}</td>
-                                            <td><span class="status-badge status-new">${service.status}</span></td>
-                                            <td>
-                                                <select onchange="updateServiceReason(${index}, this.value)">
-                                                    <option value="${service.reason}">${service.reason}</option>
-                                                    <option value="Approved - Medical Necessity">Approved - Medical Necessity</option>
-                                                    <option value="Denied - Insufficient Documentation">Denied - Insufficient Documentation</option>
-                                                    <option value="Pending - Additional Review">Pending - Additional Review</option>
-                                                    <option value="Approved - Standard Protocol">Approved - Standard Protocol</option>
-                                                </select>
-                                            </td>
-                                        </tr>
-                                    `).join('')}
-                                </tbody>
-                            </table>
-                        </div>
-                    </div>
-
-                    <!-- Provider Information -->
-                    <div class="detail-section">
-                        <div class="section-header">
-                            <div class="section-header-left">
-                                <div class="section-icon">
-                                    <i class="fas fa-user-md"></i>
-                                </div>
-                                <div class="section-title">
-                                    <h3>Provider Information</h3>
-                                    <p>Primary provider details</p>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="info-grid">
-                            <div class="info-item">
-                                <div class="info-label"><i class="fas fa-user-md"></i> Provider Name</div>
-                                <div class="info-value">${caseData.provider_info.provider_name}</div>
-                            </div>
-                            <div class="info-item">
-                                <div class="info-label"><i class="fas fa-hashtag"></i> Tax Number</div>
-                                <div class="info-value">${caseData.provider_info.tax_number}</div>
-                            </div>
-                            <div class="info-item">
-                                <div class="info-label"><i class="fas fa-id-card"></i> NPI Number</div>
-                                <div class="info-value">${caseData.provider_info.npi_number}</div>
-                            </div>
-                            <div class="info-item">
-                                <div class="info-label"><i class="fas fa-id-badge"></i> TIN</div>
-                                <div class="info-value">${caseData.provider_info.tin}</div>
-                            </div>
-                            <div class="info-item">
-                                <div class="info-label"><i class="fas fa-map-marker-alt"></i> Address</div>
-                                <div class="info-value">${caseData.provider_info.address}, ${caseData.provider_info.city}, ${caseData.provider_info.state}</div>
-                            </div>
-                            <div class="info-item">
-                                <div class="info-label"><i class="fas fa-phone"></i> Office Contact</div>
-                                <div class="info-value">${caseData.provider_info.office_contact_phone}</div>
-                            </div>
-                        </div>
-                    </div>
-
-                    <!-- Servicing Provider/Facility -->
-                    <div class="detail-section">
-                        <div class="section-header">
-                            <div class="section-header-left">
-                                <div class="section-icon">
-                                    <i class="fas fa-hospital"></i>
-                                </div>
-                                <div class="section-title">
-                                    <h3>Servicing Provider/Facility</h3>
-                                    <p>Service delivery location</p>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="info-grid">
-                            <div class="info-item">
-                                <div class="info-label"><i class="fas fa-id-card"></i> Provider ID</div>
-                                <div class="info-value">${caseData.servicing_provider.provider_id}</div>
-                            </div>
-                            <div class="info-item">
-                                <div class="info-label"><i class="fas fa-user"></i> Provider Name</div>
-                                <div class="info-value">${caseData.servicing_provider.provider_name}</div>
-                            </div>
-                            <div class="info-item">
-                                <div class="info-label"><i class="fas fa-id-badge"></i> NPI</div>
-                                <div class="info-value">${caseData.servicing_provider.npi}</div>
-                            </div>
-                            <div class="info-item">
-                                <div class="info-label"><i class="fas fa-hashtag"></i> TIN</div>
-                                <div class="info-value">${caseData.servicing_provider.tin}</div>
-                            </div>
-                            <div class="info-item">
-                                <div class="info-label"><i class="fas fa-map-marker-alt"></i> Address</div>
-                                <div class="info-value">${caseData.servicing_provider.address}</div>
-                            </div>
-                            <div class="info-item">
-                                <div class="info-label"><i class="fas fa-phone"></i> Phone</div>
-                                <div class="info-value">${caseData.servicing_provider.phone}</div>
-                            </div>
-                        </div>
-                    </div>
-
-                    <!-- UM Coordinator Notes -->
-                    <div class="detail-section">
-                        <div class="notes-section">
-                            <div class="notes-header">
-                                <h4><i class="fas fa-sticky-note"></i> UM Coordinator Notes</h4>
-                                <button class="btn-add-note" onclick="addNote('coordinator')">
-                                    <i class="fas fa-plus"></i> Add Note
-                                </button>
-                            </div>
-                            <div class="notes-content">
-                                <div class="notes-empty">
-                                    <i class="fas fa-inbox"></i>
-                                    <p>No notes yet</p>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-
-                    <!-- UM Nurse Notes -->
-                    <div class="detail-section">
-                        <div class="notes-section">
-                            <div class="notes-header">
-                                <h4><i class="fas fa-user-nurse"></i> UM Nurse Notes</h4>
-                                <button class="btn-add-note" onclick="addNote('nurse')">
-                                    <i class="fas fa-plus"></i> Add Note
-                                </button>
-                            </div>
-                            <div class="notes-content">
-                                <div class="notes-empty">
-                                    <i class="fas fa-inbox"></i>
-                                    <p>No notes yet</p>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-
-                    <!-- UM Dental Director Notes -->
-                    <div class="detail-section">
-                        <div class="notes-section">
-                            <div class="notes-header">
-                                <h4><i class="fas fa-user-md"></i> UM Dental Director Notes</h4>
-                                <button class="btn-add-note" onclick="addNote('director')">
-                                    <i class="fas fa-plus"></i> Add Note
-                                </button>
-                            </div>
-                            <div class="notes-content">
-                                <div class="notes-empty">
-                                    <i class="fas fa-inbox"></i>
-                                    <p>No notes yet</p>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-
-                    <!-- Attached Documents -->
-                    <div class="detail-section">
-                        <div class="section-header">
-                            <div class="section-header-left">
-                                <div class="section-icon">
-                                    <i class="fas fa-paperclip"></i>
-                                </div>
-                                <div class="section-title">
-                                    <h3>Attached Documents</h3>
-                                    <p>Case related files and documents</p>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="document-list">
-                            ${caseData.attached_documents.map(doc => `
-                                <div class="document-item">
-                                    <div class="document-info">
-                                        <div class="document-icon">
-                                            <i class="fas fa-file-pdf"></i>
-                                        </div>
-                                        <div class="document-details">
-                                            <h4>${doc.name}</h4>
-                                            <p>${doc.size} • Uploaded: ${doc.uploaded}</p>
-                                        </div>
-                                    </div>
-                                    <div class="document-actions">
-                                        <button class="btn-icon btn-open" onclick="openNewTab(${doc.id})" title="Open in New Tab">
-                                            <i class="fas fa-external-link-alt"></i>
-                                        </button>
-                                        <button class="btn-icon btn-view" onclick="viewDocument(${doc.id})" title="View">
-                                            <i class="fas fa-eye"></i>
-                                        </button>
-                                        <button class="btn-icon btn-download" onclick="downloadDocument(${doc.id})" title="Download">
-                                            <i class="fas fa-download"></i>
-                                        </button>
-                                        <button class="btn-icon btn-remove" onclick="removeDocument(${doc.id})" title="Remove">
-                                            <i class="fas fa-trash"></i>
-                                        </button>
-                                    </div>
-                                </div>
-                            `).join('')}
-                        </div>
-                    </div>
-
-                    <!-- Case History -->
-                    <div class="detail-section">
-                        <div class="section-header">
-                            <div class="section-header-left">
-                                <div class="section-icon">
-                                    <i class="fas fa-history"></i>
-                                </div>
-                                <div class="section-title">
-                                    <h3>Case History</h3>
-                                    <p>Timeline of case activities</p>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="history-table">
-                            <table>
-                                <thead>
-                                    <tr>
-                                        <th>DATE</th>
-                                        <th>DESCRIPTION</th>
-                                        <th>ACTION BY</th>
-                                        <th>ROLE</th>
-                                        <th>TIME TAKEN</th>
-                                    </tr>
-                                </thead>
-                                <tbody>
-                                    ${caseData.case_history.map(history => `
-                                        <tr>
-                                            <td>${history.date}</td>
-                                            <td>${history.description}</td>
-                                            <td>${history.action}</td>
-                                            <td>${history.role}</td>
-                                            <td>${history.time}</td>
-                                        </tr>
-                                    `).join('')}
-                                </tbody>
-                            </table>
-                        </div>
-                    </div>
-                `;
-            }, 500);
-        }
-
-        // Workflow functions
-        function refreshWorkflow() {
-            alert('Refreshing workflow process...');
-        }
-
-        function toggleWorkflowExpand() {
-            const expands = document.querySelectorAll('.workflow-expand');
-            expands.forEach(expand => {
-                expand.classList.toggle('show');
-            });
-        }
-
-        function rerunWorkflow(index) {
-            alert(`Re-running workflow step ${index + 1}...`);
-        }
-
-        // Service details function
-        function updateServiceReason(index, value) {
-            console.log(`Updated service ${index} reason to: ${value}`);
-        }
-
-        // Notes functions
-        function addNote(type) {
-            alert(`Adding ${type} note...`);
-        }
-
-        // Document functions
-        function openNewTab(docId) {
-            window.open('#', '_blank');
-        }
-
-        function viewDocument(docId) {
-            alert(`Viewing document ${docId}...`);
-        }
-
-        function downloadDocument(docId) {
-            alert(`Downloading document ${docId}...`);
-        }
-
-        function removeDocument(docId) {
-            if (confirm('Are you sure you want to remove this document?')) {
-                alert(`Document ${docId} removed.`);
-            }
-        }
-
-        // Placeholder functions for other tabs (keep your existing implementations)
-        function loadMemberDetails(authNumber) {
-            const content = document.getElementById('modalBodyContent');
-            content.innerHTML = '<div class="loading-state"><p>Member details loading...</p></div>';
-        }
-
-        function loadOfficeDetails(authNumber) {
-            const content = document.getElementById('modalBodyContent');
-            content.innerHTML = '<div class="loading-state"><p>Office details loading...</p></div>';
-        }
-
-        function loadGroupDetails(authNumber) {
-            const content = document.getElementById('modalBodyContent');
-            content.innerHTML = '<div class="loading-state"><p>Group details loading...</p></div>';
-        }
-
-        function loadProviderDetails(authNumber) {
-            const content = document.getElementById('modalBodyContent');
-            content.innerHTML = '<div class="loading-state"><p>Provider details loading...</p></div>';
-        }
-
-        // Close modal on Escape key
-        document.addEventListener('keydown', function(e) {
-            if (e.key === 'Escape') {
-                closeAuthDetailsModal();
-            }
-        });
     </script>
 </body>
 </html>
