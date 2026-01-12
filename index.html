@@ -4,8 +4,11 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Full Analysis Modal</title>
+
+    <!-- Fonts & Icons -->
     <link href="https://fonts.googleapis.com/css2?family=Open+Sans:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+
     <style>
         * {
             margin: 0;
@@ -16,37 +19,28 @@
         body {
             font-family: 'Open Sans', sans-serif;
             background: #f5f7fa;
-            padding: 20px;
+            overflow: hidden; /* IMPORTANT for Web2Figma */
         }
 
-        /* Modal Overlay */
+        /* ================= MODAL OVERLAY ================= */
         .modal-overlay {
             position: fixed;
-            top: 0;
-            left: 0;
-            right: 0;
-            bottom: 0;
+            inset: 0;
             background: rgba(0, 0, 0, 0.6);
-            display: flex;
+            display: none;
             justify-content: center;
             align-items: center;
             z-index: 1000;
             padding: 20px;
-            animation: fadeIn 0.3s ease-out;
         }
 
-        @keyframes fadeIn {
-            from {
-                opacity: 0;
-            }
-            to {
-                opacity: 1;
-            }
+        .modal-overlay.active {
+            display: flex; /* Modal visible by default */
         }
 
-        /* Modal Container */
+        /* ================= MODAL CONTAINER ================= */
         .modal-container {
-            background: white;
+            background: #ffffff;
             border-radius: 12px;
             box-shadow: 0 15px 50px rgba(0, 0, 0, 0.2);
             max-width: 700px;
@@ -54,6 +48,7 @@
             max-height: 90vh;
             display: flex;
             flex-direction: column;
+            position: relative;
             animation: slideUp 0.3s ease-out;
         }
 
@@ -68,7 +63,7 @@
             }
         }
 
-        /* Modal Header */
+        /* ================= MODAL HEADER ================= */
         .modal-header {
             padding: 25px 30px;
             border-bottom: 1px solid #e9ecef;
@@ -116,14 +111,9 @@
             font-size: 24px;
             color: #95a5a6;
             cursor: pointer;
-            transition: all 0.3s;
             width: 35px;
             height: 35px;
-            display: flex;
-            align-items: center;
-            justify-content: center;
             border-radius: 6px;
-            flex-shrink: 0;
         }
 
         .modal-close-btn:hover {
@@ -131,14 +121,13 @@
             color: #2c3e50;
         }
 
-        /* Modal Body */
+        /* ================= MODAL BODY ================= */
         .modal-body {
             flex: 1;
             overflow-y: auto;
             padding: 30px;
         }
 
-        /* Section Title */
         .section-title {
             font-size: 14px;
             font-weight: 700;
@@ -151,10 +140,8 @@
 
         .section-title i {
             color: #3498db;
-            font-size: 16px;
         }
 
-        /* Content Box */
         .content-box {
             background: #f8f9fa;
             padding: 20px;
@@ -172,27 +159,25 @@
             margin-top: 15px;
         }
 
-        /* Modal Footer */
+        /* ================= MODAL FOOTER ================= */
         .modal-footer {
             padding: 20px 30px;
             border-top: 1px solid #e9ecef;
             display: flex;
             justify-content: flex-end;
             gap: 12px;
-            flex-wrap: wrap;
         }
 
         .btn {
             padding: 10px 20px;
-            border: none;
             border-radius: 6px;
             font-size: 13px;
             font-weight: 600;
             cursor: pointer;
-            transition: all 0.3s;
             display: inline-flex;
             align-items: center;
             gap: 6px;
+            border: none;
         }
 
         .btn-secondary {
@@ -200,209 +185,84 @@
             color: #495057;
         }
 
-        .btn-secondary:hover {
-            background: #dee2e6;
-        }
-
         .btn-primary {
             background: #3498db;
-            color: white;
+            color: #ffffff;
         }
 
-        .btn-primary:hover {
-            background: #2980b9;
-            box-shadow: 0 4px 12px rgba(52, 152, 219, 0.3);
-        }
-
-        /* Scrollbar Styling */
+        /* ================= SCROLLBAR ================= */
         .modal-body::-webkit-scrollbar {
             width: 6px;
         }
 
-        .modal-body::-webkit-scrollbar-track {
-            background: #f8f9fa;
-        }
-
         .modal-body::-webkit-scrollbar-thumb {
-            background: #e9ecef;
+            background: #dee2e6;
             border-radius: 3px;
         }
 
-        .modal-body::-webkit-scrollbar-thumb:hover {
-            background: #dee2e6;
-        }
-
-        /* Responsive Design */
+        /* ================= RESPONSIVE ================= */
         @media (max-width: 768px) {
             .modal-container {
                 max-width: 95%;
             }
-
-            .modal-header {
-                flex-direction: column;
-                align-items: flex-start;
-                padding: 20px 25px;
-            }
-
-            .modal-close-btn {
-                position: absolute;
-                top: 15px;
-                right: 15px;
-            }
-
-            .modal-body {
-                padding: 20px;
-            }
-
-            .modal-footer {
-                flex-direction: column;
-                justify-content: stretch;
-                padding: 15px 25px;
-            }
-
-            .btn {
-                width: 100%;
-                justify-content: center;
-            }
-
-            .content-box {
-                padding: 15px;
-            }
-
-            .content-box p {
-                font-size: 12px;
-            }
-        }
-
-        @media (max-width: 480px) {
-            .modal-overlay {
-                padding: 10px;
-            }
-
-            .modal-container {
-                max-height: 95vh;
-                border-radius: 8px;
-            }
-
-            .modal-header {
-                padding: 15px 20px;
-            }
-
-            .modal-header-icon {
-                width: 40px;
-                height: 40px;
-                font-size: 18px;
-            }
-
-            .modal-header-content h2 {
-                font-size: 16px;
-            }
-
-            .modal-header-content p {
-                font-size: 11px;
-            }
-
-            .modal-body {
-                padding: 15px;
-            }
-
-            .modal-footer {
-                padding: 15px 20px;
-            }
-
-            .section-title {
-                font-size: 13px;
-            }
-
-            .content-box {
-                padding: 12px;
-            }
-
-            .content-box p {
-                font-size: 12px;
-                line-height: 1.7;
-            }
         }
     </style>
 </head>
+
 <body>
 
-    <!-- Full Analysis Modal -->
-    <div class="modal-overlay" id="analysisModal">
-        <div class="modal-container">
-            <!-- Modal Header -->
-            <div class="modal-header">
-                <div class="modal-header-left">
-                    <div class="modal-header-icon">
-                        <i class="fas fa-file-alt"></i>
-                    </div>
-                    <div class="modal-header-content">
-                        <h2>Full Analysis</h2>
-                        <p>Complete clinical rationale</p>
-                    </div>
-                </div>
-                <button class="modal-close-btn" onclick="closeModal()">
-                    <i class="fas fa-times"></i>
-                </button>
-            </div>
+<!-- ================= MODAL ================= -->
+<div class="modal-overlay active" id="analysisModal">
+    <div class="modal-container">
 
-            <!-- Modal Body -->
-            <div class="modal-body">
-                <!-- Clinical Rationale Section -->
-                <div>
-                    <div class="section-title">
-                        <i class="fas fa-align-left"></i> Clinical Rationale
-                    </div>
-                    <div class="content-box">
-                        <p>
-                            Comprehensive oral evaluation (D0150) is clinically indicated for this patient based on the documented clinical presentation and treatment planning needs. The patient presents with complex dental concerns requiring thorough assessment of intraoral and extraoral structures.
-                        </p>
-                        <p>
-                            The evaluation is essential to establish a definitive diagnosis, assess the extent of pathology, and develop an appropriate treatment plan. This foundational diagnostic service is medically necessary prior to any treatment recommendations and is consistent with standard of care guidelines for comprehensive patient assessment.
-                        </p>
-                        <p>
-                            The requested service meets established medical necessity criteria. Comprehensive oral evaluations are recognized as essential diagnostic procedures that form the foundation of appropriate dental treatment planning. The patient's clinical presentation supports the medical necessity of this evaluation.
-                        </p>
-                    </div>
+        <!-- Header -->
+        <div class="modal-header">
+            <div class="modal-header-left">
+                <div class="modal-header-icon">
+                    <i class="fas fa-file-alt"></i>
+                </div>
+                <div class="modal-header-content">
+                    <h2>Full Analysis</h2>
+                    <p>Complete clinical rationale</p>
                 </div>
             </div>
+            <button class="modal-close-btn" aria-label="Close">
+                <i class="fas fa-times"></i>
+            </button>
+        </div>
 
-            <!-- Modal Footer -->
-            <div class="modal-footer">
-                <button class="btn btn-secondary" onclick="closeModal()">
-                    <i class="fas fa-times"></i> Close
-                </button>
-                <button class="btn btn-primary">
-                    <i class="fas fa-print"></i> Print
-                </button>
+        <!-- Body -->
+        <div class="modal-body">
+            <div class="section-title">
+                <i class="fas fa-align-left"></i>
+                Clinical Rationale
+            </div>
+
+            <div class="content-box">
+                <p>
+                    Comprehensive oral evaluation (D0150) is clinically indicated for this patient based on the documented clinical presentation and treatment planning needs.
+                </p>
+                <p>
+                    The evaluation is essential to establish a definitive diagnosis, assess the extent of pathology, and develop an appropriate treatment plan.
+                </p>
+                <p>
+                    The requested service meets established medical necessity criteria and aligns with standard-of-care guidelines.
+                </p>
             </div>
         </div>
+
+        <!-- Footer -->
+        <div class="modal-footer">
+            <button class="btn btn-secondary">
+                <i class="fas fa-times"></i> Close
+            </button>
+            <button class="btn btn-primary">
+                <i class="fas fa-print"></i> Print
+            </button>
+        </div>
+
     </div>
+</div>
 
-    <script>
-        function closeModal() {
-            document.getElementById('analysisModal').classList.remove('active');
-            document.body.style.overflow = 'auto';
-        }
-
-        // Close modal when clicking outside
-        document.getElementById('analysisModal').addEventListener('click', function(e) {
-            if (e.target === this) {
-                closeModal();
-            }
-        });
-
-        // Close modal on Escape key
-        document.addEventListener('keydown', function(e) {
-            if (e.key === 'Escape') {
-                closeModal();
-            }
-        });
-
-        // Show modal on page load (for demo purposes)
-        window.addEventListener('load', function() {
-            document.getElementById('analysisModal').style.display = 'flex';
-        });
-    </script>
 </body>
 </html>
