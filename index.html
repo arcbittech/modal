@@ -1,193 +1,2001 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Full Analysis – Figma Export</title>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Case Details - Medical Software</title>
+    <link href="https://fonts.googleapis.com/css2?family=Open+Sans:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
 
-<link href="https://fonts.googleapis.com/css2?family=Open+Sans:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
-<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+        body {
+            font-family: 'Open Sans', sans-serif;
+            background: #f5f7fa;
+            padding: 20px;
+        }
 
-<style>
-* {
-    margin: 0;
-    padding: 0;
-    box-sizing: border-box;
-}
+        .container {
+            max-width: 1400px;
+            margin: 0 auto;
+            background: white;
+            border-radius: 12px;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.08);
+        }
 
-body {
-    font-family: 'Open Sans', sans-serif;
-    background: #e5e7eb;
-    min-height: 100vh;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-}
+        /* Header */
+        .page-header {
+            background: #2c3e50;
+            color: white;
+            padding: 20px 30px;
+            border-radius: 12px 12px 0 0;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
 
-/* PAGE WRAPPER */
-.page-wrapper {
-    width: 100%;
-    padding: 40px 20px;
-    display: flex;
-    justify-content: center;
-}
+        .page-header h1 {
+            font-size: 20px;
+            font-weight: 600;
+        }
 
-/* MODAL AS CARD */
-.modal-container {
-    background: #ffffff;
-    border-radius: 12px;
-    box-shadow: 0 15px 50px rgba(0, 0, 0, 0.2);
-    max-width: 700px;
-    width: 100%;
-    max-height: 90vh;
-    display: flex;
-    flex-direction: column;
-}
+        .header-meta {
+            display: flex;
+            gap: 30px;
+            font-size: 13px;
+        }
 
-/* HEADER */
-.modal-header {
-    padding: 25px 30px;
-    border-bottom: 1px solid #e9ecef;
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-}
+        .header-meta-item {
+            display: flex;
+            flex-direction: column;
+            gap: 4px;
+        }
 
-.modal-header-left {
-    display: flex;
-    gap: 12px;
-    align-items: center;
-}
+        .header-meta-label {
+            opacity: 0.8;
+            font-size: 11px;
+        }
 
-.modal-header-icon {
-    width: 45px;
-    height: 45px;
-    background: #e3f2fd;
-    color: #3498db;
-    border-radius: 10px;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    font-size: 22px;
-}
+        .header-meta-value {
+            font-weight: 600;
+        }
 
-.modal-header-content h2 {
-    font-size: 18px;
-    font-weight: 700;
-    color: #2c3e50;
-}
+        /* Content Area */
+        .content-area {
+            padding: 30px;
+        }
 
-.modal-header-content p {
-    font-size: 12px;
-    color: #6c757d;
-}
+        /* Workflow Section */
+        .workflow-section {
+            background: #f8f9fa;
+            border: 1px solid #e9ecef;
+            border-radius: 12px;
+            margin-bottom: 20px;
+            overflow: hidden;
+        }
 
-/* BODY */
-.modal-body {
-    padding: 30px;
-    overflow-y: auto;
-}
+        .workflow-header {
+            padding: 20px 25px;
+            background: white;
+            border-bottom: 1px solid #e9ecef;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
 
-.section-title {
-    font-size: 14px;
-    font-weight: 700;
-    margin-bottom: 12px;
-    display: flex;
-    align-items: center;
-    gap: 8px;
-    color: #2c3e50;
-}
+        .workflow-header-left {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+        }
 
-.section-title i {
-    color: #3498db;
-}
+        .workflow-icon {
+            width: 40px;
+            height: 40px;
+            background: #e3f2fd;
+            color: #3498db;
+            border-radius: 8px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 18px;
+        }
 
-.content-box {
-    background: #f8f9fa;
-    padding: 20px;
-    border-radius: 8px;
-    border-left: 4px solid #3498db;
-}
+        .workflow-title h3 {
+            font-size: 16px;
+            color: #2c3e50;
+            margin-bottom: 4px;
+        }
 
-.content-box p {
-    font-size: 13px;
-    line-height: 1.8;
-    color: #495057;
-}
+        .workflow-title p {
+            font-size: 12px;
+            color: #6c757d;
+        }
 
-.content-box p + p {
-    margin-top: 15px;
-}
+        .workflow-actions {
+            display: flex;
+            gap: 10px;
+        }
 
-/* FOOTER */
-.modal-footer {
-    padding: 20px 30px;
-    border-top: 1px solid #e9ecef;
-    display: flex;
-    justify-content: flex-end;
-    gap: 12px;
-}
+        .btn-action {
+            padding: 8px 16px;
+            border: none;
+            border-radius: 6px;
+            font-size: 13px;
+            font-weight: 600;
+            cursor: pointer;
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            transition: all 0.3s;
+        }
 
-.btn {
-    padding: 10px 20px;
-    border-radius: 6px;
-    font-size: 13px;
-    font-weight: 600;
-    border: none;
-    cursor: pointer;
-    display: inline-flex;
-    align-items: center;
-    gap: 6px;
-}
+        .btn-view-full {
+            background: #3498db;
+            color: white;
+        }
 
-.btn-secondary {
-    background: #e9ecef;
-    color: #495057;
-}
+        .btn-view-full:hover {
+            background: #2980b9;
+        }
 
-.btn-primary {
-    background: #3498db;
-    color: white;
-}
-</style>
+        .btn-collapse {
+            background: #95a5a6;
+            color: white;
+        }
+
+        .btn-collapse:hover {
+            background: #7f8c8d;
+        }
+
+        /* Collapsed Workflow (Horizontal) */
+        .workflow-collapsed {
+            padding: 25px;
+            display: flex;
+            justify-content: space-between;
+            gap: 20px;
+            align-items: stretch;
+        }
+
+        .workflow-step-horizontal {
+            flex: 1;
+            background: white;
+            border: 2px solid #e9ecef;
+            border-radius: 10px;
+            padding: 20px;
+            position: relative;
+            transition: all 0.3s;
+        }
+
+        .workflow-step-horizontal:hover {
+            box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+            transform: translateY(-2px);
+        }
+
+        .workflow-step-horizontal::after {
+            content: '→';
+            position: absolute;
+            right: -30px;
+            top: 50%;
+            transform: translateY(-50%);
+            font-size: 20px;
+            color: #e9ecef;
+        }
+
+        .workflow-step-horizontal:last-child::after {
+            display: none;
+        }
+
+        .workflow-step-horizontal.last-processed {
+            border-color: #27ae60;
+            background: #f0fdf4;
+        }
+
+        .workflow-step-horizontal.current {
+            border-color: #3498db;
+            background: #eff6ff;
+        }
+
+        .workflow-step-horizontal.next {
+            border-color: #f39c12;
+            background: #fffbeb;
+        }
+
+        .step-header-horizontal {
+            display: flex;
+            justify-content: space-between;
+            align-items: flex-start;
+            margin-bottom: 12px;
+        }
+
+        .step-label {
+            font-size: 11px;
+            font-weight: 700;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+            color: #6c757d;
+            margin-bottom: 8px;
+        }
+
+        .step-name {
+            font-size: 14px;
+            font-weight: 600;
+            color: #2c3e50;
+            line-height: 1.4;
+        }
+
+        .step-status-badge {
+            padding: 4px 10px;
+            border-radius: 4px;
+            font-size: 11px;
+            font-weight: 600;
+            text-transform: uppercase;
+            white-space: nowrap;
+        }
+
+        .status-completed {
+            background: #d1f2eb;
+            color: #0a6c53;
+        }
+
+        .status-in-progress {
+            background: #e3f2fd;
+            color: #1565c0;
+        }
+
+        .status-pending {
+            background: #ffeaa7;
+            color: #856404;
+        }
+
+        .step-message {
+            font-size: 12px;
+            color: #6c757d;
+            line-height: 1.5;
+            margin-top: 8px;
+        }
+
+        /* Expanded Workflow (Vertical) */
+        .workflow-expanded {
+            padding: 25px 40px 25px 60px;
+            position: relative;
+        }
+
+        .workflow-timeline {
+            position: relative;
+        }
+
+        .workflow-timeline::before {
+            content: '';
+            position: absolute;
+            left: -35px;
+            top: 0;
+            bottom: 0;
+            width: 2px;
+            background: #e9ecef;
+        }
+
+        .workflow-step-vertical {
+            position: relative;
+            padding: 20px;
+            background: white;
+            border: 1px solid #e9ecef;
+            border-radius: 10px;
+            margin-bottom: 20px;
+            transition: all 0.3s;
+        }
+
+        .workflow-step-vertical:hover {
+            box-shadow: 0 4px 12px rgba(0,0,0,0.08);
+        }
+
+        .workflow-step-vertical::before {
+            content: '';
+            position: absolute;
+            left: -43px;
+            top: 28px;
+            width: 16px;
+            height: 16px;
+            border-radius: 50%;
+            border: 3px solid white;
+            box-shadow: 0 0 0 2px #e9ecef;
+            z-index: 1;
+        }
+
+        .workflow-step-vertical.completed::before {
+            background: #27ae60;
+            box-shadow: 0 0 0 2px #27ae60;
+        }
+
+        .workflow-step-vertical.in-progress::before {
+            background: #3498db;
+            box-shadow: 0 0 0 2px #3498db;
+        }
+
+        .workflow-step-vertical.pending::before {
+            background: #f39c12;
+            box-shadow: 0 0 0 2px #f39c12;
+        }
+
+        .step-header-vertical {
+            display: flex;
+            justify-content: space-between;
+            align-items: flex-start;
+            margin-bottom: 12px;
+        }
+
+        .step-date {
+            font-size: 12px;
+            font-weight: 600;
+            color: #6c757d;
+            margin-bottom: 8px;
+        }
+
+        .step-title-vertical {
+            font-size: 14px;
+            font-weight: 700;
+            color: #2c3e50;
+            margin-bottom: 8px;
+        }
+
+        .step-description {
+            font-size: 13px;
+            color: #495057;
+            line-height: 1.6;
+            margin-bottom: 12px;
+        }
+
+        /* Detail Sections */
+        .detail-section {
+            background: #f8f9fa;
+            border: 1px solid #e9ecef;
+            border-radius: 12px;
+            padding: 25px;
+            margin-bottom: 20px;
+        }
+
+        .section-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 20px;
+            padding-bottom: 15px;
+            border-bottom: 2px solid #e9ecef;
+        }
+
+        .section-header-left {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+        }
+
+        .section-icon {
+            width: 40px;
+            height: 40px;
+            background: #e3f2fd;
+            color: #3498db;
+            border-radius: 8px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 18px;
+        }
+
+        .section-title h3 {
+            font-size: 16px;
+            color: #2c3e50;
+            margin-bottom: 4px;
+        }
+
+        .section-title p {
+            font-size: 12px;
+            color: #6c757d;
+        }
+
+        .info-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 20px;
+        }
+
+        .info-item {
+            background: white;
+            padding: 15px;
+            border-radius: 8px;
+            border: 1px solid #e9ecef;
+        }
+
+        .info-label {
+            font-size: 11px;
+            font-weight: 600;
+            color: #6c757d;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+            margin-bottom: 8px;
+            display: flex;
+            align-items: center;
+            gap: 6px;
+        }
+
+        .info-label i {
+            font-size: 13px;
+        }
+
+        .info-value {
+            font-size: 14px;
+            color: #2c3e50;
+            font-weight: 500;
+        }
+
+        /* AI Generated Badge */
+        .ai-generated-badge {
+            display: inline-flex;
+            align-items: center;
+            gap: 6px;
+            background: #e3f2fd;
+            color: #1565c0;
+            padding: 6px 12px;
+            border-radius: 6px;
+            font-size: 12px;
+            font-weight: 600;
+        }
+
+        /* AI Content Box */
+        .ai-content-box {
+            background: white;
+            border: 2px solid #e3f2fd;
+            border-radius: 8px;
+            padding: 20px;
+            position: relative;
+        }
+
+        .ai-content-box::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 4px;
+            height: 100%;
+            background: #3498db;
+            border-radius: 8px 0 0 8px;
+        }
+
+        .ai-content-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 15px;
+        }
+
+        .ai-content-text {
+            font-size: 13px;
+            color: #495057;
+            line-height: 1.8;
+            margin-bottom: 10px;
+        }
+
+        .ai-footer-note {
+            font-size: 11px;
+            color: #95a5a6;
+            font-style: italic;
+            margin-top: 15px;
+            display: flex;
+            align-items: center;
+            gap: 6px;
+        }
+
+        /* Supporting Information Section */
+        .supporting-info-form {
+            background: white;
+            padding: 20px;
+            border-radius: 8px;
+            border: 1px solid #e9ecef;
+        }
+
+        .radio-group {
+            display: flex;
+            gap: 30px;
+            margin-bottom: 20px;
+        }
+
+        .radio-option {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            cursor: pointer;
+        }
+
+        .radio-option input[type="radio"] {
+            width: 18px;
+            height: 18px;
+            cursor: pointer;
+        }
+
+        .radio-option label {
+            font-size: 14px;
+            font-weight: 500;
+            color: #2c3e50;
+            cursor: pointer;
+        }
+
+        .conditional-fields {
+            display: none;
+            margin-top: 20px;
+            padding-top: 20px;
+            border-top: 1px solid #e9ecef;
+        }
+
+        .conditional-fields.show {
+            display: block;
+        }
+
+        .form-row {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 20px;
+            margin-bottom: 20px;
+        }
+
+        .form-group {
+            display: flex;
+            flex-direction: column;
+        }
+
+        .form-group label {
+            font-size: 12px;
+            font-weight: 600;
+            color: #495057;
+            margin-bottom: 8px;
+            display: flex;
+            align-items: center;
+            gap: 6px;
+        }
+
+        .form-group select,
+        .form-group input {
+            padding: 10px 12px;
+            border: 1px solid #ced4da;
+            border-radius: 6px;
+            font-size: 13px;
+            font-family: 'Open Sans', sans-serif;
+            transition: all 0.3s;
+        }
+
+        .form-group select:focus,
+        .form-group input:focus {
+            outline: none;
+            border-color: #3498db;
+            box-shadow: 0 0 0 3px rgba(52,152,219,0.1);
+        }
+
+        .checkbox-group {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            margin-top: 15px;
+        }
+
+        .checkbox-group input[type="checkbox"] {
+            width: 18px;
+            height: 18px;
+            cursor: pointer;
+        }
+
+        .checkbox-group label {
+            font-size: 14px;
+            font-weight: 500;
+            color: #2c3e50;
+            cursor: pointer;
+        }
+
+        /* Service Table */
+        .service-table {
+            width: 100%;
+            background: white;
+            border-radius: 8px;
+            overflow: hidden;
+            border: 1px solid #e9ecef;
+        }
+
+        .service-table table {
+            width: 100%;
+            border-collapse: collapse;
+        }
+
+        .service-table th {
+            background: #f8f9fa;
+            padding: 12px;
+            text-align: left;
+            font-size: 11px;
+            font-weight: 600;
+            color: #495057;
+            text-transform: uppercase;
+            border-bottom: 2px solid #e9ecef;
+        }
+
+        .service-table td {
+            padding: 12px;
+            font-size: 13px;
+            color: #2c3e50;
+            border-bottom: 1px solid #f8f9fa;
+        }
+
+        /* Document List */
+        .document-list {
+            display: flex;
+            flex-direction: column;
+            gap: 12px;
+        }
+
+        .document-item {
+            background: white;
+            padding: 15px;
+            border-radius: 8px;
+            border: 1px solid #e9ecef;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            transition: all 0.3s;
+        }
+
+        .document-item:hover {
+            box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+        }
+
+        .document-info {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+        }
+
+        .document-icon {
+            width: 40px;
+            height: 40px;
+            background: #e3f2fd;
+            color: #3498db;
+            border-radius: 8px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 18px;
+        }
+
+        .document-details h4 {
+            font-size: 14px;
+            color: #2c3e50;
+            margin-bottom: 4px;
+        }
+
+        .document-details p {
+            font-size: 12px;
+            color: #6c757d;
+        }
+
+        .document-actions {
+            display: flex;
+            gap: 8px;
+        }
+
+        .btn-icon {
+            width: 32px;
+            height: 32px;
+            border: none;
+            border-radius: 6px;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 14px;
+            transition: all 0.3s;
+        }
+
+        .btn-icon:hover {
+            transform: scale(1.1);
+        }
+
+        /* History Table */
+        .history-table {
+            width: 100%;
+            background: white;
+            border-radius: 8px;
+            overflow: hidden;
+            border: 1px solid #e9ecef;
+        }
+
+        .history-table table {
+            width: 100%;
+            border-collapse: collapse;
+        }
+
+        .history-table th {
+            background: #f8f9fa;
+            padding: 12px;
+            text-align: left;
+            font-size: 11px;
+            font-weight: 600;
+            color: #495057;
+            text-transform: uppercase;
+            border-bottom: 2px solid #e9ecef;
+        }
+
+        .history-table td {
+            padding: 12px;
+            font-size: 13px;
+            color: #2c3e50;
+            border-bottom: 1px solid #f8f9fa;
+        }
+
+        /* Notes Section */
+        .notes-section {
+            background: white;
+            padding: 20px;
+            border-radius: 8px;
+            border: 1px solid #e9ecef;
+        }
+
+        .notes-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 15px;
+        }
+
+        .notes-header h4 {
+            font-size: 14px;
+            color: #2c3e50;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .notes-empty {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            padding: 30px;
+            color: #95a5a6;
+            background: #f8f9fa;
+            border-radius: 6px;
+        }
+
+        .notes-empty i {
+            font-size: 32px;
+            margin-bottom: 10px;
+        }
+
+        .notes-list {
+            display: flex;
+            flex-direction: column;
+            gap: 12px;
+        }
+
+        .note-item {
+            background: #f8f9fa;
+            padding: 15px;
+            border-radius: 8px;
+            border-left: 4px solid #3498db;
+        }
+
+        .note-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 10px;
+        }
+
+        .note-author {
+            font-size: 13px;
+            font-weight: 600;
+            color: #2c3e50;
+        }
+
+        .note-date {
+            font-size: 11px;
+            color: #6c757d;
+        }
+
+        .note-content {
+            font-size: 13px;
+            color: #495057;
+            line-height: 1.6;
+        }
+
+        .btn-add-note {
+            background: #3498db;
+            color: white;
+            padding: 6px 12px;
+            border: none;
+            border-radius: 6px;
+            font-size: 12px;
+            font-weight: 600;
+            cursor: pointer;
+            display: inline-flex;
+            align-items: center;
+            gap: 6px;
+        }
+
+        .btn-add-note:hover {
+            background: #2980b9;
+        }
+
+        /* SLA Extension Table */
+        .sla-extension-table {
+            width: 100%;
+            background: white;
+            border-radius: 8px;
+            overflow: hidden;
+            border: 1px solid #e9ecef;
+            margin-top: 15px;
+        }
+
+        .sla-extension-table table {
+            width: 100%;
+            border-collapse: collapse;
+        }
+
+        .sla-extension-table th {
+            background: #fff3cd;
+            padding: 12px;
+            text-align: left;
+            font-size: 11px;
+            font-weight: 600;
+            color: #856404;
+            text-transform: uppercase;
+            border-bottom: 2px solid #ffc107;
+        }
+
+        .sla-extension-table td {
+            padding: 12px;
+            font-size: 13px;
+            color: #2c3e50;
+            border-bottom: 1px solid #f8f9fa;
+        }
+
+        /* Acknowledgment Badge */
+        .acknowledgment-badge {
+            display: inline-flex;
+            align-items: center;
+            gap: 6px;
+            padding: 6px 12px;
+            border-radius: 6px;
+            font-size: 12px;
+            font-weight: 600;
+        }
+
+        .acknowledgment-sent {
+            background: #d1f2eb;
+            color: #0a6c53;
+        }
+
+        .acknowledgment-not-sent {
+            background: #f8d7da;
+            color: #721c24;
+        }
+
+        /* Hidden class for toggle */
+        .hidden {
+            display: none !important;
+        }
+
+        /* Responsive */
+        @media (max-width: 768px) {
+            .workflow-collapsed {
+                flex-direction: column;
+            }
+
+            .workflow-step-horizontal::after {
+                display: none;
+            }
+
+            .info-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+    </style>
 </head>
-
 <body>
-
-<div class="page-wrapper">
-    <div class="modal-container">
-
-        <div class="modal-header">
-            <div class="modal-header-left">
-                <div class="modal-header-icon">
-                    <i class="fas fa-file-alt"></i>
+    <div class="container">
+        <!-- Page Header -->
+        <div class="page-header">
+            <h1><i class="fas fa-folder-open"></i> Case Details</h1>
+            <div class="header-meta">
+                <div class="header-meta-item">
+                    <span class="header-meta-label">Case ID</span>
+                    <span class="header-meta-value">APP000000000001</span>
                 </div>
-                <div class="modal-header-content">
-                    <h2>Full Analysis</h2>
-                    <p>Complete clinical rationale</p>
+                <div class="header-meta-item">
+                    <span class="header-meta-label">Member</span>
+                    <span class="header-meta-value">Lori Falls</span>
+                </div>
+                <div class="header-meta-item">
+                    <span class="header-meta-label">Status</span>
+                    <span class="header-meta-value">Analyst Review</span>
+                </div>
+                <div class="header-meta-item">
+                    <span class="header-meta-label">Resolution</span>
+                    <span class="header-meta-value">Upheld</span>
                 </div>
             </div>
         </div>
 
-        <div class="modal-body">
-            <div class="section-title">
-                <i class="fas fa-align-left"></i> Clinical Rationale
+        <!-- Content Area -->
+        <div class="content-area">
+            <!-- Workflow Section -->
+            <div class="workflow-section">
+                <div class="workflow-header">
+                    <div class="workflow-header-left">
+                        <div class="workflow-icon">
+                            <i class="fas fa-project-diagram"></i>
+                        </div>
+                        <div class="workflow-title">
+                            <h3>Workflow Process</h3>
+                            <p>Case processing timeline and status</p>
+                        </div>
+                    </div>
+                    <div class="workflow-actions">
+                        <button class="btn-action btn-view-full" id="btnViewFull" onclick="expandWorkflow()">
+                            <i class="fas fa-expand"></i> View Full Workflow
+                        </button>
+                        <button class="btn-action btn-collapse hidden" id="btnCollapse" onclick="collapseWorkflow()">
+                            <i class="fas fa-compress"></i> Collapse
+                        </button>
+                    </div>
+                </div>
+
+                <!-- Collapsed View (Horizontal) -->
+                <div class="workflow-collapsed" id="workflowCollapsed">
+                    <div class="workflow-step-horizontal last-processed">
+                        <div class="step-header-horizontal">
+                            <div>
+                                <div class="step-label">Last Processed</div>
+                                <div class="step-name">UDICS CHECK</div>
+                            </div>
+                            <span class="step-status-badge status-completed">Completed</span>
+                        </div>
+                        <div class="step-message">
+                            Successfully validated identification documents.
+                        </div>
+                    </div>
+
+                    <div class="workflow-step-horizontal current">
+                        <div class="step-header-horizontal">
+                            <div>
+                                <div class="step-label">Current Step</div>
+                                <div class="step-name">ANALYST REVIEW</div>
+                            </div>
+                            <span class="step-status-badge status-in-progress">In Progress</span>
+                        </div>
+                        <div class="step-message">
+                            Case under analyst review for final determination.
+                        </div>
+                    </div>
+
+                    <div class="workflow-step-horizontal next">
+                        <div class="step-header-horizontal">
+                            <div>
+                                <div class="step-label">Next Step</div>
+                                <div class="step-name">FINAL DECISION</div>
+                            </div>
+                            <span class="step-status-badge status-pending">Pending</span>
+                        </div>
+                        <div class="step-message">
+                            Will proceed to final decision and notification.
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Expanded View (Vertical) -->
+                <div class="workflow-expanded hidden" id="workflowExpanded">
+                    <div class="workflow-timeline">
+                        <div class="workflow-step-vertical completed">
+                            <div class="step-date">Dec 17, 2025 6:16 PM</div>
+                            <div class="step-header-vertical">
+                                <div>
+                                    <div class="step-title-vertical">INTAKE AUDIT</div>
+                                    <div class="step-description">
+                                        Successfully completed intake audit. All required fields populated correctly and data integrity validated.
+                                    </div>
+                                </div>
+                                <span class="step-status-badge status-completed">Completed</span>
+                            </div>
+                        </div>
+
+                        <div class="workflow-step-vertical completed">
+                            <div class="step-date">Dec 17, 2025 6:18 PM</div>
+                            <div class="step-header-vertical">
+                                <div>
+                                    <div class="step-title-vertical">UDICS CHECK</div>
+                                    <div class="step-description">
+                                        Universal Data Integrity Check System validation completed. Member identification verified and eligibility confirmed.
+                                    </div>
+                                </div>
+                                <span class="step-status-badge status-completed">Completed</span>
+                            </div>
+                        </div>
+
+                        <div class="workflow-step-vertical in-progress">
+                            <div class="step-date">Dec 17, 2025 6:18 PM</div>
+                            <div class="step-header-vertical">
+                                <div>
+                                    <div class="step-title-vertical">ANALYST REVIEW</div>
+                                    <div class="step-description">
+                                        Case currently under analyst review. Multiple notes added during review process. SLA extended to allow thorough evaluation.
+                                    </div>
+                                </div>
+                                <span class="step-status-badge status-in-progress">In Progress</span>
+                            </div>
+                        </div>
+
+                        <div class="workflow-step-vertical pending">
+                            <div class="step-date">Pending</div>
+                            <div class="step-header-vertical">
+                                <div>
+                                    <div class="step-title-vertical">FINAL DECISION</div>
+                                    <div class="step-description">
+                                        Final determination to be made and communicated to all parties.
+                                    </div>
+                                </div>
+                                <span class="step-status-badge status-pending">Pending</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
             </div>
 
-            <div class="content-box">
-                <p>Comprehensive oral evaluation (D0150) is clinically indicated for this patient.</p>
-                <p>This evaluation establishes diagnosis and guides appropriate treatment planning.</p>
-                <p>The service meets medical necessity and standard-of-care requirements.</p>
+            <!-- Case SLA -->
+            <div class="detail-section">
+                <div class="section-header">
+                    <div class="section-header-left">
+                        <div class="section-icon">
+                            <i class="fas fa-clock"></i>
+                        </div>
+                        <div class="section-title">
+                            <h3>Case SLA</h3>
+                            <p>Service level agreement timelines</p>
+                        </div>
+                    </div>
+                </div>
+                <div class="info-grid">
+                    <div class="info-item">
+                        <div class="info-label"><i class="fas fa-info-circle"></i> Status</div>
+                        <div class="info-value">Analyst Review</div>
+                    </div>
+                    <div class="info-item">
+                        <div class="info-label"><i class="fas fa-calendar-times"></i> Original SLA Expiration</div>
+                        <div class="info-value">12/19/2025 6:16 PM</div>
+                    </div>
+                    <div class="info-item">
+                        <div class="info-label"><i class="fas fa-calendar-check"></i> Extended SLA Date</div>
+                        <div class="info-value">12/25/2025 6:30 PM</div>
+                    </div>
+                    <div class="info-item">
+                        <div class="info-label"><i class="fas fa-calendar-alt"></i> Resolution Date</div>
+                        <div class="info-value">12/19/2025</div>
+                    </div>
+                </div>
+
+                <!-- SLA Extension Details -->
+                <div class="sla-extension-table">
+                    <table>
+                        <thead>
+                            <tr>
+                                <th><i class="fas fa-clipboard-list"></i> Status</th>
+                                <th><i class="fas fa-calendar-times"></i> Old Resolution Date</th>
+                                <th><i class="fas fa-calendar-check"></i> New Resolution Date</th>
+                                <th><i class="fas fa-comment-dots"></i> Reason for Extension</th>
+                                <th><i class="fas fa-user"></i> Action By</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td>Analyst Review</td>
+                                <td>12/19/2025 6:16 PM</td>
+                                <td>12/25/2025 6:30 PM</td>
+                                <td>New</td>
+                                <td>John Analyst</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
             </div>
-        </div>
 
-        <div class="modal-footer">
-            <button class="btn btn-secondary">Close</button>
-            <button class="btn btn-primary">Print</button>
-        </div>
+            <!-- Provider Details -->
+            <div class="detail-section">
+                <div class="section-header">
+                    <div class="section-header-left">
+                        <div class="section-icon">
+                            <i class="fas fa-user-md"></i>
+                        </div>
+                        <div class="section-title">
+                            <h3>Provider Details</h3>
+                            <p>Requesting provider information</p>
+                        </div>
+                    </div>
+                </div>
+                <div class="info-grid">
+                    <div class="info-item">
+                        <div class="info-label"><i class="fas fa-user-md"></i> Provider Name</div>
+                        <div class="info-value">Dr. Jana Petersss</div>
+                    </div>
+                    <div class="info-item">
+                        <div class="info-label"><i class="fas fa-id-card"></i> NPI Number</div>
+                        <div class="info-value">-</div>
+                    </div>
+                    <div class="info-item">
+                        <div class="info-label"><i class="fas fa-user"></i> Contact Person</div>
+                        <div class="info-value">-</div>
+                    </div>
+                    <div class="info-item">
+                        <div class="info-label"><i class="fas fa-phone"></i> Provider Phone</div>
+                        <div class="info-value">-</div>
+                    </div>
+                </div>
+            </div>
 
+            <!-- Member Details -->
+            <div class="detail-section">
+                <div class="section-header">
+                    <div class="section-header-left">
+                        <div class="section-icon">
+                            <i class="fas fa-user"></i>
+                        </div>
+                        <div class="section-title">
+                            <h3>Member Details</h3>
+                            <p>Patient information</p>
+                        </div>
+                    </div>
+                </div>
+                <div class="info-grid">
+                    <div class="info-item">
+                        <div class="info-label"><i class="fas fa-id-badge"></i> Member ID</div>
+                        <div class="info-value">00501550983</div>
+                    </div>
+                    <div class="info-item">
+                        <div class="info-label"><i class="fas fa-user"></i> Member Name</div>
+                        <div class="info-value">Lori Falls</div>
+                    </div>
+                    <div class="info-item">
+                        <div class="info-label"><i class="fas fa-birthday-cake"></i> Date of Birth</div>
+                        <div class="info-value">-</div>
+                    </div>
+                    <div class="info-item">
+                        <div class="info-label"><i class="fas fa-briefcase"></i> Line of Business</div>
+                        <div class="info-value">Aetna Better Health of West Virginia</div>
+                    </div>
+                    <div class="info-item">
+                        <div class="info-label"><i class="fas fa-phone"></i> Member Phone</div>
+                        <div class="info-value">-</div>
+                    </div>
+                    <div class="info-item">
+                        <div class="info-label"><i class="fas fa-map-marker-alt"></i> Member Address</div>
+                        <div class="info-value">-</div>
+                    </div>
+                    <div class="info-item">
+                        <div class="info-label"><i class="fas fa-map-marker-alt"></i> Member Address 2</div>
+                        <div class="info-value">-</div>
+                    </div>
+                    <div class="info-item">
+                        <div class="info-label"><i class="fas fa-flag"></i> State</div>
+                        <div class="info-value">West Virginia</div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Case Details -->
+            <div class="detail-section">
+                <div class="section-header">
+                    <div class="section-header-left">
+                        <div class="section-icon">
+                            <i class="fas fa-info-circle"></i>
+                        </div>
+                        <div class="section-title">
+                            <h3>Case Details</h3>
+                            <p>Authorization request information</p>
+                        </div>
+                    </div>
+                </div>
+                <div class="info-grid">
+                    <div class="info-item">
+                        <div class="info-label"><i class="fas fa-hashtag"></i> Case Number</div>
+                        <div class="info-value">APP000000000001</div>
+                    </div>
+                    <div class="info-item">
+                        <div class="info-label"><i class="fas fa-file-alt"></i> Case Type</div>
+                        <div class="info-value">Standard</div>
+                    </div>
+                    <div class="info-item">
+                        <div class="info-label"><i class="fas fa-calendar-plus"></i> Case Received Date</div>
+                        <div class="info-value">12/17/2025</div>
+                    </div>
+                    <div class="info-item">
+                        <div class="info-label"><i class="fas fa-clock"></i> Created Date</div>
+                        <div class="info-value">12/17/2025 6:16 PM</div>
+                    </div>
+                    <div class="info-item">
+                        <div class="info-label"><i class="fas fa-edit"></i> Last Modified</div>
+                        <div class="info-value">12/24/2025 10:30 AM</div>
+                    </div>
+                    <div class="info-item">
+                        <div class="info-label"><i class="fas fa-key"></i> Authorization Number</div>
+                        <div class="info-value">-</div>
+                    </div>
+                    <div class="info-item">
+                        <div class="info-label"><i class="fas fa-user-plus"></i> Created By</div>
+                        <div class="info-value">analyst@careinsight.ai</div>
+                    </div>
+                    <div class="info-item">
+                        <div class="info-label"><i class="fas fa-user-edit"></i> Modified By</div>
+                        <div class="info-value">analyst@careinsight.ai</div>
+                    </div>
+                    <div class="info-item">
+                        <div class="info-label"><i class="fas fa-cogs"></i> Process Instance ID</div>
+                        <div class="info-value">76cc879a-db74-11f0-99bb-aa80499c10d8</div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Assignment Details -->
+            <div class="detail-section">
+                <div class="section-header">
+                    <div class="section-header-left">
+                        <div class="section-icon">
+                            <i class="fas fa-users"></i>
+                        </div>
+                        <div class="section-title">
+                            <h3>Assignment Details</h3>
+                            <p>Case assignments and responsible personnel</p>
+                        </div>
+                    </div>
+                </div>
+                <div class="info-grid">
+                    <div class="info-item">
+                        <div class="info-label"><i class="fas fa-user"></i> Assigned Analyst</div>
+                        <div class="info-value">analyst@careinsight.ai</div>
+                    </div>
+                    <div class="info-item">
+                        <div class="info-label"><i class="fas fa-user-md"></i> Assigned Clinical Analyst</div>
+                        <div class="info-value">-</div>
+                    </div>
+                    <div class="info-item">
+                        <div class="info-label"><i class="fas fa-user-nurse"></i> Assigned UM Coordinator</div>
+                        <div class="info-value">-</div>
+                    </div>
+                    <div class="info-item">
+                        <div class="info-label"><i class="fas fa-clipboard-list"></i> Assigned Claims Coordinator</div>
+                        <div class="info-value">-</div>
+                    </div>
+                    <div class="info-item">
+                        <div class="info-label"><i class="fas fa-user-tie"></i> Assigned Administrative Analyst</div>
+                        <div class="info-value">-</div>
+                    </div>
+                    <div class="info-item">
+                        <div class="info-label"><i class="fas fa-shield-alt"></i> Assigned SIU</div>
+                        <div class="info-value">-</div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Appeal/Complaint Details -->
+            <div class="detail-section">
+                <div class="section-header">
+                    <div class="section-header-left">
+                        <div class="section-icon">
+                            <i class="fas fa-exclamation-triangle"></i>
+                        </div>
+                        <div class="section-title">
+                            <h3>Appeal/Complaint Details</h3>
+                            <p>Complaint information and context</p>
+                        </div>
+                    </div>
+                </div>
+                <div class="info-grid">
+                    <div class="info-item">
+                        <div class="info-label"><i class="fas fa-user-circle"></i> Complaint Raised By</div>
+                        <div class="info-value">Provider</div>
+                    </div>
+                    <div class="info-item">
+                        <div class="info-label"><i class="fas fa-check-circle"></i> Resolution</div>
+                        <div class="info-value">Upheld</div>
+                    </div>
+                    <div class="info-item">
+                        <div class="info-label"><i class="fas fa-times-circle"></i> Resolution Denial Reason</div>
+                        <div class="info-value">Medical Necessity</div>
+                    </div>
+                    <div class="info-item">
+                        <div class="info-label"><i class="fas fa-calendar-check"></i> Resolution Date</div>
+                        <div class="info-value">12/19/2025</div>
+                    </div>
+                </div>
+                <div class="info-item" style="margin-top: 15px;">
+                    <div class="info-label"><i class="fas fa-notes-medical"></i> Appeal Notes</div>
+                    <div class="info-value">
+                        Appeal request for denial of daughter's braces. Rhaegan Falls has several crossbites in the upper right side molar area, a narrow arch, and another crossbite near her front two teeth. These issues cause difficulty eating and low self-esteem.
+                    </div>
+                </div>
+            </div>
+
+            <!-- Notification Status -->
+            <div class="detail-section">
+                <div class="section-header">
+                    <div class="section-header-left">
+                        <div class="section-icon">
+                            <i class="fas fa-bell"></i>
+                        </div>
+                        <div class="section-title">
+                            <h3>Notification Status</h3>
+                            <p>Communication tracking and status</p>
+                        </div>
+                    </div>
+                </div>
+                <div class="info-grid">
+                    <div class="info-item">
+                        <div class="info-label"><i class="fas fa-envelope-open-text"></i> Acknowledgment Receipt Sent</div>
+                        <div class="info-value">
+                            <span class="acknowledgment-badge acknowledgment-not-sent">
+                                <i class="fas fa-times-circle"></i> Not Sent
+                            </span>
+                        </div>
+                    </div>
+                    <div class="info-item">
+                        <div class="info-label"><i class="fas fa-file-export"></i> Resolution Document Sent</div>
+                        <div class="info-value">
+                            <span class="acknowledgment-badge acknowledgment-not-sent">
+                                <i class="fas fa-times-circle"></i> Not Sent
+                            </span>
+                        </div>
+                    </div>
+                    <div class="info-item">
+                        <div class="info-label"><i class="fas fa-clock"></i> Extension Document Sent</div>
+                        <div class="info-value">
+                            <span class="acknowledgment-badge acknowledgment-sent">
+                                <i class="fas fa-check-circle"></i> Sent
+                            </span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Expedited Request Details -->
+            <div class="detail-section">
+                <div class="section-header">
+                    <div class="section-header-left">
+                        <div class="section-icon">
+                            <i class="fas fa-bolt"></i>
+                        </div>
+                        <div class="section-title">
+                            <h3>Expedited Request Details</h3>
+                            <p>Priority handling information</p>
+                        </div>
+                    </div>
+                </div>
+                <div class="info-grid">
+                    <div class="info-item">
+                        <div class="info-label"><i class="fas fa-bolt"></i> Is Expedited</div>
+                        <div class="info-value">No</div>
+                    </div>
+                    <div class="info-item">
+                        <div class="info-label"><i class="fas fa-tachometer-alt"></i> Expedited Status</div>
+                        <div class="info-value">-</div>
+                    </div>
+                    <div class="info-item">
+                        <div class="info-label"><i class="fas fa-flag"></i> Effectuation Needed</div>
+                        <div class="info-value">No</div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Source & Type Details -->
+            <div class="detail-section">
+                <div class="section-header">
+                    <div class="section-header-left">
+                        <div class="section-icon">
+                            <i class="fas fa-source"></i>
+                        </div>
+                        <div class="section-title">
+                            <h3>Source & Type Details</h3>
+                            <p>Case origin and classification</p>
+                        </div>
+                    </div>
+                </div>
+                <div class="info-grid">
+                    <div class="info-item">
+                        <div class="info-label"><i class="fas fa-sitemap"></i> Source Type</div>
+                        <div class="info-value">-</div>
+                    </div>
+                    <div class="info-item">
+                        <div class="info-label"><i class="fas fa-layer-group"></i> Case Source Type</div>
+                        <div class="info-value">-</div>
+                    </div>
+                    <div class="info-item">
+                        <div class="info-label"><i class="fas fa-pills"></i> Procedure/Medication Name</div>
+                        <div class="info-value">-</div>
+                    </div>
+                    <div class="info-item">
+                        <div class="info-label"><i class="fas fa-stethoscope"></i> Service Type</div>
+                        <div class="info-value">-</div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Claim Information -->
+            <div class="detail-section">
+                <div class="section-header">
+                    <div class="section-header-left">
+                        <div class="section-icon">
+                            <i class="fas fa-file-invoice-dollar"></i>
+                        </div>
+                        <div class="section-title">
+                            <h3>Claim Information</h3>
+                            <p>Associated claim details</p>
+                        </div>
+                    </div>
+                </div>
+                <div class="info-grid">
+                    <div class="info-item">
+                        <div class="info-label"><i class="fas fa-hashtag"></i> Claim ID</div>
+                        <div class="info-value">-</div>
+                    </div>
+                    <div class="info-item">
+                        <div class="info-label"><i class="fas fa-dollar-sign"></i> Claim Billed Amount</div>
+                        <div class="info-value">-</div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Case History -->
+            <div class="detail-section">
+                <div class="section-header">
+                    <div class="section-header-left">
+                        <div class="section-icon">
+                            <i class="fas fa-history"></i>
+                        </div>
+                        <div class="section-title">
+                            <h3>Case History</h3>
+                            <p>Audit trail of case activities</p>
+                        </div>
+                    </div>
+                </div>
+                <div class="history-table">
+                    <table>
+                        <thead>
+                            <tr>
+                                <th>Date</th>
+                                <th>Description</th>
+                                <th>Action By</th>
+                                <th>Role</th>
+                                <th>Time Taken</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td>12/24/2025 10:30:58</td>
+                                <td>Case modified - Added analyst note</td>
+                                <td>analyst@careinsight.ai</td>
+                                <td>Analyst</td>
+                                <td>N/A</td>
+                            </tr>
+                            <tr>
+                                <td>12/24/2025 10:20:51</td>
+                                <td>Analyst note added: "Test"</td>
+                                <td>John Analyst</td>
+                                <td>Analyst</td>
+                                <td>N/A</td>
+                            </tr>
+                            <tr>
+                                <td>12/23/2025 1:39:03</td>
+                                <td>Analyst note added: "New"</td>
+                                <td>John Analyst</td>
+                                <td>Analyst</td>
+                                <td>N/A</td>
+                            </tr>
+                            <tr>
+                                <td>12/23/2025 6:30:00</td>
+                                <td>SLA extended from 12/19/2025 to 12/25/2025 - Reason: New</td>
+                                <td>John Analyst</td>
+                                <td>Analyst</td>
+                                <td>N/A</td>
+                            </tr>
+                            <tr>
+                                <td>12/17/2025 6:18:24</td>
+                                <td>Workflow status updated to Analyst Review</td>
+                                <td>System</td>
+                                <td>Automated</td>
+                                <td>00:02:14</td>
+                            </tr>
+                            <tr>
+                                <td>12/17/2025 6:16:10</td>
+                                <td>Case created - Appeal request for denial</td>
+                                <td>analyst@careinsight.ai</td>
+                                <td>Analyst</td>
+                                <td>N/A</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+
+            <!-- Workflow SLA Details -->
+            <div class="detail-section">
+                <div class="section-header">
+                    <div class="section-header-left">
+                        <div class="section-icon">
+                            <i class="fas fa-stopwatch"></i>
+                        </div>
+                        <div class="section-title">
+                            <h3>Workflow SLA Details</h3>
+                            <p>Service level performance metrics</p>
+                        </div>
+                    </div>
+                </div>
+                <div class="history-table">
+                    <table>
+                        <thead>
+                            <tr>
+                                <th>Workflow Status</th>
+                                <th>Actual SLA Date</th>
+                                <th>Completed SLA Date</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td>Analyst Review</td>
+                                <td>12/19/2025 6:16 PM</td>
+                                <td>12/17/2025 6:18 PM</td>
+                            </tr>
+                            <tr>
+                                <td>Analyst Review</td>
+                                <td>12/19/2025 6:18 PM</td>
+                                <td>-</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+
+            <!-- Supporting Information -->
+            <div class="detail-section">
+                <div class="section-header">
+                    <div class="section-header-left">
+                        <div class="section-icon">
+                            <i class="fas fa-clipboard-list"></i>
+                        </div>
+                        <div class="section-title">
+                            <h3>Supporting Information</h3>
+                            <p>Additional request information and selections</p>
+                        </div>
+                    </div>
+                </div>
+                <div class="supporting-info-form">
+                    <div class="radio-group">
+                        <div class="radio-option">
+                            <input type="radio" id="standard" name="request-type" value="standard" onchange="toggleConditionalFields()" checked>
+                            <label for="standard"><i class="fas fa-check-circle"></i> Standard</label>
+                        </div>
+                        <div class="radio-option">
+                            <input type="radio" id="expedited" name="request-type" value="expedited" onchange="toggleConditionalFields()">
+                            <label for="expedited"><i class="fas fa-bolt"></i> Expedited</label>
+                        </div>
+                    </div>
+
+                    <!-- Standard Fields -->
+                    <div id="standard-fields" class="conditional-fields show">
+                        <div class="form-row">
+                            <div class="form-group">
+                                <label><i class="fas fa-check"></i> Resolution</label>
+                                <select>
+                                    <option value="">Select Resolution</option>
+                                    <option value="upheld" selected>Upheld</option>
+                                    <option value="overturned">Overturned</option>
+                                    <option value="partially-upheld">Partially Upheld</option>
+                                </select>
+                            </div>
+                            <div class="form-group">
+                                <label><i class="fas fa-times-circle"></i> Denial Reason</label>
+                                <select>
+                                    <option value="">Select Denial Reason</option>
+                                    <option value="medical-necessity" selected>Medical Necessity</option>
+                                    <option value="insufficient-docs">Insufficient Documentation</option>
+                                    <option value="not-covered">Not Covered</option>
+                                </select>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Expedited Fields -->
+                    <div id="expedited-fields" class="conditional-fields">
+                        <div class="form-row">
+                            <div class="form-group">
+                                <label><i class="fas fa-bolt"></i> Expedited Status</label>
+                                <select>
+                                    <option value="">Select Status</option>
+                                    <option value="urgent">Urgent - 24hrs</option>
+                                    <option value="emergency">Emergency - Immediate</option>
+                                    <option value="standard-expedited">Standard Expedited</option>
+                                </select>
+                            </div>
+                            <div class="form-group">
+                                <label><i class="fas fa-check"></i> Resolution</label>
+                                <select>
+                                    <option value="">Select Resolution</option>
+                                    <option value="upheld">Upheld</option>
+                                    <option value="overturned">Overturned</option>
+                                    <option value="partially-upheld">Partially Upheld</option>
+                                </select>
+                            </div>
+                            <div class="form-group">
+                                <label><i class="fas fa-times-circle"></i> Denial Reason</label>
+                                <select>
+                                    <option value="">Select Denial Reason</option>
+                                    <option value="medical-necessity">Medical Necessity</option>
+                                    <option value="insufficient-docs">Insufficient Documentation</option>
+                                    <option value="not-covered">Not Covered</option>
+                                </select>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Effectuation Checkbox -->
+                    <div class="checkbox-group">
+                        <input type="checkbox" id="effectuation">
+                        <label for="effectuation"><i class="fas fa-flag"></i> Effectuation Needed</label>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Outreach Information -->
+            <div class="detail-section">
+                <div class="section-header">
+                    <div class="section-header-left">
+                        <div class="section-icon">
+                            <i class="fas fa-external-link-alt"></i>
+                        </div>
+                        <div class="section-title">
+                            <h3>Outreach Information</h3>
+                            <p>External communication links</p>
+                        </div>
+                    </div>
+                </div>
+                <div class="info-item">
+                    <div class="info-label"><i class="fas fa-link"></i> Outreach Link</div>
+                    <div class="info-value">
+                        <a href="https://gnadentaldev.health3d.ai/omnichannel/app_missingdocoutreach/APP000000000001-12172025181823" target="_blank" style="color: #3498db; text-decoration: none;">
+                            <i class="fas fa-external-link-alt"></i> View Outreach Portal
+                        </a>
+                    </div>
+                </div>
+            </div>
+
+            <!-- CASE SUMMARY (AI Generated) -->
+            <div class="detail-section">
+                <div class="section-header">
+                    <div class="section-header-left">
+                        <div class="section-icon">
+                            <i class="fas fa-file-alt"></i>
+                        </div>
+                        <div class="section-title">
+                            <h3>Case Summary</h3>
+                            <p>AI-generated comprehensive case overview</p>
+                        </div>
+                    </div>
+                    <span class="ai-generated-badge">
+                        <i class="fas fa-robot"></i> Generated by AI
+                    </span>
+                </div>
+                <div class="ai-content-box">
+                    <div class="ai-content-header">
+                        <h4 style="color: #1565c0; font-size: 14px;">
+                            <i class="fas fa-brain"></i> Automated Case Analysis
+                        </h4>
+                    </div>
+                    <div class="ai-content-text">
+                        <strong>Case Type:</strong> Provider-initiated appeal for denial of orthodontic treatment (braces) for dependent daughter Rhaegan Falls.
+                    </div>
+                    <div class="ai-content-text">
+                        <strong>Clinical Context:</strong> Patient presents with multiple crossbites in the upper right molar area, narrow arch, and crossbite near front teeth. Provider reports functional impairment including difficulty eating and psychosocial impact (low self-esteem).
+                    </div>
+                    <div class="ai-content-text">
+                        <strong>Eligibility Verification:</strong> Member Lori Falls (ID: 00501550983) confirmed active with Aetna Better Health of West Virginia. Coverage verification completed with no eligibility issues detected.
+                    </div>
+                    <div class="ai-content-text">
+                        <strong>Documentation Review:</strong> Appeal received from Dr. Jana Petersss on 12/17/2025. Initial documentation outlines clinical necessity based on functional and psychological impacts. Case assigned to analyst for comprehensive review.
+                    </div>
+                    <div class="ai-content-text">
+                        <strong>Timeline Analysis:</strong> Case created 12/17/2025 at 6:16 PM. Multiple analyst reviews conducted with notes added 12/23/2025 and 12/24/2025. SLA extended from 12/19/2025 to 12/25/2025 to allow thorough evaluation of clinical evidence.
+                    </div>
+                    <div class="ai-content-text">
+                        <strong>Resolution Status:</strong> Final determination: Upheld. Appeal denied based on medical necessity criteria. Resolution documented 12/19/2025. Extension document sent to provider; formal resolution letter pending.
+                    </div>
+                    <div class="ai-footer-note">
+                        <i class="fas fa-info-circle"></i>
+                        This summary was automatically generated using AI analysis and should be reviewed by clinical staff before final determination.
+                    </div>
+                </div>
+            </div>
+
+            <!-- PAST SUMMARY (AI Generated) -->
+            <div class="detail-section">
+                <div class="section-header">
+                    <div class="section-header-left">
+                        <div class="section-icon">
+                            <i class="fas fa-history"></i>
+                        </div>
+                        <div class="section-title">
+                            <h3>Past Summary</h3>
+                            <p>AI-generated historical case analysis</p>
+                        </div>
+                    </div>
+                    <span class="ai-generated-badge">
+                        <i class="fas fa-robot"></i> Generated by AI
+                    </span>
+                </div>
+                <div class="ai-content-box">
+                    <div class="ai-content-header">
+                        <h4 style="color: #1565c0; font-size: 14px;">
+                            <i class="fas fa-chart-line"></i> Historical Context & Patterns
+                        </h4>
+                    </div>
+                    <div class="ai-content-text">
+                        <strong>Member History:</strong> Member Lori Falls (00501550983) has active coverage with Aetna Better Health of West Virginia. No prior authorization requests found in system for orthodontic services.
+                    </div>
+                    <div class="ai-content-text">
+                        <strong>Provider History:</strong> Dr. Jana Petersss has submitted this appeal on behalf of the member's daughter. No previous interaction history found in current database for this provider with our organization.
+                    </div>
+                    <div class="ai-content-text">
+                        <strong>Dependent Coverage:</strong> This case involves treatment for member's daughter (Rhaegan Falls), not the primary member. Dependent eligibility and coverage benefits reviewed as part of appeal evaluation.
+                    </div>
+                    <div class="ai-content-text">
+                        <strong>Previous Denials:</strong> Original service request was denied, prompting this provider appeal. Denial rationale centered on medical necessity criteria for orthodontic treatment under West Virginia Medicaid guidelines.
+                    </div>
+                    <div class="ai-content-text">
+                        <strong>Clinical Documentation Pattern:</strong> Provider submitted appeal letter citing multiple clinical findings: crossbites in upper right molar region, narrow palatal arch, anterior crossbite, functional eating difficulties, and psychosocial concerns.
+                    </div>
+                    <div class="ai-content-text">
+                        <strong>Appeal Processing:</strong> Standard appeal process followed with appropriate SLA extension granted. Multiple analyst reviews documented to ensure thorough evaluation of clinical evidence and policy compliance.
+                    </div>
+                    <div class="ai-footer-note">
+                        <i class="fas fa-info-circle"></i>
+                        Historical analysis is based on claims data, provider records, and member utilization patterns. Clinical judgment should be exercised for final determination.
+                    </div>
+                </div>
+            </div>
+
+            <!-- AI RECOMMENDATION -->
+            <div class="detail-section">
+                <div class="section-header">
+                    <div class="section-header-left">
+                        <div class="section-icon">
+                            <i class="fas fa-robot"></i>
+                        </div>
+                        <div class="section-title">
+                            <h3>AI Recommendation</h3>
+                            <p>Intelligent decision support recommendation</p>
+                        </div>
+                    </div>
+                    <span class="ai-generated-badge">
+                        <i class="fas fa-robot"></i> Generated by AI
+                    </span>
+                </div>
+                <div class="ai-content-box">
+                    <div class="ai-content-header">
+                        <h4 style="color: #1565c0; font-size: 14px;">
+                            <i class="fas fa-lightbulb"></i> Clinical Decision Support Recommendation
+                        </h4>
+                    </div>
+                    <div class="ai-content-text">
+                        <strong style="color: #c0392b; font-size: 16px;">
+                            <i class="fas fa-times-circle"></i> RECOMMENDATION: UPHOLD DENIAL
+                        </strong>
+                    </div>
+                    <div class="ai-content-text">
+                        <strong>Clinical Analysis:</strong> Review of submitted documentation and appeal rationale against West Virginia Medicaid orthodontic coverage criteria. While provider cites functional and psychosocial concerns, documentation does not demonstrate severity meeting medical necessity thresholds defined in state Medicaid orthodontic guidelines.
+                    </div>
+                    <div class="ai-content-text">
+                        <strong>Medical Necessity Assessment:</strong> Crossbites and narrow arch described in appeal are common orthodontic conditions. To meet medical necessity criteria for Medicaid coverage, conditions must typically demonstrate:
+                        <ul style="margin-left: 20px; margin-top: 8px;">
+                            <li>Severe functional impairment affecting mastication</li>
+                            <li>Objective measurement scores (e.g., Handicapping Labio-lingual Deviation index)</li>
+                            <li>Documentation from multiple clinical examinations</li>
+                            <li>Radiographic evidence supporting severity claims</li>
+                        </ul>
+                    </div>
+                    <div class="ai-content-text">
+                        <strong>Documentation Gaps:</strong> Current appeal documentation lacks:
+                        <ul style="margin-left: 20px; margin-top: 8px;">
+                            <li>Standardized orthodontic assessment scores</li>
+                            <li>Objective functional measurements</li>
+                            <li>Radiographic imaging documentation</li>
+                            <li>Comprehensive treatment plan with medical justification</li>
+                        </ul>
+                    </div>
+                    <div class="ai-content-text">
+                        <strong>Policy Alignment:</strong> Aetna Better Health of West Virginia follows state Medicaid guidelines for orthodontic services. These guidelines establish specific clinical criteria that must be objectively documented. Psychosocial concerns alone (low self-esteem) do not constitute medical necessity under current policy framework.
+                    </div>
+                    <div class="ai-content-text">
+                        <strong>Recommendation Rationale:</strong> Based on available documentation, clinical presentation does not meet established medical necessity criteria for Medicaid-covered orthodontic treatment. Denial should be upheld with clear communication to provider regarding:
+                        <ul style="margin-left: 20px; margin-top: 8px;">
+                            <li>Specific documentation requirements for medical necessity</li>
+                            <li>Objective assessment tools required for reconsideration</li>
+                            <li>Alternative coverage options if applicable</li>
+                            <li>Member's right to external review if desired</li>
+                        </ul>
+                    </div>
+                    <div class="ai-content-text">
+                        <strong>Resolution:</strong> Upheld - Original denial maintained based on medical necessity review. Formal resolution letter should include detailed explanation of decision rationale and available next steps for provider and member.
+                    </div>
+                    <div class="ai-footer-note">
+                        <i class="fas fa-info-circle"></i>
+                        AI recommendations are advisory only. Final authorization decisions must be made by qualified clinical reviewers in accordance with plan policies and clinical guidelines.
+                    </div>
+                </div>
+            </div>
+
+            <!-- Analyst Notes -->
+            <div class="detail-section">
+                <div class="notes-section">
+                    <div class="notes-header">
+                        <h4><i class="fas fa-sticky-note"></i> Analyst Notes</h4>
+                        <button class="btn-add-note">
+                            <i class="fas fa-plus"></i> Add Note
+                        </button>
+                    </div>
+                    <div class="notes-list">
+                        <div class="note-item">
+                            <div class="note-header">
+                                <span class="note-author"><i class="fas fa-user"></i> John Analyst</span>
+                                <span class="note-date"><i class="fas fa-clock"></i> 12/24/2025 10:20 AM</span>
+                            </div>
+                            <div class="note-content">Test</div>
+                        </div>
+                        <div class="note-item">
+                            <div class="note-header">
+                                <span class="note-author"><i class="fas fa-user"></i> John Analyst</span>
+                                <span class="note-date"><i class="fas fa-clock"></i> 12/23/2025 1:39 PM</span>
+                            </div>
+                            <div class="note-content">New</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Clinical Analyst Notes -->
+            <div class="detail-section">
+                <div class="notes-section">
+                    <div class="notes-header">
+                        <h4><i class="fas fa-user-md"></i> Clinical Analyst Notes</h4>
+                        <button class="btn-add-note">
+                            <i class="fas fa-plus"></i> Add Note
+                        </button>
+                    </div>
+                    <div class="notes-empty">
+                        <i class="fas fa-inbox"></i>
+                        <p>No clinical notes yet</p>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Claims Coordinator Notes -->
+            <div class="detail-section">
+                <div class="notes-section">
+                    <div class="notes-header">
+                        <h4><i class="fas fa-clipboard-list"></i> Claims Coordinator Notes</h4>
+                        <button class="btn-add-note">
+                            <i class="fas fa-plus"></i> Add Note
+                        </button>
+                    </div>
+                    <div class="notes-empty">
+                        <i class="fas fa-inbox"></i>
+                        <p>No coordinator notes yet</p>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Administrative Analyst Notes -->
+            <div class="detail-section">
+                <div class="notes-section">
+                    <div class="notes-header">
+                        <h4><i class="fas fa-user-tie"></i> Administrative Analyst Notes</h4>
+                        <button class="btn-add-note">
+                            <i class="fas fa-plus"></i> Add Note
+                        </button>
+                    </div>
+                    <div class="notes-empty">
+                        <i class="fas fa-inbox"></i>
+                        <p>No administrative notes yet</p>
+                    </div>
+                </div>
+            </div>
+
+            <!-- UM Coordinator Notes -->
+            <div class="detail-section">
+                <div class="notes-section">
+                    <div class="notes-header">
+                        <h4><i class="fas fa-user-nurse"></i> UM Coordinator Notes</h4>
+                        <button class="btn-add-note">
+                            <i class="fas fa-plus"></i> Add Note
+                        </button>
+                    </div>
+                    <div class="notes-empty">
+                        <i class="fas fa-inbox"></i>
+                        <p>No UM coordinator notes yet</p>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Attached Documents -->
+            <div class="detail-section">
+                <div class="section-header">
+                    <div class="section-header-left">
+                        <div class="section-icon">
+                            <i class="fas fa-paperclip"></i>
+                        </div>
+                        <div class="section-title">
+                            <h3>Attached Documents</h3>
+                            <p>Case supporting documentation</p>
+                        </div>
+                    </div>
+                </div>
+                <div class="document-list">
+                    <div class="document-item">
+                        <div class="document-info">
+                            <div class="document-icon">
+                                <i class="fas fa-file-word"></i>
+                            </div>
+                            <div class="document-details">
+                                <h4>Appeal Request Documentation.docx</h4>
+                                <p>Provider appeal for orthodontic treatment denial</p>
+                            </div>
+                        </div>
+                        <div class="document-actions">
+                            <button class="btn-icon" style="background: #e3f2fd; color: #3498db;" title="Open in New Tab">
+                                <i class="fas fa-external-link-alt"></i>
+                            </button>
+                            <button class="btn-icon" style="background: #d1f2eb; color: #27ae60;" title="View">
+                                <i class="fas fa-eye"></i>
+                            </button>
+                            <button class="btn-icon" style="background: #fff3cd; color: #856404;" title="Download">
+                                <i class="fas fa-download"></i>
+                            </button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+        </div>
     </div>
-</div>
 
+    <script>
+        function expandWorkflow() {
+            document.getElementById('workflowCollapsed').classList.add('hidden');
+            document.getElementById('workflowExpanded').classList.remove('hidden');
+            document.getElementById('btnViewFull').classList.add('hidden');
+            document.getElementById('btnCollapse').classList.remove('hidden');
+        }
+
+        function collapseWorkflow() {
+            document.getElementById('workflowCollapsed').classList.remove('hidden');
+            document.getElementById('workflowExpanded').classList.add('hidden');
+            document.getElementById('btnViewFull').classList.remove('hidden');
+            document.getElementById('btnCollapse').classList.add('hidden');
+        }
+
+        function toggleConditionalFields() {
+            const isStandard = document.getElementById('standard').checked;
+            const standardFields = document.getElementById('standard-fields');
+            const expeditedFields = document.getElementById('expedited-fields');
+
+            if (isStandard) {
+                standardFields.classList.add('show');
+                expeditedFields.classList.remove('show');
+            } else {
+                standardFields.classList.remove('show');
+                expeditedFields.classList.add('show');
+            }
+        }
+    </script>
 </body>
 </html>
