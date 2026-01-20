@@ -23,6 +23,7 @@
             align-items: center;
             min-height: 100vh;
             padding: 20px;
+            max-width: 900px;
         }
 
         .modal {
@@ -58,7 +59,9 @@
             max-height: calc(90vh - 200px);
             overflow-y: auto;
         }
-
+        .modal-footer {
+    padding: [top/bottom]px 40px;  /* 40px left/right for 820px content */
+}
         .form-row {
             display: grid;
             grid-template-columns: repeat(2, 1fr);
