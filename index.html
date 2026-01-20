@@ -3,10 +3,11 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Outreach Template Config Modal</title>
+    <title>Outreach Template Config</title>
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Open+Sans:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/quill@2.0.2/dist/quill.snow.css">
     <style>
         * {
             margin: 0;
@@ -28,7 +29,7 @@
             background: #ffffff;
             border-radius: 16px;
             width: 100%;
-            max-width: 900px;
+            max-width: 1000px;
             max-height: 90vh;
             overflow: hidden;
             box-shadow: 0 20px 60px rgba(0, 0, 0, 0.3);
@@ -43,7 +44,13 @@
             font-size: 28px;
             font-weight: 700;
             color: #1a1a1a;
-            margin-bottom: 0;
+            margin-bottom: 8px;
+        }
+
+        .modal-subtitle {
+            font-size: 15px;
+            color: #6b7280;
+            font-weight: 400;
         }
 
         .modal-body {
@@ -75,14 +82,12 @@
 
         label {
             font-size: 14px;
-            font-weight: 400;
+            font-weight: 500;
             color: #6b7280;
-            margin-bottom: 8px;
+            margin-bottom: 12px;
         }
 
-        input[type="text"],
-        select,
-        textarea {
+        select {
             padding: 0 0 12px 0;
             border: none;
             border-bottom: 1px solid #d1d5db;
@@ -92,21 +97,6 @@
             transition: all 0.3s;
             background: transparent;
             outline: none;
-            resize: none;
-        }
-
-        input[type="text"]:focus,
-        select:focus,
-        textarea:focus {
-            border-bottom-color: #8b5cf6;
-        }
-
-        input[type="text"]::placeholder,
-        textarea::placeholder {
-            color: #9ca3af;
-        }
-
-        select {
             cursor: pointer;
             appearance: none;
             background-image: url("data:image/svg+xml,%3Csvg width='14' height='8' viewBox='0 0 14 8' fill='none' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath d='M1 1L7 7L13 1' stroke='%236b7280' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'/%3E%3C/svg%3E");
@@ -115,11 +105,89 @@
             padding-right: 24px;
         }
 
-        textarea {
-            padding: 12px 0;
-            min-height: 100px;
+        select:focus {
+            border-bottom-color: #8b5cf6;
+        }
+
+        /* Rich Text Editor Styling */
+        .editor-wrapper {
+            margin-bottom: 32px;
+        }
+
+        .editor-label {
+            font-size: 14px;
+            font-weight: 500;
+            color: #6b7280;
+            margin-bottom: 12px;
+            display: block;
+        }
+
+        .editor-container {
+            border: 1px solid #d1d5db;
+            border-radius: 8px;
+            overflow: hidden;
+            transition: all 0.3s;
+        }
+
+        .editor-container:focus-within {
+            border-color: #8b5cf6;
+            box-shadow: 0 0 0 3px rgba(139, 92, 246, 0.1);
+        }
+
+        .ql-toolbar {
+            background: #f9fafb;
+            border: none !important;
+            border-bottom: 1px solid #e5e7eb !important;
+            padding: 12px 16px;
+        }
+
+        .ql-container {
+            border: none !important;
+            font-family: 'Open Sans', sans-serif;
             font-size: 15px;
-            line-height: 1.5;
+            min-height: 200px;
+        }
+
+        .ql-editor {
+            min-height: 200px;
+            padding: 16px;
+            color: #1f2937;
+        }
+
+        .ql-editor.ql-blank::before {
+            color: #9ca3af;
+            font-style: normal;
+        }
+
+        /* Quill toolbar customization */
+        .ql-toolbar.ql-snow .ql-stroke {
+            stroke: #6b7280;
+        }
+
+        .ql-toolbar.ql-snow .ql-fill {
+            fill: #6b7280;
+        }
+
+        .ql-toolbar.ql-snow .ql-picker-label {
+            color: #6b7280;
+        }
+
+        .ql-toolbar.ql-snow button:hover,
+        .ql-toolbar.ql-snow button:focus,
+        .ql-toolbar.ql-snow button.ql-active {
+            color: #8b5cf6;
+        }
+
+        .ql-toolbar.ql-snow button:hover .ql-stroke,
+        .ql-toolbar.ql-snow button:focus .ql-stroke,
+        .ql-toolbar.ql-snow button.ql-active .ql-stroke {
+            stroke: #8b5cf6;
+        }
+
+        .ql-toolbar.ql-snow button:hover .ql-fill,
+        .ql-toolbar.ql-snow button:focus .ql-fill,
+        .ql-toolbar.ql-snow button.ql-active .ql-fill {
+            fill: #8b5cf6;
         }
 
         .modal-footer {
@@ -202,6 +270,14 @@
             .modal-footer {
                 padding: 20px 24px;
             }
+
+            .ql-container {
+                min-height: 150px;
+            }
+
+            .ql-editor {
+                min-height: 150px;
+            }
         }
     </style>
 </head>
@@ -209,10 +285,12 @@
     <div class="modal">
         <div class="modal-header">
             <h2>Outreach Template Config</h2>
+            <p class="modal-subtitle">Configure templates for different outreach types and business areas</p>
         </div>
         
         <div class="modal-body">
             <form id="outreachConfigForm">
+                <!-- Dropdown Fields -->
                 <div class="form-row">
                     <div class="form-group">
                         <label for="business_area">Business Area</label>
@@ -223,6 +301,7 @@
                             <option value="cosmetic_dentistry">Cosmetic Dentistry</option>
                             <option value="pediatric_dentistry">Pediatric Dentistry</option>
                             <option value="oral_surgery">Oral Surgery</option>
+                            <option value="periodontics">Periodontics</option>
                         </select>
                     </div>
                     <div class="form-group">
@@ -234,35 +313,40 @@
                             <option value="welcome">Welcome</option>
                             <option value="promotional">Promotional</option>
                             <option value="feedback_request">Feedback Request</option>
+                            <option value="treatment_update">Treatment Update</option>
                         </select>
                     </div>
                 </div>
 
-                <div class="form-row one-col">
-                    <div class="form-group">
-                        <label for="call_script">Call Script</label>
-                        <textarea id="call_script" name="call_script" placeholder="Enter call script here..." required></textarea>
+                <!-- Call Script -->
+                <div class="editor-wrapper">
+                    <label class="editor-label">Call Script</label>
+                    <div class="editor-container">
+                        <div id="call_script_editor"></div>
                     </div>
                 </div>
 
-                <div class="form-row one-col">
-                    <div class="form-group">
-                        <label for="sms_template">SMS Template</label>
-                        <textarea id="sms_template" name="sms_template" placeholder="Enter SMS template here..." required></textarea>
+                <!-- SMS Template -->
+                <div class="editor-wrapper">
+                    <label class="editor-label">SMS Template</label>
+                    <div class="editor-container">
+                        <div id="sms_template_editor"></div>
                     </div>
                 </div>
 
-                <div class="form-row one-col">
-                    <div class="form-group">
-                        <label for="email_template">Email Template</label>
-                        <textarea id="email_template" name="email_template" placeholder="Enter email template here..." required></textarea>
+                <!-- Email Template -->
+                <div class="editor-wrapper">
+                    <label class="editor-label">Email Template</label>
+                    <div class="editor-container">
+                        <div id="email_template_editor"></div>
                     </div>
                 </div>
 
-                <div class="form-row one-col">
-                    <div class="form-group">
-                        <label for="mail_template">Mail Template</label>
-                        <textarea id="mail_template" name="mail_template" placeholder="Enter mail template here..." required></textarea>
+                <!-- Mail Template -->
+                <div class="editor-wrapper">
+                    <label class="editor-label">Mail Template</label>
+                    <div class="editor-container">
+                        <div id="mail_template_editor"></div>
                     </div>
                 </div>
             </form>
@@ -274,18 +358,94 @@
         </div>
     </div>
 
+    <!-- Quill Rich Text Editor -->
+    <script src="https://cdn.jsdelivr.net/npm/quill@2.0.2/dist/quill.js"></script>
     <script>
+        // Quill toolbar options
+        const toolbarOptions = [
+            ['bold', 'italic', 'underline', 'strike'],
+            [{ 'list': 'ordered'}, { 'list': 'bullet' }],
+            [{ 'header': [1, 2, 3, false] }],
+            [{ 'color': [] }, { 'background': [] }],
+            [{ 'align': [] }],
+            ['link'],
+            ['clean']
+        ];
+
+        // Initialize Quill editors
+        const callScriptEditor = new Quill('#call_script_editor', {
+            theme: 'snow',
+            modules: {
+                toolbar: toolbarOptions
+            },
+            placeholder: 'Enter call script here...'
+        });
+
+        const smsTemplateEditor = new Quill('#sms_template_editor', {
+            theme: 'snow',
+            modules: {
+                toolbar: toolbarOptions
+            },
+            placeholder: 'Enter SMS template here...'
+        });
+
+        const emailTemplateEditor = new Quill('#email_template_editor', {
+            theme: 'snow',
+            modules: {
+                toolbar: toolbarOptions
+            },
+            placeholder: 'Enter email template here...'
+        });
+
+        const mailTemplateEditor = new Quill('#mail_template_editor', {
+            theme: 'snow',
+            modules: {
+                toolbar: toolbarOptions
+            },
+            placeholder: 'Enter mail template here...'
+        });
+
         // Form submission
         document.getElementById('outreachConfigForm').addEventListener('submit', (e) => {
             e.preventDefault();
             
+            // Get editor content
+            const callScript = callScriptEditor.root.innerHTML;
+            const smsTemplate = smsTemplateEditor.root.innerHTML;
+            const emailTemplate = emailTemplateEditor.root.innerHTML;
+            const mailTemplate = mailTemplateEditor.root.innerHTML;
+
+            // Get plain text for validation (check if editors are not empty)
+            const callScriptText = callScriptEditor.getText().trim();
+            const smsTemplateText = smsTemplateEditor.getText().trim();
+            const emailTemplateText = emailTemplateEditor.getText().trim();
+            const mailTemplateText = mailTemplateEditor.getText().trim();
+
+            // Validate
+            if (!callScriptText) {
+                alert('Please enter call script.');
+                return;
+            }
+            if (!smsTemplateText) {
+                alert('Please enter SMS template.');
+                return;
+            }
+            if (!emailTemplateText) {
+                alert('Please enter email template.');
+                return;
+            }
+            if (!mailTemplateText) {
+                alert('Please enter mail template.');
+                return;
+            }
+            
             const formData = {
                 business_area: document.getElementById('business_area').value,
                 outreach_type: document.getElementById('outreach_type').value,
-                call_script: document.getElementById('call_script').value,
-                sms_template: document.getElementById('sms_template').value,
-                email_template: document.getElementById('email_template').value,
-                mail_template: document.getElementById('mail_template').value
+                call_script: callScript,
+                sms_template: smsTemplate,
+                email_template: emailTemplate,
+                mail_template: mailTemplate
             };
             
             console.log('Outreach Config Data:', formData);
@@ -296,7 +456,10 @@
         document.querySelector('.btn-cancel').addEventListener('click', () => {
             if (confirm('Are you sure you want to cancel? Any unsaved changes will be lost.')) {
                 document.getElementById('outreachConfigForm').reset();
-                console.log('Form cancelled');
+                callScriptEditor.setText('');
+                smsTemplateEditor.setText('');
+                emailTemplateEditor.setText('');
+                mailTemplateEditor.setText('');
             }
         });
 
@@ -306,6 +469,23 @@
                 document.querySelector('.btn-cancel').click();
             }
         });
+
+        // Sample data loader (for demonstration)
+        function loadSampleData() {
+            document.getElementById('business_area').value = 'orthodontics';
+            document.getElementById('outreach_type').value = 'appointment_reminder';
+            
+            callScriptEditor.root.innerHTML = '<p><strong>Hello [Patient Name],</strong></p><p><br></p><p>This is [Your Name] calling from [Practice Name]. I\'m calling to remind you about your upcoming appointment.</p><p><br></p><p>Your appointment is scheduled for <strong>[Date]</strong> at <strong>[Time]</strong>.</p><p><br></p><p>Please let us know if you need to reschedule. Thank you!</p>';
+            
+            smsTemplateEditor.root.innerHTML = '<p>Hi [Patient Name]! Reminder: Your appointment at [Practice Name] is on [Date] at [Time]. Reply CONFIRM or call us at [Phone]. See you soon!</p>';
+            
+            emailTemplateEditor.root.innerHTML = '<p><strong>Subject: Appointment Reminder - [Practice Name]</strong></p><p><br></p><p>Dear [Patient Name],</p><p><br></p><p>This is a friendly reminder about your upcoming appointment:</p><p><br></p><ul><li><strong>Date:</strong> [Date]</li><li><strong>Time:</strong> [Time]</li><li><strong>Location:</strong> [Practice Address]</li></ul><p><br></p><p>If you need to reschedule, please contact us at [Phone] or reply to this email.</p><p><br></p><p>Best regards,<br>[Practice Name] Team</p>';
+            
+            mailTemplateEditor.root.innerHTML = '<p style="text-align: center;"><strong>[Practice Name]</strong><br>[Address]<br>[Phone]</p><p><br></p><p>Dear [Patient Name],</p><p><br></p><p>We look forward to seeing you at your upcoming appointment:</p><p><br></p><p><strong>Date:</strong> [Date]<br><strong>Time:</strong> [Time]</p><p><br></p><p>Please arrive 10 minutes early to complete any necessary paperwork.</p><p><br></p><p>Sincerely,<br>The [Practice Name] Team</p>';
+        }
+
+        // Uncomment to load sample data on page load
+        // loadSampleData();
     </script>
 </body>
 </html>
