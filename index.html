@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
 <meta charset="UTF-8">
-<title>Outreach Template Configuration</title>
+<title>ANG Determination</title>
 
 <!-- Font Awesome 6 Free -->
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css" integrity="sha512-DTOQO9RWCH3ppGqcWaEA1BIZOC6xxalwEsw9c2QQeAIftl+Vegovlnee1c9QX4TctnWMn13TZye+giMm8e2LwA==" crossorigin="anonymous" referrerpolicy="no-referrer">
@@ -38,66 +38,13 @@ body{
   padding:16px 16px 0 16px;
 }
 
-/* ================= HEADER ================= */
-.header-section{
-  display:flex;
-  justify-content:space-between;
-  align-items:center;
-  margin-bottom:24px;
-}
-
 /* ================= TITLE ================= */
 .title-container{
   font-family:'Open Sans';
   font-weight:600;
   font-size:24px;
   color:#1A1A1A;
-}
-
-/* ================= ACTION BUTTONS ================= */
-.header-actions{
-  display:flex;
-  gap:12px;
-}
-
-.btn-primary{
-  background:#5830AD;
-  color:#fff;
-  font-family:'Open Sans';
-  font-size:14px;
-  font-weight:600;
-  padding:10px 24px;
-  border-radius:6px;
-  border:none;
-  cursor:pointer;
-  display:flex;
-  align-items:center;
-  gap:8px;
-  transition:background 0.3s;
-}
-
-.btn-primary:hover{
-  background:#471d82;
-}
-
-.btn-secondary{
-  background:#fff;
-  color:#5830AD;
-  font-family:'Open Sans';
-  font-size:14px;
-  font-weight:600;
-  padding:10px 24px;
-  border-radius:6px;
-  border:1px solid #5830AD;
-  cursor:pointer;
-  display:flex;
-  align-items:center;
-  gap:8px;
-  transition:all 0.3s;
-}
-
-.btn-secondary:hover{
-  background:#f8f5ff;
+  margin-bottom:16px;
 }
 
 /* ================= TABS ================= */
@@ -144,7 +91,6 @@ body{
   display:flex;
   gap:16px;
   margin-bottom:16px;
-  flex-wrap:wrap;
 }
 
 .search-input,
@@ -162,11 +108,6 @@ body{
 .search-input{width:320px}
 .select{width:220px}
 
-.search-input::placeholder,
-.select::placeholder{
-  color:#9CA3AF;
-}
-
 /* ================= CARD ================= */
 .card-container{
   background:#fff;
@@ -182,7 +123,7 @@ body{
 
 table{
   width:100%;
-  min-width:1600px;
+  min-width:1800px;
   border-collapse:collapse;
   font-family:'Open Sans';
   font-size:14px;
@@ -193,90 +134,55 @@ th{
   background:#f8f8f8;
   color:#424242;
   font-weight:600;
-  padding:12px;
+  padding:10px;
   height:60px;
   text-align:left;
   white-space:nowrap;
 }
 
 td{
-  padding:12px;
+  padding:.7rem .6rem;
   color:#2E2E2E;
   font-weight:400;
-  vertical-align:middle;
+  white-space:nowrap;
 }
 
-tr:nth-child(even){
-  background:#f8f8f8;
-}
+tr:nth-child(even){background:#f8f8f8}
 
-tr:hover{
-  background:#f0f0f0;
-}
-
-/* ================= CELL STYLES ================= */
-.sr-no{
-  color:#2E2E2E;
-  font-weight:600;
-  text-align:center;
-  width:50px;
-  font-family:'Open Sans';
-}
-
-.business-area-link{
-  color:#2E2E2E;
-  font-weight:600;
-  cursor:pointer;
-  text-decoration:none;
-  transition:color 0.3s;
-  font-family:'Open Sans';
-}
-
-.business-area-link:hover{
+/* ================= CELLS ================= */
+.auth-id{
   color:#5830AD;
-  text-decoration:underline;
+  font-weight:600;
 }
 
-.plain-text{
-  color:#2E2E2E;
-  font-weight:400;
-  font-family:'Open Sans';
-}
-
-.badge{
-  display:inline-flex;
+.flex{
+  display:flex;
   align-items:center;
   gap:6px;
-  padding:6px 12px;
+}
+
+.days-text{
+  background:rgb(209,242,235);
+  color:rgb(39,131,122);
+  padding:4px 10px;
   border-radius:6px;
+  display:inline-flex;
+  align-items:center;
   font-size:13px;
   font-weight:600;
-  white-space:nowrap;
-  font-family:'Open Sans';
 }
 
-.badge-blue{
+.table-lob{
   background:#e8f1ff;
   color:#0b5cff;
+  padding:6px 12px;
+  font-family:'Open Sans';
+  font-size:12px;
+  border-radius:10px;
+  font-weight:600;
 }
 
-.badge-green{
-  background:#d4edda;
-  color:#155724;
-}
-
-.badge-orange{
-  background:#fff3cd;
-  color:#856404;
-}
-
-.badge-purple{
-  background:#e8ddf7;
-  color:#5830AD;
-}
-
-/* ================= TEMPLATE BUTTONS ================= */
-.template-btn{
+.doc-btn{
   background:#2f8de4;
   color:#fff;
   font-size:12px;
@@ -288,33 +194,73 @@ tr:hover{
   font-weight:600;
   border:none;
   cursor:pointer;
-  font-family:'Open Sans';
-  transition:background 0.3s;
 }
 
-.template-btn:hover{
-  background:#1e5fa3;
-}
-
-.template-empty{
-  background:#f3f4f6;
-  color:#9CA3AF;
-  font-size:12px;
+/* ================= CONFIDENCE ================= */
+.progress{
+  width:110px;
+  height:8px;
+  background:#e0e0e0;
   border-radius:6px;
-  padding:6px 14px;
+  overflow:hidden;
+}
+.progress span{
+  display:block;
+  width:93%;
+  height:100%;
+  background:#28A745;
+}
+.confidence-text{
+  font-size:13px;
+  margin-top:4px;
+}
+
+/* ================= RECOMMENDATION SECTION ================= */
+.recommendation-section{
+  display:flex;
+  flex-direction:column;
+  gap:8px;
+  min-width:250px;
+}
+
+.recommendation-label{
+  font-family:'Open Sans';
+  font-size:12px;
+  font-weight:600;
+  color:#424242;
+  text-transform:uppercase;
+  letter-spacing:0.5px;
+}
+
+.recommendation-content{
+  display:flex;
+  flex-direction:column;
+  gap:6px;
+}
+
+.recommendation-text{
+  font-size:13px;
+  color:#2E2E2E;
+  line-height:1.4;
+}
+
+.recommendation-badge{
+  background:#e8f1ff;
+  color:#0b5cff;
+  padding:4px 8px;
+  border-radius:4px;
+  font-size:12px;
+  font-weight:600;
   display:inline-flex;
   align-items:center;
-  gap:8px;
-  font-weight:600;
-  border:1px dashed #D1D5DB;
-  cursor:pointer;
-  font-family:'Open Sans';
-  transition:all 0.3s;
+  gap:6px;
+  width:fit-content;
 }
 
-.template-empty:hover{
-  background:#e5e7eb;
-  border-color:#9CA3AF;
+.recommendation-buttons{
+  display:flex;
+  gap:10px;
+  margin-top:8px;
 }
 
 /* ================= ACTIONS ================= */
@@ -344,8 +290,8 @@ tr:hover{
 }
 
 .btn-outline{
-  border:1px solid #D1D5DB;
-  color:#2E2E2E;
+  border:1px solid #ef4444;
+  color:#ef4444;
   font-family:'Open Sans';
   font-size:12px;
   padding:8px 16px;
@@ -360,47 +306,117 @@ tr:hover{
 }
 
 .btn-outline:hover{
+  background:#fee;
+}
+
+/* ================= OVERRIDE DROPDOWN ================= */
+.override-dropdown{
+  position:relative;
+}
+
+.override-trigger{
+  border:1px solid #ef4444;
+  color:#ef4444;
+  font-family:'Open Sans';
+  font-size:12px;
+  padding:8px 16px;
+  border-radius:8px;
+  font-weight:600;
+  background:#fff;
+  cursor:pointer;
+  display:flex;
+  align-items:center;
+  gap:6px;
+  transition:all 0.3s;
+}
+
+.override-trigger:hover{
+  background:#fee;
+}
+
+.override-dropdown-menu{
+  position:absolute;
+  top:100%;
+  right:0;
+  margin-top:8px;
+  background:#fff;
+  border:1px solid #D1D5DB;
+  border-radius:6px;
+  box-shadow:0 4px 12px rgba(0,0,0,0.15);
+  min-width:200px;
+  z-index:1000;
+  display:none;
+}
+
+.override-dropdown-menu.active{
+  display:block;
+}
+
+.override-option{
+  padding:12px 16px;
+  color:#2E2E2E;
+  cursor:pointer;
+  transition:background 0.2s;
+  font-family:'Open Sans';
+  font-size:13px;
+  font-weight:500;
+  display:flex;
+  align-items:center;
+  gap:8px;
+}
+
+.override-option:hover{
   background:#f3f4f6;
-  border-color:#9CA3AF;
+}
+
+.override-option:first-child{
+  border-bottom:1px solid #E5E7EB;
+}
+
+.override-option.selected{
+  background:#e8ddf7;
+  color:#5830AD;
+  font-weight:600;
+}
+
+.override-option i{
+  color:#5830AD;
+}
+
+/* ================= STATUS ================= */
+.table-status{
+  background:#e8f1ff;
+  color:#0b5cff;
+  font-family:'Open Sans';
+  font-size:12px;
+  padding:6px 18px;
+  border-radius:12px;
+  font-weight:600;
+  text-align:center;
 }
 
 /* ================= PAGINATION ================= */
 .pagination{
   display:flex;
   justify-content:center;
-  gap:8px;
   margin:24px 0;
-  align-items:center;
 }
 
 .page{
-  width:40px;
-  height:40px;
-  border-radius:6px;
+  width:48px;
+  height:48px;
+  border-radius:50%;
   display:flex;
   align-items:center;
   justify-content:center;
   font-family:'Open Sans';
   font-weight:600;
-  font-size:14px;
-  cursor:pointer;
-  border:1px solid #D1D5DB;
-  background:#fff;
-  color:#2E2E2E;
+  font-size:16px;
 }
 
 .page.active{
   background:#EFEAF9;
   color:#5830AD;
-  border-color:#5830AD;
-}
-
-.page:hover:not(.active){
-  background:#f3f4f6;
-}
-
-.page-dots{
-  color:#9CA3AF;
 }
 
 /* ================= FOOTER ================= */
@@ -410,277 +426,6 @@ tr:hover{
   font-family:'Open Sans';
   color:#595959;
 }
-
-/* ================= MODAL ================= */
-.modal-overlay {
-  display: none;
-  position: fixed;
-  top: 0;
-  left: 0;
-  width: 100%;
-  height: 100%;
-  background: rgba(0, 0, 0, 0.5);
-  z-index: 1000;
-  justify-content: center;
-  align-items: center;
-  padding: 20px;
-}
-
-.modal-overlay.active {
-  display: flex;
-}
-
-.modal {
-  background: #ffffff;
-  border-radius: 16px;
-  width: 100%;
-  max-width: 900px;
-  max-height: 90vh;
-  overflow: hidden;
-  box-shadow: 0 20px 60px rgba(0, 0, 0, 0.3);
-  animation: modalSlideIn 0.3s ease-out;
-}
-
-@keyframes modalSlideIn {
-  from {
-    opacity: 0;
-    transform: translateY(-20px);
-  }
-  to {
-    opacity: 1;
-    transform: translateY(0);
-  }
-}
-
-.modal-header {
-  padding: 32px 40px 24px;
-  border-bottom: 1px solid #e8e8e8;
-  display: flex;
-  justify-content: space-between;
-  align-items: flex-start;
-}
-
-.modal-header-content {
-  flex: 1;
-}
-
-.modal-header h2 {
-  font-size: 28px;
-  font-weight: 700;
-  color: #1a1a1a;
-  margin-bottom: 8px;
-  font-family: 'Open Sans';
-}
-
-.modal-subtitle {
-  font-size: 15px;
-  color: #6b7280;
-  font-weight: 400;
-  font-family: 'Open Sans';
-}
-
-.modal-close {
-  background: none;
-  border: none;
-  font-size: 28px;
-  color: #6b7280;
-  cursor: pointer;
-  width: 32px;
-  height: 32px;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  border-radius: 6px;
-  transition: all 0.2s;
-  margin-left: 16px;
-  flex-shrink: 0;
-}
-
-.modal-close:hover {
-  background: #f3f4f6;
-  color: #374151;
-}
-
-.modal-body {
-  padding: 40px;
-  max-height: calc(90vh - 200px);
-  overflow-y: auto;
-}
-
-/* Template Content */
-.template-info {
-  display: grid;
-  grid-template-columns: repeat(2, 1fr);
-  gap: 24px;
-  margin-bottom: 32px;
-  padding-bottom: 32px;
-  border-bottom: 1px solid #e8e8e8;
-}
-
-.info-item {
-  display: flex;
-  flex-direction: column;
-}
-
-.info-label {
-  font-size: 13px;
-  font-weight: 600;
-  color: #6b7280;
-  margin-bottom: 6px;
-  text-transform: uppercase;
-  letter-spacing: 0.5px;
-  font-family: 'Open Sans';
-}
-
-.info-value {
-  font-size: 15px;
-  font-weight: 600;
-  color: #1f2937;
-  font-family: 'Open Sans';
-}
-
-.template-content-section {
-  margin-bottom: 32px;
-}
-
-.content-label {
-  font-size: 16px;
-  font-weight: 600;
-  color: #1f2937;
-  margin-bottom: 16px;
-  font-family: 'Open Sans';
-}
-
-.content-box {
-  background: #f9fafb;
-  border: 1px solid #e5e7eb;
-  border-radius: 8px;
-  padding: 20px;
-  font-family: 'Open Sans';
-  font-size: 15px;
-  line-height: 1.6;
-  color: #374151;
-  min-height: 120px;
-}
-
-.content-box p {
-  margin: 0 0 12px 0;
-}
-
-.content-box p:last-child {
-  margin-bottom: 0;
-}
-
-.content-box strong {
-  color: #1f2937;
-  font-weight: 600;
-}
-
-.content-box ul {
-  margin: 8px 0;
-  padding-left: 24px;
-}
-
-.content-box li {
-  margin-bottom: 6px;
-}
-
-.modal-footer {
-  padding: 24px 40px;
-  border-top: 1px solid #e8e8e8;
-  display: flex;
-  justify-content: flex-end;
-  gap: 12px;
-  background: #fafafa;
-}
-
-.modal-btn {
-  padding: 12px 32px;
-  border-radius: 8px;
-  font-size: 15px;
-  font-weight: 500;
-  cursor: pointer;
-  transition: all 0.2s;
-  border: none;
-  font-family: 'Open Sans';
-}
-
-.modal-btn-close {
-  background: #ffffff;
-  color: #374151;
-  border: 1px solid #d1d5db;
-}
-
-.modal-btn-close:hover {
-  background: #f9fafb;
-  border-color: #9ca3af;
-}
-
-.modal-btn-edit {
-  background: #5830AD;
-  color: #ffffff;
-  padding: 12px 40px;
-  display: flex;
-  align-items: center;
-  gap: 8px;
-}
-
-.modal-btn-edit:hover {
-  background: #471d82;
-}
-
-/* Scrollbar for modal */
-.modal-body::-webkit-scrollbar {
-  width: 6px;
-}
-
-.modal-body::-webkit-scrollbar-track {
-  background: #f9fafb;
-}
-
-.modal-body::-webkit-scrollbar-thumb {
-  background: #d1d5db;
-  border-radius: 3px;
-}
-
-.modal-body::-webkit-scrollbar-thumb:hover {
-  background: #9ca3af;
-}
-
-/* ================= RESPONSIVE ================= */
-@media(max-width:1200px){
-  .main-container{
-    width:100%;
-  }
-  
-  .filters{
-    flex-wrap:wrap;
-  }
-  
-  .search-input,
-  .select{
-    flex:1;
-    min-width:200px;
-  }
-
-  .template-info {
-    grid-template-columns: 1fr;
-    gap: 16px;
-  }
-
-  .modal-body {
-    padding: 24px;
-  }
-
-  .modal-header {
-    padding: 24px;
-  }
-
-  .modal-footer {
-    padding: 20px 24px;
-  }
-}
-
 </style>
 
 </head>
@@ -689,675 +434,189 @@ tr:hover{
 <div class="right-section">
   <div class="main-container">
 
-    <!-- Header Section -->
-    <div class="header-section">
-      <div class="title-container">Outreach Template Configuration</div>
-      <div class="header-actions">
-        <button class="btn-secondary">
-          <i class="fa-solid fa-download"></i> Export
-        </button>
-        <button class="btn-primary">
-          <i class="fa-solid fa-plus"></i> Add New Template
-        </button>
-      </div>
-    </div>
+    <div class="title-container">ANG Determination</div>
 
-    <!-- Tabs Container -->
     <div class="tabs-container">
       <div class="tabs">
-        <div class="tab active">Pending Templates</div>
-        <div class="tab">Active Templates</div>
-        <div class="tab">Archived Templates</div>
+        <div class="tab active">Pending Requests</div>
+        <div class="tab">Rejected Requests</div>
+        <div class="tab">Denied Request Packet</div>
       </div>
     </div>
 
-    <!-- Filters -->
     <div class="filters">
-      <input class="search-input" placeholder="Search by business area or outreach type...">
-      <select class="select">
-        <option>All Business Areas</option>
-        <option>UM Services</option>
-        <option>Claims</option>
-        <option>Enrollment</option>
-        <option>Member Services</option>
-      </select>
-      <select class="select">
-        <option>All Outreach Types</option>
-        <option>Pre-Approval Reminder</option>
-        <option>Coverage Update</option>
-        <option>Benefit Alert</option>
-        <option>Renewal Notice</option>
-      </select>
+      <input class="search-input" placeholder="Type to search">
+      <input class="select" placeholder="Source Type">
+      <input class="select" placeholder="Line of Business">
     </div>
 
-    <!-- Main Card -->
     <div class="card-container">
       <div class="table-wrapper">
         <table>
           <thead>
             <tr>
               <th>Sr.No.</th>
-              <th>Business Area</th>
-              <th>Outreach Type</th>
-              <th>Call Script</th>
-              <th>SMS Template</th>
-              <th>Email Template</th>
-              <th>Mail Template</th>
-              <th>Actions</th>
+              <th>Auth/Claim Number</th>
+              <th>Source Type</th>
+              <th>Receiver Name</th>
+              <th>Received Date</th>
+              <th>Aging Days - Calendar</th>
+              <th>Aging Days - Business</th>
+              <th>LOB</th>
+              <th>Documents</th>
+              <th>Confidence</th>
+              <th>Rationale</th>
+              <th>Recommendation & Action</th>
+              <th>Request Status</th>
             </tr>
           </thead>
           <tbody>
             <!-- Row 1 -->
             <tr>
-              <td class="sr-no">1</td>
-              <td><a href="#" class="business-area-link">UM Services</a></td>
-              <td><span class="plain-text">Pre-Approval Reminder</span></td>
+              <td>1</td>
+              <td class="auth-id">AUTH900015</td>
+              <td><span class="flex"><i class="fa-solid fa-envelope"></i> Email</span></td>
+              <td><span class="flex"><i class="fa-solid fa-user-doctor"></i> NA</span></td>
+              <td><span class="flex"><i class="fa-regular fa-calendar"></i> 11/06/2025</span></td>
+              <td><div class="days-text"><i class="fa-regular fa-calendar"></i> 5</div></td>
+              <td><div class="days-text"><i class="fa-regular fa-calendar"></i> 3</div></td>
+              <td><div class="table-lob">Medicare</div></td>
+              <td><button class="doc-btn"><i class="fa-regular fa-file-lines"></i> View (0)</button></td>
+              <td><div class="progress"><span></span></div><div class="confidence-text">93%</div></td>
+              <td>AI identified medical necessit...<br><span class="flex" style="color:#2f8de4;font-weight:600;"><i class="fa-regular fa-eye"></i> View Full</span></td>
               <td>
-                <button class="template-btn" onclick="openTemplateModal('call', 'UM Services', 'Pre-Approval Reminder')">
-                  <i class="fa-solid fa-file-lines"></i> View
-                </button>
-              </td>
-              <td>
-                <button class="template-btn" onclick="openTemplateModal('sms', 'UM Services', 'Pre-Approval Reminder')">
-                  <i class="fa-solid fa-file-lines"></i> View
-                </button>
-              </td>
-              <td>
-                <button class="template-btn" onclick="openTemplateModal('email', 'UM Services', 'Pre-Approval Reminder')">
-                  <i class="fa-solid fa-file-lines"></i> View
-                </button>
-              </td>
-              <td>
-                <button class="template-empty"><i class="fa-solid fa-plus"></i> Add</button>
-              </td>
-              <td>
-                <div class="actions">
-                  <div class="btn-green"><i class="fa-solid fa-check"></i> Activate</div>
-                  <div class="btn-outline"><i class="fa-solid fa-pen"></i> Edit</div>
+                <div class="recommendation-section">
+                  <div class="recommendation-label">AI Recommendation</div>
+                  <div class="recommendation-content">
+                    <div class="recommendation-badge">
+                      <i class="fa-solid fa-check-circle"></i> Grievance
+                    </div>
+                    <div class="recommendation-buttons">
+                      <div class="btn-green"><i class="fa-solid fa-check"></i> Grievance</div>
+                      <div class="override-dropdown">
+                        <button class="override-trigger" onclick="toggleDropdown(this)">
+                          <i class="fa-solid fa-rotate"></i> Override
+                        </button>
+                        <div class="override-dropdown-menu">
+                          <div class="override-option selected" onclick="selectOverride(this, 'Grievance')">
+                            <i class="fa-solid fa-check"></i> Grievance
+                          </div>
+                          <div class="override-option" onclick="selectOverride(this, 'Appeal')">
+                            <i class="fa-solid fa-chevron-right"></i> Appeal
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
                 </div>
               </td>
+              <td><div class="table-status">NEW</div></td>
             </tr>
 
             <!-- Row 2 -->
             <tr>
-              <td class="sr-no">2</td>
-              <td><a href="#" class="business-area-link">Claims</a></td>
-              <td><span class="plain-text">Coverage Update</span></td>
+              <td>2</td>
+              <td class="auth-id">AUTH900016</td>
+              <td><span class="flex"><i class="fa-solid fa-envelope"></i> Email</span></td>
+              <td><span class="flex"><i class="fa-solid fa-user-doctor"></i> NA</span></td>
+              <td><span class="flex"><i class="fa-regular fa-calendar"></i> 11/06/2025</span></td>
+              <td><div class="days-text"><i class="fa-regular fa-calendar"></i> 5</div></td>
+              <td><div class="days-text"><i class="fa-regular fa-calendar"></i> 3</div></td>
+              <td><div class="table-lob">Medicare</div></td>
+              <td><button class="doc-btn"><i class="fa-regular fa-file-lines"></i> View (0)</button></td>
+              <td><div class="progress"><span></span></div><div class="confidence-text">93%</div></td>
+              <td>AI identified medical necessit...<br><span class="flex" style="color:#2f8de4;font-weight:600;"><i class="fa-regular fa-eye"></i> View Full</span></td>
               <td>
-                <button class="template-empty"><i class="fa-solid fa-plus"></i> Add</button>
-              </td>
-              <td>
-                <button class="template-btn" onclick="openTemplateModal('sms', 'Claims', 'Coverage Update')">
-                  <i class="fa-solid fa-file-lines"></i> View
-                </button>
-              </td>
-              <td>
-                <button class="template-btn" onclick="openTemplateModal('email', 'Claims', 'Coverage Update')">
-                  <i class="fa-solid fa-file-lines"></i> View
-                </button>
-              </td>
-              <td>
-                <button class="template-btn" onclick="openTemplateModal('mail', 'Claims', 'Coverage Update')">
-                  <i class="fa-solid fa-file-lines"></i> View
-                </button>
-              </td>
-              <td>
-                <div class="actions">
-                  <div class="btn-green"><i class="fa-solid fa-check"></i> Activate</div>
-                  <div class="btn-outline"><i class="fa-solid fa-pen"></i> Edit</div>
+                <div class="recommendation-section">
+                  <div class="recommendation-label">User Override: Appeal</div>
+                  <div class="recommendation-content">
+                    <div class="recommendation-badge">
+                      <i class="fa-solid fa-user"></i> Appeal
+                    </div>
+                    <div class="recommendation-buttons">
+                      <div class="btn-green"><i class="fa-solid fa-check"></i> Appeal</div>
+                      <div class="override-dropdown">
+                        <button class="override-trigger" onclick="toggleDropdown(this)">
+                          <i class="fa-solid fa-rotate"></i> Override
+                        </button>
+                        <div class="override-dropdown-menu">
+                          <div class="override-option" onclick="selectOverride(this, 'Grievance')">
+                            <i class="fa-solid fa-check"></i> Grievance
+                          </div>
+                          <div class="override-option selected" onclick="selectOverride(this, 'Appeal')">
+                            <i class="fa-solid fa-chevron-right"></i> Appeal
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
                 </div>
               </td>
-            </tr>
-
-            <!-- Row 3 -->
-            <tr>
-              <td class="sr-no">3</td>
-              <td><a href="#" class="business-area-link">Enrollment</a></td>
-              <td><span class="plain-text">Benefit Alert</span></td>
-              <td>
-                <button class="template-btn" onclick="openTemplateModal('call', 'Enrollment', 'Benefit Alert')">
-                  <i class="fa-solid fa-file-lines"></i> View
-                </button>
-              </td>
-              <td>
-                <button class="template-btn" onclick="openTemplateModal('sms', 'Enrollment', 'Benefit Alert')">
-                  <i class="fa-solid fa-file-lines"></i> View
-                </button>
-              </td>
-              <td>
-                <button class="template-empty"><i class="fa-solid fa-plus"></i> Add</button>
-              </td>
-              <td>
-                <button class="template-btn" onclick="openTemplateModal('mail', 'Enrollment', 'Benefit Alert')">
-                  <i class="fa-solid fa-file-lines"></i> View
-                </button>
-              </td>
-              <td>
-                <div class="actions">
-                  <div class="btn-green"><i class="fa-solid fa-check"></i> Activate</div>
-                  <div class="btn-outline"><i class="fa-solid fa-pen"></i> Edit</div>
-                </div>
-              </td>
-            </tr>
-
-            <!-- Row 4 -->
-            <tr>
-              <td class="sr-no">4</td>
-              <td><a href="#" class="business-area-link">Member Services</a></td>
-              <td><span class="plain-text">Renewal Notice</span></td>
-              <td>
-                <button class="template-btn" onclick="openTemplateModal('call', 'Member Services', 'Renewal Notice')">
-                  <i class="fa-solid fa-file-lines"></i> View
-                </button>
-              </td>
-              <td>
-                <button class="template-empty"><i class="fa-solid fa-plus"></i> Add</button>
-              </td>
-              <td>
-                <button class="template-btn" onclick="openTemplateModal('email', 'Member Services', 'Renewal Notice')">
-                  <i class="fa-solid fa-file-lines"></i> View
-                </button>
-              </td>
-              <td>
-                <button class="template-empty"><i class="fa-solid fa-plus"></i> Add</button>
-              </td>
-              <td>
-                <div class="actions">
-                  <div class="btn-green"><i class="fa-solid fa-check"></i> Activate</div>
-                  <div class="btn-outline"><i class="fa-solid fa-pen"></i> Edit</div>
-                </div>
-              </td>
-            </tr>
-
-            <!-- Row 5 -->
-            <tr>
-              <td class="sr-no">5</td>
-              <td><a href="#" class="business-area-link">UM Services</a></td>
-              <td><span class="plain-text">Denial Appeal Instructions</span></td>
-              <td>
-                <button class="template-btn" onclick="openTemplateModal('call', 'UM Services', 'Denial Appeal Instructions')">
-                  <i class="fa-solid fa-file-lines"></i> View
-                </button>
-              </td>
-              <td>
-                <button class="template-btn" onclick="openTemplateModal('sms', 'UM Services', 'Denial Appeal Instructions')">
-                  <i class="fa-solid fa-file-lines"></i> View
-                </button>
-              </td>
-              <td>
-                <button class="template-btn" onclick="openTemplateModal('email', 'UM Services', 'Denial Appeal Instructions')">
-                  <i class="fa-solid fa-file-lines"></i> View
-                </button>
-              </td>
-              <td>
-                <button class="template-btn" onclick="openTemplateModal('mail', 'UM Services', 'Denial Appeal Instructions')">
-                  <i class="fa-solid fa-file-lines"></i> View
-                </button>
-              </td>
-              <td>
-                <div class="actions">
-                  <div class="btn-green"><i class="fa-solid fa-check"></i> Activate</div>
-                  <div class="btn-outline"><i class="fa-solid fa-pen"></i> Edit</div>
-                </div>
-              </td>
+              <td><div class="table-status">NEW</div></td>
             </tr>
 
           </tbody>
         </table>
       </div>
 
-      <!-- Pagination -->
       <div class="pagination">
-        <button class="page"><i class="fa-solid fa-chevron-left"></i></button>
-        <button class="page active">1</button>
-        <button class="page">2</button>
-        <button class="page">3</button>
-        <span class="page-dots">...</span>
-        <button class="page">10</button>
-        <button class="page"><i class="fa-solid fa-chevron-right"></i></button>
+        <div class="page active">1</div>
       </div>
-
     </div>
 
   </div>
 
-  <!-- Footer -->
   <div class="footer">© 2026 Care Insight All Rights Reserved</div>
 </div>
 
-<!-- Template View Modal -->
-<div class="modal-overlay" id="templateModal">
-  <div class="modal">
-    <div class="modal-header">
-      <div class="modal-header-content">
-        <h2 id="modalTitle">Template Preview</h2>
-        <p class="modal-subtitle" id="modalSubtitle">View template content</p>
-      </div>
-      <button class="modal-close" onclick="closeTemplateModal()">×</button>
-    </div>
-    
-    <div class="modal-body">
-      <!-- Template Information -->
-      <div class="template-info">
-        <div class="info-item">
-          <span class="info-label">Business Area</span>
-          <span class="info-value" id="modalBusinessArea">-</span>
-        </div>
-        <div class="info-item">
-          <span class="info-label">Outreach Type</span>
-          <span class="info-value" id="modalOutreachType">-</span>
-        </div>
-        <div class="info-item">
-          <span class="info-label">Template Type</span>
-          <span class="info-value" id="modalTemplateType">-</span>
-        </div>
-        <div class="info-item">
-          <span class="info-label">Last Modified</span>
-          <span class="info-value">Jan 15, 2024</span>
-        </div>
-      </div>
-
-      <!-- Template Content -->
-      <div class="template-content-section">
-        <div class="content-label">Template Content</div>
-        <div class="content-box" id="modalContent">
-          <!-- Content will be loaded here -->
-        </div>
-      </div>
-    </div>
-
-    <div class="modal-footer">
-      <button class="modal-btn modal-btn-close" onclick="closeTemplateModal()">Close</button>
-      <button class="modal-btn modal-btn-edit">
-        <i class="fa-solid fa-pen"></i> Edit Template
-      </button>
-    </div>
-  </div>
-</div>
-
 <script>
-// Sample template data
-const templateData = {
-  call: {
-    'UM Services - Pre-Approval Reminder': `
-      <p><strong>Opening:</strong></p>
-      <p>Hello, this is [Agent Name] calling from [Health Plan Name]. May I speak with [Member Name]?</p>
-      <p><strong>Purpose:</strong></p>
-      <p>I'm calling to remind you about your upcoming pre-approval requirement for [Service/Procedure] scheduled on [Date].</p>
-      <p><strong>Key Information:</strong></p>
-      <ul>
-        <li>Pre-approval must be submitted at least 5 business days before your appointment</li>
-        <li>Your provider should have already initiated this process</li>
-        <li>You can check the status online at [Portal URL] or call our authorization department</li>
-      </ul>
-      <p><strong>Closing:</strong></p>
-      <p>Do you have any questions? Is there anything else I can help you with today?</p>
-    `,
-    'Enrollment - Benefit Alert': `
-      <p><strong>Opening:</strong></p>
-      <p>Good [morning/afternoon], this is [Agent Name] from [Health Plan Name]. Am I speaking with [Member Name]?</p>
-      <p><strong>Purpose:</strong></p>
-      <p>I'm calling to inform you about important updates to your health plan benefits effective [Date].</p>
-      <p><strong>Key Changes:</strong></p>
-      <ul>
-        <li>Enhanced preventive care coverage with zero copay</li>
-        <li>Expanded specialist network in your area</li>
-        <li>New telehealth services available 24/7</li>
-      </ul>
-      <p><strong>Action Required:</strong></p>
-      <p>Please review your updated benefits guide which will be mailed to you within 3-5 business days.</p>
-    `,
-    'Member Services - Renewal Notice': `
-      <p><strong>Opening:</strong></p>
-      <p>Hello [Member Name], this is [Agent Name] calling from [Health Plan Name].</p>
-      <p><strong>Purpose:</strong></p>
-      <p>Your health plan coverage is due for renewal on [Date]. I'm calling to ensure a smooth renewal process.</p>
-      <p><strong>Renewal Options:</strong></p>
-      <ul>
-        <li>Continue with your current plan</li>
-        <li>Upgrade to enhanced coverage</li>
-        <li>Review alternative plan options</li>
-      </ul>
-      <p><strong>Next Steps:</strong></p>
-      <p>Would you like to schedule a benefits review appointment to discuss your options?</p>
-    `,
-    'UM Services - Denial Appeal Instructions': `
-      <p><strong>Opening:</strong></p>
-      <p>Hello, this is [Agent Name] from [Health Plan Name]. May I speak with [Member Name]?</p>
-      <p><strong>Purpose:</strong></p>
-      <p>I'm calling regarding the recent denial of coverage for [Service/Procedure]. I'd like to help you understand your appeal rights.</p>
-      <p><strong>Appeal Process:</strong></p>
-      <ul>
-        <li>You have 180 days from the denial date to file an appeal</li>
-        <li>Submit a written appeal with supporting medical documentation</li>
-        <li>Your appeal will be reviewed by a medical professional not involved in the original decision</li>
-        <li>You'll receive a decision within 30 days for standard appeals or 72 hours for urgent requests</li>
-      </ul>
-      <p><strong>Support Available:</strong></p>
-      <p>We can assist you with gathering necessary documentation and filing your appeal. Would you like our help?</p>
-    `
-  },
-  sms: {
-    'UM Services - Pre-Approval Reminder': `
-      <p><strong>[Health Plan Name]:</strong> Reminder - Pre-approval needed for your [Service] on [Date]. Must be submitted 5 days prior. Check status at [Portal URL] or call [Phone]. Reply HELP for assistance.</p>
-    `,
-    'Claims - Coverage Update': `
-      <p><strong>[Health Plan Name]:</strong> Important coverage update! Your benefits have been enhanced effective [Date]. Check your mailbox for details or visit [Portal URL]. Questions? Call [Phone].</p>
-    `,
-    'Enrollment - Benefit Alert': `
-      <p><strong>[Health Plan Name]:</strong> New benefits alert! You now have access to: 🏥 $0 preventive care, 👨‍⚕️ expanded specialist network, 📱 24/7 telehealth. Learn more: [URL]</p>
-    `,
-    'UM Services - Denial Appeal Instructions': `
-      <p><strong>[Health Plan Name]:</strong> Your appeal rights - You have 180 days to appeal the coverage denial for [Service]. We can help! Call [Phone] or visit [Portal URL] for step-by-step guidance.</p>
-    `
-  },
-  email: {
-    'UM Services - Pre-Approval Reminder': `
-      <p><strong>Subject: Pre-Approval Required for Upcoming Procedure</strong></p>
-      <p>Dear [Member Name],</p>
-      <p>This is a friendly reminder that your upcoming [Service/Procedure] scheduled for <strong>[Date]</strong> requires pre-approval from [Health Plan Name].</p>
-      <p><strong>Important Details:</strong></p>
-      <ul>
-        <li>Pre-approval must be submitted at least 5 business days before your appointment</li>
-        <li>Your healthcare provider should initiate this process</li>
-        <li>Member ID: [Member ID]</li>
-        <li>Service Code: [Code]</li>
-      </ul>
-      <p><strong>Check Your Status:</strong></p>
-      <p>You can verify your pre-approval status online at [Portal URL] or by calling our Authorization Department at [Phone Number].</p>
-      <p><strong>What Happens Without Pre-Approval?</strong></p>
-      <p>Services performed without proper pre-approval may not be covered by your plan, and you may be responsible for the full cost.</p>
-      <p>If you have any questions or need assistance, please don't hesitate to contact us.</p>
-      <p>Best regards,<br>[Health Plan Name] Team<br>[Contact Information]</p>
-    `,
-    'Claims - Coverage Update': `
-      <p><strong>Subject: Important Update to Your Health Coverage</strong></p>
-      <p>Dear [Member Name],</p>
-      <p>We're writing to inform you of important updates to your health plan coverage, effective <strong>[Date]</strong>.</p>
-      <p><strong>What's Changing:</strong></p>
-      <ul>
-        <li><strong>Claims Processing:</strong> Faster processing times - most claims resolved within 10 business days</li>
-        <li><strong>Coverage Expansion:</strong> Additional services now covered under your plan</li>
-        <li><strong>Network Updates:</strong> More in-network providers available in your area</li>
-      </ul>
-      <p><strong>Your Action Items:</strong></p>
-      <ol>
-        <li>Review your updated Summary of Benefits document (attached)</li>
-        <li>Update your provider information if needed</li>
-        <li>Verify your current coverage meets your healthcare needs</li>
-      </ol>
-      <p><strong>Need Help?</strong></p>
-      <p>Our member services team is available Monday-Friday, 8 AM - 8 PM at [Phone Number] or online at [Portal URL].</p>
-      <p>Thank you for being a valued member.</p>
-      <p>Sincerely,<br>[Health Plan Name]<br>[Address]<br>[Contact Details]</p>
-    `,
-    'Member Services - Renewal Notice': `
-      <p><strong>Subject: Your Health Plan Renewal is Coming Up</strong></p>
-      <p>Dear [Member Name],</p>
-      <p>Your current health plan coverage with [Health Plan Name] is set to expire on <strong>[Date]</strong>. We want to ensure you have uninterrupted coverage.</p>
-      <p><strong>Your Renewal Options:</strong></p>
-      <ul>
-        <li><strong>Option 1:</strong> Continue with your current plan (no action needed)</li>
-        <li><strong>Option 2:</strong> Upgrade to enhanced coverage with additional benefits</li>
-        <li><strong>Option 3:</strong> Switch to a different plan that better fits your needs</li>
-      </ul>
-      <p><strong>Important Dates:</strong></p>
-      <ul>
-        <li>Current plan expires: [Date]</li>
-        <li>Last day to make changes: [Date]</li>
-        <li>New coverage begins: [Date]</li>
-      </ul>
-      <p><strong>What's Included in Your Current Plan:</strong></p>
-      <ul>
-        <li>Monthly Premium: $[Amount]</li>
-        <li>Deductible: $[Amount]</li>
-        <li>Out-of-Pocket Maximum: $[Amount]</li>
-      </ul>
-      <p><strong>Schedule a Review:</strong></p>
-      <p>Our benefits advisors are available to help you review your options. Call [Phone Number] or schedule online at [URL].</p>
-      <p>We appreciate your continued trust in [Health Plan Name].</p>
-      <p>Best regards,<br>Member Services Team<br>[Health Plan Name]</p>
-    `,
-    'UM Services - Denial Appeal Instructions': `
-      <p><strong>Subject: Your Appeal Rights - Coverage Denial for [Service]</strong></p>
-      <p>Dear [Member Name],</p>
-      <p>We understand that receiving a coverage denial can be frustrating. We want to ensure you're aware of your right to appeal this decision.</p>
-      <p><strong>Denial Details:</strong></p>
-      <ul>
-        <li>Service/Procedure: [Service Name]</li>
-        <li>Date of Service: [Date]</li>
-        <li>Denial Reason: [Reason]</li>
-        <li>Denial Date: [Date]</li>
-      </ul>
-      <p><strong>How to File an Appeal:</strong></p>
-      <ol>
-        <li><strong>Written Request:</strong> Submit a written appeal letter within 180 days of the denial date</li>
-        <li><strong>Medical Documentation:</strong> Include supporting medical records and provider letters</li>
-        <li><strong>Submit Via:</strong>
-          <ul>
-            <li>Online Portal: [URL]</li>
-            <li>Fax: [Fax Number]</li>
-            <li>Mail: [Address]</li>
-          </ul>
-        </li>
-      </ol>
-      <p><strong>Appeal Timeline:</strong></p>
-      <ul>
-        <li>Standard Appeal: Decision within 30 days</li>
-        <li>Expedited Appeal (urgent care): Decision within 72 hours</li>
-      </ul>
-      <p><strong>We're Here to Help:</strong></p>
-      <p>Our Appeals Support Team can assist you with:</p>
-      <ul>
-        <li>Gathering necessary medical documentation</li>
-        <li>Understanding the appeal process</li>
-        <li>Filing your appeal correctly</li>
-      </ul>
-      <p>Contact us at [Phone Number] or email [Email Address].</p>
-      <p>Sincerely,<br>Utilization Management Team<br>[Health Plan Name]</p>
-    `
-  },
-  mail: {
-    'Claims - Coverage Update': `
-      <p style="text-align: center;"><strong>[HEALTH PLAN NAME LETTERHEAD]</strong><br>[Address]<br>[Phone] | [Website]</p>
-      <p>[Date]</p>
-      <p>[Member Name]<br>[Member Address]<br>[City, State ZIP]</p>
-      <p><strong>RE: Important Coverage Update - Member ID: [Member ID]</strong></p>
-      <p>Dear [Member Name],</p>
-      <p>We are pleased to inform you of important updates to your health coverage, effective <strong>[Date]</strong>.</p>
-      <p><strong>Coverage Enhancements:</strong></p>
-      <ul>
-        <li>Reduced claim processing time to 10 business days</li>
-        <li>Expanded coverage for preventive services</li>
-        <li>Additional in-network providers in your area</li>
-      </ul>
-      <p><strong>What This Means for You:</strong></p>
-      <p>These improvements are designed to provide you with faster service, better access to care, and enhanced coverage options at no additional cost to you.</p>
-      <p><strong>Your Updated Documents:</strong></p>
-      <p>Enclosed you will find your updated Summary of Benefits and Coverage document. Please review it carefully and keep it with your important health plan documents.</p>
-      <p><strong>Questions?</strong></p>
-      <p>If you have any questions about these updates, please contact our Member Services department at [Phone Number], Monday through Friday, 8:00 AM to 8:00 PM.</p>
-      <p>Thank you for choosing [Health Plan Name] for your healthcare coverage needs.</p>
-      <p>Sincerely,</p>
-      <p>[Signature]<br>[Name]<br>[Title]<br>[Health Plan Name]</p>
-      <p style="font-size: 12px; color: #6b7280; border-top: 1px solid #e5e7eb; padding-top: 12px; margin-top: 20px;">
-        This is an official communication from [Health Plan Name]. Please retain this letter for your records.
-      </p>
-    `,
-    'Enrollment - Benefit Alert': `
-      <p style="text-align: center;"><strong>[HEALTH PLAN NAME LETTERHEAD]</strong><br>[Address]<br>[Phone] | [Website]</p>
-      <p>[Date]</p>
-      <p>[Member Name]<br>[Member Address]<br>[City, State ZIP]</p>
-      <p><strong>RE: New Benefits Available - Member ID: [Member ID]</strong></p>
-      <p>Dear [Member Name],</p>
-      <p>Great news! We are excited to announce new benefits now available to you as part of your [Health Plan Name] coverage.</p>
-      <p><strong>Your New Benefits Include:</strong></p>
-      <ul>
-        <li><strong>$0 Preventive Care:</strong> Annual checkups, screenings, and immunizations at no cost to you</li>
-        <li><strong>Expanded Specialist Network:</strong> Access to more than 500 additional specialists in your area</li>
-        <li><strong>24/7 Telehealth Services:</strong> Connect with healthcare providers anytime, anywhere via phone or video</li>
-        <li><strong>Enhanced Prescription Coverage:</strong> Lower copays on select medications</li>
-      </ul>
-      <p><strong>How to Access Your New Benefits:</strong></p>
-      <ol>
-        <li>Visit our member portal at [Website URL]</li>
-        <li>Download our mobile app (available on iOS and Android)</li>
-        <li>Call Member Services at [Phone Number]</li>
-      </ol>
-      <p><strong>Effective Date:</strong></p>
-      <p>These new benefits are effective immediately and are included with your current coverage at no additional cost.</p>
-      <p><strong>Questions?</strong></p>
-      <p>Our dedicated benefits specialists are available to help you understand and make the most of your new benefits. Call us at [Phone Number] or visit [Website URL].</p>
-      <p>We are committed to providing you with the best possible healthcare coverage and service.</p>
-      <p>Best regards,</p>
-      <p>[Signature]<br>[Name]<br>[Title]<br>[Health Plan Name]</p>
-    `,
-    'Member Services - Renewal Notice': `
-      <p style="text-align: center;"><strong>[HEALTH PLAN NAME LETTERHEAD]</strong><br>[Address]<br>[Phone] | [Website]</p>
-      <p>[Date]</p>
-      <p>[Member Name]<br>[Member Address]<br>[City, State ZIP]</p>
-      <p><strong>RE: Health Plan Renewal Notice - Member ID: [Member ID]</strong></p>
-      <p>Dear [Member Name],</p>
-      <p>Your current health plan coverage is scheduled to renew on <strong>[Renewal Date]</strong>. This letter contains important information about your renewal options.</p>
-      <p><strong>Your Current Plan Details:</strong></p>
-      <ul>
-        <li>Plan Name: [Plan Name]</li>
-        <li>Monthly Premium: $[Amount]</li>
-        <li>Annual Deductible: $[Amount]</li>
-        <li>Out-of-Pocket Maximum: $[Amount]</li>
-      </ul>
-      <p><strong>Renewal Options:</strong></p>
-      <p><strong>Option 1: Continue Current Coverage</strong><br>
-      No action is required. Your coverage will automatically renew with the same benefits.</p>
-      <p><strong>Option 2: Upgrade Your Coverage</strong><br>
-      Enhanced plan options are available with additional benefits. See enclosed comparison chart for details.</p>
-      <p><strong>Option 3: Change Your Plan</strong><br>
-      Explore alternative plan options that may better suit your current healthcare needs.</p>
-      <p><strong>Important Dates:</strong></p>
-      <ul>
-        <li>Current Coverage Ends: [Date]</li>
-        <li>Last Day to Make Changes: [Date]</li>
-        <li>New Coverage Begins: [Date]</li>
-      </ul>
-      <p><strong>What's Enclosed:</strong></p>
-      <ul>
-        <li>Summary of Benefits and Coverage</li>
-        <li>Plan Comparison Chart</li>
-        <li>Renewal Form (if making changes)</li>
-      </ul>
-      <p><strong>Need Assistance?</strong></p>
-      <p>Schedule a free benefits consultation with one of our advisors:</p>
-      <ul>
-        <li>Phone: [Phone Number]</li>
-        <li>Online: [Website URL]</li>
-        <li>In-Person: [Office Address]</li>
-      </ul>
-      <p>Thank you for your continued trust in [Health Plan Name]. We look forward to serving your healthcare needs in the coming year.</p>
-      <p>Sincerely,</p>
-      <p>[Signature]<br>[Name]<br>Member Services Manager<br>[Health Plan Name]</p>
-    `,
-    'UM Services - Denial Appeal Instructions': `
-      <p style="text-align: center;"><strong>[HEALTH PLAN NAME LETTERHEAD]</strong><br>[Address]<br>[Phone] | [Website]</p>
-      <p>[Date]</p>
-      <p>[Member Name]<br>[Member Address]<br>[City, State ZIP]</p>
-      <p><strong>RE: Notice of Appeal Rights - Member ID: [Member ID]</strong></p>
-      <p>Dear [Member Name],</p>
-      <p>This letter is to inform you of your right to appeal the recent coverage denial for [Service/Procedure Name].</p>
-      <p><strong>Denial Information:</strong></p>
-      <ul>
-        <li>Service/Procedure: [Service Name]</li>
-        <li>Provider: [Provider Name]</li>
-        <li>Date of Service: [Date]</li>
-        <li>Denial Reason: [Detailed Reason]</li>
-        <li>Denial Date: [Date]</li>
-      </ul>
-      <p><strong>Your Right to Appeal:</strong></p>
-      <p>You have the right to appeal this decision. Your appeal will be reviewed by a medical professional who was not involved in the original denial decision.</p>
-      <p><strong>How to File Your Appeal:</strong></p>
-      <p><strong>Step 1: Submit Written Appeal</strong><br>
-      You must submit a written appeal within 180 days of the denial date.</p>
-      <p><strong>Step 2: Provide Supporting Documentation</strong><br>
-      Include any relevant medical records, provider letters, or other documentation that supports your appeal.</p>
-      <p><strong>Step 3: Choose Your Submission Method</strong></p>
-      <ul>
-        <li><strong>Mail:</strong> [Appeals Department Address]</li>
-        <li><strong>Fax:</strong> [Fax Number]</li>
-        <li><strong>Online:</strong> [Portal URL]</li>
-      </ul>
-      <p><strong>Appeal Timeline:</strong></p>
-      <ul>
-        <li><strong>Standard Appeal:</strong> We will provide a decision within 30 calendar days</li>
-        <li><strong>Expedited Appeal:</strong> For urgent situations, we will provide a decision within 72 hours</li>
-      </ul>
-      <p><strong>Free Assistance Available:</strong></p>
-      <p>Our Appeals Support Team can help you understand the appeal process and gather necessary documentation. Contact us at:</p>
-      <ul>
-        <li>Phone: [Appeals Hotline Number]</li>
-        <li>Email: [Appeals Email]</li>
-        <li>Hours: Monday-Friday, 8:00 AM - 6:00 PM</li>
-      </ul>
-      <p><strong>External Review:</strong></p>
-      <p>If your appeal is denied, you have the right to request an external review by an independent third party at no cost to you.</p>
-      <p><strong>Enclosed Documents:</strong></p>
-      <ul>
-        <li>Appeal Form</li>
-        <li>List of Required Documentation</li>
-        <li>Member Rights and Responsibilities</li>
-      </ul>
-      <p>We are committed to working with you to resolve this matter. Please do not hesitate to contact us if you have any questions.</p>
-      <p>Sincerely,</p>
-      <p>[Signature]<br>[Name]<br>Appeals Coordinator<br>Utilization Management Department<br>[Health Plan Name]</p>
-      <p style="font-size: 12px; color: #6b7280; border-top: 1px solid #e5e7eb; padding-top: 12px; margin-top: 20px;">
-        <strong>IMPORTANT:</strong> This is time-sensitive information. Please review your appeal rights carefully and take action within the specified timeframes.
-      </p>
-    `
-  }
-};
-
-function openTemplateModal(type, businessArea, outreachType) {
-  const modal = document.getElementById('templateModal');
-  const key = `${businessArea} - ${outreachType}`;
+function toggleDropdown(button) {
+  const menu = button.nextElementSibling;
+  menu.classList.toggle('active');
   
-  // Set modal title based on template type
-  const typeLabels = {
-    call: 'Call Script',
-    sms: 'SMS Template',
-    email: 'Email Template',
-    mail: 'Mail Template'
-  };
-  
-  document.getElementById('modalTitle').textContent = typeLabels[type] + ' Preview';
-  document.getElementById('modalSubtitle').textContent = 'View template content';
-  document.getElementById('modalBusinessArea').textContent = businessArea;
-  document.getElementById('modalOutreachType').textContent = outreachType;
-  document.getElementById('modalTemplateType').textContent = typeLabels[type];
-  
-  // Set content
-  const content = templateData[type][key] || '<p>Template content not available.</p>';
-  document.getElementById('modalContent').innerHTML = content;
-  
-  // Show modal
-  modal.classList.add('active');
-  document.body.style.overflow = 'hidden';
+  // Close other open dropdowns
+  document.querySelectorAll('.override-dropdown-menu.active').forEach(m => {
+    if(m !== menu) m.classList.remove('active');
+  });
 }
 
-function closeTemplateModal() {
-  const modal = document.getElementById('templateModal');
-  modal.classList.remove('active');
-  document.body.style.overflow = '';
+function selectOverride(option, value) {
+  const menu = option.parentElement;
+  const button = menu.previousElementSibling;
+  const section = menu.closest('.recommendation-section');
+  const badge = section.querySelector('.recommendation-badge');
+  const actionButton = section.querySelector('.btn-green');
+  
+  // Update all options
+  menu.querySelectorAll('.override-option').forEach(opt => {
+    opt.classList.remove('selected');
+  });
+  option.classList.add('selected');
+  
+  // Update the label
+  const label = section.querySelector('.recommendation-label');
+  label.textContent = `User Override: ${value}`;
+  
+  // Update the badge
+  badge.innerHTML = value === 'Appeal' 
+    ? '<i class="fa-solid fa-user"></i> Appeal'
+    : '<i class="fa-solid fa-check-circle"></i> Grievance';
+  
+  // Update the action button
+  actionButton.innerHTML = value === 'Appeal'
+    ? '<i class="fa-solid fa-check"></i> Appeal'
+    : '<i class="fa-solid fa-check"></i> Grievance';
+  
+  // Close dropdown
+  menu.classList.remove('active');
 }
 
-// Close modal when clicking outside
-document.getElementById('templateModal').addEventListener('click', function(e) {
-  if (e.target === this) {
-    closeTemplateModal();
-  }
-});
-
-// Close modal on ESC key
-document.addEventListener('keydown', function(e) {
-  if (e.key === 'Escape') {
-    closeTemplateModal();
+// Close dropdown when clicking outside
+document.addEventListener('click', function(event) {
+  if (!event.target.closest('.override-dropdown')) {
+    document.querySelectorAll('.override-dropdown-menu').forEach(menu => {
+      menu.classList.remove('active');
+    });
   }
 });
 </script>
