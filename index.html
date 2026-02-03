@@ -1,1074 +1,806 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Case Details - Medical Software</title>
-    <link href="https://fonts.googleapis.com/css2?family=Open+Sans:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
-    <style>
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
-        }
-
-        body {
-            font-family: 'Open Sans', sans-serif;
-            background: #f5f7fa;
-            padding: 20px;
-        }
-
-        .container {
-            max-width: 1820px;
-            margin: 0 auto;
-            background: white;
-            border-radius: 12px;
-            box-shadow: 0 2px 8px rgba(0,0,0,0.08);
-        }
-
-        /* Header */
-        .page-header {
-            background: #2c3e50;
-            color: white;
-            padding: 20px 30px;
-            border-radius: 12px 12px 0 0;
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-        }
-
-        .page-header h1 {
-            font-size: 20px;
-            font-weight: 600;
-        }
-
-        .header-meta {
-            display: flex;
-            gap: 30px;
-            font-size: 13px;
-        }
-
-        .header-meta-item {
-            display: flex;
-            flex-direction: column;
-            gap: 4px;
-        }
-
-        .header-meta-label {
-            opacity: 0.8;
-            font-size: 11px;
-        }
-
-        .header-meta-value {
-            font-weight: 600;
-        }
-
-        /* Content Area */
-        .content-area {
-            padding: 30px;
-        }
-
-        /* Workflow Section */
-        .workflow-section {
-            background: #f8f9fa;
-            border: 1px solid #e9ecef;
-            border-radius: 12px;
-            margin-bottom: 20px;
-            overflow: hidden;
-        }
-
-        .workflow-header {
-            padding: 20px 25px;
-            background: white;
-            border-bottom: 1px solid #e9ecef;
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-        }
-
-        .workflow-header-left {
-            display: flex;
-            align-items: center;
-            gap: 12px;
-        }
-
-        .workflow-icon {
-            width: 40px;
-            height: 40px;
-            background: #e3f2fd;
-            color: #3498db;
-            border-radius: 8px;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            font-size: 18px;
-        }
-
-        .workflow-title h3 {
-            font-size: 16px;
-            color: #2c3e50;
-            margin-bottom: 4px;
-        }
-
-        .workflow-title p {
-            font-size: 12px;
-            color: #6c757d;
-        }
-
-        .workflow-actions {
-            display: flex;
-            gap: 10px;
-        }
-
-        .btn-action {
-            padding: 8px 16px;
-            border: none;
-            border-radius: 6px;
-            font-size: 13px;
-            font-weight: 600;
-            cursor: pointer;
-            display: inline-flex;
-            align-items: center;
-            gap: 8px;
-            transition: all 0.3s;
-        }
-
-        .btn-view-full {
-            background: #3498db;
-            color: white;
-        }
-
-        .btn-view-full:hover {
-            background: #2980b9;
-        }
-
-        .btn-collapse {
-            background: #95a5a6;
-            color: white;
-        }
-
-        .btn-collapse:hover {
-            background: #7f8c8d;
-        }
-
-        .btn-secondary {
-            background: #95a5a6;
-            color: white;
-        }
-
-        .btn-secondary:hover {
-            background: #7f8c8d;
-        }
-
-        .btn-success {
-            background: #27ae60;
-            color: white;
-        }
-
-        .btn-success:hover {
-            background: #229954;
-        }
-
-        /* Collapsed Workflow (Horizontal) */
-        .workflow-collapsed {
-            padding: 25px;
-            display: flex;
-            justify-content: space-between;
-            gap: 20px;
-            align-items: stretch;
-        }
-
-        .workflow-step-horizontal {
-            flex: 1;
-            background: white;
-            border: 2px solid #e9ecef;
-            border-radius: 10px;
-            padding: 20px;
-            position: relative;
-            transition: all 0.3s;
-        }
-
-        .workflow-step-horizontal:hover {
-            box-shadow: 0 4px 12px rgba(0,0,0,0.1);
-            transform: translateY(-2px);
-        }
-
-        .workflow-step-horizontal::after {
-            content: '→';
-            position: absolute;
-            right: -30px;
-            top: 50%;
-            transform: translateY(-50%);
-            font-size: 20px;
-            color: #e9ecef;
-        }
-
-        .workflow-step-horizontal:last-child::after {
-            display: none;
-        }
-
-        .workflow-step-horizontal.last-processed {
-            border-color: #27ae60;
-            background: #f0fdf4;
-        }
-
-        .workflow-step-horizontal.current {
-            border-color: #3498db;
-            background: #eff6ff;
-        }
-
-        .workflow-step-horizontal.next {
-            border-color: #f39c12;
-            background: #fffbeb;
-        }
-
-        .step-header-horizontal {
-            display: flex;
-            justify-content: space-between;
-            align-items: flex-start;
-            margin-bottom: 12px;
-        }
-
-        .step-label {
-            font-size: 11px;
-            font-weight: 700;
-            text-transform: uppercase;
-            letter-spacing: 0.5px;
-            color: #6c757d;
-            margin-bottom: 8px;
-        }
-
-        .step-name {
-            font-size: 14px;
-            font-weight: 600;
-            color: #2c3e50;
-            line-height: 1.4;
-        }
-
-        .step-status-badge {
-            padding: 4px 10px;
-            border-radius: 4px;
-            font-size: 11px;
-            font-weight: 600;
-            text-transform: uppercase;
-            white-space: nowrap;
-        }
-
-        .status-completed {
-            background: #d1f2eb;
-            color: #0a6c53;
-        }
-
-        .status-in-progress {
-            background: #e3f2fd;
-            color: #1565c0;
-        }
-
-        .status-pending {
-            background: #ffeaa7;
-            color: #856404;
-        }
-
-        .step-message {
-            font-size: 12px;
-            color: #6c757d;
-            line-height: 1.5;
-            margin-top: 8px;
-        }
-
-        /* Human Review Badge */
-        .human-review-badge {
-            display: inline-flex;
-            align-items: center;
-            gap: 6px;
-            padding: 4px 10px;
-            border-radius: 4px;
-            font-size: 11px;
-            font-weight: 600;
-            background: #fff3cd;
-            color: #856404;
-            border: 1px solid #ffc107;
-            margin-left: 10px;
-        }
-
-        /* Review Button Styles */
-        .btn-review {
-            padding: 10px 20px;
-            border: none;
-            border-radius: 6px;
-            font-size: 13px;
-            font-weight: 600;
-            cursor: pointer;
-            display: inline-flex;
-            align-items: center;
-            gap: 8px;
-            transition: all 0.3s;
-            margin-top: 12px;
-        }
-
-        .btn-review.active {
-            background: #27ae60;
-            color: white;
-        }
-
-        .btn-review.active:hover {
-            background: #229954;
-            transform: translateY(-2px);
-            box-shadow: 0 4px 12px rgba(39, 174, 96, 0.3);
-        }
-
-        .btn-review.disabled {
-            background: #e9ecef;
-            color: #95a5a6;
-            cursor: not-allowed;
-        }
-
-        /* Step Actions */
-        .step-actions {
-            margin-top: 15px;
-            padding-top: 15px;
-            border-top: 1px solid #e9ecef;
-        }
-
-        .step-actions-vertical {
-            margin-top: 15px;
-        }
-
-        /* Review Info */
-        .review-info {
-            margin-top: 12px;
-            padding: 10px 15px;
-            background: #e8f5e9;
-            border-radius: 6px;
-            font-size: 12px;
-            color: #2e7d32;
-            display: flex;
-            align-items: center;
-            gap: 15px;
-        }
-
-        .review-info i {
-            color: #27ae60;
-        }
-
-        /* Expanded Workflow (Vertical) */
-        .workflow-expanded {
-            padding: 25px 40px 25px 60px;
-            position: relative;
-        }
-
-        .workflow-timeline {
-            position: relative;
-        }
-
-        .workflow-timeline::before {
-            content: '';
-            position: absolute;
-            left: -35px;
-            top: 0;
-            bottom: 0;
-            width: 2px;
-            background: #e9ecef;
-        }
-
-        .workflow-step-vertical {
-            position: relative;
-            padding: 20px;
-            background: white;
-            border: 1px solid #e9ecef;
-            border-radius: 10px;
-            margin-bottom: 20px;
-            transition: all 0.3s;
-        }
-
-        .workflow-step-vertical:hover {
-            box-shadow: 0 4px 12px rgba(0,0,0,0.08);
-        }
-
-        .workflow-step-vertical::before {
-            content: '';
-            position: absolute;
-            left: -43px;
-            top: 28px;
-            width: 16px;
-            height: 16px;
-            border-radius: 50%;
-            border: 3px solid white;
-            box-shadow: 0 0 0 2px #e9ecef;
-            z-index: 1;
-        }
-
-        .workflow-step-vertical.completed::before {
-            background: #27ae60;
-            box-shadow: 0 0 0 2px #27ae60;
-        }
-
-        .workflow-step-vertical.in-progress::before {
-            background: #3498db;
-            box-shadow: 0 0 0 2px #3498db;
-        }
-
-        .workflow-step-vertical.pending::before {
-            background: #f39c12;
-            box-shadow: 0 0 0 2px #f39c12;
-        }
-
-        .step-header-vertical {
-            display: flex;
-            justify-content: space-between;
-            align-items: flex-start;
-            margin-bottom: 12px;
-        }
-
-        .step-date {
-            font-size: 12px;
-            font-weight: 600;
-            color: #6c757d;
-            margin-bottom: 8px;
-        }
-
-        .step-title-vertical {
-            font-size: 14px;
-            font-weight: 700;
-            color: #2c3e50;
-            margin-bottom: 8px;
-        }
-
-        .step-description {
-            font-size: 13px;
-            color: #495057;
-            line-height: 1.6;
-            margin-bottom: 12px;
-        }
-
-        /* Modal Styles */
-        .modal {
-            display: none;
-            position: fixed;
-            z-index: 1000;
-            left: 0;
-            top: 0;
-            width: 100%;
-            height: 100%;
-            overflow: auto;
-            background-color: rgba(0,0,0,0.5);
-            animation: fadeIn 0.3s;
-        }
-
-        .modal.show {
-            display: flex;
-            align-items: center;
-            justify-content: center;
-        }
-
-        @keyframes fadeIn {
-            from { opacity: 0; }
-            to { opacity: 1; }
-        }
-
-        .modal-content {
-            background-color: #fefefe;
-            margin: auto;
-            border-radius: 12px;
-            width: 90%;
-            max-width: 600px;
-            box-shadow: 0 4px 20px rgba(0,0,0,0.2);
-            animation: slideDown 0.3s;
-        }
-
-        @keyframes slideDown {
-            from {
-                transform: translateY(-50px);
-                opacity: 0;
-            }
-            to {
-                transform: translateY(0);
-                opacity: 1;
-            }
-        }
-
-        .modal-header {
-            padding: 20px 25px;
-            background: #3498db;
-            color: white;
-            border-radius: 12px 12px 0 0;
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-        }
-
-        .modal-header h2 {
-            font-size: 18px;
-            font-weight: 600;
-            display: flex;
-            align-items: center;
-            gap: 10px;
-        }
-
-        .modal-close {
-            background: none;
-            border: none;
-            color: white;
-            font-size: 24px;
-            cursor: pointer;
-            padding: 0;
-            width: 30px;
-            height: 30px;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            border-radius: 50%;
-            transition: all 0.3s;
-        }
-
-        .modal-close:hover {
-            background: rgba(255,255,255,0.2);
-        }
-
-        .modal-body {
-            padding: 25px;
-        }
-
-        .review-form {
-            display: flex;
-            flex-direction: column;
-            gap: 20px;
-        }
-
-        .review-form .form-group {
-            display: flex;
-            flex-direction: column;
-        }
-
-        .review-form label {
-            font-size: 13px;
-            font-weight: 600;
-            color: #495057;
-            margin-bottom: 8px;
-            display: flex;
-            align-items: center;
-            gap: 6px;
-        }
-
-        .review-form textarea,
-        .review-form select {
-            padding: 10px 12px;
-            border: 1px solid #ced4da;
-            border-radius: 6px;
-            font-size: 13px;
-            font-family: 'Open Sans', sans-serif;
-            transition: all 0.3s;
-        }
-
-        .review-form textarea:focus,
-        .review-form select:focus {
-            outline: none;
-            border-color: #3498db;
-            box-shadow: 0 0 0 3px rgba(52,152,219,0.1);
-        }
-
-        .modal-footer {
-            padding: 20px 25px;
-            background: #f8f9fa;
-            border-radius: 0 0 12px 12px;
-            display: flex;
-            justify-content: flex-end;
-            gap: 10px;
-        }
-
-        /* Hidden class for toggle */
-        .hidden {
-            display: none !important;
-        }
-
-        /* Responsive */
-        @media (max-width: 1400px) {
-            .container {
-                max-width: 100%;
-            }
-        }
-
-        @media (max-width: 768px) {
-            .workflow-collapsed {
-                flex-direction: column;
-            }
-
-            .workflow-step-horizontal::after {
-                display: none;
-            }
-        }
-    </style>
+<meta charset="UTF-8">
+<title>AI Agents</title>
+
+<!-- Font Awesome 6 Free -->
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css" integrity="sha512-DTOQO9RWCH3ppGqcWaEA1BIZOC6xxalwEsw9c2QQeAIftl+Vegovlnee1c9QX4TctnWMn13TZye+giMm8e2LwA==" crossorigin="anonymous" referrerpolicy="no-referrer">
+
+<!-- Fonts -->
+<link href="https://fonts.googleapis.com/css?family=Open+Sans:400,600" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@600&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700&display=swap" rel="stylesheet">
+
+<style>
+/* ================= GLOBAL ================= */
+*{box-sizing:border-box}
+body{
+  margin:0;
+  font-family:"Open Sans", sans-serif;
+  background:#f5f5f5;
+}
+
+::-webkit-scrollbar{width:5px;height:5px}
+::-webkit-scrollbar-track{box-shadow:inset 0 0 2px grey;border-radius:4px}
+::-webkit-scrollbar-thumb{background:grey;border-radius:4px}
+
+/* ================= LAYOUT ================= */
+.right-section{
+  background:whitesmoke;
+  width:100%;
+  min-height:100vh;
+}
+
+.main-container{
+  width:1855px;
+  margin:0 auto;
+  padding:16px 16px 0 16px;
+}
+
+/* ================= HEADER ================= */
+.header-section{
+  display:flex;
+  justify-content:space-between;
+  align-items:center;
+  margin-bottom:24px;
+}
+
+/* ================= TITLE ================= */
+.title-container{
+  font-family:"Open Sans";
+  font-weight:600;
+  font-size:24px;
+  color:#1A1A1A;
+}
+
+/* ================= ACTION BUTTONS ================= */
+.header-actions{
+  display:flex;
+  gap:12px;
+}
+
+.btn-primary{
+  background:#5830AD;
+  color:#fff;
+  font-family:"Open Sans";
+  font-size:14px;
+  font-weight:600;
+  padding:10px 24px;
+  border-radius:6px;
+  border:none;
+  cursor:pointer;
+  display:flex;
+  align-items:center;
+  gap:8px;
+  transition:background 0.3s;
+}
+
+.btn-primary:hover{
+  background:#471d82;
+}
+
+.btn-secondary{
+  background:#fff;
+  color:#5830AD;
+  font-family:"Open Sans";
+  font-size:14px;
+  font-weight:600;
+  padding:10px 24px;
+  border-radius:6px;
+  border:1px solid #5830AD;
+  cursor:pointer;
+  display:flex;
+  align-items:center;
+  gap:8px;
+  transition:all 0.3s;
+}
+
+.btn-secondary:hover{
+  background:#f8f5ff;
+}
+
+/* ================= TABS ================= */
+.tabs-container{
+  border-bottom:1px solid #E5E7EB;
+  margin-bottom:16px;
+}
+
+.tabs{
+  display:flex;
+  gap:8px;
+}
+
+.tab{
+  padding:0 20px;
+  height:32px;
+  display:flex;
+  align-items:center;
+  font-family:"Open Sans";
+  font-size:14px;
+  font-weight:600;
+  color:#6B7280;
+  cursor:pointer;
+}
+
+.tab.active{
+  color:#5830AD;
+  position:relative;
+}
+
+.tab.active::after{
+  content:"";
+  position:absolute;
+  bottom:-10px;
+  left:0;
+  width:100%;
+  height:3px;
+  background:#5830AD;
+  border-radius:2px 2px 0 0;
+}
+
+/* ================= FILTERS ================= */
+.filters{
+  display:flex;
+  gap:16px;
+  margin-bottom:16px;
+  flex-wrap:wrap;
+}
+
+.search-input,
+.select{
+  height:40px;
+  background:#fff;
+  border:1px solid #D1D5DB;
+  border-radius:4px;
+  padding:0 12px;
+  font-family:"Open Sans";
+  font-size:14px;
+  color:#2E2E2E;
+}
+
+.search-input{width:320px}
+.select{width:220px}
+
+.search-input::placeholder,
+.select::placeholder{
+  color:#9CA3AF;
+}
+
+/* ================= CARD ================= */
+.card-container{
+  background:#fff;
+  border-radius:8px;
+  padding:16px;
+  box-shadow:0 4px 10px rgba(0,0,0,.25);
+}
+
+/* ================= TABLE ================= */
+.table-wrapper{
+  overflow-x:auto;
+}
+
+table{
+  width:100%;
+  min-width:1200px;
+  border-collapse:collapse;
+  font-family:"Open Sans";
+  font-size:14px;
+  border:1px solid rgba(0,0,0,.1);
+}
+
+th{
+  background:#f8f8f8;
+  color:#424242;
+  font-weight:600;
+  padding:12px;
+  height:60px;
+  text-align:left;
+  white-space:nowrap;
+}
+
+td{
+  padding:12px;
+  color:#2E2E2E;
+  font-weight:400;
+  vertical-align:middle;
+}
+
+tr:nth-child(even){
+  background:#f8f8f8;
+}
+
+tr:hover{
+  background:#f0f0f0;
+}
+
+/* ================= CELL STYLES ================= */
+.agent-name-link{
+  color:#2E2E2E;
+  font-weight:600;
+  cursor:pointer;
+  text-decoration:none;
+  transition:color 0.3s;
+}
+
+.agent-name-link:hover{
+  color:#5830AD;
+  text-decoration:underline;
+}
+
+/* ================= AGENT TYPE BADGE ================= */
+.agent-type-badge{
+  display:inline-flex;
+  align-items:center;
+  gap:6px;
+  padding:6px 12px;
+  border-radius:4px;
+  font-size:13px;
+  font-weight:600;
+  white-space:nowrap;
+  font-family:"Open Sans";
+  background:#f3f4f6;
+  color:#424242;
+  border:1px solid #d1d5db;
+}
+
+/* ================= VOICE WITH ICON ================= */
+.voice-cell{
+  display:flex;
+  align-items:center;
+  gap:8px;
+}
+
+.voice-icon{
+  width:32px;
+  height:32px;
+  border-radius:50%;
+  background:#e8ddf7;
+  color:#5830AD;
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  font-size:14px;
+  flex-shrink:0;
+}
+
+.voice-info{
+  display:flex;
+  flex-direction:column;
+  gap:2px;
+}
+
+.voice-name{
+  color:#2E2E2E;
+  font-weight:600;
+  font-size:13px;
+}
+
+.voice-type{
+  color:#6B7280;
+  font-weight:400;
+  font-size:12px;
+}
+
+.phone-number{
+  color:#2E2E2E;
+  font-weight:400;
+  font-family:"Open Sans", monospace;
+}
+
+.edited-by{
+  color:#2E2E2E;
+  font-weight:400;
+}
+
+/* ================= DROPDOWN MENU ================= */
+.dropdown-menu-wrapper{
+  position:relative;
+  display:inline-block;
+}
+
+.menu-btn{
+  background:none;
+  border:none;
+  color:#6B7280;
+  font-size:20px;
+  cursor:pointer;
+  padding:4px 8px;
+  border-radius:4px;
+  transition:all 0.3s;
+  display:flex;
+  align-items:center;
+  justify-content:center;
+}
+
+.menu-btn:hover{
+  background:#e5e7eb;
+  color:#2E2E2E;
+}
+
+.dropdown-content{
+  display:none;
+  position:absolute;
+  right:0;
+  background:#fff;
+  min-width:180px;
+  box-shadow:0 2px 10px rgba(0,0,0,0.15);
+  border-radius:6px;
+  z-index:1000;
+  border:1px solid #e5e7eb;
+}
+
+.dropdown-content.show{
+  display:block;
+}
+
+.dropdown-item{
+  color:#2E2E2E;
+  padding:12px 16px;
+  text-decoration:none;
+  display:flex;
+  align-items:center;
+  gap:10px;
+  font-family:"Open Sans";
+  font-size:14px;
+  cursor:pointer;
+  transition:all 0.3s;
+  border:none;
+  background:none;
+  width:100%;
+  text-align:left;
+}
+
+.dropdown-item:first-child{
+  border-radius:6px 6px 0 0;
+}
+
+.dropdown-item:last-child{
+  border-radius:0 0 6px 6px;
+}
+
+.dropdown-item:hover{
+  background:#f3f4f6;
+  color:#5830AD;
+}
+
+.dropdown-item i{
+  width:16px;
+  text-align:center;
+}
+
+/* ================= PAGINATION - CIRCULAR STYLE ================= */
+.pagination{
+  display:flex;
+  justify-content:center;
+  gap:8px;
+  margin:24px 0;
+  align-items:center;
+}
+
+.page{
+  width:44px;
+  height:44px;
+  border-radius:50%;
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  font-family:"Open Sans";
+  font-weight:600;
+  font-size:14px;
+  cursor:pointer;
+  border:1px solid #D1D5DB;
+  background:#fff;
+  color:#2E2E2E;
+  transition:all 0.3s;
+}
+
+.page:hover:not(.active){
+  border-color:#5830AD;
+  background:#f8f5ff;
+  color:#5830AD;
+}
+
+.page.active{
+  background:#5830AD;
+  color:#fff;
+  border-color:#5830AD;
+  box-shadow:0 2px 8px rgba(88,48,173,0.3);
+}
+
+.page-dots{
+  color:#9CA3AF;
+  padding:0 4px;
+}
+
+/* ================= FOOTER ================= */
+.footer{
+  text-align:center;
+  padding:40px 16px;
+  font-family:"Open Sans";
+  color:#595959;
+}
+
+/* ================= RESPONSIVE ================= */
+@media(max-width:1200px){
+  .main-container{
+    width:100%;
+  }
+  
+  .filters{
+    flex-wrap:wrap;
+  }
+  
+  .search-input,
+  .select{
+    flex:1;
+    min-width:200px;
+  }
+}
+
+</style>
+
 </head>
 <body>
-    <div class="container">
-        <!-- Page Header -->
-        <div class="page-header">
-            <h1><i class="fas fa-folder-open"></i> Case Details</h1>
-            <div class="header-meta">
-                <div class="header-meta-item">
-                    <span class="header-meta-label">Case ID</span>
-                    <span class="header-meta-value">APP000000000001</span>
-                </div>
-                <div class="header-meta-item">
-                    <span class="header-meta-label">Member</span>
-                    <span class="header-meta-value">Lori Falls</span>
-                </div>
-                <div class="header-meta-item">
-                    <span class="header-meta-label">Status</span>
-                    <span class="header-meta-value">Analyst Review</span>
-                </div>
-                <div class="header-meta-item">
-                    <span class="header-meta-label">Resolution</span>
-                    <span class="header-meta-value">Upheld</span>
-                </div>
-            </div>
-        </div>
 
-        <!-- Content Area -->
-        <div class="content-area">
-            <!-- Workflow Section with Human Review -->
-            <div class="workflow-section">
-                <div class="workflow-header">
-                    <div class="workflow-header-left">
-                        <div class="workflow-icon">
-                            <i class="fas fa-project-diagram"></i>
-                        </div>
-                        <div class="workflow-title">
-                            <h3>Workflow Process</h3>
-                            <p>Case processing timeline and status</p>
-                        </div>
-                    </div>
-                    <div class="workflow-actions">
-                        <button class="btn-action btn-view-full" id="btnViewFull" onclick="expandWorkflow()">
-                            <i class="fas fa-expand"></i> View Full Workflow
-                        </button>
-                        <button class="btn-action btn-collapse hidden" id="btnCollapse" onclick="collapseWorkflow()">
-                            <i class="fas fa-compress"></i> Collapse
-                        </button>
-                    </div>
-                </div>
+<div class="right-section">
+  <div class="main-container">
 
-                <!-- Collapsed View (Horizontal) -->
-                <div class="workflow-collapsed" id="workflowCollapsed">
-                    <div class="workflow-step-horizontal last-processed">
-                        <div class="step-header-horizontal">
-                            <div>
-                                <div class="step-label">Last Processed</div>
-                                <div class="step-name">INFORMATION GATHERING</div>
-                            </div>
-                            <span class="step-status-badge status-completed">Completed</span>
-                        </div>
-                        <div class="step-message">
-                            Successfully gathered all required information and documentation.
-                        </div>
-                    </div>
-
-                    <div class="workflow-step-horizontal current">
-                        <div class="step-header-horizontal">
-                            <div>
-                                <div class="step-label">Current Step</div>
-                                <div class="step-name">ANALYST READY TO REVIEW</div>
-                                <span class="human-review-badge">
-                                    <i class="fas fa-user-check"></i> Human Review Required
-                                </span>
-                            </div>
-                            <span class="step-status-badge status-in-progress">In Progress</span>
-                        </div>
-                        <div class="step-message">
-                            Case is ready for analyst review and determination.
-                        </div>
-                        <div class="step-actions">
-                            <button class="btn-review active" onclick="openReviewModal('Analyst Ready to Review')">
-                                <i class="fas fa-clipboard-check"></i> Start Review
-                            </button>
-                        </div>
-                    </div>
-
-                    <div class="workflow-step-horizontal next">
-                        <div class="step-header-horizontal">
-                            <div>
-                                <div class="step-label">Next Step</div>
-                                <div class="step-name">RESOLUTION</div>
-                            </div>
-                            <span class="step-status-badge status-pending">Pending</span>
-                        </div>
-                        <div class="step-message">
-                            Will proceed to final resolution and notification.
-                        </div>
-                    </div>
-                </div>
-
-                <!-- Expanded View (Vertical) -->
-                <div class="workflow-expanded hidden" id="workflowExpanded">
-                    <div class="workflow-timeline">
-                        <!-- Delegation Check -->
-                        <div class="workflow-step-vertical completed">
-                            <div class="step-date">Dec 17, 2025 9:00 AM</div>
-                            <div class="step-header-vertical">
-                                <div>
-                                    <div class="step-title-vertical">DELEGATION CHECK</div>
-                                    <div class="step-description">
-                                        Verified delegation status and authority. No delegation issues identified.
-                                    </div>
-                                </div>
-                                <span class="step-status-badge status-completed">Completed</span>
-                            </div>
-                        </div>
-
-                        <!-- AOR Check -->
-                        <div class="workflow-step-vertical completed">
-                            <div class="step-date">Dec 17, 2025 9:15 AM</div>
-                            <div class="step-header-vertical">
-                                <div>
-                                    <div class="step-title-vertical">AOR CHECK</div>
-                                    <div class="step-description">
-                                        Acknowledgment of Receipt check completed. All required acknowledgments sent.
-                                    </div>
-                                </div>
-                                <span class="step-status-badge status-completed">Completed</span>
-                            </div>
-                        </div>
-
-                        <!-- Good Cause Check -->
-                        <div class="workflow-step-vertical completed">
-                            <div class="step-date">Dec 17, 2025 9:30 AM</div>
-                            <div class="step-header-vertical">
-                                <div>
-                                    <div class="step-title-vertical">GOOD CAUSE CHECK</div>
-                                    <div class="step-description">
-                                        Good cause evaluation completed. Criteria met for processing.
-                                    </div>
-                                </div>
-                                <span class="step-status-badge status-completed">Completed</span>
-                            </div>
-                        </div>
-
-                        <!-- Expedited Review Check -->
-                        <div class="workflow-step-vertical completed">
-                            <div class="step-date">Dec 17, 2025 9:45 AM</div>
-                            <div class="step-header-vertical">
-                                <div>
-                                    <div class="step-title-vertical">EXPEDITED REVIEW CHECK</div>
-                                    <span class="human-review-badge">
-                                        <i class="fas fa-user-check"></i> Human Review
-                                    </span>
-                                    <div class="step-description">
-                                        Expedited status evaluation completed. Standard processing timeline applied.
-                                    </div>
-                                </div>
-                                <span class="step-status-badge status-completed">Completed</span>
-                            </div>
-                            <div class="review-info">
-                                <i class="fas fa-user"></i> Reviewed by: Jane Reviewer | <i class="fas fa-clock"></i> 12/17/2025 9:50 AM
-                            </div>
-                        </div>
-
-                        <!-- Pre-Information Validation Check -->
-                        <div class="workflow-step-vertical completed">
-                            <div class="step-date">Dec 17, 2025 10:00 AM</div>
-                            <div class="step-header-vertical">
-                                <div>
-                                    <div class="step-title-vertical">PRE-INFORMATION VALIDATION CHECK</div>
-                                    <div class="step-description">
-                                        Initial validation of submitted information completed. Data integrity verified.
-                                    </div>
-                                </div>
-                                <span class="step-status-badge status-completed">Completed</span>
-                            </div>
-                        </div>
-
-                        <!-- Member Packet Generation -->
-                        <div class="workflow-step-vertical completed">
-                            <div class="step-date">Dec 17, 2025 10:15 AM</div>
-                            <div class="step-header-vertical">
-                                <div>
-                                    <div class="step-title-vertical">MEMBER PACKET GENERATION</div>
-                                    <div class="step-description">
-                                        Member information packet generated and prepared for distribution.
-                                    </div>
-                                </div>
-                                <span class="step-status-badge status-completed">Completed</span>
-                            </div>
-                        </div>
-
-                        <!-- Acknowledgment -->
-                        <div class="workflow-step-vertical completed">
-                            <div class="step-date">Dec 17, 2025 10:30 AM</div>
-                            <div class="step-header-vertical">
-                                <div>
-                                    <div class="step-title-vertical">ACKNOWLEDGMENT</div>
-                                    <div class="step-description">
-                                        Acknowledgment letter sent to all parties. Receipt confirmation received.
-                                    </div>
-                                </div>
-                                <span class="step-status-badge status-completed">Completed</span>
-                            </div>
-                        </div>
-
-                        <!-- Information Gathering -->
-                        <div class="workflow-step-vertical completed">
-                            <div class="step-date">Dec 17, 2025 11:00 AM</div>
-                            <div class="step-header-vertical">
-                                <div>
-                                    <div class="step-title-vertical">INFORMATION GATHERING</div>
-                                    <div class="step-description">
-                                        All required documentation and information collected from relevant parties.
-                                    </div>
-                                </div>
-                                <span class="step-status-badge status-completed">Completed</span>
-                            </div>
-                        </div>
-
-                        <!-- Post-Information Validation Check -->
-                        <div class="workflow-step-vertical completed">
-                            <div class="step-date">Dec 17, 2025 11:30 AM</div>
-                            <div class="step-header-vertical">
-                                <div>
-                                    <div class="step-title-vertical">POST-INFORMATION VALIDATION CHECK</div>
-                                    <span class="human-review-badge">
-                                        <i class="fas fa-user-check"></i> Human Review
-                                    </span>
-                                    <div class="step-description">
-                                        Post-collection validation completed. All documentation verified for completeness.
-                                    </div>
-                                </div>
-                                <span class="step-status-badge status-completed">Completed</span>
-                            </div>
-                            <div class="review-info">
-                                <i class="fas fa-user"></i> Reviewed by: John Analyst | <i class="fas fa-clock"></i> 12/17/2025 11:45 AM
-                            </div>
-                        </div>
-
-                        <!-- Analyst Ready to Review (CURRENT - HUMAN REVIEW REQUIRED) -->
-                        <div class="workflow-step-vertical in-progress">
-                            <div class="step-date">Dec 17, 2025 12:00 PM</div>
-                            <div class="step-header-vertical">
-                                <div>
-                                    <div class="step-title-vertical">ANALYST READY TO REVIEW</div>
-                                    <span class="human-review-badge">
-                                        <i class="fas fa-user-check"></i> Human Review Required
-                                    </span>
-                                    <div class="step-description">
-                                        Case ready for comprehensive analyst review. All documentation compiled and available for evaluation.
-                                    </div>
-                                </div>
-                                <span class="step-status-badge status-in-progress">In Progress</span>
-                            </div>
-                            <div class="step-actions-vertical">
-                                <button class="btn-review active" onclick="openReviewModal('Analyst Ready to Review')">
-                                    <i class="fas fa-clipboard-check"></i> Start Review
-                                </button>
-                            </div>
-                        </div>
-
-                        <!-- Clinical Ready to Review (PENDING - HUMAN REVIEW WILL BE REQUIRED) -->
-                        <div class="workflow-step-vertical pending">
-                            <div class="step-date">Pending</div>
-                            <div class="step-header-vertical">
-                                <div>
-                                    <div class="step-title-vertical">CLINICAL READY TO REVIEW</div>
-                                    <span class="human-review-badge">
-                                        <i class="fas fa-user-check"></i> Human Review Required
-                                    </span>
-                                    <div class="step-description">
-                                        Clinical review by licensed medical professional to validate findings and recommendations.
-                                    </div>
-                                </div>
-                                <span class="step-status-badge status-pending">Pending</span>
-                            </div>
-                            <div class="step-actions-vertical">
-                                <button class="btn-review disabled" disabled>
-                                    <i class="fas fa-lock"></i> Review (Locked)
-                                </button>
-                            </div>
-                        </div>
-
-                        <!-- Escalation -->
-                        <div class="workflow-step-vertical pending">
-                            <div class="step-date">Pending</div>
-                            <div class="step-header-vertical">
-                                <div>
-                                    <div class="step-title-vertical">ESCALATION</div>
-                                    <div class="step-description">
-                                        Escalation to higher authority if required based on case complexity or policy.
-                                    </div>
-                                </div>
-                                <span class="step-status-badge status-pending">Pending</span>
-                            </div>
-                        </div>
-
-                        <!-- Case Review Prep for Resolution -->
-                        <div class="workflow-step-vertical pending">
-                            <div class="step-date">Pending</div>
-                            <div class="step-header-vertical">
-                                <div>
-                                    <div class="step-title-vertical">CASE REVIEW PREP FOR RESOLUTION</div>
-                                    <div class="step-description">
-                                        Final preparation and compilation of all findings for resolution decision.
-                                    </div>
-                                </div>
-                                <span class="step-status-badge status-pending">Pending</span>
-                            </div>
-                        </div>
-
-                        <!-- Effectuation -->
-                        <div class="workflow-step-vertical pending">
-                            <div class="step-date">Pending</div>
-                            <div class="step-header-vertical">
-                                <div>
-                                    <div class="step-title-vertical">EFFECTUATION</div>
-                                    <div class="step-description">
-                                        Implementation of approved actions and benefits adjustments.
-                                    </div>
-                                </div>
-                                <span class="step-status-badge status-pending">Pending</span>
-                            </div>
-                        </div>
-
-                        <!-- Resolution -->
-                        <div class="workflow-step-vertical pending">
-                            <div class="step-date">Pending</div>
-                            <div class="step-header-vertical">
-                                <div>
-                                    <div class="step-title-vertical">RESOLUTION</div>
-                                    <div class="step-description">
-                                        Final determination and notification to all parties.
-                                    </div>
-                                </div>
-                                <span class="step-status-badge status-pending">Pending</span>
-                            </div>
-                        </div>
-
-                        <!-- Corrective Action -->
-                        <div class="workflow-step-vertical pending">
-                            <div class="step-date">Pending</div>
-                            <div class="step-header-vertical">
-                                <div>
-                                    <div class="step-title-vertical">CORRECTIVE ACTION</div>
-                                    <div class="step-description">
-                                        Implementation of any required corrective actions or process improvements.
-                                    </div>
-                                </div>
-                                <span class="step-status-badge status-pending">Pending</span>
-                            </div>
-                        </div>
-
-                        <!-- Closed -->
-                        <div class="workflow-step-vertical pending">
-                            <div class="step-date">Pending</div>
-                            <div class="step-header-vertical">
-                                <div>
-                                    <div class="step-title-vertical">CLOSED</div>
-                                    <div class="step-description">
-                                        Case closed and archived. All required actions completed.
-                                    </div>
-                                </div>
-                                <span class="step-status-badge status-pending">Pending</span>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
+    <!-- Header Section -->
+    <div class="header-section">
+      <div class="title-container">AI Agents</div>
+      <div class="header-actions">
+        <button class="btn-secondary">
+          <i class="fa-solid fa-download"></i> Export
+        </button>
+        <button class="btn-primary">
+          <i class="fa-solid fa-plus"></i> Add New Agent
+        </button>
+      </div>
     </div>
 
-    <!-- Review Modal -->
-    <div id="reviewModal" class="modal">
-        <div class="modal-content">
-            <div class="modal-header">
-                <h2><i class="fas fa-clipboard-check"></i> <span id="modalTitle">Review Process</span></h2>
-                <button class="modal-close" onclick="closeReviewModal()">
-                    <i class="fas fa-times"></i>
-                </button>
-            </div>
-            <div class="modal-body">
-                <div class="review-form">
-                    <div class="form-group">
-                        <label><i class="fas fa-comment-alt"></i> Review Comments</label>
-                        <textarea id="reviewComments" rows="6" placeholder="Enter your review comments here..."></textarea>
-                    </div>
-                    <div class="form-group">
-                        <label><i class="fas fa-check-circle"></i> Decision</label>
-                        <select id="reviewDecision">
-                            <option value="">Select Decision</option>
-                            <option value="approved">Approved</option>
-                            <option value="denied">Denied</option>
-                            <option value="more-info">Request More Information</option>
-                            <option value="escalate">Escalate</option>
-                        </select>
-                    </div>
-                </div>
-            </div>
-            <div class="modal-footer">
-                <button class="btn-action btn-secondary" onclick="closeReviewModal()">
-                    <i class="fas fa-times"></i> Cancel
-                </button>
-                <button class="btn-action btn-success" onclick="submitReview()">
-                    <i class="fas fa-check"></i> Submit Review
-                </button>
-            </div>
-        </div>
+    <!-- Tabs Container -->
+    <div class="tabs-container">
+      <div class="tabs">
+        <div class="tab active">Active Agents</div>
+        <div class="tab">Inactive Agents</div>
+      </div>
     </div>
 
-    <script>
-        function openReviewModal(stepName) {
-            document.getElementById('modalTitle').textContent = stepName + ' - Review';
-            document.getElementById('reviewModal').classList.add('show');
-        }
+    <!-- Filters -->
+    <div class="filters">
+      <input class="search-input" placeholder="Search by agent name...">
+      <select class="select">
+        <option>All Agent Types</option>
+        <option>Voice Agent</option>
+        <option>Text Agent</option>
+        <option>Chat Agent</option>
+      </select>
+      <select class="select">
+        <option>All Voices</option>
+        <option>Sarah - Female</option>
+        <option>John - Male</option>
+        <option>Emma - Female</option>
+        <option>Michael - Male</option>
+      </select>
+    </div>
 
-        function closeReviewModal() {
-            document.getElementById('reviewModal').classList.remove('show');
-            // Clear form
-            document.getElementById('reviewComments').value = '';
-            document.getElementById('reviewDecision').value = '';
-        }
+    <!-- Main Card -->
+    <div class="card-container">
+      <div class="table-wrapper">
+        <table>
+          <thead>
+            <tr>
+              <th>Agent Name</th>
+              <th>Agent Type</th>
+              <th>Voice</th>
+              <th>Phone</th>
+              <th>Edited By</th>
+              <th style="text-align:center;">Actions</th>
+            </tr>
+          </thead>
+          <tbody>
+            <!-- Row 1 -->
+            <tr>
+              <td><a href="#" class="agent-name-link">Appeals Agent</a></td>
+              <td><span class="agent-type-badge"><i class="fa-solid fa-microphone"></i> Voice Agent</span></td>
+              <td>
+                <div class="voice-cell">
+                  <div class="voice-icon"><i class="fa-solid fa-user"></i></div>
+                  <div class="voice-info">
+                    <div class="voice-name">Sarah</div>
+                    <div class="voice-type">Female</div>
+                  </div>
+                </div>
+              </td>
+              <td><span class="phone-number">+1 (800) 555-0123</span></td>
+              <td><span class="edited-by">John Smith</span></td>
+              <td style="text-align:center;">
+                <div class="dropdown-menu-wrapper">
+                  <button class="menu-btn" onclick="toggleDropdown(this)">
+                    <i class="fa-solid fa-ellipsis-vertical"></i>
+                  </button>
+                  <div class="dropdown-content">
+                    <button class="dropdown-item" onclick="handleAction('edit', 'Appeals Agent')">
+                      <i class="fa-solid fa-pen"></i> Edit
+                    </button>
+                    <button class="dropdown-item" onclick="handleAction('view', 'Appeals Agent')">
+                      <i class="fa-solid fa-eye"></i> View Details
+                    </button>
+                    <button class="dropdown-item" onclick="handleAction('test', 'Appeals Agent')">
+                      <i class="fa-solid fa-phone"></i> Test Call
+                    </button>
+                    <button class="dropdown-item" onclick="handleAction('logs', 'Appeals Agent')">
+                      <i class="fa-solid fa-list"></i> View Logs
+                    </button>
+                    <button class="dropdown-item" onclick="handleAction('clone', 'Appeals Agent')">
+                      <i class="fa-solid fa-copy"></i> Clone
+                    </button>
+                    <button class="dropdown-item" onclick="handleAction('delete', 'Appeals Agent')" style="color:#ef4444;">
+                      <i class="fa-solid fa-trash"></i> Delete
+                    </button>
+                  </div>
+                </div>
+              </td>
+            </tr>
 
-        function submitReview() {
-            const comments = document.getElementById('reviewComments').value;
-            const decision = document.getElementById('reviewDecision').value;
-            
-            if (!comments || !decision) {
-                alert('Please provide both comments and a decision.');
-                return;
-            }
-            
-            // Here you would typically send the review data to your backend
-            console.log('Review submitted:', { comments, decision });
-            
-            // Show success message
-            alert('Review submitted successfully!');
-            
-            closeReviewModal();
-        }
+            <!-- Row 2 -->
+            <tr>
+              <td><a href="#" class="agent-name-link">Grievance Resolution Agent</a></td>
+              <td><span class="agent-type-badge"><i class="fa-solid fa-comment"></i> Text Agent</span></td>
+              <td>
+                <div class="voice-cell">
+                  <div class="voice-icon"><i class="fa-solid fa-user"></i></div>
+                  <div class="voice-info">
+                    <div class="voice-name">John</div>
+                    <div class="voice-type">Male</div>
+                  </div>
+                </div>
+              </td>
+              <td><span class="phone-number">+1 (800) 555-0124</span></td>
+              <td><span class="edited-by">Sarah Johnson</span></td>
+              <td style="text-align:center;">
+                <div class="dropdown-menu-wrapper">
+                  <button class="menu-btn" onclick="toggleDropdown(this)">
+                    <i class="fa-solid fa-ellipsis-vertical"></i>
+                  </button>
+                  <div class="dropdown-content">
+                    <button class="dropdown-item" onclick="handleAction('edit', 'Grievance Resolution Agent')">
+                      <i class="fa-solid fa-pen"></i> Edit
+                    </button>
+                    <button class="dropdown-item" onclick="handleAction('view', 'Grievance Resolution Agent')">
+                      <i class="fa-solid fa-eye"></i> View Details
+                    </button>
+                    <button class="dropdown-item" onclick="handleAction('test', 'Grievance Resolution Agent')">
+                      <i class="fa-solid fa-phone"></i> Test Call
+                    </button>
+                    <button class="dropdown-item" onclick="handleAction('logs', 'Grievance Resolution Agent')">
+                      <i class="fa-solid fa-list"></i> View Logs
+                    </button>
+                    <button class="dropdown-item" onclick="handleAction('clone', 'Grievance Resolution Agent')">
+                      <i class="fa-solid fa-copy"></i> Clone
+                    </button>
+                    <button class="dropdown-item" onclick="handleAction('delete', 'Grievance Resolution Agent')" style="color:#ef4444;">
+                      <i class="fa-solid fa-trash"></i> Delete
+                    </button>
+                  </div>
+                </div>
+              </td>
+            </tr>
 
-        // Close modal when clicking outside
-        window.onclick = function(event) {
-            const modal = document.getElementById('reviewModal');
-            if (event.target == modal) {
-                closeReviewModal();
-            }
-        }
+            <!-- Row 3 -->
+            <tr>
+              <td><a href="#" class="agent-name-link">Claims Verification Agent</a></td>
+              <td><span class="agent-type-badge"><i class="fa-solid fa-comments"></i> Chat Agent</span></td>
+              <td>
+                <div class="voice-cell">
+                  <div class="voice-icon"><i class="fa-solid fa-user"></i></div>
+                  <div class="voice-info">
+                    <div class="voice-name">Emma</div>
+                    <div class="voice-type">Female</div>
+                  </div>
+                </div>
+              </td>
+              <td><span class="phone-number">+1 (800) 555-0125</span></td>
+              <td><span class="edited-by">Michael Davis</span></td>
+              <td style="text-align:center;">
+                <div class="dropdown-menu-wrapper">
+                  <button class="menu-btn" onclick="toggleDropdown(this)">
+                    <i class="fa-solid fa-ellipsis-vertical"></i>
+                  </button>
+                  <div class="dropdown-content">
+                    <button class="dropdown-item" onclick="handleAction('edit', 'Claims Verification Agent')">
+                      <i class="fa-solid fa-pen"></i> Edit
+                    </button>
+                    <button class="dropdown-item" onclick="handleAction('view', 'Claims Verification Agent')">
+                      <i class="fa-solid fa-eye"></i> View Details
+                    </button>
+                    <button class="dropdown-item" onclick="handleAction('test', 'Claims Verification Agent')">
+                      <i class="fa-solid fa-phone"></i> Test Call
+                    </button>
+                    <button class="dropdown-item" onclick="handleAction('logs', 'Claims Verification Agent')">
+                      <i class="fa-solid fa-list"></i> View Logs
+                    </button>
+                    <button class="dropdown-item" onclick="handleAction('clone', 'Claims Verification Agent')">
+                      <i class="fa-solid fa-copy"></i> Clone
+                    </button>
+                    <button class="dropdown-item" onclick="handleAction('delete', 'Claims Verification Agent')" style="color:#ef4444;">
+                      <i class="fa-solid fa-trash"></i> Delete
+                    </button>
+                  </div>
+                </div>
+              </td>
+            </tr>
 
-        function expandWorkflow() {
-            document.getElementById('workflowCollapsed').classList.add('hidden');
-            document.getElementById('workflowExpanded').classList.remove('hidden');
-            document.getElementById('btnViewFull').classList.add('hidden');
-            document.getElementById('btnCollapse').classList.remove('hidden');
-        }
+            <!-- Row 4 -->
+            <tr>
+              <td><a href="#" class="agent-name-link">Member Support Agent</a></td>
+              <td><span class="agent-type-badge"><i class="fa-solid fa-microphone"></i> Voice Agent</span></td>
+              <td>
+                <div class="voice-cell">
+                  <div class="voice-icon"><i class="fa-solid fa-user"></i></div>
+                  <div class="voice-info">
+                    <div class="voice-name">Michael</div>
+                    <div class="voice-type">Male</div>
+                  </div>
+                </div>
+              </td>
+              <td><span class="phone-number">+1 (800) 555-0126</span></td>
+              <td><span class="edited-by">Emily Wilson</span></td>
+              <td style="text-align:center;">
+                <div class="dropdown-menu-wrapper">
+                  <button class="menu-btn" onclick="toggleDropdown(this)">
+                    <i class="fa-solid fa-ellipsis-vertical"></i>
+                  </button>
+                  <div class="dropdown-content">
+                    <button class="dropdown-item" onclick="handleAction('edit', 'Member Support Agent')">
+                      <i class="fa-solid fa-pen"></i> Edit
+                    </button>
+                    <button class="dropdown-item" onclick="handleAction('view', 'Member Support Agent')">
+                      <i class="fa-solid fa-eye"></i> View Details
+                    </button>
+                    <button class="dropdown-item" onclick="handleAction('test', 'Member Support Agent')">
+                      <i class="fa-solid fa-phone"></i> Test Call
+                    </button>
+                    <button class="dropdown-item" onclick="handleAction('logs', 'Member Support Agent')">
+                      <i class="fa-solid fa-list"></i> View Logs
+                    </button>
+                    <button class="dropdown-item" onclick="handleAction('clone', 'Member Support Agent')">
+                      <i class="fa-solid fa-copy"></i> Clone
+                    </button>
+                    <button class="dropdown-item" onclick="handleAction('delete', 'Member Support Agent')" style="color:#ef4444;">
+                      <i class="fa-solid fa-trash"></i> Delete
+                    </button>
+                  </div>
+                </div>
+              </td>
+            </tr>
 
-        function collapseWorkflow() {
-            document.getElementById('workflowCollapsed').classList.remove('hidden');
-            document.getElementById('workflowExpanded').classList.add('hidden');
-            document.getElementById('btnViewFull').classList.remove('hidden');
-            document.getElementById('btnCollapse').classList.add('hidden');
-        }
-      
-      // Show full workflow by default
-window.onload = function () {
-    expandWorkflow();
-    openReviewModal('Analyst Ready to Review');
-};
-    </script>
+            <!-- Row 5 -->
+            <tr>
+              <td><a href="#" class="agent-name-link">Prior Auth Agent</a></td>
+              <td><span class="agent-type-badge"><i class="fa-solid fa-comment"></i> Text Agent</span></td>
+              <td>
+                <div class="voice-cell">
+                  <div class="voice-icon"><i class="fa-solid fa-user"></i></div>
+                  <div class="voice-info">
+                    <div class="voice-name">Sarah</div>
+                    <div class="voice-type">Female</div>
+                  </div>
+                </div>
+              </td>
+              <td><span class="phone-number">+1 (800) 555-0127</span></td>
+              <td><span class="edited-by">Robert Taylor</span></td>
+              <td style="text-align:center;">
+                <div class="dropdown-menu-wrapper">
+                  <button class="menu-btn" onclick="toggleDropdown(this)">
+                    <i class="fa-solid fa-ellipsis-vertical"></i>
+                  </button>
+                  <div class="dropdown-content">
+                    <button class="dropdown-item" onclick="handleAction('edit', 'Prior Auth Agent')">
+                      <i class="fa-solid fa-pen"></i> Edit
+                    </button>
+                    <button class="dropdown-item" onclick="handleAction('view', 'Prior Auth Agent')">
+                      <i class="fa-solid fa-eye"></i> View Details
+                    </button>
+                    <button class="dropdown-item" onclick="handleAction('test', 'Prior Auth Agent')">
+                      <i class="fa-solid fa-phone"></i> Test Call
+                    </button>
+                    <button class="dropdown-item" onclick="handleAction('logs', 'Prior Auth Agent')">
+                      <i class="fa-solid fa-list"></i> View Logs
+                    </button>
+                    <button class="dropdown-item" onclick="handleAction('clone', 'Prior Auth Agent')">
+                      <i class="fa-solid fa-copy"></i> Clone
+                    </button>
+                    <button class="dropdown-item" onclick="handleAction('delete', 'Prior Auth Agent')" style="color:#ef4444;">
+                      <i class="fa-solid fa-trash"></i> Delete
+                    </button>
+                  </div>
+                </div>
+              </td>
+            </tr>
+
+          </tbody>
+        </table>
+      </div>
+
+      <!-- Pagination -->
+      <div class="pagination">
+        <button class="page"><i class="fa-solid fa-chevron-left"></i></button>
+        <button class="page active">1</button>
+        <button class="page">2</button>
+        <button class="page">3</button>
+        <span class="page-dots">...</span>
+        <button class="page">10</button>
+        <button class="page"><i class="fa-solid fa-chevron-right"></i></button>
+      </div>
+
+    </div>
+
+  </div>
+
+  <!-- Footer -->
+  <div class="footer">© 2026 Care Insight All Rights Reserved</div>
+</div>
+
+<script>
+// Toggle dropdown menu
+function toggleDropdown(button) {
+  const dropdown = button.nextElementSibling;
+  
+  // Close all other dropdowns
+  document.querySelectorAll('.dropdown-content').forEach(menu => {
+    if(menu !== dropdown) {
+      menu.classList.remove('show');
+    }
+  });
+  
+  // Toggle current dropdown
+  dropdown.classList.toggle('show');
+}
+
+// Handle dropdown actions
+function handleAction(action, agentName) {
+  console.log(`Action: ${action}, Agent: ${agentName}`);
+  
+  // Close dropdown after action
+  document.querySelectorAll('.dropdown-content').forEach(menu => {
+    menu.classList.remove('show');
+  });
+  
+  switch(action) {
+    case 'edit':
+      alert(`Edit ${agentName}`);
+      break;
+    case 'view':
+      alert(`View details for ${agentName}`);
+      break;
+    case 'test':
+      alert(`Test call for ${agentName}`);
+      break;
+    case 'logs':
+      alert(`View logs for ${agentName}`);
+      break;
+    case 'clone':
+      alert(`Clone ${agentName}`);
+      break;
+    case 'delete':
+      if(confirm(`Are you sure you want to delete ${agentName}?`)) {
+        alert(`${agentName} deleted`);
+      }
+      break;
+  }
+}
+
+// Close dropdown when clicking outside
+document.addEventListener('click', function(event) {
+  if(!event.target.closest('.dropdown-menu-wrapper')) {
+    document.querySelectorAll('.dropdown-content').forEach(menu => {
+      menu.classList.remove('show');
+    });
+  }
+});
+</script>
+
 </body>
 </html>
