@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
 <meta charset="UTF-8">
-<title>AI Agents</title>
+<title>AI Agent Details</title>
 
 <!-- Font Awesome 6 Free -->
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css" integrity="sha512-DTOQO9RWCH3ppGqcWaEA1BIZOC6xxalwEsw9c2QQeAIftl+Vegovlnee1c9QX4TctnWMn13TZye+giMm8e2LwA==" crossorigin="anonymous" referrerpolicy="no-referrer">
@@ -26,41 +26,164 @@ body{
 ::-webkit-scrollbar-thumb{background:grey;border-radius:4px}
 
 /* ================= LAYOUT ================= */
-.right-section{
-  background:whitesmoke;
+.page-container{
   width:100%;
   min-height:100vh;
+  background:#f5f5f5;
 }
 
-.main-container{
-  width:1855px;
-  margin:0 auto;
-  padding:16px 16px 0 16px;
-}
-
-/* ================= HEADER ================= */
-.header-section{
+.content-wrapper{
   display:flex;
-  justify-content:space-between;
-  align-items:center;
-  margin-bottom:24px;
+  gap:24px;
+  padding:24px;
+  max-width:1800px;
+  margin:0 auto;
 }
 
-/* ================= TITLE ================= */
-.title-container{
+.left-section{
+  flex:1;
+  min-width:0;
+}
+
+.right-section{
+  width:380px;
+  flex-shrink:0;
+}
+
+/* ================= TOP BAR ================= */
+.top-bar{
+  background:#fff;
+  padding:16px 24px;
+  border-bottom:1px solid #e5e7eb;
+  display:flex;
+  align-items:center;
+  justify-content:space-between;
+  box-shadow:0 1px 3px rgba(0,0,0,0.1);
+}
+
+.top-bar-left{
+  display:flex;
+  align-items:center;
+  gap:16px;
+}
+
+.home-icon{
+  color:#5830AD;
+  font-size:20px;
+  cursor:pointer;
+}
+
+.agent-header{
+  display:flex;
+  align-items:center;
+  gap:8px;
+}
+
+.agent-title{
   font-family:"Open Sans";
+  font-size:20px;
   font-weight:600;
-  font-size:24px;
   color:#1A1A1A;
 }
 
-/* ================= ACTION BUTTONS ================= */
-.header-actions{
+.edit-icon{
+  color:#6B7280;
+  cursor:pointer;
+  font-size:14px;
+}
+
+.agent-meta{
   display:flex;
+  align-items:center;
+  gap:16px;
+  font-size:13px;
+  color:#6B7280;
+  margin-top:6px;
+  flex-wrap:wrap;
+}
+
+.meta-item{
+  display:flex;
+  align-items:center;
+  gap:6px;
+}
+
+.meta-item i{
+  color:#5830AD;
+}
+
+.info-icon{
+  cursor:pointer;
+  color:#9CA3AF;
+}
+
+.top-bar-right{
+  display:flex;
+  align-items:center;
   gap:12px;
 }
 
-.btn-primary{
+.top-nav{
+  display:flex;
+  gap:24px;
+}
+
+.nav-link{
+  color:#6B7280;
+  text-decoration:none;
+  font-family:"Open Sans";
+  font-size:14px;
+  font-weight:500;
+  cursor:pointer;
+  transition:color 0.3s;
+}
+
+.nav-link:hover{
+  color:#5830AD;
+}
+
+.nav-link.active{
+  color:#5830AD;
+  font-weight:600;
+}
+
+.action-buttons{
+  display:flex;
+  gap:8px;
+  align-items:center;
+}
+
+.menu-btn-top{
+  background:none;
+  border:none;
+  color:#6B7280;
+  font-size:20px;
+  cursor:pointer;
+  padding:8px;
+  transition:all 0.3s;
+}
+
+.menu-btn-top:hover{
+  background:#f3f4f6;
+  border-radius:6px;
+}
+
+.history-btn{
+  background:none;
+  border:none;
+  color:#6B7280;
+  font-size:20px;
+  cursor:pointer;
+  padding:8px;
+  transition:all 0.3s;
+}
+
+.history-btn:hover{
+  background:#f3f4f6;
+  border-radius:6px;
+}
+
+.btn-publish{
   background:#5830AD;
   color:#fff;
   font-family:"Open Sans";
@@ -76,365 +199,354 @@ body{
   transition:background 0.3s;
 }
 
-.btn-primary:hover{
+.btn-publish:hover{
   background:#471d82;
 }
 
-.btn-secondary{
+/* ================= CONFIG SECTION ================= */
+.config-section{
   background:#fff;
-  color:#5830AD;
-  font-family:"Open Sans";
-  font-size:14px;
-  font-weight:600;
-  padding:10px 24px;
-  border-radius:6px;
-  border:1px solid #5830AD;
-  cursor:pointer;
-  display:flex;
-  align-items:center;
-  gap:8px;
-  transition:all 0.3s;
+  border-radius:8px;
+  padding:20px;
+  margin-bottom:20px;
+  box-shadow:0 1px 3px rgba(0,0,0,0.1);
 }
 
-.btn-secondary:hover{
-  background:#f8f5ff;
-}
-
-/* ================= TABS ================= */
-.tabs-container{
-  border-bottom:1px solid #E5E7EB;
-  margin-bottom:16px;
-}
-
-.tabs{
-  display:flex;
-  gap:8px;
-}
-
-.tab{
-  padding:0 20px;
-  height:32px;
-  display:flex;
-  align-items:center;
-  font-family:"Open Sans";
-  font-size:14px;
-  font-weight:600;
-  color:#6B7280;
-  cursor:pointer;
-}
-
-.tab.active{
-  color:#5830AD;
-  position:relative;
-}
-
-.tab.active::after{
-  content:"";
-  position:absolute;
-  bottom:-10px;
-  left:0;
-  width:100%;
-  height:3px;
-  background:#5830AD;
-  border-radius:2px 2px 0 0;
-}
-
-/* ================= FILTERS ================= */
-.filters{
+.config-row{
   display:flex;
   gap:16px;
+  align-items:flex-end;
   margin-bottom:16px;
-  flex-wrap:wrap;
 }
 
-.search-input,
-.select{
+.config-row:last-child{
+  margin-bottom:0;
+}
+
+.config-group{
+  flex:1;
+}
+
+.config-label{
+  font-family:"Open Sans";
+  font-size:13px;
+  font-weight:600;
+  color:#424242;
+  margin-bottom:8px;
+  display:block;
+}
+
+.config-select{
+  width:100%;
   height:40px;
   background:#fff;
   border:1px solid #D1D5DB;
-  border-radius:4px;
+  border-radius:6px;
   padding:0 12px;
   font-family:"Open Sans";
   font-size:14px;
   color:#2E2E2E;
-}
-
-.search-input{width:320px}
-.select{width:220px}
-
-.search-input::placeholder,
-.select::placeholder{
-  color:#9CA3AF;
-}
-
-/* ================= CARD ================= */
-.card-container{
-  background:#fff;
-  border-radius:8px;
-  padding:16px;
-  box-shadow:0 4px 10px rgba(0,0,0,.25);
-}
-
-/* ================= TABLE ================= */
-.table-wrapper{
-  overflow-x:auto;
-}
-
-table{
-  width:100%;
-  min-width:1200px;
-  border-collapse:collapse;
-  font-family:"Open Sans";
-  font-size:14px;
-  border:1px solid rgba(0,0,0,.1);
-}
-
-th{
-  background:#f8f8f8;
-  color:#424242;
-  font-weight:600;
-  padding:12px;
-  height:60px;
-  text-align:left;
-  white-space:nowrap;
-}
-
-td{
-  padding:12px;
-  color:#2E2E2E;
-  font-weight:400;
-  vertical-align:middle;
-}
-
-tr:nth-child(even){
-  background:#f8f8f8;
-}
-
-tr:hover{
-  background:#f0f0f0;
-}
-
-/* ================= CELL STYLES ================= */
-.agent-name-link{
-  color:#2E2E2E;
-  font-weight:600;
   cursor:pointer;
-  text-decoration:none;
-  transition:color 0.3s;
 }
 
-.agent-name-link:hover{
-  color:#5830AD;
-  text-decoration:underline;
+.config-select:focus{
+  outline:none;
+  border-color:#5830AD;
+  box-shadow:0 0 0 3px rgba(88,48,173,0.1);
 }
 
-/* ================= AGENT TYPE BADGE ================= */
-.agent-type-badge{
-  display:inline-flex;
-  align-items:center;
-  gap:6px;
-  padding:6px 12px;
-  border-radius:4px;
-  font-size:13px;
-  font-weight:600;
-  white-space:nowrap;
-  font-family:"Open Sans";
+.icon-btn-config{
+  width:40px;
+  height:40px;
   background:#f3f4f6;
-  color:#424242;
-  border:1px solid #d1d5db;
-}
-
-/* ================= VOICE WITH ICON ================= */
-.voice-cell{
-  display:flex;
-  align-items:center;
-  gap:8px;
-}
-
-.voice-icon{
-  width:32px;
-  height:32px;
-  border-radius:50%;
-  background:#e8ddf7;
-  color:#5830AD;
-  display:flex;
-  align-items:center;
-  justify-content:center;
-  font-size:14px;
-  flex-shrink:0;
-}
-
-.voice-info{
-  display:flex;
-  flex-direction:column;
-  gap:2px;
-}
-
-.voice-name{
-  color:#2E2E2E;
-  font-weight:600;
-  font-size:13px;
-}
-
-.voice-type{
-  color:#6B7280;
-  font-weight:400;
-  font-size:12px;
-}
-
-.phone-number{
-  color:#2E2E2E;
-  font-weight:400;
-  font-family:"Open Sans", monospace;
-}
-
-.edited-by{
-  color:#2E2E2E;
-  font-weight:400;
-}
-
-/* ================= DROPDOWN MENU ================= */
-.dropdown-menu-wrapper{
-  position:relative;
-  display:inline-block;
-}
-
-.menu-btn{
-  background:none;
-  border:none;
-  color:#6B7280;
-  font-size:20px;
+  border:1px solid #D1D5DB;
+  border-radius:6px;
   cursor:pointer;
-  padding:4px 8px;
-  border-radius:4px;
+  color:#6B7280;
   transition:all 0.3s;
-  display:flex;
-  align-items:center;
-  justify-content:center;
 }
 
-.menu-btn:hover{
+.icon-btn-config:hover{
   background:#e5e7eb;
   color:#2E2E2E;
 }
 
-.dropdown-content{
-  display:none;
-  position:absolute;
-  right:0;
+/* ================= PROMPT SECTION ================= */
+.prompt-section{
   background:#fff;
-  min-width:180px;
-  box-shadow:0 2px 10px rgba(0,0,0,0.15);
-  border-radius:6px;
-  z-index:1000;
-  border:1px solid #e5e7eb;
+  border-radius:8px;
+  padding:20px;
+  margin-bottom:20px;
+  box-shadow:0 1px 3px rgba(0,0,0,0.1);
 }
 
-.dropdown-content.show{
+.section-title{
+  font-family:"Open Sans";
+  font-size:15px;
+  font-weight:600;
+  color:#1A1A1A;
+  margin-bottom:12px;
+}
+
+.rich-editor{
+  border:1px solid #D1D5DB;
+  border-radius:6px;
+  overflow:hidden;
+}
+
+.editor-toolbar{
+  background:#f9fafb;
+  border-bottom:1px solid #D1D5DB;
+  padding:8px 12px;
+  display:flex;
+  gap:4px;
+  flex-wrap:wrap;
+}
+
+.toolbar-btn{
+  background:#fff;
+  border:1px solid #D1D5DB;
+  border-radius:4px;
+  width:32px;
+  height:32px;
+  cursor:pointer;
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  color:#6B7280;
+  transition:all 0.3s;
+  font-size:14px;
+}
+
+.toolbar-btn:hover{
+  background:#f3f4f6;
+  border-color:#9CA3AF;
+  color:#2E2E2E;
+}
+
+.editor-content{
+  min-height:180px;
+  padding:12px;
+  font-family:"Open Sans";
+  font-size:14px;
+  color:#2E2E2E;
+  resize:vertical;
+  border:none;
+  background:#fff;
+  width:100%;
+}
+
+/* ================= COLLAPSE SECTION ================= */
+.collapse-section{
+  background:#fff;
+  border-radius:8px;
+  margin-bottom:20px;
+  box-shadow:0 1px 3px rgba(0,0,0,0.1);
+  overflow:hidden;
+}
+
+.collapse-header{
+  padding:16px 20px;
+  background:#f9fafb;
+  border-bottom:1px solid #e5e7eb;
+  cursor:pointer;
+  display:flex;
+  align-items:center;
+  justify-content:space-between;
+  transition:background 0.3s;
+  user-select:none;
+}
+
+.collapse-header:hover{
+  background:#f3f4f6;
+}
+
+.collapse-header.active{
+  background:#f3f4f6;
+}
+
+.collapse-title{
+  font-family:"Open Sans";
+  font-size:15px;
+  font-weight:600;
+  color:#1A1A1A;
+  display:flex;
+  align-items:center;
+  gap:12px;
+}
+
+.collapse-title i{
+  color:#5830AD;
+  font-size:16px;
+}
+
+.collapse-icon{
+  color:#6B7280;
+  transition:transform 0.3s;
+  font-size:16px;
+}
+
+.collapse-header.active .collapse-icon{
+  transform:rotate(180deg);
+}
+
+.collapse-content{
+  display:none;
+  padding:16px 20px;
+  background:#fff;
+}
+
+.collapse-content.show{
   display:block;
 }
 
-.dropdown-item{
-  color:#2E2E2E;
-  padding:12px 16px;
-  text-decoration:none;
+.function-item{
+  background:#f9fafb;
+  border-radius:6px;
+  padding:12px;
+  margin-bottom:12px;
   display:flex;
   align-items:center;
-  gap:10px;
+  justify-content:space-between;
+}
+
+.function-item:last-child{
+  margin-bottom:0;
+}
+
+.function-name{
   font-family:"Open Sans";
   font-size:14px;
-  cursor:pointer;
-  transition:all 0.3s;
-  border:none;
-  background:none;
-  width:100%;
-  text-align:left;
-}
-
-.dropdown-item:first-child{
-  border-radius:6px 6px 0 0;
-}
-
-.dropdown-item:last-child{
-  border-radius:0 0 6px 6px;
-}
-
-.dropdown-item:hover{
-  background:#f3f4f6;
-  color:#5830AD;
-}
-
-.dropdown-item i{
-  width:16px;
-  text-align:center;
-}
-
-/* ================= PAGINATION - CIRCULAR STYLE ================= */
-.pagination{
+  font-weight:500;
+  color:#2E2E2E;
   display:flex;
+  align-items:center;
+  gap:8px;
+}
+
+.function-actions{
+  display:flex;
+  gap:8px;
+}
+
+.func-btn{
+  background:none;
+  border:none;
+  color:#6B7280;
+  cursor:pointer;
+  font-size:14px;
+  padding:4px 8px;
+  border-radius:4px;
+  transition:all 0.3s;
+}
+
+.func-btn:hover{
+  background:#e5e7eb;
+  color:#2E2E2E;
+}
+
+.add-function-btn{
+  background:none;
+  border:2px dashed #D1D5DB;
+  border-radius:6px;
+  padding:12px;
+  color:#6B7280;
+  font-family:"Open Sans";
+  font-size:14px;
+  font-weight:500;
+  cursor:pointer;
+  width:100%;
+  display:flex;
+  align-items:center;
   justify-content:center;
   gap:8px;
-  margin:24px 0;
-  align-items:center;
-}
-
-.page{
-  width:44px;
-  height:44px;
-  border-radius:50%;
-  display:flex;
-  align-items:center;
-  justify-content:center;
-  font-family:"Open Sans";
-  font-weight:600;
-  font-size:14px;
-  cursor:pointer;
-  border:1px solid #D1D5DB;
-  background:#fff;
-  color:#2E2E2E;
   transition:all 0.3s;
 }
 
-.page:hover:not(.active){
+.add-function-btn:hover{
   border-color:#5830AD;
-  background:#f8f5ff;
   color:#5830AD;
+  background:#f8f5ff;
 }
 
-.page.active{
+/* ================= RIGHT SIDEBAR ================= */
+.right-sidebar{
+  background:#fff;
+  border-radius:8px;
+  padding:20px;
+  box-shadow:0 1px 3px rgba(0,0,0,0.1);
+  height:fit-content;
+  position:sticky;
+  top:24px;
+}
+
+.sidebar-title{
+  font-family:"Open Sans";
+  font-size:15px;
+  font-weight:600;
+  color:#1A1A1A;
+  margin-bottom:16px;
+  display:flex;
+  align-items:center;
+  gap:8px;
+}
+
+.test-button{
+  width:100%;
   background:#5830AD;
   color:#fff;
-  border-color:#5830AD;
-  box-shadow:0 2px 8px rgba(88,48,173,0.3);
-}
-
-.page-dots{
-  color:#9CA3AF;
-  padding:0 4px;
-}
-
-/* ================= FOOTER ================= */
-.footer{
-  text-align:center;
-  padding:40px 16px;
   font-family:"Open Sans";
-  color:#595959;
+  font-size:14px;
+  font-weight:600;
+  padding:12px;
+  border-radius:6px;
+  border:none;
+  cursor:pointer;
+  transition:background 0.3s;
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  gap:8px;
+}
+
+.test-button:hover{
+  background:#471d82;
+}
+
+.test-placeholder{
+  background:#f9fafb;
+  border:2px dashed #D1D5DB;
+  border-radius:8px;
+  padding:40px 20px;
+  text-align:center;
+  margin-top:16px;
+  min-height:200px;
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  flex-direction:column;
+  color:#6B7280;
+}
+
+.test-placeholder i{
+  font-size:48px;
+  color:#D1D5DB;
+  margin-bottom:12px;
+}
+
+.test-placeholder-text{
+  font-size:14px;
+  font-weight:500;
 }
 
 /* ================= RESPONSIVE ================= */
 @media(max-width:1200px){
-  .main-container{
+  .content-wrapper{
+    flex-direction:column;
+  }
+  
+  .right-section{
     width:100%;
-  }
-  
-  .filters{
-    flex-wrap:wrap;
-  }
-  
-  .search-input,
-  .select{
-    flex:1;
-    min-width:200px;
   }
 }
 
@@ -443,363 +555,258 @@ tr:hover{
 </head>
 <body>
 
-<div class="right-section">
-  <div class="main-container">
-
-    <!-- Header Section -->
-    <div class="header-section">
-      <div class="title-container">AI Agents</div>
-      <div class="header-actions">
-        <button class="btn-secondary">
-          <i class="fa-solid fa-download"></i> Export
+<div class="page-container">
+  <!-- Top Bar -->
+  <div class="top-bar">
+    <div class="top-bar-left">
+      <div class="home-icon">
+        <i class="fa-solid fa-home"></i>
+      </div>
+      <div>
+        <div class="agent-header">
+          <span class="agent-title">Appeals Agent</span>
+          <i class="fa-solid fa-pen edit-icon"></i>
+        </div>
+        <div class="agent-meta">
+          <div class="meta-item">
+            <span>Agent ID: ag...bed</span>
+            <i class="fa-solid fa-copy"></i>
+          </div>
+          <div class="meta-item">
+            <span>Retell LLM ID: ll...b03</span>
+            <i class="fa-solid fa-copy"></i>
+          </div>
+          <div class="meta-item">
+            <span>$0.095/min</span>
+            <i class="fa-solid fa-circle-info info-icon"></i>
+          </div>
+          <div class="meta-item">
+            <span>820-1000ms latency</span>
+            <i class="fa-solid fa-circle-info info-icon"></i>
+          </div>
+          <div class="meta-item">
+            <span>1661-2621 tokens</span>
+            <i class="fa-solid fa-circle-info info-icon"></i>
+          </div>
+        </div>
+      </div>
+    </div>
+    
+    <div class="top-bar-right">
+      <div class="top-nav">
+        <a href="#" class="nav-link active">Create</a>
+        <a href="#" class="nav-link">Simulation</a>
+      </div>
+      <div class="action-buttons">
+        <button class="history-btn" title="History">
+          <i class="fa-solid fa-clock-rotate-left"></i>
         </button>
-        <button class="btn-primary">
-          <i class="fa-solid fa-plus"></i> Add New Agent
+        <button class="menu-btn-top" title="More Options">
+          <i class="fa-solid fa-ellipsis-vertical"></i>
+        </button>
+        <button class="btn-publish">
+          <i class="fa-solid fa-cloud-arrow-up"></i> Publish
         </button>
       </div>
     </div>
-
-    <!-- Tabs Container -->
-    <div class="tabs-container">
-      <div class="tabs">
-        <div class="tab active">Active Agents</div>
-        <div class="tab">Inactive Agents</div>
-      </div>
-    </div>
-
-    <!-- Filters -->
-    <div class="filters">
-      <input class="search-input" placeholder="Search by agent name...">
-      <select class="select">
-        <option>All Agent Types</option>
-        <option>Voice Agent</option>
-        <option>Text Agent</option>
-        <option>Chat Agent</option>
-      </select>
-      <select class="select">
-        <option>All Voices</option>
-        <option>Sarah - Female</option>
-        <option>John - Male</option>
-        <option>Emma - Female</option>
-        <option>Michael - Male</option>
-      </select>
-    </div>
-
-    <!-- Main Card -->
-    <div class="card-container">
-      <div class="table-wrapper">
-        <table>
-          <thead>
-            <tr>
-              <th>Agent Name</th>
-              <th>Agent Type</th>
-              <th>Voice</th>
-              <th>Phone</th>
-              <th>Edited By</th>
-              <th style="text-align:center;">Actions</th>
-            </tr>
-          </thead>
-          <tbody>
-            <!-- Row 1 -->
-            <tr>
-              <td><a href="#" class="agent-name-link">Appeals Agent</a></td>
-              <td><span class="agent-type-badge"><i class="fa-solid fa-microphone"></i> Voice Agent</span></td>
-              <td>
-                <div class="voice-cell">
-                  <div class="voice-icon"><i class="fa-solid fa-user"></i></div>
-                  <div class="voice-info">
-                    <div class="voice-name">Sarah</div>
-                    <div class="voice-type">Female</div>
-                  </div>
-                </div>
-              </td>
-              <td><span class="phone-number">+1 (800) 555-0123</span></td>
-              <td><span class="edited-by">John Smith</span></td>
-              <td style="text-align:center;">
-                <div class="dropdown-menu-wrapper">
-                  <button class="menu-btn" onclick="toggleDropdown(this)">
-                    <i class="fa-solid fa-ellipsis-vertical"></i>
-                  </button>
-                  <div class="dropdown-content">
-                    <button class="dropdown-item" onclick="handleAction('edit', 'Appeals Agent')">
-                      <i class="fa-solid fa-pen"></i> Edit
-                    </button>
-                    <button class="dropdown-item" onclick="handleAction('view', 'Appeals Agent')">
-                      <i class="fa-solid fa-eye"></i> View Details
-                    </button>
-                    <button class="dropdown-item" onclick="handleAction('test', 'Appeals Agent')">
-                      <i class="fa-solid fa-phone"></i> Test Call
-                    </button>
-                    <button class="dropdown-item" onclick="handleAction('logs', 'Appeals Agent')">
-                      <i class="fa-solid fa-list"></i> View Logs
-                    </button>
-                    <button class="dropdown-item" onclick="handleAction('clone', 'Appeals Agent')">
-                      <i class="fa-solid fa-copy"></i> Clone
-                    </button>
-                    <button class="dropdown-item" onclick="handleAction('delete', 'Appeals Agent')" style="color:#ef4444;">
-                      <i class="fa-solid fa-trash"></i> Delete
-                    </button>
-                  </div>
-                </div>
-              </td>
-            </tr>
-
-            <!-- Row 2 -->
-            <tr>
-              <td><a href="#" class="agent-name-link">Grievance Resolution Agent</a></td>
-              <td><span class="agent-type-badge"><i class="fa-solid fa-comment"></i> Text Agent</span></td>
-              <td>
-                <div class="voice-cell">
-                  <div class="voice-icon"><i class="fa-solid fa-user"></i></div>
-                  <div class="voice-info">
-                    <div class="voice-name">John</div>
-                    <div class="voice-type">Male</div>
-                  </div>
-                </div>
-              </td>
-              <td><span class="phone-number">+1 (800) 555-0124</span></td>
-              <td><span class="edited-by">Sarah Johnson</span></td>
-              <td style="text-align:center;">
-                <div class="dropdown-menu-wrapper">
-                  <button class="menu-btn" onclick="toggleDropdown(this)">
-                    <i class="fa-solid fa-ellipsis-vertical"></i>
-                  </button>
-                  <div class="dropdown-content">
-                    <button class="dropdown-item" onclick="handleAction('edit', 'Grievance Resolution Agent')">
-                      <i class="fa-solid fa-pen"></i> Edit
-                    </button>
-                    <button class="dropdown-item" onclick="handleAction('view', 'Grievance Resolution Agent')">
-                      <i class="fa-solid fa-eye"></i> View Details
-                    </button>
-                    <button class="dropdown-item" onclick="handleAction('test', 'Grievance Resolution Agent')">
-                      <i class="fa-solid fa-phone"></i> Test Call
-                    </button>
-                    <button class="dropdown-item" onclick="handleAction('logs', 'Grievance Resolution Agent')">
-                      <i class="fa-solid fa-list"></i> View Logs
-                    </button>
-                    <button class="dropdown-item" onclick="handleAction('clone', 'Grievance Resolution Agent')">
-                      <i class="fa-solid fa-copy"></i> Clone
-                    </button>
-                    <button class="dropdown-item" onclick="handleAction('delete', 'Grievance Resolution Agent')" style="color:#ef4444;">
-                      <i class="fa-solid fa-trash"></i> Delete
-                    </button>
-                  </div>
-                </div>
-              </td>
-            </tr>
-
-            <!-- Row 3 -->
-            <tr>
-              <td><a href="#" class="agent-name-link">Claims Verification Agent</a></td>
-              <td><span class="agent-type-badge"><i class="fa-solid fa-comments"></i> Chat Agent</span></td>
-              <td>
-                <div class="voice-cell">
-                  <div class="voice-icon"><i class="fa-solid fa-user"></i></div>
-                  <div class="voice-info">
-                    <div class="voice-name">Emma</div>
-                    <div class="voice-type">Female</div>
-                  </div>
-                </div>
-              </td>
-              <td><span class="phone-number">+1 (800) 555-0125</span></td>
-              <td><span class="edited-by">Michael Davis</span></td>
-              <td style="text-align:center;">
-                <div class="dropdown-menu-wrapper">
-                  <button class="menu-btn" onclick="toggleDropdown(this)">
-                    <i class="fa-solid fa-ellipsis-vertical"></i>
-                  </button>
-                  <div class="dropdown-content">
-                    <button class="dropdown-item" onclick="handleAction('edit', 'Claims Verification Agent')">
-                      <i class="fa-solid fa-pen"></i> Edit
-                    </button>
-                    <button class="dropdown-item" onclick="handleAction('view', 'Claims Verification Agent')">
-                      <i class="fa-solid fa-eye"></i> View Details
-                    </button>
-                    <button class="dropdown-item" onclick="handleAction('test', 'Claims Verification Agent')">
-                      <i class="fa-solid fa-phone"></i> Test Call
-                    </button>
-                    <button class="dropdown-item" onclick="handleAction('logs', 'Claims Verification Agent')">
-                      <i class="fa-solid fa-list"></i> View Logs
-                    </button>
-                    <button class="dropdown-item" onclick="handleAction('clone', 'Claims Verification Agent')">
-                      <i class="fa-solid fa-copy"></i> Clone
-                    </button>
-                    <button class="dropdown-item" onclick="handleAction('delete', 'Claims Verification Agent')" style="color:#ef4444;">
-                      <i class="fa-solid fa-trash"></i> Delete
-                    </button>
-                  </div>
-                </div>
-              </td>
-            </tr>
-
-            <!-- Row 4 -->
-            <tr>
-              <td><a href="#" class="agent-name-link">Member Support Agent</a></td>
-              <td><span class="agent-type-badge"><i class="fa-solid fa-microphone"></i> Voice Agent</span></td>
-              <td>
-                <div class="voice-cell">
-                  <div class="voice-icon"><i class="fa-solid fa-user"></i></div>
-                  <div class="voice-info">
-                    <div class="voice-name">Michael</div>
-                    <div class="voice-type">Male</div>
-                  </div>
-                </div>
-              </td>
-              <td><span class="phone-number">+1 (800) 555-0126</span></td>
-              <td><span class="edited-by">Emily Wilson</span></td>
-              <td style="text-align:center;">
-                <div class="dropdown-menu-wrapper">
-                  <button class="menu-btn" onclick="toggleDropdown(this)">
-                    <i class="fa-solid fa-ellipsis-vertical"></i>
-                  </button>
-                  <div class="dropdown-content">
-                    <button class="dropdown-item" onclick="handleAction('edit', 'Member Support Agent')">
-                      <i class="fa-solid fa-pen"></i> Edit
-                    </button>
-                    <button class="dropdown-item" onclick="handleAction('view', 'Member Support Agent')">
-                      <i class="fa-solid fa-eye"></i> View Details
-                    </button>
-                    <button class="dropdown-item" onclick="handleAction('test', 'Member Support Agent')">
-                      <i class="fa-solid fa-phone"></i> Test Call
-                    </button>
-                    <button class="dropdown-item" onclick="handleAction('logs', 'Member Support Agent')">
-                      <i class="fa-solid fa-list"></i> View Logs
-                    </button>
-                    <button class="dropdown-item" onclick="handleAction('clone', 'Member Support Agent')">
-                      <i class="fa-solid fa-copy"></i> Clone
-                    </button>
-                    <button class="dropdown-item" onclick="handleAction('delete', 'Member Support Agent')" style="color:#ef4444;">
-                      <i class="fa-solid fa-trash"></i> Delete
-                    </button>
-                  </div>
-                </div>
-              </td>
-            </tr>
-
-            <!-- Row 5 -->
-            <tr>
-              <td><a href="#" class="agent-name-link">Prior Auth Agent</a></td>
-              <td><span class="agent-type-badge"><i class="fa-solid fa-comment"></i> Text Agent</span></td>
-              <td>
-                <div class="voice-cell">
-                  <div class="voice-icon"><i class="fa-solid fa-user"></i></div>
-                  <div class="voice-info">
-                    <div class="voice-name">Sarah</div>
-                    <div class="voice-type">Female</div>
-                  </div>
-                </div>
-              </td>
-              <td><span class="phone-number">+1 (800) 555-0127</span></td>
-              <td><span class="edited-by">Robert Taylor</span></td>
-              <td style="text-align:center;">
-                <div class="dropdown-menu-wrapper">
-                  <button class="menu-btn" onclick="toggleDropdown(this)">
-                    <i class="fa-solid fa-ellipsis-vertical"></i>
-                  </button>
-                  <div class="dropdown-content">
-                    <button class="dropdown-item" onclick="handleAction('edit', 'Prior Auth Agent')">
-                      <i class="fa-solid fa-pen"></i> Edit
-                    </button>
-                    <button class="dropdown-item" onclick="handleAction('view', 'Prior Auth Agent')">
-                      <i class="fa-solid fa-eye"></i> View Details
-                    </button>
-                    <button class="dropdown-item" onclick="handleAction('test', 'Prior Auth Agent')">
-                      <i class="fa-solid fa-phone"></i> Test Call
-                    </button>
-                    <button class="dropdown-item" onclick="handleAction('logs', 'Prior Auth Agent')">
-                      <i class="fa-solid fa-list"></i> View Logs
-                    </button>
-                    <button class="dropdown-item" onclick="handleAction('clone', 'Prior Auth Agent')">
-                      <i class="fa-solid fa-copy"></i> Clone
-                    </button>
-                    <button class="dropdown-item" onclick="handleAction('delete', 'Prior Auth Agent')" style="color:#ef4444;">
-                      <i class="fa-solid fa-trash"></i> Delete
-                    </button>
-                  </div>
-                </div>
-              </td>
-            </tr>
-
-          </tbody>
-        </table>
-      </div>
-
-      <!-- Pagination -->
-      <div class="pagination">
-        <button class="page"><i class="fa-solid fa-chevron-left"></i></button>
-        <button class="page active">1</button>
-        <button class="page">2</button>
-        <button class="page">3</button>
-        <span class="page-dots">...</span>
-        <button class="page">10</button>
-        <button class="page"><i class="fa-solid fa-chevron-right"></i></button>
-      </div>
-
-    </div>
-
   </div>
 
-  <!-- Footer -->
-  <div class="footer">© 2026 Care Insight All Rights Reserved</div>
+  <!-- Main Content -->
+  <div class="content-wrapper">
+    <!-- Left Section -->
+    <div class="left-section">
+      <!-- Config Section -->
+      <div class="config-section">
+        <div class="config-row">
+          <div class="config-group">
+            <label class="config-label">Model</label>
+            <select class="config-select">
+              <option>Claude 4.5 Haiku</option>
+              <option>Claude 3.5 Sonnet</option>
+              <option>Claude 3 Opus</option>
+              <option>GPT-4 Turbo</option>
+            </select>
+          </div>
+          <button class="icon-btn-config" title="Model Settings">
+            <i class="fa-solid fa-sliders"></i>
+          </button>
+          <button class="icon-btn-config" title="Pause">
+            <i class="fa-solid fa-pause"></i>
+          </button>
+        </div>
+        
+        <div class="config-row">
+          <div class="config-group">
+            <label class="config-label">Voice</label>
+            <select class="config-select">
+              <option>Sarah - Female</option>
+              <option>John - Male</option>
+              <option>Emma - Female</option>
+              <option>Michael - Male</option>
+            </select>
+          </div>
+          <button class="icon-btn-config" title="Voice Settings">
+            <i class="fa-solid fa-gear"></i>
+          </button>
+        </div>
+        
+        <div class="config-row">
+          <div class="config-group">
+            <label class="config-label">Language</label>
+            <select class="config-select">
+              <option>English</option>
+              <option>Spanish</option>
+              <option>French</option>
+              <option>German</option>
+            </select>
+          </div>
+          <button class="icon-btn-config" title="Language Settings">
+            <i class="fa-solid fa-globe"></i>
+          </button>
+        </div>
+      </div>
+
+      <!-- Prompt Section -->
+      <div class="prompt-section">
+        <div class="section-title">System Prompt</div>
+        <div class="rich-editor">
+          <div class="editor-toolbar">
+            <button class="toolbar-btn" title="Bold"><i class="fa-solid fa-bold"></i></button>
+            <button class="toolbar-btn" title="Italic"><i class="fa-solid fa-italic"></i></button>
+            <button class="toolbar-btn" title="Underline"><i class="fa-solid fa-underline"></i></button>
+            <div style="flex:1;"></div>
+            <button class="toolbar-btn" title="More"><i class="fa-solid fa-ellipsis"></i></button>
+          </div>
+          <textarea class="editor-content">You are Paola, a professional voice agent for ABC Dental Insurance, specializing in helping members with their appeals and grievances. You have access to a comprehensive set of tools through an MCP server integration to assist members with their cases.
+
+CRITICAL AUTHENTICATION REQUIREMENT:
+Before accessing ANY protected health information (PHI) or performing ANY member-specific operations, you MUST authenticate the member first using the authenticate_member function. This is a HIPAA compliance requirement and is non-negotiable.
+
+AUTHENTICATION PROCESS:
+1. When a member contacts you, immediately inform them that you need to verify their identity before accessing their information
+2. Politely ask for their:
+   - Member ID (format: M######, e.g., M123456)
+   - Date of Birth (format: YYYY-MM-DD, e.g., 1985-03-15)
+   - ZIP Code (5 digits, e.g., 90210)
+3. Call authenticate_member with these three pieces of information
+4. Only proceed with accessing their information if authentication is successful
+5. If authentication fails, inform them politely and ask them to verify their information</textarea>
+        </div>
+      </div>
+
+      <!-- Functions Section -->
+      <div class="collapse-section">
+        <div class="collapse-header active" onclick="toggleCollapse(this)">
+          <div class="collapse-title">
+            <i class="fa-solid fa-cube"></i> Functions
+          </div>
+          <i class="collapse-icon fa-solid fa-chevron-down"></i>
+        </div>
+        <div class="collapse-content show">
+          <div class="function-item">
+            <div class="function-name">
+              <i class="fa-solid fa-phone"></i> end_call_1760995941862
+            </div>
+            <div class="function-actions">
+              <button class="func-btn" title="Edit"><i class="fa-solid fa-pen"></i></button>
+              <button class="func-btn" title="Delete"><i class="fa-solid fa-trash"></i></button>
+            </div>
+          </div>
+          <button class="add-function-btn">
+            <i class="fa-solid fa-plus"></i> Add Function
+          </button>
+        </div>
+      </div>
+
+      <!-- Webhook Settings Section -->
+      <div class="collapse-section">
+        <div class="collapse-header" onclick="toggleCollapse(this)">
+          <div class="collapse-title">
+            <i class="fa-solid fa-webhook"></i> Webhook Settings
+          </div>
+          <i class="collapse-icon fa-solid fa-chevron-down"></i>
+        </div>
+        <div class="collapse-content">
+          <p style="color:#6B7280;font-size:14px;margin:0;">Configure webhooks for your agent events</p>
+        </div>
+      </div>
+
+      <!-- Translation Section -->
+      <div class="collapse-section">
+        <div class="collapse-header" onclick="toggleCollapse(this)">
+          <div class="collapse-title">
+            <i class="fa-solid fa-language"></i> Translation
+          </div>
+          <i class="collapse-icon fa-solid fa-chevron-down"></i>
+        </div>
+        <div class="collapse-content">
+          <p style="color:#6B7280;font-size:14px;margin:0;">Enable translation settings for multilingual support</p>
+        </div>
+      </div>
+
+      <!-- Analytics Section -->
+      <div class="collapse-section">
+        <div class="collapse-header" onclick="toggleCollapse(this)">
+          <div class="collapse-title">
+            <i class="fa-solid fa-chart-line"></i> Analytics
+          </div>
+          <i class="collapse-icon fa-solid fa-chevron-down"></i>
+        </div>
+        <div class="collapse-content">
+          <p style="color:#6B7280;font-size:14px;margin:0;">View analytics and performance metrics</p>
+        </div>
+      </div>
+
+      <!-- MCPs Section -->
+      <div class="collapse-section">
+        <div class="collapse-header" onclick="toggleCollapse(this)">
+          <div class="collapse-title">
+            <i class="fa-solid fa-link"></i> MCPs
+          </div>
+          <i class="collapse-icon fa-solid fa-chevron-down"></i>
+        </div>
+        <div class="collapse-content">
+          <p style="color:#6B7280;font-size:14px;margin:0;">Configure Model Context Protocol integrations</p>
+        </div>
+      </div>
+
+    </div>
+
+    <!-- Right Sidebar -->
+    <div class="right-section">
+      <div class="right-sidebar">
+        <div class="sidebar-title">
+          <i class="fa-solid fa-phone"></i> Test Audio
+        </div>
+        <button class="test-button">
+          <i class="fa-solid fa-play"></i> Test
+        </button>
+        <div class="test-placeholder">
+          <i class="fa-solid fa-microphone"></i>
+          <div class="test-placeholder-text">Test your agent</div>
+        </div>
+      </div>
+    </div>
+  </div>
 </div>
 
 <script>
-// Toggle dropdown menu
-function toggleDropdown(button) {
-  const dropdown = button.nextElementSibling;
+function toggleCollapse(header) {
+  const content = header.nextElementSibling;
+  const isActive = header.classList.contains('active');
   
-  // Close all other dropdowns
-  document.querySelectorAll('.dropdown-content').forEach(menu => {
-    if(menu !== dropdown) {
-      menu.classList.remove('show');
+  // Close all other sections
+  document.querySelectorAll('.collapse-header').forEach(h => {
+    if(h !== header) {
+      h.classList.remove('active');
+      h.nextElementSibling.classList.remove('show');
     }
   });
   
-  // Toggle current dropdown
-  dropdown.classList.toggle('show');
+  // Toggle current section
+  header.classList.toggle('active');
+  content.classList.toggle('show');
 }
-
-// Handle dropdown actions
-function handleAction(action, agentName) {
-  console.log(`Action: ${action}, Agent: ${agentName}`);
-  
-  // Close dropdown after action
-  document.querySelectorAll('.dropdown-content').forEach(menu => {
-    menu.classList.remove('show');
-  });
-  
-  switch(action) {
-    case 'edit':
-      alert(`Edit ${agentName}`);
-      break;
-    case 'view':
-      alert(`View details for ${agentName}`);
-      break;
-    case 'test':
-      alert(`Test call for ${agentName}`);
-      break;
-    case 'logs':
-      alert(`View logs for ${agentName}`);
-      break;
-    case 'clone':
-      alert(`Clone ${agentName}`);
-      break;
-    case 'delete':
-      if(confirm(`Are you sure you want to delete ${agentName}?`)) {
-        alert(`${agentName} deleted`);
-      }
-      break;
-  }
-}
-
-// Close dropdown when clicking outside
-document.addEventListener('click', function(event) {
-  if(!event.target.closest('.dropdown-menu-wrapper')) {
-    document.querySelectorAll('.dropdown-content').forEach(menu => {
-      menu.classList.remove('show');
-    });
-  }
-});
 </script>
 
 </body>
