@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
 <meta charset="UTF-8">
-<title>AI Agent Details</title>
+<title>Outreach Outbound</title>
 
 <!-- Font Awesome 6 Free -->
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css" integrity="sha512-DTOQO9RWCH3ppGqcWaEA1BIZOC6xxalwEsw9c2QQeAIftl+Vegovlnee1c9QX4TctnWMn13TZye+giMm8e2LwA==" crossorigin="anonymous" referrerpolicy="no-referrer">
@@ -26,164 +26,94 @@ body{
 ::-webkit-scrollbar-thumb{background:grey;border-radius:4px}
 
 /* ================= LAYOUT ================= */
-.page-container{
+.right-section{
+  background:whitesmoke;
   width:100%;
   min-height:100vh;
-  background:#f5f5f5;
 }
 
-.content-wrapper{
-  display:flex;
-  gap:24px;
-  padding:24px;
-  max-width:1800px;
+.main-container{
+  width:1855px;
   margin:0 auto;
+  padding:16px 16px 0 16px;
 }
 
-.left-section{
-  flex:1;
-  min-width:0;
-}
-
-.right-section{
-  width:380px;
-  flex-shrink:0;
-}
-
-/* ================= TOP BAR ================= */
-.top-bar{
-  background:#fff;
-  padding:16px 24px;
-  border-bottom:1px solid #e5e7eb;
+/* ================= HEADER ================= */
+.header-section{
   display:flex;
-  align-items:center;
   justify-content:space-between;
-  box-shadow:0 1px 3px rgba(0,0,0,0.1);
-}
-
-.top-bar-left{
-  display:flex;
   align-items:center;
-  gap:16px;
+  margin-bottom:24px;
 }
 
-.home-icon{
-  color:#5830AD;
-  font-size:20px;
-  cursor:pointer;
-}
-
-.agent-header{
-  display:flex;
-  align-items:center;
-  gap:8px;
-}
-
-.agent-title{
+.title-container{
   font-family:"Open Sans";
-  font-size:20px;
   font-weight:600;
+  font-size:24px;
   color:#1A1A1A;
 }
 
-.edit-icon{
+.header-actions{
+  display:flex;
+  gap:12px;
+  align-items:center;
+}
+
+.call-type-selector{
+  display:flex;
+  gap:8px;
+  background:#fff;
+  padding:8px;
+  border-radius:8px;
+  border:1px solid #D1D5DB;
+}
+
+.call-type-btn{
+  font-family:"Open Sans";
+  font-size:13px;
+  font-weight:600;
+  padding:8px 16px;
+  border-radius:6px;
+  border:none;
+  background:#f3f4f6;
   color:#6B7280;
   cursor:pointer;
-  font-size:14px;
-}
-
-.agent-meta{
-  display:flex;
-  align-items:center;
-  gap:16px;
-  font-size:13px;
-  color:#6B7280;
-  margin-top:6px;
-  flex-wrap:wrap;
-}
-
-.meta-item{
+  transition:all 0.3s;
   display:flex;
   align-items:center;
   gap:6px;
 }
 
-.meta-item i{
-  color:#5830AD;
+.call-type-btn.active{
+  background:#5830AD;
+  color:#fff;
 }
 
-.info-icon{
-  cursor:pointer;
-  color:#9CA3AF;
+.call-type-btn:hover{
+  background:#e5e7eb;
 }
 
-.top-bar-right{
-  display:flex;
-  align-items:center;
-  gap:12px;
+.call-type-btn.active:hover{
+  background:#471d82;
 }
 
-.top-nav{
-  display:flex;
-  gap:24px;
-}
-
-.nav-link{
+.history-btn-top{
+  background:#fff;
+  border:1px solid #D1D5DB;
   color:#6B7280;
-  text-decoration:none;
-  font-family:"Open Sans";
-  font-size:14px;
-  font-weight:500;
+  font-size:18px;
   cursor:pointer;
-  transition:color 0.3s;
-}
-
-.nav-link:hover{
-  color:#5830AD;
-}
-
-.nav-link.active{
-  color:#5830AD;
-  font-weight:600;
-}
-
-.action-buttons{
-  display:flex;
-  gap:8px;
-  align-items:center;
-}
-
-.menu-btn-top{
-  background:none;
-  border:none;
-  color:#6B7280;
-  font-size:20px;
-  cursor:pointer;
-  padding:8px;
+  padding:10px;
+  border-radius:6px;
   transition:all 0.3s;
 }
 
-.menu-btn-top:hover{
+.history-btn-top:hover{
   background:#f3f4f6;
-  border-radius:6px;
+  color:#2E2E2E;
 }
 
-.history-btn{
-  background:none;
-  border:none;
-  color:#6B7280;
-  font-size:20px;
-  cursor:pointer;
-  padding:8px;
-  transition:all 0.3s;
-}
-
-.history-btn:hover{
-  background:#f3f4f6;
-  border-radius:6px;
-}
-
-.btn-publish{
+.btn-primary{
   background:#5830AD;
   color:#fff;
   font-family:"Open Sans";
@@ -199,354 +129,401 @@ body{
   transition:background 0.3s;
 }
 
-.btn-publish:hover{
+.btn-primary:hover{
   background:#471d82;
 }
 
-/* ================= CONFIG SECTION ================= */
-.config-section{
+/* ================= DASHBOARD CARDS ================= */
+.dashboard-section{
+  display:grid;
+  grid-template-columns:repeat(auto-fit, minmax(250px, 1fr));
+  gap:16px;
+  margin-bottom:24px;
+}
+
+.dashboard-card{
   background:#fff;
   border-radius:8px;
   padding:20px;
-  margin-bottom:20px;
   box-shadow:0 1px 3px rgba(0,0,0,0.1);
 }
 
-.config-row{
+.card-header{
   display:flex;
-  gap:16px;
-  align-items:flex-end;
-  margin-bottom:16px;
+  align-items:center;
+  justify-content:space-between;
+  margin-bottom:12px;
 }
 
-.config-row:last-child{
-  margin-bottom:0;
-}
-
-.config-group{
-  flex:1;
-}
-
-.config-label{
+.card-title{
   font-family:"Open Sans";
   font-size:13px;
   font-weight:600;
-  color:#424242;
-  margin-bottom:8px;
-  display:block;
+  color:#6B7280;
 }
 
-.config-select{
-  width:100%;
+.card-icon{
+  font-size:24px;
+  width:40px;
+  height:40px;
+  border-radius:8px;
+  display:flex;
+  align-items:center;
+  justify-content:center;
+}
+
+.card-icon.blue{
+  background:#e8f1ff;
+  color:#0b5cff;
+}
+
+.card-icon.green{
+  background:#d4edda;
+  color:#155724;
+}
+
+.card-icon.orange{
+  background:#fff3cd;
+  color:#856404;
+}
+
+.card-icon.purple{
+  background:#e8ddf7;
+  color:#5830AD;
+}
+
+.card-value{
+  font-family:"Open Sans";
+  font-size:32px;
+  font-weight:600;
+  color:#1A1A1A;
+}
+
+.card-subtitle{
+  font-family:"Open Sans";
+  font-size:12px;
+  color:#9CA3AF;
+  margin-top:8px;
+}
+
+/* ================= FILTERS ================= */
+.filters-section{
+  background:#fff;
+  border-radius:8px;
+  padding:16px;
+  margin-bottom:16px;
+  box-shadow:0 1px 3px rgba(0,0,0,0.1);
+  display:flex;
+  gap:12px;
+  flex-wrap:wrap;
+  align-items:center;
+}
+
+.search-input,
+.filter-select{
   height:40px;
   background:#fff;
   border:1px solid #D1D5DB;
-  border-radius:6px;
+  border-radius:4px;
   padding:0 12px;
   font-family:"Open Sans";
   font-size:14px;
   color:#2E2E2E;
-  cursor:pointer;
 }
 
-.config-select:focus{
-  outline:none;
-  border-color:#5830AD;
-  box-shadow:0 0 0 3px rgba(88,48,173,0.1);
+.search-input{width:300px}
+.search-input::placeholder{color:#9CA3AF}
+.filter-select{width:180px}
+
+.filters-divider{
+  width:1px;
+  height:24px;
+  background:#D1D5DB;
 }
 
-.icon-btn-config{
-  width:40px;
-  height:40px;
-  background:#f3f4f6;
-  border:1px solid #D1D5DB;
-  border-radius:6px;
-  cursor:pointer;
-  color:#6B7280;
-  transition:all 0.3s;
-}
-
-.icon-btn-config:hover{
-  background:#e5e7eb;
-  color:#2E2E2E;
-}
-
-/* ================= PROMPT SECTION ================= */
-.prompt-section{
+/* ================= CARD CONTAINER ================= */
+.card-container{
   background:#fff;
   border-radius:8px;
-  padding:20px;
-  margin-bottom:20px;
-  box-shadow:0 1px 3px rgba(0,0,0,0.1);
+  padding:16px;
+  box-shadow:0 4px 10px rgba(0,0,0,.25);
 }
 
-.section-title{
-  font-family:"Open Sans";
-  font-size:15px;
-  font-weight:600;
-  color:#1A1A1A;
-  margin-bottom:12px;
+/* ================= TABLE ================= */
+.table-wrapper{
+  overflow-x:auto;
 }
 
-.rich-editor{
-  border:1px solid #D1D5DB;
-  border-radius:6px;
-  overflow:hidden;
-}
-
-.editor-toolbar{
-  background:#f9fafb;
-  border-bottom:1px solid #D1D5DB;
-  padding:8px 12px;
-  display:flex;
-  gap:4px;
-  flex-wrap:wrap;
-}
-
-.toolbar-btn{
-  background:#fff;
-  border:1px solid #D1D5DB;
-  border-radius:4px;
-  width:32px;
-  height:32px;
-  cursor:pointer;
-  display:flex;
-  align-items:center;
-  justify-content:center;
-  color:#6B7280;
-  transition:all 0.3s;
-  font-size:14px;
-}
-
-.toolbar-btn:hover{
-  background:#f3f4f6;
-  border-color:#9CA3AF;
-  color:#2E2E2E;
-}
-
-.editor-content{
-  min-height:180px;
-  padding:12px;
-  font-family:"Open Sans";
-  font-size:14px;
-  color:#2E2E2E;
-  resize:vertical;
-  border:none;
-  background:#fff;
+table{
   width:100%;
-}
-
-/* ================= COLLAPSE SECTION ================= */
-.collapse-section{
-  background:#fff;
-  border-radius:8px;
-  margin-bottom:20px;
-  box-shadow:0 1px 3px rgba(0,0,0,0.1);
-  overflow:hidden;
-}
-
-.collapse-header{
-  padding:16px 20px;
-  background:#f9fafb;
-  border-bottom:1px solid #e5e7eb;
-  cursor:pointer;
-  display:flex;
-  align-items:center;
-  justify-content:space-between;
-  transition:background 0.3s;
-  user-select:none;
-}
-
-.collapse-header:hover{
-  background:#f3f4f6;
-}
-
-.collapse-header.active{
-  background:#f3f4f6;
-}
-
-.collapse-title{
-  font-family:"Open Sans";
-  font-size:15px;
-  font-weight:600;
-  color:#1A1A1A;
-  display:flex;
-  align-items:center;
-  gap:12px;
-}
-
-.collapse-title i{
-  color:#5830AD;
-  font-size:16px;
-}
-
-.collapse-icon{
-  color:#6B7280;
-  transition:transform 0.3s;
-  font-size:16px;
-}
-
-.collapse-header.active .collapse-icon{
-  transform:rotate(180deg);
-}
-
-.collapse-content{
-  display:none;
-  padding:16px 20px;
-  background:#fff;
-}
-
-.collapse-content.show{
-  display:block;
-}
-
-.function-item{
-  background:#f9fafb;
-  border-radius:6px;
-  padding:12px;
-  margin-bottom:12px;
-  display:flex;
-  align-items:center;
-  justify-content:space-between;
-}
-
-.function-item:last-child{
-  margin-bottom:0;
-}
-
-.function-name{
+  min-width:1400px;
+  border-collapse:collapse;
   font-family:"Open Sans";
   font-size:14px;
-  font-weight:500;
+  border:1px solid rgba(0,0,0,.1);
+}
+
+th{
+  background:#f8f8f8;
+  color:#424242;
+  font-weight:600;
+  padding:12px;
+  height:60px;
+  text-align:left;
+  white-space:nowrap;
+}
+
+td{
+  padding:12px;
   color:#2E2E2E;
+  font-weight:400;
+  vertical-align:middle;
+}
+
+tr:nth-child(even){
+  background:#f8f8f8;
+}
+
+tr:hover{
+  background:#f0f0f0;
+}
+
+/* ================= TABLE CELLS ================= */
+.sr-no{
+  text-align:center;
+  font-weight:600;
+  color:#424242;
+  width:50px;
+}
+
+.call-type-badge{
+  display:inline-flex;
+  align-items:center;
+  gap:6px;
+  padding:6px 12px;
+  border-radius:4px;
+  font-size:13px;
+  font-weight:600;
+  white-space:nowrap;
+  background:#f3f4f6;
+  color:#424242;
+  border:1px solid #d1d5db;
+}
+
+.case-number{
+  color:#2E2E2E;
+  font-weight:600;
+}
+
+.schedule-datetime{
+  color:#2E2E2E;
+  font-weight:400;
   display:flex;
   align-items:center;
-  gap:8px;
+  gap:6px;
 }
 
-.function-actions{
-  display:flex;
-  gap:8px;
+.status-badge{
+  display:inline-flex;
+  align-items:center;
+  padding:6px 12px;
+  border-radius:6px;
+  font-size:12px;
+  font-weight:600;
+  white-space:nowrap;
 }
 
-.func-btn{
+.status-completed{
+  background:#d4edda;
+  color:#155724;
+}
+
+.status-scheduled{
+  background:#e8f1ff;
+  color:#0b5cff;
+}
+
+.status-pending{
+  background:#fff3cd;
+  color:#856404;
+}
+
+.status-cancelled{
+  background:#f8d7da;
+  color:#721c24;
+}
+
+.notes-cell{
+  color:#6B7280;
+  font-size:13px;
+  max-width:200px;
+  overflow:hidden;
+  text-overflow:ellipsis;
+  white-space:nowrap;
+}
+
+/* ================= DROPDOWN MENU ================= */
+.dropdown-menu-wrapper{
+  position:relative;
+  display:inline-block;
+}
+
+.menu-btn{
   background:none;
   border:none;
   color:#6B7280;
+  font-size:20px;
   cursor:pointer;
-  font-size:14px;
   padding:4px 8px;
   border-radius:4px;
   transition:all 0.3s;
+  display:flex;
+  align-items:center;
+  justify-content:center;
 }
 
-.func-btn:hover{
+.menu-btn:hover{
   background:#e5e7eb;
   color:#2E2E2E;
 }
 
-.add-function-btn{
-  background:none;
-  border:2px dashed #D1D5DB;
+.dropdown-content{
+  display:none;
+  position:absolute;
+  right:0;
+  background:#fff;
+  min-width:160px;
+  box-shadow:0 2px 10px rgba(0,0,0,0.15);
   border-radius:6px;
-  padding:12px;
-  color:#6B7280;
+  z-index:1000;
+  border:1px solid #e5e7eb;
+}
+
+.dropdown-content.show{
+  display:block;
+}
+
+.dropdown-item{
+  color:#2E2E2E;
+  padding:12px 16px;
+  text-decoration:none;
+  display:flex;
+  align-items:center;
+  gap:10px;
   font-family:"Open Sans";
   font-size:14px;
-  font-weight:500;
   cursor:pointer;
+  transition:all 0.3s;
+  border:none;
+  background:none;
   width:100%;
+  text-align:left;
+}
+
+.dropdown-item:first-child{
+  border-radius:6px 6px 0 0;
+}
+
+.dropdown-item:last-child{
+  border-radius:0 0 6px 6px;
+}
+
+.dropdown-item:hover{
+  background:#f3f4f6;
+  color:#5830AD;
+}
+
+.dropdown-item i{
+  width:16px;
+  text-align:center;
+}
+
+.dropdown-item.danger{
+  color:#ef4444;
+}
+
+/* ================= PAGINATION ================= */
+.pagination{
+  display:flex;
+  justify-content:center;
+  gap:8px;
+  margin:24px 0;
+  align-items:center;
+}
+
+.page{
+  width:44px;
+  height:44px;
+  border-radius:50%;
   display:flex;
   align-items:center;
   justify-content:center;
-  gap:8px;
+  font-family:"Open Sans";
+  font-weight:600;
+  font-size:14px;
+  cursor:pointer;
+  border:1px solid #D1D5DB;
+  background:#fff;
+  color:#2E2E2E;
   transition:all 0.3s;
 }
 
-.add-function-btn:hover{
+.page:hover:not(.active){
   border-color:#5830AD;
-  color:#5830AD;
   background:#f8f5ff;
+  color:#5830AD;
 }
 
-/* ================= RIGHT SIDEBAR ================= */
-.right-sidebar{
-  background:#fff;
-  border-radius:8px;
-  padding:20px;
-  box-shadow:0 1px 3px rgba(0,0,0,0.1);
-  height:fit-content;
-  position:sticky;
-  top:24px;
-}
-
-.sidebar-title{
-  font-family:"Open Sans";
-  font-size:15px;
-  font-weight:600;
-  color:#1A1A1A;
-  margin-bottom:16px;
-  display:flex;
-  align-items:center;
-  gap:8px;
-}
-
-.test-button{
-  width:100%;
+.page.active{
   background:#5830AD;
   color:#fff;
-  font-family:"Open Sans";
-  font-size:14px;
-  font-weight:600;
-  padding:12px;
-  border-radius:6px;
-  border:none;
-  cursor:pointer;
-  transition:background 0.3s;
-  display:flex;
-  align-items:center;
-  justify-content:center;
-  gap:8px;
+  border-color:#5830AD;
+  box-shadow:0 2px 8px rgba(88,48,173,0.3);
 }
 
-.test-button:hover{
-  background:#471d82;
+.page-dots{
+  color:#9CA3AF;
+  padding:0 4px;
 }
 
-.test-placeholder{
-  background:#f9fafb;
-  border:2px dashed #D1D5DB;
-  border-radius:8px;
-  padding:40px 20px;
+/* ================= FOOTER ================= */
+.footer{
   text-align:center;
-  margin-top:16px;
-  min-height:200px;
-  display:flex;
-  align-items:center;
-  justify-content:center;
-  flex-direction:column;
-  color:#6B7280;
-}
-
-.test-placeholder i{
-  font-size:48px;
-  color:#D1D5DB;
-  margin-bottom:12px;
-}
-
-.test-placeholder-text{
-  font-size:14px;
-  font-weight:500;
+  padding:40px 16px;
+  font-family:"Open Sans";
+  color:#595959;
 }
 
 /* ================= RESPONSIVE ================= */
 @media(max-width:1200px){
-  .content-wrapper{
-    flex-direction:column;
+  .main-container{
+    width:100%;
   }
   
-  .right-section{
+  .dashboard-section{
+    grid-template-columns:repeat(2, 1fr);
+  }
+  
+  .filters-section{
+    flex-direction:column;
+    align-items:stretch;
+  }
+  
+  .search-input,
+  .filter-select{
     width:100%;
+  }
+}
+
+@media(max-width:768px){
+  .dashboard-section{
+    grid-template-columns:1fr;
+  }
+  
+  .header-section{
+    flex-direction:column;
+    align-items:flex-start;
+    gap:12px;
   }
 }
 
@@ -555,258 +532,381 @@ body{
 </head>
 <body>
 
-<div class="page-container">
-  <!-- Top Bar -->
-  <div class="top-bar">
-    <div class="top-bar-left">
-      <div class="home-icon">
-        <i class="fa-solid fa-home"></i>
-      </div>
-      <div>
-        <div class="agent-header">
-          <span class="agent-title">Appeals Agent</span>
-          <i class="fa-solid fa-pen edit-icon"></i>
+<div class="right-section">
+  <div class="main-container">
+
+    <!-- Header Section -->
+    <div class="header-section">
+      <div class="title-container">Outreach Outbound</div>
+      <div class="header-actions">
+        <div class="call-type-selector">
+          <button class="call-type-btn active">
+            <i class="fa-solid fa-phone"></i> One-way Call
+          </button>
+          <button class="call-type-btn">
+            <i class="fa-solid fa-phone-flip"></i> Two-way Call
+          </button>
         </div>
-        <div class="agent-meta">
-          <div class="meta-item">
-            <span>Agent ID: ag...bed</span>
-            <i class="fa-solid fa-copy"></i>
-          </div>
-          <div class="meta-item">
-            <span>Retell LLM ID: ll...b03</span>
-            <i class="fa-solid fa-copy"></i>
-          </div>
-          <div class="meta-item">
-            <span>$0.095/min</span>
-            <i class="fa-solid fa-circle-info info-icon"></i>
-          </div>
-          <div class="meta-item">
-            <span>820-1000ms latency</span>
-            <i class="fa-solid fa-circle-info info-icon"></i>
-          </div>
-          <div class="meta-item">
-            <span>1661-2621 tokens</span>
-            <i class="fa-solid fa-circle-info info-icon"></i>
-          </div>
-        </div>
-      </div>
-    </div>
-    
-    <div class="top-bar-right">
-      <div class="top-nav">
-        <a href="#" class="nav-link active">Create</a>
-        <a href="#" class="nav-link">Simulation</a>
-      </div>
-      <div class="action-buttons">
-        <button class="history-btn" title="History">
-          <i class="fa-solid fa-clock-rotate-left"></i>
+        <button class="history-btn-top" title="Call History">
+          <i class="fa-solid fa-history"></i>
         </button>
-        <button class="menu-btn-top" title="More Options">
-          <i class="fa-solid fa-ellipsis-vertical"></i>
-        </button>
-        <button class="btn-publish">
-          <i class="fa-solid fa-cloud-arrow-up"></i> Publish
+        <button class="btn-primary">
+          <i class="fa-solid fa-plus"></i> Add Outbound Call
         </button>
       </div>
     </div>
+
+    <!-- Dashboard Cards -->
+    <div class="dashboard-section">
+      <!-- Total Calls Card -->
+      <div class="dashboard-card">
+        <div class="card-header">
+          <div class="card-title">Total Calls</div>
+          <div class="card-icon blue">
+            <i class="fa-solid fa-phone"></i>
+          </div>
+        </div>
+        <div class="card-value">1,245</div>
+        <div class="card-subtitle">All time outbound calls</div>
+      </div>
+
+      <!-- Scheduled Card -->
+      <div class="dashboard-card">
+        <div class="card-header">
+          <div class="card-title">Scheduled</div>
+          <div class="card-icon orange">
+            <i class="fa-solid fa-clock"></i>
+          </div>
+        </div>
+        <div class="card-value">42</div>
+        <div class="card-subtitle">Awaiting execution</div>
+      </div>
+
+      <!-- Completed Card -->
+      <div class="dashboard-card">
+        <div class="card-header">
+          <div class="card-title">Completed</div>
+          <div class="card-icon green">
+            <i class="fa-solid fa-check-circle"></i>
+          </div>
+        </div>
+        <div class="card-value">1,178</div>
+        <div class="card-subtitle">Successfully completed</div>
+      </div>
+
+      <!-- New Card -->
+      <div class="dashboard-card">
+        <div class="card-header">
+          <div class="card-title">New</div>
+          <div class="card-icon purple">
+            <i class="fa-solid fa-star"></i>
+          </div>
+        </div>
+        <div class="card-value">25</div>
+        <div class="card-subtitle">New outbound requests</div>
+      </div>
+    </div>
+
+    <!-- Filters Section -->
+    <div class="filters-section">
+      <input class="search-input" placeholder="Search by case number or phone...">
+      <div class="filters-divider"></div>
+      <select class="filter-select">
+        <option>All Call Types</option>
+        <option>One-way Call</option>
+        <option>Two-way Call</option>
+      </select>
+      <select class="filter-select">
+        <option>All Status</option>
+        <option>Completed</option>
+        <option>Scheduled</option>
+        <option>Pending</option>
+        <option>Cancelled</option>
+      </select>
+      <select class="filter-select">
+        <option>All Dates</option>
+        <option>Today</option>
+        <option>This Week</option>
+        <option>This Month</option>
+      </select>
+    </div>
+
+    <!-- Main Card with Table -->
+    <div class="card-container">
+      <div class="table-wrapper">
+        <table>
+          <thead>
+            <tr>
+              <th>Sr.No.</th>
+              <th>Call Type</th>
+              <th>Case Number</th>
+              <th>Schedule Date & Time</th>
+              <th>Status</th>
+              <th>Notes</th>
+              <th>Actions</th>
+            </tr>
+          </thead>
+          <tbody>
+            <!-- Row 1 -->
+            <tr>
+              <td class="sr-no">1</td>
+              <td><span class="call-type-badge"><i class="fa-solid fa-phone"></i> One-way</span></td>
+              <td><span class="case-number">CASE-2024-001234</span></td>
+              <td><span class="schedule-datetime"><i class="fa-regular fa-calendar"></i> 14 Jan 2025, 10:30 AM</span></td>
+              <td><span class="status-badge status-completed"><i class="fa-solid fa-check"></i> Completed</span></td>
+              <td><span class="notes-cell">Member confirmed appeal submission and timeline</span></td>
+              <td>
+                <div class="dropdown-menu-wrapper">
+                  <button class="menu-btn" onclick="toggleDropdown(this)">
+                    <i class="fa-solid fa-ellipsis-vertical"></i>
+                  </button>
+                  <div class="dropdown-content">
+                    <button class="dropdown-item" onclick="handleAction('reschedule', 'CASE-2024-001234')">
+                      <i class="fa-solid fa-calendar-check"></i> Reschedule
+                    </button>
+                    <button class="dropdown-item" onclick="handleAction('view', 'CASE-2024-001234')">
+                      <i class="fa-solid fa-eye"></i> View Details
+                    </button>
+                    <button class="dropdown-item" onclick="handleAction('notes', 'CASE-2024-001234')">
+                      <i class="fa-solid fa-note-sticky"></i> Add Notes
+                    </button>
+                    <button class="dropdown-item danger" onclick="handleAction('cancel', 'CASE-2024-001234')">
+                      <i class="fa-solid fa-ban"></i> Cancel
+                    </button>
+                  </div>
+                </div>
+              </td>
+            </tr>
+
+            <!-- Row 2 -->
+            <tr>
+              <td class="sr-no">2</td>
+              <td><span class="call-type-badge"><i class="fa-solid fa-phone-flip"></i> Two-way</span></td>
+              <td><span class="case-number">CASE-2024-001235</span></td>
+              <td><span class="schedule-datetime"><i class="fa-regular fa-calendar"></i> 15 Jan 2025, 02:00 PM</span></td>
+              <td><span class="status-badge status-scheduled"><i class="fa-solid fa-hourglass-start"></i> Scheduled</span></td>
+              <td><span class="notes-cell">Awaiting member availability confirmation</span></td>
+              <td>
+                <div class="dropdown-menu-wrapper">
+                  <button class="menu-btn" onclick="toggleDropdown(this)">
+                    <i class="fa-solid fa-ellipsis-vertical"></i>
+                  </button>
+                  <div class="dropdown-content">
+                    <button class="dropdown-item" onclick="handleAction('reschedule', 'CASE-2024-001235')">
+                      <i class="fa-solid fa-calendar-check"></i> Reschedule
+                    </button>
+                    <button class="dropdown-item" onclick="handleAction('view', 'CASE-2024-001235')">
+                      <i class="fa-solid fa-eye"></i> View Details
+                    </button>
+                    <button class="dropdown-item" onclick="handleAction('notes', 'CASE-2024-001235')">
+                      <i class="fa-solid fa-note-sticky"></i> Add Notes
+                    </button>
+                    <button class="dropdown-item danger" onclick="handleAction('cancel', 'CASE-2024-001235')">
+                      <i class="fa-solid fa-ban"></i> Cancel
+                    </button>
+                  </div>
+                </div>
+              </td>
+            </tr>
+
+            <!-- Row 3 -->
+            <tr>
+              <td class="sr-no">3</td>
+              <td><span class="call-type-badge"><i class="fa-solid fa-phone"></i> One-way</span></td>
+              <td><span class="case-number">CASE-2024-001236</span></td>
+              <td><span class="schedule-datetime"><i class="fa-regular fa-calendar"></i> 16 Jan 2025, 11:00 AM</span></td>
+              <td><span class="status-badge status-pending"><i class="fa-solid fa-circle-notch"></i> Pending</span></td>
+              <td><span class="notes-cell">Retrying after previous attempt unsuccessful</span></td>
+              <td>
+                <div class="dropdown-menu-wrapper">
+                  <button class="menu-btn" onclick="toggleDropdown(this)">
+                    <i class="fa-solid fa-ellipsis-vertical"></i>
+                  </button>
+                  <div class="dropdown-content">
+                    <button class="dropdown-item" onclick="handleAction('reschedule', 'CASE-2024-001236')">
+                      <i class="fa-solid fa-calendar-check"></i> Reschedule
+                    </button>
+                    <button class="dropdown-item" onclick="handleAction('view', 'CASE-2024-001236')">
+                      <i class="fa-solid fa-eye"></i> View Details
+                    </button>
+                    <button class="dropdown-item" onclick="handleAction('notes', 'CASE-2024-001236')">
+                      <i class="fa-solid fa-note-sticky"></i> Add Notes
+                    </button>
+                    <button class="dropdown-item danger" onclick="handleAction('cancel', 'CASE-2024-001236')">
+                      <i class="fa-solid fa-ban"></i> Cancel
+                    </button>
+                  </div>
+                </div>
+              </td>
+            </tr>
+
+            <!-- Row 4 -->
+            <tr>
+              <td class="sr-no">4</td>
+              <td><span class="call-type-badge"><i class="fa-solid fa-phone-flip"></i> Two-way</span></td>
+              <td><span class="case-number">CASE-2024-001237</span></td>
+              <td><span class="schedule-datetime"><i class="fa-regular fa-calendar"></i> 17 Jan 2025, 03:30 PM</span></td>
+              <td><span class="status-badge status-scheduled"><i class="fa-solid fa-hourglass-start"></i> Scheduled</span></td>
+              <td><span class="notes-cell">Follow-up call for grievance resolution status update</span></td>
+              <td>
+                <div class="dropdown-menu-wrapper">
+                  <button class="menu-btn" onclick="toggleDropdown(this)">
+                    <i class="fa-solid fa-ellipsis-vertical"></i>
+                  </button>
+                  <div class="dropdown-content">
+                    <button class="dropdown-item" onclick="handleAction('reschedule', 'CASE-2024-001237')">
+                      <i class="fa-solid fa-calendar-check"></i> Reschedule
+                    </button>
+                    <button class="dropdown-item" onclick="handleAction('view', 'CASE-2024-001237')">
+                      <i class="fa-solid fa-eye"></i> View Details
+                    </button>
+                    <button class="dropdown-item" onclick="handleAction('notes', 'CASE-2024-001237')">
+                      <i class="fa-solid fa-note-sticky"></i> Add Notes
+                    </button>
+                    <button class="dropdown-item danger" onclick="handleAction('cancel', 'CASE-2024-001237')">
+                      <i class="fa-solid fa-ban"></i> Cancel
+                    </button>
+                  </div>
+                </div>
+              </td>
+            </tr>
+
+            <!-- Row 5 -->
+            <tr>
+              <td class="sr-no">5</td>
+              <td><span class="call-type-badge"><i class="fa-solid fa-phone"></i> One-way</span></td>
+              <td><span class="case-number">CASE-2024-001238</span></td>
+              <td><span class="schedule-datetime"><i class="fa-regular fa-calendar"></i> 18 Jan 2025, 09:15 AM</span></td>
+              <td><span class="status-badge status-cancelled"><i class="fa-solid fa-xmark"></i> Cancelled</span></td>
+              <td><span class="notes-cell">Member requested postponement due to unavailability</span></td>
+              <td>
+                <div class="dropdown-menu-wrapper">
+                  <button class="menu-btn" onclick="toggleDropdown(this)">
+                    <i class="fa-solid fa-ellipsis-vertical"></i>
+                  </button>
+                  <div class="dropdown-content">
+                    <button class="dropdown-item" onclick="handleAction('reschedule', 'CASE-2024-001238')">
+                      <i class="fa-solid fa-calendar-check"></i> Reschedule
+                    </button>
+                    <button class="dropdown-item" onclick="handleAction('view', 'CASE-2024-001238')">
+                      <i class="fa-solid fa-eye"></i> View Details
+                    </button>
+                    <button class="dropdown-item" onclick="handleAction('notes', 'CASE-2024-001238')">
+                      <i class="fa-solid fa-note-sticky"></i> Add Notes
+                    </button>
+                    <button class="dropdown-item danger" onclick="handleAction('cancel', 'CASE-2024-001238')">
+                      <i class="fa-solid fa-ban"></i> Cancel
+                    </button>
+                  </div>
+                </div>
+              </td>
+            </tr>
+
+            <!-- Row 6 -->
+            <tr>
+              <td class="sr-no">6</td>
+              <td><span class="call-type-badge"><i class="fa-solid fa-phone-flip"></i> Two-way</span></td>
+              <td><span class="case-number">CASE-2024-001239</span></td>
+              <td><span class="schedule-datetime"><i class="fa-regular fa-calendar"></i> 19 Jan 2025, 01:45 PM</span></td>
+              <td><span class="status-badge status-completed"><i class="fa-solid fa-check"></i> Completed</span></td>
+              <td><span class="notes-cell">Prior authorization discussed and approved</span></td>
+              <td>
+                <div class="dropdown-menu-wrapper">
+                  <button class="menu-btn" onclick="toggleDropdown(this)">
+                    <i class="fa-solid fa-ellipsis-vertical"></i>
+                  </button>
+                  <div class="dropdown-content">
+                    <button class="dropdown-item" onclick="handleAction('reschedule', 'CASE-2024-001239')">
+                      <i class="fa-solid fa-calendar-check"></i> Reschedule
+                    </button>
+                    <button class="dropdown-item" onclick="handleAction('view', 'CASE-2024-001239')">
+                      <i class="fa-solid fa-eye"></i> View Details
+                    </button>
+                    <button class="dropdown-item" onclick="handleAction('notes', 'CASE-2024-001239')">
+                      <i class="fa-solid fa-note-sticky"></i> Add Notes
+                    </button>
+                    <button class="dropdown-item danger" onclick="handleAction('cancel', 'CASE-2024-001239')">
+                      <i class="fa-solid fa-ban"></i> Cancel
+                    </button>
+                  </div>
+                </div>
+              </td>
+            </tr>
+
+          </tbody>
+        </table>
+      </div>
+
+      <!-- Pagination -->
+      <div class="pagination">
+        <button class="page"><i class="fa-solid fa-chevron-left"></i></button>
+        <button class="page active">1</button>
+        <button class="page">2</button>
+        <button class="page">3</button>
+        <span class="page-dots">...</span>
+        <button class="page">10</button>
+        <button class="page"><i class="fa-solid fa-chevron-right"></i></button>
+      </div>
+
+    </div>
+
   </div>
 
-  <!-- Main Content -->
-  <div class="content-wrapper">
-    <!-- Left Section -->
-    <div class="left-section">
-      <!-- Config Section -->
-      <div class="config-section">
-        <div class="config-row">
-          <div class="config-group">
-            <label class="config-label">Model</label>
-            <select class="config-select">
-              <option>Claude 4.5 Haiku</option>
-              <option>Claude 3.5 Sonnet</option>
-              <option>Claude 3 Opus</option>
-              <option>GPT-4 Turbo</option>
-            </select>
-          </div>
-          <button class="icon-btn-config" title="Model Settings">
-            <i class="fa-solid fa-sliders"></i>
-          </button>
-          <button class="icon-btn-config" title="Pause">
-            <i class="fa-solid fa-pause"></i>
-          </button>
-        </div>
-        
-        <div class="config-row">
-          <div class="config-group">
-            <label class="config-label">Voice</label>
-            <select class="config-select">
-              <option>Sarah - Female</option>
-              <option>John - Male</option>
-              <option>Emma - Female</option>
-              <option>Michael - Male</option>
-            </select>
-          </div>
-          <button class="icon-btn-config" title="Voice Settings">
-            <i class="fa-solid fa-gear"></i>
-          </button>
-        </div>
-        
-        <div class="config-row">
-          <div class="config-group">
-            <label class="config-label">Language</label>
-            <select class="config-select">
-              <option>English</option>
-              <option>Spanish</option>
-              <option>French</option>
-              <option>German</option>
-            </select>
-          </div>
-          <button class="icon-btn-config" title="Language Settings">
-            <i class="fa-solid fa-globe"></i>
-          </button>
-        </div>
-      </div>
-
-      <!-- Prompt Section -->
-      <div class="prompt-section">
-        <div class="section-title">System Prompt</div>
-        <div class="rich-editor">
-          <div class="editor-toolbar">
-            <button class="toolbar-btn" title="Bold"><i class="fa-solid fa-bold"></i></button>
-            <button class="toolbar-btn" title="Italic"><i class="fa-solid fa-italic"></i></button>
-            <button class="toolbar-btn" title="Underline"><i class="fa-solid fa-underline"></i></button>
-            <div style="flex:1;"></div>
-            <button class="toolbar-btn" title="More"><i class="fa-solid fa-ellipsis"></i></button>
-          </div>
-          <textarea class="editor-content">You are Paola, a professional voice agent for ABC Dental Insurance, specializing in helping members with their appeals and grievances. You have access to a comprehensive set of tools through an MCP server integration to assist members with their cases.
-
-CRITICAL AUTHENTICATION REQUIREMENT:
-Before accessing ANY protected health information (PHI) or performing ANY member-specific operations, you MUST authenticate the member first using the authenticate_member function. This is a HIPAA compliance requirement and is non-negotiable.
-
-AUTHENTICATION PROCESS:
-1. When a member contacts you, immediately inform them that you need to verify their identity before accessing their information
-2. Politely ask for their:
-   - Member ID (format: M######, e.g., M123456)
-   - Date of Birth (format: YYYY-MM-DD, e.g., 1985-03-15)
-   - ZIP Code (5 digits, e.g., 90210)
-3. Call authenticate_member with these three pieces of information
-4. Only proceed with accessing their information if authentication is successful
-5. If authentication fails, inform them politely and ask them to verify their information</textarea>
-        </div>
-      </div>
-
-      <!-- Functions Section -->
-      <div class="collapse-section">
-        <div class="collapse-header active" onclick="toggleCollapse(this)">
-          <div class="collapse-title">
-            <i class="fa-solid fa-cube"></i> Functions
-          </div>
-          <i class="collapse-icon fa-solid fa-chevron-down"></i>
-        </div>
-        <div class="collapse-content show">
-          <div class="function-item">
-            <div class="function-name">
-              <i class="fa-solid fa-phone"></i> end_call_1760995941862
-            </div>
-            <div class="function-actions">
-              <button class="func-btn" title="Edit"><i class="fa-solid fa-pen"></i></button>
-              <button class="func-btn" title="Delete"><i class="fa-solid fa-trash"></i></button>
-            </div>
-          </div>
-          <button class="add-function-btn">
-            <i class="fa-solid fa-plus"></i> Add Function
-          </button>
-        </div>
-      </div>
-
-      <!-- Webhook Settings Section -->
-      <div class="collapse-section">
-        <div class="collapse-header" onclick="toggleCollapse(this)">
-          <div class="collapse-title">
-            <i class="fa-solid fa-webhook"></i> Webhook Settings
-          </div>
-          <i class="collapse-icon fa-solid fa-chevron-down"></i>
-        </div>
-        <div class="collapse-content">
-          <p style="color:#6B7280;font-size:14px;margin:0;">Configure webhooks for your agent events</p>
-        </div>
-      </div>
-
-      <!-- Translation Section -->
-      <div class="collapse-section">
-        <div class="collapse-header" onclick="toggleCollapse(this)">
-          <div class="collapse-title">
-            <i class="fa-solid fa-language"></i> Translation
-          </div>
-          <i class="collapse-icon fa-solid fa-chevron-down"></i>
-        </div>
-        <div class="collapse-content">
-          <p style="color:#6B7280;font-size:14px;margin:0;">Enable translation settings for multilingual support</p>
-        </div>
-      </div>
-
-      <!-- Analytics Section -->
-      <div class="collapse-section">
-        <div class="collapse-header" onclick="toggleCollapse(this)">
-          <div class="collapse-title">
-            <i class="fa-solid fa-chart-line"></i> Analytics
-          </div>
-          <i class="collapse-icon fa-solid fa-chevron-down"></i>
-        </div>
-        <div class="collapse-content">
-          <p style="color:#6B7280;font-size:14px;margin:0;">View analytics and performance metrics</p>
-        </div>
-      </div>
-
-      <!-- MCPs Section -->
-      <div class="collapse-section">
-        <div class="collapse-header" onclick="toggleCollapse(this)">
-          <div class="collapse-title">
-            <i class="fa-solid fa-link"></i> MCPs
-          </div>
-          <i class="collapse-icon fa-solid fa-chevron-down"></i>
-        </div>
-        <div class="collapse-content">
-          <p style="color:#6B7280;font-size:14px;margin:0;">Configure Model Context Protocol integrations</p>
-        </div>
-      </div>
-
-    </div>
-
-    <!-- Right Sidebar -->
-    <div class="right-section">
-      <div class="right-sidebar">
-        <div class="sidebar-title">
-          <i class="fa-solid fa-phone"></i> Test Audio
-        </div>
-        <button class="test-button">
-          <i class="fa-solid fa-play"></i> Test
-        </button>
-        <div class="test-placeholder">
-          <i class="fa-solid fa-microphone"></i>
-          <div class="test-placeholder-text">Test your agent</div>
-        </div>
-      </div>
-    </div>
-  </div>
+  <!-- Footer -->
+  <div class="footer">© 2026 Care Insight All Rights Reserved</div>
 </div>
 
 <script>
-function toggleCollapse(header) {
-  const content = header.nextElementSibling;
-  const isActive = header.classList.contains('active');
+// Toggle dropdown menu
+function toggleDropdown(button) {
+  const dropdown = button.nextElementSibling;
   
-  // Close all other sections
-  document.querySelectorAll('.collapse-header').forEach(h => {
-    if(h !== header) {
-      h.classList.remove('active');
-      h.nextElementSibling.classList.remove('show');
+  // Close all other dropdowns
+  document.querySelectorAll('.dropdown-content').forEach(menu => {
+    if(menu !== dropdown) {
+      menu.classList.remove('show');
     }
   });
   
-  // Toggle current section
-  header.classList.toggle('active');
-  content.classList.toggle('show');
+  // Toggle current dropdown
+  dropdown.classList.toggle('show');
 }
+
+// Handle dropdown actions
+function handleAction(action, caseNumber) {
+  console.log(`Action: ${action}, Case: ${caseNumber}`);
+  
+  // Close dropdown after action
+  document.querySelectorAll('.dropdown-content').forEach(menu => {
+    menu.classList.remove('show');
+  });
+  
+  switch(action) {
+    case 'reschedule':
+      alert(`Reschedule ${caseNumber}`);
+      break;
+    case 'view':
+      alert(`View details for ${caseNumber}`);
+      break;
+    case 'notes':
+      alert(`Add notes for ${caseNumber}`);
+      break;
+    case 'cancel':
+      if(confirm(`Are you sure you want to cancel ${caseNumber}?`)) {
+        alert(`${caseNumber} cancelled`);
+      }
+      break;
+  }
+}
+
+// Close dropdown when clicking outside
+document.addEventListener('click', function(event) {
+  if(!event.target.closest('.dropdown-menu-wrapper')) {
+    document.querySelectorAll('.dropdown-content').forEach(menu => {
+      menu.classList.remove('show');
+    });
+  }
+});
 </script>
 
 </body>
