@@ -1,913 +1,446 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-<meta charset="UTF-8">
-<title>Outreach Outbound</title>
-
-<!-- Font Awesome 6 Free -->
-<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css" integrity="sha512-DTOQO9RWCH3ppGqcWaEA1BIZOC6xxalwEsw9c2QQeAIftl+Vegovlnee1c9QX4TctnWMn13TZye+giMm8e2LwA==" crossorigin="anonymous" referrerpolicy="no-referrer">
-
-<!-- Fonts -->
-<link href="https://fonts.googleapis.com/css?family=Open+Sans:400,600" rel="stylesheet">
-<link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@600&display=swap" rel="stylesheet">
-<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700&display=swap" rel="stylesheet">
-
-<style>
-/* ================= GLOBAL ================= */
-*{box-sizing:border-box}
-body{
-  margin:0;
-  font-family:"Open Sans", sans-serif;
-  background:#f5f5f5;
-}
-
-::-webkit-scrollbar{width:5px;height:5px}
-::-webkit-scrollbar-track{box-shadow:inset 0 0 2px grey;border-radius:4px}
-::-webkit-scrollbar-thumb{background:grey;border-radius:4px}
-
-/* ================= LAYOUT ================= */
-.right-section{
-  background:whitesmoke;
-  width:100%;
-  min-height:100vh;
-}
-
-.main-container{
-  width:1855px;
-  margin:0 auto;
-  padding:16px 16px 0 16px;
-}
-
-/* ================= HEADER ================= */
-.header-section{
-  display:flex;
-  justify-content:space-between;
-  align-items:center;
-  margin-bottom:24px;
-}
-
-.title-container{
-  font-family:"Open Sans";
-  font-weight:600;
-  font-size:24px;
-  color:#1A1A1A;
-}
-
-.header-actions{
-  display:flex;
-  gap:12px;
-  align-items:center;
-}
-
-.call-type-selector{
-  display:flex;
-  gap:8px;
-  background:#fff;
-  padding:8px;
-  border-radius:8px;
-  border:1px solid #D1D5DB;
-}
-
-.call-type-btn{
-  font-family:"Open Sans";
-  font-size:13px;
-  font-weight:600;
-  padding:8px 16px;
-  border-radius:6px;
-  border:none;
-  background:#f3f4f6;
-  color:#6B7280;
-  cursor:pointer;
-  transition:all 0.3s;
-  display:flex;
-  align-items:center;
-  gap:6px;
-}
-
-.call-type-btn.active{
-  background:#5830AD;
-  color:#fff;
-}
-
-.call-type-btn:hover{
-  background:#e5e7eb;
-}
-
-.call-type-btn.active:hover{
-  background:#471d82;
-}
-
-.history-btn-top{
-  background:#fff;
-  border:1px solid #D1D5DB;
-  color:#6B7280;
-  font-size:18px;
-  cursor:pointer;
-  padding:10px;
-  border-radius:6px;
-  transition:all 0.3s;
-}
-
-.history-btn-top:hover{
-  background:#f3f4f6;
-  color:#2E2E2E;
-}
-
-.btn-primary{
-  background:#5830AD;
-  color:#fff;
-  font-family:"Open Sans";
-  font-size:14px;
-  font-weight:600;
-  padding:10px 24px;
-  border-radius:6px;
-  border:none;
-  cursor:pointer;
-  display:flex;
-  align-items:center;
-  gap:8px;
-  transition:background 0.3s;
-}
-
-.btn-primary:hover{
-  background:#471d82;
-}
-
-/* ================= DASHBOARD CARDS ================= */
-.dashboard-section{
-  display:grid;
-  grid-template-columns:repeat(auto-fit, minmax(250px, 1fr));
-  gap:16px;
-  margin-bottom:24px;
-}
-
-.dashboard-card{
-  background:#fff;
-  border-radius:8px;
-  padding:20px;
-  box-shadow:0 1px 3px rgba(0,0,0,0.1);
-}
-
-.card-header{
-  display:flex;
-  align-items:center;
-  justify-content:space-between;
-  margin-bottom:12px;
-}
-
-.card-title{
-  font-family:"Open Sans";
-  font-size:13px;
-  font-weight:600;
-  color:#6B7280;
-}
-
-.card-icon{
-  font-size:24px;
-  width:40px;
-  height:40px;
-  border-radius:8px;
-  display:flex;
-  align-items:center;
-  justify-content:center;
-}
-
-.card-icon.blue{
-  background:#e8f1ff;
-  color:#0b5cff;
-}
-
-.card-icon.green{
-  background:#d4edda;
-  color:#155724;
-}
-
-.card-icon.orange{
-  background:#fff3cd;
-  color:#856404;
-}
-
-.card-icon.purple{
-  background:#e8ddf7;
-  color:#5830AD;
-}
-
-.card-value{
-  font-family:"Open Sans";
-  font-size:32px;
-  font-weight:600;
-  color:#1A1A1A;
-}
-
-.card-subtitle{
-  font-family:"Open Sans";
-  font-size:12px;
-  color:#9CA3AF;
-  margin-top:8px;
-}
-
-/* ================= FILTERS ================= */
-.filters-section{
-  background:#fff;
-  border-radius:8px;
-  padding:16px;
-  margin-bottom:16px;
-  box-shadow:0 1px 3px rgba(0,0,0,0.1);
-  display:flex;
-  gap:12px;
-  flex-wrap:wrap;
-  align-items:center;
-}
-
-.search-input,
-.filter-select{
-  height:40px;
-  background:#fff;
-  border:1px solid #D1D5DB;
-  border-radius:4px;
-  padding:0 12px;
-  font-family:"Open Sans";
-  font-size:14px;
-  color:#2E2E2E;
-}
-
-.search-input{width:300px}
-.search-input::placeholder{color:#9CA3AF}
-.filter-select{width:180px}
-
-.filters-divider{
-  width:1px;
-  height:24px;
-  background:#D1D5DB;
-}
-
-/* ================= CARD CONTAINER ================= */
-.card-container{
-  background:#fff;
-  border-radius:8px;
-  padding:16px;
-  box-shadow:0 4px 10px rgba(0,0,0,.25);
-}
-
-/* ================= TABLE ================= */
-.table-wrapper{
-  overflow-x:auto;
-}
-
-table{
-  width:100%;
-  min-width:1400px;
-  border-collapse:collapse;
-  font-family:"Open Sans";
-  font-size:14px;
-  border:1px solid rgba(0,0,0,.1);
-}
-
-th{
-  background:#f8f8f8;
-  color:#424242;
-  font-weight:600;
-  padding:12px;
-  height:60px;
-  text-align:left;
-  white-space:nowrap;
-}
-
-td{
-  padding:12px;
-  color:#2E2E2E;
-  font-weight:400;
-  vertical-align:middle;
-}
-
-tr:nth-child(even){
-  background:#f8f8f8;
-}
-
-tr:hover{
-  background:#f0f0f0;
-}
-
-/* ================= TABLE CELLS ================= */
-.sr-no{
-  text-align:center;
-  font-weight:600;
-  color:#424242;
-  width:50px;
-}
-
-.call-type-badge{
-  display:inline-flex;
-  align-items:center;
-  gap:6px;
-  padding:6px 12px;
-  border-radius:4px;
-  font-size:13px;
-  font-weight:600;
-  white-space:nowrap;
-  background:#f3f4f6;
-  color:#424242;
-  border:1px solid #d1d5db;
-}
-
-.case-number{
-  color:#2E2E2E;
-  font-weight:600;
-}
-
-.schedule-datetime{
-  color:#2E2E2E;
-  font-weight:400;
-  display:flex;
-  align-items:center;
-  gap:6px;
-}
-
-.status-badge{
-  display:inline-flex;
-  align-items:center;
-  padding:6px 12px;
-  border-radius:6px;
-  font-size:12px;
-  font-weight:600;
-  white-space:nowrap;
-}
-
-.status-completed{
-  background:#d4edda;
-  color:#155724;
-}
-
-.status-scheduled{
-  background:#e8f1ff;
-  color:#0b5cff;
-}
-
-.status-pending{
-  background:#fff3cd;
-  color:#856404;
-}
-
-.status-cancelled{
-  background:#f8d7da;
-  color:#721c24;
-}
-
-.notes-cell{
-  color:#6B7280;
-  font-size:13px;
-  max-width:200px;
-  overflow:hidden;
-  text-overflow:ellipsis;
-  white-space:nowrap;
-}
-
-/* ================= DROPDOWN MENU ================= */
-.dropdown-menu-wrapper{
-  position:relative;
-  display:inline-block;
-}
-
-.menu-btn{
-  background:none;
-  border:none;
-  color:#6B7280;
-  font-size:20px;
-  cursor:pointer;
-  padding:4px 8px;
-  border-radius:4px;
-  transition:all 0.3s;
-  display:flex;
-  align-items:center;
-  justify-content:center;
-}
-
-.menu-btn:hover{
-  background:#e5e7eb;
-  color:#2E2E2E;
-}
-
-.dropdown-content{
-  display:none;
-  position:absolute;
-  right:0;
-  background:#fff;
-  min-width:160px;
-  box-shadow:0 2px 10px rgba(0,0,0,0.15);
-  border-radius:6px;
-  z-index:1000;
-  border:1px solid #e5e7eb;
-}
-
-.dropdown-content.show{
-  display:block;
-}
-
-.dropdown-item{
-  color:#2E2E2E;
-  padding:12px 16px;
-  text-decoration:none;
-  display:flex;
-  align-items:center;
-  gap:10px;
-  font-family:"Open Sans";
-  font-size:14px;
-  cursor:pointer;
-  transition:all 0.3s;
-  border:none;
-  background:none;
-  width:100%;
-  text-align:left;
-}
-
-.dropdown-item:first-child{
-  border-radius:6px 6px 0 0;
-}
-
-.dropdown-item:last-child{
-  border-radius:0 0 6px 6px;
-}
-
-.dropdown-item:hover{
-  background:#f3f4f6;
-  color:#5830AD;
-}
-
-.dropdown-item i{
-  width:16px;
-  text-align:center;
-}
-
-.dropdown-item.danger{
-  color:#ef4444;
-}
-
-/* ================= PAGINATION ================= */
-.pagination{
-  display:flex;
-  justify-content:center;
-  gap:8px;
-  margin:24px 0;
-  align-items:center;
-}
-
-.page{
-  width:44px;
-  height:44px;
-  border-radius:50%;
-  display:flex;
-  align-items:center;
-  justify-content:center;
-  font-family:"Open Sans";
-  font-weight:600;
-  font-size:14px;
-  cursor:pointer;
-  border:1px solid #D1D5DB;
-  background:#fff;
-  color:#2E2E2E;
-  transition:all 0.3s;
-}
-
-.page:hover:not(.active){
-  border-color:#5830AD;
-  background:#f8f5ff;
-  color:#5830AD;
-}
-
-.page.active{
-  background:#5830AD;
-  color:#fff;
-  border-color:#5830AD;
-  box-shadow:0 2px 8px rgba(88,48,173,0.3);
-}
-
-.page-dots{
-  color:#9CA3AF;
-  padding:0 4px;
-}
-
-/* ================= FOOTER ================= */
-.footer{
-  text-align:center;
-  padding:40px 16px;
-  font-family:"Open Sans";
-  color:#595959;
-}
-
-/* ================= RESPONSIVE ================= */
-@media(max-width:1200px){
-  .main-container{
-    width:100%;
-  }
-  
-  .dashboard-section{
-    grid-template-columns:repeat(2, 1fr);
-  }
-  
-  .filters-section{
-    flex-direction:column;
-    align-items:stretch;
-  }
-  
-  .search-input,
-  .filter-select{
-    width:100%;
-  }
-}
-
-@media(max-width:768px){
-  .dashboard-section{
-    grid-template-columns:1fr;
-  }
-  
-  .header-section{
-    flex-direction:column;
-    align-items:flex-start;
-    gap:12px;
-  }
-}
-
-</style>
-
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Add Outbound Call</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Open+Sans:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Open Sans', sans-serif;
+            background: rgba(0, 0, 0, 0.4);
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+            padding: 20px;
+        }
+
+        .modal {
+            background: #ffffff;
+            border-radius: 16px;
+            width: 100%;
+            max-width: 900px;
+            max-height: 90vh;
+            overflow: hidden;
+            box-shadow: 0 20px 60px rgba(0, 0, 0, 0.3);
+        }
+
+        .modal-header {
+            padding: 32px 40px 24px;
+            border-bottom: 1px solid #e8e8e8;
+        }
+
+        .modal-header h2 {
+            font-size: 28px;
+            font-weight: 700;
+            color: #1a1a1a;
+            margin-bottom: 8px;
+        }
+
+        .modal-subtitle {
+            font-size: 15px;
+            color: #6b7280;
+            font-weight: 400;
+        }
+
+        .modal-body {
+            padding: 40px;
+            max-height: calc(90vh - 200px);
+            overflow-y: auto;
+        }
+
+        .form-row {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 32px 24px;
+            margin-bottom: 32px;
+        }
+
+        .form-row.one-col {
+            grid-template-columns: 1fr;
+        }
+
+        .form-group {
+            display: flex;
+            flex-direction: column;
+            position: relative;
+        }
+
+        .form-group.span-2 {
+            grid-column: span 2;
+        }
+
+        label {
+            font-size: 14px;
+            font-weight: 400;
+            color: #6b7280;
+            margin-bottom: 8px;
+        }
+
+        input[type="text"],
+        input[type="tel"],
+        input[type="number"],
+        input[type="datetime-local"],
+        select,
+        textarea {
+            padding: 0 0 12px 0;
+            border: none;
+            border-bottom: 1px solid #d1d5db;
+            font-size: 15px;
+            color: #1f2937;
+            font-family: 'Open Sans', sans-serif;
+            transition: all 0.3s;
+            background: transparent;
+            outline: none;
+        }
+
+        input[type="text"]:focus,
+        input[type="tel"]:focus,
+        input[type="number"]:focus,
+        input[type="datetime-local"]:focus,
+        select:focus,
+        textarea:focus {
+            border-bottom-color: #8b5cf6;
+        }
+
+        input[type="text"]::placeholder,
+        input[type="tel"]::placeholder,
+        input[type="number"]::placeholder,
+        textarea::placeholder {
+            color: #9ca3af;
+        }
+
+        select {
+            cursor: pointer;
+            appearance: none;
+            background-image: url("data:image/svg+xml,%3Csvg width='14' height='8' viewBox='0 0 14 8' fill='none' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath d='M1 1L7 7L13 1' stroke='%236b7280' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'/%3E%3C/svg%3E");
+            background-repeat: no-repeat;
+            background-position: right 0 center;
+            padding-right: 24px;
+        }
+
+        /* Datetime input styling */
+        input[type="datetime-local"] {
+            padding: 8px 0 12px 0;
+            cursor: pointer;
+        }
+
+        input[type="datetime-local"]::-webkit-calendar-picker-indicator {
+            cursor: pointer;
+            filter: opacity(0.6);
+        }
+
+        input[type="datetime-local"]::-webkit-calendar-picker-indicator:hover {
+            filter: opacity(1);
+        }
+
+        /* Textarea styling */
+        textarea {
+            resize: vertical;
+            min-height: 100px;
+            padding: 12px 0;
+            line-height: 1.5;
+            font-family: 'Open Sans', sans-serif;
+        }
+
+        /* Duration and Number inputs */
+        input[type="number"] {
+            -moz-appearance: textfield;
+        }
+
+        input[type="number"]::-webkit-inner-spin-button,
+        input[type="number"]::-webkit-outer-spin-button {
+            -webkit-appearance: none;
+            margin: 0;
+        }
+
+        .input-hint {
+            font-size: 12px;
+            color: #9ca3af;
+            margin-top: 6px;
+        }
+
+        .modal-footer {
+            padding: 24px 40px;
+            border-top: 1px solid #e8e8e8;
+            display: flex;
+            justify-content: flex-end;
+            gap: 12px;
+            background: #fafafa;
+        }
+
+        .btn {
+            padding: 12px 32px;
+            border-radius: 8px;
+            font-size: 15px;
+            font-weight: 500;
+            cursor: pointer;
+            transition: all 0.2s;
+            border: none;
+            font-family: 'Open Sans', sans-serif;
+        }
+
+        .btn-cancel {
+            background: #ffffff;
+            color: #374151;
+            border: 1px solid #d1d5db;
+        }
+
+        .btn-cancel:hover {
+            background: #f9fafb;
+            border-color: #9ca3af;
+        }
+
+        .btn-save {
+            background: #8b5cf6;
+            color: #ffffff;
+            padding: 12px 40px;
+        }
+
+        .btn-save:hover {
+            background: #7c3aed;
+        }
+
+        /* Scrollbar styling */
+        .modal-body::-webkit-scrollbar {
+            width: 6px;
+        }
+
+        .modal-body::-webkit-scrollbar-track {
+            background: #f9fafb;
+        }
+
+        .modal-body::-webkit-scrollbar-thumb {
+            background: #d1d5db;
+            border-radius: 3px;
+        }
+
+        .modal-body::-webkit-scrollbar-thumb:hover {
+            background: #9ca3af;
+        }
+
+        @media (max-width: 768px) {
+            .form-row {
+                grid-template-columns: 1fr;
+                gap: 32px;
+            }
+
+            .form-group.span-2 {
+                grid-column: span 1;
+            }
+
+            .modal-body {
+                padding: 24px;
+            }
+
+            .modal-header {
+                padding: 24px;
+            }
+
+            .modal-footer {
+                padding: 20px 24px;
+            }
+        }
+    </style>
 </head>
 <body>
-
-<div class="right-section">
-  <div class="main-container">
-
-    <!-- Header Section -->
-    <div class="header-section">
-      <div class="title-container">Outreach Outbound</div>
-      <div class="header-actions">
-        <div class="call-type-selector">
-          <button class="call-type-btn active">
-            <i class="fa-solid fa-phone"></i> One-way Call
-          </button>
-          <button class="call-type-btn">
-            <i class="fa-solid fa-phone-flip"></i> Two-way Call
-          </button>
+    <div class="modal">
+        <div class="modal-header">
+            <h2>Add Outbound Call</h2>
+            <p class="modal-subtitle">Log details of an outbound call</p>
         </div>
-        <button class="history-btn-top" title="Call History">
-          <i class="fa-solid fa-history"></i>
-        </button>
-        <button class="btn-primary">
-          <i class="fa-solid fa-plus"></i> Add Outbound Call
-        </button>
-      </div>
+        
+        <div class="modal-body">
+            <form id="outboundCallForm">
+                <!-- Phone Number and Call Duration -->
+                <div class="form-row">
+                    <div class="form-group">
+                        <label for="phone_number">Phone Number</label>
+                        <input 
+                            type="tel" 
+                            id="phone_number" 
+                            name="phone_number" 
+                            placeholder="(555) 123-4567"
+                            required
+                        >
+                        <span class="input-hint">Enter 10-digit phone number</span>
+                    </div>
+                    <div class="form-group">
+                        <label for="call_duration">Call Duration (minutes)</label>
+                        <input 
+                            type="number" 
+                            id="call_duration" 
+                            name="call_duration" 
+                            placeholder="0"
+                            min="0"
+                            step="1"
+                            required
+                        >
+                        <span class="input-hint">Duration in minutes</span>
+                    </div>
+                </div>
+
+                <!-- Call Date and Time -->
+                <div class="form-row one-col">
+                    <div class="form-group">
+                        <label for="call_datetime">Call Date and Time</label>
+                        <input 
+                            type="datetime-local" 
+                            id="call_datetime" 
+                            name="call_datetime" 
+                            required
+                        >
+                    </div>
+                </div>
+
+                <!-- Call Type and Case Number -->
+                <div class="form-row">
+                    <div class="form-group">
+                        <label for="call_type">Call Type</label>
+                        <select id="call_type" name="call_type" required>
+                            <option value="">Call Type</option>
+                            <option value="follow_up">Follow Up</option>
+                            <option value="appointment_reminder">Appointment Reminder</option>
+                            <option value="information_request">Information Request</option>
+                            <option value="pre_approval">Pre-Approval</option>
+                            <option value="claim_inquiry">Claim Inquiry</option>
+                            <option value="benefit_verification">Benefit Verification</option>
+                            <option value="appeal_discussion">Appeal Discussion</option>
+                            <option value="general_inquiry">General Inquiry</option>
+                        </select>
+                    </div>
+                    <div class="form-group">
+                        <label for="case_number">Case Number</label>
+                        <input 
+                            type="text" 
+                            id="case_number" 
+                            name="case_number" 
+                            placeholder="CASE-2024-00001"
+                            required
+                        >
+                        <span class="input-hint">Enter associated case number</span>
+                    </div>
+                </div>
+
+                <!-- Schedule Date and Time -->
+                <div class="form-row one-col">
+                    <div class="form-group">
+                        <label for="schedule_datetime">Schedule Date and Time (Optional)</label>
+                        <input 
+                            type="datetime-local" 
+                            id="schedule_datetime" 
+                            name="schedule_datetime"
+                        >
+                        <span class="input-hint">Schedule a follow-up call if needed</span>
+                    </div>
+                </div>
+
+                <!-- Timezone -->
+                <div class="form-row one-col">
+                    <div class="form-group">
+                        <label for="timezone">Timezone</label>
+                        <select id="timezone" name="timezone" required>
+                            <option value="">Timezone</option>
+                            <option value="America/New_York">Eastern Time (ET)</option>
+                            <option value="America/Chicago">Central Time (CT)</option>
+                            <option value="America/Denver">Mountain Time (MT)</option>
+                            <option value="America/Los_Angeles">Pacific Time (PT)</option>
+                            <option value="America/Anchorage">Alaska Time (AKT)</option>
+                            <option value="Pacific/Honolulu">Hawaii Time (HT)</option>
+                        </select>
+                    </div>
+                </div>
+
+                <!-- Notes -->
+                <div class="form-row one-col">
+                    <div class="form-group">
+                        <label for="notes">Notes</label>
+                        <textarea 
+                            id="notes" 
+                            name="notes" 
+                            placeholder="Enter call notes, discussion summary, action items, or any relevant details..."
+                            required
+                        ></textarea>
+                        <span class="input-hint">Provide detailed notes about the call conversation</span>
+                    </div>
+                </div>
+            </form>
+        </div>
+
+        <div class="modal-footer">
+            <button type="button" class="btn btn-cancel">Cancel</button>
+            <button type="submit" class="btn btn-save" form="outboundCallForm">Save</button>
+        </div>
     </div>
 
-    <!-- Dashboard Cards -->
-    <div class="dashboard-section">
-      <!-- Total Calls Card -->
-      <div class="dashboard-card">
-        <div class="card-header">
-          <div class="card-title">Total Calls</div>
-          <div class="card-icon blue">
-            <i class="fa-solid fa-phone"></i>
-          </div>
-        </div>
-        <div class="card-value">1,245</div>
-        <div class="card-subtitle">All time outbound calls</div>
-      </div>
+    <script>
+        // Set current datetime as default for call datetime
+        window.addEventListener('DOMContentLoaded', function() {
+            const now = new Date();
+            now.setMinutes(now.getMinutes() - now.getTimezoneOffset());
+            document.getElementById('call_datetime').value = now.toISOString().slice(0, 16);
+        });
 
-      <!-- Scheduled Card -->
-      <div class="dashboard-card">
-        <div class="card-header">
-          <div class="card-title">Scheduled</div>
-          <div class="card-icon orange">
-            <i class="fa-solid fa-clock"></i>
-          </div>
-        </div>
-        <div class="card-value">42</div>
-        <div class="card-subtitle">Awaiting execution</div>
-      </div>
+        // Phone number formatting
+        document.getElementById('phone_number').addEventListener('input', function(e) {
+            let value = e.target.value.replace(/\D/g, '');
+            if (value.length > 10) value = value.slice(0, 10);
+            
+            if (value.length >= 6) {
+                value = `(${value.slice(0, 3)}) ${value.slice(3, 6)}-${value.slice(6)}`;
+            } else if (value.length >= 3) {
+                value = `(${value.slice(0, 3)}) ${value.slice(3)}`;
+            }
+            
+            e.target.value = value;
+        });
 
-      <!-- Completed Card -->
-      <div class="dashboard-card">
-        <div class="card-header">
-          <div class="card-title">Completed</div>
-          <div class="card-icon green">
-            <i class="fa-solid fa-check-circle"></i>
-          </div>
-        </div>
-        <div class="card-value">1,178</div>
-        <div class="card-subtitle">Successfully completed</div>
-      </div>
+        // Form submission
+        document.getElementById('outboundCallForm').addEventListener('submit', (e) => {
+            e.preventDefault();
+            
+            const formData = {
+                phone_number: document.getElementById('phone_number').value,
+                call_duration: parseInt(document.getElementById('call_duration').value),
+                call_datetime: document.getElementById('call_datetime').value,
+                call_type: document.getElementById('call_type').value,
+                case_number: document.getElementById('case_number').value,
+                schedule_datetime: document.getElementById('schedule_datetime').value || null,
+                timezone: document.getElementById('timezone').value,
+                notes: document.getElementById('notes').value
+            };
+            
+            console.log('Outbound Call Data:', formData);
+            alert('Outbound call logged successfully!');
+        });
 
-      <!-- New Card -->
-      <div class="dashboard-card">
-        <div class="card-header">
-          <div class="card-title">New</div>
-          <div class="card-icon purple">
-            <i class="fa-solid fa-star"></i>
-          </div>
-        </div>
-        <div class="card-value">25</div>
-        <div class="card-subtitle">New outbound requests</div>
-      </div>
-    </div>
+        // Cancel button
+        document.querySelector('.btn-cancel').addEventListener('click', () => {
+            if (confirm('Are you sure you want to cancel? Any unsaved changes will be lost.')) {
+                document.getElementById('outboundCallForm').reset();
+                
+                // Reset call datetime to current time
+                const now = new Date();
+                now.setMinutes(now.getMinutes() - now.getTimezoneOffset());
+                document.getElementById('call_datetime').value = now.toISOString().slice(0, 16);
+            }
+        });
 
-    <!-- Filters Section -->
-    <div class="filters-section">
-      <input class="search-input" placeholder="Search by case number or phone...">
-      <div class="filters-divider"></div>
-      <select class="filter-select">
-        <option>All Call Types</option>
-        <option>One-way Call</option>
-        <option>Two-way Call</option>
-      </select>
-      <select class="filter-select">
-        <option>All Status</option>
-        <option>Completed</option>
-        <option>Scheduled</option>
-        <option>Pending</option>
-        <option>Cancelled</option>
-      </select>
-      <select class="filter-select">
-        <option>All Dates</option>
-        <option>Today</option>
-        <option>This Week</option>
-        <option>This Month</option>
-      </select>
-    </div>
-
-    <!-- Main Card with Table -->
-    <div class="card-container">
-      <div class="table-wrapper">
-        <table>
-          <thead>
-            <tr>
-              <th>Sr.No.</th>
-              <th>Call Type</th>
-              <th>Case Number</th>
-              <th>Schedule Date & Time</th>
-              <th>Status</th>
-              <th>Notes</th>
-              <th>Actions</th>
-            </tr>
-          </thead>
-          <tbody>
-            <!-- Row 1 -->
-            <tr>
-              <td class="sr-no">1</td>
-              <td><span class="call-type-badge"><i class="fa-solid fa-phone"></i> One-way</span></td>
-              <td><span class="case-number">CASE-2024-001234</span></td>
-              <td><span class="schedule-datetime"><i class="fa-regular fa-calendar"></i> 14 Jan 2025, 10:30 AM</span></td>
-              <td><span class="status-badge status-completed"><i class="fa-solid fa-check"></i> Completed</span></td>
-              <td><span class="notes-cell">Member confirmed appeal submission and timeline</span></td>
-              <td>
-                <div class="dropdown-menu-wrapper">
-                  <button class="menu-btn" onclick="toggleDropdown(this)">
-                    <i class="fa-solid fa-ellipsis-vertical"></i>
-                  </button>
-                  <div class="dropdown-content">
-                    <button class="dropdown-item" onclick="handleAction('reschedule', 'CASE-2024-001234')">
-                      <i class="fa-solid fa-calendar-check"></i> Reschedule
-                    </button>
-                    <button class="dropdown-item" onclick="handleAction('view', 'CASE-2024-001234')">
-                      <i class="fa-solid fa-eye"></i> View Details
-                    </button>
-                    <button class="dropdown-item" onclick="handleAction('notes', 'CASE-2024-001234')">
-                      <i class="fa-solid fa-note-sticky"></i> Add Notes
-                    </button>
-                    <button class="dropdown-item danger" onclick="handleAction('cancel', 'CASE-2024-001234')">
-                      <i class="fa-solid fa-ban"></i> Cancel
-                    </button>
-                  </div>
-                </div>
-              </td>
-            </tr>
-
-            <!-- Row 2 -->
-            <tr>
-              <td class="sr-no">2</td>
-              <td><span class="call-type-badge"><i class="fa-solid fa-phone-flip"></i> Two-way</span></td>
-              <td><span class="case-number">CASE-2024-001235</span></td>
-              <td><span class="schedule-datetime"><i class="fa-regular fa-calendar"></i> 15 Jan 2025, 02:00 PM</span></td>
-              <td><span class="status-badge status-scheduled"><i class="fa-solid fa-hourglass-start"></i> Scheduled</span></td>
-              <td><span class="notes-cell">Awaiting member availability confirmation</span></td>
-              <td>
-                <div class="dropdown-menu-wrapper">
-                  <button class="menu-btn" onclick="toggleDropdown(this)">
-                    <i class="fa-solid fa-ellipsis-vertical"></i>
-                  </button>
-                  <div class="dropdown-content">
-                    <button class="dropdown-item" onclick="handleAction('reschedule', 'CASE-2024-001235')">
-                      <i class="fa-solid fa-calendar-check"></i> Reschedule
-                    </button>
-                    <button class="dropdown-item" onclick="handleAction('view', 'CASE-2024-001235')">
-                      <i class="fa-solid fa-eye"></i> View Details
-                    </button>
-                    <button class="dropdown-item" onclick="handleAction('notes', 'CASE-2024-001235')">
-                      <i class="fa-solid fa-note-sticky"></i> Add Notes
-                    </button>
-                    <button class="dropdown-item danger" onclick="handleAction('cancel', 'CASE-2024-001235')">
-                      <i class="fa-solid fa-ban"></i> Cancel
-                    </button>
-                  </div>
-                </div>
-              </td>
-            </tr>
-
-            <!-- Row 3 -->
-            <tr>
-              <td class="sr-no">3</td>
-              <td><span class="call-type-badge"><i class="fa-solid fa-phone"></i> One-way</span></td>
-              <td><span class="case-number">CASE-2024-001236</span></td>
-              <td><span class="schedule-datetime"><i class="fa-regular fa-calendar"></i> 16 Jan 2025, 11:00 AM</span></td>
-              <td><span class="status-badge status-pending"><i class="fa-solid fa-circle-notch"></i> Pending</span></td>
-              <td><span class="notes-cell">Retrying after previous attempt unsuccessful</span></td>
-              <td>
-                <div class="dropdown-menu-wrapper">
-                  <button class="menu-btn" onclick="toggleDropdown(this)">
-                    <i class="fa-solid fa-ellipsis-vertical"></i>
-                  </button>
-                  <div class="dropdown-content">
-                    <button class="dropdown-item" onclick="handleAction('reschedule', 'CASE-2024-001236')">
-                      <i class="fa-solid fa-calendar-check"></i> Reschedule
-                    </button>
-                    <button class="dropdown-item" onclick="handleAction('view', 'CASE-2024-001236')">
-                      <i class="fa-solid fa-eye"></i> View Details
-                    </button>
-                    <button class="dropdown-item" onclick="handleAction('notes', 'CASE-2024-001236')">
-                      <i class="fa-solid fa-note-sticky"></i> Add Notes
-                    </button>
-                    <button class="dropdown-item danger" onclick="handleAction('cancel', 'CASE-2024-001236')">
-                      <i class="fa-solid fa-ban"></i> Cancel
-                    </button>
-                  </div>
-                </div>
-              </td>
-            </tr>
-
-            <!-- Row 4 -->
-            <tr>
-              <td class="sr-no">4</td>
-              <td><span class="call-type-badge"><i class="fa-solid fa-phone-flip"></i> Two-way</span></td>
-              <td><span class="case-number">CASE-2024-001237</span></td>
-              <td><span class="schedule-datetime"><i class="fa-regular fa-calendar"></i> 17 Jan 2025, 03:30 PM</span></td>
-              <td><span class="status-badge status-scheduled"><i class="fa-solid fa-hourglass-start"></i> Scheduled</span></td>
-              <td><span class="notes-cell">Follow-up call for grievance resolution status update</span></td>
-              <td>
-                <div class="dropdown-menu-wrapper">
-                  <button class="menu-btn" onclick="toggleDropdown(this)">
-                    <i class="fa-solid fa-ellipsis-vertical"></i>
-                  </button>
-                  <div class="dropdown-content">
-                    <button class="dropdown-item" onclick="handleAction('reschedule', 'CASE-2024-001237')">
-                      <i class="fa-solid fa-calendar-check"></i> Reschedule
-                    </button>
-                    <button class="dropdown-item" onclick="handleAction('view', 'CASE-2024-001237')">
-                      <i class="fa-solid fa-eye"></i> View Details
-                    </button>
-                    <button class="dropdown-item" onclick="handleAction('notes', 'CASE-2024-001237')">
-                      <i class="fa-solid fa-note-sticky"></i> Add Notes
-                    </button>
-                    <button class="dropdown-item danger" onclick="handleAction('cancel', 'CASE-2024-001237')">
-                      <i class="fa-solid fa-ban"></i> Cancel
-                    </button>
-                  </div>
-                </div>
-              </td>
-            </tr>
-
-            <!-- Row 5 -->
-            <tr>
-              <td class="sr-no">5</td>
-              <td><span class="call-type-badge"><i class="fa-solid fa-phone"></i> One-way</span></td>
-              <td><span class="case-number">CASE-2024-001238</span></td>
-              <td><span class="schedule-datetime"><i class="fa-regular fa-calendar"></i> 18 Jan 2025, 09:15 AM</span></td>
-              <td><span class="status-badge status-cancelled"><i class="fa-solid fa-xmark"></i> Cancelled</span></td>
-              <td><span class="notes-cell">Member requested postponement due to unavailability</span></td>
-              <td>
-                <div class="dropdown-menu-wrapper">
-                  <button class="menu-btn" onclick="toggleDropdown(this)">
-                    <i class="fa-solid fa-ellipsis-vertical"></i>
-                  </button>
-                  <div class="dropdown-content">
-                    <button class="dropdown-item" onclick="handleAction('reschedule', 'CASE-2024-001238')">
-                      <i class="fa-solid fa-calendar-check"></i> Reschedule
-                    </button>
-                    <button class="dropdown-item" onclick="handleAction('view', 'CASE-2024-001238')">
-                      <i class="fa-solid fa-eye"></i> View Details
-                    </button>
-                    <button class="dropdown-item" onclick="handleAction('notes', 'CASE-2024-001238')">
-                      <i class="fa-solid fa-note-sticky"></i> Add Notes
-                    </button>
-                    <button class="dropdown-item danger" onclick="handleAction('cancel', 'CASE-2024-001238')">
-                      <i class="fa-solid fa-ban"></i> Cancel
-                    </button>
-                  </div>
-                </div>
-              </td>
-            </tr>
-
-            <!-- Row 6 -->
-            <tr>
-              <td class="sr-no">6</td>
-              <td><span class="call-type-badge"><i class="fa-solid fa-phone-flip"></i> Two-way</span></td>
-              <td><span class="case-number">CASE-2024-001239</span></td>
-              <td><span class="schedule-datetime"><i class="fa-regular fa-calendar"></i> 19 Jan 2025, 01:45 PM</span></td>
-              <td><span class="status-badge status-completed"><i class="fa-solid fa-check"></i> Completed</span></td>
-              <td><span class="notes-cell">Prior authorization discussed and approved</span></td>
-              <td>
-                <div class="dropdown-menu-wrapper">
-                  <button class="menu-btn" onclick="toggleDropdown(this)">
-                    <i class="fa-solid fa-ellipsis-vertical"></i>
-                  </button>
-                  <div class="dropdown-content">
-                    <button class="dropdown-item" onclick="handleAction('reschedule', 'CASE-2024-001239')">
-                      <i class="fa-solid fa-calendar-check"></i> Reschedule
-                    </button>
-                    <button class="dropdown-item" onclick="handleAction('view', 'CASE-2024-001239')">
-                      <i class="fa-solid fa-eye"></i> View Details
-                    </button>
-                    <button class="dropdown-item" onclick="handleAction('notes', 'CASE-2024-001239')">
-                      <i class="fa-solid fa-note-sticky"></i> Add Notes
-                    </button>
-                    <button class="dropdown-item danger" onclick="handleAction('cancel', 'CASE-2024-001239')">
-                      <i class="fa-solid fa-ban"></i> Cancel
-                    </button>
-                  </div>
-                </div>
-              </td>
-            </tr>
-
-          </tbody>
-        </table>
-      </div>
-
-      <!-- Pagination -->
-      <div class="pagination">
-        <button class="page"><i class="fa-solid fa-chevron-left"></i></button>
-        <button class="page active">1</button>
-        <button class="page">2</button>
-        <button class="page">3</button>
-        <span class="page-dots">...</span>
-        <button class="page">10</button>
-        <button class="page"><i class="fa-solid fa-chevron-right"></i></button>
-      </div>
-
-    </div>
-
-  </div>
-
-  <!-- Footer -->
-  <div class="footer">© 2026 Care Insight All Rights Reserved</div>
-</div>
-
-<script>
-// Toggle dropdown menu
-function toggleDropdown(button) {
-  const dropdown = button.nextElementSibling;
-  
-  // Close all other dropdowns
-  document.querySelectorAll('.dropdown-content').forEach(menu => {
-    if(menu !== dropdown) {
-      menu.classList.remove('show');
-    }
-  });
-  
-  // Toggle current dropdown
-  dropdown.classList.toggle('show');
-}
-
-// Handle dropdown actions
-function handleAction(action, caseNumber) {
-  console.log(`Action: ${action}, Case: ${caseNumber}`);
-  
-  // Close dropdown after action
-  document.querySelectorAll('.dropdown-content').forEach(menu => {
-    menu.classList.remove('show');
-  });
-  
-  switch(action) {
-    case 'reschedule':
-      alert(`Reschedule ${caseNumber}`);
-      break;
-    case 'view':
-      alert(`View details for ${caseNumber}`);
-      break;
-    case 'notes':
-      alert(`Add notes for ${caseNumber}`);
-      break;
-    case 'cancel':
-      if(confirm(`Are you sure you want to cancel ${caseNumber}?`)) {
-        alert(`${caseNumber} cancelled`);
-      }
-      break;
-  }
-}
-
-// Close dropdown when clicking outside
-document.addEventListener('click', function(event) {
-  if(!event.target.closest('.dropdown-menu-wrapper')) {
-    document.querySelectorAll('.dropdown-content').forEach(menu => {
-      menu.classList.remove('show');
-    });
-  }
-});
-</script>
-
+        // Close modal on ESC key
+        document.addEventListener('keydown', (e) => {
+            if (e.key === 'Escape') {
+                document.querySelector('.btn-cancel').click();
+            }
+        });
+    </script>
 </body>
 </html>
