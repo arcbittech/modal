@@ -3,10 +3,11 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Add Outbound Call</title>
+    <title>Call History</title>
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Open+Sans:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
     <style>
         * {
             margin: 0;
@@ -37,6 +38,13 @@
         .modal-header {
             padding: 32px 40px 24px;
             border-bottom: 1px solid #e8e8e8;
+            display: flex;
+            justify-content: space-between;
+            align-items: flex-start;
+        }
+
+        .modal-header-content {
+            flex: 1;
         }
 
         .modal-header h2 {
@@ -52,121 +60,368 @@
             font-weight: 400;
         }
 
+        .modal-close {
+            background: none;
+            border: none;
+            font-size: 28px;
+            color: #6b7280;
+            cursor: pointer;
+            width: 32px;
+            height: 32px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            border-radius: 6px;
+            transition: all 0.2s;
+            margin-left: 16px;
+            flex-shrink: 0;
+        }
+
+        .modal-close:hover {
+            background: #f3f4f6;
+            color: #374151;
+        }
+
         .modal-body {
             padding: 40px;
             max-height: calc(90vh - 200px);
             overflow-y: auto;
         }
 
-        .form-row {
-            display: grid;
-            grid-template-columns: repeat(2, 1fr);
-            gap: 32px 24px;
+        /* Call Summary Section */
+        .call-summary {
+            background: #f9fafb;
+            border: 1px solid #e5e7eb;
+            border-radius: 8px;
+            padding: 20px;
             margin-bottom: 32px;
         }
 
-        .form-row.one-col {
-            grid-template-columns: 1fr;
+        .summary-grid {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 20px;
         }
 
-        .form-group {
+        .summary-item {
             display: flex;
             flex-direction: column;
-            position: relative;
         }
 
-        .form-group.span-2 {
-            grid-column: span 2;
-        }
-
-        label {
-            font-size: 14px;
-            font-weight: 400;
-            color: #6b7280;
-            margin-bottom: 8px;
-        }
-
-        input[type="text"],
-        input[type="tel"],
-        input[type="number"],
-        input[type="datetime-local"],
-        select,
-        textarea {
-            padding: 0 0 12px 0;
-            border: none;
-            border-bottom: 1px solid #d1d5db;
-            font-size: 15px;
-            color: #1f2937;
-            font-family: 'Open Sans', sans-serif;
-            transition: all 0.3s;
-            background: transparent;
-            outline: none;
-        }
-
-        input[type="text"]:focus,
-        input[type="tel"]:focus,
-        input[type="number"]:focus,
-        input[type="datetime-local"]:focus,
-        select:focus,
-        textarea:focus {
-            border-bottom-color: #8b5cf6;
-        }
-
-        input[type="text"]::placeholder,
-        input[type="tel"]::placeholder,
-        input[type="number"]::placeholder,
-        textarea::placeholder {
-            color: #9ca3af;
-        }
-
-        select {
-            cursor: pointer;
-            appearance: none;
-            background-image: url("data:image/svg+xml,%3Csvg width='14' height='8' viewBox='0 0 14 8' fill='none' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath d='M1 1L7 7L13 1' stroke='%236b7280' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'/%3E%3C/svg%3E");
-            background-repeat: no-repeat;
-            background-position: right 0 center;
-            padding-right: 24px;
-        }
-
-        /* Datetime input styling */
-        input[type="datetime-local"] {
-            padding: 8px 0 12px 0;
-            cursor: pointer;
-        }
-
-        input[type="datetime-local"]::-webkit-calendar-picker-indicator {
-            cursor: pointer;
-            filter: opacity(0.6);
-        }
-
-        input[type="datetime-local"]::-webkit-calendar-picker-indicator:hover {
-            filter: opacity(1);
-        }
-
-        /* Textarea styling */
-        textarea {
-            resize: vertical;
-            min-height: 100px;
-            padding: 12px 0;
-            line-height: 1.5;
-            font-family: 'Open Sans', sans-serif;
-        }
-
-        /* Duration and Number inputs */
-        input[type="number"] {
-            -moz-appearance: textfield;
-        }
-
-        input[type="number"]::-webkit-inner-spin-button,
-        input[type="number"]::-webkit-outer-spin-button {
-            -webkit-appearance: none;
-            margin: 0;
-        }
-
-        .input-hint {
+        .summary-label {
             font-size: 12px;
+            font-weight: 600;
+            color: #6b7280;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+            margin-bottom: 6px;
+        }
+
+        .summary-value {
+            font-size: 16px;
+            font-weight: 600;
+            color: #1f2937;
+        }
+
+        /* Attempts Section */
+        .attempts-container {
+            display: flex;
+            flex-direction: column;
+            gap: 20px;
+        }
+
+        .attempt-card {
+            background: #ffffff;
+            border: 1px solid #e5e7eb;
+            border-radius: 12px;
+            overflow: hidden;
+            transition: all 0.3s;
+        }
+
+        .attempt-card:hover {
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+        }
+
+        .attempt-header {
+            background: #f9fafb;
+            padding: 16px 20px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            border-bottom: 1px solid #e5e7eb;
+        }
+
+        .attempt-title {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+        }
+
+        .attempt-number {
+            background: #8b5cf6;
+            color: #ffffff;
+            width: 36px;
+            height: 36px;
+            border-radius: 8px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 14px;
+            font-weight: 700;
+        }
+
+        .attempt-title-text {
+            font-size: 16px;
+            font-weight: 600;
+            color: #1f2937;
+        }
+
+        .attempt-status {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .status-badge {
+            padding: 4px 12px;
+            border-radius: 12px;
+            font-size: 12px;
+            font-weight: 600;
+        }
+
+        .status-completed {
+            background: #d4edda;
+            color: #155724;
+        }
+
+        .status-missed {
+            background: #f8d7da;
+            color: #721c24;
+        }
+
+        .status-ongoing {
+            background: #fff3cd;
+            color: #856404;
+        }
+
+        .attempt-body {
+            padding: 20px;
+        }
+
+        .attempt-info {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 16px;
+            margin-bottom: 20px;
+        }
+
+        .info-item {
+            display: flex;
+            flex-direction: column;
+        }
+
+        .info-label {
+            font-size: 12px;
+            font-weight: 600;
+            color: #6b7280;
+            margin-bottom: 4px;
+            text-transform: uppercase;
+            letter-spacing: 0.3px;
+        }
+
+        .info-value {
+            font-size: 14px;
+            font-weight: 500;
+            color: #1f2937;
+            display: flex;
+            align-items: center;
+            gap: 6px;
+        }
+
+        .info-icon {
+            color: #8b5cf6;
+            font-size: 14px;
+        }
+
+        /* Call Summary Text */
+        .call-summary-section {
+            margin-bottom: 20px;
+        }
+
+        .section-title {
+            font-size: 13px;
+            font-weight: 600;
+            color: #374151;
+            margin-bottom: 8px;
+            text-transform: uppercase;
+            letter-spacing: 0.3px;
+        }
+
+        .summary-text {
+            background: #f9fafb;
+            border-left: 3px solid #8b5cf6;
+            padding: 12px 16px;
+            border-radius: 6px;
+            font-size: 14px;
+            line-height: 1.6;
+            color: #4b5563;
+        }
+
+        /* Action Buttons */
+        .attempt-actions {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 12px;
+            padding-top: 16px;
+            border-top: 1px solid #e5e7eb;
+        }
+
+        .action-btn {
+            padding: 8px 16px;
+            border-radius: 6px;
+            font-size: 13px;
+            font-weight: 500;
+            cursor: pointer;
+            transition: all 0.2s;
+            border: none;
+            display: flex;
+            align-items: center;
+            gap: 6px;
+            font-family: 'Open Sans', sans-serif;
+        }
+
+        .btn-primary {
+            background: #8b5cf6;
+            color: #ffffff;
+        }
+
+        .btn-primary:hover {
+            background: #7c3aed;
+        }
+
+        .btn-secondary {
+            background: #ffffff;
+            color: #374151;
+            border: 1px solid #d1d5db;
+        }
+
+        .btn-secondary:hover {
+            background: #f9fafb;
+            border-color: #9ca3af;
+        }
+
+        .btn-success {
+            background: #10b981;
+            color: #ffffff;
+        }
+
+        .btn-success:hover {
+            background: #059669;
+        }
+
+        .btn-info {
+            background: #3b82f6;
+            color: #ffffff;
+        }
+
+        .btn-info:hover {
+            background: #2563eb;
+        }
+
+        /* Language Selector */
+        .language-selector {
+            position: relative;
+            display: inline-block;
+        }
+
+        .language-btn {
+            background: #ffffff;
+            color: #374151;
+            border: 1px solid #d1d5db;
+            padding: 8px 16px;
+            border-radius: 6px;
+            font-size: 13px;
+            font-weight: 500;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            gap: 6px;
+            font-family: 'Open Sans', sans-serif;
+        }
+
+        .language-btn:hover {
+            background: #f9fafb;
+        }
+
+        .language-dropdown {
+            position: absolute;
+            top: 100%;
+            right: 0;
+            margin-top: 4px;
+            background: #ffffff;
+            border: 1px solid #e5e7eb;
+            border-radius: 6px;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+            z-index: 10;
+            min-width: 150px;
+            display: none;
+        }
+
+        .language-dropdown.show {
+            display: block;
+        }
+
+        .language-option {
+            padding: 10px 16px;
+            font-size: 13px;
+            color: #374151;
+            cursor: pointer;
+            transition: background 0.2s;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .language-option:hover {
+            background: #f9fafb;
+        }
+
+        .language-option:first-child {
+            border-radius: 6px 6px 0 0;
+        }
+
+        .language-option:last-child {
+            border-radius: 0 0 6px 6px;
+        }
+
+        .language-option.selected {
+            background: #f3f4f6;
+            color: #8b5cf6;
+            font-weight: 600;
+        }
+
+        /* Empty State */
+        .empty-state {
+            text-align: center;
+            padding: 60px 20px;
             color: #9ca3af;
-            margin-top: 6px;
+        }
+
+        .empty-state i {
+            font-size: 48px;
+            margin-bottom: 16px;
+            opacity: 0.5;
+        }
+
+        .empty-state p {
+            font-size: 16px;
+            margin-bottom: 8px;
+            color: #6b7280;
+        }
+
+        .empty-state small {
+            font-size: 14px;
+            color: #9ca3af;
         }
 
         .modal-footer {
@@ -189,25 +444,15 @@
             font-family: 'Open Sans', sans-serif;
         }
 
-        .btn-cancel {
+        .btn-close {
             background: #ffffff;
             color: #374151;
             border: 1px solid #d1d5db;
         }
 
-        .btn-cancel:hover {
+        .btn-close:hover {
             background: #f9fafb;
             border-color: #9ca3af;
-        }
-
-        .btn-save {
-            background: #8b5cf6;
-            color: #ffffff;
-            padding: 12px 40px;
-        }
-
-        .btn-save:hover {
-            background: #7c3aed;
         }
 
         /* Scrollbar styling */
@@ -229,13 +474,21 @@
         }
 
         @media (max-width: 768px) {
-            .form-row {
-                grid-template-columns: 1fr;
-                gap: 32px;
+            .summary-grid {
+                grid-template-columns: repeat(2, 1fr);
             }
 
-            .form-group.span-2 {
-                grid-column: span 1;
+            .attempt-info {
+                grid-template-columns: 1fr;
+            }
+
+            .attempt-actions {
+                flex-direction: column;
+            }
+
+            .action-btn {
+                width: 100%;
+                justify-content: center;
             }
 
             .modal-body {
@@ -255,190 +508,344 @@
 <body>
     <div class="modal">
         <div class="modal-header">
-            <h2>Add Outbound Call</h2>
-            <p class="modal-subtitle">Log details of an outbound call</p>
+            <div class="modal-header-content">
+                <h2>Call History</h2>
+                <p class="modal-subtitle">Case #CASE-2024-00123 • Member: John Doe • Phone: (555) 123-4567</p>
+            </div>
+            <button class="modal-close" onclick="closeModal()">×</button>
         </div>
         
         <div class="modal-body">
-            <form id="outboundCallForm">
-                <!-- Phone Number and Call Duration -->
-                <div class="form-row">
-                    <div class="form-group">
-                        <label for="phone_number">Phone Number</label>
-                        <input 
-                            type="tel" 
-                            id="phone_number" 
-                            name="phone_number" 
-                            placeholder="(555) 123-4567"
-                            required
-                        >
-                        <span class="input-hint">Enter 10-digit phone number</span>
+            <!-- Call Summary Overview -->
+            <div class="call-summary">
+                <div class="summary-grid">
+                    <div class="summary-item">
+                        <span class="summary-label">Total Attempts</span>
+                        <span class="summary-value">3</span>
                     </div>
-                    <div class="form-group">
-                        <label for="call_duration">Call Duration (minutes)</label>
-                        <input 
-                            type="number" 
-                            id="call_duration" 
-                            name="call_duration" 
-                            placeholder="0"
-                            min="0"
-                            step="1"
-                            required
-                        >
-                        <span class="input-hint">Duration in minutes</span>
+                    <div class="summary-item">
+                        <span class="summary-label">Total Duration</span>
+                        <span class="summary-value">24 mins</span>
+                    </div>
+                    <div class="summary-item">
+                        <span class="summary-label">Successful Calls</span>
+                        <span class="summary-value">2</span>
+                    </div>
+                    <div class="summary-item">
+                        <span class="summary-label">Last Call</span>
+                        <span class="summary-value">Today, 2:30 PM</span>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Attempts Container -->
+            <div class="attempts-container">
+                
+                <!-- Attempt 1 -->
+                <div class="attempt-card">
+                    <div class="attempt-header">
+                        <div class="attempt-title">
+                            <div class="attempt-number">1</div>
+                            <div class="attempt-title-text">First Attempt</div>
+                        </div>
+                        <div class="attempt-status">
+                            <span class="status-badge status-completed">Completed</span>
+                        </div>
+                    </div>
+                    <div class="attempt-body">
+                        <div class="attempt-info">
+                            <div class="info-item">
+                                <span class="info-label">Call Duration</span>
+                                <span class="info-value">
+                                    <i class="fa-solid fa-clock info-icon"></i>
+                                    8 minutes
+                                </span>
+                            </div>
+                            <div class="info-item">
+                                <span class="info-label">Date & Time</span>
+                                <span class="info-value">
+                                    <i class="fa-solid fa-calendar info-icon"></i>
+                                    Jan 15, 2024 - 10:30 AM
+                                </span>
+                            </div>
+                            <div class="info-item">
+                                <span class="info-label">Agent</span>
+                                <span class="info-value">
+                                    <i class="fa-solid fa-user info-icon"></i>
+                                    Sarah Johnson
+                                </span>
+                            </div>
+                        </div>
+
+                        <div class="call-summary-section">
+                            <div class="section-title">Call Summary</div>
+                            <div class="summary-text">
+                                Initial contact with member regarding pre-approval requirement for upcoming procedure. Explained the documentation needed and provided portal access information. Member confirmed understanding and agreed to submit documents within 3 business days.
+                            </div>
+                        </div>
+
+                        <div class="attempt-actions">
+                            <button class="action-btn btn-primary" onclick="viewTranscript(1)">
+                                <i class="fa-solid fa-file-lines"></i>
+                                View Complete Transcript
+                            </button>
+                            <div class="language-selector">
+                                <button class="language-btn" onclick="toggleLanguageDropdown(1)">
+                                    <i class="fa-solid fa-language"></i>
+                                    English
+                                    <i class="fa-solid fa-chevron-down"></i>
+                                </button>
+                                <div class="language-dropdown" id="langDropdown1">
+                                    <div class="language-option selected" onclick="selectLanguage(1, 'English')">
+                                        <i class="fa-solid fa-check"></i>
+                                        English
+                                    </div>
+                                    <div class="language-option" onclick="selectLanguage(1, 'French')">
+                                        French
+                                    </div>
+                                    <div class="language-option" onclick="selectLanguage(1, 'Spanish')">
+                                        Spanish
+                                    </div>
+                                    <div class="language-option" onclick="selectLanguage(1, 'German')">
+                                        German
+                                    </div>
+                                </div>
+                            </div>
+                            <button class="action-btn btn-success" onclick="playRecording(1)">
+                                <i class="fa-solid fa-play"></i>
+                                Play Recording
+                            </button>
+                            <button class="action-btn btn-info" onclick="downloadRecording(1)">
+                                <i class="fa-solid fa-download"></i>
+                                Download Recording
+                            </button>
+                        </div>
                     </div>
                 </div>
 
-                <!-- Call Date and Time -->
-                <div class="form-row one-col">
-                    <div class="form-group">
-                        <label for="call_datetime">Call Date and Time</label>
-                        <input 
-                            type="datetime-local" 
-                            id="call_datetime" 
-                            name="call_datetime" 
-                            required
-                        >
+                <!-- Attempt 2 -->
+                <div class="attempt-card">
+                    <div class="attempt-header">
+                        <div class="attempt-title">
+                            <div class="attempt-number">2</div>
+                            <div class="attempt-title-text">Second Attempt</div>
+                        </div>
+                        <div class="attempt-status">
+                            <span class="status-badge status-missed">No Answer</span>
+                        </div>
+                    </div>
+                    <div class="attempt-body">
+                        <div class="attempt-info">
+                            <div class="info-item">
+                                <span class="info-label">Call Duration</span>
+                                <span class="info-value">
+                                    <i class="fa-solid fa-clock info-icon"></i>
+                                    0 minutes
+                                </span>
+                            </div>
+                            <div class="info-item">
+                                <span class="info-label">Date & Time</span>
+                                <span class="info-value">
+                                    <i class="fa-solid fa-calendar info-icon"></i>
+                                    Jan 16, 2024 - 3:15 PM
+                                </span>
+                            </div>
+                            <div class="info-item">
+                                <span class="info-label">Agent</span>
+                                <span class="info-value">
+                                    <i class="fa-solid fa-user info-icon"></i>
+                                    Michael Chen
+                                </span>
+                            </div>
+                        </div>
+
+                        <div class="call-summary-section">
+                            <div class="section-title">Call Summary</div>
+                            <div class="summary-text">
+                                Follow-up call attempted to check on document submission status. No answer received. Voicemail left with callback number and portal reminder. Follow-up scheduled for next business day.
+                            </div>
+                        </div>
+
+                        <div class="attempt-actions">
+                            <button class="action-btn btn-secondary" disabled>
+                                <i class="fa-solid fa-file-lines"></i>
+                                No Transcript Available
+                            </button>
+                            <button class="action-btn btn-secondary" disabled>
+                                <i class="fa-solid fa-play"></i>
+                                No Recording
+                            </button>
+                        </div>
                     </div>
                 </div>
 
-                <!-- Call Type and Case Number -->
-                <div class="form-row">
-                    <div class="form-group">
-                        <label for="call_type">Call Type</label>
-                        <select id="call_type" name="call_type" required>
-                            <option value="">Call Type</option>
-                            <option value="follow_up">Follow Up</option>
-                            <option value="appointment_reminder">Appointment Reminder</option>
-                            <option value="information_request">Information Request</option>
-                            <option value="pre_approval">Pre-Approval</option>
-                            <option value="claim_inquiry">Claim Inquiry</option>
-                            <option value="benefit_verification">Benefit Verification</option>
-                            <option value="appeal_discussion">Appeal Discussion</option>
-                            <option value="general_inquiry">General Inquiry</option>
-                        </select>
+                <!-- Attempt 3 -->
+                <div class="attempt-card">
+                    <div class="attempt-header">
+                        <div class="attempt-title">
+                            <div class="attempt-number">3</div>
+                            <div class="attempt-title-text">Third Attempt</div>
+                        </div>
+                        <div class="attempt-status">
+                            <span class="status-badge status-completed">Completed</span>
+                        </div>
                     </div>
-                    <div class="form-group">
-                        <label for="case_number">Case Number</label>
-                        <input 
-                            type="text" 
-                            id="case_number" 
-                            name="case_number" 
-                            placeholder="CASE-2024-00001"
-                            required
-                        >
-                        <span class="input-hint">Enter associated case number</span>
+                    <div class="attempt-body">
+                        <div class="attempt-info">
+                            <div class="info-item">
+                                <span class="info-label">Call Duration</span>
+                                <span class="info-value">
+                                    <i class="fa-solid fa-clock info-icon"></i>
+                                    16 minutes
+                                </span>
+                            </div>
+                            <div class="info-item">
+                                <span class="info-label">Date & Time</span>
+                                <span class="info-value">
+                                    <i class="fa-solid fa-calendar info-icon"></i>
+                                    Jan 17, 2024 - 2:30 PM
+                                </span>
+                            </div>
+                            <div class="info-item">
+                                <span class="info-label">Agent</span>
+                                <span class="info-value">
+                                    <i class="fa-solid fa-user info-icon"></i>
+                                    Sarah Johnson
+                                </span>
+                            </div>
+                        </div>
+
+                        <div class="call-summary-section">
+                            <div class="section-title">Call Summary</div>
+                            <div class="summary-text">
+                                Successful follow-up call. Member confirmed documents were submitted via portal. Reviewed submission and verified all required documentation received. Pre-approval processing initiated. Provided member with reference number and estimated timeline of 5-7 business days. Member satisfied with resolution.
+                            </div>
+                        </div>
+
+                        <div class="attempt-actions">
+                            <button class="action-btn btn-primary" onclick="viewTranscript(3)">
+                                <i class="fa-solid fa-file-lines"></i>
+                                View Complete Transcript
+                            </button>
+                            <div class="language-selector">
+                                <button class="language-btn" onclick="toggleLanguageDropdown(3)">
+                                    <i class="fa-solid fa-language"></i>
+                                    English
+                                    <i class="fa-solid fa-chevron-down"></i>
+                                </button>
+                                <div class="language-dropdown" id="langDropdown3">
+                                    <div class="language-option selected" onclick="selectLanguage(3, 'English')">
+                                        <i class="fa-solid fa-check"></i>
+                                        English
+                                    </div>
+                                    <div class="language-option" onclick="selectLanguage(3, 'French')">
+                                        French
+                                    </div>
+                                    <div class="language-option" onclick="selectLanguage(3, 'Spanish')">
+                                        Spanish
+                                    </div>
+                                    <div class="language-option" onclick="selectLanguage(3, 'German')">
+                                        German
+                                    </div>
+                                </div>
+                            </div>
+                            <button class="action-btn btn-success" onclick="playRecording(3)">
+                                <i class="fa-solid fa-play"></i>
+                                Play Recording
+                            </button>
+                            <button class="action-btn btn-info" onclick="downloadRecording(3)">
+                                <i class="fa-solid fa-download"></i>
+                                Download Recording
+                            </button>
+                        </div>
                     </div>
                 </div>
 
-                <!-- Schedule Date and Time -->
-                <div class="form-row one-col">
-                    <div class="form-group">
-                        <label for="schedule_datetime">Schedule Date and Time (Optional)</label>
-                        <input 
-                            type="datetime-local" 
-                            id="schedule_datetime" 
-                            name="schedule_datetime"
-                        >
-                        <span class="input-hint">Schedule a follow-up call if needed</span>
-                    </div>
-                </div>
-
-                <!-- Timezone -->
-                <div class="form-row one-col">
-                    <div class="form-group">
-                        <label for="timezone">Timezone</label>
-                        <select id="timezone" name="timezone" required>
-                            <option value="">Timezone</option>
-                            <option value="America/New_York">Eastern Time (ET)</option>
-                            <option value="America/Chicago">Central Time (CT)</option>
-                            <option value="America/Denver">Mountain Time (MT)</option>
-                            <option value="America/Los_Angeles">Pacific Time (PT)</option>
-                            <option value="America/Anchorage">Alaska Time (AKT)</option>
-                            <option value="Pacific/Honolulu">Hawaii Time (HT)</option>
-                        </select>
-                    </div>
-                </div>
-
-                <!-- Notes -->
-                <div class="form-row one-col">
-                    <div class="form-group">
-                        <label for="notes">Notes</label>
-                        <textarea 
-                            id="notes" 
-                            name="notes" 
-                            placeholder="Enter call notes, discussion summary, action items, or any relevant details..."
-                            required
-                        ></textarea>
-                        <span class="input-hint">Provide detailed notes about the call conversation</span>
-                    </div>
-                </div>
-            </form>
+            </div>
         </div>
 
         <div class="modal-footer">
-            <button type="button" class="btn btn-cancel">Cancel</button>
-            <button type="submit" class="btn btn-save" form="outboundCallForm">Save</button>
+            <button class="btn btn-close" onclick="closeModal()">Close</button>
         </div>
     </div>
 
     <script>
-        // Set current datetime as default for call datetime
-        window.addEventListener('DOMContentLoaded', function() {
-            const now = new Date();
-            now.setMinutes(now.getMinutes() - now.getTimezoneOffset());
-            document.getElementById('call_datetime').value = now.toISOString().slice(0, 16);
-        });
+        function closeModal() {
+            console.log('Modal closed');
+            // Add your close modal logic here
+        }
 
-        // Phone number formatting
-        document.getElementById('phone_number').addEventListener('input', function(e) {
-            let value = e.target.value.replace(/\D/g, '');
-            if (value.length > 10) value = value.slice(0, 10);
-            
-            if (value.length >= 6) {
-                value = `(${value.slice(0, 3)}) ${value.slice(3, 6)}-${value.slice(6)}`;
-            } else if (value.length >= 3) {
-                value = `(${value.slice(0, 3)}) ${value.slice(3)}`;
-            }
-            
-            e.target.value = value;
-        });
+        function viewTranscript(attemptNumber) {
+            console.log(`Viewing transcript for attempt ${attemptNumber}`);
+            alert(`Opening transcript for Attempt ${attemptNumber}...`);
+            // Add your transcript viewing logic here
+        }
 
-        // Form submission
-        document.getElementById('outboundCallForm').addEventListener('submit', (e) => {
-            e.preventDefault();
+        function toggleLanguageDropdown(attemptNumber) {
+            const dropdown = document.getElementById(`langDropdown${attemptNumber}`);
             
-            const formData = {
-                phone_number: document.getElementById('phone_number').value,
-                call_duration: parseInt(document.getElementById('call_duration').value),
-                call_datetime: document.getElementById('call_datetime').value,
-                call_type: document.getElementById('call_type').value,
-                case_number: document.getElementById('case_number').value,
-                schedule_datetime: document.getElementById('schedule_datetime').value || null,
-                timezone: document.getElementById('timezone').value,
-                notes: document.getElementById('notes').value
-            };
+            // Close all other dropdowns
+            document.querySelectorAll('.language-dropdown').forEach(dd => {
+                if (dd !== dropdown) {
+                    dd.classList.remove('show');
+                }
+            });
             
-            console.log('Outbound Call Data:', formData);
-            alert('Outbound call logged successfully!');
-        });
+            dropdown.classList.toggle('show');
+        }
 
-        // Cancel button
-        document.querySelector('.btn-cancel').addEventListener('click', () => {
-            if (confirm('Are you sure you want to cancel? Any unsaved changes will be lost.')) {
-                document.getElementById('outboundCallForm').reset();
-                
-                // Reset call datetime to current time
-                const now = new Date();
-                now.setMinutes(now.getMinutes() - now.getTimezoneOffset());
-                document.getElementById('call_datetime').value = now.toISOString().slice(0, 16);
+        function selectLanguage(attemptNumber, language) {
+            console.log(`Selected ${language} for attempt ${attemptNumber}`);
+            
+            // Update button text
+            const button = document.querySelector(`#langDropdown${attemptNumber}`).previousElementSibling;
+            button.innerHTML = `
+                <i class="fa-solid fa-language"></i>
+                ${language}
+                <i class="fa-solid fa-chevron-down"></i>
+            `;
+            
+            // Update selected state
+            const dropdown = document.getElementById(`langDropdown${attemptNumber}`);
+            dropdown.querySelectorAll('.language-option').forEach(option => {
+                option.classList.remove('selected');
+                if (option.textContent.trim() === language) {
+                    option.classList.add('selected');
+                }
+            });
+            
+            // Close dropdown
+            dropdown.classList.remove('show');
+            
+            // Show notification
+            alert(`Transcript language changed to ${language}`);
+        }
+
+        function playRecording(attemptNumber) {
+            console.log(`Playing recording for attempt ${attemptNumber}`);
+            alert(`Playing call recording for Attempt ${attemptNumber}...`);
+            // Add your audio player logic here
+        }
+
+        function downloadRecording(attemptNumber) {
+            console.log(`Downloading recording for attempt ${attemptNumber}`);
+            alert(`Downloading call recording for Attempt ${attemptNumber}...`);
+            // Add your download logic here
+        }
+
+        // Close dropdowns when clicking outside
+        document.addEventListener('click', function(e) {
+            if (!e.target.closest('.language-selector')) {
+                document.querySelectorAll('.language-dropdown').forEach(dd => {
+                    dd.classList.remove('show');
+                });
             }
         });
 
         // Close modal on ESC key
-        document.addEventListener('keydown', (e) => {
+        document.addEventListener('keydown', function(e) {
             if (e.key === 'Escape') {
-                document.querySelector('.btn-cancel').click();
+                closeModal();
             }
         });
     </script>
