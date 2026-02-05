@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
 <meta charset="UTF-8">
-<title>AI Agent Details - Modern Design</title>
+<title>Create/Edit AI Agent</title>
 
 <!-- Font Awesome 6 Free -->
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css" integrity="sha512-DTOQO9RWCH3ppGqcWaEA1BIZOC6xxalwEsw9c2QQeAIftl+Vegovlnee1c9QX4TctnWMn13TZye+giMm8e2LwA==" crossorigin="anonymous" referrerpolicy="no-referrer">
@@ -24,207 +24,15 @@ body{
 ::-webkit-scrollbar-track{background:transparent}
 ::-webkit-scrollbar-thumb{background:#d1d5db;border-radius:4px}
 
-/* ================= LAYOUT ================= */
-.app-container{
-  display:grid;
-  grid-template-columns:auto 1fr;
+/* ================= PAGE CONTAINER ================= */
+.page-container{
   min-height:100vh;
-  gap:0;
-}
-
-/* ================= LEFT PANEL ================= */
-.left-panel{
-  width:380px;
-  background:#fff;
-  border-right:1px solid #e5e7eb;
-  overflow-y:auto;
-  padding:20px;
   display:flex;
   flex-direction:column;
 }
 
-.panel-header{
-  display:flex;
-  align-items:center;
-  justify-content:space-between;
-  margin-bottom:24px;
-  padding-bottom:16px;
-  border-bottom:1px solid #f3f4f6;
-}
-
-.panel-title{
-  font-size:18px;
-  font-weight:600;
-  color:#1A1A1A;
-  display:flex;
-  align-items:center;
-  gap:10px;
-}
-
-.panel-title i{
-  color:#5830AD;
-  font-size:20px;
-}
-
-.close-btn{
-  background:none;
-  border:none;
-  color:#6B7280;
-  font-size:20px;
-  cursor:pointer;
-  padding:4px;
-  transition:color 0.3s;
-  display:none;
-}
-
-.close-btn:hover{
-  color:#2E2E2E;
-}
-
-/* ================= TEST SECTION IN LEFT PANEL ================= */
-.test-section{
-  display:flex;
-  flex-direction:column;
-  gap:16px;
-  margin-bottom:32px;
-}
-
-.test-label{
-  font-size:12px;
-  font-weight:700;
-  color:#6B7280;
-  text-transform:uppercase;
-  letter-spacing:0.5px;
-}
-
-.test-button{
-  background:linear-gradient(135deg, #5830AD, #7e57c2);
-  color:#fff;
-  border:none;
-  padding:14px 20px;
-  border-radius:10px;
-  font-weight:600;
-  font-size:14px;
-  cursor:pointer;
-  transition:all 0.3s;
-  display:flex;
-  align-items:center;
-  justify-content:center;
-  gap:10px;
-}
-
-.test-button:hover{
-  transform:translateY(-2px);
-  box-shadow:0 8px 20px rgba(88,48,173,0.3);
-}
-
-.test-tabs{
-  display:flex;
-  gap:8px;
-}
-
-.test-tab{
-  flex:1;
-  background:#f3f4f6;
-  border:none;
-  padding:10px;
-  border-radius:8px;
-  font-size:12px;
-  font-weight:600;
-  color:#6B7280;
-  cursor:pointer;
-  transition:all 0.3s;
-}
-
-.test-tab.active{
-  background:#5830AD;
-  color:#fff;
-}
-
-.test-display{
-  background:linear-gradient(135deg, #f9fafb, #f3f4f6);
-  border:2px dashed #d1d5db;
-  border-radius:10px;
-  padding:32px 16px;
-  text-align:center;
-  display:flex;
-  flex-direction:column;
-  align-items:center;
-  justify-content:center;
-  gap:12px;
-  min-height:280px;
-}
-
-.display-icon{
-  font-size:52px;
-  color:#d1d5db;
-}
-
-.display-text{
-  font-size:13px;
-  color:#6B7280;
-  font-weight:500;
-}
-
-/* ================= CONFIG SECTION IN LEFT PANEL ================= */
-.config-section{
-  display:flex;
-  flex-direction:column;
-  gap:16px;
-  padding-top:24px;
-  border-top:1px solid #f3f4f6;
-}
-
-.config-section-label{
-  font-size:12px;
-  font-weight:700;
-  color:#6B7280;
-  text-transform:uppercase;
-  letter-spacing:0.5px;
-}
-
-.config-item{
-  display:flex;
-  flex-direction:column;
-  gap:8px;
-}
-
-.config-item-label{
-  font-size:12px;
-  font-weight:600;
-  color:#424242;
-}
-
-.config-select{
-  background:#f9fafb;
-  border:1px solid #d1d5db;
-  padding:10px 12px;
-  border-radius:8px;
-  font-size:13px;
-  color:#2E2E2E;
-  cursor:pointer;
-  font-family:"Open Sans";
-  transition:all 0.3s;
-}
-
-.config-select:hover,
-.config-select:focus{
-  border-color:#5830AD;
-  background:#fff;
-  outline:none;
-}
-
-/* ================= MAIN CONTENT ================= */
-.main-content{
-  flex:1;
-  overflow-y:auto;
-  padding:0;
-  display:flex;
-  flex-direction:column;
-}
-
-/* ================= TOP NAVIGATION ================= */
-.top-navigation{
+/* ================= TOP HEADER ================= */
+.header{
   background:#fff;
   border-bottom:1px solid #e5e7eb;
   padding:16px 32px;
@@ -234,255 +42,89 @@ body{
   position:sticky;
   top:0;
   z-index:100;
-  height:70px;
 }
 
-.nav-left{
+.header-left{
   display:flex;
   align-items:center;
   gap:16px;
 }
 
-.menu-toggle{
+.back-button{
   background:none;
   border:none;
   color:#5830AD;
   font-size:22px;
   cursor:pointer;
-  display:none;
-}
-
-.breadcrumb{
+  padding:4px;
+  transition:all 0.3s;
   display:flex;
   align-items:center;
-  gap:8px;
-  font-size:13px;
+  justify-content:center;
 }
 
-.breadcrumb-link{
-  color:#5830AD;
-  text-decoration:none;
-  cursor:pointer;
+.back-button:hover{
+  background:#f3f4f6;
+  border-radius:6px;
+  transform:translateX(-2px);
 }
 
-.breadcrumb-separator{
-  color:#d1d5db;
+.header-title{
+  font-size:20px;
+  font-weight:700;
+  color:#1A1A1A;
+  font-family:"Poppins";
 }
 
-.breadcrumb-current{
-  color:#6B7280;
-}
-
-.nav-right{
+.header-right{
   display:flex;
   align-items:center;
   gap:12px;
 }
 
-.nav-btn{
-  background:none;
-  border:none;
+.header-btn{
+  background:#f3f4f6;
+  border:1px solid #e5e7eb;
   color:#6B7280;
-  font-size:18px;
-  cursor:pointer;
-  padding:8px;
-  transition:color 0.3s;
-}
-
-.nav-btn:hover{
-  color:#2E2E2E;
-}
-
-.publish-btn{
-  background:#5830AD;
-  color:#fff;
-  border:none;
-  padding:10px 20px;
+  padding:10px 16px;
   border-radius:8px;
   font-weight:600;
   font-size:13px;
   cursor:pointer;
-  display:flex;
-  align-items:center;
-  gap:8px;
-  transition:background 0.3s;
-}
-
-.publish-btn:hover{
-  background:#471d82;
-}
-
-/* ================= AGENT CARD ================= */
-.agent-card{
-  background:#fff;
-  margin:20px 20px 0 20px;
-  border-radius:12px;
-  padding:24px;
-  border:1px solid #e5e7eb;
-}
-
-.agent-header-row{
-  display:flex;
-  align-items:flex-start;
-  justify-content:space-between;
-  margin-bottom:20px;
-}
-
-.agent-title-block{
-  display:flex;
-  align-items:center;
-  gap:16px;
-}
-
-.agent-avatar{
-  width:64px;
-  height:64px;
-  background:linear-gradient(135deg, #5830AD, #7e57c2);
-  border-radius:12px;
-  display:flex;
-  align-items:center;
-  justify-content:center;
-  color:#fff;
-  font-size:32px;
-}
-
-.agent-info{
-  display:flex;
-  flex-direction:column;
-  gap:6px;
-}
-
-.agent-name{
-  font-size:22px;
-  font-weight:700;
-  color:#1A1A1A;
-  font-family:"Poppins";
-  display:flex;
-  align-items:center;
-  gap:10px;
-}
-
-.edit-icon{
-  color:#6B7280;
-  cursor:pointer;
-  font-size:16px;
-}
-
-.agent-meta{
-  font-size:12px;
-  color:#6B7280;
+  transition:all 0.3s;
   display:flex;
   align-items:center;
   gap:8px;
 }
 
-.copy-btn{
-  background:none;
-  border:none;
-  color:#5830AD;
-  cursor:pointer;
-  font-size:12px;
-  padding:0;
-}
-
-.agent-badges{
-  display:flex;
-  gap:8px;
-  flex-wrap:wrap;
-}
-
-.badge{
-  background:#e8ddf7;
-  color:#5830AD;
-  padding:6px 12px;
-  border-radius:20px;
-  font-size:12px;
-  font-weight:600;
-  display:inline-flex;
-  align-items:center;
-  gap:6px;
-}
-
-.agent-stats-row{
-  display:grid;
-  grid-template-columns:repeat(4, 1fr);
-  gap:16px;
-  padding-top:20px;
-  border-top:1px solid #f3f4f6;
-}
-
-.stat-item{
-  display:flex;
-  flex-direction:column;
-  gap:8px;
-}
-
-.stat-label{
-  font-size:11px;
-  font-weight:600;
-  color:#6B7280;
-  text-transform:uppercase;
-  letter-spacing:0.5px;
-}
-
-.stat-value{
-  font-size:18px;
-  font-weight:700;
-  color:#1A1A1A;
-  font-family:"Poppins";
-}
-
-/* ================= TABS ================= */
-.tabs-container{
-  background:#fff;
-  border-bottom:1px solid #e5e7eb;
-  padding:0 32px;
-  display:flex;
-  gap:32px;
-  margin-top:0;
-}
-
-.tab{
-  color:#6B7280;
-  border:none;
-  background:none;
-  padding:12px 0;
-  font-size:14px;
-  font-weight:500;
-  cursor:pointer;
-  position:relative;
-  transition:color 0.3s;
-  font-family:"Open Sans";
-}
-
-.tab:hover{
+.header-btn:hover{
+  background:#e5e7eb;
   color:#2E2E2E;
 }
 
-.tab.active{
-  color:#5830AD;
+.btn-save{
+  background:linear-gradient(135deg, #5830AD, #7e57c2);
+  color:#fff;
+  border:none;
 }
 
-.tab.active::after{
-  content:'';
-  position:absolute;
-  bottom:-1px;
-  left:0;
-  right:0;
-  height:3px;
-  background:#5830AD;
-  border-radius:2px 2px 0 0;
+.btn-save:hover{
+  box-shadow:0 4px 12px rgba(88,48,173,0.3);
+  transform:translateY(-1px);
 }
 
-/* ================= CONTENT SECTIONS ================= */
-.content-sections{
+/* ================= MAIN CONTENT ================= */
+.main-wrapper{
   flex:1;
-  padding:24px 32px;
+  padding:32px;
   overflow-y:auto;
+  max-width:1400px;
+  margin:0 auto;
+  width:100%;
 }
 
-/* ================= PROMPT EDITOR ================= */
-.prompt-section{
+/* ================= FORM SECTIONS ================= */
+.form-section{
   background:#fff;
   border-radius:12px;
   border:1px solid #e5e7eb;
@@ -490,111 +132,7 @@ body{
   overflow:hidden;
 }
 
-.prompt-header{
-  background:#f9fafb;
-  padding:18px 24px;
-  border-bottom:1px solid #e5e7eb;
-  display:flex;
-  align-items:center;
-  justify-content:space-between;
-}
-
-.prompt-title{
-  font-size:15px;
-  font-weight:600;
-  color:#1A1A1A;
-  display:flex;
-  align-items:center;
-  gap:12px;
-}
-
-.prompt-title i{
-  color:#5830AD;
-}
-
-.prompt-actions{
-  display:flex;
-  gap:8px;
-}
-
-.prompt-btn{
-  background:none;
-  border:none;
-  color:#6B7280;
-  cursor:pointer;
-  padding:6px;
-  font-size:14px;
-  transition:all 0.3s;
-  border-radius:4px;
-}
-
-.prompt-btn:hover{
-  background:#e5e7eb;
-  color:#2E2E2E;
-}
-
-.editor-wrapper{
-  border:1px solid #e5e7eb;
-  border-radius:0;
-  overflow:hidden;
-}
-
-.editor-toolbar{
-  background:#f9fafb;
-  border-bottom:1px solid #e5e7eb;
-  padding:12px 16px;
-  display:flex;
-  gap:4px;
-  flex-wrap:wrap;
-}
-
-.toolbar-btn{
-  background:#fff;
-  border:1px solid #d1d5db;
-  width:36px;
-  height:36px;
-  border-radius:6px;
-  cursor:pointer;
-  display:flex;
-  align-items:center;
-  justify-content:center;
-  color:#6B7280;
-  transition:all 0.3s;
-  font-size:13px;
-  font-weight:600;
-}
-
-.toolbar-btn:hover{
-  background:#f3f4f6;
-  border-color:#9ca3af;
-}
-
-.editor-textarea{
-  width:100%;
-  min-height:240px;
-  padding:16px;
-  border:none;
-  font-family:"Open Sans";
-  font-size:13px;
-  color:#2E2E2E;
-  resize:vertical;
-  line-height:1.6;
-}
-
-.editor-textarea:focus{
-  outline:none;
-}
-
-/* ================= MODERN MODULES SECTION ================= */
-.modules-section{
-  background:#fff;
-  border-radius:12px;
-  border:1px solid #e5e7eb;
-  overflow:hidden;
-  margin-bottom:40px;
-}
-
-.modules-header{
+.section-header{
   background:linear-gradient(135deg, #f9fafb, #f3f4f6);
   padding:20px 24px;
   border-bottom:1px solid #e5e7eb;
@@ -603,224 +141,7 @@ body{
   gap:12px;
 }
 
-.modules-title{
-  font-size:16px;
-  font-weight:700;
-  color:#1A1A1A;
-  font-family:"Poppins";
-  display:flex;
-  align-items:center;
-  gap:10px;
-}
-
-.modules-title i{
-  color:#5830AD;
-  font-size:18px;
-}
-
-.modules-grid{
-  display:grid;
-  grid-template-columns:repeat(3, 1fr);
-  gap:0;
-  padding:0;
-  background:#fff;
-}
-
-.module-card{
-  border-right:1px solid #e5e7eb;
-  border-bottom:1px solid #e5e7eb;
-  padding:0;
-  cursor:pointer;
-  transition:all 0.3s;
-  position:relative;
-  overflow:hidden;
-}
-
-.module-card:hover{
-  background:#f9fafb;
-  transform:translateY(-2px);
-}
-
-.module-card:nth-child(3n){
-  border-right:none;
-}
-
-.module-card:nth-last-child(-n+3){
-  border-bottom:none;
-}
-
-.module-card::before{
-  content:'';
-  position:absolute;
-  top:0;
-  left:0;
-  width:4px;
-  height:0;
-  background:linear-gradient(135deg, #5830AD, #7e57c2);
-  transition:height 0.3s;
-}
-
-.module-card:hover::before{
-  height:100%;
-}
-
-.module-header{
-  padding:20px 24px;
-  display:flex;
-  align-items:center;
-  justify-content:space-between;
-  cursor:pointer;
-  user-select:none;
-}
-
-.module-info{
-  display:flex;
-  align-items:flex-start;
-  gap:14px;
-  flex:1;
-}
-
-.module-icon{
-  width:44px;
-  height:44px;
-  background:#e8ddf7;
-  border-radius:10px;
-  display:flex;
-  align-items:center;
-  justify-content:center;
-  color:#5830AD;
-  font-size:20px;
-  transition:all 0.3s;
-  flex-shrink:0;
-}
-
-.module-card:hover .module-icon{
-  background:#5830AD;
-  color:#fff;
-  transform:scale(1.1);
-}
-
-.module-details{
-  display:flex;
-  flex-direction:column;
-  gap:6px;
-  flex:1;
-}
-
-.module-name{
-  font-size:14px;
-  font-weight:600;
-  color:#1A1A1A;
-  font-family:"Poppins";
-}
-
-.module-desc{
-  font-size:12px;
-  color:#6B7280;
-  line-height:1.4;
-}
-
-.module-status{
-  font-size:11px;
-  color:#5830AD;
-  font-weight:600;
-  display:flex;
-  align-items:center;
-  gap:6px;
-  margin-top:4px;
-}
-
-.status-dot{
-  width:6px;
-  height:6px;
-  background:#10b981;
-  border-radius:50%;
-}
-
-.status-dot.inactive{
-  background:#9ca3af;
-}
-
-.module-toggle{
-  width:24px;
-  height:24px;
-  background:none;
-  border:none;
-  color:#6B7280;
-  font-size:16px;
-  cursor:pointer;
-  transition:transform 0.3s;
-  padding:0;
-  display:flex;
-  align-items:center;
-  justify-content:center;
-}
-
-.module-card.expanded .module-toggle{
-  transform:rotate(180deg);
-}
-
-/* ================= MODULE CONTENT ================= */
-.module-content{
-  display:none;
-  padding:0 24px 24px 24px;
-  border-top:1px solid #e5e7eb;
-  background:#f9fafb;
-}
-
-.module-content.show{
-  display:block;
-}
-
-.content-empty{
-  padding:20px;
-  text-align:center;
-  color:#6B7280;
-  font-size:13px;
-}
-
-.content-empty i{
-  font-size:32px;
-  color:#d1d5db;
-  margin-bottom:12px;
-  display:block;
-}
-
-/* ================= ITEMS LIST ================= */
-.items-list{
-  display:flex;
-  flex-direction:column;
-  gap:12px;
-  padding:16px 0;
-}
-
-.item-row{
-  background:#fff;
-  border:1px solid #e5e7eb;
-  border-radius:8px;
-  padding:14px 16px;
-  display:flex;
-  align-items:center;
-  justify-content:space-between;
-  transition:all 0.3s;
-}
-
-.item-row:hover{
-  background:#fff;
-  border-color:#d1d5db;
-  box-shadow:0 2px 8px rgba(0,0,0,0.05);
-}
-
-.item-info{
-  display:flex;
-  align-items:center;
-  gap:12px;
-  font-size:13px;
-  color:#2E2E2E;
-  font-weight:500;
-}
-
-.item-icon{
+.section-icon{
   width:36px;
   height:36px;
   background:#e8ddf7;
@@ -829,147 +150,426 @@ body{
   align-items:center;
   justify-content:center;
   color:#5830AD;
-  font-size:14px;
+  font-size:16px;
 }
 
-.item-actions{
+.section-title{
+  font-size:15px;
+  font-weight:700;
+  color:#1A1A1A;
+  font-family:"Poppins";
+}
+
+.section-body{
+  padding:24px;
+}
+
+/* ================= FORM GRID ================= */
+.form-grid{
+  display:grid;
+  grid-template-columns:repeat(2, 1fr);
+  gap:24px;
+}
+
+.form-grid.full{
+  grid-template-columns:1fr;
+}
+
+.form-group{
   display:flex;
+  flex-direction:column;
+  gap:8px;
+}
+
+.form-label{
+  font-size:13px;
+  font-weight:600;
+  color:#424242;
+  text-transform:uppercase;
+  letter-spacing:0.5px;
+  display:flex;
+  align-items:center;
   gap:6px;
 }
 
-.item-btn{
+.required{
+  color:#ef4444;
+  font-weight:700;
+}
+
+.form-input,
+.form-select,
+.form-textarea{
+  background:#f9fafb;
+  border:1px solid #d1d5db;
+  padding:12px 14px;
+  border-radius:8px;
+  font-family:"Open Sans";
+  font-size:13px;
+  color:#2E2E2E;
+  transition:all 0.3s;
+}
+
+.form-input:hover,
+.form-select:hover,
+.form-textarea:hover{
+  border-color:#9ca3af;
+  background:#fff;
+}
+
+.form-input:focus,
+.form-select:focus,
+.form-textarea:focus{
+  outline:none;
+  border-color:#5830AD;
+  background:#fff;
+  box-shadow:0 0 0 3px rgba(88,48,173,0.1);
+}
+
+.form-input::placeholder,
+.form-textarea::placeholder{
+  color:#9ca3af;
+}
+
+.form-textarea{
+  resize:vertical;
+  min-height:120px;
+  line-height:1.6;
+}
+
+.form-help{
+  font-size:11px;
+  color:#6B7280;
+  margin-top:4px;
+}
+
+/* ================= BUTTON GROUP ================= */
+.button-group{
+  display:flex;
+  gap:12px;
+  align-items:center;
+}
+
+.btn-icon-small{
   background:none;
   border:none;
   color:#6B7280;
   cursor:pointer;
-  padding:6px;
-  font-size:13px;
+  padding:8px;
+  border-radius:6px;
   transition:all 0.3s;
-  border-radius:4px;
+  font-size:14px;
 }
 
-.item-btn:hover{
+.btn-icon-small:hover{
+  background:#f3f4f6;
+  color:#2E2E2E;
+}
+
+/* ================= SELECT WITH ICON ================= */
+.select-with-icon{
+  position:relative;
+}
+
+.select-icon{
+  position:absolute;
+  right:12px;
+  top:50%;
+  transform:translateY(-50%);
+  color:#6B7280;
+  pointer-events:none;
+  font-size:14px;
+}
+
+.form-select{
+  padding-right:36px;
+  appearance:none;
+  background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='8' viewBox='0 0 12 8'%3E%3Cpath fill='%236B7280' d='M1 1l5 5 5-5'/%3E%3C/svg%3E");
+  background-repeat:no-repeat;
+  background-position:right 12px center;
+  padding-right:36px;
+}
+
+/* ================= AVATAR UPLOAD ================= */
+.avatar-upload{
+  display:flex;
+  align-items:center;
+  gap:16px;
+}
+
+.avatar-preview{
+  width:80px;
+  height:80px;
+  border-radius:12px;
+  background:linear-gradient(135deg, #5830AD, #7e57c2);
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  color:#fff;
+  font-size:32px;
+  flex-shrink:0;
+  position:relative;
+  overflow:hidden;
+}
+
+.avatar-preview img{
+  width:100%;
+  height:100%;
+  object-fit:cover;
+}
+
+.avatar-actions{
+  display:flex;
+  flex-direction:column;
+  gap:8px;
+}
+
+.avatar-btn{
+  background:#f3f4f6;
+  border:1px solid #d1d5db;
+  color:#6B7280;
+  padding:8px 16px;
+  border-radius:6px;
+  font-size:12px;
+  font-weight:600;
+  cursor:pointer;
+  transition:all 0.3s;
+  display:flex;
+  align-items:center;
+  gap:6px;
+}
+
+.avatar-btn:hover{
+  background:#e5e7eb;
+  border-color:#9ca3af;
+  color:#2E2E2E;
+}
+
+.avatar-btn.danger{
+  color:#ef4444;
+  border-color:#fecaca;
+}
+
+.avatar-btn.danger:hover{
+  background:#fee2e2;
+  border-color:#ef4444;
+}
+
+/* ================= SWITCH/TOGGLE ================= */
+.form-switch{
+  display:flex;
+  align-items:center;
+  justify-content:space-between;
+  padding:14px;
+  background:#f9fafb;
+  border:1px solid #d1d5db;
+  border-radius:8px;
+  cursor:pointer;
+  transition:all 0.3s;
+}
+
+.form-switch:hover{
+  background:#fff;
+  border-color:#9ca3af;
+}
+
+.switch-content{
+  display:flex;
+  flex-direction:column;
+  gap:4px;
+  flex:1;
+}
+
+.switch-label{
+  font-size:13px;
+  font-weight:600;
+  color:#2E2E2E;
+}
+
+.switch-desc{
+  font-size:11px;
+  color:#6B7280;
+}
+
+.toggle-switch{
+  width:48px;
+  height:28px;
+  background:#d1d5db;
+  border-radius:14px;
+  cursor:pointer;
+  position:relative;
+  transition:background 0.3s;
+}
+
+.toggle-switch.active{
+  background:#10b981;
+}
+
+.toggle-circle{
+  width:24px;
+  height:24px;
+  background:#fff;
+  border-radius:50%;
+  position:absolute;
+  top:2px;
+  left:2px;
+  transition:left 0.3s;
+  box-shadow:0 2px 4px rgba(0,0,0,0.1);
+}
+
+.toggle-switch.active .toggle-circle{
+  left:22px;
+}
+
+/* ================= TAGS INPUT ================= */
+.tags-input{
+  background:#f9fafb;
+  border:1px solid #d1d5db;
+  border-radius:8px;
+  padding:8px;
+  display:flex;
+  flex-wrap:wrap;
+  gap:8px;
+  align-items:center;
+  min-height:44px;
+}
+
+.tag{
+  background:#e8ddf7;
+  color:#5830AD;
+  padding:6px 10px;
+  border-radius:20px;
+  font-size:12px;
+  font-weight:600;
+  display:flex;
+  align-items:center;
+  gap:6px;
+}
+
+.tag-remove{
+  background:none;
+  border:none;
+  color:#5830AD;
+  cursor:pointer;
+  padding:0;
+  font-size:14px;
+  transition:color 0.3s;
+}
+
+.tag-remove:hover{
+  color:#ef4444;
+}
+
+.tag-input{
+  flex:1;
+  min-width:100px;
+  background:none;
+  border:none;
+  font-family:"Open Sans";
+  font-size:13px;
+  color:#2E2E2E;
+  outline:none;
+}
+
+.tag-input::placeholder{
+  color:#9ca3af;
+}
+
+/* ================= TIPS/INFO BOX ================= */
+.info-box{
+  background:#f0f9ff;
+  border:1px solid #bfdbfe;
+  border-radius:8px;
+  padding:12px 14px;
+  display:flex;
+  gap:10px;
+  margin-top:12px;
+}
+
+.info-icon{
+  color:#0284c7;
+  font-size:16px;
+  flex-shrink:0;
+  margin-top:2px;
+}
+
+.info-text{
+  font-size:12px;
+  color:#0c4a6e;
+  line-height:1.5;
+}
+
+/* ================= FOOTER ================= */
+.form-footer{
+  display:flex;
+  gap:12px;
+  justify-content:flex-end;
+  padding-top:24px;
+  border-top:1px solid #e5e7eb;
+  margin-top:24px;
+}
+
+.btn-footer{
+  padding:12px 24px;
+  border-radius:8px;
+  font-weight:600;
+  font-size:13px;
+  cursor:pointer;
+  transition:all 0.3s;
+  display:flex;
+  align-items:center;
+  gap:8px;
+  border:none;
+  font-family:"Open Sans";
+}
+
+.btn-cancel{
+  background:#f3f4f6;
+  color:#6B7280;
+}
+
+.btn-cancel:hover{
   background:#e5e7eb;
   color:#2E2E2E;
 }
 
-.add-item-btn{
-  background:none;
-  border:2px dashed #d1d5db;
-  border-radius:8px;
-  padding:14px;
-  color:#6B7280;
-  font-size:13px;
-  font-weight:600;
-  cursor:pointer;
-  width:100%;
-  display:flex;
-  align-items:center;
-  justify-content:center;
-  gap:8px;
-  transition:all 0.3s;
-  margin-top:12px;
+.btn-submit{
+  background:linear-gradient(135deg, #5830AD, #7e57c2);
+  color:#fff;
 }
 
-.add-item-btn:hover{
-  border-color:#5830AD;
-  color:#5830AD;
-  background:#f8f5ff;
+.btn-submit:hover{
+  box-shadow:0 6px 16px rgba(88,48,173,0.3);
+  transform:translateY(-2px);
 }
 
 /* ================= RESPONSIVE ================= */
-@media(max-width:1200px){
-  .agent-stats-row{
-    grid-template-columns:repeat(2, 1fr);
-  }
-  
-  .modules-grid{
-    grid-template-columns:repeat(2, 1fr);
-  }
-  
-  .module-card:nth-child(2n){
-    border-right:none;
-  }
-  
-  .module-card:nth-last-child(-n+2){
-    border-bottom:none;
-  }
-}
-
-@media(max-width:992px){
-  .left-panel{
-    width:320px;
-  }
-  
-  .content-sections{
-    padding:20px;
-  }
-  
-  .top-navigation{
-    padding:16px 20px;
-  }
-  
-  .tabs-container{
-    padding:0 20px;
-  }
-}
-
 @media(max-width:768px){
-  .app-container{
+  .main-wrapper{
+    padding:16px;
+  }
+  
+  .form-grid{
     grid-template-columns:1fr;
   }
   
-  .left-panel{
-    width:100%;
-    position:fixed;
-    left:-100%;
-    top:0;
-    height:100vh;
-    z-index:999;
-    border-right:none;
-    box-shadow:0 8px 32px rgba(0,0,0,0.15);
-    transition:left 0.3s ease;
-  }
-  
-  .left-panel.open{
-    left:0;
-  }
-  
-  .close-btn{
-    display:block;
-  }
-  
-  .menu-toggle{
-    display:block;
-  }
-  
-  .agent-stats-row{
-    grid-template-columns:1fr 1fr;
-  }
-  
-  .top-navigation{
+  .header{
     padding:12px 16px;
+    flex-wrap:wrap;
+    gap:12px;
   }
   
-  .tabs-container{
-    padding:0 16px;
-    gap:16px;
+  .header-title{
+    font-size:16px;
   }
   
-  .modules-grid{
-    grid-template-columns:1fr;
+  .header-right{
+    width:100%;
+    justify-content:flex-end;
   }
   
-  .module-card:nth-child(3n){
-    border-right:1px solid #e5e7eb;
-  }
-  
-  .module-card:nth-last-child(-n+3){
-    border-bottom:1px solid #e5e7eb;
-  }
-  
-  .module-card:last-child{
-    border-bottom:none;
+  .section-body{
+    padding:16px;
   }
 }
 
@@ -978,481 +578,455 @@ body{
 </head>
 <body>
 
-<div class="app-container">
-  <!-- LEFT PANEL -->
-  <div class="left-panel" id="leftPanel">
-    <div class="panel-header">
-      <div class="panel-title">
-        <i class="fa-solid fa-sliders"></i> Controls
-      </div>
-      <button class="close-btn" onclick="toggleLeftPanel()">
-        <i class="fa-solid fa-times"></i>
+<div class="page-container">
+  <!-- Header -->
+  <div class="header">
+    <div class="header-left">
+      <button class="back-button" onclick="goBack()">
+        <i class="fa-solid fa-arrow-left"></i>
       </button>
+      <div class="header-title">Create New Agent</div>
     </div>
-
-    <!-- Test Section -->
-    <div class="test-section">
-      <div class="test-label">Test Agent</div>
-      
-      <div class="test-tabs">
-        <button class="test-tab active">Audio</button>
-        <button class="test-tab">Chat</button>
-      </div>
-      
-      <button class="test-button">
-        <i class="fa-solid fa-play"></i> Start Test
+    
+    <div class="header-right">
+      <button class="header-btn">
+        <i class="fa-solid fa-undo"></i> Reset
       </button>
-      
-      <div class="test-display">
-        <div class="display-icon">
-          <i class="fa-solid fa-microphone"></i>
-        </div>
-        <div class="display-text">Ready to test</div>
-      </div>
-    </div>
-
-    <!-- Config Section -->
-    <div class="config-section">
-      <div class="config-section-label">Configuration</div>
-      
-      <div class="config-item">
-        <label class="config-item-label">Model</label>
-        <select class="config-select">
-          <option>Claude 4.5 Haiku</option>
-          <option>Claude 3.5 Sonnet</option>
-          <option>Claude 3 Opus</option>
-        </select>
-      </div>
-      
-      <div class="config-item">
-        <label class="config-item-label">Voice</label>
-        <select class="config-select">
-          <option>Sarah - Female</option>
-          <option>John - Male</option>
-          <option>Emma - Female</option>
-        </select>
-      </div>
-      
-      <div class="config-item">
-        <label class="config-item-label">Language</label>
-        <select class="config-select">
-          <option>English</option>
-          <option>Spanish</option>
-          <option>French</option>
-        </select>
-      </div>
+      <button class="header-btn btn-save">
+        <i class="fa-solid fa-floppy-disk"></i> Save Agent
+      </button>
     </div>
   </div>
 
-  <!-- MAIN CONTENT -->
-  <div class="main-content">
-    <!-- Top Navigation -->
-    <div class="top-navigation">
-      <div class="nav-left">
-        <button class="menu-toggle" onclick="toggleLeftPanel()">
-          <i class="fa-solid fa-bars"></i>
-        </button>
-        <div class="breadcrumb">
-          <a href="#" class="breadcrumb-link">Agents</a>
-          <span class="breadcrumb-separator">/</span>
-          <span class="breadcrumb-current">Appeals Agent</span>
+  <!-- Main Content -->
+  <div class="main-wrapper">
+    <!-- Basic Information Section -->
+    <div class="form-section">
+      <div class="section-header">
+        <div class="section-icon">
+          <i class="fa-solid fa-circle-info"></i>
         </div>
+        <div class="section-title">Basic Information</div>
       </div>
-      
-      <div class="nav-right">
-        <button class="nav-btn" title="History">
-          <i class="fa-solid fa-clock-rotate-left"></i>
-        </button>
-        <button class="nav-btn" title="More Options">
-          <i class="fa-solid fa-ellipsis-vertical"></i>
-        </button>
-        <button class="publish-btn">
-          <i class="fa-solid fa-cloud-arrow-up"></i> Publish
-        </button>
+      <div class="section-body">
+        <div class="form-grid">
+          <div class="form-group">
+            <label class="form-label">
+              Agent Name <span class="required">*</span>
+            </label>
+            <input type="text" class="form-input" placeholder="e.g., Appeals Agent" value="">
+            <span class="form-help">This name will be displayed to users</span>
+          </div>
+          
+          <div class="form-group">
+            <label class="form-label">
+              Agent Type <span class="required">*</span>
+            </label>
+            <div class="select-with-icon">
+              <select class="form-select">
+                <option value="">Select agent type</option>
+                <option value="voice">Voice Agent</option>
+                <option value="text">Text Agent</option>
+                <option value="chat">Chat Agent</option>
+              </select>
+            </div>
+            <span class="form-help">Determines how the agent will interact with users</span>
+          </div>
+
+          <div class="form-group">
+            <label class="form-label">
+              Voice <span class="required">*</span>
+            </label>
+            <div class="select-with-icon">
+              <select class="form-select">
+                <option value="">Select voice</option>
+                <option value="sarah">Sarah - Female</option>
+                <option value="john">John - Male</option>
+                <option value="emma">Emma - Female</option>
+                <option value="michael">Michael - Male</option>
+              </select>
+            </div>
+            <span class="form-help">Choose the voice for audio interactions</span>
+          </div>
+
+          <div class="form-group">
+            <label class="form-label">
+              Language <span class="required">*</span>
+            </label>
+            <div class="select-with-icon">
+              <select class="form-select">
+                <option value="">Select language</option>
+                <option value="en">English</option>
+                <option value="es">Spanish</option>
+                <option value="fr">French</option>
+                <option value="de">German</option>
+              </select>
+            </div>
+            <span class="form-help">Primary language for the agent</span>
+          </div>
+
+          <div class="form-group full">
+            <label class="form-label">
+              Description <span class="required">*</span>
+            </label>
+            <textarea class="form-textarea" placeholder="Provide a detailed description of what this agent does, its purpose, and how it will help users..."></textarea>
+            <span class="form-help">Help other team members understand this agent's role</span>
+          </div>
+        </div>
       </div>
     </div>
 
-    <!-- Agent Card -->
-    <div class="agent-card">
-      <div class="agent-header-row">
-        <div class="agent-title-block">
-          <div class="agent-avatar">
+    <!-- Model Configuration Section -->
+    <div class="form-section">
+      <div class="section-header">
+        <div class="section-icon">
+          <i class="fa-solid fa-microchip"></i>
+        </div>
+        <div class="section-title">Model Configuration</div>
+      </div>
+      <div class="section-body">
+        <div class="form-grid">
+          <div class="form-group">
+            <label class="form-label">
+              LLM Model <span class="required">*</span>
+            </label>
+            <div class="select-with-icon">
+              <select class="form-select">
+                <option value="">Select model</option>
+                <option value="claude-haiku">Claude 4.5 Haiku</option>
+                <option value="claude-sonnet">Claude 3.5 Sonnet</option>
+                <option value="claude-opus">Claude 3 Opus</option>
+                <option value="gpt4">GPT-4 Turbo</option>
+              </select>
+            </div>
+            <span class="form-help">Choose the AI model to power your agent</span>
+          </div>
+
+          <div class="form-group">
+            <label class="form-label">
+              Temperature
+            </label>
+            <input type="number" class="form-input" placeholder="0.7" min="0" max="1" step="0.1" value="0.7">
+            <span class="form-help">Controls randomness (0=deterministic, 1=creative)</span>
+          </div>
+
+          <div class="form-group">
+            <label class="form-label">
+              Max Tokens
+            </label>
+            <input type="number" class="form-input" placeholder="2000" value="2000">
+            <span class="form-help">Maximum tokens per response</span>
+          </div>
+
+          <div class="form-group">
+            <label class="form-label">
+              Response Format
+            </label>
+            <div class="select-with-icon">
+              <select class="form-select">
+                <option value="natural">Natural Language</option>
+                <option value="structured">Structured (JSON)</option>
+                <option value="custom">Custom Format</option>
+              </select>
+            </div>
+            <span class="form-help">How responses should be formatted</span>
+          </div>
+        </div>
+
+        <div class="info-box">
+          <i class="fa-solid fa-lightbulb info-icon"></i>
+          <div class="info-text">
+            <strong>Tip:</strong> Higher temperature values make responses more creative but less predictable. For customer support, use lower values (0.3-0.5).
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Capabilities Section -->
+    <div class="form-section">
+      <div class="section-header">
+        <div class="section-icon">
+          <i class="fa-solid fa-star"></i>
+        </div>
+        <div class="section-title">Agent Capabilities</div>
+      </div>
+      <div class="section-body">
+        <div class="form-grid full">
+          <div class="form-switch" onclick="toggleSwitch(this)">
+            <div class="switch-content">
+              <div class="switch-label">Function Calling</div>
+              <div class="switch-desc">Allow agent to execute external functions</div>
+            </div>
+            <div class="toggle-switch active">
+              <div class="toggle-circle"></div>
+            </div>
+          </div>
+
+          <div class="form-switch" onclick="toggleSwitch(this)">
+            <div class="switch-content">
+              <div class="switch-label">Web Search</div>
+              <div class="switch-desc">Enable real-time information retrieval</div>
+            </div>
+            <div class="toggle-switch">
+              <div class="toggle-circle"></div>
+            </div>
+          </div>
+
+          <div class="form-switch" onclick="toggleSwitch(this)">
+            <div class="switch-content">
+              <div class="switch-label">Memory/Context</div>
+              <div class="switch-desc">Maintain conversation history and context</div>
+            </div>
+            <div class="toggle-switch active">
+              <div class="toggle-circle"></div>
+            </div>
+          </div>
+
+          <div class="form-switch" onclick="toggleSwitch(this)">
+            <div class="switch-content">
+              <div class="switch-label">File Upload</div>
+              <div class="switch-desc">Allow users to upload files for processing</div>
+            </div>
+            <div class="toggle-switch">
+              <div class="toggle-circle"></div>
+            </div>
+          </div>
+
+          <div class="form-switch" onclick="toggleSwitch(this)">
+            <div class="switch-content">
+              <div class="switch-label">Multi-Language Support</div>
+              <div class="switch-desc">Handle multiple languages in one conversation</div>
+            </div>
+            <div class="toggle-switch">
+              <div class="toggle-circle"></div>
+            </div>
+          </div>
+
+          <div class="form-switch" onclick="toggleSwitch(this)">
+            <div class="switch-content">
+              <div class="switch-label">Sentiment Analysis</div>
+              <div class="switch-desc">Analyze and respond to user sentiment</div>
+            </div>
+            <div class="toggle-switch active">
+              <div class="toggle-circle"></div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Avatar & Personalization Section -->
+    <div class="form-section">
+      <div class="section-header">
+        <div class="section-icon">
+          <i class="fa-solid fa-image"></i>
+        </div>
+        <div class="section-title">Avatar & Personalization</div>
+      </div>
+      <div class="section-body">
+        <div class="avatar-upload">
+          <div class="avatar-preview">
             <i class="fa-solid fa-microphone-lines"></i>
           </div>
-          <div class="agent-info">
-            <div class="agent-name">
-              Appeals Agent
-              <button class="edit-icon" title="Edit">
-                <i class="fa-solid fa-pen"></i>
-              </button>
-            </div>
-            <div class="agent-meta">
-              <span>Agent ID: ag...bed</span>
-              <button class="copy-btn">
-                <i class="fa-solid fa-copy"></i>
-              </button>
-            </div>
-            <div class="agent-badges">
-              <div class="badge">
-                <i class="fa-solid fa-circle" style="font-size:8px;"></i> Voice Agent
-              </div>
-              <div class="badge" style="background:#d4edda;color:#155724;">
-                <i class="fa-solid fa-circle" style="font-size:8px;"></i> Active
-              </div>
-            </div>
+          <div class="avatar-actions">
+            <button class="avatar-btn">
+              <i class="fa-solid fa-upload"></i> Upload Avatar
+            </button>
+            <button class="avatar-btn">
+              <i class="fa-solid fa-wand-magic-sparkles"></i> Generate
+            </button>
+            <button class="avatar-btn danger">
+              <i class="fa-solid fa-trash"></i> Remove
+            </button>
           </div>
         </div>
-      </div>
 
-      <div class="agent-stats-row">
-        <div class="stat-item">
-          <div class="stat-label">Cost/Min</div>
-          <div class="stat-value">$0.095</div>
-        </div>
-        <div class="stat-item">
-          <div class="stat-label">Latency</div>
-          <div class="stat-value">850ms</div>
-        </div>
-        <div class="stat-item">
-          <div class="stat-label">Tokens</div>
-          <div class="stat-value">1,800</div>
-        </div>
-        <div class="stat-item">
-          <div class="stat-label">Total Calls</div>
-          <div class="stat-value">342</div>
+        <div class="form-grid" style="margin-top:24px;">
+          <div class="form-group">
+            <label class="form-label">Agent Persona</label>
+            <div class="select-with-icon">
+              <select class="form-select">
+                <option value="">Select persona</option>
+                <option value="professional">Professional</option>
+                <option value="friendly">Friendly</option>
+                <option value="formal">Formal</option>
+                <option value="casual">Casual</option>
+              </select>
+            </div>
+            <span class="form-help">Define how the agent presents itself</span>
+          </div>
+
+          <div class="form-group">
+            <label class="form-label">Accent/Region</label>
+            <div class="select-with-icon">
+              <select class="form-select">
+                <option value="">Select region</option>
+                <option value="us">US English</option>
+                <option value="uk">British English</option>
+                <option value="au">Australian English</option>
+                <option value="ca">Canadian English</option>
+              </select>
+            </div>
+            <span class="form-help">Customize voice accent</span>
+          </div>
+
+          <div class="form-group full">
+            <label class="form-label">Personality Traits</label>
+            <div class="tags-input">
+              <div class="tag">
+                professional
+                <button class="tag-remove">×</button>
+              </div>
+              <div class="tag">
+                empathetic
+                <button class="tag-remove">×</button>
+              </div>
+              <input type="text" class="tag-input" placeholder="Add traits and press Enter...">
+            </div>
+            <span class="form-help">Define personality characteristics (e.g., empathetic, patient, knowledgeable)</span>
+          </div>
         </div>
       </div>
     </div>
 
-    <!-- Tabs -->
-    <div class="tabs-container">
-      <button class="tab active">Configuration</button>
-      <button class="tab">Logs</button>
-      <button class="tab">Analytics</button>
-    </div>
-
-    <!-- Content Sections -->
-    <div class="content-sections">
-      <!-- System Prompt Section -->
-      <div class="prompt-section">
-        <div class="prompt-header">
-          <div class="prompt-title">
-            <i class="fa-solid fa-wand-magic-sparkles"></i> System Prompt
+    <!-- Security & Privacy Section -->
+    <div class="form-section">
+      <div class="section-header">
+        <div class="section-icon">
+          <i class="fa-solid fa-lock"></i>
+        </div>
+        <div class="section-title">Security & Privacy</div>
+      </div>
+      <div class="section-body">
+        <div class="form-grid">
+          <div class="form-group">
+            <label class="form-label">Access Level</label>
+            <div class="select-with-icon">
+              <select class="form-select">
+                <option value="public">Public</option>
+                <option value="private">Private</option>
+                <option value="team">Team Only</option>
+                <option value="restricted">Restricted</option>
+              </select>
+            </div>
+            <span class="form-help">Who can access and use this agent</span>
           </div>
-          <div class="prompt-actions">
-            <button class="prompt-btn" title="Copy">
-              <i class="fa-solid fa-copy"></i>
-            </button>
-            <button class="prompt-btn" title="Reset">
-              <i class="fa-solid fa-rotate-left"></i>
-            </button>
+
+          <div class="form-group">
+            <label class="form-label">Data Retention</label>
+            <div class="select-with-icon">
+              <select class="form-select">
+                <option value="30">30 Days</option>
+                <option value="90">90 Days</option>
+                <option value="180">6 Months</option>
+                <option value="365">1 Year</option>
+                <option value="forever">Forever</option>
+              </select>
+            </div>
+            <span class="form-help">How long to keep conversation logs</span>
           </div>
         </div>
-        <div style="padding:0;">
-          <div class="editor-wrapper">
-            <div class="editor-toolbar">
-              <button class="toolbar-btn" title="Bold"><strong>B</strong></button>
-              <button class="toolbar-btn" title="Italic"><em>I</em></button>
-              <button class="toolbar-btn" title="Code"><i class="fa-solid fa-code"></i></button>
-              <button class="toolbar-btn" title="List"><i class="fa-solid fa-list"></i></button>
-              <div style="flex:1;"></div>
-              <button class="toolbar-btn" title="More"><i class="fa-solid fa-ellipsis"></i></button>
+
+        <div class="form-grid full">
+          <div class="form-switch" onclick="toggleSwitch(this)">
+            <div class="switch-content">
+              <div class="switch-label">Require Authentication</div>
+              <div class="switch-desc">Users must authenticate before using this agent</div>
             </div>
-            <textarea class="editor-textarea">You are a professional voice agent for ABC Dental Insurance, specializing in helping members with their appeals and grievances.
-
-CRITICAL AUTHENTICATION REQUIREMENT:
-Before accessing ANY protected health information (PHI), you MUST authenticate the member first using their:
-- Member ID (format: M######, e.g., M123456)
-- Date of Birth (format: YYYY-MM-DD, e.g., 1985-03-15)
-- ZIP Code (5 digits, e.g., 90210)
-
-AUTHENTICATION PROCESS:
-1. When a member contacts you, immediately inform them that you need to verify their identity
-2. Politely ask for their three pieces of information
-3. Call authenticate_member with these details
-4. Only proceed if authentication is successful
-
-CONVERSATION STYLE:
-- Speak naturally and conversationally
-- Be warm, empathetic, and professional
-- Keep responses concise but informative
-- Always maintain patient privacy
-- Confirm information back to members for accuracy</textarea>
+            <div class="toggle-switch active">
+              <div class="toggle-circle"></div>
             </div>
+          </div>
+
+          <div class="form-switch" onclick="toggleSwitch(this)">
+            <div class="switch-content">
+              <div class="switch-label">HIPAA Compliance</div>
+              <div class="switch-desc">Enable HIPAA-compliant processing for PHI</div>
+            </div>
+            <div class="toggle-switch active">
+              <div class="toggle-circle"></div>
+            </div>
+          </div>
+
+          <div class="form-switch" onclick="toggleSwitch(this)">
+            <div class="switch-content">
+              <div class="switch-label">Audit Logging</div>
+              <div class="switch-desc">Log all agent actions and interactions</div>
+            </div>
+            <div class="toggle-switch active">
+              <div class="toggle-circle"></div>
+            </div>
+          </div>
+
+          <div class="form-switch" onclick="toggleSwitch(this)">
+            <div class="switch-content">
+              <div class="switch-label">Rate Limiting</div>
+              <div class="switch-desc">Limit requests per user/minute</div>
+            </div>
+            <div class="toggle-switch">
+              <div class="toggle-circle"></div>
+            </div>
+          </div>
+        </div>
+
+        <div class="info-box">
+          <i class="fa-solid fa-shield info-icon"></i>
+          <div class="info-text">
+            <strong>Security Note:</strong> All agent communications are encrypted in transit. Enable HIPAA compliance if handling protected health information.
           </div>
         </div>
       </div>
+    </div>
 
-      <!-- Modern Modules Section -->
-      <div class="modules-section">
-        <div class="modules-header">
-          <i class="fa-solid fa-cube"></i>
-          <div class="modules-title">Agent Modules</div>
-        </div>
-        
-        <div class="modules-grid">
-          <!-- Functions Module -->
-          <div class="module-card expanded" id="functionsModule">
-            <div class="module-header" onclick="toggleModule(event)">
-              <div class="module-info">
-                <div class="module-icon">
-                  <i class="fa-solid fa-cube"></i>
-                </div>
-                <div class="module-details">
-                  <div class="module-name">Functions</div>
-                  <div class="module-desc">Add and manage callable functions</div>
-                  <div class="module-status">
-                    <span class="status-dot"></span> 1 Function
-                  </div>
-                </div>
-              </div>
-              <button class="module-toggle">
-                <i class="fa-solid fa-chevron-down"></i>
-              </button>
-            </div>
-            <div class="module-content show">
-              <div class="items-list">
-                <div class="item-row">
-                  <div class="item-info">
-                    <div class="item-icon">
-                      <i class="fa-solid fa-phone"></i>
-                    </div>
-                    <span>end_call_1760995941862</span>
-                  </div>
-                  <div class="item-actions">
-                    <button class="item-btn" title="Edit"><i class="fa-solid fa-pen"></i></button>
-                    <button class="item-btn" title="Delete"><i class="fa-solid fa-trash"></i></button>
-                  </div>
-                </div>
-                <div class="item-row">
-                  <div class="item-info">
-                    <div class="item-icon">
-                      <i class="fa-solid fa-person"></i>
-                    </div>
-                    <span>authenticate_member</span>
-                  </div>
-                  <div class="item-actions">
-                    <button class="item-btn" title="Edit"><i class="fa-solid fa-pen"></i></button>
-                    <button class="item-btn" title="Delete"><i class="fa-solid fa-trash"></i></button>
-                  </div>
-                </div>
-              </div>
-              <button class="add-item-btn">
-                <i class="fa-solid fa-plus"></i> Add Function
-              </button>
-            </div>
-          </div>
-
-          <!-- Webhook Settings Module -->
-          <div class="module-card" id="webhooksModule">
-            <div class="module-header" onclick="toggleModule(event)">
-              <div class="module-info">
-                <div class="module-icon">
-                  <i class="fa-solid fa-webhook"></i>
-                </div>
-                <div class="module-details">
-                  <div class="module-name">Webhooks</div>
-                  <div class="module-desc">Configure event callbacks</div>
-                  <div class="module-status">
-                    <span class="status-dot inactive"></span> Not Configured
-                  </div>
-                </div>
-              </div>
-              <button class="module-toggle">
-                <i class="fa-solid fa-chevron-down"></i>
-              </button>
-            </div>
-            <div class="module-content">
-              <div class="content-empty">
-                <i class="fa-solid fa-link"></i>
-                <p>No webhooks configured yet</p>
-              </div>
-              <button class="add-item-btn">
-                <i class="fa-solid fa-plus"></i> Add Webhook
-              </button>
-            </div>
-          </div>
-
-          <!-- Localization Module -->
-          <div class="module-card" id="localizationModule">
-            <div class="module-header" onclick="toggleModule(event)">
-              <div class="module-info">
-                <div class="module-icon">
-                  <i class="fa-solid fa-language"></i>
-                </div>
-                <div class="module-details">
-                  <div class="module-name">Localization</div>
-                  <div class="module-desc">Multilingual support</div>
-                  <div class="module-status">
-                    <span class="status-dot"></span> English Only
-                  </div>
-                </div>
-              </div>
-              <button class="module-toggle">
-                <i class="fa-solid fa-chevron-down"></i>
-              </button>
-            </div>
-            <div class="module-content">
-              <div class="items-list">
-                <div class="item-row">
-                  <div class="item-info">
-                    <div class="item-icon">
-                      <i class="fa-solid fa-flag-usa"></i>
-                    </div>
-                    <span>English (United States)</span>
-                  </div>
-                  <div class="item-actions">
-                    <button class="item-btn" title="Edit"><i class="fa-solid fa-pen"></i></button>
-                    <button class="item-btn" title="Delete"><i class="fa-solid fa-trash"></i></button>
-                  </div>
-                </div>
-              </div>
-              <button class="add-item-btn">
-                <i class="fa-solid fa-plus"></i> Add Language
-              </button>
-            </div>
-          </div>
-
-          <!-- Analytics Module -->
-          <div class="module-card" id="analyticsModule">
-            <div class="module-header" onclick="toggleModule(event)">
-              <div class="module-info">
-                <div class="module-icon">
-                  <i class="fa-solid fa-chart-line"></i>
-                </div>
-                <div class="module-details">
-                  <div class="module-name">Analytics</div>
-                  <div class="module-desc">Performance metrics</div>
-                  <div class="module-status">
-                    <span class="status-dot"></span> Active
-                  </div>
-                </div>
-              </div>
-              <button class="module-toggle">
-                <i class="fa-solid fa-chevron-down"></i>
-              </button>
-            </div>
-            <div class="module-content">
-              <div class="content-empty">
-                <i class="fa-solid fa-chart-pie"></i>
-                <p>Real-time analytics dashboard coming soon</p>
-              </div>
-            </div>
-          </div>
-
-          <!-- Integrations Module -->
-          <div class="module-card" id="integrationsModule">
-            <div class="module-header" onclick="toggleModule(event)">
-              <div class="module-info">
-                <div class="module-icon">
-                  <i class="fa-solid fa-plug"></i>
-                </div>
-                <div class="module-details">
-                  <div class="module-name">Integrations</div>
-                  <div class="module-desc">External APIs</div>
-                  <div class="module-status">
-                    <span class="status-dot inactive"></span> 0 Connected
-                  </div>
-                </div>
-              </div>
-              <button class="module-toggle">
-                <i class="fa-solid fa-chevron-down"></i>
-              </button>
-            </div>
-            <div class="module-content">
-              <div class="content-empty">
-                <i class="fa-solid fa-code-branch"></i>
-                <p>No integrations connected yet</p>
-              </div>
-              <button class="add-item-btn">
-                <i class="fa-solid fa-plus"></i> Add Integration
-              </button>
-            </div>
-          </div>
-
-          <!-- Security Module -->
-          <div class="module-card" id="securityModule">
-            <div class="module-header" onclick="toggleModule(event)">
-              <div class="module-info">
-                <div class="module-icon">
-                  <i class="fa-solid fa-lock"></i>
-                </div>
-                <div class="module-details">
-                  <div class="module-name">Security</div>
-                  <div class="module-desc">Auth & access control</div>
-                  <div class="module-status">
-                    <span class="status-dot"></span> Configured
-                  </div>
-                </div>
-              </div>
-              <button class="module-toggle">
-                <i class="fa-solid fa-chevron-down"></i>
-              </button>
-            </div>
-            <div class="module-content">
-              <div class="items-list">
-                <div class="item-row">
-                  <div class="item-info">
-                    <div class="item-icon">
-                      <i class="fa-solid fa-key"></i>
-                    </div>
-                    <span>API Key Authentication</span>
-                  </div>
-                  <div class="item-actions">
-                    <button class="item-btn" title="Edit"><i class="fa-solid fa-pen"></i></button>
-                  </div>
-                </div>
-                <div class="item-row">
-                  <div class="item-info">
-                    <div class="item-icon">
-                      <i class="fa-solid fa-shield"></i>
-                    </div>
-                    <span>HIPAA Compliance</span>
-                  </div>
-                  <div class="item-actions">
-                    <button class="item-btn" title="Edit"><i class="fa-solid fa-pen"></i></button>
-                  </div>
-                </div>
-              </div>
-            </div>
-          </div>
-        </div>
+    <!-- Form Footer -->
+    <div class="section-body" style="background:none;">
+      <div class="form-footer">
+        <button class="btn-footer btn-cancel" onclick="goBack()">
+          <i class="fa-solid fa-times"></i> Cancel
+        </button>
+        <button class="btn-footer btn-submit">
+          <i class="fa-solid fa-check"></i> Create Agent
+        </button>
       </div>
     </div>
   </div>
 </div>
 
 <script>
-function toggleLeftPanel() {
-  const panel = document.getElementById('leftPanel');
-  panel.classList.toggle('open');
+function goBack() {
+  window.history.back();
 }
 
-function toggleModule(event) {
-  const moduleCard = event.currentTarget.closest('.module-card');
-  const moduleContent = moduleCard.querySelector('.module-content');
-  
-  moduleCard.classList.toggle('expanded');
-  moduleContent.classList.toggle('show');
+function toggleSwitch(element) {
+  const toggle = element.querySelector('.toggle-switch');
+  toggle.classList.toggle('active');
 }
 
-// Close left panel when clicking outside
-document.addEventListener('click', function(e) {
-  const panel = document.getElementById('leftPanel');
-  const toggle = document.querySelector('.menu-toggle');
-  
-  if (!panel.contains(e.target) && !toggle.contains(e.target)) {
-    panel.classList.remove('open');
-  }
+// Tag input handling
+document.querySelectorAll('.tag-input').forEach(input => {
+  input.addEventListener('keypress', function(e) {
+    if (e.key === 'Enter') {
+      e.preventDefault();
+      const value = this.value.trim();
+      if (value) {
+        const tag = document.createElement('div');
+        tag.className = 'tag';
+        tag.innerHTML = `${value}<button class="tag-remove">×</button>`;
+        this.parentNode.insertBefore(tag, this);
+        this.value = '';
+        
+        tag.querySelector('.tag-remove').addEventListener('click', function() {
+          tag.remove();
+        });
+      }
+    }
+  });
 });
 
-// Module card click handler (excluding the toggle button)
-document.querySelectorAll('.module-header').forEach(header => {
-  header.addEventListener('click', function(e) {
-    if (!e.target.closest('.module-toggle')) {
-      // Prevent toggle from firing twice
-      return;
-    }
+// Existing tag remove buttons
+document.querySelectorAll('.tag-remove').forEach(btn => {
+  btn.addEventListener('click', function() {
+    this.closest('.tag').remove();
   });
 });
 </script>
