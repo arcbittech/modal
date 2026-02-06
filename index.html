@@ -1,275 +1,1139 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8">
-  <title>Decision History Timeline</title>
-  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css" integrity="sha512-DTOQO9RWCH3ppGqcWaEA1BIZOC6xxalwEsw9c2QQeAIftl+Vegovlnee1c9QX4TctnWMn13TZye+giMm8e2LwA==" crossorigin="anonymous" referrerpolicy="no-referrer">
-  <link href="https://fonts.googleapis.com/css?family=Open+Sans:400,600" rel="stylesheet">
-  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700&display=swap" rel="stylesheet">
-  <style>
-    *{box-sizing:border-box;margin:0;padding:0}
-    body{
-      font-family:"Open Sans", sans-serif;
-      background:#757575;
-      display:flex;
-      align-items:center;
-      justify-content:center;
-      min-height:100vh;
-      padding:40px 20px;
-    }
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Request Details Modal - Medical Software</title>
+    <link href="https://fonts.googleapis.com/css2?family=Open+Sans:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
 
-    .modal{
-      background:#fff;
-      border-radius:12px;
-      box-shadow:0 20px 60px rgba(0,0,0,0.3);
-      width:800px;
-      display:flex;
-      flex-direction:column;
-    }
+        body {
+            font-family: 'Open Sans', sans-serif;
+            background: #f5f7fa;
+            padding: 20px;
+        }
 
-    .modal-header{
-      padding:24px;
-      border-bottom:1px solid #e5e7eb;
-      display:flex;
-      align-items:center;
-      justify-content:space-between;
-    }
-    .modal-title{
-      font-size:20px;
-      font-weight:700;
-      color:#1A1A1A;
-      font-family:"Poppins",sans-serif;
-      display:flex;
-      align-items:center;
-      gap:12px;
-    }
-    .modal-title i{color:#5830AD;font-size:22px}
-    .modal-close{
-      background:none;border:none;color:#6B7280;font-size:24px;
-      cursor:pointer;width:40px;height:40px;display:flex;
-      align-items:center;justify-content:center;border-radius:6px;
-    }
+        /* Modal Overlay */
+        .modal-overlay {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.6);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            z-index: 9999;
+            padding: 20px;
+        }
 
-    .modal-body{
-      padding:24px;
-    }
+        /* Modal Container */
+        .modal-container {
+            background: white;
+            border-radius: 12px;
+            box-shadow: 0 10px 40px rgba(0,0,0,0.2);
+            width: 100%;
+            max-width: 1400px;
+            max-height: 90vh;
+            display: flex;
+            flex-direction: column;
+            animation: modalSlideIn 0.3s ease-out;
+        }
 
-    .timeline{position:relative;padding:0}
-    .timeline::before{
-      content:'';position:absolute;left:15px;top:0;bottom:0;
-      width:2px;background:linear-gradient(to bottom,#5830AD,#d1d5db);
-    }
-    .timeline-item{margin-bottom:28px;padding-left:60px;position:relative}
-    .timeline-item:last-child{margin-bottom:0}
-    .timeline-dot{
-      position:absolute;left:0;top:2px;width:32px;height:32px;
-      background:#fff;border:3px solid #5830AD;border-radius:50%;
-      display:flex;align-items:center;justify-content:center;
-      color:#5830AD;font-size:14px;font-weight:600;
-    }
-    .timeline-dot.ai{border-color:#10b981;color:#10b981}
-    .timeline-dot.user{border-color:#f59e0b;color:#f59e0b}
+        @keyframes modalSlideIn {
+            from {
+                opacity: 0;
+                transform: translateY(-50px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
 
-    .timeline-content{
-      background:#f9fafb;border:1px solid #e5e7eb;
-      border-radius:8px;padding:16px;
-    }
-    .timeline-header{
-      display:flex;align-items:center;
-      justify-content:space-between;margin-bottom:12px;
-    }
-    .timeline-title{
-      font-weight:700;color:#1A1A1A;
-      font-size:14px;font-family:"Poppins",sans-serif;
-    }
-    .timeline-meta{
-      font-size:12px;color:#6B7280;
-      display:flex;align-items:center;gap:6px;
-    }
-    .timeline-badge{
-      display:inline-flex;align-items:center;gap:6px;
-      padding:4px 10px;border-radius:12px;
-      font-size:11px;font-weight:700;white-space:nowrap;
-    }
-    .badge-ai{background:#d1fae5;color:#065f46}
-    .badge-user{background:#fef3c7;color:#92400e}
+        /* Modal Header */
+        .modal-header {
+            background: #2c3e50;
+            color: white;
+            padding: 20px 30px;
+            border-radius: 12px 12px 0 0;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            border-bottom: 3px solid #3498db;
+        }
 
-    .timeline-decision{
-      background:#fff;border-left:4px solid #5830AD;
-      padding:12px;border-radius:4px;margin-bottom:12px;
-    }
-    .timeline-decision.appeal{border-left-color:#10b981;background:#f0fdf4}
-    .timeline-decision.grievance{border-left-color:#f59e0b;background:#fffbf0}
-    .timeline-decision.appeal-grievance{border-left-color:#8b5cf6;background:#faf5ff}
+        .modal-header-left {
+            display: flex;
+            align-items: center;
+            gap: 15px;
+        }
 
-    .decision-label{
-      font-size:10px;font-weight:700;color:#6B7280;
-      text-transform:uppercase;letter-spacing:0.5px;
-      margin-bottom:4px;display:block;
-    }
-    .decision-value{
-      font-weight:700;color:#1A1A1A;font-size:13px;
-      display:flex;align-items:center;gap:8px;
-    }
-    .decision-badge{
-      display:inline-flex;align-items:center;gap:4px;
-      padding:2px 8px;border-radius:12px;
-      font-size:11px;font-weight:600;
-    }
-    .badge-appeal{background:#d1fae5;color:#065f46}
-    .badge-grievance{background:#fef3c7;color:#92400e}
-    .badge-both{background:#e0e7ff;color:#3730a3}
+        .modal-icon {
+            width: 45px;
+            height: 45px;
+            background: #3498db;
+            border-radius: 8px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 20px;
+        }
 
-    .confidence-score{
-      font-size:12px;color:#6B7280;margin-top:8px;
-      padding-top:8px;border-top:1px solid rgba(0,0,0,0.1);
-    }
-    .timeline-note{
-      background:#fff;border-left:4px solid #0b5cff;
-      padding:12px;border-radius:4px;font-size:13px;
-      color:#2E2E2E;line-height:1.5;
-    }
-    .timeline-note strong{color:#1A1A1A}
-    .timeline-footer{
-      font-size:12px;color:#6B7280;margin-top:12px;
-      padding-top:12px;border-top:1px solid #e5e7eb;
-      display:flex;gap:16px;align-items:center;
-    }
-    .footer-item{display:flex;align-items:center;gap:6px}
-    .footer-item i{color:#9CA3AF}
+        .modal-title h2 {
+            font-size: 18px;
+            font-weight: 600;
+            margin-bottom: 4px;
+        }
 
-    .modal-footer{
-      padding:16px 24px;border-top:1px solid #e5e7eb;
-      display:flex;gap:12px;justify-content:flex-end;
-    }
-    .modal-btn{
-      padding:10px 20px;border-radius:8px;font-weight:600;
-      font-size:13px;cursor:pointer;border:none;
-      font-family:"Open Sans",sans-serif;
-    }
-    .modal-btn-secondary{background:#f3f4f6;color:#6B7280}
-  </style>
+        .modal-subtitle {
+            font-size: 12px;
+            opacity: 0.8;
+        }
+
+        .modal-close {
+            width: 35px;
+            height: 35px;
+            background: rgba(255, 255, 255, 0.1);
+            border: none;
+            border-radius: 6px;
+            color: white;
+            font-size: 18px;
+            cursor: pointer;
+            transition: all 0.3s;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .modal-close:hover {
+            background: rgba(255, 255, 255, 0.2);
+            transform: scale(1.1);
+        }
+
+        /* Modal Body */
+        .modal-body {
+            padding: 25px 30px;
+            overflow-y: auto;
+            flex: 1;
+        }
+
+        /* Scrollbar Styling */
+        .modal-body::-webkit-scrollbar {
+            width: 8px;
+        }
+
+        .modal-body::-webkit-scrollbar-track {
+            background: #f1f1f1;
+        }
+
+        .modal-body::-webkit-scrollbar-thumb {
+            background: #3498db;
+            border-radius: 4px;
+        }
+
+        .modal-body::-webkit-scrollbar-thumb:hover {
+            background: #2980b9;
+        }
+
+        /* Modal Footer */
+        .modal-footer {
+            padding: 20px 30px;
+            border-top: 1px solid #e9ecef;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            background: #f8f9fa;
+            border-radius: 0 0 12px 12px;
+        }
+
+        /* Detail Sections */
+        .detail-section {
+            background: #f8f9fa;
+            border: 1px solid #e9ecef;
+            border-radius: 12px;
+            padding: 20px;
+            margin-bottom: 20px;
+        }
+
+        .section-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 15px;
+            padding-bottom: 12px;
+            border-bottom: 2px solid #e9ecef;
+        }
+
+        .section-header-left {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .section-icon {
+            width: 35px;
+            height: 35px;
+            background: #e3f2fd;
+            color: #3498db;
+            border-radius: 8px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 16px;
+        }
+
+        .section-title h3 {
+            font-size: 15px;
+            color: #2c3e50;
+            margin-bottom: 3px;
+        }
+
+        .section-title p {
+            font-size: 11px;
+            color: #6c757d;
+        }
+
+        .info-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 15px;
+        }
+
+        .info-item {
+            background: white;
+            padding: 12px;
+            border-radius: 8px;
+            border: 1px solid #e9ecef;
+        }
+
+        .info-label {
+            font-size: 10px;
+            font-weight: 600;
+            color: #6c757d;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+            margin-bottom: 6px;
+            display: flex;
+            align-items: center;
+            gap: 6px;
+        }
+
+        .info-label i {
+            font-size: 11px;
+        }
+
+        .info-value {
+            font-size: 13px;
+            color: #2c3e50;
+            font-weight: 500;
+        }
+
+        /* Status Badges */
+        .status-badge {
+            display: inline-flex;
+            align-items: center;
+            gap: 6px;
+            padding: 5px 10px;
+            border-radius: 5px;
+            font-size: 11px;
+            font-weight: 600;
+        }
+
+        .status-pending {
+            background: #fff3cd;
+            color: #856404;
+        }
+
+        .status-validated {
+            background: #d1f2eb;
+            color: #0a6c53;
+        }
+
+        .status-active {
+            background: #d1f2eb;
+            color: #0a6c53;
+        }
+
+        .status-yes {
+            background: #d1f2eb;
+            color: #0a6c53;
+        }
+
+        .status-no {
+            background: #f8d7da;
+            color: #721c24;
+        }
+
+        /* AI Badge */
+        .ai-badge {
+            display: inline-flex;
+            align-items: center;
+            gap: 6px;
+            background: #e3f2fd;
+            color: #1565c0;
+            padding: 5px 10px;
+            border-radius: 5px;
+            font-size: 11px;
+            font-weight: 600;
+        }
+
+        /* Confidence Score */
+        .confidence-score {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .confidence-bar {
+            flex: 1;
+            height: 8px;
+            background: #e9ecef;
+            border-radius: 4px;
+            overflow: hidden;
+            position: relative;
+        }
+
+        .confidence-fill {
+            height: 100%;
+            background: linear-gradient(90deg, #27ae60, #f39c12, #e74c3c);
+            border-radius: 4px;
+            transition: width 0.3s;
+        }
+
+        .confidence-percentage {
+            font-size: 13px;
+            font-weight: 600;
+            color: #2c3e50;
+            min-width: 45px;
+        }
+
+        /* Text Area */
+        .text-content {
+            background: white;
+            padding: 15px;
+            border-radius: 8px;
+            border: 1px solid #e9ecef;
+            font-size: 13px;
+            color: #495057;
+            line-height: 1.8;
+        }
+
+        /* Action Buttons */
+        .btn-action {
+            padding: 8px 16px;
+            border: none;
+            border-radius: 6px;
+            font-size: 13px;
+            font-weight: 600;
+            cursor: pointer;
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            transition: all 0.3s;
+        }
+
+        .btn-primary {
+            background: #3498db;
+            color: white;
+        }
+
+        .btn-primary:hover {
+            background: #2980b9;
+        }
+
+        .btn-secondary {
+            background: #95a5a6;
+            color: white;
+        }
+
+        .btn-secondary:hover {
+            background: #7f8c8d;
+        }
+
+        .btn-success {
+            background: #27ae60;
+            color: white;
+        }
+
+        .btn-success:hover {
+            background: #229954;
+        }
+
+        .btn-danger {
+            background: #e74c3c;
+            color: white;
+        }
+
+        .btn-danger:hover {
+            background: #c0392b;
+        }
+
+        /* Claim Lines */
+        .claim-lines {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 8px;
+        }
+
+        .claim-line-tag {
+            display: inline-flex;
+            align-items: center;
+            gap: 6px;
+            padding: 5px 10px;
+            border-radius: 5px;
+            font-size: 11px;
+            font-weight: 600;
+            background: #e3f2fd;
+            color: #1565c0;
+        }
+
+        /* Validation Details */
+        .validation-item {
+            background: white;
+            padding: 12px;
+            border-radius: 8px;
+            border-left: 4px solid #3498db;
+            margin-bottom: 10px;
+        }
+
+        .validation-key {
+            font-size: 11px;
+            font-weight: 600;
+            color: #6c757d;
+            margin-bottom: 4px;
+        }
+
+        .validation-value {
+            font-size: 13px;
+            color: #2c3e50;
+        }
+
+        /* TAT Grid */
+        .tat-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 12px;
+        }
+
+        .tat-card {
+            background: white;
+            padding: 15px;
+            border-radius: 8px;
+            border: 1px solid #e9ecef;
+            text-align: center;
+        }
+
+        .tat-number {
+            font-size: 28px;
+            font-weight: 700;
+            color: #3498db;
+            margin-bottom: 5px;
+        }
+
+        .tat-label {
+            font-size: 11px;
+            color: #6c757d;
+            text-transform: uppercase;
+            font-weight: 600;
+        }
+
+        /* Responsive */
+        @media (max-width: 768px) {
+            .modal-container {
+                max-width: 100%;
+                max-height: 95vh;
+            }
+
+            .info-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .tat-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+    </style>
 </head>
 <body>
+    <!-- Trigger Button (for demo) -->
+    <button class="btn-action btn-primary" onclick="openModal()" style="margin: 20px;">
+        <i class="fas fa-eye"></i> Open Request Details Modal
+    </button>
 
-  <div class="modal">
-    <div class="modal-header">
-      <div class="modal-title">
-        <i class="fa-solid fa-history"></i> Decision History Timeline
-      </div>
-      <button class="modal-close">
-        <i class="fa-solid fa-times"></i>
-      </button>
-    </div>
-    <div class="modal-body">
-      <div class="timeline">
-
-        <div class="timeline-item">
-          <div class="timeline-dot ai">
-            <i class="fa-solid fa-robot"></i>
-          </div>
-          <div class="timeline-content">
-            <div class="timeline-header">
-              <div>
-                <div class="timeline-title">AI Recommendation</div>
-                <div class="timeline-meta">
-                  <i class="fa-regular fa-calendar"></i> Nov 6, 2025 &bull; 9:15 AM
+    <!-- Modal Overlay -->
+    <div class="modal-overlay" id="requestModal" style="display: none;">
+        <div class="modal-container">
+            <!-- Modal Header -->
+            <div class="modal-header">
+                <div class="modal-header-left">
+                    <div class="modal-icon">
+                        <i class="fas fa-file-alt"></i>
+                    </div>
+                    <div class="modal-title">
+                        <h2>Request Details</h2>
+                        <div class="modal-subtitle">Complete request information and processing details</div>
+                    </div>
                 </div>
-              </div>
-              <span class="timeline-badge badge-ai">
-                <i class="fa-solid fa-microchip"></i> System
-              </span>
+                <button class="modal-close" onclick="closeModal()">
+                    <i class="fas fa-times"></i>
+                </button>
             </div>
-            <div class="timeline-decision appeal">
-              <span class="decision-label">Recommendation</span>
-              <div class="decision-value">
-                <span class="decision-badge badge-appeal">APPEAL</span>
-              </div>
-            </div>
-            <div class="confidence-score">
-              <strong>Confidence:</strong> 95% | <strong>Rationale:</strong> The member's call regarding a claim denial typically indicates a desire to challenge or request a review of the decision, which is characteristic of an appeal.
-            </div>
-          </div>
-        </div>
 
-        <div class="timeline-item">
-          <div class="timeline-dot user">
-            <i class="fa-solid fa-user"></i>
-          </div>
-          <div class="timeline-content">
-            <div class="timeline-header">
-              <div>
-                <div class="timeline-title">Decision Changed by User</div>
-                <div class="timeline-meta">
-                  <i class="fa-regular fa-calendar"></i> Nov 8, 2025 &bull; 2:45 PM
+            <!-- Modal Body -->
+            <div class="modal-body">
+                <!-- Tracking & Identifiers -->
+                <div class="detail-section">
+                    <div class="section-header">
+                        <div class="section-header-left">
+                            <div class="section-icon">
+                                <i class="fas fa-barcode"></i>
+                            </div>
+                            <div class="section-title">
+                                <h3>Tracking & Identifiers</h3>
+                                <p>Request identification and tracking information</p>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="info-grid">
+                        <div class="info-item">
+                            <div class="info-label"><i class="fas fa-hashtag"></i> Request ID</div>
+                            <div class="info-value">REQ-2025-00123</div>
+                        </div>
+                        <div class="info-item">
+                            <div class="info-label"><i class="fas fa-folder-open"></i> Parent Original Call File ID</div>
+                            <div class="info-value">CALL-PARENT-456789</div>
+                        </div>
+                        <div class="info-item">
+                            <div class="info-label"><i class="fas fa-file"></i> Original Call File ID</div>
+                            <div class="info-value">CALL-789012</div>
+                        </div>
+                        <div class="info-item">
+                            <div class="info-label"><i class="fas fa-comments"></i> Interaction ID</div>
+                            <div class="info-value">INT-345678</div>
+                        </div>
+                        <div class="info-item">
+                            <div class="info-label"><i class="fas fa-file-invoice"></i> Claim Number</div>
+                            <div class="info-value">CLM-2025-987654</div>
+                        </div>
+                        <div class="info-item">
+                            <div class="info-label"><i class="fas fa-list-ol"></i> Claim Lines</div>
+                            <div class="info-value">
+                                <div class="claim-lines">
+                                    <span class="claim-line-tag">
+                                        <i class="fas fa-hashtag"></i> Line 1
+                                    </span>
+                                    <span class="claim-line-tag">
+                                        <i class="fas fa-hashtag"></i> Line 2
+                                    </span>
+                                    <span class="claim-line-tag">
+                                        <i class="fas fa-hashtag"></i> Line 3
+                                    </span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
                 </div>
-              </div>
-              <span class="timeline-badge badge-user">
-                <i class="fa-solid fa-user-tie"></i> John Smith
-              </span>
-            </div>
-            <div class="timeline-decision appeal-grievance">
-              <span class="decision-label">Changed To</span>
-              <div class="decision-value">
-                <span class="decision-badge badge-both">APPEAL AND GRIEVANCE</span>
-              </div>
-            </div>
-            <div class="timeline-note">
-              <strong>Note:</strong> After reviewing additional documentation provided by the member, it's clear this case involves both an appeal of the claim denial AND a complaint about service delays. The member specifically mentioned dissatisfaction with how their initial inquiry was handled.
-            </div>
-            <div class="timeline-footer">
-              <div class="footer-item">
-                <i class="fa-solid fa-pen"></i> Changed by John Smith
-              </div>
-              <div class="footer-item">
-                <i class="fa-solid fa-clock"></i> 2h 30m after initial
-              </div>
-            </div>
-          </div>
-        </div>
 
-        <div class="timeline-item">
-          <div class="timeline-dot user">
-            <i class="fa-solid fa-user"></i>
-          </div>
-          <div class="timeline-content">
-            <div class="timeline-header">
-              <div>
-                <div class="timeline-title">Decision Changed by User</div>
-                <div class="timeline-meta">
-                  <i class="fa-regular fa-calendar"></i> Nov 10, 2025 &bull; 10:20 AM
+                <!-- Source Information -->
+                <div class="detail-section">
+                    <div class="section-header">
+                        <div class="section-header-left">
+                            <div class="section-icon">
+                                <i class="fas fa-source"></i>
+                            </div>
+                            <div class="section-title">
+                                <h3>Source Information</h3>
+                                <p>Request origin and channel details</p>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="info-grid">
+                        <div class="info-item">
+                            <div class="info-label"><i class="fas fa-inbox"></i> Intake Source</div>
+                            <div class="info-value">Care Event</div>
+                        </div>
+                        <div class="info-item">
+                            <div class="info-label"><i class="fas fa-broadcast-tower"></i> Source Channel</div>
+                            <div class="info-value">Phone Call</div>
+                        </div>
+                        <div class="info-item">
+                            <div class="info-label"><i class="fas fa-fingerprint"></i> Source Identifier</div>
+                            <div class="info-value">PHONE-IVR-001</div>
+                        </div>
+                    </div>
                 </div>
-              </div>
-              <span class="timeline-badge badge-user">
-                <i class="fa-solid fa-user-tie"></i> Sarah Johnson
-              </span>
+
+                <!-- Timing Information -->
+                <div class="detail-section">
+                    <div class="section-header">
+                        <div class="section-header-left">
+                            <div class="section-icon">
+                                <i class="fas fa-clock"></i>
+                            </div>
+                            <div class="section-title">
+                                <h3>Timing Information</h3>
+                                <p>Date and time details</p>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="info-grid">
+                        <div class="info-item">
+                            <div class="info-label"><i class="fas fa-calendar-day"></i> Received Date</div>
+                            <div class="info-value">12/28/2025</div>
+                        </div>
+                        <div class="info-item">
+                            <div class="info-label"><i class="fas fa-clock"></i> Time Received</div>
+                            <div class="info-value">14:35:22</div>
+                        </div>
+                        <div class="info-item">
+                            <div class="info-label"><i class="fas fa-calendar-plus"></i> Created Date</div>
+                            <div class="info-value">12/28/2025 2:35 PM</div>
+                        </div>
+                        <div class="info-item">
+                            <div class="info-label"><i class="fas fa-edit"></i> Modified Date</div>
+                            <div class="info-value">12/28/2025 3:20 PM</div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Requestor Information -->
+                <div class="detail-section">
+                    <div class="section-header">
+                        <div class="section-header-left">
+                            <div class="section-icon">
+                                <i class="fas fa-user-circle"></i>
+                            </div>
+                            <div class="section-title">
+                                <h3>Requestor Information</h3>
+                                <p>Person submitting the request</p>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="info-grid">
+                        <div class="info-item">
+                            <div class="info-label"><i class="fas fa-user"></i> Requestor Name</div>
+                            <div class="info-value">Sarah Johnson</div>
+                        </div>
+                        <div class="info-item">
+                            <div class="info-label"><i class="fas fa-phone"></i> Requestor Phone</div>
+                            <div class="info-value">555-123-4567</div>
+                        </div>
+                        <div class="info-item">
+                            <div class="info-label"><i class="fas fa-bolt"></i> Expedited Review</div>
+                            <div class="info-value">
+                                <span class="status-badge status-yes">
+                                    <i class="fas fa-check-circle"></i> Yes
+                                </span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Provider & Office -->
+                <div class="detail-section">
+                    <div class="section-header">
+                        <div class="section-header-left">
+                            <div class="section-icon">
+                                <i class="fas fa-user-md"></i>
+                            </div>
+                            <div class="section-title">
+                                <h3>Provider & Office Information</h3>
+                                <p>Healthcare provider details</p>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="info-grid">
+                        <div class="info-item">
+                            <div class="info-label"><i class="fas fa-id-card"></i> Provider Number</div>
+                            <div class="info-value">PRV-789456</div>
+                        </div>
+                        <div class="info-item">
+                            <div class="info-label"><i class="fas fa-building"></i> Office Number</div>
+                            <div class="info-value">OFF-123789</div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Member Information -->
+                <div class="detail-section">
+                    <div class="section-header">
+                        <div class="section-header-left">
+                            <div class="section-icon">
+                                <i class="fas fa-user"></i>
+                            </div>
+                            <div class="section-title">
+                                <h3>Member Information</h3>
+                                <p>Patient details</p>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="info-grid">
+                        <div class="info-item">
+                            <div class="info-label"><i class="fas fa-hashtag"></i> Member Number</div>
+                            <div class="info-value">MBR-456789</div>
+                        </div>
+                        <div class="info-item">
+                            <div class="info-label"><i class="fas fa-user"></i> First Name</div>
+                            <div class="info-value">John</div>
+                        </div>
+                        <div class="info-item">
+                            <div class="info-label"><i class="fas fa-user"></i> Last Name</div>
+                            <div class="info-value">Smith</div>
+                        </div>
+                        <div class="info-item">
+                            <div class="info-label"><i class="fas fa-id-badge"></i> Member ID</div>
+                            <div class="info-value">MID-987654</div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Group & LOB -->
+                <div class="detail-section">
+                    <div class="section-header">
+                        <div class="section-header-left">
+                            <div class="section-icon">
+                                <i class="fas fa-users"></i>
+                            </div>
+                            <div class="section-title">
+                                <h3>Group & Line of Business</h3>
+                                <p>Group and LOB information</p>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="info-grid">
+                        <div class="info-item">
+                            <div class="info-label"><i class="fas fa-hashtag"></i> Group Number</div>
+                            <div class="info-value">GRP-12345</div>
+                        </div>
+                        <div class="info-item">
+                            <div class="info-label"><i class="fas fa-building"></i> Group Name</div>
+                            <div class="info-value">Enterprise Health Group</div>
+                        </div>
+                        <div class="info-item">
+                            <div class="info-label"><i class="fas fa-briefcase"></i> GA Secondary LOB</div>
+                            <div class="info-value">Commercial</div>
+                        </div>
+                        <div class="info-item">
+                            <div class="info-label"><i class="fas fa-users-cog"></i> GA Team</div>
+                            <div class="info-value">Team Alpha</div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Call Summary & Narrative -->
+                <div class="detail-section">
+                    <div class="section-header">
+                        <div class="section-header-left">
+                            <div class="section-icon">
+                                <i class="fas fa-file-alt"></i>
+                            </div>
+                            <div class="section-title">
+                                <h3>Call Summary & Narrative</h3>
+                                <p>Detailed description of the request</p>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="info-item" style="margin-bottom: 15px;">
+                        <div class="info-label"><i class="fas fa-align-left"></i> Summary of Call</div>
+                        <div class="text-content">
+                            Member called regarding denial of service for physical therapy sessions. Member states that their provider recommended 12 sessions but only 6 were approved. Member is requesting appeal of the decision and wants expedited review due to deteriorating condition. Member expressed frustration with the denial and requested supervisor callback.
+                        </div>
+                    </div>
+                    <div class="info-item" style="margin-bottom: 15px;">
+                        <div class="info-label"><i class="fas fa-search"></i> MSR Research Actions</div>
+                        <div class="text-content">
+                            Verified member eligibility and coverage. Reviewed original authorization request and denial reason. Confirmed provider credentials and in-network status. Checked member's utilization history for similar services. Created case for appeal review and flagged for expedited processing.
+                        </div>
+                    </div>
+                    <div class="info-item">
+                        <div class="info-label"><i class="fas fa-gavel"></i> Grievance & Appeal Result</div>
+                        <div class="info-value">
+                            <span class="status-badge status-pending">
+                                <i class="fas fa-clock"></i> Pending Review
+                            </span>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Delegation Flags -->
+                <div class="detail-section">
+                    <div class="section-header">
+                        <div class="section-header-left">
+                            <div class="section-icon">
+                                <i class="fas fa-handshake"></i>
+                            </div>
+                            <div class="section-title">
+                                <h3>Delegation Flags</h3>
+                                <p>Delegation status indicators</p>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="info-grid">
+                        <div class="info-item">
+                            <div class="info-label"><i class="fas fa-exclamation-triangle"></i> LDP Delegated Grievances</div>
+                            <div class="info-value">
+                                <span class="status-badge status-no">
+                                    <i class="fas fa-times-circle"></i> No
+                                </span>
+                            </div>
+                        </div>
+                        <div class="info-item">
+                            <div class="info-label"><i class="fas fa-balance-scale"></i> LDP Delegated Appeals</div>
+                            <div class="info-value">
+                                <span class="status-badge status-no">
+                                    <i class="fas fa-times-circle"></i> No
+                                </span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- SLA & TAT Configuration -->
+                <div class="detail-section">
+                    <div class="section-header">
+                        <div class="section-header-left">
+                            <div class="section-icon">
+                                <i class="fas fa-stopwatch"></i>
+                            </div>
+                            <div class="section-title">
+                                <h3>SLA & TAT Configuration</h3>
+                                <p>Service level agreement timelines</p>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="tat-grid">
+                        <div class="tat-card">
+                            <div class="tat-number">2</div>
+                            <div class="tat-label">
+                                <i class="fas fa-file-signature"></i> Grievance ACK TAT (Days)
+                            </div>
+                        </div>
+                        <div class="tat-card">
+                            <div class="tat-number">3</div>
+                            <div class="tat-label">
+                                <i class="fas fa-file-signature"></i> Appeal ACK TAT (Days)
+                            </div>
+                        </div>
+                        <div class="tat-card">
+                            <div class="tat-number">72</div>
+                            <div class="tat-label">
+                                <i class="fas fa-bolt"></i> Expedited GA TAT (Hours)
+                            </div>
+                        </div>
+                        <div class="tat-card">
+                            <div class="tat-number">30</div>
+                            <div class="tat-label">
+                                <i class="fas fa-clipboard-check"></i> Grievance Resolution TAT (Days)
+                            </div>
+                        </div>
+                        <div class="tat-card">
+                            <div class="tat-number">30</div>
+                            <div class="tat-label">
+                                <i class="fas fa-clipboard-check"></i> Appeal Resolution TAT (Days)
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Filing Rules -->
+                <div class="detail-section">
+                    <div class="section-header">
+                        <div class="section-header-left">
+                            <div class="section-icon">
+                                <i class="fas fa-file-contract"></i>
+                            </div>
+                            <div class="section-title">
+                                <h3>Filing Rules</h3>
+                                <p>Filing requirements and timelines</p>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="info-grid">
+                        <div class="info-item">
+                            <div class="info-label"><i class="fas fa-calendar-alt"></i> Days to File Appeal</div>
+                            <div class="info-value">60 Days</div>
+                        </div>
+                        <div class="info-item">
+                            <div class="info-label"><i class="fas fa-calendar-alt"></i> Days to File Grievance</div>
+                            <div class="info-value">180 Days</div>
+                        </div>
+                        <div class="info-item">
+                            <div class="info-label"><i class="fas fa-exclamation-circle"></i> Untimely GA Process</div>
+                            <div class="info-value">Accept with Notification</div>
+                        </div>
+                        <div class="info-item">
+                            <div class="info-label"><i class="fas fa-layer-group"></i> Appeal Review Level</div>
+                            <div class="info-value">Level 1</div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- AI Information -->
+                <div class="detail-section">
+                    <div class="section-header">
+                        <div class="section-header-left">
+                            <div class="section-icon">
+                                <i class="fas fa-robot"></i>
+                            </div>
+                            <div class="section-title">
+                                <h3>AI Processing Information</h3>
+                                <p>Artificial intelligence analysis details</p>
+                            </div>
+                        </div>
+                        <span class="ai-badge">
+                            <i class="fas fa-robot"></i> AI Processed
+                        </span>
+                    </div>
+                    <div class="info-grid">
+                        <div class="info-item">
+                            <div class="info-label"><i class="fas fa-brain"></i> AI Model Used</div>
+                            <div class="info-value">GPT-4-Turbo-Medical-v2</div>
+                        </div>
+                        <div class="info-item">
+                            <div class="info-label"><i class="fas fa-code-branch"></i> AI Version</div>
+                            <div class="info-value">v2.3.1</div>
+                        </div>
+                        <div class="info-item">
+                            <div class="info-label"><i class="fas fa-tachometer-alt"></i> Execution Time</div>
+                            <div class="info-value">2.34 seconds</div>
+                        </div>
+                        <div class="info-item">
+                            <div class="info-label"><i class="fas fa-tag"></i> Request Type</div>
+                            <div class="info-value">Appeal - Medical Necessity</div>
+                        </div>
+                        <div class="info-item">
+                            <div class="info-label"><i class="fas fa-thumbs-up"></i> AI Recommendation</div>
+                            <div class="info-value">
+                                <span class="status-badge status-yes">
+                                    <i class="fas fa-check-circle"></i> Recommended
+                                </span>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="info-item" style="margin-top: 15px;">
+                        <div class="info-label"><i class="fas fa-chart-line"></i> Confidence Score</div>
+                        <div class="confidence-score">
+                            <div class="confidence-bar">
+                                <div class="confidence-fill" style="width: 87%;"></div>
+                            </div>
+                            <div class="confidence-percentage">87%</div>
+                        </div>
+                    </div>
+
+                    <div class="info-item" style="margin-top: 15px;">
+                        <div class="info-label"><i class="fas fa-lightbulb"></i> AI Rationale</div>
+                        <div class="text-content">
+                            Based on clinical documentation review and medical necessity criteria, the AI system recommends approval of the appeal. The provider's medical records demonstrate clear clinical justification for the requested 12 physical therapy sessions. Patient's condition shows progressive improvement with current treatment plan, and medical literature supports extended therapy for this diagnosis. Denial appears to be based on utilization management guidelines that may not account for patient-specific factors documented in the medical records.
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Status & Processing -->
+                <div class="detail-section">
+                    <div class="section-header">
+                        <div class="section-header-left">
+                            <div class="section-icon">
+                                <i class="fas fa-tasks"></i>
+                            </div>
+                            <div class="section-title">
+                                <h3>Status & Processing Information</h3>
+                                <p>Current status and assignment details</p>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="info-grid">
+                        <div class="info-item">
+                            <div class="info-label"><i class="fas fa-info-circle"></i> Request Status</div>
+                            <div class="info-value">
+                                <span class="status-badge status-pending">
+                                    <i class="fas fa-clock"></i> Pending Review
+                                </span>
+                            </div>
+                        </div>
+                        <div class="info-item">
+                            <div class="info-label"><i class="fas fa-check-double"></i> Validation Status</div>
+                            <div class="info-value">
+                                <span class="status-badge status-validated">
+                                    <i class="fas fa-check-circle"></i> Validated
+                                </span>
+                            </div>
+                        </div>
+                        <div class="info-item">
+                            <div class="info-label"><i class="fas fa-user-check"></i> Assigned To</div>
+                            <div class="info-value">analyst@careinsight.ai</div>
+                        </div>
+                        <div class="info-item">
+                            <div class="info-label"><i class="fas fa-user-shield"></i> Human Review Required</div>
+                            <div class="info-value">
+                                <span class="status-badge status-yes">
+                                    <i class="fas fa-check-circle"></i> Yes
+                                </span>
+                            </div>
+                        </div>
+                        <div class="info-item">
+                            <div class="info-label"><i class="fas fa-toggle-on"></i> Active Status</div>
+                            <div class="info-value">
+                                <span class="status-badge status-active">
+                                    <i class="fas fa-check-circle"></i> Active
+                                </span>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="info-item" style="margin-top: 15px;">
+                        <div class="info-label"><i class="fas fa-comments"></i> Human Review Comments</div>
+                        <div class="text-content">
+                            Case flagged for clinical review due to complexity. Medical director review recommended to validate AI analysis and ensure compliance with state regulations. Additional clinical documentation may be requested from provider.
+                        </div>
+                    </div>
+
+                    <div class="info-item" style="margin-top: 15px;">
+                        <div class="info-label"><i class="fas fa-undo"></i> Reason for Override</div>
+                        <div class="text-content">
+                            No override recorded
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Validation Details -->
+                <div class="detail-section">
+                    <div class="section-header">
+                        <div class="section-header-left">
+                            <div class="section-icon">
+                                <i class="fas fa-check-circle"></i>
+                            </div>
+                            <div class="section-title">
+                                <h3>Validation Details</h3>
+                                <p>Data validation results</p>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="validation-item">
+                        <div class="validation-key">Member Eligibility</div>
+                        <div class="validation-value">
+                            <span class="status-badge status-validated">
+                                <i class="fas fa-check-circle"></i> Verified
+                            </span>
+                        </div>
+                    </div>
+                    <div class="validation-item">
+                        <div class="validation-key">Provider Credentials</div>
+                        <div class="validation-value">
+                            <span class="status-badge status-validated">
+                                <i class="fas fa-check-circle"></i> Valid
+                            </span>
+                        </div>
+                    </div>
+                    <div class="validation-item">
+                        <div class="validation-key">Filing Timeline</div>
+                        <div class="validation-value">
+                            <span class="status-badge status-validated">
+                                <i class="fas fa-check-circle"></i> Within Limits
+                            </span>
+                        </div>
+                    </div>
+                    <div class="validation-item">
+                        <div class="validation-key">Required Documents</div>
+                        <div class="validation-value">
+                            <span class="status-badge status-pending">
+                                <i class="fas fa-clock"></i> Pending Upload
+                            </span>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Audit Information -->
+                <div class="detail-section">
+                    <div class="section-header">
+                        <div class="section-header-left">
+                            <div class="section-icon">
+                                <i class="fas fa-history"></i>
+                            </div>
+                            <div class="section-title">
+                                <h3>Audit Information</h3>
+                                <p>Creation and modification tracking</p>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="info-grid">
+                        <div class="info-item">
+                            <div class="info-label"><i class="fas fa-user-plus"></i> Created By</div>
+                            <div class="info-value">system@careinsight.ai</div>
+                        </div>
+                        <div class="info-item">
+                            <div class="info-label"><i class="fas fa-calendar-plus"></i> Created Date</div>
+                            <div class="info-value">12/28/2025 2:35 PM</div>
+                        </div>
+                        <div class="info-item">
+                            <div class="info-label"><i class="fas fa-user-edit"></i> Modified By</div>
+                            <div class="info-value">analyst@careinsight.ai</div>
+                        </div>
+                        <div class="info-item">
+                            <div class="info-label"><i class="fas fa-edit"></i> Modified Date</div>
+                            <div class="info-value">12/28/2025 3:20 PM</div>
+                        </div>
+                    </div>
+                </div>
             </div>
-            <div class="timeline-decision grievance">
-              <span class="decision-label">Changed To</span>
-              <div class="decision-value">
-                <span class="decision-badge badge-grievance">GRIEVANCE</span>
-              </div>
+
+            <!-- Modal Footer -->
+            <div class="modal-footer">
+                <div>
+                    <span style="font-size: 12px; color: #6c757d;">
+                        <i class="fas fa-info-circle"></i> Last updated: 12/28/2025 3:20 PM
+                    </span>
+                </div>
+                <div style="display: flex; gap: 10px;">
+                    <button class="btn-action btn-secondary" onclick="closeModal()">
+                        <i class="fas fa-times"></i> Close
+                    </button>
+                    <button class="btn-action btn-primary">
+                        <i class="fas fa-edit"></i> Edit Request
+                    </button>
+                    <button class="btn-action btn-success">
+                        <i class="fas fa-check"></i> Approve
+                    </button>
+                    <button class="btn-action btn-danger">
+                        <i class="fas fa-ban"></i> Deny
+                    </button>
+                </div>
             </div>
-            <div class="timeline-note">
-              <strong>Note:</strong> Upon further discussion with the member and review of case history, the core issue is regarding service quality and responsiveness, not the claim decision itself. Member is satisfied with claim status but wants formal complaint regarding delayed response. Reclassifying as grievance only.
-            </div>
-            <div class="timeline-footer">
-              <div class="footer-item">
-                <i class="fa-solid fa-pen"></i> Changed by Sarah Johnson
-              </div>
-              <div class="footer-item">
-                <i class="fa-solid fa-clock"></i> 1d 7h after initial
-              </div>
-            </div>
-          </div>
         </div>
-
-      </div>
     </div>
-    <div class="modal-footer">
-      <button class="modal-btn modal-btn-secondary">Close</button>
-    </div>
-  </div>
 
+    <script>
+        function openModal() {
+            document.getElementById('requestModal').style.display = 'flex';
+            document.body.style.overflow = 'hidden';
+        }
+
+        function closeModal() {
+            document.getElementById('requestModal').style.display = 'none';
+            document.body.style.overflow = 'auto';
+        }
+
+        // Close modal when clicking outside
+        document.getElementById('requestModal').addEventListener('click', function(e) {
+            if (e.target === this) {
+                closeModal();
+            }
+        });
+
+        // Close modal with Escape key
+        document.addEventListener('keydown', function(e) {
+            if (e.key === 'Escape') {
+                closeModal();
+            }
+        });
+    </script>
 </body>
 </html>
