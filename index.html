@@ -7,34 +7,22 @@
   <link href="https://fonts.googleapis.com/css?family=Open+Sans:400,600" rel="stylesheet">
   <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700&display=swap" rel="stylesheet">
   <style>
-    *{box-sizing:border-box}
+    *{box-sizing:border-box;margin:0;padding:0}
     body{
-      margin:0;
       font-family:"Open Sans", sans-serif;
-      background:#f5f5f5;
-    }
-    ::-webkit-scrollbar{width:5px;height:5px}
-    ::-webkit-scrollbar-track{box-shadow:inset 0 0 2px grey;border-radius:4px}
-    ::-webkit-scrollbar-thumb{background:grey;border-radius:4px}
-
-    .modal-overlay{
+      background:#757575;
       display:flex;
-      position:fixed;
-      top:0;left:0;right:0;bottom:0;
-      background:rgba(0,0,0,0.6);
-      z-index:999;
       align-items:center;
       justify-content:center;
-      padding:20px;
+      min-height:100vh;
+      padding:40px 20px;
     }
 
     .modal{
       background:#fff;
       border-radius:12px;
       box-shadow:0 20px 60px rgba(0,0,0,0.3);
-      width:100%;
-      max-width:800px;
-      max-height:85vh;
+      width:800px;
       display:flex;
       flex-direction:column;
     }
@@ -50,7 +38,7 @@
       font-size:20px;
       font-weight:700;
       color:#1A1A1A;
-      font-family:"Poppins";
+      font-family:"Poppins",sans-serif;
       display:flex;
       align-items:center;
       gap:12px;
@@ -58,19 +46,13 @@
     .modal-title i{color:#5830AD;font-size:22px}
     .modal-close{
       background:none;border:none;color:#6B7280;font-size:24px;
-      cursor:pointer;padding:0;transition:color 0.3s;
-      width:40px;height:40px;display:flex;align-items:center;
-      justify-content:center;border-radius:6px;
+      cursor:pointer;width:40px;height:40px;display:flex;
+      align-items:center;justify-content:center;border-radius:6px;
     }
-    .modal-close:hover{background:#f3f4f6;color:#2E2E2E}
 
     .modal-body{
       padding:24px;
-      overflow-y:auto;
-      flex:1;
     }
-    .modal-body::-webkit-scrollbar{width:6px}
-    .modal-body::-webkit-scrollbar-thumb{background:#d1d5db;border-radius:3px}
 
     .timeline{position:relative;padding:0}
     .timeline::before{
@@ -90,11 +72,7 @@
 
     .timeline-content{
       background:#f9fafb;border:1px solid #e5e7eb;
-      border-radius:8px;padding:16px;transition:all 0.3s;
-    }
-    .timeline-item:hover .timeline-content{
-      background:#f3f4f6;border-color:#d1d5db;
-      box-shadow:0 2px 8px rgba(0,0,0,0.05);
+      border-radius:8px;padding:16px;
     }
     .timeline-header{
       display:flex;align-items:center;
@@ -102,7 +80,7 @@
     }
     .timeline-title{
       font-weight:700;color:#1A1A1A;
-      font-size:14px;font-family:"Poppins";
+      font-size:14px;font-family:"Poppins",sans-serif;
     }
     .timeline-meta{
       font-size:12px;color:#6B7280;
@@ -166,156 +144,132 @@
     }
     .modal-btn{
       padding:10px 20px;border-radius:8px;font-weight:600;
-      font-size:13px;cursor:pointer;transition:all 0.3s;
-      border:none;font-family:"Open Sans";
+      font-size:13px;cursor:pointer;border:none;
+      font-family:"Open Sans",sans-serif;
     }
     .modal-btn-secondary{background:#f3f4f6;color:#6B7280}
-    .modal-btn-secondary:hover{background:#e5e7eb;color:#2E2E2E}
-
-    @media(max-width:768px){
-      .modal{width:95%}
-      .timeline-item{padding-left:50px}
-      .timeline::before{left:11px}
-      .timeline-dot{width:28px;height:28px;left:-2px;font-size:12px}
-    }
   </style>
 </head>
 <body>
 
-  <div class="modal-overlay" id="historyViewModal">
-    <div class="modal">
-      <div class="modal-header">
-        <div class="modal-title">
-          <i class="fa-solid fa-history"></i> Decision History Timeline
+  <div class="modal">
+    <div class="modal-header">
+      <div class="modal-title">
+        <i class="fa-solid fa-history"></i> Decision History Timeline
+      </div>
+      <button class="modal-close">
+        <i class="fa-solid fa-times"></i>
+      </button>
+    </div>
+    <div class="modal-body">
+      <div class="timeline">
+
+        <div class="timeline-item">
+          <div class="timeline-dot ai">
+            <i class="fa-solid fa-robot"></i>
+          </div>
+          <div class="timeline-content">
+            <div class="timeline-header">
+              <div>
+                <div class="timeline-title">AI Recommendation</div>
+                <div class="timeline-meta">
+                  <i class="fa-regular fa-calendar"></i> Nov 6, 2025 &bull; 9:15 AM
+                </div>
+              </div>
+              <span class="timeline-badge badge-ai">
+                <i class="fa-solid fa-microchip"></i> System
+              </span>
+            </div>
+            <div class="timeline-decision appeal">
+              <span class="decision-label">Recommendation</span>
+              <div class="decision-value">
+                <span class="decision-badge badge-appeal">APPEAL</span>
+              </div>
+            </div>
+            <div class="confidence-score">
+              <strong>Confidence:</strong> 95% | <strong>Rationale:</strong> The member's call regarding a claim denial typically indicates a desire to challenge or request a review of the decision, which is characteristic of an appeal.
+            </div>
+          </div>
         </div>
-        <button class="modal-close" onclick="closeHistoryViewModal()">
-          <i class="fa-solid fa-times"></i>
-        </button>
-      </div>
-      <div class="modal-body">
-        <div class="timeline">
 
-          <!-- Timeline Item 1 - AI Recommendation -->
-          <div class="timeline-item">
-            <div class="timeline-dot ai">
-              <i class="fa-solid fa-robot"></i>
+        <div class="timeline-item">
+          <div class="timeline-dot user">
+            <i class="fa-solid fa-user"></i>
+          </div>
+          <div class="timeline-content">
+            <div class="timeline-header">
+              <div>
+                <div class="timeline-title">Decision Changed by User</div>
+                <div class="timeline-meta">
+                  <i class="fa-regular fa-calendar"></i> Nov 8, 2025 &bull; 2:45 PM
+                </div>
+              </div>
+              <span class="timeline-badge badge-user">
+                <i class="fa-solid fa-user-tie"></i> John Smith
+              </span>
             </div>
-            <div class="timeline-content">
-              <div class="timeline-header">
-                <div>
-                  <div class="timeline-title">AI Recommendation</div>
-                  <div class="timeline-meta">
-                    <i class="fa-regular fa-calendar"></i> Nov 6, 2025 • 9:15 AM
-                  </div>
-                </div>
-                <span class="timeline-badge badge-ai">
-                  <i class="fa-solid fa-microchip"></i> System
-                </span>
+            <div class="timeline-decision appeal-grievance">
+              <span class="decision-label">Changed To</span>
+              <div class="decision-value">
+                <span class="decision-badge badge-both">APPEAL AND GRIEVANCE</span>
               </div>
-              <div class="timeline-decision appeal">
-                <span class="decision-label">Recommendation</span>
-                <div class="decision-value">
-                  <span class="decision-badge badge-appeal">APPEAL</span>
-                </div>
+            </div>
+            <div class="timeline-note">
+              <strong>Note:</strong> After reviewing additional documentation provided by the member, it's clear this case involves both an appeal of the claim denial AND a complaint about service delays. The member specifically mentioned dissatisfaction with how their initial inquiry was handled.
+            </div>
+            <div class="timeline-footer">
+              <div class="footer-item">
+                <i class="fa-solid fa-pen"></i> Changed by John Smith
               </div>
-              <div class="confidence-score">
-                <strong>Confidence:</strong> 95% | <strong>Rationale:</strong> The member's call regarding a claim denial typically indicates a desire to challenge or request a review of the decision, which is characteristic of an appeal.
+              <div class="footer-item">
+                <i class="fa-solid fa-clock"></i> 2h 30m after initial
               </div>
             </div>
           </div>
-
-          <!-- Timeline Item 2 - User Override -->
-          <div class="timeline-item">
-            <div class="timeline-dot user">
-              <i class="fa-solid fa-user"></i>
-            </div>
-            <div class="timeline-content">
-              <div class="timeline-header">
-                <div>
-                  <div class="timeline-title">Decision Changed by User</div>
-                  <div class="timeline-meta">
-                    <i class="fa-regular fa-calendar"></i> Nov 8, 2025 • 2:45 PM
-                  </div>
-                </div>
-                <span class="timeline-badge badge-user">
-                  <i class="fa-solid fa-user-tie"></i> John Smith
-                </span>
-              </div>
-              <div class="timeline-decision appeal-grievance">
-                <span class="decision-label">Changed To</span>
-                <div class="decision-value">
-                  <span class="decision-badge badge-both">APPEAL AND GRIEVANCE</span>
-                </div>
-              </div>
-              <div class="timeline-note">
-                <strong>Note:</strong> After reviewing additional documentation provided by the member, it's clear this case involves both an appeal of the claim denial AND a complaint about service delays. The member specifically mentioned dissatisfaction with how their initial inquiry was handled.
-              </div>
-              <div class="timeline-footer">
-                <div class="footer-item">
-                  <i class="fa-solid fa-pen"></i> Changed by John Smith
-                </div>
-                <div class="footer-item">
-                  <i class="fa-solid fa-clock"></i> 2h 30m after initial
-                </div>
-              </div>
-            </div>
-          </div>
-
-          <!-- Timeline Item 3 - Another Override -->
-          <div class="timeline-item">
-            <div class="timeline-dot user">
-              <i class="fa-solid fa-user"></i>
-            </div>
-            <div class="timeline-content">
-              <div class="timeline-header">
-                <div>
-                  <div class="timeline-title">Decision Changed by User</div>
-                  <div class="timeline-meta">
-                    <i class="fa-regular fa-calendar"></i> Nov 10, 2025 • 10:20 AM
-                  </div>
-                </div>
-                <span class="timeline-badge badge-user">
-                  <i class="fa-solid fa-user-tie"></i> Sarah Johnson
-                </span>
-              </div>
-              <div class="timeline-decision grievance">
-                <span class="decision-label">Changed To</span>
-                <div class="decision-value">
-                  <span class="decision-badge badge-grievance">GRIEVANCE</span>
-                </div>
-              </div>
-              <div class="timeline-note">
-                <strong>Note:</strong> Upon further discussion with the member and review of case history, the core issue is regarding service quality and responsiveness, not the claim decision itself. Member is satisfied with claim status but wants formal complaint regarding delayed response. Reclassifying as grievance only.
-              </div>
-              <div class="timeline-footer">
-                <div class="footer-item">
-                  <i class="fa-solid fa-pen"></i> Changed by Sarah Johnson
-                </div>
-                <div class="footer-item">
-                  <i class="fa-solid fa-clock"></i> 1d 7h after initial
-                </div>
-              </div>
-            </div>
-          </div>
-
         </div>
+
+        <div class="timeline-item">
+          <div class="timeline-dot user">
+            <i class="fa-solid fa-user"></i>
+          </div>
+          <div class="timeline-content">
+            <div class="timeline-header">
+              <div>
+                <div class="timeline-title">Decision Changed by User</div>
+                <div class="timeline-meta">
+                  <i class="fa-regular fa-calendar"></i> Nov 10, 2025 &bull; 10:20 AM
+                </div>
+              </div>
+              <span class="timeline-badge badge-user">
+                <i class="fa-solid fa-user-tie"></i> Sarah Johnson
+              </span>
+            </div>
+            <div class="timeline-decision grievance">
+              <span class="decision-label">Changed To</span>
+              <div class="decision-value">
+                <span class="decision-badge badge-grievance">GRIEVANCE</span>
+              </div>
+            </div>
+            <div class="timeline-note">
+              <strong>Note:</strong> Upon further discussion with the member and review of case history, the core issue is regarding service quality and responsiveness, not the claim decision itself. Member is satisfied with claim status but wants formal complaint regarding delayed response. Reclassifying as grievance only.
+            </div>
+            <div class="timeline-footer">
+              <div class="footer-item">
+                <i class="fa-solid fa-pen"></i> Changed by Sarah Johnson
+              </div>
+              <div class="footer-item">
+                <i class="fa-solid fa-clock"></i> 1d 7h after initial
+              </div>
+            </div>
+          </div>
+        </div>
+
       </div>
-      <div class="modal-footer">
-        <button class="modal-btn modal-btn-secondary" onclick="closeHistoryViewModal()">Close</button>
-      </div>
+    </div>
+    <div class="modal-footer">
+      <button class="modal-btn modal-btn-secondary">Close</button>
     </div>
   </div>
 
-  <script>
-    function closeHistoryViewModal() {
-      document.getElementById('historyViewModal').style.display = 'none';
-    }
-    document.getElementById('historyViewModal').addEventListener('click', function(e) {
-      if (e.target === this) closeHistoryViewModal();
-    });
-    document.addEventListener('keydown', function(e) {
-      if (e.key === 'Escape') closeHistoryViewModal();
-    });
-  </script>
 </body>
 </html>
