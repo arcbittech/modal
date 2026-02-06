@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
 <meta charset="UTF-8">
-<title>Create/Edit AI Agent</title>
+<title>ANG Determination - Override & History</title>
 
 <!-- Font Awesome 6 Free -->
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css" integrity="sha512-DTOQO9RWCH3ppGqcWaEA1BIZOC6xxalwEsw9c2QQeAIftl+Vegovlnee1c9QX4TctnWMn13TZye+giMm8e2LwA==" crossorigin="anonymous" referrerpolicy="no-referrer">
@@ -17,559 +17,677 @@
 body{
   margin:0;
   font-family:"Open Sans", sans-serif;
-  background:#fafbfc;
+  background:#f5f5f5;
 }
 
-::-webkit-scrollbar{width:8px}
-::-webkit-scrollbar-track{background:transparent}
-::-webkit-scrollbar-thumb{background:#d1d5db;border-radius:4px}
+::-webkit-scrollbar{width:5px;height:5px}
+::-webkit-scrollbar-track{box-shadow:inset 0 0 2px grey;border-radius:4px}
+::-webkit-scrollbar-thumb{background:grey;border-radius:4px}
 
-/* ================= PAGE CONTAINER ================= */
-.page-container{
+/* ================= LAYOUT ================= */
+.right-section{
+  background:whitesmoke;
+  width:100%;
   min-height:100vh;
-  display:flex;
-  flex-direction:column;
 }
 
-/* ================= TOP HEADER ================= */
-.header{
-  background:#fff;
-  border-bottom:1px solid #e5e7eb;
-  padding:16px 32px;
-  display:flex;
-  align-items:center;
-  justify-content:space-between;
-  position:sticky;
-  top:0;
-  z-index:100;
+.main-container{
+  width:1855px;
+  margin:0 auto;
+  padding:16px 16px 0 16px;
 }
 
-.header-left{
+/* ================= TITLE ================= */
+.title-container{
+  font-family:"Poppins";
+  font-weight:600;
+  font-size:24px;
+  color:#1A1A1A;
+  margin-bottom:16px;
+}
+
+/* ================= TABS ================= */
+.tabs-container{
+  border-bottom:1px solid #E5E7EB;
+  margin-bottom:16px;
+}
+
+.tabs{
+  display:flex;
+  gap:8px;
+}
+
+.tab{
+  padding:0 20px;
+  height:32px;
   display:flex;
   align-items:center;
+  font-family:"Open Sans";
+  font-size:14px;
+  font-weight:600;
+  color:#6B7280;
+  cursor:pointer;
+}
+
+.tab.active{
+  color:#5830AD;
+  position:relative;
+}
+
+.tab.active::after{
+  content:"";
+  position:absolute;
+  bottom:-10px;
+  left:0;
+  width:100%;
+  height:3px;
+  background:#5830AD;
+  border-radius:2px 2px 0 0;
+}
+
+/* ================= FILTERS ================= */
+.filters{
+  display:flex;
   gap:16px;
+  margin-bottom:16px;
+  flex-wrap:wrap;
 }
 
-.back-button{
+.search-input,
+.select{
+  height:40px;
+  background:#fff;
+  border:1px solid #D1D5DB;
+  border-radius:4px;
+  padding:0 12px;
+  font-family:"Open Sans";
+  font-size:14px;
+  color:#2E2E2E;
+}
+
+.search-input{width:320px}
+.select{width:220px}
+
+/* ================= CARD ================= */
+.card-container{
+  background:#fff;
+  border-radius:8px;
+  padding:16px;
+  box-shadow:0 4px 10px rgba(0,0,0,.25);
+}
+
+/* ================= TABLE ================= */
+.table-wrapper{
+  overflow-x:auto;
+}
+
+table{
+  width:100%;
+  min-width:1800px;
+  border-collapse:collapse;
+  font-family:"Open Sans";
+  font-size:14px;
+  border:1px solid rgba(0,0,0,.1);
+}
+
+th{
+  background:#f8f8f8;
+  color:#424242;
+  font-weight:600;
+  padding:10px;
+  height:60px;
+  text-align:left;
+  white-space:nowrap;
+}
+
+td{
+  padding:.7rem .6rem;
+  color:#2E2E2E;
+  font-weight:400;
+  white-space:nowrap;
+}
+
+tr:nth-child(even){background:#f8f8f8}
+
+/* ================= CELLS ================= */
+.auth-id{color:#2E2E2E;font-weight:600}
+
+.flex{display:flex;align-items:center;gap:6px}
+
+.days-text{
+  background:rgb(209,242,235);
+  color:rgb(39,131,122);
+  padding:4px 10px;
+  border-radius:6px;
+  display:inline-flex;
+  align-items:center;
+  font-size:13px;
+  font-weight:600;
+}
+
+.table-lob{
+  background:#e8f1ff;
+  color:#0b5cff;
+  padding:6px 12px;
+  font-family:"Open Sans";
+  font-size: 12px;
+  border-radius:10px;
+  font-weight:600;
+}
+
+.doc-btn{
+  background:#2f8de4;
+  color:#fff;
+  font-size: 12px;
+  border-radius:6px;
+  padding:6px 14px;
+  display:inline-flex;
+  align-items:center;
+  gap:8px;
+  font-weight:600;
+  border:none;
+  cursor:pointer;
+  transition:all 0.3s;
+}
+
+.doc-btn:hover{
+  background:#1e5fa3;
+}
+
+/* ================= CONFIDENCE ================= */
+.progress{
+  width:110px;
+  height:8px;
+  background:#e0e0e0;
+  border-radius:6px;
+  overflow:hidden;
+}
+.progress span{display:block;width:93%;height:100%;background:#28A745}
+.confidence-text{font-size:13px;margin-top:4px}
+
+/* ================= ACTIONS ================= */
+.actions{display:flex;gap:10px;align-items:center;}
+
+.btn-green{
+  background:#28a745;
+  color:#fff;
+  font-family:"Open Sans";
+  font-size: 12px;
+  padding:8px 16px;
+  border-radius:8px;
+  font-weight:600;
+  text-transform:uppercase;
+  border:none;
+  cursor:pointer;
+  transition:all 0.3s;
+}
+
+.btn-green:hover{
+  background:#218838;
+}
+
+.btn-outline{
+  border:1px solid #D1D5DB;
+  color:#6B7280;  
+  font-family:"Open Sans";
+  font-size: 12px;
+  padding:8px 12px;
+  border-radius:8px;
+  font-weight:600;
+  background:#fff;
+  cursor:pointer;
+  transition:all 0.3s;
+}
+
+.btn-outline:hover{
+  background:#f3f4f6;
+  border-color:#9CA3AF;
+  color:#2E2E2E;
+}
+
+.history-icon-btn{
   background:none;
   border:none;
-  color:#5830AD;
-  font-size:22px;
+  color:#6B7280;
+  font-size:16px;
   cursor:pointer;
-  padding:4px;
+  padding:6px 8px;
+  border-radius:4px;
   transition:all 0.3s;
+}
+
+.history-icon-btn:hover{
+  background:#e5e7eb;
+  color:#5830AD;
+}
+
+.table-status{
+  background:#e8f1ff;
+  color:#0b5cff;
+  font-family:"Open Sans";
+  font-size: 12px;
+  padding:6px 18px;
+  border-radius:12px;
+  font-weight:600;
+  text-align:center;
+}
+
+/* ================= PAGINATION ================= */
+.pagination{
+  display:flex;
+  justify-content:center;
+  margin:24px 0;
+}
+
+.page{
+  width:48px;
+  height:48px;
+  border-radius:50%;
   display:flex;
   align-items:center;
   justify-content:center;
+  font-family:"Poppins";
+  font-weight:600;
+  font-size:16px;
 }
 
-.back-button:hover{
-  background:#f3f4f6;
-  border-radius:6px;
-  transform:translateX(-2px);
+.page.active{background:#EFEAF9;color:#5830AD}
+
+/* ================= FOOTER ================= */
+.footer{
+  text-align:center;
+  padding:40px 16px;
+  font-family:"Open Sans";
+  color:#595959;
 }
 
-.header-title{
+/* ================= MODAL OVERLAY ================= */
+.modal-overlay{
+  display:none;
+  position:fixed;
+  top:0;
+  left:0;
+  right:0;
+  bottom:0;
+  background:rgba(0,0,0,0.6);
+  z-index:999;
+  backdrop-filter:blur(4px);
+}
+
+.modal-overlay.show{
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  padding:20px;
+}
+
+/* ================= MODAL ================= */
+.modal{
+  background:#fff;
+  border-radius:12px;
+  box-shadow:0 20px 60px rgba(0,0,0,0.3);
+  width:100%;
+  max-width:800px;
+  max-height:85vh;
+  display:flex;
+  flex-direction:column;
+  animation:slideUp 0.3s ease-out;
+}
+
+@keyframes slideUp{
+  from{
+    transform:translateY(50px);
+    opacity:0;
+  }
+  to{
+    transform:translateY(0);
+    opacity:1;
+  }
+}
+
+/* ================= MODAL HEADER ================= */
+.modal-header{
+  padding:24px;
+  border-bottom:1px solid #e5e7eb;
+  display:flex;
+  align-items:center;
+  justify-content:space-between;
+}
+
+.modal-title{
   font-size:20px;
   font-weight:700;
   color:#1A1A1A;
   font-family:"Poppins";
-}
-
-.header-right{
   display:flex;
   align-items:center;
   gap:12px;
 }
 
-.header-btn{
-  background:#f3f4f6;
-  border:1px solid #e5e7eb;
-  color:#6B7280;
-  padding:10px 16px;
-  border-radius:8px;
-  font-weight:600;
-  font-size:13px;
-  cursor:pointer;
-  transition:all 0.3s;
-  display:flex;
-  align-items:center;
-  gap:8px;
+.modal-title i{
+  color:#5830AD;
+  font-size:22px;
 }
 
-.header-btn:hover{
-  background:#e5e7eb;
+.modal-close{
+  background:none;
+  border:none;
+  color:#6B7280;
+  font-size:24px;
+  cursor:pointer;
+  padding:0;
+  transition:color 0.3s;
+  width:40px;
+  height:40px;
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  border-radius:6px;
+}
+
+.modal-close:hover{
+  background:#f3f4f6;
   color:#2E2E2E;
 }
 
-.btn-save{
-  background:linear-gradient(135deg, #5830AD, #7e57c2);
-  color:#fff;
-  border:none;
-}
-
-.btn-save:hover{
-  box-shadow:0 4px 12px rgba(88,48,173,0.3);
-  transform:translateY(-1px);
-}
-
-/* ================= MAIN CONTENT ================= */
-.main-wrapper{
-  flex:1;
-  padding:32px;
+/* ================= MODAL BODY ================= */
+.modal-body{
+  padding:24px;
   overflow-y:auto;
-  max-width:1400px;
-  margin:0 auto;
-  width:100%;
+  flex:1;
 }
 
-/* ================= FORM SECTIONS ================= */
-.form-section{
+.modal-body::-webkit-scrollbar{
+  width:6px;
+}
+
+.modal-body::-webkit-scrollbar-thumb{
+  background:#d1d5db;
+  border-radius:3px;
+}
+
+/* ================= HISTORY TIMELINE ================= */
+.timeline{
+  position:relative;
+  padding:0;
+}
+
+.timeline::before{
+  content:'';
+  position:absolute;
+  left:15px;
+  top:0;
+  bottom:0;
+  width:2px;
+  background:linear-gradient(to bottom, #5830AD, #d1d5db);
+}
+
+.timeline-item{
+  margin-bottom:28px;
+  padding-left:60px;
+  position:relative;
+}
+
+.timeline-item:last-child{
+  margin-bottom:0;
+}
+
+.timeline-dot{
+  position:absolute;
+  left:0;
+  top:2px;
+  width:32px;
+  height:32px;
   background:#fff;
-  border-radius:12px;
-  border:1px solid #e5e7eb;
-  margin-bottom:24px;
-  overflow:hidden;
-}
-
-.section-header{
-  background:linear-gradient(135deg, #f9fafb, #f3f4f6);
-  padding:20px 24px;
-  border-bottom:1px solid #e5e7eb;
-  display:flex;
-  align-items:center;
-  gap:12px;
-}
-
-.section-icon{
-  width:36px;
-  height:36px;
-  background:#e8ddf7;
-  border-radius:8px;
+  border:3px solid #5830AD;
+  border-radius:50%;
   display:flex;
   align-items:center;
   justify-content:center;
   color:#5830AD;
-  font-size:16px;
-}
-
-.section-title{
-  font-size:15px;
-  font-weight:700;
-  color:#1A1A1A;
-  font-family:"Poppins";
-}
-
-.section-body{
-  padding:24px;
-}
-
-/* ================= FORM GRID ================= */
-.form-grid{
-  display:grid;
-  grid-template-columns:repeat(2, 1fr);
-  gap:24px;
-}
-
-.form-grid.full{
-  grid-template-columns:1fr;
-}
-
-.form-group{
-  display:flex;
-  flex-direction:column;
-  gap:8px;
-}
-
-.form-label{
-  font-size:13px;
+  font-size:14px;
   font-weight:600;
-  color:#424242;
-  text-transform:uppercase;
-  letter-spacing:0.5px;
-  display:flex;
-  align-items:center;
-  gap:6px;
 }
 
-.required{
-  color:#ef4444;
-  font-weight:700;
+.timeline-dot.ai{
+  border-color:#10b981;
+  color:#10b981;
 }
 
-.form-input,
-.form-select,
-.form-textarea{
+.timeline-dot.user{
+  border-color:#f59e0b;
+  color:#f59e0b;
+}
+
+.timeline-content{
   background:#f9fafb;
-  border:1px solid #d1d5db;
-  padding:12px 14px;
+  border:1px solid #e5e7eb;
   border-radius:8px;
-  font-family:"Open Sans";
-  font-size:13px;
-  color:#2E2E2E;
+  padding:16px;
   transition:all 0.3s;
 }
 
-.form-input:hover,
-.form-select:hover,
-.form-textarea:hover{
-  border-color:#9ca3af;
-  background:#fff;
-}
-
-.form-input:focus,
-.form-select:focus,
-.form-textarea:focus{
-  outline:none;
-  border-color:#5830AD;
-  background:#fff;
-  box-shadow:0 0 0 3px rgba(88,48,173,0.1);
-}
-
-.form-input::placeholder,
-.form-textarea::placeholder{
-  color:#9ca3af;
-}
-
-.form-textarea{
-  resize:vertical;
-  min-height:120px;
-  line-height:1.6;
-}
-
-.form-help{
-  font-size:11px;
-  color:#6B7280;
-  margin-top:4px;
-}
-
-/* ================= BUTTON GROUP ================= */
-.button-group{
-  display:flex;
-  gap:12px;
-  align-items:center;
-}
-
-.btn-icon-small{
-  background:none;
-  border:none;
-  color:#6B7280;
-  cursor:pointer;
-  padding:8px;
-  border-radius:6px;
-  transition:all 0.3s;
-  font-size:14px;
-}
-
-.btn-icon-small:hover{
+.timeline-item:hover .timeline-content{
   background:#f3f4f6;
-  color:#2E2E2E;
+  border-color:#d1d5db;
+  box-shadow:0 2px 8px rgba(0,0,0,0.05);
 }
 
-/* ================= SELECT WITH ICON ================= */
-.select-with-icon{
-  position:relative;
-}
-
-.select-icon{
-  position:absolute;
-  right:12px;
-  top:50%;
-  transform:translateY(-50%);
-  color:#6B7280;
-  pointer-events:none;
-  font-size:14px;
-}
-
-.form-select{
-  padding-right:36px;
-  appearance:none;
-  background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='8' viewBox='0 0 12 8'%3E%3Cpath fill='%236B7280' d='M1 1l5 5 5-5'/%3E%3C/svg%3E");
-  background-repeat:no-repeat;
-  background-position:right 12px center;
-  padding-right:36px;
-}
-
-/* ================= AVATAR UPLOAD ================= */
-.avatar-upload{
-  display:flex;
-  align-items:center;
-  gap:16px;
-}
-
-.avatar-preview{
-  width:80px;
-  height:80px;
-  border-radius:12px;
-  background:linear-gradient(135deg, #5830AD, #7e57c2);
-  display:flex;
-  align-items:center;
-  justify-content:center;
-  color:#fff;
-  font-size:32px;
-  flex-shrink:0;
-  position:relative;
-  overflow:hidden;
-}
-
-.avatar-preview img{
-  width:100%;
-  height:100%;
-  object-fit:cover;
-}
-
-.avatar-actions{
-  display:flex;
-  flex-direction:column;
-  gap:8px;
-}
-
-.avatar-btn{
-  background:#f3f4f6;
-  border:1px solid #d1d5db;
-  color:#6B7280;
-  padding:8px 16px;
-  border-radius:6px;
-  font-size:12px;
-  font-weight:600;
-  cursor:pointer;
-  transition:all 0.3s;
-  display:flex;
-  align-items:center;
-  gap:6px;
-}
-
-.avatar-btn:hover{
-  background:#e5e7eb;
-  border-color:#9ca3af;
-  color:#2E2E2E;
-}
-
-.avatar-btn.danger{
-  color:#ef4444;
-  border-color:#fecaca;
-}
-
-.avatar-btn.danger:hover{
-  background:#fee2e2;
-  border-color:#ef4444;
-}
-
-/* ================= SWITCH/TOGGLE ================= */
-.form-switch{
+.timeline-header{
   display:flex;
   align-items:center;
   justify-content:space-between;
-  padding:14px;
-  background:#f9fafb;
-  border:1px solid #d1d5db;
-  border-radius:8px;
-  cursor:pointer;
-  transition:all 0.3s;
+  margin-bottom:12px;
 }
 
-.form-switch:hover{
-  background:#fff;
-  border-color:#9ca3af;
+.timeline-title{
+  font-weight:700;
+  color:#1A1A1A;
+  font-size:14px;
+  font-family:"Poppins";
 }
 
-.switch-content{
-  display:flex;
-  flex-direction:column;
-  gap:4px;
-  flex:1;
-}
-
-.switch-label{
-  font-size:13px;
-  font-weight:600;
-  color:#2E2E2E;
-}
-
-.switch-desc{
-  font-size:11px;
-  color:#6B7280;
-}
-
-.toggle-switch{
-  width:48px;
-  height:28px;
-  background:#d1d5db;
-  border-radius:14px;
-  cursor:pointer;
-  position:relative;
-  transition:background 0.3s;
-}
-
-.toggle-switch.active{
-  background:#10b981;
-}
-
-.toggle-circle{
-  width:24px;
-  height:24px;
-  background:#fff;
-  border-radius:50%;
-  position:absolute;
-  top:2px;
-  left:2px;
-  transition:left 0.3s;
-  box-shadow:0 2px 4px rgba(0,0,0,0.1);
-}
-
-.toggle-switch.active .toggle-circle{
-  left:22px;
-}
-
-/* ================= TAGS INPUT ================= */
-.tags-input{
-  background:#f9fafb;
-  border:1px solid #d1d5db;
-  border-radius:8px;
-  padding:8px;
-  display:flex;
-  flex-wrap:wrap;
-  gap:8px;
-  align-items:center;
-  min-height:44px;
-}
-
-.tag{
-  background:#e8ddf7;
-  color:#5830AD;
-  padding:6px 10px;
-  border-radius:20px;
+.timeline-meta{
   font-size:12px;
-  font-weight:600;
+  color:#6B7280;
   display:flex;
   align-items:center;
   gap:6px;
 }
 
-.tag-remove{
-  background:none;
-  border:none;
-  color:#5830AD;
-  cursor:pointer;
-  padding:0;
-  font-size:14px;
-  transition:color 0.3s;
+.timeline-badge{
+  display:inline-flex;
+  align-items:center;
+  gap:6px;
+  padding:4px 10px;
+  border-radius:12px;
+  font-size:11px;
+  font-weight:700;
+  white-space:nowrap;
 }
 
-.tag-remove:hover{
-  color:#ef4444;
+.badge-ai{
+  background:#d1fae5;
+  color:#065f46;
 }
 
-.tag-input{
-  flex:1;
-  min-width:100px;
-  background:none;
-  border:none;
-  font-family:"Open Sans";
+.badge-user{
+  background:#fef3c7;
+  color:#92400e;
+}
+
+.timeline-decision{
+  background:#fff;
+  border-left:4px solid #5830AD;
+  padding:12px;
+  border-radius:4px;
+  margin-bottom:12px;
+}
+
+.timeline-decision.appeal{
+  border-left-color:#10b981;
+  background:#f0fdf4;
+}
+
+.timeline-decision.grievance{
+  border-left-color:#f59e0b;
+  background:#fffbf0;
+}
+
+.timeline-decision.appeal-grievance{
+  border-left-color:#8b5cf6;
+  background:#faf5ff;
+}
+
+.decision-label{
+  font-size:10px;
+  font-weight:700;
+  color:#6B7280;
+  text-transform:uppercase;
+  letter-spacing:0.5px;
+  margin-bottom:4px;
+  display:block;
+}
+
+.decision-value{
+  font-weight:700;
+  color:#1A1A1A;
+  font-size:13px;
+  display:flex;
+  align-items:center;
+  gap:8px;
+}
+
+.decision-badge{
+  display:inline-flex;
+  align-items:center;
+  gap:4px;
+  padding:2px 8px;
+  border-radius:12px;
+  font-size:11px;
+  font-weight:600;
+}
+
+.badge-appeal{
+  background:#d1fae5;
+  color:#065f46;
+}
+
+.badge-grievance{
+  background:#fef3c7;
+  color:#92400e;
+}
+
+.badge-both{
+  background:#e0e7ff;
+  color:#3730a3;
+}
+
+.confidence-score{
+  font-size:12px;
+  color:#6B7280;
+  margin-top:8px;
+  padding-top:8px;
+  border-top:1px solid rgba(0,0,0,0.1);
+}
+
+.timeline-note{
+  background:#fff;
+  border-left:4px solid #0b5cff;
+  padding:12px;
+  border-radius:4px;
   font-size:13px;
   color:#2E2E2E;
-  outline:none;
-}
-
-.tag-input::placeholder{
-  color:#9ca3af;
-}
-
-/* ================= TIPS/INFO BOX ================= */
-.info-box{
-  background:#f0f9ff;
-  border:1px solid #bfdbfe;
-  border-radius:8px;
-  padding:12px 14px;
-  display:flex;
-  gap:10px;
-  margin-top:12px;
-}
-
-.info-icon{
-  color:#0284c7;
-  font-size:16px;
-  flex-shrink:0;
-  margin-top:2px;
-}
-
-.info-text{
-  font-size:12px;
-  color:#0c4a6e;
   line-height:1.5;
 }
 
-/* ================= FOOTER ================= */
-.form-footer{
+.timeline-note strong{
+  color:#1A1A1A;
+}
+
+.timeline-footer{
+  font-size:12px;
+  color:#6B7280;
+  margin-top:12px;
+  padding-top:12px;
+  border-top:1px solid #e5e7eb;
+  display:flex;
+  gap:16px;
+  align-items:center;
+}
+
+.footer-item{
+  display:flex;
+  align-items:center;
+  gap:6px;
+}
+
+.footer-item i{
+  color:#9CA3AF;
+}
+
+/* ================= MODAL FOOTER ================= */
+.modal-footer{
+  padding:16px 24px;
+  border-top:1px solid #e5e7eb;
   display:flex;
   gap:12px;
   justify-content:flex-end;
-  padding-top:24px;
-  border-top:1px solid #e5e7eb;
-  margin-top:24px;
 }
 
-.btn-footer{
-  padding:12px 24px;
+.modal-btn{
+  padding:10px 20px;
   border-radius:8px;
   font-weight:600;
   font-size:13px;
   cursor:pointer;
   transition:all 0.3s;
-  display:flex;
-  align-items:center;
-  gap:8px;
   border:none;
   font-family:"Open Sans";
 }
 
-.btn-cancel{
+.modal-btn-secondary{
   background:#f3f4f6;
   color:#6B7280;
 }
 
-.btn-cancel:hover{
+.modal-btn-secondary:hover{
   background:#e5e7eb;
   color:#2E2E2E;
-}
-
-.btn-submit{
-  background:linear-gradient(135deg, #5830AD, #7e57c2);
-  color:#fff;
-}
-
-.btn-submit:hover{
-  box-shadow:0 6px 16px rgba(88,48,173,0.3);
-  transform:translateY(-2px);
 }
 
 /* ================= RESPONSIVE ================= */
 @media(max-width:768px){
-  .main-wrapper{
-    padding:16px;
-  }
-  
-  .form-grid{
-    grid-template-columns:1fr;
-  }
-  
-  .header{
-    padding:12px 16px;
-    flex-wrap:wrap;
-    gap:12px;
-  }
-  
-  .header-title{
-    font-size:16px;
-  }
-  
-  .header-right{
+  .main-container{
     width:100%;
-    justify-content:flex-end;
   }
   
-  .section-body{
-    padding:16px;
+  .modal{
+    width:95%;
+  }
+  
+  table{
+    min-width:100%;
+    font-size:12px;
+  }
+  
+  th, td{
+    padding:8px 6px;
+  }
+  
+  .timeline-item{
+    padding-left:50px;
+  }
+  
+  .timeline::before{
+    left:11px;
+  }
+  
+  .timeline-dot{
+    width:28px;
+    height:28px;
+    left:-2px;
+    font-size:12px;
   }
 }
 
@@ -578,456 +696,297 @@ body{
 </head>
 <body>
 
-<div class="page-container">
-  <!-- Header -->
-  <div class="header">
-    <div class="header-left">
-      <button class="back-button" onclick="goBack()">
-        <i class="fa-solid fa-arrow-left"></i>
-      </button>
-      <div class="header-title">Create New Agent</div>
+<div class="right-section">
+  <div class="main-container">
+
+    <div class="title-container">ANG Determination</div>
+
+    <div class="tabs-container">
+      <div class="tabs">
+        <div class="tab active">Pending Requests</div>
+        <div class="tab">Rejected Requests</div>
+        <div class="tab">Denied Request Packet</div>
+      </div>
     </div>
-    
-    <div class="header-right">
-      <button class="header-btn">
-        <i class="fa-solid fa-undo"></i> Reset
-      </button>
-      <button class="header-btn btn-save">
-        <i class="fa-solid fa-floppy-disk"></i> Save Agent
-      </button>
+
+    <div class="filters">
+      <input class="search-input" placeholder="Type to search">
+      <input class="select" placeholder="Source Type">
+      <input class="select" placeholder="Line of Business">
     </div>
+
+    <div class="card-container">
+      <div class="table-wrapper">
+        <table>
+          <thead>
+            <tr>
+              <th>Sr.No.</th>
+              <th>Auth/Claim Number</th>
+              <th>Source Type</th>
+              <th>Receiver Name</th>
+              <th>Received Date</th>
+              <th>Aging Days - Calendar</th>
+              <th>Aging Days - Business</th>
+              <th>LOB</th>
+              <th>Documents</th>
+              <th>Confidence</th>
+              <th>Rationale</th>
+              <th>AI Recommendation</th>
+              <th>Request Status</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td>1</td>
+              <td class="auth-id">AUTH900015</td>
+              <td><span class="flex"><i class="fa-solid fa-envelope"></i> Email</span></td>
+              <td><span class="flex"><i class="fa-solid fa-user-doctor"></i> NA</span></td>
+              <td><span class="flex"><i class="fa-regular fa-calendar"></i> 11/06/2025</span></td>
+              <td><div class="days-text"><i class="fa-regular fa-calendar"></i> 5</div></td>
+              <td><div class="days-text"><i class="fa-regular fa-calendar"></i> 3</div></td>
+              <td><div class="table-lob">Medicare</div></td>
+              <td><button class="doc-btn"><i class="fa-regular fa-file-lines"></i> View (0)</button></td>
+              <td><div class="progress"><span></span></div><div class="confidence-text">93%</div></td>
+              <td>AI identified medical necessit...<br><span class="flex" style="color:#2f8de4;font-weight:600;"><i class="fa-regular fa-eye"></i> View Full Analysis</span></td>
+              <td>
+                <div class="actions">
+                  <div class="btn-green"><i class="fa-solid fa-check"></i> Approve</div>
+                  <div class="btn-outline" onclick="openHistoryModal('AUTH900015')"><i class="fa-solid fa-rotate"></i> Override</div>
+                  <button class="history-icon-btn" title="View History" onclick="openHistoryViewModal('AUTH900015')">
+                    <i class="fa-solid fa-history"></i>
+                  </button>
+                </div>
+              </td>
+              <td><div class="table-status">NEW</div></td>
+            </tr>
+
+            <tr>
+              <td>2</td>
+              <td class="auth-id">AUTH900016</td>
+              <td><span class="flex"><i class="fa-solid fa-envelope"></i> Email</span></td>
+              <td><span class="flex"><i class="fa-solid fa-user-doctor"></i> NA</span></td>
+              <td><span class="flex"><i class="fa-regular fa-calendar"></i> 11/06/2025</span></td>
+              <td><div class="days-text"><i class="fa-regular fa-calendar"></i> 4</div></td>
+              <td><div class="days-text"><i class="fa-regular fa-calendar"></i> 2</div></td>
+              <td><div class="table-lob">Commercial</div></td>
+              <td><button class="doc-btn"><i class="fa-regular fa-file-lines"></i> View (2)</button></td>
+              <td><div class="progress"><span style="width:78%;"></span></div><div class="confidence-text">78%</div></td>
+              <td>Requires further review...<br><span class="flex" style="color:#2f8de4;font-weight:600;"><i class="fa-regular fa-eye"></i> View Full Analysis</span></td>
+              <td>
+                <div class="actions">
+                  <div class="btn-green"><i class="fa-solid fa-check"></i> Approve</div>
+                  <div class="btn-outline" onclick="openHistoryModal('AUTH900016')"><i class="fa-solid fa-rotate"></i> Override</div>
+                  <button class="history-icon-btn" title="View History" onclick="openHistoryViewModal('AUTH900016')">
+                    <i class="fa-solid fa-history"></i>
+                  </button>
+                </div>
+              </td>
+              <td><div class="table-status">NEW</div></td>
+            </tr>
+
+            <tr>
+              <td>3</td>
+              <td class="auth-id">AUTH900017</td>
+              <td><span class="flex"><i class="fa-solid fa-envelope"></i> Email</span></td>
+              <td><span class="flex"><i class="fa-solid fa-user-doctor"></i> NA</span></td>
+              <td><span class="flex"><i class="fa-regular fa-calendar"></i> 11/06/2025</span></td>
+              <td><div class="days-text"><i class="fa-regular fa-calendar"></i> 6</div></td>
+              <td><div class="days-text"><i class="fa-regular fa-calendar"></i> 4</div></td>
+              <td><div class="table-lob">Medicaid</div></td>
+              <td><button class="doc-btn"><i class="fa-regular fa-file-lines"></i> View (1)</button></td>
+              <td><div class="progress"><span style="width:85%;"></span></div><div class="confidence-text">85%</div></td>
+              <td>Clear medical justification...<br><span class="flex" style="color:#2f8de4;font-weight:600;"><i class="fa-regular fa-eye"></i> View Full Analysis</span></td>
+              <td>
+                <div class="actions">
+                  <div class="btn-green"><i class="fa-solid fa-check"></i> Approve</div>
+                  <div class="btn-outline" onclick="openHistoryModal('AUTH900017')"><i class="fa-solid fa-rotate"></i> Override</div>
+                  <button class="history-icon-btn" title="View History" onclick="openHistoryViewModal('AUTH900017')">
+                    <i class="fa-solid fa-history"></i>
+                  </button>
+                </div>
+              </td>
+              <td><div class="table-status">NEW</div></td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+
+      <div class="pagination">
+        <div class="page active">1</div>
+      </div>
+    </div>
+
   </div>
 
-  <!-- Main Content -->
-  <div class="main-wrapper">
-    <!-- Basic Information Section -->
-    <div class="form-section">
-      <div class="section-header">
-        <div class="section-icon">
-          <i class="fa-solid fa-circle-info"></i>
-        </div>
-        <div class="section-title">Basic Information</div>
+  <div class="footer">© 2026 Care Insight All Rights Reserved</div>
+</div>
+
+<!-- HISTORY VIEW MODAL - Shows Timeline of Changes -->
+<div class="modal-overlay" id="historyViewModal">
+  <div class="modal">
+    <div class="modal-header">
+      <div class="modal-title">
+        <i class="fa-solid fa-history"></i>
+        Decision History Timeline
       </div>
-      <div class="section-body">
-        <div class="form-grid">
-          <div class="form-group">
-            <label class="form-label">
-              Agent Name <span class="required">*</span>
-            </label>
-            <input type="text" class="form-input" placeholder="e.g., Appeals Agent" value="">
-            <span class="form-help">This name will be displayed to users</span>
-          </div>
-          
-          <div class="form-group">
-            <label class="form-label">
-              Agent Type <span class="required">*</span>
-            </label>
-            <div class="select-with-icon">
-              <select class="form-select">
-                <option value="">Select agent type</option>
-                <option value="voice">Voice Agent</option>
-                <option value="text">Text Agent</option>
-                <option value="chat">Chat Agent</option>
-              </select>
-            </div>
-            <span class="form-help">Determines how the agent will interact with users</span>
-          </div>
-
-          <div class="form-group">
-            <label class="form-label">
-              Voice <span class="required">*</span>
-            </label>
-            <div class="select-with-icon">
-              <select class="form-select">
-                <option value="">Select voice</option>
-                <option value="sarah">Sarah - Female</option>
-                <option value="john">John - Male</option>
-                <option value="emma">Emma - Female</option>
-                <option value="michael">Michael - Male</option>
-              </select>
-            </div>
-            <span class="form-help">Choose the voice for audio interactions</span>
-          </div>
-
-          <div class="form-group">
-            <label class="form-label">
-              Language <span class="required">*</span>
-            </label>
-            <div class="select-with-icon">
-              <select class="form-select">
-                <option value="">Select language</option>
-                <option value="en">English</option>
-                <option value="es">Spanish</option>
-                <option value="fr">French</option>
-                <option value="de">German</option>
-              </select>
-            </div>
-            <span class="form-help">Primary language for the agent</span>
-          </div>
-
-          <div class="form-group full">
-            <label class="form-label">
-              Description <span class="required">*</span>
-            </label>
-            <textarea class="form-textarea" placeholder="Provide a detailed description of what this agent does, its purpose, and how it will help users..."></textarea>
-            <span class="form-help">Help other team members understand this agent's role</span>
-          </div>
-        </div>
-      </div>
+      <button class="modal-close" onclick="closeHistoryViewModal()">
+        <i class="fa-solid fa-times"></i>
+      </button>
     </div>
 
-    <!-- Model Configuration Section -->
-    <div class="form-section">
-      <div class="section-header">
-        <div class="section-icon">
-          <i class="fa-solid fa-microchip"></i>
-        </div>
-        <div class="section-title">Model Configuration</div>
-      </div>
-      <div class="section-body">
-        <div class="form-grid">
-          <div class="form-group">
-            <label class="form-label">
-              LLM Model <span class="required">*</span>
-            </label>
-            <div class="select-with-icon">
-              <select class="form-select">
-                <option value="">Select model</option>
-                <option value="claude-haiku">Claude 4.5 Haiku</option>
-                <option value="claude-sonnet">Claude 3.5 Sonnet</option>
-                <option value="claude-opus">Claude 3 Opus</option>
-                <option value="gpt4">GPT-4 Turbo</option>
-              </select>
-            </div>
-            <span class="form-help">Choose the AI model to power your agent</span>
+    <div class="modal-body">
+      <div class="timeline">
+        <!-- Timeline Item 1 - AI Recommendation -->
+        <div class="timeline-item">
+          <div class="timeline-dot ai">
+            <i class="fa-solid fa-robot"></i>
           </div>
-
-          <div class="form-group">
-            <label class="form-label">
-              Temperature
-            </label>
-            <input type="number" class="form-input" placeholder="0.7" min="0" max="1" step="0.1" value="0.7">
-            <span class="form-help">Controls randomness (0=deterministic, 1=creative)</span>
-          </div>
-
-          <div class="form-group">
-            <label class="form-label">
-              Max Tokens
-            </label>
-            <input type="number" class="form-input" placeholder="2000" value="2000">
-            <span class="form-help">Maximum tokens per response</span>
-          </div>
-
-          <div class="form-group">
-            <label class="form-label">
-              Response Format
-            </label>
-            <div class="select-with-icon">
-              <select class="form-select">
-                <option value="natural">Natural Language</option>
-                <option value="structured">Structured (JSON)</option>
-                <option value="custom">Custom Format</option>
-              </select>
-            </div>
-            <span class="form-help">How responses should be formatted</span>
-          </div>
-        </div>
-
-        <div class="info-box">
-          <i class="fa-solid fa-lightbulb info-icon"></i>
-          <div class="info-text">
-            <strong>Tip:</strong> Higher temperature values make responses more creative but less predictable. For customer support, use lower values (0.3-0.5).
-          </div>
-        </div>
-      </div>
-    </div>
-
-    <!-- Capabilities Section -->
-    <div class="form-section">
-      <div class="section-header">
-        <div class="section-icon">
-          <i class="fa-solid fa-star"></i>
-        </div>
-        <div class="section-title">Agent Capabilities</div>
-      </div>
-      <div class="section-body">
-        <div class="form-grid full">
-          <div class="form-switch" onclick="toggleSwitch(this)">
-            <div class="switch-content">
-              <div class="switch-label">Function Calling</div>
-              <div class="switch-desc">Allow agent to execute external functions</div>
-            </div>
-            <div class="toggle-switch active">
-              <div class="toggle-circle"></div>
-            </div>
-          </div>
-
-          <div class="form-switch" onclick="toggleSwitch(this)">
-            <div class="switch-content">
-              <div class="switch-label">Web Search</div>
-              <div class="switch-desc">Enable real-time information retrieval</div>
-            </div>
-            <div class="toggle-switch">
-              <div class="toggle-circle"></div>
-            </div>
-          </div>
-
-          <div class="form-switch" onclick="toggleSwitch(this)">
-            <div class="switch-content">
-              <div class="switch-label">Memory/Context</div>
-              <div class="switch-desc">Maintain conversation history and context</div>
-            </div>
-            <div class="toggle-switch active">
-              <div class="toggle-circle"></div>
-            </div>
-          </div>
-
-          <div class="form-switch" onclick="toggleSwitch(this)">
-            <div class="switch-content">
-              <div class="switch-label">File Upload</div>
-              <div class="switch-desc">Allow users to upload files for processing</div>
-            </div>
-            <div class="toggle-switch">
-              <div class="toggle-circle"></div>
-            </div>
-          </div>
-
-          <div class="form-switch" onclick="toggleSwitch(this)">
-            <div class="switch-content">
-              <div class="switch-label">Multi-Language Support</div>
-              <div class="switch-desc">Handle multiple languages in one conversation</div>
-            </div>
-            <div class="toggle-switch">
-              <div class="toggle-circle"></div>
-            </div>
-          </div>
-
-          <div class="form-switch" onclick="toggleSwitch(this)">
-            <div class="switch-content">
-              <div class="switch-label">Sentiment Analysis</div>
-              <div class="switch-desc">Analyze and respond to user sentiment</div>
-            </div>
-            <div class="toggle-switch active">
-              <div class="toggle-circle"></div>
-            </div>
-          </div>
-        </div>
-      </div>
-    </div>
-
-    <!-- Avatar & Personalization Section -->
-    <div class="form-section">
-      <div class="section-header">
-        <div class="section-icon">
-          <i class="fa-solid fa-image"></i>
-        </div>
-        <div class="section-title">Avatar & Personalization</div>
-      </div>
-      <div class="section-body">
-        <div class="avatar-upload">
-          <div class="avatar-preview">
-            <i class="fa-solid fa-microphone-lines"></i>
-          </div>
-          <div class="avatar-actions">
-            <button class="avatar-btn">
-              <i class="fa-solid fa-upload"></i> Upload Avatar
-            </button>
-            <button class="avatar-btn">
-              <i class="fa-solid fa-wand-magic-sparkles"></i> Generate
-            </button>
-            <button class="avatar-btn danger">
-              <i class="fa-solid fa-trash"></i> Remove
-            </button>
-          </div>
-        </div>
-
-        <div class="form-grid" style="margin-top:24px;">
-          <div class="form-group">
-            <label class="form-label">Agent Persona</label>
-            <div class="select-with-icon">
-              <select class="form-select">
-                <option value="">Select persona</option>
-                <option value="professional">Professional</option>
-                <option value="friendly">Friendly</option>
-                <option value="formal">Formal</option>
-                <option value="casual">Casual</option>
-              </select>
-            </div>
-            <span class="form-help">Define how the agent presents itself</span>
-          </div>
-
-          <div class="form-group">
-            <label class="form-label">Accent/Region</label>
-            <div class="select-with-icon">
-              <select class="form-select">
-                <option value="">Select region</option>
-                <option value="us">US English</option>
-                <option value="uk">British English</option>
-                <option value="au">Australian English</option>
-                <option value="ca">Canadian English</option>
-              </select>
-            </div>
-            <span class="form-help">Customize voice accent</span>
-          </div>
-
-          <div class="form-group full">
-            <label class="form-label">Personality Traits</label>
-            <div class="tags-input">
-              <div class="tag">
-                professional
-                <button class="tag-remove">×</button>
+          <div class="timeline-content">
+            <div class="timeline-header">
+              <div>
+                <div class="timeline-title">AI Recommendation</div>
+                <div class="timeline-meta">
+                  <i class="fa-regular fa-calendar"></i> Nov 6, 2025 • 9:15 AM
+                </div>
               </div>
-              <div class="tag">
-                empathetic
-                <button class="tag-remove">×</button>
+              <span class="timeline-badge badge-ai">
+                <i class="fa-solid fa-microchip"></i> System
+              </span>
+            </div>
+            
+            <div class="timeline-decision appeal">
+              <span class="decision-label">Recommendation</span>
+              <div class="decision-value">
+                <span class="decision-badge badge-appeal">APPEAL</span>
               </div>
-              <input type="text" class="tag-input" placeholder="Add traits and press Enter...">
             </div>
-            <span class="form-help">Define personality characteristics (e.g., empathetic, patient, knowledgeable)</span>
+
+            <div class="confidence-score">
+              <strong>Confidence:</strong> 95% | <strong>Rationale:</strong> The member's call regarding a claim denial typically indicates a desire to challenge or request a review of the decision, which is characteristic of an appeal.
+            </div>
+          </div>
+        </div>
+
+        <!-- Timeline Item 2 - User Override -->
+        <div class="timeline-item">
+          <div class="timeline-dot user">
+            <i class="fa-solid fa-user"></i>
+          </div>
+          <div class="timeline-content">
+            <div class="timeline-header">
+              <div>
+                <div class="timeline-title">Decision Changed by User</div>
+                <div class="timeline-meta">
+                  <i class="fa-regular fa-calendar"></i> Nov 8, 2025 • 2:45 PM
+                </div>
+              </div>
+              <span class="timeline-badge badge-user">
+                <i class="fa-solid fa-user-tie"></i> John Smith
+              </span>
+            </div>
+            
+            <div class="timeline-decision appeal-grievance">
+              <span class="decision-label">Changed To</span>
+              <div class="decision-value">
+                <span class="decision-badge badge-both">APPEAL AND GRIEVANCE</span>
+              </div>
+            </div>
+
+            <div class="timeline-note">
+              <strong>Note:</strong> After reviewing additional documentation provided by the member, it's clear this case involves both an appeal of the claim denial AND a complaint about service delays. The member specifically mentioned dissatisfaction with how their initial inquiry was handled.
+            </div>
+
+            <div class="timeline-footer">
+              <div class="footer-item">
+                <i class="fa-solid fa-pen"></i> Changed by John Smith
+              </div>
+              <div class="footer-item">
+                <i class="fa-solid fa-clock"></i> 2h 30m after initial
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Timeline Item 3 - Another Override -->
+        <div class="timeline-item">
+          <div class="timeline-dot user">
+            <i class="fa-solid fa-user"></i>
+          </div>
+          <div class="timeline-content">
+            <div class="timeline-header">
+              <div>
+                <div class="timeline-title">Decision Changed by User</div>
+                <div class="timeline-meta">
+                  <i class="fa-regular fa-calendar"></i> Nov 10, 2025 • 10:20 AM
+                </div>
+              </div>
+              <span class="timeline-badge badge-user">
+                <i class="fa-solid fa-user-tie"></i> Sarah Johnson
+              </span>
+            </div>
+            
+            <div class="timeline-decision grievance">
+              <span class="decision-label">Changed To</span>
+              <div class="decision-value">
+                <span class="decision-badge badge-grievance">GRIEVANCE</span>
+              </div>
+            </div>
+
+            <div class="timeline-note">
+              <strong>Note:</strong> Upon further discussion with the member and review of case history, the core issue is regarding service quality and responsiveness, not the claim decision itself. Member is satisfied with claim status but wants formal complaint regarding delayed response. Reclassifying as grievance only.
+            </div>
+
+            <div class="timeline-footer">
+              <div class="footer-item">
+                <i class="fa-solid fa-pen"></i> Changed by Sarah Johnson
+              </div>
+              <div class="footer-item">
+                <i class="fa-solid fa-clock"></i> 1d 7h after initial
+              </div>
+            </div>
           </div>
         </div>
       </div>
     </div>
 
-    <!-- Security & Privacy Section -->
-    <div class="form-section">
-      <div class="section-header">
-        <div class="section-icon">
-          <i class="fa-solid fa-lock"></i>
-        </div>
-        <div class="section-title">Security & Privacy</div>
-      </div>
-      <div class="section-body">
-        <div class="form-grid">
-          <div class="form-group">
-            <label class="form-label">Access Level</label>
-            <div class="select-with-icon">
-              <select class="form-select">
-                <option value="public">Public</option>
-                <option value="private">Private</option>
-                <option value="team">Team Only</option>
-                <option value="restricted">Restricted</option>
-              </select>
-            </div>
-            <span class="form-help">Who can access and use this agent</span>
-          </div>
-
-          <div class="form-group">
-            <label class="form-label">Data Retention</label>
-            <div class="select-with-icon">
-              <select class="form-select">
-                <option value="30">30 Days</option>
-                <option value="90">90 Days</option>
-                <option value="180">6 Months</option>
-                <option value="365">1 Year</option>
-                <option value="forever">Forever</option>
-              </select>
-            </div>
-            <span class="form-help">How long to keep conversation logs</span>
-          </div>
-        </div>
-
-        <div class="form-grid full">
-          <div class="form-switch" onclick="toggleSwitch(this)">
-            <div class="switch-content">
-              <div class="switch-label">Require Authentication</div>
-              <div class="switch-desc">Users must authenticate before using this agent</div>
-            </div>
-            <div class="toggle-switch active">
-              <div class="toggle-circle"></div>
-            </div>
-          </div>
-
-          <div class="form-switch" onclick="toggleSwitch(this)">
-            <div class="switch-content">
-              <div class="switch-label">HIPAA Compliance</div>
-              <div class="switch-desc">Enable HIPAA-compliant processing for PHI</div>
-            </div>
-            <div class="toggle-switch active">
-              <div class="toggle-circle"></div>
-            </div>
-          </div>
-
-          <div class="form-switch" onclick="toggleSwitch(this)">
-            <div class="switch-content">
-              <div class="switch-label">Audit Logging</div>
-              <div class="switch-desc">Log all agent actions and interactions</div>
-            </div>
-            <div class="toggle-switch active">
-              <div class="toggle-circle"></div>
-            </div>
-          </div>
-
-          <div class="form-switch" onclick="toggleSwitch(this)">
-            <div class="switch-content">
-              <div class="switch-label">Rate Limiting</div>
-              <div class="switch-desc">Limit requests per user/minute</div>
-            </div>
-            <div class="toggle-switch">
-              <div class="toggle-circle"></div>
-            </div>
-          </div>
-        </div>
-
-        <div class="info-box">
-          <i class="fa-solid fa-shield info-icon"></i>
-          <div class="info-text">
-            <strong>Security Note:</strong> All agent communications are encrypted in transit. Enable HIPAA compliance if handling protected health information.
-          </div>
-        </div>
-      </div>
-    </div>
-
-    <!-- Form Footer -->
-    <div class="section-body" style="background:none;">
-      <div class="form-footer">
-        <button class="btn-footer btn-cancel" onclick="goBack()">
-          <i class="fa-solid fa-times"></i> Cancel
-        </button>
-        <button class="btn-footer btn-submit">
-          <i class="fa-solid fa-check"></i> Create Agent
-        </button>
-      </div>
+    <div class="modal-footer">
+      <button class="modal-btn modal-btn-secondary" onclick="closeHistoryViewModal()">Close</button>
     </div>
   </div>
 </div>
 
 <script>
-function goBack() {
-  window.history.back();
+function openHistoryModal(authId) {
+  console.log('Opening override modal for:', authId);
+  // You can implement override modal here
 }
 
-function toggleSwitch(element) {
-  const toggle = element.querySelector('.toggle-switch');
-  toggle.classList.toggle('active');
+function openHistoryViewModal(authId) {
+  console.log('Opening history view for:', authId);
+  const modal = document.getElementById('historyViewModal');
+  modal.classList.add('show');
 }
 
-// Tag input handling
-document.querySelectorAll('.tag-input').forEach(input => {
-  input.addEventListener('keypress', function(e) {
-    if (e.key === 'Enter') {
-      e.preventDefault();
-      const value = this.value.trim();
-      if (value) {
-        const tag = document.createElement('div');
-        tag.className = 'tag';
-        tag.innerHTML = `${value}<button class="tag-remove">×</button>`;
-        this.parentNode.insertBefore(tag, this);
-        this.value = '';
-        
-        tag.querySelector('.tag-remove').addEventListener('click', function() {
-          tag.remove();
-        });
-      }
-    }
-  });
+function closeHistoryViewModal() {
+  const modal = document.getElementById('historyViewModal');
+  modal.classList.remove('show');
+}
+
+// Close modal when clicking outside
+document.getElementById('historyViewModal').addEventListener('click', function(e) {
+  if (e.target === this) {
+    closeHistoryViewModal();
+  }
 });
 
-// Existing tag remove buttons
-document.querySelectorAll('.tag-remove').forEach(btn => {
-  btn.addEventListener('click', function() {
-    this.closest('.tag').remove();
-  });
+// Close modal with Escape key
+document.addEventListener('keydown', function(e) {
+  if (e.key === 'Escape') {
+    closeHistoryViewModal();
+  }
+});
+window.addEventListener('DOMContentLoaded', () => {
+  document.getElementById('historyViewModal').classList.add('show');
 });
 </script>
 
