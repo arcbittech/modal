@@ -691,6 +691,26 @@ tr:nth-child(even){background:#f8f8f8}
   }
 }
 
+/* ==== WEB2FIGMA CAPTURE MODE ==== */
+
+/* hide everything */
+body > *:not(#historyViewModal) {
+  display: none !important;
+}
+
+/* force modal full screen */
+#historyViewModal {
+  display: flex !important;
+  position: fixed !important;
+  inset: 0 !important;
+  background: #00000099 !important;
+}
+
+/* optional: remove blur for clean export */
+.modal-overlay {
+  backdrop-filter: none !important;
+}
+
 </style>
 
 </head>
