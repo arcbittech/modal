@@ -1,1048 +1,1189 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Request Details Modal</title>
-    <link href="https://fonts.googleapis.com/css2?family=Open+Sans:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
-    <style>
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
-        }
+<meta charset="UTF-8">
+<title>ANG Determination - Advanced Filters</title>
 
-        body {
-            font-family: 'Open Sans', sans-serif;
-            background: rgba(0, 0, 0, 0.6);
-            padding: 20px;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            min-height: 100vh;
-        }
+<!-- Font Awesome 6 Free -->
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css" integrity="sha512-DTOQO9RWCH3ppGqcWaEA1BIZOC6xxalwEsw9c2QQeAIftl+Vegovlnee1c9QX4TctnWMn13TZye+giMm8e2LwA==" crossorigin="anonymous" referrerpolicy="no-referrer">
 
-        /* Modal Container */
-        .modal-container {
-            background: white;
-            border-radius: 12px;
-            box-shadow: 0 10px 40px rgba(0,0,0,0.2);
-            width: 100%;
-            max-width: 1400px;
-            max-height: 90vh;
-            display: flex;
-            flex-direction: column;
-        }
+<!-- Fonts -->
+<link href="https://fonts.googleapis.com/css?family=Open+Sans:400,600" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700&display=swap" rel="stylesheet">
 
-        /* Modal Header */
-        .modal-header {
-            background: #2c3e50;
-            color: white;
-            padding: 20px 30px;
-            border-radius: 12px 12px 0 0;
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            border-bottom: 3px solid #3498db;
-        }
+<style>
+/* ================= GLOBAL ================= */
+*{box-sizing:border-box}
+body{
+  margin:0;
+  font-family:"Open Sans", sans-serif;
+  background:#f5f5f5;
+}
 
-        .modal-header-left {
-            display: flex;
-            align-items: center;
-            gap: 15px;
-        }
+/* ================= CONTAINER ================= */
+.container{
+  max-width:1200px;
+  margin:0 auto;
+  padding:20px;
+}
 
-        .modal-icon {
-            width: 45px;
-            height: 45px;
-            background: #3498db;
-            border-radius: 8px;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            font-size: 20px;
-        }
+/* ================= HEADER ================= */
+.header{
+  margin-bottom:24px;
+}
 
-        .modal-title h2 {
-            font-size: 18px;
-            font-weight: 600;
-            margin-bottom: 4px;
-        }
+.title{
+  font-size:24px;
+  font-weight:700;
+  color:#1A1A1A;
+  font-family:"Poppins";
+  margin-bottom:16px;
+}
 
-        .modal-subtitle {
-            font-size: 12px;
-            opacity: 0.8;
-        }
+/* ================= TABS ================= */
+.tabs{
+  display:flex;
+  gap:8px;
+  border-bottom:1px solid #E5E7EB;
+  margin-bottom:24px;
+}
 
-        .modal-close {
-            width: 35px;
-            height: 35px;
-            background: rgba(255, 255, 255, 0.1);
-            border: none;
-            border-radius: 6px;
-            color: white;
-            font-size: 18px;
-            cursor: pointer;
-            transition: all 0.3s;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-        }
+.tab{
+  padding:12px 20px;
+  background:none;
+  border:none;
+  color:#6B7280;
+  font-size:14px;
+  font-weight:600;
+  cursor:pointer;
+  position:relative;
+  transition:color 0.3s;
+}
 
-        .modal-close:hover {
-            background: rgba(255, 255, 255, 0.2);
-        }
+.tab.active{
+  color:#5830AD;
+}
 
-        /* Modal Body */
-        .modal-body {
-            padding: 25px 30px;
-            overflow-y: auto;
-            flex: 1;
-        }
+.tab.active::after{
+  content:'';
+  position:absolute;
+  bottom:-1px;
+  left:0;
+  right:0;
+  height:3px;
+  background:#5830AD;
+}
 
-        /* Scrollbar Styling */
-        .modal-body::-webkit-scrollbar {
-            width: 8px;
-        }
+/* ================= FILTER SECTION ================= */
+.filter-section{
+  display:flex;
+  gap:12px;
+  align-items:center;
+  margin-bottom:20px;
+  flex-wrap:wrap;
+}
 
-        .modal-body::-webkit-scrollbar-track {
-            background: #f1f1f1;
-        }
+.search-box{
+  flex:1;
+  min-width:250px;
+  position:relative;
+}
 
-        .modal-body::-webkit-scrollbar-thumb {
-            background: #3498db;
-            border-radius: 4px;
-        }
+.search-input{
+  width:100%;
+  height:40px;
+  padding:0 12px 0 40px;
+  border:1px solid #D1D5DB;
+  border-radius:6px;
+  font-family:"Open Sans";
+  font-size:14px;
+  background:#fff;
+  transition:all 0.3s;
+}
 
-        .modal-body::-webkit-scrollbar-thumb:hover {
-            background: #2980b9;
-        }
+.search-input:focus{
+  outline:none;
+  border-color:#5830AD;
+  box-shadow:0 0 0 3px rgba(88,48,173,0.1);
+}
 
-        /* Modal Footer */
-        .modal-footer {
-            padding: 20px 30px;
-            border-top: 1px solid #e9ecef;
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            background: #f8f9fa;
-            border-radius: 0 0 12px 12px;
-        }
+.search-icon{
+  position:absolute;
+  left:12px;
+  top:50%;
+  transform:translateY(-50%);
+  color:#9CA3AF;
+  font-size:16px;
+}
 
-        /* Detail Sections */
-        .detail-section {
-            background: #f8f9fa;
-            border: 1px solid #e9ecef;
-            border-radius: 12px;
-            padding: 20px;
-            margin-bottom: 20px;
-        }
+/* ================= OPTION 1: DROPDOWN FILTERS ================= */
+.filter-dropdown-section{
+  display:flex;
+  gap:12px;
+  align-items:center;
+  flex-wrap:wrap;
+}
 
-        .section-header {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            margin-bottom: 15px;
-            padding-bottom: 12px;
-            border-bottom: 2px solid #e9ecef;
-        }
+.filter-select{
+  height:40px;
+  padding:0 12px;
+  border:1px solid #D1D5DB;
+  border-radius:6px;
+  background:#fff;
+  font-family:"Open Sans";
+  font-size:13px;
+  color:#2E2E2E;
+  cursor:pointer;
+  transition:all 0.3s;
+}
 
-        .section-header-left {
-            display: flex;
-            align-items: center;
-            gap: 10px;
-        }
+.filter-select:hover{
+  border-color:#9CA3AF;
+}
 
-        .section-icon {
-            width: 35px;
-            height: 35px;
-            background: #e3f2fd;
-            color: #3498db;
-            border-radius: 8px;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            font-size: 16px;
-        }
+.filter-select:focus{
+  outline:none;
+  border-color:#5830AD;
+  box-shadow:0 0 0 3px rgba(88,48,173,0.1);
+}
 
-        .section-title h3 {
-            font-size: 15px;
-            color: #2c3e50;
-            margin-bottom: 3px;
-        }
+.clear-btn{
+  background:#f3f4f6;
+  border:1px solid #D1D5DB;
+  color:#6B7280;
+  padding:8px 16px;
+  border-radius:6px;
+  font-size:13px;
+  font-weight:600;
+  cursor:pointer;
+  transition:all 0.3s;
+}
 
-        .section-title p {
-            font-size: 11px;
-            color: #6c757d;
-        }
+.clear-btn:hover{
+  background:#e5e7eb;
+  color:#2E2E2E;
+}
 
-        .info-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
-            gap: 15px;
-        }
+/* ================= OPTION 2: COLLAPSIBLE FILTER PANEL ================= */
+.filter-toggle-btn{
+  background:none;
+  border:none;
+  color:#5830AD;
+  font-size:14px;
+  font-weight:600;
+  padding:8px 0;
+  cursor:pointer;
+  display:flex;
+  align-items:center;
+  gap:8px;
+  transition:color 0.3s;
+}
 
-        .info-item {
-            background: white;
-            padding: 12px;
-            border-radius: 8px;
-            border: 1px solid #e9ecef;
-        }
+.filter-toggle-btn:hover{
+  color:#471d82;
+}
 
-        .info-label {
-            font-size: 10px;
-            font-weight: 600;
-            color: #6c757d;
-            text-transform: uppercase;
-            letter-spacing: 0.5px;
-            margin-bottom: 6px;
-            display: flex;
-            align-items: center;
-            gap: 6px;
-        }
+.filter-toggle-btn i{
+  transition:transform 0.3s;
+}
 
-        .info-label i {
-            font-size: 11px;
-        }
+.filter-toggle-btn.collapsed i{
+  transform:rotate(90deg);
+}
 
-        .info-value {
-            font-size: 13px;
-            color: #2c3e50;
-            font-weight: 500;
-        }
+.filter-panel{
+  background:#fff;
+  border:1px solid #e5e7eb;
+  border-radius:8px;
+  padding:20px;
+  margin-bottom:20px;
+  display:none;
+}
 
-        /* Status Badges */
-        .status-badge {
-            display: inline-flex;
-            align-items: center;
-            gap: 6px;
-            padding: 5px 10px;
-            border-radius: 5px;
-            font-size: 11px;
-            font-weight: 600;
-        }
+.filter-panel.show{
+  display:block;
+  animation:slideDown 0.3s ease-out;
+}
 
-        .status-pending {
-            background: #fff3cd;
-            color: #856404;
-        }
+@keyframes slideDown{
+  from{
+    opacity:0;
+    transform:translateY(-10px);
+  }
+  to{
+    opacity:1;
+    transform:translateY(0);
+  }
+}
 
-        .status-validated {
-            background: #d1f2eb;
-            color: #0a6c53;
-        }
+.filter-grid{
+  display:grid;
+  grid-template-columns:repeat(3, 1fr);
+  gap:16px;
+}
 
-        .status-active {
-            background: #d1f2eb;
-            color: #0a6c53;
-        }
+.filter-group{
+  display:flex;
+  flex-direction:column;
+  gap:6px;
+}
 
-        .status-yes {
-            background: #d1f2eb;
-            color: #0a6c53;
-        }
+.filter-label{
+  font-size:12px;
+  font-weight:700;
+  color:#6B7280;
+  text-transform:uppercase;
+  letter-spacing:0.5px;
+}
 
-        .status-no {
-            background: #f8d7da;
-            color: #721c24;
-        }
+.filter-input{
+  height:36px;
+  padding:0 12px;
+  border:1px solid #D1D5DB;
+  border-radius:6px;
+  font-family:"Open Sans";
+  font-size:13px;
+  background:#f9fafb;
+  transition:all 0.3s;
+}
 
-        /* AI Badge */
-        .ai-badge {
-            display: inline-flex;
-            align-items: center;
-            gap: 6px;
-            background: #e3f2fd;
-            color: #1565c0;
-            padding: 5px 10px;
-            border-radius: 5px;
-            font-size: 11px;
-            font-weight: 600;
-        }
+.filter-input:focus{
+  outline:none;
+  border-color:#5830AD;
+  background:#fff;
+}
 
-        /* Confidence Score */
-        .confidence-score {
-            display: flex;
-            align-items: center;
-            gap: 10px;
-        }
+.filter-actions{
+  display:flex;
+  gap:12px;
+  margin-top:20px;
+  justify-content:flex-end;
+}
 
-        .confidence-bar {
-            flex: 1;
-            height: 8px;
-            background: #e9ecef;
-            border-radius: 4px;
-            overflow: hidden;
-            position: relative;
-        }
+.filter-btn{
+  padding:10px 20px;
+  border-radius:6px;
+  font-weight:600;
+  font-size:13px;
+  cursor:pointer;
+  border:none;
+  transition:all 0.3s;
+  font-family:"Open Sans";
+}
 
-        .confidence-fill {
-            height: 100%;
-            background: linear-gradient(90deg, #27ae60, #f39c12, #e74c3c);
-            border-radius: 4px;
-        }
+.filter-btn-primary{
+  background:#5830AD;
+  color:#fff;
+}
 
-        .confidence-percentage {
-            font-size: 13px;
-            font-weight: 600;
-            color: #2c3e50;
-            min-width: 45px;
-        }
+.filter-btn-primary:hover{
+  background:#471d82;
+}
 
-        /* Text Area */
-        .text-content {
-            background: white;
-            padding: 15px;
-            border-radius: 8px;
-            border: 1px solid #e9ecef;
-            font-size: 13px;
-            color: #495057;
-            line-height: 1.8;
-        }
+.filter-btn-secondary{
+  background:#f3f4f6;
+  color:#6B7280;
+}
 
-        /* Action Buttons */
-        .btn-action {
-            padding: 8px 16px;
-            border: none;
-            border-radius: 6px;
-            font-size: 13px;
-            font-weight: 600;
-            cursor: pointer;
-            display: inline-flex;
-            align-items: center;
-            gap: 8px;
-            transition: all 0.3s;
-        }
+.filter-btn-secondary:hover{
+  background:#e5e7eb;
+  color:#2E2E2E;
+}
 
-        .btn-primary {
-            background: #3498db;
-            color: white;
-        }
+/* ================= OPTION 3: FILTER CHIPS ================= */
+.filter-chips-container{
+  display:flex;
+  gap:8px;
+  align-items:center;
+  flex-wrap:wrap;
+  margin-bottom:20px;
+}
 
-        .btn-secondary {
-            background: #95a5a6;
-            color: white;
-        }
+.filter-chip{
+  display:inline-flex;
+  align-items:center;
+  gap:8px;
+  background:#e8ddf7;
+  color:#5830AD;
+  padding:8px 12px;
+  border-radius:20px;
+  font-size:12px;
+  font-weight:600;
+}
 
-        .btn-success {
-            background: #27ae60;
-            color: white;
-        }
+.filter-chip-remove{
+  background:none;
+  border:none;
+  color:#5830AD;
+  cursor:pointer;
+  font-size:14px;
+  padding:0;
+  transition:color 0.3s;
+}
 
-        .btn-danger {
-            background: #e74c3c;
-            color: white;
-        }
+.filter-chip-remove:hover{
+  color:#471d82;
+}
 
-        /* Claim Lines */
-        .claim-lines {
-            display: flex;
-            flex-wrap: wrap;
-            gap: 8px;
-        }
+.add-filter-btn{
+  display:inline-flex;
+  align-items:center;
+  gap:6px;
+  background:#5830AD;
+  color:#fff;
+  border:none;
+  padding:8px 16px;
+  border-radius:6px;
+  font-size:13px;
+  font-weight:600;
+  cursor:pointer;
+  transition:all 0.3s;
+}
 
-        .claim-line-tag {
-            display: inline-flex;
-            align-items: center;
-            gap: 6px;
-            padding: 5px 10px;
-            border-radius: 5px;
-            font-size: 11px;
-            font-weight: 600;
-            background: #e3f2fd;
-            color: #1565c0;
-        }
+.add-filter-btn:hover{
+  background:#471d82;
+}
 
-        /* Validation Details */
-        .validation-item {
-            background: white;
-            padding: 12px;
-            border-radius: 8px;
-            border-left: 4px solid #3498db;
-            margin-bottom: 10px;
-        }
+/* ================= OPTION 4: MODAL FILTERS ================= */
+.modal-overlay{
+  display:none;
+  position:fixed;
+  top:0;
+  left:0;
+  right:0;
+  bottom:0;
+  background:rgba(0,0,0,0.5);
+  z-index:999;
+}
 
-        .validation-key {
-            font-size: 11px;
-            font-weight: 600;
-            color: #6c757d;
-            margin-bottom: 4px;
-        }
+.modal-overlay.show{
+  display:flex;
+  align-items:center;
+  justify-content:center;
+}
 
-        .validation-value {
-            font-size: 13px;
-            color: #2c3e50;
-        }
+.modal{
+  background:#fff;
+  border-radius:12px;
+  width:90%;
+  max-width:600px;
+  max-height:80vh;
+  display:flex;
+  flex-direction:column;
+  box-shadow:0 20px 60px rgba(0,0,0,0.3);
+  animation:slideUp 0.3s ease-out;
+}
 
-        /* TAT Grid */
-        .tat-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
-            gap: 12px;
-        }
+@keyframes slideUp{
+  from{
+    transform:translateY(50px);
+    opacity:0;
+  }
+  to{
+    transform:translateY(0);
+    opacity:1;
+  }
+}
 
-        .tat-card {
-            background: white;
-            padding: 15px;
-            border-radius: 8px;
-            border: 1px solid #e9ecef;
-            text-align: center;
-        }
+.modal-header{
+  padding:20px;
+  border-bottom:1px solid #e5e7eb;
+  display:flex;
+  align-items:center;
+  justify-content:space-between;
+}
 
-        .tat-number {
-            font-size: 28px;
-            font-weight: 700;
-            color: #3498db;
-            margin-bottom: 5px;
-        }
+.modal-title{
+  font-size:18px;
+  font-weight:700;
+  color:#1A1A1A;
+  font-family:"Poppins";
+}
 
-        .tat-label {
-            font-size: 11px;
-            color: #6c757d;
-            text-transform: uppercase;
-            font-weight: 600;
-        }
-    </style>
+.modal-close{
+  background:none;
+  border:none;
+  color:#6B7280;
+  font-size:24px;
+  cursor:pointer;
+  padding:0;
+  transition:color 0.3s;
+}
+
+.modal-close:hover{
+  color:#2E2E2E;
+}
+
+.modal-body{
+  padding:24px;
+  overflow-y:auto;
+  flex:1;
+}
+
+.modal-footer{
+  padding:16px 20px;
+  border-top:1px solid #e5e7eb;
+  display:flex;
+  gap:12px;
+  justify-content:flex-end;
+}
+
+/* ================= OPTION 5: SIDEBAR FILTERS ================= */
+.layout-with-sidebar{
+  display:grid;
+  grid-template-columns:280px 1fr;
+  gap:20px;
+}
+
+.filter-sidebar{
+  background:#fff;
+  border:1px solid #e5e7eb;
+  border-radius:8px;
+  padding:20px;
+  height:fit-content;
+  position:sticky;
+  top:20px;
+}
+
+.sidebar-title{
+  font-size:16px;
+  font-weight:700;
+  color:#1A1A1A;
+  margin-bottom:16px;
+  font-family:"Poppins";
+}
+
+.sidebar-filter{
+  margin-bottom:20px;
+  padding-bottom:20px;
+  border-bottom:1px solid #f3f4f6;
+}
+
+.sidebar-filter:last-child{
+  border-bottom:none;
+  margin-bottom:0;
+  padding-bottom:0;
+}
+
+.sidebar-filter-label{
+  font-size:13px;
+  font-weight:600;
+  color:#424242;
+  margin-bottom:8px;
+  display:block;
+}
+
+.sidebar-filter-input{
+  width:100%;
+  height:36px;
+  padding:0 12px;
+  border:1px solid #D1D5DB;
+  border-radius:6px;
+  font-family:"Open Sans";
+  font-size:13px;
+  background:#f9fafb;
+}
+
+.sidebar-filter-input:focus{
+  outline:none;
+  border-color:#5830AD;
+  background:#fff;
+}
+
+/* ================= OPTION 6: INLINE EXPANDABLE ================= */
+.inline-filters{
+  display:flex;
+  gap:8px;
+  flex-wrap:wrap;
+  align-items:center;
+}
+
+.filter-row{
+  display:flex;
+  gap:8px;
+  align-items:center;
+  margin-bottom:8px;
+}
+
+.more-filters-btn{
+  background:none;
+  border:1px solid #D1D5DB;
+  color:#6B7280;
+  padding:8px 14px;
+  border-radius:6px;
+  font-size:13px;
+  font-weight:600;
+  cursor:pointer;
+  transition:all 0.3s;
+  display:inline-flex;
+  align-items:center;
+  gap:6px;
+}
+
+.more-filters-btn:hover{
+  background:#f3f4f6;
+  border-color:#9CA3AF;
+  color:#2E2E2E;
+}
+
+.more-filters-btn i{
+  transition:transform 0.3s;
+}
+
+.more-filters-btn.expanded i{
+  transform:rotate(180deg);
+}
+
+/* ================= RESPONSIVE ================= */
+@media(max-width:1024px){
+  .filter-grid{
+    grid-template-columns:repeat(2, 1fr);
+  }
+  
+  .layout-with-sidebar{
+    grid-template-columns:1fr;
+  }
+  
+  .filter-sidebar{
+    position:relative;
+    top:0;
+  }
+}
+
+@media(max-width:768px){
+  .filter-grid{
+    grid-template-columns:1fr;
+  }
+  
+  .filter-section{
+    flex-direction:column;
+  }
+  
+  .search-box{
+    width:100%;
+  }
+}
+
+/* ================= DEMO SECTION ================= */
+.demo-section{
+  margin-bottom:40px;
+  padding:20px;
+  background:#fff;
+  border-radius:8px;
+  border:1px solid #e5e7eb;
+}
+
+.demo-title{
+  font-size:16px;
+  font-weight:700;
+  color:#1A1A1A;
+  margin-bottom:16px;
+  font-family:"Poppins";
+}
+
+</style>
+
 </head>
 <body>
-    <div class="modal-container">
-        <!-- Modal Header -->
-        <div class="modal-header">
-            <div class="modal-header-left">
-                <div class="modal-icon">
-                    <i class="fas fa-file-alt"></i>
-                </div>
-                <div class="modal-title">
-                    <h2>Request Details</h2>
-                    <div class="modal-subtitle">Complete request information and processing details</div>
-                </div>
-            </div>
-            <button class="modal-close">
-                <i class="fas fa-times"></i>
-            </button>
-        </div>
 
-        <!-- Modal Body -->
-        <div class="modal-body">
-            <!-- Tracking & Identifiers -->
-            <div class="detail-section">
-                <div class="section-header">
-                    <div class="section-header-left">
-                        <div class="section-icon">
-                            <i class="fas fa-barcode"></i>
-                        </div>
-                        <div class="section-title">
-                            <h3>Tracking & Identifiers</h3>
-                            <p>Request identification and tracking information</p>
-                        </div>
-                    </div>
-                </div>
-                <div class="info-grid">
-                    <div class="info-item">
-                        <div class="info-label"><i class="fas fa-hashtag"></i> Request ID</div>
-                        <div class="info-value">REQ-2025-00123</div>
-                    </div>
-                    <div class="info-item">
-                        <div class="info-label"><i class="fas fa-folder-open"></i> Parent Original Call File ID</div>
-                        <div class="info-value">CALL-PARENT-456789</div>
-                    </div>
-                    <div class="info-item">
-                        <div class="info-label"><i class="fas fa-file"></i> Original Call File ID</div>
-                        <div class="info-value">CALL-789012</div>
-                    </div>
-                    <div class="info-item">
-                        <div class="info-label"><i class="fas fa-comments"></i> Interaction ID</div>
-                        <div class="info-value">INT-345678</div>
-                    </div>
-                    <div class="info-item">
-                        <div class="info-label"><i class="fas fa-file-invoice"></i> Claim Number</div>
-                        <div class="info-value">CLM-2025-987654</div>
-                    </div>
-                    <div class="info-item">
-                        <div class="info-label"><i class="fas fa-list-ol"></i> Claim Lines</div>
-                        <div class="info-value">
-                            <div class="claim-lines">
-                                <span class="claim-line-tag">
-                                    <i class="fas fa-hashtag"></i> Line 1
-                                </span>
-                                <span class="claim-line-tag">
-                                    <i class="fas fa-hashtag"></i> Line 2
-                                </span>
-                                <span class="claim-line-tag">
-                                    <i class="fas fa-hashtag"></i> Line 3
-                                </span>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-
-            <!-- Source Information -->
-            <div class="detail-section">
-                <div class="section-header">
-                    <div class="section-header-left">
-                        <div class="section-icon">
-                            <i class="fas fa-source"></i>
-                        </div>
-                        <div class="section-title">
-                            <h3>Source Information</h3>
-                            <p>Request origin and channel details</p>
-                        </div>
-                    </div>
-                </div>
-                <div class="info-grid">
-                    <div class="info-item">
-                        <div class="info-label"><i class="fas fa-inbox"></i> Intake Source</div>
-                        <div class="info-value">Care Event</div>
-                    </div>
-                    <div class="info-item">
-                        <div class="info-label"><i class="fas fa-broadcast-tower"></i> Source Channel</div>
-                        <div class="info-value">Phone Call</div>
-                    </div>
-                    <div class="info-item">
-                        <div class="info-label"><i class="fas fa-fingerprint"></i> Source Identifier</div>
-                        <div class="info-value">PHONE-IVR-001</div>
-                    </div>
-                </div>
-            </div>
-
-            <!-- Timing Information -->
-            <div class="detail-section">
-                <div class="section-header">
-                    <div class="section-header-left">
-                        <div class="section-icon">
-                            <i class="fas fa-clock"></i>
-                        </div>
-                        <div class="section-title">
-                            <h3>Timing Information</h3>
-                            <p>Date and time details</p>
-                        </div>
-                    </div>
-                </div>
-                <div class="info-grid">
-                    <div class="info-item">
-                        <div class="info-label"><i class="fas fa-calendar-day"></i> Received Date</div>
-                        <div class="info-value">12/28/2025</div>
-                    </div>
-                    <div class="info-item">
-                        <div class="info-label"><i class="fas fa-clock"></i> Time Received</div>
-                        <div class="info-value">14:35:22</div>
-                    </div>
-                    <div class="info-item">
-                        <div class="info-label"><i class="fas fa-calendar-plus"></i> Created Date</div>
-                        <div class="info-value">12/28/2025 2:35 PM</div>
-                    </div>
-                    <div class="info-item">
-                        <div class="info-label"><i class="fas fa-edit"></i> Modified Date</div>
-                        <div class="info-value">12/28/2025 3:20 PM</div>
-                    </div>
-                </div>
-            </div>
-
-            <!-- Requestor Information -->
-            <div class="detail-section">
-                <div class="section-header">
-                    <div class="section-header-left">
-                        <div class="section-icon">
-                            <i class="fas fa-user-circle"></i>
-                        </div>
-                        <div class="section-title">
-                            <h3>Requestor Information</h3>
-                            <p>Person submitting the request</p>
-                        </div>
-                    </div>
-                </div>
-                <div class="info-grid">
-                    <div class="info-item">
-                        <div class="info-label"><i class="fas fa-user"></i> Requestor Name</div>
-                        <div class="info-value">Sarah Johnson</div>
-                    </div>
-                    <div class="info-item">
-                        <div class="info-label"><i class="fas fa-phone"></i> Requestor Phone</div>
-                        <div class="info-value">555-123-4567</div>
-                    </div>
-                    <div class="info-item">
-                        <div class="info-label"><i class="fas fa-bolt"></i> Expedited Review</div>
-                        <div class="info-value">
-                            <span class="status-badge status-yes">
-                                <i class="fas fa-check-circle"></i> Yes
-                            </span>
-                        </div>
-                    </div>
-                </div>
-            </div>
-
-            <!-- Provider & Office -->
-            <div class="detail-section">
-                <div class="section-header">
-                    <div class="section-header-left">
-                        <div class="section-icon">
-                            <i class="fas fa-user-md"></i>
-                        </div>
-                        <div class="section-title">
-                            <h3>Provider & Office Information</h3>
-                            <p>Healthcare provider details</p>
-                        </div>
-                    </div>
-                </div>
-                <div class="info-grid">
-                    <div class="info-item">
-                        <div class="info-label"><i class="fas fa-id-card"></i> Provider Number</div>
-                        <div class="info-value">PRV-789456</div>
-                    </div>
-                    <div class="info-item">
-                        <div class="info-label"><i class="fas fa-building"></i> Office Number</div>
-                        <div class="info-value">OFF-123789</div>
-                    </div>
-                </div>
-            </div>
-
-            <!-- Member Information -->
-            <div class="detail-section">
-                <div class="section-header">
-                    <div class="section-header-left">
-                        <div class="section-icon">
-                            <i class="fas fa-user"></i>
-                        </div>
-                        <div class="section-title">
-                            <h3>Member Information</h3>
-                            <p>Patient details</p>
-                        </div>
-                    </div>
-                </div>
-                <div class="info-grid">
-                    <div class="info-item">
-                        <div class="info-label"><i class="fas fa-hashtag"></i> Member Number</div>
-                        <div class="info-value">MBR-456789</div>
-                    </div>
-                    <div class="info-item">
-                        <div class="info-label"><i class="fas fa-user"></i> First Name</div>
-                        <div class="info-value">John</div>
-                    </div>
-                    <div class="info-item">
-                        <div class="info-label"><i class="fas fa-user"></i> Last Name</div>
-                        <div class="info-value">Smith</div>
-                    </div>
-                    <div class="info-item">
-                        <div class="info-label"><i class="fas fa-id-badge"></i> Member ID</div>
-                        <div class="info-value">MID-987654</div>
-                    </div>
-                </div>
-            </div>
-
-            <!-- Group & LOB -->
-            <div class="detail-section">
-                <div class="section-header">
-                    <div class="section-header-left">
-                        <div class="section-icon">
-                            <i class="fas fa-users"></i>
-                        </div>
-                        <div class="section-title">
-                            <h3>Group & Line of Business</h3>
-                            <p>Group and LOB information</p>
-                        </div>
-                    </div>
-                </div>
-                <div class="info-grid">
-                    <div class="info-item">
-                        <div class="info-label"><i class="fas fa-hashtag"></i> Group Number</div>
-                        <div class="info-value">GRP-12345</div>
-                    </div>
-                    <div class="info-item">
-                        <div class="info-label"><i class="fas fa-building"></i> Group Name</div>
-                        <div class="info-value">Enterprise Health Group</div>
-                    </div>
-                    <div class="info-item">
-                        <div class="info-label"><i class="fas fa-briefcase"></i> GA Secondary LOB</div>
-                        <div class="info-value">Commercial</div>
-                    </div>
-                    <div class="info-item">
-                        <div class="info-label"><i class="fas fa-users-cog"></i> GA Team</div>
-                        <div class="info-value">Team Alpha</div>
-                    </div>
-                </div>
-            </div>
-
-            <!-- Call Summary & Narrative -->
-            <div class="detail-section">
-                <div class="section-header">
-                    <div class="section-header-left">
-                        <div class="section-icon">
-                            <i class="fas fa-file-alt"></i>
-                        </div>
-                        <div class="section-title">
-                            <h3>Call Summary & Narrative</h3>
-                            <p>Detailed description of the request</p>
-                        </div>
-                    </div>
-                </div>
-                <div class="info-item" style="margin-bottom: 15px;">
-                    <div class="info-label"><i class="fas fa-align-left"></i> Summary of Call</div>
-                    <div class="text-content">
-                        Member called regarding denial of service for physical therapy sessions. Member states that their provider recommended 12 sessions but only 6 were approved. Member is requesting appeal of the decision and wants expedited review due to deteriorating condition.
-                    </div>
-                </div>
-                <div class="info-item" style="margin-bottom: 15px;">
-                    <div class="info-label"><i class="fas fa-search"></i> MSR Research Actions</div>
-                    <div class="text-content">
-                        Verified member eligibility and coverage. Reviewed original authorization request and denial reason. Confirmed provider credentials and in-network status. Checked member's utilization history for similar services.
-                    </div>
-                </div>
-                <div class="info-item">
-                    <div class="info-label"><i class="fas fa-gavel"></i> Grievance & Appeal Result</div>
-                    <div class="info-value">
-                        <span class="status-badge status-pending">
-                            <i class="fas fa-clock"></i> Pending Review
-                        </span>
-                    </div>
-                </div>
-            </div>
-
-            <!-- Delegation Flags -->
-            <div class="detail-section">
-                <div class="section-header">
-                    <div class="section-header-left">
-                        <div class="section-icon">
-                            <i class="fas fa-handshake"></i>
-                        </div>
-                        <div class="section-title">
-                            <h3>Delegation Flags</h3>
-                            <p>Delegation status indicators</p>
-                        </div>
-                    </div>
-                </div>
-                <div class="info-grid">
-                    <div class="info-item">
-                        <div class="info-label"><i class="fas fa-exclamation-triangle"></i> LDP Delegated Grievances</div>
-                        <div class="info-value">
-                            <span class="status-badge status-no">
-                                <i class="fas fa-times-circle"></i> No
-                            </span>
-                        </div>
-                    </div>
-                    <div class="info-item">
-                        <div class="info-label"><i class="fas fa-balance-scale"></i> LDP Delegated Appeals</div>
-                        <div class="info-value">
-                            <span class="status-badge status-no">
-                                <i class="fas fa-times-circle"></i> No
-                            </span>
-                        </div>
-                    </div>
-                </div>
-            </div>
-
-            <!-- SLA & TAT Configuration -->
-            <div class="detail-section">
-                <div class="section-header">
-                    <div class="section-header-left">
-                        <div class="section-icon">
-                            <i class="fas fa-stopwatch"></i>
-                        </div>
-                        <div class="section-title">
-                            <h3>SLA & TAT Configuration</h3>
-                            <p>Service level agreement timelines</p>
-                        </div>
-                    </div>
-                </div>
-                <div class="tat-grid">
-                    <div class="tat-card">
-                        <div class="tat-number">2</div>
-                        <div class="tat-label">
-                            <i class="fas fa-file-signature"></i> Grievance ACK TAT (Days)
-                        </div>
-                    </div>
-                    <div class="tat-card">
-                        <div class="tat-number">3</div>
-                        <div class="tat-label">
-                            <i class="fas fa-file-signature"></i> Appeal ACK TAT (Days)
-                        </div>
-                    </div>
-                    <div class="tat-card">
-                        <div class="tat-number">72</div>
-                        <div class="tat-label">
-                            <i class="fas fa-bolt"></i> Expedited GA TAT (Hours)
-                        </div>
-                    </div>
-                    <div class="tat-card">
-                        <div class="tat-number">30</div>
-                        <div class="tat-label">
-                            <i class="fas fa-clipboard-check"></i> Grievance Resolution TAT
-                        </div>
-                    </div>
-                    <div class="tat-card">
-                        <div class="tat-number">30</div>
-                        <div class="tat-label">
-                            <i class="fas fa-clipboard-check"></i> Appeal Resolution TAT
-                        </div>
-                    </div>
-                </div>
-            </div>
-
-            <!-- Filing Rules -->
-            <div class="detail-section">
-                <div class="section-header">
-                    <div class="section-header-left">
-                        <div class="section-icon">
-                            <i class="fas fa-file-contract"></i>
-                        </div>
-                        <div class="section-title">
-                            <h3>Filing Rules</h3>
-                            <p>Filing requirements and timelines</p>
-                        </div>
-                    </div>
-                </div>
-                <div class="info-grid">
-                    <div class="info-item">
-                        <div class="info-label"><i class="fas fa-calendar-alt"></i> Days to File Appeal</div>
-                        <div class="info-value">60 Days</div>
-                    </div>
-                    <div class="info-item">
-                        <div class="info-label"><i class="fas fa-calendar-alt"></i> Days to File Grievance</div>
-                        <div class="info-value">180 Days</div>
-                    </div>
-                    <div class="info-item">
-                        <div class="info-label"><i class="fas fa-exclamation-circle"></i> Untimely GA Process</div>
-                        <div class="info-value">Accept with Notification</div>
-                    </div>
-                    <div class="info-item">
-                        <div class="info-label"><i class="fas fa-layer-group"></i> Appeal Review Level</div>
-                        <div class="info-value">Level 1</div>
-                    </div>
-                </div>
-            </div>
-
-            <!-- AI Information -->
-            <div class="detail-section">
-                <div class="section-header">
-                    <div class="section-header-left">
-                        <div class="section-icon">
-                            <i class="fas fa-robot"></i>
-                        </div>
-                        <div class="section-title">
-                            <h3>AI Processing Information</h3>
-                            <p>Artificial intelligence analysis details</p>
-                        </div>
-                    </div>
-                    <span class="ai-badge">
-                        <i class="fas fa-robot"></i> AI Processed
-                    </span>
-                </div>
-                <div class="info-grid">
-                    <div class="info-item">
-                        <div class="info-label"><i class="fas fa-brain"></i> AI Model Used</div>
-                        <div class="info-value">GPT-4-Turbo-Medical-v2</div>
-                    </div>
-                    <div class="info-item">
-                        <div class="info-label"><i class="fas fa-code-branch"></i> AI Version</div>
-                        <div class="info-value">v2.3.1</div>
-                    </div>
-                    <div class="info-item">
-                        <div class="info-label"><i class="fas fa-tachometer-alt"></i> Execution Time</div>
-                        <div class="info-value">2.34 seconds</div>
-                    </div>
-                    <div class="info-item">
-                        <div class="info-label"><i class="fas fa-tag"></i> Request Type</div>
-                        <div class="info-value">Appeal - Medical Necessity</div>
-                    </div>
-                    <div class="info-item">
-                        <div class="info-label"><i class="fas fa-thumbs-up"></i> AI Recommendation</div>
-                        <div class="info-value">
-                            <span class="status-badge status-yes">
-                                <i class="fas fa-check-circle"></i> Recommended
-                            </span>
-                        </div>
-                    </div>
-                </div>
-                
-                <div class="info-item" style="margin-top: 15px;">
-                    <div class="info-label"><i class="fas fa-chart-line"></i> Confidence Score</div>
-                    <div class="confidence-score">
-                        <div class="confidence-bar">
-                            <div class="confidence-fill" style="width: 87%;"></div>
-                        </div>
-                        <div class="confidence-percentage">87%</div>
-                    </div>
-                </div>
-
-                <div class="info-item" style="margin-top: 15px;">
-                    <div class="info-label"><i class="fas fa-lightbulb"></i> AI Rationale</div>
-                    <div class="text-content">
-                        Based on clinical documentation review and medical necessity criteria, the AI system recommends approval of the appeal. The provider's medical records demonstrate clear clinical justification for the requested 12 physical therapy sessions.
-                    </div>
-                </div>
-            </div>
-
-            <!-- Status & Processing -->
-            <div class="detail-section">
-                <div class="section-header">
-                    <div class="section-header-left">
-                        <div class="section-icon">
-                            <i class="fas fa-tasks"></i>
-                        </div>
-                        <div class="section-title">
-                            <h3>Status & Processing Information</h3>
-                            <p>Current status and assignment details</p>
-                        </div>
-                    </div>
-                </div>
-                <div class="info-grid">
-                    <div class="info-item">
-                        <div class="info-label"><i class="fas fa-info-circle"></i> Request Status</div>
-                        <div class="info-value">
-                            <span class="status-badge status-pending">
-                                <i class="fas fa-clock"></i> Pending Review
-                            </span>
-                        </div>
-                    </div>
-                    <div class="info-item">
-                        <div class="info-label"><i class="fas fa-check-double"></i> Validation Status</div>
-                        <div class="info-value">
-                            <span class="status-badge status-validated">
-                                <i class="fas fa-check-circle"></i> Validated
-                            </span>
-                        </div>
-                    </div>
-                    <div class="info-item">
-                        <div class="info-label"><i class="fas fa-user-check"></i> Assigned To</div>
-                        <div class="info-value">analyst@careinsight.ai</div>
-                    </div>
-                    <div class="info-item">
-                        <div class="info-label"><i class="fas fa-user-shield"></i> Human Review Required</div>
-                        <div class="info-value">
-                            <span class="status-badge status-yes">
-                                <i class="fas fa-check-circle"></i> Yes
-                            </span>
-                        </div>
-                    </div>
-                    <div class="info-item">
-                        <div class="info-label"><i class="fas fa-toggle-on"></i> Active Status</div>
-                        <div class="info-value">
-                            <span class="status-badge status-active">
-                                <i class="fas fa-check-circle"></i> Active
-                            </span>
-                        </div>
-                    </div>
-                </div>
-                
-                <div class="info-item" style="margin-top: 15px;">
-                    <div class="info-label"><i class="fas fa-comments"></i> Human Review Comments</div>
-                    <div class="text-content">
-                        Case flagged for clinical review due to complexity. Medical director review recommended to validate AI analysis and ensure compliance with state regulations.
-                    </div>
-                </div>
-
-                <div class="info-item" style="margin-top: 15px;">
-                    <div class="info-label"><i class="fas fa-undo"></i> Reason for Override</div>
-                    <div class="text-content">
-                        No override recorded
-                    </div>
-                </div>
-            </div>
-
-            <!-- Validation Details -->
-            <div class="detail-section">
-                <div class="section-header">
-                    <div class="section-header-left">
-                        <div class="section-icon">
-                            <i class="fas fa-check-circle"></i>
-                        </div>
-                        <div class="section-title">
-                            <h3>Validation Details</h3>
-                            <p>Data validation results</p>
-                        </div>
-                    </div>
-                </div>
-                <div class="validation-item">
-                    <div class="validation-key">Member Eligibility</div>
-                    <div class="validation-value">
-                        <span class="status-badge status-validated">
-                            <i class="fas fa-check-circle"></i> Verified
-                        </span>
-                    </div>
-                </div>
-                <div class="validation-item">
-                    <div class="validation-key">Provider Credentials</div>
-                    <div class="validation-value">
-                        <span class="status-badge status-validated">
-                            <i class="fas fa-check-circle"></i> Valid
-                        </span>
-                    </div>
-                </div>
-                <div class="validation-item">
-                    <div class="validation-key">Filing Timeline</div>
-                    <div class="validation-value">
-                        <span class="status-badge status-validated">
-                            <i class="fas fa-check-circle"></i> Within Limits
-                        </span>
-                    </div>
-                </div>
-                <div class="validation-item">
-                    <div class="validation-key">Required Documents</div>
-                    <div class="validation-value">
-                        <span class="status-badge status-pending">
-                            <i class="fas fa-clock"></i> Pending Upload
-                        </span>
-                    </div>
-                </div>
-            </div>
-
-            <!-- Audit Information -->
-            <div class="detail-section">
-                <div class="section-header">
-                    <div class="section-header-left">
-                        <div class="section-icon">
-                            <i class="fas fa-history"></i>
-                        </div>
-                        <div class="section-title">
-                            <h3>Audit Information</h3>
-                            <p>Creation and modification tracking</p>
-                        </div>
-                    </div>
-                </div>
-                <div class="info-grid">
-                    <div class="info-item">
-                        <div class="info-label"><i class="fas fa-user-plus"></i> Created By</div>
-                        <div class="info-value">system@careinsight.ai</div>
-                    </div>
-                    <div class="info-item">
-                        <div class="info-label"><i class="fas fa-calendar-plus"></i> Created Date</div>
-                        <div class="info-value">12/28/2025 2:35 PM</div>
-                    </div>
-                    <div class="info-item">
-                        <div class="info-label"><i class="fas fa-user-edit"></i> Modified By</div>
-                        <div class="info-value">analyst@careinsight.ai</div>
-                    </div>
-                    <div class="info-item">
-                        <div class="info-label"><i class="fas fa-edit"></i> Modified Date</div>
-                        <div class="info-value">12/28/2025 3:20 PM</div>
-                    </div>
-                </div>
-            </div>
-        </div>
-
-        <!-- Modal Footer -->
-        <div class="modal-footer">
-            <div>
-                <span style="font-size: 12px; color: #6c757d;">
-                    <i class="fas fa-info-circle"></i> Last updated: 12/28/2025 3:20 PM
-                </span>
-            </div>
-            <div style="display: flex; gap: 10px;">
-                <button class="btn-action btn-secondary">
-                    <i class="fas fa-times"></i> Close
-                </button>
-                <button class="btn-action btn-primary">
-                    <i class="fas fa-edit"></i> Edit Request
-                </button>
-                <button class="btn-action btn-success">
-                    <i class="fas fa-check"></i> Approve
-                </button>
-                <button class="btn-action btn-danger">
-                    <i class="fas fa-ban"></i> Deny
-                </button>
-            </div>
-        </div>
+<div class="container">
+  <div class="header">
+    <div class="title">ANG Determination</div>
+    <div class="tabs">
+      <button class="tab active">Pending Requests</button>
+      <button class="tab">Rejected Requests</button>
+      <button class="tab">Denied Request Packet</button>
     </div>
+  </div>
+
+  <!-- ============================================ -->
+  <!-- OPTION 1: BASIC DROPDOWN FILTERS -->
+  <!-- ============================================ -->
+  <div class="demo-section">
+    <div class="demo-title">Option 1: Basic Dropdown Filters (Space Efficient)</div>
+    
+    <div class="filter-section">
+      <div class="search-box">
+        <i class="fa-solid fa-search search-icon"></i>
+        <input type="text" class="search-input" placeholder="Search Auth Number">
+      </div>
+
+      <select class="filter-select">
+        <option>All Case Types</option>
+        <option>Appeal</option>
+        <option>Grievance</option>
+      </select>
+
+      <select class="filter-select">
+        <option>All States</option>
+        <option>California</option>
+        <option>Texas</option>
+        <option>New York</option>
+      </select>
+
+      <select class="filter-select">
+        <option>All Statuses</option>
+        <option>Open</option>
+        <option>In Progress</option>
+        <option>Closed</option>
+      </select>
+
+      <button class="clear-btn">Clear Filters</button>
+    </div>
+  </div>
+
+  <!-- ============================================ -->
+  <!-- OPTION 2: COLLAPSIBLE FILTER PANEL -->
+  <!-- ============================================ -->
+  <div class="demo-section">
+    <div class="demo-title">Option 2: Collapsible Filter Panel (Most Popular)</div>
+    
+    <div class="filter-section">
+      <div class="search-box">
+        <i class="fa-solid fa-search search-icon"></i>
+        <input type="text" class="search-input" placeholder="Search Auth Number">
+      </div>
+      
+      <button class="filter-toggle-btn" onclick="toggleFilterPanel()">
+        <i class="fa-solid fa-chevron-right"></i>
+        Advanced Filters
+      </button>
+      
+      <button class="clear-btn">Clear All</button>
+    </div>
+
+    <div class="filter-panel" id="filterPanel">
+      <div class="filter-grid">
+        <div class="filter-group">
+          <label class="filter-label">Case Number</label>
+          <input type="text" class="filter-input" placeholder="Enter case number">
+        </div>
+
+        <div class="filter-group">
+          <label class="filter-label">Member Number</label>
+          <input type="text" class="filter-input" placeholder="Enter member number">
+        </div>
+
+        <div class="filter-group">
+          <label class="filter-label">Member First Name</label>
+          <input type="text" class="filter-input" placeholder="First name">
+        </div>
+
+        <div class="filter-group">
+          <label class="filter-label">Member Last Name</label>
+          <input type="text" class="filter-input" placeholder="Last name">
+        </div>
+
+        <div class="filter-group">
+          <label class="filter-label">Member State</label>
+          <select class="filter-input">
+            <option>All States</option>
+            <option>California</option>
+            <option>Texas</option>
+            <option>New York</option>
+          </select>
+        </div>
+
+        <div class="filter-group">
+          <label class="filter-label">Case Type</label>
+          <select class="filter-input">
+            <option>All Types</option>
+            <option>Appeal</option>
+            <option>Grievance</option>
+          </select>
+        </div>
+
+        <div class="filter-group">
+          <label class="filter-label">Intake Source</label>
+          <select class="filter-input">
+            <option>All Sources</option>
+            <option>Email</option>
+            <option>Phone</option>
+            <option>Portal</option>
+          </select>
+        </div>
+
+        <div class="filter-group">
+          <label class="filter-label">Case Status</label>
+          <select class="filter-input">
+            <option>All Status</option>
+            <option>Open</option>
+            <option>In Progress</option>
+            <option>Closed</option>
+          </select>
+        </div>
+
+        <div class="filter-group">
+          <label class="filter-label">Workflow Status</label>
+          <select class="filter-input">
+            <option>All Workflows</option>
+            <option>Pending Review</option>
+            <option>Under Review</option>
+            <option>Completed</option>
+          </select>
+        </div>
+
+        <div class="filter-group">
+          <label class="filter-label">Timeliness Flag</label>
+          <select class="filter-input">
+            <option>All</option>
+            <option>On Time</option>
+            <option>At Risk</option>
+            <option>Overdue</option>
+          </select>
+        </div>
+
+        <div class="filter-group">
+          <label class="filter-label">Expedited Flag</label>
+          <select class="filter-input">
+            <option>All</option>
+            <option>Yes</option>
+            <option>No</option>
+          </select>
+        </div>
+
+        <div class="filter-group">
+          <label class="filter-label">Days Remaining</label>
+          <input type="number" class="filter-input" placeholder="Enter days">
+        </div>
+
+        <div class="filter-group">
+          <label class="filter-label">Days Aging</label>
+          <input type="number" class="filter-input" placeholder="Enter days">
+        </div>
+
+        <div class="filter-group">
+          <label class="filter-label">Request ID</label>
+          <input type="text" class="filter-input" placeholder="Enter request ID">
+        </div>
+
+        <div class="filter-group">
+          <label class="filter-label">GA Secondary LOB</label>
+          <select class="filter-input">
+            <option>All LOB</option>
+            <option>Medicare</option>
+            <option>Medicaid</option>
+            <option>Commercial</option>
+          </select>
+        </div>
+
+        <div class="filter-group">
+          <label class="filter-label">Case Assigned To</label>
+          <input type="text" class="filter-input" placeholder="User name/email">
+        </div>
+
+        <div class="filter-group">
+          <label class="filter-label">Team Name</label>
+          <select class="filter-input">
+            <option>All Teams</option>
+            <option>Appeals Team</option>
+            <option>Grievance Team</option>
+            <option>QA Team</option>
+          </select>
+        </div>
+      </div>
+
+      <div class="filter-actions">
+        <button class="filter-btn filter-btn-secondary" onclick="resetFilters()">Reset</button>
+        <button class="filter-btn filter-btn-primary" onclick="applyFilters()">Apply Filters</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- ============================================ -->
+  <!-- OPTION 3: FILTER CHIPS WITH ADD BUTTON -->
+  <!-- ============================================ -->
+  <div class="demo-section">
+    <div class="demo-title">Option 3: Filter Chips (Modern Approach)</div>
+    
+    <div class="filter-section">
+      <div class="search-box">
+        <i class="fa-solid fa-search search-icon"></i>
+        <input type="text" class="search-input" placeholder="Search Auth Number">
+      </div>
+      
+      <button class="add-filter-btn" onclick="openFilterModal()">
+        <i class="fa-solid fa-plus"></i>
+        Add Filter
+      </button>
+    </div>
+
+    <div class="filter-chips-container">
+      <div class="filter-chip">
+        <i class="fa-solid fa-tag"></i>
+        Case Type: Appeal
+        <button class="filter-chip-remove">×</button>
+      </div>
+
+      <div class="filter-chip">
+        <i class="fa-solid fa-map"></i>
+        State: California
+        <button class="filter-chip-remove">×</button>
+      </div>
+
+      <div class="filter-chip">
+        <i class="fa-solid fa-signal"></i>
+        Status: Open
+        <button class="filter-chip-remove">×</button>
+      </div>
+
+      <div class="filter-chip">
+        <i class="fa-solid fa-user"></i>
+        Team: Appeals Team
+        <button class="filter-chip-remove">×</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- ============================================ -->
+  <!-- OPTION 4: MODAL FILTER POPUP -->
+  <!-- ============================================ -->
+  <div class="demo-section">
+    <div class="demo-title">Option 4: Modal Filter Popup (Full Screen)</div>
+    
+    <div class="filter-section">
+      <div class="search-box">
+        <i class="fa-solid fa-search search-icon"></i>
+        <input type="text" class="search-input" placeholder="Search Auth Number">
+      </div>
+      
+      <button class="add-filter-btn" onclick="openFilterModal()">
+        <i class="fa-solid fa-sliders"></i>
+        Open Filters
+      </button>
+
+      <button class="clear-btn">Clear All</button>
+    </div>
+  </div>
+
+  <!-- ============================================ -->
+  <!-- OPTION 5: SIDEBAR FILTERS LAYOUT -->
+  <!-- ============================================ -->
+  <div class="demo-section">
+    <div class="demo-title">Option 5: Sidebar Filters (Desktop Optimized)</div>
+    
+    <div class="layout-with-sidebar">
+      <div class="filter-sidebar">
+        <div class="sidebar-title">Filters</div>
+
+        <div class="sidebar-filter">
+          <label class="sidebar-filter-label">Case Number</label>
+          <input type="text" class="sidebar-filter-input" placeholder="Enter case number">
+        </div>
+
+        <div class="sidebar-filter">
+          <label class="sidebar-filter-label">Member Number</label>
+          <input type="text" class="sidebar-filter-input" placeholder="Enter member number">
+        </div>
+
+        <div class="sidebar-filter">
+          <label class="sidebar-filter-label">Member State</label>
+          <select class="sidebar-filter-input">
+            <option>All States</option>
+            <option>California</option>
+            <option>Texas</option>
+          </select>
+        </div>
+
+        <div class="sidebar-filter">
+          <label class="sidebar-filter-label">Case Type</label>
+          <select class="sidebar-filter-input">
+            <option>All Types</option>
+            <option>Appeal</option>
+            <option>Grievance</option>
+          </select>
+        </div>
+
+        <div class="sidebar-filter">
+          <label class="sidebar-filter-label">Case Status</label>
+          <select class="sidebar-filter-input">
+            <option>All Status</option>
+            <option>Open</option>
+            <option>In Progress</option>
+            <option>Closed</option>
+          </select>
+        </div>
+
+        <div style="display:flex;gap:8px;margin-top:20px;">
+          <button class="filter-btn filter-btn-secondary" style="flex:1;">Reset</button>
+          <button class="filter-btn filter-btn-primary" style="flex:1;">Apply</button>
+        </div>
+      </div>
+
+      <div style="background:#fff;border:1px solid #e5e7eb;border-radius:8px;padding:20px;">
+        <p style="text-align:center;color:#6B7280;">Table content here</p>
+      </div>
+    </div>
+  </div>
+
+  <!-- ============================================ -->
+  <!-- OPTION 6: INLINE EXPANDABLE FILTERS -->
+  <!-- ============================================ -->
+  <div class="demo-section">
+    <div class="demo-title">Option 6: Inline Expandable (Compact)</div>
+    
+    <div class="filter-section">
+      <div class="search-box">
+        <i class="fa-solid fa-search search-icon"></i>
+        <input type="text" class="search-input" placeholder="Search Auth Number">
+      </div>
+    </div>
+
+    <div class="inline-filters">
+      <div class="filter-row">
+        <select class="filter-select" style="width:150px;">
+          <option>All Case Types</option>
+          <option>Appeal</option>
+          <option>Grievance</option>
+        </select>
+
+        <select class="filter-select" style="width:150px;">
+          <option>All States</option>
+          <option>California</option>
+          <option>Texas</option>
+        </select>
+      </div>
+
+      <div class="filter-row">
+        <select class="filter-select" style="width:150px;">
+          <option>All Statuses</option>
+          <option>Open</option>
+          <option>In Progress</option>
+        </select>
+
+        <button class="more-filters-btn" id="moreFiltersBtn" onclick="toggleMoreFilters()">
+          <i class="fa-solid fa-chevron-down"></i>
+          More Filters
+        </button>
+
+        <button class="clear-btn">Clear</button>
+      </div>
+
+      <div id="moreFiltersRow" style="display:none;width:100%;margin-top:8px;">
+        <div class="filter-row">
+          <select class="filter-select" style="width:150px;">
+            <option>All Teams</option>
+            <option>Appeals Team</option>
+            <option>Grievance Team</option>
+          </select>
+
+          <select class="filter-select" style="width:150px;">
+            <option>Timeliness</option>
+            <option>On Time</option>
+            <option>At Risk</option>
+            <option>Overdue</option>
+          </select>
+
+          <select class="filter-select" style="width:150px;">
+            <option>All LOB</option>
+            <option>Medicare</option>
+            <option>Medicaid</option>
+          </select>
+
+          <select class="filter-select" style="width:150px;">
+            <option>Expedited</option>
+            <option>Yes</option>
+            <option>No</option>
+          </select>
+        </div>
+      </div>
+    </div>
+  </div>
+
+</div>
+
+<!-- FILTER MODAL -->
+<div class="modal-overlay" id="filterModal">
+  <div class="modal">
+    <div class="modal-header">
+      <div class="modal-title">Advanced Filters</div>
+      <button class="modal-close" onclick="closeFilterModal()">
+        <i class="fa-solid fa-times"></i>
+      </button>
+    </div>
+
+    <div class="modal-body">
+      <div class="filter-grid">
+        <div class="filter-group">
+          <label class="filter-label">Case Number</label>
+          <input type="text" class="filter-input" placeholder="Enter case number">
+        </div>
+
+        <div class="filter-group">
+          <label class="filter-label">Member Number</label>
+          <input type="text" class="filter-input" placeholder="Enter member number">
+        </div>
+
+        <div class="filter-group">
+          <label class="filter-label">Member First Name</label>
+          <input type="text" class="filter-input" placeholder="First name">
+        </div>
+
+        <div class="filter-group">
+          <label class="filter-label">Member Last Name</label>
+          <input type="text" class="filter-input" placeholder="Last name">
+        </div>
+
+        <div class="filter-group">
+          <label class="filter-label">Member State</label>
+          <select class="filter-input">
+            <option>All States</option>
+            <option>California</option>
+            <option>Texas</option>
+          </select>
+        </div>
+
+        <div class="filter-group">
+          <label class="filter-label">Case Type</label>
+          <select class="filter-input">
+            <option>All Types</option>
+            <option>Appeal</option>
+            <option>Grievance</option>
+          </select>
+        </div>
+
+        <div class="filter-group">
+          <label class="filter-label">Intake Source</label>
+          <select class="filter-input">
+            <option>All Sources</option>
+            <option>Email</option>
+            <option>Phone</option>
+          </select>
+        </div>
+
+        <div class="filter-group">
+          <label class="filter-label">Case Status</label>
+          <select class="filter-input">
+            <option>All Status</option>
+            <option>Open</option>
+            <option>In Progress</option>
+          </select>
+        </div>
+
+        <div class="filter-group">
+          <label class="filter-label">Workflow Status</label>
+          <select class="filter-input">
+            <option>All Workflows</option>
+            <option>Pending</option>
+            <option>Under Review</option>
+          </select>
+        </div>
+
+        <div class="filter-group">
+          <label class="filter-label">Timeliness Flag</label>
+          <select class="filter-input">
+            <option>All</option>
+            <option>On Time</option>
+            <option>At Risk</option>
+          </select>
+        </div>
+
+        <div class="filter-group">
+          <label class="filter-label">Expedited Flag</label>
+          <select class="filter-input">
+            <option>All</option>
+            <option>Yes</option>
+            <option>No</option>
+          </select>
+        </div>
+
+        <div class="filter-group">
+          <label class="filter-label">Days Remaining</label>
+          <input type="number" class="filter-input" placeholder="Enter days">
+        </div>
+
+        <div class="filter-group">
+          <label class="filter-label">Days Aging</label>
+          <input type="number" class="filter-input" placeholder="Enter days">
+        </div>
+
+        <div class="filter-group">
+          <label class="filter-label">Request ID</label>
+          <input type="text" class="filter-input" placeholder="Enter request ID">
+        </div>
+
+        <div class="filter-group">
+          <label class="filter-label">GA Secondary LOB</label>
+          <select class="filter-input">
+            <option>All LOB</option>
+            <option>Medicare</option>
+            <option>Medicaid</option>
+          </select>
+        </div>
+
+        <div class="filter-group">
+          <label class="filter-label">Case Assigned To</label>
+          <input type="text" class="filter-input" placeholder="User name/email">
+        </div>
+
+        <div class="filter-group">
+          <label class="filter-label">Team Name</label>
+          <select class="filter-input">
+            <option>All Teams</option>
+            <option>Appeals Team</option>
+            <option>Grievance Team</option>
+          </select>
+        </div>
+      </div>
+    </div>
+
+    <div class="modal-footer">
+      <button class="filter-btn filter-btn-secondary" onclick="closeFilterModal()">Cancel</button>
+      <button class="filter-btn filter-btn-primary">Apply Filters</button>
+    </div>
+  </div>
+</div>
+
+<script>
+function toggleFilterPanel() {
+  const panel = document.getElementById('filterPanel');
+  const btn = event.target.closest('.filter-toggle-btn');
+  
+  panel.classList.toggle('show');
+  btn.classList.toggle('collapsed');
+}
+
+function toggleMoreFilters() {
+  const row = document.getElementById('moreFiltersRow');
+  const btn = document.getElementById('moreFiltersBtn');
+  
+  row.style.display = row.style.display === 'none' ? 'block' : 'none';
+  btn.classList.toggle('expanded');
+}
+
+function openFilterModal() {
+  const modal = document.getElementById('filterModal');
+  modal.classList.add('show');
+}
+
+function closeFilterModal() {
+  const modal = document.getElementById('filterModal');
+  modal.classList.remove('show');
+}
+
+function applyFilters() {
+  console.log('Filters applied');
+  toggleFilterPanel();
+}
+
+function resetFilters() {
+  console.log('Filters reset');
+}
+
+// Close modal when clicking outside
+document.getElementById('filterModal').addEventListener('click', function(e) {
+  if (e.target === this) {
+    closeFilterModal();
+  }
+});
+
+// Close modal with Escape key
+document.addEventListener('keydown', function(e) {
+  if (e.key === 'Escape') {
+    closeFilterModal();
+  }
+});
+</script>
+
 </body>
 </html>
