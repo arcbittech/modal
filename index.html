@@ -3,8 +3,8 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Authorization/Claim Details Section</title>
-    <link href="https://fonts.googleapis.com/css2?family=Open+Sans:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+    <title>Style Guide - Medical Software</title>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <style>
         * {
@@ -14,8 +14,8 @@
         }
 
         body {
-            font-family: 'Open Sans', sans-serif;
-            background: #f5f7fa;
+            font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+            background: #f8f9fa;
             padding: 20px;
         }
 
@@ -23,423 +23,1119 @@
             max-width: 1820px;
             margin: 0 auto;
             background: white;
-            border-radius: 12px;
-            box-shadow: 0 2px 8px rgba(0,0,0,0.08);
-            padding: 30px;
+            border-radius: 8px;
+            box-shadow: 0 1px 3px rgba(0,0,0,0.1);
+        }
+
+        /* Header */
+        .page-header {
+            background: white;
+            color: #1a1a1a;
+            padding: 24px 32px;
+            border-bottom: 1px solid #e5e7eb;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .page-header h1 {
+            font-size: 24px;
+            font-weight: 600;
+            color: #1a1a1a;
+        }
+
+        .header-meta {
+            font-size: 14px;
+            color: #6b7280;
+        }
+
+        /* Content Area */
+        .content-area {
+            padding: 32px;
         }
 
         /* Detail Sections */
         .detail-section {
-            background: #f8f9fa;
-            border: 1px solid #e9ecef;
-            border-radius: 12px;
-            padding: 25px;
-            margin-bottom: 20px;
+            background: white;
+            border: 1px solid #e5e7eb;
+            border-radius: 8px;
+            padding: 24px;
+            margin-bottom: 24px;
         }
 
         .section-header {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            margin-bottom: 20px;
-            padding-bottom: 15px;
-            border-bottom: 2px solid #e9ecef;
+            margin-bottom: 24px;
+            padding-bottom: 16px;
+            border-bottom: 1px solid #e5e7eb;
         }
 
-        .section-header-left {
-            display: flex;
-            align-items: center;
-            gap: 12px;
-        }
-
-        .section-icon {
-            width: 40px;
-            height: 40px;
-            background: #e3f2fd;
-            color: #3498db;
-            border-radius: 8px;
-            display: flex;
-            align-items: center;
-            justify-content: center;
+        .section-title {
             font-size: 18px;
-        }
-
-        .section-title h3 {
-            font-size: 16px;
-            color: #2c3e50;
+            font-weight: 600;
+            color: #1a1a1a;
             margin-bottom: 4px;
         }
 
-        .section-title p {
-            font-size: 12px;
-            color: #6c757d;
+        .section-subtitle {
+            font-size: 14px;
+            color: #6b7280;
         }
 
-        /* Service Table */
-        .service-table {
-            width: 100%;
+        /* Color Palette */
+        .color-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 16px;
+        }
+
+        .color-swatch {
             background: white;
+            border: 1px solid #e5e7eb;
             border-radius: 8px;
             overflow: hidden;
-            border: 1px solid #e9ecef;
-            margin-bottom: 20px;
         }
 
-        .service-table table {
-            width: 100%;
-            border-collapse: collapse;
-        }
-
-        .service-table th {
-            background: #f8f9fa;
-            padding: 12px;
-            text-align: left;
-            font-size: 11px;
-            font-weight: 600;
-            color: #495057;
-            text-transform: uppercase;
-            border-bottom: 2px solid #e9ecef;
-        }
-
-        .service-table td {
-            padding: 12px;
-            font-size: 13px;
-            color: #2c3e50;
-            border-bottom: 1px solid #f8f9fa;
-            vertical-align: middle;
-        }
-
-        /* Action Buttons */
-        .action-buttons-cell {
-            display: flex;
-            gap: 8px;
-            align-items: center;
-        }
-
-        .btn-action {
-            padding: 6px 14px;
-            border: none;
-            border-radius: 6px;
-            font-size: 12px;
-            font-weight: 600;
-            cursor: pointer;
-            display: inline-flex;
-            align-items: center;
-            gap: 6px;
-            transition: all 0.3s;
-        }
-
-        .btn-upheld {
-            background: #27ae60;
-            color: white;
-        }
-
-        .btn-upheld:hover {
-            background: #229954;
-        }
-
-        .btn-overturn {
-            background: #e74c3c;
-            color: white;
-        }
-
-        .btn-overturn:hover {
-            background: #c0392b;
-        }
-
-        .btn-history {
-            width: 32px;
-            height: 32px;
-            padding: 0;
-            background: #3498db;
-            color: white;
-            border: none;
-            border-radius: 6px;
-            cursor: pointer;
+        .color-block {
+            height: 100px;
             display: flex;
             align-items: center;
             justify-content: center;
+            color: white;
+            font-weight: 600;
             font-size: 14px;
-            transition: all 0.3s;
         }
 
-        .btn-history:hover {
-            background: #2980b9;
-            transform: scale(1.05);
+        .color-info {
+            padding: 12px;
         }
 
-        /* Status Badge */
+        .color-name {
+            font-size: 13px;
+            font-weight: 600;
+            color: #1a1a1a;
+            margin-bottom: 4px;
+        }
+
+        .color-hex {
+            font-size: 12px;
+            color: #6b7280;
+            font-family: 'Courier New', monospace;
+        }
+
+        /* Typography Samples */
+        .typography-sample {
+            background: #f9fafb;
+            padding: 20px;
+            border-radius: 8px;
+            border: 1px solid #e5e7eb;
+            margin-bottom: 16px;
+        }
+
+        .typography-label {
+            font-size: 12px;
+            font-weight: 600;
+            color: #6b7280;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+            margin-bottom: 12px;
+        }
+
+        .font-h1 { font-size: 30px; font-weight: 700; color: #1a1a1a; }
+        .font-h2 { font-size: 24px; font-weight: 600; color: #1a1a1a; }
+        .font-h3 { font-size: 18px; font-weight: 600; color: #1a1a1a; }
+        .font-body { font-size: 14px; font-weight: 400; color: #374151; line-height: 1.6; }
+        .font-small { font-size: 13px; font-weight: 400; color: #6b7280; }
+        .font-tiny { font-size: 12px; font-weight: 400; color: #9ca3af; }
+
+        /* Button Samples */
+        .button-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 20px;
+        }
+
+        .button-sample {
+            background: #f9fafb;
+            padding: 20px;
+            border-radius: 8px;
+            border: 1px solid #e5e7eb;
+        }
+
+        .button-label {
+            font-size: 12px;
+            font-weight: 600;
+            color: #6b7280;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+            margin-bottom: 12px;
+        }
+
+        .btn-action {
+            padding: 8px 16px;
+            border: none;
+            border-radius: 6px;
+            font-size: 14px;
+            font-weight: 500;
+            cursor: pointer;
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            transition: all 0.2s;
+            width: 100%;
+            justify-content: center;
+        }
+
+        .btn-primary {
+            background: #7c3aed;
+            color: white;
+        }
+
+        .btn-primary:hover {
+            background: #6d28d9;
+        }
+
+        .btn-success {
+            background: #10b981;
+            color: white;
+        }
+
+        .btn-success:hover {
+            background: #059669;
+        }
+
+        .btn-secondary {
+            background: #f3f4f6;
+            color: #374151;
+            border: 1px solid #d1d5db;
+        }
+
+        .btn-secondary:hover {
+            background: #e5e7eb;
+        }
+
+        .btn-danger {
+            background: #ef4444;
+            color: white;
+        }
+
+        .btn-danger:hover {
+            background: #dc2626;
+        }
+
+        .btn-view {
+            background: #6366f1;
+            color: white;
+        }
+
+        .btn-view:hover {
+            background: #4f46e5;
+        }
+
+        .btn-overturn {
+            background: #f3f4f6;
+            color: #374151;
+            border: 1px solid #d1d5db;
+        }
+
+        .btn-overturn:hover {
+            background: #e5e7eb;
+        }
+
+        /* Badge Samples */
+        .badge-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 20px;
+        }
+
+        .badge-sample {
+            background: #f9fafb;
+            padding: 20px;
+            border-radius: 8px;
+            border: 1px solid #e5e7eb;
+        }
+
         .status-badge {
             display: inline-flex;
             align-items: center;
             gap: 6px;
-            padding: 5px 10px;
-            border-radius: 5px;
-            font-size: 11px;
-            font-weight: 600;
-        }
-
-        .status-pending {
-            background: #fff3cd;
-            color: #856404;
-        }
-
-        .status-upheld {
-            background: #d1f2eb;
-            color: #0a6c53;
-        }
-
-        .status-overturned {
-            background: #f8d7da;
-            color: #721c24;
-        }
-
-        /* Radio Group */
-        .radio-group-section {
-            background: white;
-            padding: 20px;
-            border-radius: 8px;
-            border: 1px solid #e9ecef;
-            display: flex;
-            align-items: center;
-            gap: 30px;
-        }
-
-        .radio-group-label {
+            padding: 4px 12px;
+            border-radius: 6px;
             font-size: 13px;
-            font-weight: 600;
-            color: #495057;
-            display: flex;
-            align-items: center;
-            gap: 8px;
+            font-weight: 500;
         }
 
-        .radio-options {
-            display: flex;
+        .status-new {
+            background: #dbeafe;
+            color: #1e40af;
+        }
+
+        .status-view-01 {
+            background: #ede9fe;
+            color: #6d28d9;
+        }
+
+        .status-medicare {
+            background: #ede9fe;
+            color: #6d28d9;
+        }
+
+        .status-appeal {
+            background: #d1fae5;
+            color: #065f46;
+        }
+
+        .status-grievance {
+            background: #d1fae5;
+            color: #065f46;
+        }
+
+        /* Table Samples */
+        .table-wrapper {
+            background: white;
+            border: 1px solid #e5e7eb;
+            border-radius: 8px;
+            overflow: hidden;
+        }
+
+        .table-sample {
+            width: 100%;
+            border-collapse: collapse;
+        }
+
+        .table-sample thead {
+            background: #f9fafb;
+        }
+
+        .table-sample th {
+            padding: 12px 16px;
+            text-align: left;
+            font-size: 12px;
+            font-weight: 600;
+            color: #6b7280;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+            border-bottom: 1px solid #e5e7eb;
+        }
+
+        .table-sample td {
+            padding: 12px 16px;
+            font-size: 14px;
+            color: #1a1a1a;
+            border-bottom: 1px solid #f3f4f6;
+        }
+
+        .table-sample tbody tr:hover {
+            background: #f9fafb;
+        }
+
+        .table-link {
+            color: #2563eb;
+            text-decoration: none;
+            font-weight: 500;
+        }
+
+        .table-link:hover {
+            text-decoration: underline;
+        }
+
+        /* Form Elements */
+        .form-elements-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
             gap: 20px;
         }
 
-        .radio-option {
-            display: flex;
-            align-items: center;
-            gap: 8px;
-            cursor: pointer;
+        .form-sample {
+            background: white;
+            padding: 20px;
+            border-radius: 8px;
+            border: 1px solid #e5e7eb;
         }
 
-        .radio-option input[type="radio"] {
-            width: 18px;
-            height: 18px;
-            cursor: pointer;
-            accent-color: #3498db;
+        .form-group {
+            margin-bottom: 16px;
         }
 
-        .radio-option label {
-            font-size: 13px;
+        .form-group label {
+            font-size: 14px;
             font-weight: 500;
-            color: #2c3e50;
-            cursor: pointer;
+            color: #374151;
+            margin-bottom: 6px;
+            display: block;
         }
 
-        .rationale-field {
-            flex: 1;
+        .form-group input,
+        .form-group select,
+        .form-group textarea {
+            width: 100%;
+            padding: 10px 12px;
+            border: 1px solid #d1d5db;
+            border-radius: 6px;
+            font-size: 14px;
+            font-family: 'Inter', sans-serif;
+            color: #1a1a1a;
+            transition: all 0.2s;
+        }
+
+        .form-group input:focus,
+        .form-group select:focus,
+        .form-group textarea:focus {
+            outline: none;
+            border-color: #7c3aed;
+            box-shadow: 0 0 0 3px rgba(124,58,237,0.1);
+        }
+
+        .form-group input::placeholder {
+            color: #9ca3af;
+        }
+
+        /* Checkbox & Multi-select */
+        .checkbox-item {
             display: flex;
             align-items: center;
             gap: 10px;
+            padding: 10px 12px;
+            border-radius: 6px;
+            cursor: pointer;
+            transition: background 0.2s;
         }
 
-        .rationale-field label {
-            font-size: 13px;
-            font-weight: 600;
-            color: #495057;
-            white-space: nowrap;
+        .checkbox-item:hover {
+            background: #f9fafb;
         }
 
-        .rationale-field select {
-            flex: 1;
-            padding: 8px 12px;
-            border: 1px solid #ced4da;
+        .checkbox-item input[type="checkbox"] {
+            width: 18px;
+            height: 18px;
+            cursor: pointer;
+            accent-color: #7c3aed;
+        }
+
+        .checkbox-item label {
+            font-size: 14px;
+            color: #374151;
+            cursor: pointer;
+        }
+
+        .selected-tags {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 8px;
+            margin-bottom: 12px;
+        }
+
+        .tag {
+            display: inline-flex;
+            align-items: center;
+            gap: 6px;
+            padding: 4px 10px;
+            background: #ede9fe;
+            color: #6d28d9;
             border-radius: 6px;
             font-size: 13px;
-            font-family: 'Open Sans', sans-serif;
-            color: #495057;
-            background: white;
+            font-weight: 500;
+        }
+
+        .tag .remove {
             cursor: pointer;
-            transition: all 0.3s;
+            font-weight: bold;
         }
 
-        .rationale-field select:focus {
-            outline: none;
-            border-color: #3498db;
-            box-shadow: 0 0 0 3px rgba(52,152,219,0.1);
+        /* Modal */
+        .modal-overlay {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.5);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            z-index: 9999;
         }
 
-        /* Responsive */
-        @media (max-width: 1200px) {
-            .radio-group-section {
-                flex-direction: column;
-                align-items: flex-start;
-            }
+        .modal-container {
+            background: white;
+            border-radius: 12px;
+            box-shadow: 0 20px 25px -5px rgba(0, 0, 0, 0.1);
+            width: 100%;
+            max-width: 600px;
+            max-height: 90vh;
+            overflow-y: auto;
+        }
 
-            .rationale-field {
-                width: 100%;
-            }
+        .modal-header {
+            padding: 24px;
+            border-bottom: 1px solid #e5e7eb;
+        }
+
+        .modal-title {
+            font-size: 20px;
+            font-weight: 600;
+            color: #1a1a1a;
+            margin-bottom: 4px;
+        }
+
+        .modal-subtitle {
+            font-size: 14px;
+            color: #6b7280;
+        }
+
+        .modal-body {
+            padding: 24px;
+        }
+
+        .modal-footer {
+            padding: 16px 24px;
+            border-top: 1px solid #e5e7eb;
+            display: flex;
+            justify-content: flex-end;
+            gap: 12px;
+        }
+
+        /* Progress Bar */
+        .progress-bar {
+            width: 100%;
+            height: 8px;
+            background: #e5e7eb;
+            border-radius: 4px;
+            overflow: hidden;
+        }
+
+        .progress-fill {
+            height: 100%;
+            background: #10b981;
+            border-radius: 4px;
+            transition: width 0.3s;
+        }
+
+        /* Icon Samples */
+        .icon-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(120px, 1fr));
+            gap: 16px;
+        }
+
+        .icon-sample {
+            background: #f9fafb;
+            padding: 20px;
+            border-radius: 8px;
+            border: 1px solid #e5e7eb;
+            text-align: center;
+        }
+
+        .icon-display {
+            font-size: 32px;
+            color: #6b7280;
+            margin-bottom: 8px;
+        }
+
+        .icon-name {
+            font-size: 12px;
+            color: #9ca3af;
+        }
+
+        /* Cards */
+        .card-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 20px;
+        }
+
+        .info-card {
+            background: white;
+            border: 1px solid #e5e7eb;
+            border-radius: 8px;
+            padding: 20px;
+        }
+
+        .card-header {
+            font-size: 14px;
+            font-weight: 600;
+            color: #1a1a1a;
+            margin-bottom: 12px;
+        }
+
+        .card-content {
+            font-size: 14px;
+            color: #6b7280;
+            line-height: 1.6;
+        }
+
+        .card-stats {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-top: 16px;
+            padding-top: 16px;
+            border-top: 1px solid #e5e7eb;
+        }
+
+        .stat-item {
+            text-align: center;
+        }
+
+        .stat-value {
+            font-size: 24px;
+            font-weight: 700;
+            color: #1a1a1a;
+            margin-bottom: 4px;
+        }
+
+        .stat-label {
+            font-size: 12px;
+            color: #6b7280;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+        }
+
+        /* Action Buttons Group */
+        .action-group {
+            display: flex;
+            gap: 8px;
+            align-items: center;
+        }
+
+        .icon-btn {
+            width: 32px;
+            height: 32px;
+            border: none;
+            border-radius: 6px;
+            background: #f3f4f6;
+            color: #6b7280;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            transition: all 0.2s;
+        }
+
+        .icon-btn:hover {
+            background: #e5e7eb;
+            color: #374151;
+        }
+
+        /* Spacing Guide */
+        .spacing-sample {
+            background: #f9fafb;
+            padding: 20px;
+            border-radius: 8px;
+            border: 1px solid #e5e7eb;
+            margin-bottom: 16px;
+        }
+
+        .spacing-box {
+            background: #ede9fe;
+            border: 2px dashed #7c3aed;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: #7c3aed;
+            font-weight: 600;
+            font-size: 13px;
         }
     </style>
 </head>
 <body>
     <div class="container">
-        <!-- Authorization/Claim Details -->
-        <div class="detail-section">
-            <div class="section-header">
-                <div class="section-header-left">
-                    <div class="section-icon">
-                        <i class="fas fa-file-medical"></i>
-                    </div>
-                    <div class="section-title">
-                        <h3>Authorization/Claim Details</h3>
-                        <p>Service authorization information</p>
-                    </div>
-                </div>
-            </div>
-            <div class="service-table">
-                <table>
-                    <thead>
-                        <tr>
-                            <th>Claim Line</th>
-                            <th>Billed Amount</th>
-                            <th>Place of Service</th>
-                            <th>Service Type</th>
-                            <th>Service Code</th>
-                            <th>Service Description</th>
-                            <th>Status</th>
-                            <th>Actions</th>
-                        </tr>
-                    </thead>
-                    <tbody>
-                        <tr>
-                            <td>12345</td>
-                            <td>$250.00</td>
-                            <td>Office</td>
-                            <td>Eval & Tx</td>
-                            <td>D0150</td>
-                            <td>PROSSO-ORAL EVALUATION</td>
-                            <td>
-                                <span class="status-badge status-pending">
-                                    <i class="fas fa-clock"></i> Pending
-                                </span>
-                            </td>
-                            <td>
-                                <div class="action-buttons-cell">
-                                    <button class="btn-action btn-upheld">
-                                        <i class="fas fa-check"></i> Upheld
-                                    </button>
-                                    <button class="btn-action btn-overturn">
-                                        <i class="fas fa-undo"></i> Overturn
-                                    </button>
-                                    <button class="btn-history" title="View History">
-                                        <i class="fas fa-history"></i>
-                                    </button>
-                                </div>
-                            </td>
-                        </tr>
-                        <tr>
-                            <td>12346</td>
-                            <td>$180.00</td>
-                            <td>Office</td>
-                            <td>Eval & Tx</td>
-                            <td>D0120</td>
-                            <td>PERIODIC ORAL EVALUATION</td>
-                            <td>
-                                <span class="status-badge status-upheld">
-                                    <i class="fas fa-check-circle"></i> Upheld
-                                </span>
-                            </td>
-                            <td>
-                                <div class="action-buttons-cell">
-                                    <button class="btn-action btn-upheld" disabled style="opacity: 0.6; cursor: not-allowed;">
-                                        <i class="fas fa-check"></i> Upheld
-                                    </button>
-                                    <button class="btn-action btn-overturn">
-                                        <i class="fas fa-undo"></i> Overturn
-                                    </button>
-                                    <button class="btn-history" title="View History">
-                                        <i class="fas fa-history"></i>
-                                    </button>
-                                </div>
-                            </td>
-                        </tr>
-                        <tr>
-                            <td>12347</td>
-                            <td>$320.00</td>
-                            <td>Office</td>
-                            <td>Treatment</td>
-                            <td>D0210</td>
-                            <td>INTRAORAL - COMPLETE SERIES</td>
-                            <td>
-                                <span class="status-badge status-overturned">
-                                    <i class="fas fa-times-circle"></i> Overturned
-                                </span>
-                            </td>
-                            <td>
-                                <div class="action-buttons-cell">
-                                    <button class="btn-action btn-upheld">
-                                        <i class="fas fa-check"></i> Upheld
-                                    </button>
-                                    <button class="btn-action btn-overturn" disabled style="opacity: 0.6; cursor: not-allowed;">
-                                        <i class="fas fa-undo"></i> Overturn
-                                    </button>
-                                    <button class="btn-history" title="View History">
-                                        <i class="fas fa-history"></i>
-                                    </button>
-                                </div>
-                            </td>
-                        </tr>
-                    </tbody>
-                </table>
+        <!-- Page Header -->
+        <div class="page-header">
+            <div>
+                <h1><i class="fas fa-palette"></i> Design System Style Guide</h1>
+                <div class="header-meta">Medical Software Portal - Updated Color Scheme</div>
             </div>
         </div>
 
-        <!-- Expedited Standard Section -->
-        <div class="detail-section">
-            <div class="section-header">
-                <div class="section-header-left">
-                    <div class="section-icon">
-                        <i class="fas fa-bolt"></i>
+        <!-- Content Area -->
+        <div class="content-area">
+            <!-- Color Palette -->
+            <div class="detail-section">
+                <div class="section-header">
+                    <div class="section-title">Color Palette</div>
+                    <div class="section-subtitle">Primary and secondary colors used throughout the application</div>
+                </div>
+                <div class="color-grid">
+                    <div class="color-swatch">
+                        <div class="color-block" style="background: #7c3aed;">Primary</div>
+                        <div class="color-info">
+                            <div class="color-name">Primary Purple</div>
+                            <div class="color-hex">#7c3aed</div>
+                        </div>
                     </div>
-                    <div class="section-title">
-                        <h3>Expedited Standard</h3>
-                        <p>Expedite status and rationale</p>
+                    <div class="color-swatch">
+                        <div class="color-block" style="background: #6366f1;">Secondary</div>
+                        <div class="color-info">
+                            <div class="color-name">Secondary Indigo</div>
+                            <div class="color-hex">#6366f1</div>
+                        </div>
+                    </div>
+                    <div class="color-swatch">
+                        <div class="color-block" style="background: #10b981;">Success</div>
+                        <div class="color-info">
+                            <div class="color-name">Success Green</div>
+                            <div class="color-hex">#10b981</div>
+                        </div>
+                    </div>
+                    <div class="color-swatch">
+                        <div class="color-block" style="background: #ef4444;">Danger</div>
+                        <div class="color-info">
+                            <div class="color-name">Danger Red</div>
+                            <div class="color-hex">#ef4444</div>
+                        </div>
+                    </div>
+                    <div class="color-swatch">
+                        <div class="color-block" style="background: #f59e0b;">Warning</div>
+                        <div class="color-info">
+                            <div class="color-name">Warning Orange</div>
+                            <div class="color-hex">#f59e0b</div>
+                        </div>
+                    </div>
+                    <div class="color-swatch">
+                        <div class="color-block" style="background: #2563eb;">Info</div>
+                        <div class="color-info">
+                            <div class="color-name">Info Blue</div>
+                            <div class="color-hex">#2563eb</div>
+                        </div>
+                    </div>
+                    <div class="color-swatch">
+                        <div class="color-block" style="background: #1a1a1a;">Dark Text</div>
+                        <div class="color-info">
+                            <div class="color-name">Primary Text</div>
+                            <div class="color-hex">#1a1a1a</div>
+                        </div>
+                    </div>
+                    <div class="color-swatch">
+                        <div class="color-block" style="background: #6b7280; color: white;">Gray</div>
+                        <div class="color-info">
+                            <div class="color-name">Secondary Text</div>
+                            <div class="color-hex">#6b7280</div>
+                        </div>
                     </div>
                 </div>
             </div>
-            <div class="radio-group-section">
-                <div class="radio-group-label">
-                    <i class="fas fa-bolt"></i> Expedited:
+
+            <!-- Typography -->
+            <div class="detail-section">
+                <div class="section-header">
+                    <div class="section-title">Typography</div>
+                    <div class="section-subtitle">Font family: Inter</div>
                 </div>
-                <div class="radio-options">
-                    <div class="radio-option">
-                        <input type="radio" id="expedited-yes" name="expedited" value="yes">
-                        <label for="expedited-yes">Yes</label>
+                <div class="typography-sample">
+                    <div class="typography-label">Heading 1 - 30px Bold</div>
+                    <div class="font-h1">The quick brown fox jumps over the lazy dog</div>
+                </div>
+                <div class="typography-sample">
+                    <div class="typography-label">Heading 2 - 24px Semibold</div>
+                    <div class="font-h2">The quick brown fox jumps over the lazy dog</div>
+                </div>
+                <div class="typography-sample">
+                    <div class="typography-label">Heading 3 - 18px Semibold</div>
+                    <div class="font-h3">The quick brown fox jumps over the lazy dog</div>
+                </div>
+                <div class="typography-sample">
+                    <div class="typography-label">Body Text - 14px Regular</div>
+                    <div class="font-body">The quick brown fox jumps over the lazy dog. Lorem ipsum dolor sit amet, consectetur adipiscing elit.</div>
+                </div>
+                <div class="typography-sample">
+                    <div class="typography-label">Small Text - 13px Regular</div>
+                    <div class="font-small">The quick brown fox jumps over the lazy dog</div>
+                </div>
+                <div class="typography-sample">
+                    <div class="typography-label">Tiny Text - 12px Regular</div>
+                    <div class="font-tiny">The quick brown fox jumps over the lazy dog</div>
+                </div>
+            </div>
+
+            <!-- Buttons -->
+            <div class="detail-section">
+                <div class="section-header">
+                    <div class="section-title">Buttons</div>
+                    <div class="section-subtitle">Button styles and variations</div>
+                </div>
+                <div class="button-grid">
+                    <div class="button-sample">
+                        <div class="button-label">Primary Button</div>
+                        <button class="btn-action btn-primary">
+                            <i class="fas fa-check"></i> Save
+                        </button>
                     </div>
-                    <div class="radio-option">
-                        <input type="radio" id="expedited-no" name="expedited" value="no" checked>
-                        <label for="expedited-no">No</label>
+                    <div class="button-sample">
+                        <div class="button-label">Success Button</div>
+                        <button class="btn-action btn-success">
+                            <i class="fas fa-check"></i> APPEAL & GRIEVANCE
+                        </button>
+                    </div>
+                    <div class="button-sample">
+                        <div class="button-label">Secondary Button</div>
+                        <button class="btn-action btn-secondary">
+                            <i class="fas fa-times"></i> Cancel
+                        </button>
+                    </div>
+                    <div class="button-sample">
+                        <div class="button-label">View Button</div>
+                        <button class="btn-action btn-view">
+                            <i class="fas fa-eye"></i> View-01
+                        </button>
+                    </div>
+                    <div class="button-sample">
+                        <div class="button-label">Overturn Button</div>
+                        <button class="btn-action btn-overturn">
+                            <i class="fas fa-undo"></i> Overturn
+                        </button>
+                    </div>
+                    <div class="button-sample">
+                        <div class="button-label">Danger Button</div>
+                        <button class="btn-action btn-danger">
+                            <i class="fas fa-trash"></i> Delete
+                        </button>
                     </div>
                 </div>
-                <div class="rationale-field">
-                    <label for="rationale">
-                        <i class="fas fa-comment-dots"></i> Rationale:
-                    </label>
-                    <select id="rationale" name="rationale">
-                        <option value="">Select Rationale</option>
-                        <option value="urgent-medical">Urgent Medical Necessity</option>
-                        <option value="life-threatening">Life-Threatening Condition</option>
-                        <option value="severe-pain">Severe Pain or Suffering</option>
-                        <option value="standard-delay">Standard Process Would Cause Serious Harm</option>
-                        <option value="provider-request">Provider Urgent Request</option>
-                        <option value="regulatory">Regulatory Requirement</option>
-                        <option value="other">Other - See Notes</option>
-                    </select>
+            </div>
+
+            <!-- Badges -->
+            <div class="detail-section">
+                <div class="section-header">
+                    <div class="section-title">Status Badges</div>
+                    <div class="section-subtitle">Badge styles for different statuses</div>
+                </div>
+                <div class="badge-grid">
+                    <div class="badge-sample">
+                        <div class="button-label">New Status</div>
+                        <span class="status-badge status-new">NEW</span>
+                    </div>
+                    <div class="badge-sample">
+                        <div class="button-label">View-01 Badge</div>
+                        <span class="status-badge status-view-01">
+                            <i class="fas fa-eye"></i> View-01
+                        </span>
+                    </div>
+                    <div class="badge-sample">
+                        <div class="button-label">Medicare Badge</div>
+                        <span class="status-badge status-medicare">Medicare</span>
+                    </div>
+                    <div class="badge-sample">
+                        <div class="button-label">Appeal Badge</div>
+                        <span class="status-badge status-appeal">
+                            <i class="fas fa-check"></i> APPEAL
+                        </span>
+                    </div>
+                    <div class="badge-sample">
+                        <div class="button-label">Grievance Badge</div>
+                        <span class="status-badge status-grievance">
+                            <i class="fas fa-check"></i> APPEAL & GRIEVANCE
+                        </span>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Table -->
+            <div class="detail-section">
+                <div class="section-header">
+                    <div class="section-title">Data Table</div>
+                    <div class="section-subtitle">Table layout with sample data</div>
+                </div>
+                <div class="table-wrapper">
+                    <table class="table-sample">
+                        <thead>
+                            <tr>
+                                <th>Sr.No.</th>
+                                <th>Auth/Claim Number</th>
+                                <th>Source Type</th>
+                                <th>Receiver Name</th>
+                                <th>Received Date</th>
+                                <th>LOB</th>
+                                <th>Documents</th>
+                                <th>Status</th>
+                                <th>Action</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td>1</td>
+                                <td><a href="#" class="table-link">AUTH000015</a></td>
+                                <td><i class="fas fa-envelope"></i> Email</td>
+                                <td><i class="fas fa-user"></i> NA</td>
+                                <td><i class="fas fa-calendar"></i> 11/05/2025</td>
+                                <td><span class="status-badge status-medicare">Medicare</span></td>
+                                <td><span class="status-badge status-view-01"><i class="fas fa-eye"></i> View-01</span></td>
+                                <td><span class="status-badge status-new">NEW</span></td>
+                                <td>
+                                    <div class="action-group">
+                                        <button class="icon-btn" title="More Options">
+                                            <i class="fas fa-ellipsis-v"></i>
+                                        </button>
+                                    </div>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>2</td>
+                                <td><a href="#" class="table-link">AUTH000016</a></td>
+                                <td><i class="fas fa-envelope"></i> Email</td>
+                                <td><i class="fas fa-user"></i> NA</td>
+                                <td><i class="fas fa-calendar"></i> 11/05/2025</td>
+                                <td><span class="status-badge status-medicare">Medicare</span></td>
+                                <td><span class="status-badge status-view-01"><i class="fas fa-eye"></i> View-01</span></td>
+                                <td><span class="status-badge status-new">NEW</span></td>
+                                <td>
+                                    <div class="action-group">
+                                        <button class="icon-btn" title="More Options">
+                                            <i class="fas fa-ellipsis-v"></i>
+                                        </button>
+                                    </div>
+                                </td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+
+            <!-- Form Elements -->
+            <div class="detail-section">
+                <div class="section-header">
+                    <div class="section-title">Form Elements</div>
+                    <div class="section-subtitle">Input fields and form controls</div>
+                </div>
+                <div class="form-elements-grid">
+                    <div class="form-sample">
+                        <div class="form-group">
+                            <label>Select Prefix</label>
+                            <select>
+                                <option>Select Prefix</option>
+                                <option>Mr.</option>
+                                <option>Mrs.</option>
+                                <option>Ms.</option>
+                                <option>Dr.</option>
+                            </select>
+                        </div>
+                    </div>
+                    <div class="form-sample">
+                        <div class="form-group">
+                            <label>First Name</label>
+                            <input type="text" placeholder="First Name">
+                        </div>
+                    </div>
+                    <div class="form-sample">
+                        <div class="form-group">
+                            <label>Last Name</label>
+                            <input type="text" placeholder="Last Name">
+                        </div>
+                    </div>
+                    <div class="form-sample">
+                        <div class="form-group">
+                            <label>Email ID</label>
+                            <input type="email" placeholder="Email ID">
+                        </div>
+                    </div>
+                    <div class="form-sample">
+                        <div class="form-group">
+                            <label>Phone Number</label>
+                            <input type="tel" placeholder="Phone Number">
+                        </div>
+                    </div>
+                    <div class="form-sample">
+                        <div class="form-group">
+                            <label>Select Role</label>
+                            <select>
+                                <option>Select User Credentials</option>
+                                <option>Admin</option>
+                                <option>Analyst</option>
+                                <option>Manager</option>
+                            </select>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Multi-Select Dropdown -->
+            <div class="detail-section">
+                <div class="section-header">
+                    <div class="section-title">Multi-Select Dropdown</div>
+                    <div class="section-subtitle">Checkbox-based multi-selection</div>
+                </div>
+                <div class="form-sample" style="max-width: 600px;">
+                    <div class="form-group">
+                        <label>Select Skills</label>
+                        <div class="selected-tags">
+                            <span class="tag">
+                                Invisalign <span class="remove">×</span>
+                            </span>
+                            <span class="tag">
+                                Treatment Planning <span class="remove">×</span>
+                            </span>
+                        </div>
+                        <div style="background: #f9fafb; border: 1px solid #e5e7eb; border-radius: 8px; padding: 8px; max-height: 250px; overflow-y: auto;">
+                            <div class="checkbox-item">
+                                <input type="checkbox" id="skill1" checked>
+                                <label for="skill1">Invisalign</label>
+                            </div>
+                            <div class="checkbox-item">
+                                <input type="checkbox" id="skill2" checked>
+                                <label for="skill2">Treatment Planning</label>
+                            </div>
+                            <div class="checkbox-item">
+                                <input type="checkbox" id="skill3">
+                                <label for="skill3">3D Printing</label>
+                            </div>
+                            <div class="checkbox-item">
+                                <input type="checkbox" id="skill4">
+                                <label for="skill4">Clear Aligners</label>
+                            </div>
+                            <div class="checkbox-item">
+                                <input type="checkbox" id="skill5">
+                                <label for="skill5">Orthodontic Appliances</label>
+                            </div>
+                            <div class="checkbox-item">
+                                <input type="checkbox" id="skill6">
+                                <label for="skill6">Digital Scanning</label>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Modal Example -->
+            <div class="detail-section">
+                <div class="section-header">
+                    <div class="section-title">Modal Dialog</div>
+                    <div class="section-subtitle">Modal window layout</div>
+                </div>
+                <div class="modal-container" style="position: relative; max-height: none;">
+                    <div class="modal-header">
+                        <div class="modal-title">Add User</div>
+                        <div class="modal-subtitle">Add a new user with existing role</div>
+                    </div>
+                    <div class="modal-body">
+                        <div class="form-elements-grid">
+                            <div class="form-group">
+                                <label>Select Prefix</label>
+                                <select>
+                                    <option>Select Prefix</option>
+                                </select>
+                            </div>
+                            <div class="form-group">
+                                <label>First Name</label>
+                                <input type="text" placeholder="First Name">
+                            </div>
+                            <div class="form-group">
+                                <label>Last Name</label>
+                                <input type="text" placeholder="Last Name">
+                            </div>
+                            <div class="form-group">
+                                <label>Select Specialization</label>
+                                <select>
+                                    <option>Select Specialization</option>
+                                </select>
+                            </div>
+                            <div class="form-group">
+                                <label>Phone Number</label>
+                                <input type="tel" placeholder="Phone Number">
+                            </div>
+                            <div class="form-group">
+                                <label>Extension</label>
+                                <input type="text" placeholder="Extension">
+                            </div>
+                        </div>
+                    </div>
+                    <div class="modal-footer">
+                        <button class="btn-action btn-secondary">Cancel</button>
+                        <button class="btn-action btn-primary">Save</button>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Progress Bar -->
+            <div class="detail-section">
+                <div class="section-header">
+                    <div class="section-title">Progress Indicators</div>
+                    <div class="section-subtitle">Progress bars and completion indicators</div>
+                </div>
+                <div class="form-sample">
+                    <div class="button-label">Confidence: 78%</div>
+                    <div class="progress-bar">
+                        <div class="progress-fill" style="width: 78%;"></div>
+                    </div>
+                </div>
+                <div class="form-sample">
+                    <div class="button-label">Rationale: Yes</div>
+                    <div class="progress-bar">
+                        <div class="progress-fill" style="width: 100%; background: #10b981;"></div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Icons -->
+            <div class="detail-section">
+                <div class="section-header">
+                    <div class="section-title">Icon Library</div>
+                    <div class="section-subtitle">Commonly used icons</div>
+                </div>
+                <div class="icon-grid">
+                    <div class="icon-sample">
+                        <div class="icon-display"><i class="fas fa-envelope"></i></div>
+                        <div class="icon-name">fa-envelope</div>
+                    </div>
+                    <div class="icon-sample">
+                        <div class="icon-display"><i class="fas fa-user"></i></div>
+                        <div class="icon-name">fa-user</div>
+                    </div>
+                    <div class="icon-sample">
+                        <div class="icon-display"><i class="fas fa-calendar"></i></div>
+                        <div class="icon-name">fa-calendar</div>
+                    </div>
+                    <div class="icon-sample">
+                        <div class="icon-display"><i class="fas fa-eye"></i></div>
+                        <div class="icon-name">fa-eye</div>
+                    </div>
+                    <div class="icon-sample">
+                        <div class="icon-display"><i class="fas fa-check"></i></div>
+                        <div class="icon-name">fa-check</div>
+                    </div>
+                    <div class="icon-sample">
+                        <div class="icon-display"><i class="fas fa-ellipsis-v"></i></div>
+                        <div class="icon-name">fa-ellipsis-v</div>
+                    </div>
+                    <div class="icon-sample">
+                        <div class="icon-display"><i class="fas fa-history"></i></div>
+                        <div class="icon-name">fa-history</div>
+                    </div>
+                    <div class="icon-sample">
+                        <div class="icon-display"><i class="fas fa-undo"></i></div>
+                        <div class="icon-name">fa-undo</div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Spacing -->
+            <div class="detail-section">
+                <div class="section-header">
+                    <div class="section-title">Spacing System</div>
+                    <div class="section-subtitle">Standard spacing values</div>
+                </div>
+                <div class="spacing-sample">
+                    <div class="typography-label">4px - Tiny</div>
+                    <div class="spacing-box" style="height: 4px;"></div>
+                </div>
+                <div class="spacing-sample">
+                    <div class="typography-label">8px - Extra Small</div>
+                    <div class="spacing-box" style="height: 8px;"></div>
+                </div>
+                <div class="spacing-sample">
+                    <div class="typography-label">12px - Small</div>
+                    <div class="spacing-box" style="height: 12px;"></div>
+                </div>
+                <div class="spacing-sample">
+                    <div class="typography-label">16px - Medium</div>
+                    <div class="spacing-box" style="height: 16px;"></div>
+                </div>
+                <div class="spacing-sample">
+                    <div class="typography-label">24px - Large</div>
+                    <div class="spacing-box" style="height: 24px;"></div>
+                </div>
+                <div class="spacing-sample">
+                    <div class="typography-label">32px - Extra Large</div>
+                    <div class="spacing-box" style="height: 32px;"></div>
                 </div>
             </div>
         </div>
