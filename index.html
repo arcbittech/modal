@@ -1,883 +1,448 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-<meta charset="UTF-8">
-<title>Advanced Search and Filter</title>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Authorization/Claim Details Section</title>
+    <link href="https://fonts.googleapis.com/css2?family=Open+Sans:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
 
-<!-- Font Awesome 6 Free -->
-<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css" integrity="sha512-DTOQO9RWCH3ppGqcWaEA1BIZOC6xxalwEsw9c2QQeAIftl+Vegovlnee1c9QX4TctnWMn13TZye+giMm8e2LwA==" crossorigin="anonymous" referrerpolicy="no-referrer">
+        body {
+            font-family: 'Open Sans', sans-serif;
+            background: #f5f7fa;
+            padding: 20px;
+        }
 
-<!-- Fonts -->
-<link href="https://fonts.googleapis.com/css?family=Open+Sans:400,600" rel="stylesheet">
-<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700&display=swap" rel="stylesheet">
+        .container {
+            max-width: 1820px;
+            margin: 0 auto;
+            background: white;
+            border-radius: 12px;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.08);
+            padding: 30px;
+        }
 
-<style>
-/* ================= GLOBAL ================= */
-*{box-sizing:border-box}
-body{
-  margin:0;
-  font-family:"Open Sans", sans-serif;
-  background:#f5f5f5;
-  padding:20px;
-}
+        /* Detail Sections */
+        .detail-section {
+            background: #f8f9fa;
+            border: 1px solid #e9ecef;
+            border-radius: 12px;
+            padding: 25px;
+            margin-bottom: 20px;
+        }
 
-::-webkit-scrollbar{width:6px}
-::-webkit-scrollbar-track{background:transparent}
-::-webkit-scrollbar-thumb{background:#d1d5db;border-radius:3px}
+        .section-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 20px;
+            padding-bottom: 15px;
+            border-bottom: 2px solid #e9ecef;
+        }
 
-/* ================= CONTAINER ================= */
-.container{
-  max-width:1200px;
-  margin:0 auto;
-}
+        .section-header-left {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+        }
 
-/* ================= SECTION ================= */
-.section{
-  background:#fff;
-  border-radius:8px;
-  padding:24px;
-  margin-bottom:24px;
-  box-shadow:0 2px 8px rgba(0,0,0,0.05);
-}
+        .section-icon {
+            width: 40px;
+            height: 40px;
+            background: #e3f2fd;
+            color: #3498db;
+            border-radius: 8px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 18px;
+        }
 
-.section-title{
-  font-size:16px;
-  font-weight:700;
-  color:#1A1A1A;
-  margin-bottom:20px;
-  font-family:"Poppins";
-}
+        .section-title h3 {
+            font-size: 16px;
+            color: #2c3e50;
+            margin-bottom: 4px;
+        }
 
-/* ================= SEARCH BAR ================= */
-.search-bar{
-  display:flex;
-  gap:12px;
-  align-items:center;
-  margin-bottom:16px;
-}
+        .section-title p {
+            font-size: 12px;
+            color: #6c757d;
+        }
 
-.search-input{
-  flex:1;
-  background:#fff;
-  border:1px solid #D1D5DB;
-  padding:10px 14px;
-  border-radius:6px;
-  font-family:"Open Sans";
-  font-size:14px;
-  color:#2E2E2E;
-  transition:all 0.3s;
-}
+        /* Service Table */
+        .service-table {
+            width: 100%;
+            background: white;
+            border-radius: 8px;
+            overflow: hidden;
+            border: 1px solid #e9ecef;
+            margin-bottom: 20px;
+        }
 
-.search-input:focus{
-  outline:none;
-  border-color:#5830AD;
-  box-shadow:0 0 0 3px rgba(88,48,173,0.1);
-}
+        .service-table table {
+            width: 100%;
+            border-collapse: collapse;
+        }
 
-.search-input::placeholder{
-  color:#9CA3AF;
-}
+        .service-table th {
+            background: #f8f9fa;
+            padding: 12px;
+            text-align: left;
+            font-size: 11px;
+            font-weight: 600;
+            color: #495057;
+            text-transform: uppercase;
+            border-bottom: 2px solid #e9ecef;
+        }
 
-.btn-filter{
-  background:none;
-  border:none;
-  color:#5830AD;
-  font-size:13px;
-  font-weight:600;
-  cursor:pointer;
-  display:flex;
-  align-items:center;
-  gap:6px;
-  padding:8px 14px;
-  transition:all 0.3s;
-  border-radius:6px;
-}
+        .service-table td {
+            padding: 12px;
+            font-size: 13px;
+            color: #2c3e50;
+            border-bottom: 1px solid #f8f9fa;
+            vertical-align: middle;
+        }
 
-.btn-filter:hover{
-  background:#f3f4f6;
-}
+        /* Action Buttons */
+        .action-buttons-cell {
+            display: flex;
+            gap: 8px;
+            align-items: center;
+        }
 
-.btn-filter.collapsed{
-  transform:rotate(90deg);
-}
+        .btn-action {
+            padding: 6px 14px;
+            border: none;
+            border-radius: 6px;
+            font-size: 12px;
+            font-weight: 600;
+            cursor: pointer;
+            display: inline-flex;
+            align-items: center;
+            gap: 6px;
+            transition: all 0.3s;
+        }
 
-.btn-clear{
-  background:none;
-  border:1px solid #D1D5DB;
-  color:#6B7280;
-  font-size:13px;
-  font-weight:600;
-  cursor:pointer;
-  padding:8px 14px;
-  border-radius:6px;
-  transition:all 0.3s;
-}
+        .btn-upheld {
+            background: #27ae60;
+            color: white;
+        }
 
-.btn-clear:hover{
-  background:#f3f4f6;
-  border-color:#9CA3AF;
-}
+        .btn-upheld:hover {
+            background: #229954;
+        }
 
-/* ================= FILTER PANEL ================= */
-.filter-panel{
-  background:#f9fafb;
-  border:1px solid #e5e7eb;
-  border-radius:8px;
-  padding:20px;
-  margin-top:16px;
-  animation:slideDown 0.3s ease-out;
-}
+        .btn-overturn {
+            background: #e74c3c;
+            color: white;
+        }
 
-.filter-panel.hide{
-  display:none;
-}
+        .btn-overturn:hover {
+            background: #c0392b;
+        }
 
-@keyframes slideDown{
-  from{
-    opacity:0;
-    transform:translateY(-10px);
-  }
-  to{
-    opacity:1;
-    transform:translateY(0);
-  }
-}
+        .btn-history {
+            width: 32px;
+            height: 32px;
+            padding: 0;
+            background: #3498db;
+            color: white;
+            border: none;
+            border-radius: 6px;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 14px;
+            transition: all 0.3s;
+        }
 
-/* ================= FILTER GROUP ================= */
-.filter-group{
-  background:#fff;
-  border:1px solid #e5e7eb;
-  border-radius:8px;
-  padding:16px;
-  margin-bottom:16px;
-  transition:all 0.3s;
-}
+        .btn-history:hover {
+            background: #2980b9;
+            transform: scale(1.05);
+        }
 
-.filter-group:last-child{
-  margin-bottom:0;
-}
+        /* Status Badge */
+        .status-badge {
+            display: inline-flex;
+            align-items: center;
+            gap: 6px;
+            padding: 5px 10px;
+            border-radius: 5px;
+            font-size: 11px;
+            font-weight: 600;
+        }
 
-.filter-group-header{
-  display:flex;
-  align-items:center;
-  justify-content:space-between;
-  margin-bottom:12px;
-}
+        .status-pending {
+            background: #fff3cd;
+            color: #856404;
+        }
 
-.filter-group-title{
-  font-weight:600;
-  color:#1A1A1A;
-  font-size:14px;
-}
+        .status-upheld {
+            background: #d1f2eb;
+            color: #0a6c53;
+        }
 
-.filter-row{
-  display:grid;
-  grid-template-columns:repeat(4, 1fr);
-  gap:12px;
-  margin-bottom:12px;
-}
+        .status-overturned {
+            background: #f8d7da;
+            color: #721c24;
+        }
 
-.filter-row:last-child{
-  margin-bottom:0;
-}
+        /* Radio Group */
+        .radio-group-section {
+            background: white;
+            padding: 20px;
+            border-radius: 8px;
+            border: 1px solid #e9ecef;
+            display: flex;
+            align-items: center;
+            gap: 30px;
+        }
 
-.filter-item{
-  display:flex;
-  flex-direction:column;
-  gap:6px;
-}
+        .radio-group-label {
+            font-size: 13px;
+            font-weight: 600;
+            color: #495057;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
 
-.filter-label{
-  font-size:12px;
-  font-weight:600;
-  color:#424242;
-  text-transform:uppercase;
-  letter-spacing:0.5px;
-}
+        .radio-options {
+            display: flex;
+            gap: 20px;
+        }
 
-.filter-input,
-.filter-select{
-  background:#f9fafb;
-  border:1px solid #d1d5db;
-  padding:8px 12px;
-  border-radius:6px;
-  font-family:"Open Sans";
-  font-size:13px;
-  color:#2E2E2E;
-  transition:all 0.3s;
-  cursor:pointer;
-}
+        .radio-option {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            cursor: pointer;
+        }
 
-.filter-input:hover,
-.filter-select:hover{
-  border-color:#9ca3af;
-  background:#fff;
-}
+        .radio-option input[type="radio"] {
+            width: 18px;
+            height: 18px;
+            cursor: pointer;
+            accent-color: #3498db;
+        }
 
-.filter-input:focus,
-.filter-select:focus{
-  outline:none;
-  border-color:#5830AD;
-  background:#fff;
-}
+        .radio-option label {
+            font-size: 13px;
+            font-weight: 500;
+            color: #2c3e50;
+            cursor: pointer;
+        }
 
-.filter-select{
-  appearance:none;
-  background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='8' viewBox='0 0 12 8'%3E%3Cpath fill='%236B7280' d='M1 1l5 5 5-5'/%3E%3C/svg%3E");
-  background-repeat:no-repeat;
-  background-position:right 8px center;
-  padding-right:28px;
-}
+        .rationale-field {
+            flex: 1;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
 
-/* ================= ACTION BUTTONS ================= */
-.filter-actions{
-  display:flex;
-  gap:12px;
-  justify-content:flex-end;
-  margin-top:20px;
-  padding-top:20px;
-  border-top:1px solid #e5e7eb;
-}
+        .rationale-field label {
+            font-size: 13px;
+            font-weight: 600;
+            color: #495057;
+            white-space: nowrap;
+        }
 
-.btn-reset{
-  background:#f3f4f6;
-  color:#6B7280;
-  border:none;
-  padding:10px 24px;
-  border-radius:6px;
-  font-weight:600;
-  font-size:13px;
-  cursor:pointer;
-  transition:all 0.3s;
-  font-family:"Open Sans";
-}
+        .rationale-field select {
+            flex: 1;
+            padding: 8px 12px;
+            border: 1px solid #ced4da;
+            border-radius: 6px;
+            font-size: 13px;
+            font-family: 'Open Sans', sans-serif;
+            color: #495057;
+            background: white;
+            cursor: pointer;
+            transition: all 0.3s;
+        }
 
-.btn-reset:hover{
-  background:#e5e7eb;
-  color:#2E2E2E;
-}
+        .rationale-field select:focus {
+            outline: none;
+            border-color: #3498db;
+            box-shadow: 0 0 0 3px rgba(52,152,219,0.1);
+        }
 
-.btn-apply{
-  background:#5830AD;
-  color:#fff;
-  border:none;
-  padding:10px 24px;
-  border-radius:6px;
-  font-weight:600;
-  font-size:13px;
-  cursor:pointer;
-  transition:all 0.3s;
-  font-family:"Open Sans";
-}
+        /* Responsive */
+        @media (max-width: 1200px) {
+            .radio-group-section {
+                flex-direction: column;
+                align-items: flex-start;
+            }
 
-.btn-apply:hover{
-  background:#471d82;
-}
-
-/* ================= SELECTED FILTERS ================= */
-.selected-filters{
-  display:flex;
-  flex-wrap:wrap;
-  gap:8px;
-  align-items:center;
-  padding:12px;
-  background:#f3f4f6;
-  border-radius:8px;
-  margin-top:16px;
-}
-
-.selected-filters:empty{
-  display:none;
-}
-
-.filter-tag{
-  display:inline-flex;
-  align-items:center;
-  gap:6px;
-  padding:6px 12px;
-  background:#5830AD;
-  color:#fff;
-  border-radius:20px;
-  font-size:12px;
-  font-weight:600;
-}
-
-.filter-tag-remove{
-  background:none;
-  border:none;
-  color:#fff;
-  cursor:pointer;
-  font-size:14px;
-  padding:0;
-  display:flex;
-  align-items:center;
-  transition:all 0.3s;
-}
-
-.filter-tag-remove:hover{
-  transform:scale(1.2);
-}
-
-.clear-all-link{
-  color:#5830AD;
-  text-decoration:none;
-  font-size:13px;
-  font-weight:600;
-  cursor:pointer;
-  transition:color 0.3s;
-  margin-left:auto;
-}
-
-.clear-all-link:hover{
-  color:#471d82;
-  text-decoration:underline;
-}
-
-/* ================= ADD FILTER BUTTON ================= */
-.btn-add-filter{
-  background:none;
-  border:2px dashed #d1d5db;
-  color:#6B7280;
-  padding:12px 16px;
-  border-radius:6px;
-  font-weight:600;
-  font-size:13px;
-  cursor:pointer;
-  display:flex;
-  align-items:center;
-  gap:8px;
-  transition:all 0.3s;
-  font-family:"Open Sans";
-  width:100%;
-  margin-top:12px;
-}
-
-.btn-add-filter:hover{
-  border-color:#5830AD;
-  color:#5830AD;
-  background:#f8f5ff;
-}
-
-/* ================= REMOVE FILTER ================= */
-.btn-remove-filter{
-  background:none;
-  border:none;
-  color:#ef4444;
-  cursor:pointer;
-  padding:4px 6px;
-  font-size:14px;
-  transition:all 0.3s;
-}
-
-.btn-remove-filter:hover{
-  transform:scale(1.2);
-}
-
-/* ================= RESPONSIVE ================= */
-@media(max-width:1024px){
-  .filter-row{
-    grid-template-columns:repeat(3, 1fr);
-  }
-}
-
-@media(max-width:768px){
-  .filter-row{
-    grid-template-columns:repeat(2, 1fr);
-  }
-  
-  .search-bar{
-    flex-wrap:wrap;
-  }
-  
-  .section{
-    padding:16px;
-  }
-  
-  .filter-actions{
-    flex-direction:column;
-  }
-  
-  .btn-reset,
-  .btn-apply{
-    width:100%;
-  }
-}
-
-@media(max-width:480px){
-  .filter-row{
-    grid-template-columns:1fr;
-  }
-  
-  .selected-filters{
-    flex-direction:column;
-  }
-  
-  .clear-all-link{
-    margin-left:0;
-    width:100%;
-  }
-}
-
-/* ================= HELPER TEXT ================= */
-.helper-text{
-  font-size:11px;
-  color:#6B7280;
-  margin-top:4px;
-}
-
-</style>
-
+            .rationale-field {
+                width: 100%;
+            }
+        }
+    </style>
 </head>
 <body>
+    <div class="container">
+        <!-- Authorization/Claim Details -->
+        <div class="detail-section">
+            <div class="section-header">
+                <div class="section-header-left">
+                    <div class="section-icon">
+                        <i class="fas fa-file-medical"></i>
+                    </div>
+                    <div class="section-title">
+                        <h3>Authorization/Claim Details</h3>
+                        <p>Service authorization information</p>
+                    </div>
+                </div>
+            </div>
+            <div class="service-table">
+                <table>
+                    <thead>
+                        <tr>
+                            <th>Claim Line</th>
+                            <th>Billed Amount</th>
+                            <th>Place of Service</th>
+                            <th>Service Type</th>
+                            <th>Service Code</th>
+                            <th>Service Description</th>
+                            <th>Status</th>
+                            <th>Actions</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td>12345</td>
+                            <td>$250.00</td>
+                            <td>Office</td>
+                            <td>Eval & Tx</td>
+                            <td>D0150</td>
+                            <td>PROSSO-ORAL EVALUATION</td>
+                            <td>
+                                <span class="status-badge status-pending">
+                                    <i class="fas fa-clock"></i> Pending
+                                </span>
+                            </td>
+                            <td>
+                                <div class="action-buttons-cell">
+                                    <button class="btn-action btn-upheld">
+                                        <i class="fas fa-check"></i> Upheld
+                                    </button>
+                                    <button class="btn-action btn-overturn">
+                                        <i class="fas fa-undo"></i> Overturn
+                                    </button>
+                                    <button class="btn-history" title="View History">
+                                        <i class="fas fa-history"></i>
+                                    </button>
+                                </div>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>12346</td>
+                            <td>$180.00</td>
+                            <td>Office</td>
+                            <td>Eval & Tx</td>
+                            <td>D0120</td>
+                            <td>PERIODIC ORAL EVALUATION</td>
+                            <td>
+                                <span class="status-badge status-upheld">
+                                    <i class="fas fa-check-circle"></i> Upheld
+                                </span>
+                            </td>
+                            <td>
+                                <div class="action-buttons-cell">
+                                    <button class="btn-action btn-upheld" disabled style="opacity: 0.6; cursor: not-allowed;">
+                                        <i class="fas fa-check"></i> Upheld
+                                    </button>
+                                    <button class="btn-action btn-overturn">
+                                        <i class="fas fa-undo"></i> Overturn
+                                    </button>
+                                    <button class="btn-history" title="View History">
+                                        <i class="fas fa-history"></i>
+                                    </button>
+                                </div>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>12347</td>
+                            <td>$320.00</td>
+                            <td>Office</td>
+                            <td>Treatment</td>
+                            <td>D0210</td>
+                            <td>INTRAORAL - COMPLETE SERIES</td>
+                            <td>
+                                <span class="status-badge status-overturned">
+                                    <i class="fas fa-times-circle"></i> Overturned
+                                </span>
+                            </td>
+                            <td>
+                                <div class="action-buttons-cell">
+                                    <button class="btn-action btn-upheld">
+                                        <i class="fas fa-check"></i> Upheld
+                                    </button>
+                                    <button class="btn-action btn-overturn" disabled style="opacity: 0.6; cursor: not-allowed;">
+                                        <i class="fas fa-undo"></i> Overturn
+                                    </button>
+                                    <button class="btn-history" title="View History">
+                                        <i class="fas fa-history"></i>
+                                    </button>
+                                </div>
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
 
-<div class="container">
-  
-  <!-- ADVANCED FILTERS SECTION (EXPANDED BY DEFAULT) -->
-  <div class="section">
-    <div class="section-title">Search and Filter - Advanced Options - Open</div>
-    
-    <div class="search-bar">
-      <input type="text" class="search-input" placeholder="Search Auth Number">
-      <button class="btn-filter" onclick="toggleAdvancedFilters()">
-        <i class="fa-solid fa-chevron-down"></i> Advanced Filters
-      </button>
-      <button class="btn-clear" onclick="clearAllFilters()">Clear All</button>
+        <!-- Expedited Standard Section -->
+        <div class="detail-section">
+            <div class="section-header">
+                <div class="section-header-left">
+                    <div class="section-icon">
+                        <i class="fas fa-bolt"></i>
+                    </div>
+                    <div class="section-title">
+                        <h3>Expedited Standard</h3>
+                        <p>Expedite status and rationale</p>
+                    </div>
+                </div>
+            </div>
+            <div class="radio-group-section">
+                <div class="radio-group-label">
+                    <i class="fas fa-bolt"></i> Expedited:
+                </div>
+                <div class="radio-options">
+                    <div class="radio-option">
+                        <input type="radio" id="expedited-yes" name="expedited" value="yes">
+                        <label for="expedited-yes">Yes</label>
+                    </div>
+                    <div class="radio-option">
+                        <input type="radio" id="expedited-no" name="expedited" value="no" checked>
+                        <label for="expedited-no">No</label>
+                    </div>
+                </div>
+                <div class="rationale-field">
+                    <label for="rationale">
+                        <i class="fas fa-comment-dots"></i> Rationale:
+                    </label>
+                    <select id="rationale" name="rationale">
+                        <option value="">Select Rationale</option>
+                        <option value="urgent-medical">Urgent Medical Necessity</option>
+                        <option value="life-threatening">Life-Threatening Condition</option>
+                        <option value="severe-pain">Severe Pain or Suffering</option>
+                        <option value="standard-delay">Standard Process Would Cause Serious Harm</option>
+                        <option value="provider-request">Provider Urgent Request</option>
+                        <option value="regulatory">Regulatory Requirement</option>
+                        <option value="other">Other - See Notes</option>
+                    </select>
+                </div>
+            </div>
+        </div>
     </div>
-
-    <!-- FILTER PANEL (VISIBLE BY DEFAULT) -->
-    <div class="filter-panel" id="filterPanel">
-      
-      <!-- FILTER OPTION 1: Key-Value Based -->
-      <div class="filter-group">
-        <div class="filter-group-header">
-          <div class="filter-group-title">Show data which matches</div>
-          <button class="btn-remove-filter" onclick="removeFilterGroup(this)" title="Remove filter group">
-            <i class="fa-solid fa-trash"></i>
-          </button>
-        </div>
-
-        <div class="filter-row">
-          <div class="filter-item">
-            <label class="filter-label">Field</label>
-            <select class="filter-select" onchange="updateValueOptions(this)">
-              <option value="">Select Field</option>
-              <option value="case_type">Case Type</option>
-              <option value="case_number">Case Number</option>
-              <option value="member_number">Member Number</option>
-              <option value="member_first_name">Member First Name</option>
-              <option value="member_last_name">Member Last Name</option>
-              <option value="member_state">Member State</option>
-              <option value="intake_source">Intake Source</option>
-              <option value="case_status">Case Status</option>
-              <option value="workflow_status">Workflow Status</option>
-              <option value="timeliness_flag">Timeliness Flag</option>
-              <option value="expedited_flag">Expedited Flag</option>
-              <option value="days_remaining">Days Remaining</option>
-              <option value="days_aging">Days Aging</option>
-              <option value="request_id">Request ID</option>
-              <option value="ga_secondary_lob">GA Secondary LOB</option>
-              <option value="case_assigned_to">Case Assigned To</option>
-              <option value="team_name">Team Name</option>
-            </select>
-          </div>
-
-          <div class="filter-item">
-            <label class="filter-label">Operator</label>
-            <select class="filter-select">
-              <option value="equals">Equals</option>
-              <option value="contains">Contains</option>
-              <option value="starts_with">Starts With</option>
-              <option value="ends_with">Ends With</option>
-              <option value="greater_than">Greater Than</option>
-              <option value="less_than">Less Than</option>
-              <option value="between">Between</option>
-            </select>
-          </div>
-
-          <div class="filter-item">
-            <label class="filter-label">Value</label>
-            <input type="text" class="filter-input" placeholder="Enter value">
-          </div>
-
-          <div class="filter-item">
-            <label class="filter-label">&nbsp;</label>
-            <button class="btn-remove-filter" onclick="this.closest('.filter-row').remove()" title="Remove this filter">
-              <i class="fa-solid fa-trash"></i>
-            </button>
-          </div>
-        </div>
-
-        <button class="btn-add-filter" onclick="addFilterRow(this)">
-          <i class="fa-solid fa-plus"></i> Add Another Filter
-        </button>
-      </div>
-
-      <!-- FILTER OPTION 2: Predefined Filters -->
-      <div class="filter-group">
-        <div class="filter-group-header">
-          <div class="filter-group-title">Quick Filters</div>
-          <button class="btn-remove-filter" onclick="removeFilterGroup(this)" title="Remove filter group">
-            <i class="fa-solid fa-trash"></i>
-          </button>
-        </div>
-
-        <div class="filter-row">
-          <div class="filter-item">
-            <label class="filter-label">Case Type</label>
-            <select class="filter-select">
-              <option value="">Select Case Type</option>
-              <option value="appeal">Appeal</option>
-              <option value="grievance">Grievance</option>
-              <option value="standard">Standard</option>
-              <option value="appeal_grievance">Appeal & Grievance</option>
-            </select>
-          </div>
-
-          <div class="filter-item">
-            <label class="filter-label">Member State</label>
-            <select class="filter-select">
-              <option value="">Select State</option>
-              <option value="ca">California</option>
-              <option value="ny">New York</option>
-              <option value="tx">Texas</option>
-              <option value="fl">Florida</option>
-              <option value="wv">West Virginia</option>
-              <option value="pa">Pennsylvania</option>
-            </select>
-          </div>
-
-          <div class="filter-item">
-            <label class="filter-label">Case Status</label>
-            <select class="filter-select">
-              <option value="">Select Status</option>
-              <option value="open">Open</option>
-              <option value="in_progress">In Progress</option>
-              <option value="pending">Pending</option>
-              <option value="on_hold">On Hold</option>
-              <option value="closed">Closed</option>
-            </select>
-          </div>
-
-          <div class="filter-item">
-            <label class="filter-label">Intake Source</label>
-            <select class="filter-select">
-              <option value="">Select Source</option>
-              <option value="phone">Phone</option>
-              <option value="email">Email</option>
-              <option value="portal">Portal</option>
-              <option value="fax">Fax</option>
-              <option value="care_event">Care Event</option>
-            </select>
-          </div>
-        </div>
-
-        <div class="filter-row">
-          <div class="filter-item">
-            <label class="filter-label">Workflow Status</label>
-            <select class="filter-select">
-              <option value="">Select Workflow Status</option>
-              <option value="new">New</option>
-              <option value="reviewed">Reviewed</option>
-              <option value="assigned">Assigned</option>
-              <option value="completed">Completed</option>
-            </select>
-          </div>
-
-          <div class="filter-item">
-            <label class="filter-label">Timeliness Flag</label>
-            <select class="filter-select">
-              <option value="">Select Timeliness</option>
-              <option value="on_time">On Time</option>
-              <option value="at_risk">At Risk</option>
-              <option value="overdue">Overdue</option>
-            </select>
-          </div>
-
-          <div class="filter-item">
-            <label class="filter-label">Expedited Flag</label>
-            <select class="filter-select">
-              <option value="">All</option>
-              <option value="yes">Yes</option>
-              <option value="no">No</option>
-            </select>
-          </div>
-
-          <div class="filter-item">
-            <label class="filter-label">&nbsp;</label>
-          </div>
-        </div>
-      </div>
-
-      <!-- FILTER OPTION 3: Range & Conditions -->
-      <div class="filter-group">
-        <div class="filter-group-header">
-          <div class="filter-group-title">Numeric Filters</div>
-          <button class="btn-remove-filter" onclick="removeFilterGroup(this)" title="Remove filter group">
-            <i class="fa-solid fa-trash"></i>
-          </button>
-        </div>
-
-        <div class="filter-row">
-          <div class="filter-item">
-            <label class="filter-label">Days Aging From</label>
-            <input type="number" class="filter-input" placeholder="From" min="0">
-          </div>
-
-          <div class="filter-item">
-            <label class="filter-label">Days Aging To</label>
-            <input type="number" class="filter-input" placeholder="To" min="0">
-          </div>
-
-          <div class="filter-item">
-            <label class="filter-label">Days Remaining From</label>
-            <input type="number" class="filter-input" placeholder="From" min="0">
-          </div>
-
-          <div class="filter-item">
-            <label class="filter-label">Days Remaining To</label>
-            <input type="number" class="filter-input" placeholder="To" min="0">
-          </div>
-        </div>
-
-        <div class="filter-row">
-          <div class="filter-item">
-            <label class="filter-label">Confidence Score Min</label>
-            <select class="filter-select">
-              <option value="">Select Min Score</option>
-              <option value="90_100">90% - 100%</option>
-              <option value="75_90">75% - 90%</option>
-              <option value="50_75">50% - 75%</option>
-              <option value="below_50">Below 50%</option>
-            </select>
-          </div>
-
-          <div class="filter-item">
-            <label class="filter-label">Confidence Score Max</label>
-            <select class="filter-select">
-              <option value="">Select Max Score</option>
-              <option value="90_100">90% - 100%</option>
-              <option value="75_90">75% - 90%</option>
-              <option value="50_75">50% - 75%</option>
-            </select>
-          </div>
-
-          <div class="filter-item" style="grid-column:span 2;">
-            <label class="filter-label">&nbsp;</label>
-          </div>
-        </div>
-      </div>
-
-      <!-- FILTER OPTION 4: Text Search -->
-      <div class="filter-group">
-        <div class="filter-group-header">
-          <div class="filter-group-title">Text Search</div>
-          <button class="btn-remove-filter" onclick="removeFilterGroup(this)" title="Remove filter group">
-            <i class="fa-solid fa-trash"></i>
-          </button>
-        </div>
-
-        <div class="filter-row">
-          <div class="filter-item" style="grid-column:span 2;">
-            <label class="filter-label">Case Number</label>
-            <input type="text" class="filter-input" placeholder="Enter case number (e.g., APP000000001)">
-          </div>
-
-          <div class="filter-item" style="grid-column:span 2;">
-            <label class="filter-label">Member Number</label>
-            <input type="text" class="filter-input" placeholder="Enter member number">
-          </div>
-
-          <div class="filter-item" style="grid-column:span 2;">
-            <label class="filter-label">Member Name</label>
-            <input type="text" class="filter-input" placeholder="Enter first or last name">
-          </div>
-
-          <div class="filter-item" style="grid-column:span 2;">
-            <label class="filter-label">Team Name</label>
-            <input type="text" class="filter-input" placeholder="Enter team name">
-          </div>
-
-          <div class="filter-item" style="grid-column:span 2;">
-            <label class="filter-label">Case Assigned To</label>
-            <input type="text" class="filter-input" placeholder="Enter assignee name or email">
-          </div>
-
-          <div class="filter-item" style="grid-column:span 2;">
-            <label class="filter-label">Request ID</label>
-            <input type="text" class="filter-input" placeholder="Enter request ID">
-          </div>
-        </div>
-      </div>
-
-      <!-- ACTION BUTTONS -->
-      <div class="filter-actions">
-        <button class="btn-reset" onclick="resetFilters()">Reset</button>
-        <button class="btn-apply" onclick="applyFilters()">Apply</button>
-      </div>
-    </div>
-
-    <!-- SELECTED FILTERS DISPLAY -->
-    <div class="selected-filters" id="selectedFilters">
-      <div class="filter-tag">
-        <i class="fa-solid fa-tag"></i>
-        Case Type: Appeal
-        <button class="filter-tag-remove" onclick="removeFilter(this)">×</button>
-      </div>
-      <div class="filter-tag">
-        <i class="fa-solid fa-location-dot"></i>
-        State: California
-        <button class="filter-tag-remove" onclick="removeFilter(this)">×</button>
-      </div>
-      <div class="filter-tag">
-        <i class="fa-solid fa-signal"></i>
-        Status: Open
-        <button class="filter-tag-remove" onclick="removeFilter(this)">×</button>
-      </div>
-      <div class="filter-tag">
-        <i class="fa-solid fa-users"></i>
-        Team: Appeals Team
-        <button class="filter-tag-remove" onclick="removeFilter(this)">×</button>
-      </div>
-      <a href="#" class="clear-all-link" onclick="clearAllFiltersEvent(event)">Clear All</a>
-    </div>
-  </div>
-
-</div>
-
-<script>
-function toggleAdvancedFilters() {
-  const panel = document.getElementById('filterPanel');
-  const btn = event.target.closest('.btn-filter');
-  panel.classList.toggle('hide');
-  btn.classList.toggle('collapsed');
-}
-
-function updateValueOptions(selectElement) {
-  const field = selectElement.value;
-  const valueField = selectElement.closest('.filter-row').querySelector('input[type="text"]');
-  
-  const fieldOptions = {
-    'case_type': {type: 'dropdown', options: ['Appeal', 'Grievance', 'Standard', 'Appeal & Grievance']},
-    'case_number': {type: 'text', placeholder: 'Enter case number'},
-    'member_number': {type: 'text', placeholder: 'Enter member number'},
-    'member_first_name': {type: 'text', placeholder: 'Enter first name'},
-    'member_last_name': {type: 'text', placeholder: 'Enter last name'},
-    'member_state': {type: 'dropdown', options: ['CA', 'NY', 'TX', 'FL', 'WV', 'PA']},
-    'intake_source': {type: 'dropdown', options: ['Phone', 'Email', 'Portal', 'Fax', 'Care Event']},
-    'case_status': {type: 'dropdown', options: ['Open', 'In Progress', 'Pending', 'On Hold', 'Closed']},
-    'workflow_status': {type: 'dropdown', options: ['New', 'Reviewed', 'Assigned', 'Completed']},
-    'timeliness_flag': {type: 'dropdown', options: ['On Time', 'At Risk', 'Overdue']},
-    'expedited_flag': {type: 'dropdown', options: ['Yes', 'No']},
-    'days_remaining': {type: 'number', placeholder: 'Enter days'},
-    'days_aging': {type: 'number', placeholder: 'Enter days'},
-    'request_id': {type: 'text', placeholder: 'Enter request ID'},
-    'ga_secondary_lob': {type: 'text', placeholder: 'Enter LOB'},
-    'case_assigned_to': {type: 'text', placeholder: 'Enter assignee name'},
-    'team_name': {type: 'text', placeholder: 'Enter team name'}
-  };
-  
-  const config = fieldOptions[field];
-  if (config && config.type === 'dropdown') {
-    // Would convert to dropdown in real implementation
-    console.log('Options for', field, ':', config.options);
-  }
-}
-
-function addFilterRow(button) {
-  const filterGroup = button.closest('.filter-group');
-  const newRow = document.createElement('div');
-  newRow.className = 'filter-row';
-  newRow.innerHTML = `
-    <div class="filter-item">
-      <label class="filter-label">Field</label>
-      <select class="filter-select" onchange="updateValueOptions(this)">
-        <option value="">Select Field</option>
-        <option value="case_type">Case Type</option>
-        <option value="case_number">Case Number</option>
-        <option value="member_number">Member Number</option>
-        <option value="member_first_name">Member First Name</option>
-        <option value="member_last_name">Member Last Name</option>
-        <option value="member_state">Member State</option>
-        <option value="intake_source">Intake Source</option>
-        <option value="case_status">Case Status</option>
-        <option value="workflow_status">Workflow Status</option>
-        <option value="timeliness_flag">Timeliness Flag</option>
-        <option value="expedited_flag">Expedited Flag</option>
-        <option value="days_remaining">Days Remaining</option>
-        <option value="days_aging">Days Aging</option>
-        <option value="request_id">Request ID</option>
-        <option value="ga_secondary_lob">GA Secondary LOB</option>
-        <option value="case_assigned_to">Case Assigned To</option>
-        <option value="team_name">Team Name</option>
-      </select>
-    </div>
-    <div class="filter-item">
-      <label class="filter-label">Operator</label>
-      <select class="filter-select">
-        <option value="equals">Equals</option>
-        <option value="contains">Contains</option>
-        <option value="starts_with">Starts With</option>
-        <option value="ends_with">Ends With</option>
-        <option value="greater_than">Greater Than</option>
-        <option value="less_than">Less Than</option>
-      </select>
-    </div>
-    <div class="filter-item">
-      <label class="filter-label">Value</label>
-      <input type="text" class="filter-input" placeholder="Enter value">
-    </div>
-    <div class="filter-item">
-      <label class="filter-label">&nbsp;</label>
-      <button class="btn-remove-filter" onclick="this.closest('.filter-row').remove()" title="Remove this filter">
-        <i class="fa-solid fa-trash"></i>
-      </button>
-    </div>
-  `;
-  filterGroup.insertBefore(newRow, button);
-}
-
-function removeFilterGroup(button) {
-  button.closest('.filter-group').remove();
-}
-
-function removeFilter(button) {
-  button.closest('.filter-tag').remove();
-  if (document.getElementById('selectedFilters').children.length === 1) {
-    document.getElementById('selectedFilters').innerHTML = '';
-  }
-}
-
-function clearAllFilters() {
-  document.querySelectorAll('.filter-input, .filter-select').forEach(el => {
-    el.value = '';
-  });
-}
-
-function clearAllFiltersEvent(e) {
-  e.preventDefault();
-  document.getElementById('selectedFilters').innerHTML = '';
-}
-
-function resetFilters() {
-  clearAllFilters();
-  console.log('Filters reset');
-}
-
-function applyFilters() {
-  console.log('Filters applied');
-  // Get all filter values
-  const filters = [];
-  document.querySelectorAll('.filter-row').forEach(row => {
-    const field = row.querySelector('select:first-of-type')?.value;
-    const operator = row.querySelector('select:nth-of-type(2)')?.value;
-    const value = row.querySelector('input:first-of-type')?.value;
-    if (field && value) {
-      filters.push({ field, operator, value });
-    }
-  });
-  console.log('Applied filters:', filters);
-}
-</script>
-
 </body>
 </html>
