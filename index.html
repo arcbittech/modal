@@ -3,8 +3,8 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Style Guide - Medical Software</title>
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+    <title>Workflow Section - Medical Software</title>
+    <link href="https://fonts.googleapis.com/css2?family=Open+Sans:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <style>
         * {
@@ -14,8 +14,8 @@
         }
 
         body {
-            font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
-            background: #f8f9fa;
+            font-family: 'Open Sans', sans-serif;
+            background: #f5f7fa;
             padding: 20px;
         }
 
@@ -23,1122 +23,1035 @@
             max-width: 1820px;
             margin: 0 auto;
             background: white;
-            border-radius: 8px;
-            box-shadow: 0 1px 3px rgba(0,0,0,0.1);
+            border-radius: 12px;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.08);
+            padding: 30px;
         }
 
-        /* Header */
-        .page-header {
+        /* Workflow Section */
+        .workflow-section {
+            background: #f8f9fa;
+            border: 1px solid #e9ecef;
+            border-radius: 12px;
+            margin-bottom: 20px;
+            overflow: hidden;
+        }
+
+        .workflow-header {
+            padding: 20px 25px;
             background: white;
-            color: #1a1a1a;
-            padding: 24px 32px;
-            border-bottom: 1px solid #e5e7eb;
+            border-bottom: 1px solid #e9ecef;
             display: flex;
             justify-content: space-between;
             align-items: center;
         }
 
-        .page-header h1 {
-            font-size: 24px;
-            font-weight: 600;
-            color: #1a1a1a;
+        .workflow-header-left {
+            display: flex;
+            align-items: center;
+            gap: 12px;
         }
 
-        .header-meta {
-            font-size: 14px;
-            color: #6b7280;
-        }
-
-        /* Content Area */
-        .content-area {
-            padding: 32px;
-        }
-
-        /* Detail Sections */
-        .detail-section {
-            background: white;
-            border: 1px solid #e5e7eb;
+        .workflow-icon {
+            width: 40px;
+            height: 40px;
+            background: #e3f2fd;
+            color: #3498db;
             border-radius: 8px;
-            padding: 24px;
-            margin-bottom: 24px;
-        }
-
-        .section-header {
-            margin-bottom: 24px;
-            padding-bottom: 16px;
-            border-bottom: 1px solid #e5e7eb;
-        }
-
-        .section-title {
-            font-size: 18px;
-            font-weight: 600;
-            color: #1a1a1a;
-            margin-bottom: 4px;
-        }
-
-        .section-subtitle {
-            font-size: 14px;
-            color: #6b7280;
-        }
-
-        /* Color Palette */
-        .color-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
-            gap: 16px;
-        }
-
-        .color-swatch {
-            background: white;
-            border: 1px solid #e5e7eb;
-            border-radius: 8px;
-            overflow: hidden;
-        }
-
-        .color-block {
-            height: 100px;
             display: flex;
             align-items: center;
             justify-content: center;
-            color: white;
-            font-weight: 600;
-            font-size: 14px;
+            font-size: 18px;
         }
 
-        .color-info {
-            padding: 12px;
-        }
-
-        .color-name {
-            font-size: 13px;
-            font-weight: 600;
-            color: #1a1a1a;
+        .workflow-title h3 {
+            font-size: 16px;
+            color: #2c3e50;
             margin-bottom: 4px;
         }
 
-        .color-hex {
+        .workflow-title p {
             font-size: 12px;
-            color: #6b7280;
-            font-family: 'Courier New', monospace;
+            color: #6c757d;
         }
 
-        /* Typography Samples */
-        .typography-sample {
-            background: #f9fafb;
-            padding: 20px;
-            border-radius: 8px;
-            border: 1px solid #e5e7eb;
-            margin-bottom: 16px;
-        }
-
-        .typography-label {
-            font-size: 12px;
-            font-weight: 600;
-            color: #6b7280;
-            text-transform: uppercase;
-            letter-spacing: 0.5px;
-            margin-bottom: 12px;
-        }
-
-        .font-h1 { font-size: 30px; font-weight: 700; color: #1a1a1a; }
-        .font-h2 { font-size: 24px; font-weight: 600; color: #1a1a1a; }
-        .font-h3 { font-size: 18px; font-weight: 600; color: #1a1a1a; }
-        .font-body { font-size: 14px; font-weight: 400; color: #374151; line-height: 1.6; }
-        .font-small { font-size: 13px; font-weight: 400; color: #6b7280; }
-        .font-tiny { font-size: 12px; font-weight: 400; color: #9ca3af; }
-
-        /* Button Samples */
-        .button-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
-            gap: 20px;
-        }
-
-        .button-sample {
-            background: #f9fafb;
-            padding: 20px;
-            border-radius: 8px;
-            border: 1px solid #e5e7eb;
-        }
-
-        .button-label {
-            font-size: 12px;
-            font-weight: 600;
-            color: #6b7280;
-            text-transform: uppercase;
-            letter-spacing: 0.5px;
-            margin-bottom: 12px;
+        .workflow-actions {
+            display: flex;
+            gap: 10px;
         }
 
         .btn-action {
             padding: 8px 16px;
             border: none;
             border-radius: 6px;
-            font-size: 14px;
-            font-weight: 500;
-            cursor: pointer;
-            display: inline-flex;
-            align-items: center;
-            gap: 8px;
-            transition: all 0.2s;
-            width: 100%;
-            justify-content: center;
-        }
-
-        .btn-primary {
-            background: #7c3aed;
-            color: white;
-        }
-
-        .btn-primary:hover {
-            background: #6d28d9;
-        }
-
-        .btn-success {
-            background: #10b981;
-            color: white;
-        }
-
-        .btn-success:hover {
-            background: #059669;
-        }
-
-        .btn-secondary {
-            background: #f3f4f6;
-            color: #374151;
-            border: 1px solid #d1d5db;
-        }
-
-        .btn-secondary:hover {
-            background: #e5e7eb;
-        }
-
-        .btn-danger {
-            background: #ef4444;
-            color: white;
-        }
-
-        .btn-danger:hover {
-            background: #dc2626;
-        }
-
-        .btn-view {
-            background: #6366f1;
-            color: white;
-        }
-
-        .btn-view:hover {
-            background: #4f46e5;
-        }
-
-        .btn-overturn {
-            background: #f3f4f6;
-            color: #374151;
-            border: 1px solid #d1d5db;
-        }
-
-        .btn-overturn:hover {
-            background: #e5e7eb;
-        }
-
-        /* Badge Samples */
-        .badge-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
-            gap: 20px;
-        }
-
-        .badge-sample {
-            background: #f9fafb;
-            padding: 20px;
-            border-radius: 8px;
-            border: 1px solid #e5e7eb;
-        }
-
-        .status-badge {
-            display: inline-flex;
-            align-items: center;
-            gap: 6px;
-            padding: 4px 12px;
-            border-radius: 6px;
             font-size: 13px;
-            font-weight: 500;
-        }
-
-        .status-new {
-            background: #dbeafe;
-            color: #1e40af;
-        }
-
-        .status-view-01 {
-            background: #ede9fe;
-            color: #6d28d9;
-        }
-
-        .status-medicare {
-            background: #ede9fe;
-            color: #6d28d9;
-        }
-
-        .status-appeal {
-            background: #d1fae5;
-            color: #065f46;
-        }
-
-        .status-grievance {
-            background: #d1fae5;
-            color: #065f46;
-        }
-
-        /* Table Samples */
-        .table-wrapper {
-            background: white;
-            border: 1px solid #e5e7eb;
-            border-radius: 8px;
-            overflow: hidden;
-        }
-
-        .table-sample {
-            width: 100%;
-            border-collapse: collapse;
-        }
-
-        .table-sample thead {
-            background: #f9fafb;
-        }
-
-        .table-sample th {
-            padding: 12px 16px;
-            text-align: left;
-            font-size: 12px;
             font-weight: 600;
-            color: #6b7280;
-            text-transform: uppercase;
-            letter-spacing: 0.5px;
-            border-bottom: 1px solid #e5e7eb;
-        }
-
-        .table-sample td {
-            padding: 12px 16px;
-            font-size: 14px;
-            color: #1a1a1a;
-            border-bottom: 1px solid #f3f4f6;
-        }
-
-        .table-sample tbody tr:hover {
-            background: #f9fafb;
-        }
-
-        .table-link {
-            color: #2563eb;
-            text-decoration: none;
-            font-weight: 500;
-        }
-
-        .table-link:hover {
-            text-decoration: underline;
-        }
-
-        /* Form Elements */
-        .form-elements-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-            gap: 20px;
-        }
-
-        .form-sample {
-            background: white;
-            padding: 20px;
-            border-radius: 8px;
-            border: 1px solid #e5e7eb;
-        }
-
-        .form-group {
-            margin-bottom: 16px;
-        }
-
-        .form-group label {
-            font-size: 14px;
-            font-weight: 500;
-            color: #374151;
-            margin-bottom: 6px;
-            display: block;
-        }
-
-        .form-group input,
-        .form-group select,
-        .form-group textarea {
-            width: 100%;
-            padding: 10px 12px;
-            border: 1px solid #d1d5db;
-            border-radius: 6px;
-            font-size: 14px;
-            font-family: 'Inter', sans-serif;
-            color: #1a1a1a;
-            transition: all 0.2s;
-        }
-
-        .form-group input:focus,
-        .form-group select:focus,
-        .form-group textarea:focus {
-            outline: none;
-            border-color: #7c3aed;
-            box-shadow: 0 0 0 3px rgba(124,58,237,0.1);
-        }
-
-        .form-group input::placeholder {
-            color: #9ca3af;
-        }
-
-        /* Checkbox & Multi-select */
-        .checkbox-item {
-            display: flex;
+            cursor: pointer;
+            display: inline-flex;
             align-items: center;
-            gap: 10px;
-            padding: 10px 12px;
-            border-radius: 6px;
-            cursor: pointer;
-            transition: background 0.2s;
-        }
-
-        .checkbox-item:hover {
-            background: #f9fafb;
-        }
-
-        .checkbox-item input[type="checkbox"] {
-            width: 18px;
-            height: 18px;
-            cursor: pointer;
-            accent-color: #7c3aed;
-        }
-
-        .checkbox-item label {
-            font-size: 14px;
-            color: #374151;
-            cursor: pointer;
-        }
-
-        .selected-tags {
-            display: flex;
-            flex-wrap: wrap;
             gap: 8px;
+            transition: all 0.3s;
+        }
+
+        .btn-view-full {
+            background: #3498db;
+            color: white;
+        }
+
+        .btn-view-full:hover {
+            background: #2980b9;
+        }
+
+        .btn-collapse {
+            background: #95a5a6;
+            color: white;
+        }
+
+        .btn-collapse:hover {
+            background: #7f8c8d;
+        }
+
+        .btn-detailed {
+            background: #9b59b6;
+            color: white;
+        }
+
+        .btn-detailed:hover {
+            background: #8e44ad;
+        }
+
+        /* Collapsed Workflow (Horizontal) */
+        .workflow-collapsed {
+            padding: 25px;
+            display: flex;
+            justify-content: space-between;
+            gap: 20px;
+            align-items: stretch;
+        }
+
+        .workflow-step-horizontal {
+            flex: 1;
+            background: white;
+            border: 2px solid #e9ecef;
+            border-radius: 10px;
+            padding: 20px;
+            position: relative;
+            transition: all 0.3s;
+        }
+
+        .workflow-step-horizontal:hover {
+            box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+            transform: translateY(-2px);
+        }
+
+        .workflow-step-horizontal::after {
+            content: '→';
+            position: absolute;
+            right: -30px;
+            top: 50%;
+            transform: translateY(-50%);
+            font-size: 20px;
+            color: #e9ecef;
+        }
+
+        .workflow-step-horizontal:last-child::after {
+            display: none;
+        }
+
+        .workflow-step-horizontal.last-processed {
+            border-color: #27ae60;
+            background: #f0fdf4;
+        }
+
+        .workflow-step-horizontal.current {
+            border-color: #3498db;
+            background: #eff6ff;
+        }
+
+        .workflow-step-horizontal.next {
+            border-color: #f39c12;
+            background: #fffbeb;
+        }
+
+        .step-header-horizontal {
+            display: flex;
+            justify-content: space-between;
+            align-items: flex-start;
             margin-bottom: 12px;
         }
 
-        .tag {
-            display: inline-flex;
-            align-items: center;
-            gap: 6px;
-            padding: 4px 10px;
-            background: #ede9fe;
-            color: #6d28d9;
-            border-radius: 6px;
-            font-size: 13px;
-            font-weight: 500;
-        }
-
-        .tag .remove {
-            cursor: pointer;
-            font-weight: bold;
-        }
-
-        /* Modal */
-        .modal-overlay {
-            position: fixed;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            background: rgba(0, 0, 0, 0.5);
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            z-index: 9999;
-        }
-
-        .modal-container {
-            background: white;
-            border-radius: 12px;
-            box-shadow: 0 20px 25px -5px rgba(0, 0, 0, 0.1);
-            width: 100%;
-            max-width: 600px;
-            max-height: 90vh;
-            overflow-y: auto;
-        }
-
-        .modal-header {
-            padding: 24px;
-            border-bottom: 1px solid #e5e7eb;
-        }
-
-        .modal-title {
-            font-size: 20px;
-            font-weight: 600;
-            color: #1a1a1a;
-            margin-bottom: 4px;
-        }
-
-        .modal-subtitle {
-            font-size: 14px;
-            color: #6b7280;
-        }
-
-        .modal-body {
-            padding: 24px;
-        }
-
-        .modal-footer {
-            padding: 16px 24px;
-            border-top: 1px solid #e5e7eb;
-            display: flex;
-            justify-content: flex-end;
-            gap: 12px;
-        }
-
-        /* Progress Bar */
-        .progress-bar {
-            width: 100%;
-            height: 8px;
-            background: #e5e7eb;
-            border-radius: 4px;
-            overflow: hidden;
-        }
-
-        .progress-fill {
-            height: 100%;
-            background: #10b981;
-            border-radius: 4px;
-            transition: width 0.3s;
-        }
-
-        /* Icon Samples */
-        .icon-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(120px, 1fr));
-            gap: 16px;
-        }
-
-        .icon-sample {
-            background: #f9fafb;
-            padding: 20px;
-            border-radius: 8px;
-            border: 1px solid #e5e7eb;
-            text-align: center;
-        }
-
-        .icon-display {
-            font-size: 32px;
-            color: #6b7280;
+        .step-label {
+            font-size: 11px;
+            font-weight: 700;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+            color: #6c757d;
             margin-bottom: 8px;
         }
 
-        .icon-name {
-            font-size: 12px;
-            color: #9ca3af;
-        }
-
-        /* Cards */
-        .card-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-            gap: 20px;
-        }
-
-        .info-card {
-            background: white;
-            border: 1px solid #e5e7eb;
-            border-radius: 8px;
-            padding: 20px;
-        }
-
-        .card-header {
+        .step-name {
             font-size: 14px;
             font-weight: 600;
-            color: #1a1a1a;
+            color: #2c3e50;
+            line-height: 1.4;
+        }
+
+        .step-status-badge {
+            padding: 4px 10px;
+            border-radius: 4px;
+            font-size: 11px;
+            font-weight: 600;
+            text-transform: uppercase;
+            white-space: nowrap;
+        }
+
+        .status-completed {
+            background: #d1f2eb;
+            color: #0a6c53;
+        }
+
+        .status-in-progress {
+            background: #e3f2fd;
+            color: #1565c0;
+        }
+
+        .status-pending {
+            background: #ffeaa7;
+            color: #856404;
+        }
+
+        .status-approved {
+            background: #d1f2eb;
+            color: #0a6c53;
+        }
+
+        .status-denied {
+            background: #f8d7da;
+            color: #721c24;
+        }
+
+        .status-hold {
+            background: #fff3cd;
+            color: #856404;
+        }
+
+        .step-message {
+            font-size: 12px;
+            color: #6c757d;
+            line-height: 1.5;
+            margin-top: 8px;
+        }
+
+        /* Expanded Workflow (Vertical) */
+        .workflow-expanded {
+            padding: 25px 40px 25px 60px;
+            position: relative;
+        }
+
+        .workflow-timeline {
+            position: relative;
+        }
+
+        .workflow-timeline::before {
+            content: '';
+            position: absolute;
+            left: -35px;
+            top: 0;
+            bottom: 0;
+            width: 2px;
+            background: #e9ecef;
+        }
+
+        .workflow-step-vertical {
+            position: relative;
+            padding: 20px;
+            background: white;
+            border: 1px solid #e9ecef;
+            border-radius: 10px;
+            margin-bottom: 20px;
+            transition: all 0.3s;
+        }
+
+        .workflow-step-vertical:hover {
+            box-shadow: 0 4px 12px rgba(0,0,0,0.08);
+        }
+
+        .workflow-step-vertical::before {
+            content: '';
+            position: absolute;
+            left: -43px;
+            top: 28px;
+            width: 16px;
+            height: 16px;
+            border-radius: 50%;
+            border: 3px solid white;
+            box-shadow: 0 0 0 2px #e9ecef;
+            z-index: 1;
+        }
+
+        .workflow-step-vertical.completed::before {
+            background: #27ae60;
+            box-shadow: 0 0 0 2px #27ae60;
+        }
+
+        .workflow-step-vertical.in-progress::before {
+            background: #3498db;
+            box-shadow: 0 0 0 2px #3498db;
+        }
+
+        .workflow-step-vertical.pending::before {
+            background: #f39c12;
+            box-shadow: 0 0 0 2px #f39c12;
+        }
+
+        .step-header-vertical {
+            display: flex;
+            justify-content: space-between;
+            align-items: flex-start;
             margin-bottom: 12px;
         }
 
-        .card-content {
+        .step-date {
+            font-size: 12px;
+            font-weight: 600;
+            color: #6c757d;
+            margin-bottom: 8px;
+        }
+
+        .step-title-vertical {
             font-size: 14px;
-            color: #6b7280;
+            font-weight: 700;
+            color: #2c3e50;
+            margin-bottom: 8px;
+        }
+
+        .step-description {
+            font-size: 13px;
+            color: #495057;
+            line-height: 1.6;
+            margin-bottom: 12px;
+        }
+
+        .step-user {
+            font-size: 12px;
+            color: #6c757d;
+            margin-bottom: 8px;
+            display: flex;
+            align-items: center;
+            gap: 6px;
+        }
+
+        .step-rationale {
+            background: #f8f9fa;
+            padding: 12px;
+            border-radius: 6px;
+            border-left: 3px solid #3498db;
+            margin-top: 10px;
+        }
+
+        .rationale-label {
+            font-size: 11px;
+            font-weight: 600;
+            color: #6c757d;
+            text-transform: uppercase;
+            margin-bottom: 6px;
+        }
+
+        .rationale-text {
+            font-size: 12px;
+            color: #495057;
             line-height: 1.6;
         }
 
-        .card-stats {
+        /* Sub-steps */
+        .sub-steps {
+            margin-top: 15px;
+            padding-left: 20px;
+            border-left: 2px solid #e9ecef;
+        }
+
+        .sub-step-item {
+            background: #f8f9fa;
+            padding: 12px;
+            border-radius: 6px;
+            margin-bottom: 10px;
+            border-left: 3px solid #3498db;
+        }
+
+        .sub-step-item.completed {
+            border-left-color: #27ae60;
+        }
+
+        .sub-step-item.denied {
+            border-left-color: #e74c3c;
+        }
+
+        .sub-step-header {
             display: flex;
             justify-content: space-between;
             align-items: center;
-            margin-top: 16px;
-            padding-top: 16px;
-            border-top: 1px solid #e5e7eb;
+            margin-bottom: 8px;
         }
 
-        .stat-item {
-            text-align: center;
+        .sub-step-title {
+            font-size: 13px;
+            font-weight: 600;
+            color: #2c3e50;
         }
 
-        .stat-value {
-            font-size: 24px;
-            font-weight: 700;
-            color: #1a1a1a;
-            margin-bottom: 4px;
+        .sub-step-date {
+            font-size: 11px;
+            color: #6c757d;
         }
 
-        .stat-label {
+        .sub-step-content {
             font-size: 12px;
-            color: #6b7280;
-            text-transform: uppercase;
-            letter-spacing: 0.5px;
+            color: #495057;
+            line-height: 1.5;
         }
 
-        /* Action Buttons Group */
-        .action-group {
+        /* Documents Section */
+        .step-documents {
+            margin-top: 12px;
+            padding: 12px;
+            background: #f8f9fa;
+            border-radius: 6px;
+        }
+
+        .documents-header {
             display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 10px;
+        }
+
+        .documents-title {
+            font-size: 12px;
+            font-weight: 600;
+            color: #2c3e50;
+            display: flex;
+            align-items: center;
+            gap: 6px;
+        }
+
+        .btn-add-doc {
+            padding: 4px 10px;
+            background: #3498db;
+            color: white;
+            border: none;
+            border-radius: 4px;
+            font-size: 11px;
+            font-weight: 600;
+            cursor: pointer;
+            display: inline-flex;
+            align-items: center;
+            gap: 4px;
+            transition: all 0.3s;
+        }
+
+        .btn-add-doc:hover {
+            background: #2980b9;
+        }
+
+        .document-list {
+            display: flex;
+            flex-direction: column;
             gap: 8px;
+        }
+
+        .document-item {
+            background: white;
+            padding: 10px;
+            border-radius: 4px;
+            border: 1px solid #e9ecef;
+            display: flex;
+            justify-content: space-between;
             align-items: center;
         }
 
-        .icon-btn {
-            width: 32px;
-            height: 32px;
+        .document-name {
+            font-size: 12px;
+            color: #2c3e50;
+            display: flex;
+            align-items: center;
+            gap: 6px;
+        }
+
+        .document-actions {
+            display: flex;
+            gap: 4px;
+        }
+
+        .btn-doc-action {
+            width: 24px;
+            height: 24px;
             border: none;
-            border-radius: 6px;
-            background: #f3f4f6;
-            color: #6b7280;
+            border-radius: 4px;
             cursor: pointer;
             display: flex;
             align-items: center;
             justify-content: center;
-            transition: all 0.2s;
+            font-size: 11px;
+            transition: all 0.3s;
         }
 
-        .icon-btn:hover {
-            background: #e5e7eb;
-            color: #374151;
+        .btn-doc-action:hover {
+            transform: scale(1.1);
         }
 
-        /* Spacing Guide */
-        .spacing-sample {
-            background: #f9fafb;
-            padding: 20px;
-            border-radius: 8px;
-            border: 1px solid #e5e7eb;
-            margin-bottom: 16px;
+        /* Outreach Attempts */
+        .outreach-attempts {
+            margin-top: 10px;
         }
 
-        .spacing-box {
-            background: #ede9fe;
-            border: 2px dashed #7c3aed;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            color: #7c3aed;
+        .outreach-item {
+            background: #fff3cd;
+            padding: 10px;
+            border-radius: 4px;
+            margin-bottom: 8px;
+            border-left: 3px solid #f39c12;
+        }
+
+        .outreach-header {
+            font-size: 11px;
             font-weight: 600;
-            font-size: 13px;
+            color: #856404;
+            margin-bottom: 4px;
+        }
+
+        .outreach-details {
+            font-size: 11px;
+            color: #856404;
+        }
+
+        /* Hidden class */
+        .hidden {
+            display: none !important;
+        }
+
+        /* Responsive */
+        @media (max-width: 768px) {
+            .workflow-collapsed {
+                flex-direction: column;
+            }
+
+            .workflow-step-horizontal::after {
+                display: none;
+            }
         }
     </style>
 </head>
 <body>
     <div class="container">
-        <!-- Page Header -->
-        <div class="page-header">
-            <div>
-                <h1><i class="fas fa-palette"></i> Design System Style Guide</h1>
-                <div class="header-meta">Medical Software Portal - Updated Color Scheme</div>
-            </div>
-        </div>
-
-        <!-- Content Area -->
-        <div class="content-area">
-            <!-- Color Palette -->
-            <div class="detail-section">
-                <div class="section-header">
-                    <div class="section-title">Color Palette</div>
-                    <div class="section-subtitle">Primary and secondary colors used throughout the application</div>
+        <!-- Workflow Section -->
+        <div class="workflow-section">
+            <div class="workflow-header">
+                <div class="workflow-header-left">
+                    <div class="workflow-icon">
+                        <i class="fas fa-project-diagram"></i>
+                    </div>
+                    <div class="workflow-title">
+                        <h3>Workflow Process</h3>
+                        <p>Case processing timeline and status</p>
+                    </div>
                 </div>
-                <div class="color-grid">
-                    <div class="color-swatch">
-                        <div class="color-block" style="background: #7c3aed;">Primary</div>
-                        <div class="color-info">
-                            <div class="color-name">Primary Purple</div>
-                            <div class="color-hex">#7c3aed</div>
+                <div class="workflow-actions">
+                    <button class="btn-action btn-view-full" id="btnViewFull" onclick="expandWorkflow()">
+                        <i class="fas fa-expand"></i> View Full Workflow
+                    </button>
+                    <button class="btn-action btn-detailed hidden" id="btnDetailed" onclick="showDetailed()">
+                        <i class="fas fa-list-ul"></i> Detailed View
+                    </button>
+                    <button class="btn-action btn-collapse hidden" id="btnCollapse" onclick="collapseWorkflow()">
+                        <i class="fas fa-compress"></i> Collapse
+                    </button>
+                </div>
+            </div>
+
+            <!-- Collapsed View (Horizontal) -->
+            <div class="workflow-collapsed" id="workflowCollapsed">
+                <div class="workflow-step-horizontal last-processed">
+                    <div class="step-header-horizontal">
+                        <div>
+                            <div class="step-label">Last Processed</div>
+                            <div class="step-name">DELEGATION CHECK</div>
                         </div>
+                        <span class="step-status-badge status-completed">Completed</span>
                     </div>
-                    <div class="color-swatch">
-                        <div class="color-block" style="background: #6366f1;">Secondary</div>
-                        <div class="color-info">
-                            <div class="color-name">Secondary Indigo</div>
-                            <div class="color-hex">#6366f1</div>
-                        </div>
+                    <div class="step-message">
+                        Non-Delegated - Case ready for next step.
                     </div>
-                    <div class="color-swatch">
-                        <div class="color-block" style="background: #10b981;">Success</div>
-                        <div class="color-info">
-                            <div class="color-name">Success Green</div>
-                            <div class="color-hex">#10b981</div>
+                </div>
+
+                <div class="workflow-step-horizontal current">
+                    <div class="step-header-horizontal">
+                        <div>
+                            <div class="step-label">Current Step</div>
+                            <div class="step-name">AOR CHECK</div>
                         </div>
+                        <span class="step-status-badge status-in-progress">In Progress</span>
                     </div>
-                    <div class="color-swatch">
-                        <div class="color-block" style="background: #ef4444;">Danger</div>
-                        <div class="color-info">
-                            <div class="color-name">Danger Red</div>
-                            <div class="color-hex">#ef4444</div>
-                        </div>
+                    <div class="step-message">
+                        AOR requested from member - Pending response.
                     </div>
-                    <div class="color-swatch">
-                        <div class="color-block" style="background: #f59e0b;">Warning</div>
-                        <div class="color-info">
-                            <div class="color-name">Warning Orange</div>
-                            <div class="color-hex">#f59e0b</div>
+                </div>
+
+                <div class="workflow-step-horizontal next">
+                    <div class="step-header-horizontal">
+                        <div>
+                            <div class="step-label">Next Step</div>
+                            <div class="step-name">GOOD CAUSE CHECK</div>
                         </div>
+                        <span class="step-status-badge status-pending">Pending</span>
                     </div>
-                    <div class="color-swatch">
-                        <div class="color-block" style="background: #2563eb;">Info</div>
-                        <div class="color-info">
-                            <div class="color-name">Info Blue</div>
-                            <div class="color-hex">#2563eb</div>
-                        </div>
-                    </div>
-                    <div class="color-swatch">
-                        <div class="color-block" style="background: #1a1a1a;">Dark Text</div>
-                        <div class="color-info">
-                            <div class="color-name">Primary Text</div>
-                            <div class="color-hex">#1a1a1a</div>
-                        </div>
-                    </div>
-                    <div class="color-swatch">
-                        <div class="color-block" style="background: #6b7280; color: white;">Gray</div>
-                        <div class="color-info">
-                            <div class="color-name">Secondary Text</div>
-                            <div class="color-hex">#6b7280</div>
-                        </div>
+                    <div class="step-message">
+                        Will proceed to good cause verification.
                     </div>
                 </div>
             </div>
 
-            <!-- Typography -->
-            <div class="detail-section">
-                <div class="section-header">
-                    <div class="section-title">Typography</div>
-                    <div class="section-subtitle">Font family: Inter</div>
-                </div>
-                <div class="typography-sample">
-                    <div class="typography-label">Heading 1 - 30px Bold</div>
-                    <div class="font-h1">The quick brown fox jumps over the lazy dog</div>
-                </div>
-                <div class="typography-sample">
-                    <div class="typography-label">Heading 2 - 24px Semibold</div>
-                    <div class="font-h2">The quick brown fox jumps over the lazy dog</div>
-                </div>
-                <div class="typography-sample">
-                    <div class="typography-label">Heading 3 - 18px Semibold</div>
-                    <div class="font-h3">The quick brown fox jumps over the lazy dog</div>
-                </div>
-                <div class="typography-sample">
-                    <div class="typography-label">Body Text - 14px Regular</div>
-                    <div class="font-body">The quick brown fox jumps over the lazy dog. Lorem ipsum dolor sit amet, consectetur adipiscing elit.</div>
-                </div>
-                <div class="typography-sample">
-                    <div class="typography-label">Small Text - 13px Regular</div>
-                    <div class="font-small">The quick brown fox jumps over the lazy dog</div>
-                </div>
-                <div class="typography-sample">
-                    <div class="typography-label">Tiny Text - 12px Regular</div>
-                    <div class="font-tiny">The quick brown fox jumps over the lazy dog</div>
-                </div>
-            </div>
+            <!-- Expanded View (Vertical) - Summary -->
+            <div class="workflow-expanded hidden" id="workflowExpanded">
+                <div class="workflow-timeline">
+                    <!-- New/Appeal Created -->
+                    <div class="workflow-step-vertical completed">
+                        <div class="step-date">Dec 28, 2025 9:15 AM</div>
+                        <div class="step-header-vertical">
+                            <div>
+                                <div class="step-title-vertical">1. NEW - APPEAL CREATED</div>
+                                <div class="step-description">
+                                    Appeal case created and initialized in the system.
+                                </div>
+                                <div class="step-user">
+                                    <i class="fas fa-user"></i> System Automated
+                                </div>
+                            </div>
+                            <span class="step-status-badge status-completed">Completed</span>
+                        </div>
+                    </div>
 
-            <!-- Buttons -->
-            <div class="detail-section">
-                <div class="section-header">
-                    <div class="section-title">Buttons</div>
-                    <div class="section-subtitle">Button styles and variations</div>
-                </div>
-                <div class="button-grid">
-                    <div class="button-sample">
-                        <div class="button-label">Primary Button</div>
-                        <button class="btn-action btn-primary">
-                            <i class="fas fa-check"></i> Save
-                        </button>
+                    <!-- Delegation Check -->
+                    <div class="workflow-step-vertical completed">
+                        <div class="step-date">Dec 28, 2025 9:20 AM</div>
+                        <div class="step-header-vertical">
+                            <div>
+                                <div class="step-title-vertical">2. DELEGATION CHECK</div>
+                                <div class="step-description">
+                                    LDP delegation status verified - Case is Non-Delegated.
+                                </div>
+                                <div class="step-user">
+                                    <i class="fas fa-user"></i> John Analyst
+                                </div>
+                            </div>
+                            <span class="step-status-badge status-completed">Non-Delegated</span>
+                        </div>
                     </div>
-                    <div class="button-sample">
-                        <div class="button-label">Success Button</div>
-                        <button class="btn-action btn-success">
-                            <i class="fas fa-check"></i> APPEAL & GRIEVANCE
-                        </button>
-                    </div>
-                    <div class="button-sample">
-                        <div class="button-label">Secondary Button</div>
-                        <button class="btn-action btn-secondary">
-                            <i class="fas fa-times"></i> Cancel
-                        </button>
-                    </div>
-                    <div class="button-sample">
-                        <div class="button-label">View Button</div>
-                        <button class="btn-action btn-view">
-                            <i class="fas fa-eye"></i> View-01
-                        </button>
-                    </div>
-                    <div class="button-sample">
-                        <div class="button-label">Overturn Button</div>
-                        <button class="btn-action btn-overturn">
-                            <i class="fas fa-undo"></i> Overturn
-                        </button>
-                    </div>
-                    <div class="button-sample">
-                        <div class="button-label">Danger Button</div>
-                        <button class="btn-action btn-danger">
-                            <i class="fas fa-trash"></i> Delete
-                        </button>
-                    </div>
-                </div>
-            </div>
 
-            <!-- Badges -->
-            <div class="detail-section">
-                <div class="section-header">
-                    <div class="section-title">Status Badges</div>
-                    <div class="section-subtitle">Badge styles for different statuses</div>
-                </div>
-                <div class="badge-grid">
-                    <div class="badge-sample">
-                        <div class="button-label">New Status</div>
-                        <span class="status-badge status-new">NEW</span>
+                    <!-- AOR Check - Current -->
+                    <div class="workflow-step-vertical in-progress">
+                        <div class="step-date">Dec 28, 2025 10:00 AM</div>
+                        <div class="step-header-vertical">
+                            <div>
+                                <div class="step-title-vertical">3. AOR CHECK</div>
+                                <div class="step-description">
+                                    Authorization of Representative (AOR) verification in progress.
+                                </div>
+                                <div class="step-user">
+                                    <i class="fas fa-user"></i> Sarah Martinez
+                                </div>
+                            </div>
+                            <span class="step-status-badge status-in-progress">AOR Requested</span>
+                        </div>
                     </div>
-                    <div class="badge-sample">
-                        <div class="button-label">View-01 Badge</div>
-                        <span class="status-badge status-view-01">
-                            <i class="fas fa-eye"></i> View-01
-                        </span>
+
+                    <!-- Good Cause Check - Pending -->
+                    <div class="workflow-step-vertical pending">
+                        <div class="step-date">Pending</div>
+                        <div class="step-header-vertical">
+                            <div>
+                                <div class="step-title-vertical">4. GOOD CAUSE CHECK</div>
+                                <div class="step-description">
+                                    Will verify if case was received timely or if good cause applies.
+                                </div>
+                            </div>
+                            <span class="step-status-badge status-pending">Pending</span>
+                        </div>
                     </div>
-                    <div class="badge-sample">
-                        <div class="button-label">Medicare Badge</div>
-                        <span class="status-badge status-medicare">Medicare</span>
-                    </div>
-                    <div class="badge-sample">
-                        <div class="button-label">Appeal Badge</div>
-                        <span class="status-badge status-appeal">
-                            <i class="fas fa-check"></i> APPEAL
-                        </span>
-                    </div>
-                    <div class="badge-sample">
-                        <div class="button-label">Grievance Badge</div>
-                        <span class="status-badge status-grievance">
-                            <i class="fas fa-check"></i> APPEAL & GRIEVANCE
-                        </span>
+
+                    <!-- Expedited Review Check - Pending -->
+                    <div class="workflow-step-vertical pending">
+                        <div class="step-date">Pending</div>
+                        <div class="step-header-vertical">
+                            <div>
+                                <div class="step-title-vertical">5. EXPEDITED REVIEW CHECK</div>
+                                <div class="step-description">
+                                    Will determine if expedited processing is required.
+                                </div>
+                            </div>
+                            <span class="step-status-badge status-pending">Pending</span>
+                        </div>
                     </div>
                 </div>
             </div>
 
-            <!-- Table -->
-            <div class="detail-section">
-                <div class="section-header">
-                    <div class="section-title">Data Table</div>
-                    <div class="section-subtitle">Table layout with sample data</div>
-                </div>
-                <div class="table-wrapper">
-                    <table class="table-sample">
-                        <thead>
-                            <tr>
-                                <th>Sr.No.</th>
-                                <th>Auth/Claim Number</th>
-                                <th>Source Type</th>
-                                <th>Receiver Name</th>
-                                <th>Received Date</th>
-                                <th>LOB</th>
-                                <th>Documents</th>
-                                <th>Status</th>
-                                <th>Action</th>
-                            </tr>
-                        </thead>
-                        <tbody>
-                            <tr>
-                                <td>1</td>
-                                <td><a href="#" class="table-link">AUTH000015</a></td>
-                                <td><i class="fas fa-envelope"></i> Email</td>
-                                <td><i class="fas fa-user"></i> NA</td>
-                                <td><i class="fas fa-calendar"></i> 11/05/2025</td>
-                                <td><span class="status-badge status-medicare">Medicare</span></td>
-                                <td><span class="status-badge status-view-01"><i class="fas fa-eye"></i> View-01</span></td>
-                                <td><span class="status-badge status-new">NEW</span></td>
-                                <td>
-                                    <div class="action-group">
-                                        <button class="icon-btn" title="More Options">
-                                            <i class="fas fa-ellipsis-v"></i>
+            <!-- Detailed View (Vertical) -->
+            <div class="workflow-expanded hidden" id="workflowDetailed">
+                <div class="workflow-timeline">
+                    <!-- 1. New/Appeal Created with Sub-steps -->
+                    <div class="workflow-step-vertical completed">
+                        <div class="step-date">Dec 28, 2025 9:15 AM</div>
+                        <div class="step-header-vertical">
+                            <div>
+                                <div class="step-title-vertical">1. NEW</div>
+                                <div class="step-description">
+                                    Case initialization and type determination.
+                                </div>
+                                <div class="step-user">
+                                    <i class="fas fa-user"></i> System Automated
+                                </div>
+                            </div>
+                            <span class="step-status-badge status-completed">Completed</span>
+                        </div>
+
+                        <div class="sub-steps">
+                            <div class="sub-step-item completed">
+                                <div class="sub-step-header">
+                                    <span class="sub-step-title">1.1 Appeal Created</span>
+                                    <span class="sub-step-date">Dec 28, 2025 9:15 AM</span>
+                                </div>
+                                <div class="sub-step-content">
+                                    Appeal case created for member Lori Falls. Case Type: Provider Appeal. Initial assessment completed.
+                                </div>
+                            </div>
+
+                            <div class="sub-step-item" style="opacity: 0.6;">
+                                <div class="sub-step-header">
+                                    <span class="sub-step-title">1.2 Grievance Created</span>
+                                    <span class="sub-step-date">N/A</span>
+                                </div>
+                                <div class="sub-step-content">
+                                    Not applicable for this case type.
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- 2. Delegation Check with Sub-steps -->
+                    <div class="workflow-step-vertical completed">
+                        <div class="step-date">Dec 28, 2025 9:20 AM</div>
+                        <div class="step-header-vertical">
+                            <div>
+                                <div class="step-title-vertical">2. DELEGATION CHECK</div>
+                                <div class="step-description">
+                                    Verification of LDP delegation status for case routing.
+                                </div>
+                                <div class="step-user">
+                                    <i class="fas fa-user"></i> John Analyst
+                                </div>
+                            </div>
+                            <span class="step-status-badge status-completed">Completed</span>
+                        </div>
+
+                        <div class="sub-steps">
+                            <div class="sub-step-item" style="opacity: 0.6;">
+                                <div class="sub-step-header">
+                                    <span class="sub-step-title">2.1 Delegated</span>
+                                    <span class="sub-step-date">N/A</span>
+                                </div>
+                                <div class="sub-step-content">
+                                    Not applicable - Case determined as non-delegated.
+                                </div>
+                            </div>
+
+                            <div class="sub-step-item completed">
+                                <div class="sub-step-header">
+                                    <span class="sub-step-title">2.2 Non-Delegated</span>
+                                    <span class="sub-step-date">Dec 28, 2025 9:20 AM</span>
+                                </div>
+                                <div class="sub-step-content">
+                                    Case determined as non-delegated. LDP does not have delegation authority for this case type. Case will be processed internally.
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- 3. AOR Check with Sub-steps and Documents -->
+                    <div class="workflow-step-vertical in-progress">
+                        <div class="step-date">Dec 28, 2025 10:00 AM - Present</div>
+                        <div class="step-header-vertical">
+                            <div>
+                                <div class="step-title-vertical">3. AOR CHECK</div>
+                                <div class="step-description">
+                                    Authorization of Representative verification and documentation process.
+                                </div>
+                                <div class="step-user">
+                                    <i class="fas fa-user"></i> Sarah Martinez
+                                </div>
+                            </div>
+                            <span class="step-status-badge status-in-progress">In Progress</span>
+                        </div>
+
+                        <div class="sub-steps">
+                            <div class="sub-step-item completed">
+                                <div class="sub-step-header">
+                                    <span class="sub-step-title">3.0 AOR Requested</span>
+                                    <span class="sub-step-date">Dec 28, 2025 10:00 AM</span>
+                                </div>
+                                <div class="sub-step-content">
+                                    AOR template sent to member and requestor via email. Verbal consent attempted.
+                                </div>
+                                
+                                <div class="outreach-attempts">
+                                    <div class="outreach-item">
+                                        <div class="outreach-header">Outreach Attempt 1</div>
+                                        <div class="outreach-details">Dec 28, 2025 10:00 AM - Email sent to member</div>
+                                    </div>
+                                    <div class="outreach-item">
+                                        <div class="outreach-header">Outreach Attempt 2</div>
+                                        <div class="outreach-details">Dec 28, 2025 2:30 PM - Phone call to requestor (No answer, left voicemail)</div>
+                                    </div>
+                                </div>
+
+                                <div class="step-documents">
+                                    <div class="documents-header">
+                                        <div class="documents-title">
+                                            <i class="fas fa-paperclip"></i> Documents (2)
+                                        </div>
+                                        <button class="btn-add-doc">
+                                            <i class="fas fa-plus"></i> Add Document
                                         </button>
                                     </div>
-                                </td>
-                            </tr>
-                            <tr>
-                                <td>2</td>
-                                <td><a href="#" class="table-link">AUTH000016</a></td>
-                                <td><i class="fas fa-envelope"></i> Email</td>
-                                <td><i class="fas fa-user"></i> NA</td>
-                                <td><i class="fas fa-calendar"></i> 11/05/2025</td>
-                                <td><span class="status-badge status-medicare">Medicare</span></td>
-                                <td><span class="status-badge status-view-01"><i class="fas fa-eye"></i> View-01</span></td>
-                                <td><span class="status-badge status-new">NEW</span></td>
-                                <td>
-                                    <div class="action-group">
-                                        <button class="icon-btn" title="More Options">
-                                            <i class="fas fa-ellipsis-v"></i>
-                                        </button>
+                                    <div class="document-list">
+                                        <div class="document-item">
+                                            <div class="document-name">
+                                                <i class="fas fa-file-pdf"></i> AOR_Request_Template.pdf
+                                            </div>
+                                            <div class="document-actions">
+                                                <button class="btn-doc-action" style="background: #e3f2fd; color: #3498db;" title="View">
+                                                    <i class="fas fa-eye"></i>
+                                                </button>
+                                                <button class="btn-doc-action" style="background: #d1f2eb; color: #27ae60;" title="Download">
+                                                    <i class="fas fa-download"></i>
+                                                </button>
+                                            </div>
+                                        </div>
+                                        <div class="document-item">
+                                            <div class="document-name">
+                                                <i class="fas fa-file-word"></i> Email_Confirmation.docx
+                                            </div>
+                                            <div class="document-actions">
+                                                <button class="btn-doc-action" style="background: #e3f2fd; color: #3498db;" title="View">
+                                                    <i class="fas fa-eye"></i>
+                                                </button>
+                                                <button class="btn-doc-action" style="background: #d1f2eb; color: #27ae60;" title="Download">
+                                                    <i class="fas fa-download"></i>
+                                                </button>
+                                            </div>
+                                        </div>
                                     </div>
-                                </td>
-                            </tr>
-                        </tbody>
-                    </table>
-                </div>
-            </div>
+                                </div>
+                            </div>
 
-            <!-- Form Elements -->
-            <div class="detail-section">
-                <div class="section-header">
-                    <div class="section-title">Form Elements</div>
-                    <div class="section-subtitle">Input fields and form controls</div>
-                </div>
-                <div class="form-elements-grid">
-                    <div class="form-sample">
-                        <div class="form-group">
-                            <label>Select Prefix</label>
-                            <select>
-                                <option>Select Prefix</option>
-                                <option>Mr.</option>
-                                <option>Mrs.</option>
-                                <option>Ms.</option>
-                                <option>Dr.</option>
-                            </select>
-                        </div>
-                    </div>
-                    <div class="form-sample">
-                        <div class="form-group">
-                            <label>First Name</label>
-                            <input type="text" placeholder="First Name">
-                        </div>
-                    </div>
-                    <div class="form-sample">
-                        <div class="form-group">
-                            <label>Last Name</label>
-                            <input type="text" placeholder="Last Name">
-                        </div>
-                    </div>
-                    <div class="form-sample">
-                        <div class="form-group">
-                            <label>Email ID</label>
-                            <input type="email" placeholder="Email ID">
-                        </div>
-                    </div>
-                    <div class="form-sample">
-                        <div class="form-group">
-                            <label>Phone Number</label>
-                            <input type="tel" placeholder="Phone Number">
-                        </div>
-                    </div>
-                    <div class="form-sample">
-                        <div class="form-group">
-                            <label>Select Role</label>
-                            <select>
-                                <option>Select User Credentials</option>
-                                <option>Admin</option>
-                                <option>Analyst</option>
-                                <option>Manager</option>
-                            </select>
-                        </div>
-                    </div>
-                </div>
-            </div>
+                            <div class="sub-step-item completed">
+                                <div class="sub-step-header">
+                                    <span class="sub-step-title">3.1 AOR Pending</span>
+                                    <span class="sub-step-date">Dec 28, 2025 10:05 AM - Present</span>
+                                </div>
+                                <div class="sub-step-content">
+                                    Waiting for AOR documentation from member. Mail date: Dec 28, 2025 (sent before 2pm PST).
+                                </div>
+                            </div>
 
-            <!-- Multi-Select Dropdown -->
-            <div class="detail-section">
-                <div class="section-header">
-                    <div class="section-title">Multi-Select Dropdown</div>
-                    <div class="section-subtitle">Checkbox-based multi-selection</div>
-                </div>
-                <div class="form-sample" style="max-width: 600px;">
-                    <div class="form-group">
-                        <label>Select Skills</label>
-                        <div class="selected-tags">
-                            <span class="tag">
-                                Invisalign <span class="remove">×</span>
-                            </span>
-                            <span class="tag">
-                                Treatment Planning <span class="remove">×</span>
-                            </span>
-                        </div>
-                        <div style="background: #f9fafb; border: 1px solid #e5e7eb; border-radius: 8px; padding: 8px; max-height: 250px; overflow-y: auto;">
-                            <div class="checkbox-item">
-                                <input type="checkbox" id="skill1" checked>
-                                <label for="skill1">Invisalign</label>
+                            <div class="sub-step-item" style="opacity: 0.6;">
+                                <div class="sub-step-header">
+                                    <span class="sub-step-title">3.2 AOR Received</span>
+                                    <span class="sub-step-date">Pending</span>
+                                </div>
+                                <div class="sub-step-content">
+                                    Awaiting receipt of AOR documentation.
+                                </div>
                             </div>
-                            <div class="checkbox-item">
-                                <input type="checkbox" id="skill2" checked>
-                                <label for="skill2">Treatment Planning</label>
+
+                            <div class="sub-step-item" style="opacity: 0.6;">
+                                <div class="sub-step-header">
+                                    <span class="sub-step-title">3.3 AOR Approved</span>
+                                    <span class="sub-step-date">Pending</span>
+                                </div>
+                                <div class="sub-step-content">
+                                    Pending approval after receipt.
+                                </div>
                             </div>
-                            <div class="checkbox-item">
-                                <input type="checkbox" id="skill3">
-                                <label for="skill3">3D Printing</label>
+
+                            <div class="sub-step-item" style="opacity: 0.6;">
+                                <div class="sub-step-header">
+                                    <span class="sub-step-title">3.4 AOR Denied</span>
+                                    <span class="sub-step-date">N/A</span>
+                                </div>
                             </div>
-                            <div class="checkbox-item">
-                                <input type="checkbox" id="skill4">
-                                <label for="skill4">Clear Aligners</label>
+
+                            <div class="sub-step-item" style="opacity: 0.6;">
+                                <div class="sub-step-header">
+                                    <span class="sub-step-title">3.5 AOR Not Received</span>
+                                    <span class="sub-step-date">N/A</span>
+                                </div>
                             </div>
-                            <div class="checkbox-item">
-                                <input type="checkbox" id="skill5">
-                                <label for="skill5">Orthodontic Appliances</label>
-                            </div>
-                            <div class="checkbox-item">
-                                <input type="checkbox" id="skill6">
-                                <label for="skill6">Digital Scanning</label>
+
+                            <div class="sub-step-item" style="opacity: 0.6;">
+                                <div class="sub-step-header">
+                                    <span class="sub-step-title">3.6 AOR Not Applicable</span>
+                                    <span class="sub-step-date">N/A</span>
+                                </div>
                             </div>
                         </div>
                     </div>
-                </div>
-            </div>
 
-            <!-- Modal Example -->
-            <div class="detail-section">
-                <div class="section-header">
-                    <div class="section-title">Modal Dialog</div>
-                    <div class="section-subtitle">Modal window layout</div>
-                </div>
-                <div class="modal-container" style="position: relative; max-height: none;">
-                    <div class="modal-header">
-                        <div class="modal-title">Add User</div>
-                        <div class="modal-subtitle">Add a new user with existing role</div>
-                    </div>
-                    <div class="modal-body">
-                        <div class="form-elements-grid">
-                            <div class="form-group">
-                                <label>Select Prefix</label>
-                                <select>
-                                    <option>Select Prefix</option>
-                                </select>
+                    <!-- 4. Good Cause Check - Pending with Sub-steps -->
+                    <div class="workflow-step-vertical pending">
+                        <div class="step-date">Pending</div>
+                        <div class="step-header-vertical">
+                            <div>
+                                <div class="step-title-vertical">4. GOOD CAUSE CHECK</div>
+                                <div class="step-description">
+                                    Verification of timeliness and good cause determination.
+                                </div>
                             </div>
-                            <div class="form-group">
-                                <label>First Name</label>
-                                <input type="text" placeholder="First Name">
+                            <span class="step-status-badge status-pending">Pending</span>
+                        </div>
+
+                        <div class="sub-steps">
+                            <div class="sub-step-item" style="opacity: 0.6;">
+                                <div class="sub-step-header">
+                                    <span class="sub-step-title">4.0 Good Cause Requested</span>
+                                    <span class="sub-step-date">Pending</span>
+                                </div>
                             </div>
-                            <div class="form-group">
-                                <label>Last Name</label>
-                                <input type="text" placeholder="Last Name">
+
+                            <div class="sub-step-item" style="opacity: 0.6;">
+                                <div class="sub-step-header">
+                                    <span class="sub-step-title">4.1 Good Cause Pending</span>
+                                    <span class="sub-step-date">Pending</span>
+                                </div>
                             </div>
-                            <div class="form-group">
-                                <label>Select Specialization</label>
-                                <select>
-                                    <option>Select Specialization</option>
-                                </select>
+
+                            <div class="sub-step-item" style="opacity: 0.6;">
+                                <div class="sub-step-header">
+                                    <span class="sub-step-title">4.2 Good Cause Received</span>
+                                    <span class="sub-step-date">Pending</span>
+                                </div>
                             </div>
-                            <div class="form-group">
-                                <label>Phone Number</label>
-                                <input type="tel" placeholder="Phone Number">
+
+                            <div class="sub-step-item" style="opacity: 0.6;">
+                                <div class="sub-step-header">
+                                    <span class="sub-step-title">4.3 Good Cause Not Applicable</span>
+                                    <span class="sub-step-date">Pending</span>
+                                </div>
                             </div>
-                            <div class="form-group">
-                                <label>Extension</label>
-                                <input type="text" placeholder="Extension">
+
+                            <div class="sub-step-item" style="opacity: 0.6;">
+                                <div class="sub-step-header">
+                                    <span class="sub-step-title">4.4 Good Cause Approved</span>
+                                    <span class="sub-step-date">Pending</span>
+                                </div>
+                            </div>
+
+                            <div class="sub-step-item" style="opacity: 0.6;">
+                                <div class="sub-step-header">
+                                    <span class="sub-step-title">4.5 Good Cause Denied</span>
+                                    <span class="sub-step-date">Pending</span>
+                                </div>
+                            </div>
+
+                            <div class="sub-step-item" style="opacity: 0.6;">
+                                <div class="sub-step-header">
+                                    <span class="sub-step-title">4.6 Good Cause Not Received</span>
+                                    <span class="sub-step-date">Pending</span>
+                                </div>
                             </div>
                         </div>
                     </div>
-                    <div class="modal-footer">
-                        <button class="btn-action btn-secondary">Cancel</button>
-                        <button class="btn-action btn-primary">Save</button>
-                    </div>
-                </div>
-            </div>
 
-            <!-- Progress Bar -->
-            <div class="detail-section">
-                <div class="section-header">
-                    <div class="section-title">Progress Indicators</div>
-                    <div class="section-subtitle">Progress bars and completion indicators</div>
-                </div>
-                <div class="form-sample">
-                    <div class="button-label">Confidence: 78%</div>
-                    <div class="progress-bar">
-                        <div class="progress-fill" style="width: 78%;"></div>
-                    </div>
-                </div>
-                <div class="form-sample">
-                    <div class="button-label">Rationale: Yes</div>
-                    <div class="progress-bar">
-                        <div class="progress-fill" style="width: 100%; background: #10b981;"></div>
-                    </div>
-                </div>
-            </div>
+                    <!-- 5. Expedited Review Check - Pending -->
+                    <div class="workflow-step-vertical pending">
+                        <div class="step-date">Pending</div>
+                        <div class="step-header-vertical">
+                            <div>
+                                <div class="step-title-vertical">5. EXPEDITED REVIEW CHECK</div>
+                                <div class="step-description">
+                                    Determination of expedited processing requirements.
+                                </div>
+                            </div>
+                            <span class="step-status-badge status-pending">Pending</span>
+                        </div>
 
-            <!-- Icons -->
-            <div class="detail-section">
-                <div class="section-header">
-                    <div class="section-title">Icon Library</div>
-                    <div class="section-subtitle">Commonly used icons</div>
-                </div>
-                <div class="icon-grid">
-                    <div class="icon-sample">
-                        <div class="icon-display"><i class="fas fa-envelope"></i></div>
-                        <div class="icon-name">fa-envelope</div>
-                    </div>
-                    <div class="icon-sample">
-                        <div class="icon-display"><i class="fas fa-user"></i></div>
-                        <div class="icon-name">fa-user</div>
-                    </div>
-                    <div class="icon-sample">
-                        <div class="icon-display"><i class="fas fa-calendar"></i></div>
-                        <div class="icon-name">fa-calendar</div>
-                    </div>
-                    <div class="icon-sample">
-                        <div class="icon-display"><i class="fas fa-eye"></i></div>
-                        <div class="icon-name">fa-eye</div>
-                    </div>
-                    <div class="icon-sample">
-                        <div class="icon-display"><i class="fas fa-check"></i></div>
-                        <div class="icon-name">fa-check</div>
-                    </div>
-                    <div class="icon-sample">
-                        <div class="icon-display"><i class="fas fa-ellipsis-v"></i></div>
-                        <div class="icon-name">fa-ellipsis-v</div>
-                    </div>
-                    <div class="icon-sample">
-                        <div class="icon-display"><i class="fas fa-history"></i></div>
-                        <div class="icon-name">fa-history</div>
-                    </div>
-                    <div class="icon-sample">
-                        <div class="icon-display"><i class="fas fa-undo"></i></div>
-                        <div class="icon-name">fa-undo</div>
-                    </div>
-                </div>
-            </div>
+                        <div class="sub-steps">
+                            <div class="sub-step-item" style="opacity: 0.6;">
+                                <div class="sub-step-header">
+                                    <span class="sub-step-title">5.1 Expedited Review Pending</span>
+                                    <span class="sub-step-date">Pending</span>
+                                </div>
+                            </div>
 
-            <!-- Spacing -->
-            <div class="detail-section">
-                <div class="section-header">
-                    <div class="section-title">Spacing System</div>
-                    <div class="section-subtitle">Standard spacing values</div>
-                </div>
-                <div class="spacing-sample">
-                    <div class="typography-label">4px - Tiny</div>
-                    <div class="spacing-box" style="height: 4px;"></div>
-                </div>
-                <div class="spacing-sample">
-                    <div class="typography-label">8px - Extra Small</div>
-                    <div class="spacing-box" style="height: 8px;"></div>
-                </div>
-                <div class="spacing-sample">
-                    <div class="typography-label">12px - Small</div>
-                    <div class="spacing-box" style="height: 12px;"></div>
-                </div>
-                <div class="spacing-sample">
-                    <div class="typography-label">16px - Medium</div>
-                    <div class="spacing-box" style="height: 16px;"></div>
-                </div>
-                <div class="spacing-sample">
-                    <div class="typography-label">24px - Large</div>
-                    <div class="spacing-box" style="height: 24px;"></div>
-                </div>
-                <div class="spacing-sample">
-                    <div class="typography-label">32px - Extra Large</div>
-                    <div class="spacing-box" style="height: 32px;"></div>
+                            <div class="sub-step-item" style="opacity: 0.6;">
+                                <div class="sub-step-header">
+                                    <span class="sub-step-title">5.2 Expedited Approved</span>
+                                    <span class="sub-step-date">Pending</span>
+                                </div>
+                            </div>
+
+                            <div class="sub-step-item" style="opacity: 0.6;">
+                                <div class="sub-step-header">
+                                    <span class="sub-step-title">5.3 Expedited Denied</span>
+                                    <span class="sub-step-date">Pending</span>
+                                </div>
+                            </div>
+
+                            <div class="sub-step-item" style="opacity: 0.6;">
+                                <div class="sub-step-header">
+                                    <span class="sub-step-title">5.4 Expedited Not Applicable</span>
+                                    <span class="sub-step-date">Pending</span>
+                                </div>
+                            </div>
+
+                            <div class="sub-step-item" style="opacity: 0.6;">
+                                <div class="sub-step-header">
+                                    <span class="sub-step-title">5.5 Expedited Reclassified</span>
+                                    <span class="sub-step-date">Pending</span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
                 </div>
             </div>
         </div>
     </div>
+
+    <script>
+        function expandWorkflow() {
+            document.getElementById('workflowCollapsed').classList.add('hidden');
+            document.getElementById('workflowExpanded').classList.remove('hidden');
+            document.getElementById('workflowDetailed').classList.add('hidden');
+            document.getElementById('btnViewFull').classList.add('hidden');
+            document.getElementById('btnDetailed').classList.remove('hidden');
+            document.getElementById('btnCollapse').classList.remove('hidden');
+        }
+
+        function showDetailed() {
+            document.getElementById('workflowCollapsed').classList.add('hidden');
+            document.getElementById('workflowExpanded').classList.add('hidden');
+            document.getElementById('workflowDetailed').classList.remove('hidden');
+            document.getElementById('btnViewFull').classList.add('hidden');
+            document.getElementById('btnDetailed').classList.add('hidden');
+            document.getElementById('btnCollapse').classList.remove('hidden');
+        }
+
+        function collapseWorkflow() {
+            document.getElementById('workflowCollapsed').classList.remove('hidden');
+            document.getElementById('workflowExpanded').classList.add('hidden');
+            document.getElementById('workflowDetailed').classList.add('hidden');
+            document.getElementById('btnViewFull').classList.remove('hidden');
+            document.getElementById('btnDetailed').classList.add('hidden');
+            document.getElementById('btnCollapse').classList.add('hidden');
+        }
+    </script>
 </body>
 </html>
