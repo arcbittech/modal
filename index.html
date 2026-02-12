@@ -556,20 +556,20 @@
                     </div>
                 </div>
                 <div class="workflow-actions">
-                    <button class="btn-action btn-view-full" id="btnViewFull" onclick="expandWorkflow()">
+                    <button class="btn-action btn-view-full hidden" id="btnViewFull" onclick="expandWorkflow()">
                         <i class="fas fa-expand"></i> View Full Workflow
                     </button>
                     <button class="btn-action btn-detailed hidden" id="btnDetailed" onclick="showDetailed()">
                         <i class="fas fa-list-ul"></i> Detailed View
                     </button>
-                    <button class="btn-action btn-collapse hidden" id="btnCollapse" onclick="collapseWorkflow()">
+                    <button class="btn-action btn-collapse" id="btnCollapse" onclick="collapseWorkflow()">
                         <i class="fas fa-compress"></i> Collapse
                     </button>
                 </div>
             </div>
 
-            <!-- Collapsed View (Horizontal) -->
-            <div class="workflow-collapsed" id="workflowCollapsed">
+            <!-- Collapsed View (Horizontal) - Hidden by default -->
+            <div class="workflow-collapsed hidden" id="workflowCollapsed">
                 <div class="workflow-step-horizontal last-processed">
                     <div class="step-header-horizontal">
                         <div>
@@ -610,7 +610,7 @@
                 </div>
             </div>
 
-            <!-- Expanded View (Vertical) - Summary -->
+            <!-- Expanded View (Vertical) - Summary - Hidden by default -->
             <div class="workflow-expanded hidden" id="workflowExpanded">
                 <div class="workflow-timeline">
                     <!-- New/Appeal Created -->
@@ -694,8 +694,8 @@
                 </div>
             </div>
 
-            <!-- Detailed View (Vertical) -->
-            <div class="workflow-expanded hidden" id="workflowDetailed">
+            <!-- Detailed View (Vertical) - Visible by default -->
+            <div class="workflow-expanded" id="workflowDetailed">
                 <div class="workflow-timeline">
                     <!-- 1. New/Appeal Created with Sub-steps -->
                     <div class="workflow-step-vertical completed">
@@ -1016,6 +1016,80 @@
                                 <div class="sub-step-header">
                                     <span class="sub-step-title">5.5 Expedited Reclassified</span>
                                     <span class="sub-step-date">Pending</span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- 6. Pre-Information Validation Check - Pending -->
+                    <div class="workflow-step-vertical pending">
+                        <div class="step-date">Pending</div>
+                        <div class="step-header-vertical">
+                            <div>
+                                <div class="step-title-vertical">6. PRE-INFORMATION VALIDATION CHECK</div>
+                                <div class="step-description">
+                                    Assessment of information completeness before processing.
+                                </div>
+                            </div>
+                            <span class="step-status-badge status-pending">Pending</span>
+                        </div>
+
+                        <div class="sub-steps">
+                            <div class="sub-step-item" style="opacity: 0.6;">
+                                <div class="sub-step-header">
+                                    <span class="sub-step-title">6.1 Additional Information Required</span>
+                                    <span class="sub-step-date">Pending</span>
+                                </div>
+                            </div>
+
+                            <div class="sub-step-item" style="opacity: 0.6;">
+                                <div class="sub-step-header">
+                                    <span class="sub-step-title">6.2 Additional Information Not Required</span>
+                                    <span class="sub-step-date">Pending</span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- 7. Member Packet Generation - Pending -->
+                    <div class="workflow-step-vertical pending">
+                        <div class="step-date">Pending</div>
+                        <div class="step-header-vertical">
+                            <div>
+                                <div class="step-title-vertical">7. MEMBER PACKET GENERATION</div>
+                                <div class="step-description">
+                                    Generation and approval of member notification packet.
+                                </div>
+                            </div>
+                            <span class="step-status-badge status-pending">Pending</span>
+                        </div>
+
+                        <div class="sub-steps">
+                            <div class="sub-step-item" style="opacity: 0.6;">
+                                <div class="sub-step-header">
+                                    <span class="sub-step-title">7.1 Member Packet Review</span>
+                                    <span class="sub-step-date">Pending</span>
+                                </div>
+                            </div>
+
+                            <div class="sub-step-item" style="opacity: 0.6;">
+                                <div class="sub-step-header">
+                                    <span class="sub-step-title">7.2 Member Packet Approved</span>
+                                    <span class="sub-step-date">Pending</span>
+                                </div>
+                            </div>
+
+                            <div class="sub-step-item" style="opacity: 0.6;">
+                                <div class="sub-step-header">
+                                    <span class="sub-step-title">7.3 Member Packet Rejected</span>
+                                    <span class="sub-step-date">N/A</span>
+                                </div>
+                            </div>
+
+                            <div class="sub-step-item" style="opacity: 0.6;">
+                                <div class="sub-step-header">
+                                    <span class="sub-step-title">7.4 Member Packet Generation Failed</span>
+                                    <span class="sub-step-date">N/A</span>
                                 </div>
                             </div>
                         </div>
