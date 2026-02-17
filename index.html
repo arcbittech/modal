@@ -1,9 +1,10 @@
+html
 <!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Workflow - Detailed View - Compact Dot Timeline</title>
+    <title>Workflow - Progress Bar Pills</title>
     <link href="https://fonts.googleapis.com/css2?family=Open+Sans:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <style>
@@ -196,80 +197,143 @@
             color: #856404;
         }
 
-        /* Sub-process Compact Style */
-        .sub-process-compact {
+        /* Sub-process Progress Bar Style */
+        .sub-process-progress {
             padding: 12px 20px 16px 72px;
             background: #fafbfc;
             border-top: 1px solid #e9ecef;
-            display: flex;
-            align-items: center;
-            gap: 8px;
         }
 
-        .sub-dot-line {
+        .progress-header {
             display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 8px;
+        }
+
+        .progress-info {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+        }
+
+        .current-step-pill {
+            background: #e3f2fd;
+            color: #1565c0;
+            padding: 4px 10px;
+            border-radius: 12px;
+            font-size: 11px;
+            font-weight: 600;
+            display: inline-flex;
             align-items: center;
             gap: 6px;
         }
 
-        .sub-dot {
-            width: 8px;
-            height: 8px;
-            border-radius: 50%;
-            background: #e9ecef;
-            position: relative;
-            transition: all 0.3s;
-            flex-shrink: 0;
+        .current-step-pill i {
+            font-size: 10px;
         }
 
-        .sub-dot.completed {
-            background: #27ae60;
-            box-shadow: 0 0 0 2px rgba(39, 174, 96, 0.2);
-        }
-
-        .sub-dot.active {
-            background: #3498db;
-            box-shadow: 0 0 0 2px rgba(52, 152, 219, 0.2);
-            animation: pulse 2s infinite;
-        }
-
-        @keyframes pulse {
-            0%, 100% {
-                box-shadow: 0 0 0 2px rgba(52, 152, 219, 0.2);
-            }
-            50% {
-                box-shadow: 0 0 0 4px rgba(52, 152, 219, 0.4);
-            }
-        }
-
-        .sub-dot-connector {
-            width: 16px;
-            height: 2px;
-            background: #e9ecef;
-            flex-shrink: 0;
-        }
-
-        .sub-dot-connector.completed {
-            background: #27ae60;
-        }
-
-        .sub-process-label {
+        .progress-counter {
             font-size: 11px;
             color: #6c757d;
-            margin-left: 8px;
-            display: flex;
-            align-items: center;
-            gap: 6px;
+            font-weight: 600;
         }
 
-        .sub-process-current {
-            font-weight: 600;
+        .progress-percentage {
+            font-size: 12px;
+            font-weight: 700;
             color: #3498db;
         }
 
-        .sub-process-total {
+        .progress-bar-container {
+            height: 6px;
+            background: #e9ecef;
+            border-radius: 3px;
+            overflow: hidden;
+            position: relative;
+        }
+
+        .progress-bar-fill {
+            height: 100%;
+            background: linear-gradient(90deg, #3498db, #5dade2);
+            border-radius: 3px;
+            transition: width 0.3s ease;
+            position: relative;
+        }
+
+        .progress-bar-fill::after {
+            content: '';
+            position: absolute;
+            top: 0;
+            right: 0;
+            bottom: 0;
+            left: 0;
+            background: linear-gradient(
+                90deg,
+                transparent,
+                rgba(255, 255, 255, 0.3),
+                transparent
+            );
+            animation: shimmer 2s infinite;
+        }
+
+        @keyframes shimmer {
+            0% {
+                transform: translateX(-100%);
+            }
+            100% {
+                transform: translateX(100%);
+            }
+        }
+
+        .progress-bar-fill.completed {
+            background: linear-gradient(90deg, #27ae60, #2ecc71);
+        }
+
+        .sub-steps-pills {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 6px;
+            margin-top: 10px;
+        }
+
+        .step-pill {
+            padding: 3px 8px;
+            border-radius: 10px;
             font-size: 10px;
+            font-weight: 600;
+            border: 1px solid #e9ecef;
+            background: white;
             color: #95a5a6;
+            display: inline-flex;
+            align-items: center;
+            gap: 4px;
+        }
+
+        .step-pill.completed {
+            background: #d1f2eb;
+            color: #0a6c53;
+            border-color: #27ae60;
+        }
+
+        .step-pill.active {
+            background: #e3f2fd;
+            color: #1565c0;
+            border-color: #3498db;
+            animation: pillPulse 2s infinite;
+        }
+
+        @keyframes pillPulse {
+            0%, 100% {
+                box-shadow: 0 0 0 0 rgba(52, 152, 219, 0.4);
+            }
+            50% {
+                box-shadow: 0 0 0 3px rgba(52, 152, 219, 0.2);
+            }
+        }
+
+        .step-pill i {
+            font-size: 8px;
         }
 
         /* Expand Toggle */
@@ -284,7 +348,6 @@
             justify-content: center;
             cursor: pointer;
             transition: all 0.3s;
-            flex-shrink: 0;
         }
 
         .expand-toggle:hover {
@@ -294,275 +357,6 @@
         .expand-toggle i {
             font-size: 12px;
             color: #6c757d;
-            transition: transform 0.3s;
-        }
-
-        .expand-toggle.expanded i {
-            transform: rotate(180deg);
-        }
-
-        /* Detailed View */
-        .workflow-detailed {
-            padding: 16px 20px 16px 72px;
-            background: #ffffff;
-            border-top: 1px solid #e9ecef;
-            display: none;
-        }
-
-        .workflow-detailed.show {
-            display: block;
-        }
-
-        .detailed-header {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            margin-bottom: 12px;
-            padding-bottom: 8px;
-            border-bottom: 1px solid #e9ecef;
-        }
-
-        .detailed-title {
-            font-size: 12px;
-            font-weight: 600;
-            color: #2c3e50;
-            display: flex;
-            align-items: center;
-            gap: 6px;
-        }
-
-        .detailed-user {
-            font-size: 11px;
-            color: #6c757d;
-            display: flex;
-            align-items: center;
-            gap: 4px;
-        }
-
-        /* Sub-step Items in Detail */
-        .sub-step-list {
-            display: flex;
-            flex-direction: column;
-            gap: 8px;
-        }
-
-        .sub-step-detail {
-            display: flex;
-            align-items: flex-start;
-            gap: 10px;
-            padding: 8px 12px;
-            background: #f8f9fa;
-            border-radius: 6px;
-            border-left: 3px solid #e9ecef;
-            transition: all 0.3s;
-        }
-
-        .sub-step-detail.completed {
-            border-left-color: #27ae60;
-            background: #f0fdf4;
-        }
-
-        .sub-step-detail.active {
-            border-left-color: #3498db;
-            background: #eff6ff;
-        }
-
-        .sub-step-detail:hover {
-            box-shadow: 0 2px 4px rgba(0,0,0,0.05);
-        }
-
-        .sub-step-icon {
-            width: 20px;
-            height: 20px;
-            border-radius: 50%;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            font-size: 10px;
-            flex-shrink: 0;
-            margin-top: 2px;
-        }
-
-        .sub-step-detail.completed .sub-step-icon {
-            background: #d1f2eb;
-            color: #0a6c53;
-        }
-
-        .sub-step-detail.active .sub-step-icon {
-            background: #e3f2fd;
-            color: #1565c0;
-        }
-
-        .sub-step-detail.pending .sub-step-icon {
-            background: #e9ecef;
-            color: #95a5a6;
-        }
-
-        .sub-step-info {
-            flex: 1;
-        }
-
-        .sub-step-name {
-            font-size: 12px;
-            font-weight: 600;
-            color: #2c3e50;
-            margin-bottom: 4px;
-            display: flex;
-            align-items: center;
-            gap: 6px;
-        }
-
-        .sub-step-desc {
-            font-size: 11px;
-            color: #6c757d;
-            line-height: 1.4;
-        }
-
-        .sub-step-date {
-            font-size: 10px;
-            color: #95a5a6;
-            margin-top: 4px;
-            display: flex;
-            align-items: center;
-            gap: 4px;
-        }
-
-        /* Documents Mini Section */
-        .sub-step-documents {
-            margin-top: 8px;
-            padding-top: 8px;
-            border-top: 1px solid #e9ecef;
-        }
-
-        .docs-mini-header {
-            font-size: 10px;
-            font-weight: 600;
-            color: #6c757d;
-            text-transform: uppercase;
-            margin-bottom: 6px;
-            display: flex;
-            align-items: center;
-            gap: 4px;
-        }
-
-        .docs-mini-list {
-            display: flex;
-            flex-direction: column;
-            gap: 4px;
-        }
-
-        .doc-mini-item {
-            display: flex;
-            align-items: center;
-            justify-content: space-between;
-            padding: 4px 8px;
-            background: white;
-            border-radius: 4px;
-            border: 1px solid #e9ecef;
-        }
-
-        .doc-mini-name {
-            font-size: 10px;
-            color: #2c3e50;
-            display: flex;
-            align-items: center;
-            gap: 4px;
-        }
-
-        .doc-mini-actions {
-            display: flex;
-            gap: 2px;
-        }
-
-        .btn-doc-mini {
-            width: 18px;
-            height: 18px;
-            border: none;
-            border-radius: 3px;
-            cursor: pointer;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            font-size: 9px;
-            transition: all 0.3s;
-        }
-
-        .btn-doc-mini:hover {
-            transform: scale(1.1);
-        }
-
-        .btn-add-doc-mini {
-            padding: 3px 8px;
-            background: #3498db;
-            color: white;
-            border: none;
-            border-radius: 3px;
-            font-size: 9px;
-            font-weight: 600;
-            cursor: pointer;
-            display: inline-flex;
-            align-items: center;
-            gap: 3px;
-            margin-top: 4px;
-        }
-
-        .btn-add-doc-mini:hover {
-            background: #2980b9;
-        }
-
-        /* Outreach Attempts Mini */
-        .outreach-mini {
-            margin-top: 8px;
-            padding-top: 8px;
-            border-top: 1px solid #e9ecef;
-        }
-
-        .outreach-mini-header {
-            font-size: 10px;
-            font-weight: 600;
-            color: #856404;
-            text-transform: uppercase;
-            margin-bottom: 6px;
-            display: flex;
-            align-items: center;
-            gap: 4px;
-        }
-
-        .outreach-mini-item {
-            padding: 4px 8px;
-            background: #fff3cd;
-            border-radius: 4px;
-            margin-bottom: 4px;
-            border-left: 2px solid #f39c12;
-        }
-
-        .outreach-mini-text {
-            font-size: 10px;
-            color: #856404;
-            line-height: 1.3;
-        }
-
-        /* Rationale Box */
-        .rationale-mini {
-            margin-top: 8px;
-            padding: 8px;
-            background: #e3f2fd;
-            border-radius: 4px;
-            border-left: 2px solid #3498db;
-        }
-
-        .rationale-mini-label {
-            font-size: 10px;
-            font-weight: 600;
-            color: #1565c0;
-            text-transform: uppercase;
-            margin-bottom: 4px;
-        }
-
-        .rationale-mini-text {
-            font-size: 11px;
-            color: #2c3e50;
-            line-height: 1.4;
         }
     </style>
 </head>
@@ -576,7 +370,7 @@
                     </div>
                     <div class="workflow-title">
                         <h3>Workflow Process</h3>
-                        <p>Case processing timeline and status - Detailed View</p>
+                        <p>Case processing timeline and status</p>
                     </div>
                 </div>
             </div>
@@ -584,7 +378,7 @@
             <div class="workflow-list">
                 <!-- Workflow Item 1 - Completed -->
                 <div class="workflow-item completed">
-                    <div class="workflow-main" onclick="toggleDetail(this)">
+                    <div class="workflow-main">
                         <div class="workflow-number">1</div>
                         <div class="workflow-content">
                             <div class="workflow-main-title">NEW - Appeal Created</div>
@@ -597,63 +391,35 @@
                             <div class="workflow-status status-completed">
                                 <i class="fas fa-check-circle"></i> Completed
                             </div>
-                            <div class="expand-toggle">
-                                <i class="fas fa-chevron-down"></i>
-                            </div>
                         </div>
                     </div>
-                    <div class="sub-process-compact">
-                        <div class="sub-dot-line">
-                            <div class="sub-dot completed"></div>
-                            <div class="sub-dot-connector completed"></div>
-                            <div class="sub-dot completed"></div>
+                    <div class="sub-process-progress">
+                        <div class="progress-header">
+                            <div class="progress-info">
+                                <div class="current-step-pill">
+                                    <i class="fas fa-check"></i> Appeal Created
+                                </div>
+                                <span class="progress-counter">2/2 steps</span>
+                            </div>
+                            <div class="progress-percentage">100%</div>
                         </div>
-                        <div class="sub-process-label">
-                            <span class="sub-process-current">Appeal Created</span>
-                            <span class="sub-process-total">• 2/2 steps completed</span>
+                        <div class="progress-bar-container">
+                            <div class="progress-bar-fill completed" style="width: 100%;"></div>
                         </div>
-                    </div>
-                    <div class="workflow-detailed">
-                        <div class="detailed-header">
-                            <div class="detailed-title">
-                                <i class="fas fa-list-ul"></i> Process Steps
-                            </div>
-                            <div class="detailed-user">
-                                <i class="fas fa-user"></i> System Automated
-                            </div>
-                        </div>
-                        <div class="sub-step-list">
-                            <div class="sub-step-detail completed">
-                                <div class="sub-step-icon">
-                                    <i class="fas fa-check"></i>
-                                </div>
-                                <div class="sub-step-info">
-                                    <div class="sub-step-name">1.1 Appeal Created</div>
-                                    <div class="sub-step-desc">Appeal case created for member Lori Falls. Case Type: Provider Appeal. Initial assessment completed.</div>
-                                    <div class="sub-step-date">
-                                        <i class="fas fa-clock"></i> Dec 28, 2025 9:15 AM
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="sub-step-detail pending">
-                                <div class="sub-step-icon">
-                                    <i class="fas fa-minus"></i>
-                                </div>
-                                <div class="sub-step-info">
-                                    <div class="sub-step-name">1.2 Grievance Created</div>
-                                    <div class="sub-step-desc">Not applicable for this case type.</div>
-                                    <div class="sub-step-date">
-                                        <i class="fas fa-ban"></i> N/A
-                                    </div>
-                                </div>
-                            </div>
+                        <div class="sub-steps-pills">
+                            <span class="step-pill completed">
+                                <i class="fas fa-check"></i> 1.1 Appeal Created
+                            </span>
+                            <span class="step-pill completed">
+                                <i class="fas fa-check"></i> 1.2 Grievance Created
+                            </span>
                         </div>
                     </div>
                 </div>
 
                 <!-- Workflow Item 2 - Completed -->
                 <div class="workflow-item completed">
-                    <div class="workflow-main" onclick="toggleDetail(this)">
+                    <div class="workflow-main">
                         <div class="workflow-number">2</div>
                         <div class="workflow-content">
                             <div class="workflow-main-title">Delegation Check</div>
@@ -666,63 +432,33 @@
                             <div class="workflow-status status-completed">
                                 <i class="fas fa-check-circle"></i> Completed
                             </div>
-                            <div class="expand-toggle">
-                                <i class="fas fa-chevron-down"></i>
-                            </div>
                         </div>
                     </div>
-                    <div class="sub-process-compact">
-                        <div class="sub-dot-line">
-                            <div class="sub-dot"></div>
-                            <div class="sub-dot-connector completed"></div>
-                            <div class="sub-dot completed"></div>
+                    <div class="sub-process-progress">
+                        <div class="progress-header">
+                            <div class="progress-info">
+                                <div class="current-step-pill">
+                                    <i class="fas fa-check"></i> Non-Delegated
+                                </div>
+                                <span class="progress-counter">1/2 steps</span>
+                            </div>
+                            <div class="progress-percentage">50%</div>
                         </div>
-                        <div class="sub-process-label">
-                            <span class="sub-process-current">Non-Delegated</span>
-                            <span class="sub-process-total">• 1/2 steps completed</span>
+                        <div class="progress-bar-container">
+                            <div class="progress-bar-fill completed" style="width: 50%;"></div>
                         </div>
-                    </div>
-                    <div class="workflow-detailed">
-                        <div class="detailed-header">
-                            <div class="detailed-title">
-                                <i class="fas fa-list-ul"></i> Process Steps
-                            </div>
-                            <div class="detailed-user">
-                                <i class="fas fa-user"></i> John Analyst
-                            </div>
-                        </div>
-                        <div class="sub-step-list">
-                            <div class="sub-step-detail pending">
-                                <div class="sub-step-icon">
-                                    <i class="fas fa-minus"></i>
-                                </div>
-                                <div class="sub-step-info">
-                                    <div class="sub-step-name">2.1 Delegated</div>
-                                    <div class="sub-step-desc">Not applicable - Case determined as non-delegated.</div>
-                                    <div class="sub-step-date">
-                                        <i class="fas fa-ban"></i> N/A
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="sub-step-detail completed">
-                                <div class="sub-step-icon">
-                                    <i class="fas fa-check"></i>
-                                </div>
-                                <div class="sub-step-info">
-                                    <div class="sub-step-name">2.2 Non-Delegated</div>
-                                    <div class="sub-step-desc">Case determined as non-delegated. LDP does not have delegation authority for this case type. Case will be processed internally.</div>
-                                    <div class="sub-step-date">
-                                        <i class="fas fa-clock"></i> Dec 28, 2025 9:20 AM
-                                    </div>
-                                </div>
-                            </div>
+                        <div class="sub-steps-pills">
+                            <span class="step-pill">2.1 Delegated</span>
+                            <span class="step-pill completed">
+                                <i class="fas fa-check"></i> 2.2 Non-Delegated
+                            </span>
                         </div>
                     </div>
                 </div>
 
-                <!-- Workflow Item 3 - In Progress with Documents and Outreach -->
+                <!-- Workflow Item 3 - In Progress -->
                 <div class="workflow-item in-progress">
-                    <div class="workflow-main" onclick="toggleDetail(this)">
+                    <div class="workflow-main">
                         <div class="workflow-number">3</div>
                         <div class="workflow-content">
                             <div class="workflow-main-title">AOR Check</div>
@@ -735,192 +471,43 @@
                             <div class="workflow-status status-in-progress">
                                 <i class="fas fa-spinner"></i> In Progress
                             </div>
-                            <div class="expand-toggle expanded">
+                            <div class="expand-toggle">
                                 <i class="fas fa-chevron-down"></i>
                             </div>
                         </div>
                     </div>
-                    <div class="sub-process-compact">
-                        <div class="sub-dot-line">
-                            <div class="sub-dot completed"></div>
-                            <div class="sub-dot-connector completed"></div>
-                            <div class="sub-dot active"></div>
-                            <div class="sub-dot-connector"></div>
-                            <div class="sub-dot"></div>
-                            <div class="sub-dot-connector"></div>
-                            <div class="sub-dot"></div>
-                            <div class="sub-dot-connector"></div>
-                            <div class="sub-dot"></div>
-                            <div class="sub-dot-connector"></div>
-                            <div class="sub-dot"></div>
+                    <div class="sub-process-progress">
+                        <div class="progress-header">
+                            <div class="progress-info">
+                                <div class="current-step-pill">
+                                    <i class="fas fa-spinner fa-spin"></i> AOR Pending
+                                </div>
+                                <span class="progress-counter">2/6 steps</span>
+                            </div>
+                            <div class="progress-percentage">33%</div>
                         </div>
-                        <div class="sub-process-label">
-                            <span class="sub-process-current">AOR Pending</span>
-                            <span class="sub-process-total">• 2/6 steps completed</span>
+                        <div class="progress-bar-container">
+                            <div class="progress-bar-fill" style="width: 33%;"></div>
                         </div>
-                    </div>
-                    <div class="workflow-detailed show">
-                        <div class="detailed-header">
-                            <div class="detailed-title">
-                                <i class="fas fa-list-ul"></i> Process Steps
-                            </div>
-                            <div class="detailed-user">
-                                <i class="fas fa-user"></i> Sarah Martinez
-                            </div>
-                        </div>
-                        <div class="sub-step-list">
-                            <div class="sub-step-detail completed">
-                                <div class="sub-step-icon">
-                                    <i class="fas fa-check"></i>
-                                </div>
-                                <div class="sub-step-info">
-                                    <div class="sub-step-name">3.0 AOR Requested</div>
-                                    <div class="sub-step-desc">AOR template sent to member and requestor via email. Verbal consent attempted.</div>
-                                    <div class="sub-step-date">
-                                        <i class="fas fa-clock"></i> Dec 28, 2025 10:00 AM
-                                    </div>
-                                    
-                                    <!-- Outreach Attempts -->
-                                    <div class="outreach-mini">
-                                        <div class="outreach-mini-header">
-                                            <i class="fas fa-phone"></i> Outreach Attempts
-                                        </div>
-                                        <div class="outreach-mini-item">
-                                            <div class="outreach-mini-text">
-                                                <strong>Attempt 1:</strong> Dec 28, 10:00 AM - Email sent to member
-                                            </div>
-                                        </div>
-                                        <div class="outreach-mini-item">
-                                            <div class="outreach-mini-text">
-                                                <strong>Attempt 2:</strong> Dec 28, 2:30 PM - Phone call (No answer, left voicemail)
-                                            </div>
-                                        </div>
-                                    </div>
-
-                                    <!-- Documents -->
-                                    <div class="sub-step-documents">
-                                        <div class="docs-mini-header">
-                                            <i class="fas fa-paperclip"></i> Documents (2)
-                                        </div>
-                                        <div class="docs-mini-list">
-                                            <div class="doc-mini-item">
-                                                <div class="doc-mini-name">
-                                                    <i class="fas fa-file-pdf"></i> AOR_Request_Template.pdf
-                                                </div>
-                                                <div class="doc-mini-actions">
-                                                    <button class="btn-doc-mini" style="background: #e3f2fd; color: #3498db;" title="View">
-                                                        <i class="fas fa-eye"></i>
-                                                    </button>
-                                                    <button class="btn-doc-mini" style="background: #d1f2eb; color: #27ae60;" title="Download">
-                                                        <i class="fas fa-download"></i>
-                                                    </button>
-                                                </div>
-                                            </div>
-                                            <div class="doc-mini-item">
-                                                <div class="doc-mini-name">
-                                                    <i class="fas fa-file-word"></i> Email_Confirmation.docx
-                                                </div>
-                                                <div class="doc-mini-actions">
-                                                    <button class="btn-doc-mini" style="background: #e3f2fd; color: #3498db;" title="View">
-                                                        <i class="fas fa-eye"></i>
-                                                    </button>
-                                                    <button class="btn-doc-mini" style="background: #d1f2eb; color: #27ae60;" title="Download">
-                                                        <i class="fas fa-download"></i>
-                                                    </button>
-                                                </div>
-                                            </div>
-                                        </div>
-                                        <button class="btn-add-doc-mini">
-                                            <i class="fas fa-plus"></i> Add Document
-                                        </button>
-                                    </div>
-                                </div>
-                            </div>
-
-                            <div class="sub-step-detail active">
-                                <div class="sub-step-icon">
-                                    <i class="fas fa-spinner fa-spin"></i>
-                                </div>
-                                <div class="sub-step-info">
-                                    <div class="sub-step-name">3.1 AOR Pending</div>
-                                    <div class="sub-step-desc">Waiting for AOR documentation from member. Mail date: Dec 28, 2025 (sent before 2pm PST).</div>
-                                    <div class="sub-step-date">
-                                        <i class="fas fa-hourglass-half"></i> Dec 28, 10:05 AM - Present
-                                    </div>
-                                </div>
-                            </div>
-
-                            <div class="sub-step-detail pending">
-                                <div class="sub-step-icon">
-                                    <i class="fas fa-circle"></i>
-                                </div>
-                                <div class="sub-step-info">
-                                    <div class="sub-step-name">3.2 AOR Received</div>
-                                    <div class="sub-step-desc">Awaiting receipt of AOR documentation.</div>
-                                    <div class="sub-step-date">
-                                        <i class="fas fa-hourglass-half"></i> Pending
-                                    </div>
-                                </div>
-                            </div>
-
-                            <div class="sub-step-detail pending">
-                                <div class="sub-step-icon">
-                                    <i class="fas fa-circle"></i>
-                                </div>
-                                <div class="sub-step-info">
-                                    <div class="sub-step-name">3.3 AOR Approved</div>
-                                    <div class="sub-step-desc">Pending approval after receipt.</div>
-                                    <div class="sub-step-date">
-                                        <i class="fas fa-hourglass-half"></i> Pending
-                                    </div>
-                                </div>
-                            </div>
-
-                            <div class="sub-step-detail pending">
-                                <div class="sub-step-icon">
-                                    <i class="fas fa-circle"></i>
-                                </div>
-                                <div class="sub-step-info">
-                                    <div class="sub-step-name">3.4 AOR Denied</div>
-                                    <div class="sub-step-desc">AOR denial with rationale (if applicable).</div>
-                                    <div class="sub-step-date">
-                                        <i class="fas fa-ban"></i> N/A
-                                    </div>
-                                </div>
-                            </div>
-
-                            <div class="sub-step-detail pending">
-                                <div class="sub-step-icon">
-                                    <i class="fas fa-circle"></i>
-                                </div>
-                                <div class="sub-step-info">
-                                    <div class="sub-step-name">3.5 AOR Not Received</div>
-                                    <div class="sub-step-desc">AOR not received within timeframe.</div>
-                                    <div class="sub-step-date">
-                                        <i class="fas fa-ban"></i> N/A
-                                    </div>
-                                </div>
-                            </div>
-
-                            <div class="sub-step-detail pending">
-                                <div class="sub-step-icon">
-                                    <i class="fas fa-circle"></i>
-                                </div>
-                                <div class="sub-step-info">
-                                    <div class="sub-step-name">3.6 AOR Not Applicable</div>
-                                    <div class="sub-step-desc">AOR not required for this case.</div>
-                                    <div class="sub-step-date">
-                                        <i class="fas fa-ban"></i> N/A
-                                    </div>
-                                </div>
-                            </div>
+                        <div class="sub-steps-pills">
+                            <span class="step-pill completed">
+                                <i class="fas fa-check"></i> 3.0 Requested
+                            </span>
+                            <span class="step-pill active">
+                                <i class="fas fa-circle"></i> 3.1 Pending
+                            </span>
+                            <span class="step-pill">3.2 Received</span>
+                            <span class="step-pill">3.3 Approved</span>
+                            <span class="step-pill">3.4 Denied</span>
+                            <span class="step-pill">3.5 Not Received</span>
+                            <span class="step-pill">3.6 N/A</span>
                         </div>
                     </div>
                 </div>
 
                 <!-- Workflow Item 4 - Pending -->
                 <div class="workflow-item pending">
-                    <div class="workflow-main" onclick="toggleDetail(this)">
+                    <div class="workflow-main">
                         <div class="workflow-number">4</div>
                         <div class="workflow-content">
                             <div class="workflow-main-title">Good Cause Check</div>
@@ -933,111 +520,33 @@
                             <div class="workflow-status status-pending">
                                 <i class="fas fa-hourglass-half"></i> Pending
                             </div>
-                            <div class="expand-toggle">
-                                <i class="fas fa-chevron-down"></i>
-                            </div>
                         </div>
                     </div>
-                    <div class="sub-process-compact">
-                        <div class="sub-dot-line">
-                            <div class="sub-dot"></div>
-                            <div class="sub-dot-connector"></div>
-                            <div class="sub-dot"></div>
-                            <div class="sub-dot-connector"></div>
-                            <div class="sub-dot"></div>
-                            <div class="sub-dot-connector"></div>
-                            <div class="sub-dot"></div>
-                            <div class="sub-dot-connector"></div>
-                            <div class="sub-dot"></div>
-                            <div class="sub-dot-connector"></div>
-                            <div class="sub-dot"></div>
-                            <div class="sub-dot-connector"></div>
-                            <div class="sub-dot"></div>
+                    <div class="sub-process-progress">
+                        <div class="progress-header">
+                            <div class="progress-info">
+                                <span class="progress-counter">0/7 steps</span>
+                            </div>
+                            <div class="progress-percentage">0%</div>
                         </div>
-                        <div class="sub-process-label">
-                            <span class="sub-process-total">0/7 steps completed</span>
+                        <div class="progress-bar-container">
+                            <div class="progress-bar-fill" style="width: 0%;"></div>
                         </div>
-                    </div>
-                    <div class="workflow-detailed">
-                        <div class="detailed-header">
-                            <div class="detailed-title">
-                                <i class="fas fa-list-ul"></i> Process Steps
-                            </div>
-                            <div class="detailed-user">
-                                <i class="fas fa-hourglass-half"></i> Awaiting Assignment
-                            </div>
-                        </div>
-                        <div class="sub-step-list">
-                            <div class="sub-step-detail pending">
-                                <div class="sub-step-icon">
-                                    <i class="fas fa-circle"></i>
-                                </div>
-                                <div class="sub-step-info">
-                                    <div class="sub-step-name">4.0 Good Cause Requested</div>
-                                    <div class="sub-step-desc">Good cause request sent to member (Verbal or Template).</div>
-                                </div>
-                            </div>
-                            <div class="sub-step-detail pending">
-                                <div class="sub-step-icon">
-                                    <i class="fas fa-circle"></i>
-                                </div>
-                                <div class="sub-step-info">
-                                    <div class="sub-step-name">4.1 Good Cause Pending</div>
-                                    <div class="sub-step-desc">Awaiting good cause documentation.</div>
-                                </div>
-                            </div>
-                            <div class="sub-step-detail pending">
-                                <div class="sub-step-icon">
-                                    <i class="fas fa-circle"></i>
-                                </div>
-                                <div class="sub-step-info">
-                                    <div class="sub-step-name">4.2 Good Cause Received</div>
-                                    <div class="sub-step-desc">Good cause documentation received.</div>
-                                </div>
-                            </div>
-                            <div class="sub-step-detail pending">
-                                <div class="sub-step-icon">
-                                    <i class="fas fa-circle"></i>
-                                </div>
-                                <div class="sub-step-info">
-                                    <div class="sub-step-name">4.3 Good Cause Not Applicable</div>
-                                    <div class="sub-step-desc">Good cause not required for this case.</div>
-                                </div>
-                            </div>
-                            <div class="sub-step-detail pending">
-                                <div class="sub-step-icon">
-                                    <i class="fas fa-circle"></i>
-                                </div>
-                                <div class="sub-step-info">
-                                    <div class="sub-step-name">4.4 Good Cause Approved</div>
-                                    <div class="sub-step-desc">Good cause approved with rationale.</div>
-                                </div>
-                            </div>
-                            <div class="sub-step-detail pending">
-                                <div class="sub-step-icon">
-                                    <i class="fas fa-circle"></i>
-                                </div>
-                                <div class="sub-step-info">
-                                    <div class="sub-step-name">4.5 Good Cause Denied</div>
-                                    <div class="sub-step-desc">Good cause denied with rationale.</div>
-                                </div>
-                            </div>
-                            <div class="sub-step-detail pending">
-                                <div class="sub-step-icon">
-                                    <i class="fas fa-circle"></i>
-                                </div>
-                                <div class="sub-step-info">
-                                    <div class="sub-step-name">4.6 Good Cause Not Received</div>
-                                    <div class="sub-step-desc">Good cause not received within timeframe.</div>
-                                </div>
-                            </div>
+                        <div class="sub-steps-pills">
+                            <span class="step-pill">4.0 Requested</span>
+                            <span class="step-pill">4.1 Pending</span>
+                            <span class="step-pill">4.2 Received</span>
+                            <span class="step-pill">4.3 N/A</span>
+                            <span class="step-pill">4.4 Approved</span>
+                            <span class="step-pill">4.5 Denied</span>
+                            <span class="step-pill">4.6 Not Received</span>
                         </div>
                     </div>
                 </div>
 
                 <!-- Workflow Item 5 - Pending -->
                 <div class="workflow-item pending">
-                    <div class="workflow-main" onclick="toggleDetail(this)">
+                    <div class="workflow-main">
                         <div class="workflow-number">5</div>
                         <div class="workflow-content">
                             <div class="workflow-main-title">Expedited Review Check</div>
@@ -1050,103 +559,29 @@
                             <div class="workflow-status status-pending">
                                 <i class="fas fa-hourglass-half"></i> Pending
                             </div>
-                            <div class="expand-toggle">
-                                <i class="fas fa-chevron-down"></i>
-                            </div>
                         </div>
                     </div>
-                    <div class="sub-process-compact">
-                        <div class="sub-dot-line">
-                            <div class="sub-dot"></div>
-                            <div class="sub-dot-connector"></div>
-                            <div class="sub-dot"></div>
-                            <div class="sub-dot-connector"></div>
-                            <div class="sub-dot"></div>
-                            <div class="sub-dot-connector"></div>
-                            <div class="sub-dot"></div>
-                            <div class="sub-dot-connector"></div>
-                            <div class="sub-dot"></div>
+                    <div class="sub-process-progress">
+                        <div class="progress-header">
+                            <div class="progress-info">
+                                <span class="progress-counter">0/5 steps</span>
+                            </div>
+                            <div class="progress-percentage">0%</div>
                         </div>
-                        <div class="sub-process-label">
-                            <span class="sub-process-total">0/5 steps completed</span>
+                        <div class="progress-bar-container">
+                            <div class="progress-bar-fill" style="width: 0%;"></div>
                         </div>
-                    </div>
-                    <div class="workflow-detailed">
-                        <div class="detailed-header">
-                            <div class="detailed-title">
-                                <i class="fas fa-list-ul"></i> Process Steps
-                            </div>
-                            <div class="detailed-user">
-                                <i class="fas fa-hourglass-half"></i> Awaiting Assignment
-                            </div>
-                        </div>
-                        <div class="sub-step-list">
-                            <div class="sub-step-detail pending">
-                                <div class="sub-step-icon">
-                                    <i class="fas fa-circle"></i>
-                                </div>
-                                <div class="sub-step-info">
-                                    <div class="sub-step-name">5.1 Expedited Review Pending</div>
-                                    <div class="sub-step-desc">Expedited review determination pending.</div>
-                                </div>
-                            </div>
-                            <div class="sub-step-detail pending">
-                                <div class="sub-step-icon">
-                                    <i class="fas fa-circle"></i>
-                                </div>
-                                <div class="sub-step-info">
-                                    <div class="sub-step-name">5.2 Expedited Approved</div>
-                                    <div class="sub-step-desc">Expedited processing approved with rationale.</div>
-                                </div>
-                            </div>
-                            <div class="sub-step-detail pending">
-                                <div class="sub-step-icon">
-                                    <i class="fas fa-circle"></i>
-                                </div>
-                                <div class="sub-step-info">
-                                    <div class="sub-step-name">5.3 Expedited Denied</div>
-                                    <div class="sub-step-desc">Expedited processing denied with rationale.</div>
-                                </div>
-                            </div>
-                            <div class="sub-step-detail pending">
-                                <div class="sub-step-icon">
-                                    <i class="fas fa-circle"></i>
-                                </div>
-                                <div class="sub-step-info">
-                                    <div class="sub-step-name">5.4 Expedited Not Applicable</div>
-                                    <div class="sub-step-desc">Expedited processing not required for this case.</div>
-                                </div>
-                            </div>
-                            <div class="sub-step-detail pending">
-                                <div class="sub-step-icon">
-                                    <i class="fas fa-circle"></i>
-                                </div>
-                                <div class="sub-step-info">
-                                    <div class="sub-step-name">5.5 Expedited Reclassified</div>
-                                    <div class="sub-step-desc">Case reclassified from/to expedited status.</div>
-                                </div>
-                            </div>
+                        <div class="sub-steps-pills">
+                            <span class="step-pill">5.1 Pending</span>
+                            <span class="step-pill">5.2 Approved</span>
+                            <span class="step-pill">5.3 Denied</span>
+                            <span class="step-pill">5.4 N/A</span>
+                            <span class="step-pill">5.5 Reclassified</span>
                         </div>
                     </div>
                 </div>
             </div>
         </div>
     </div>
-
-    <script>
-        function toggleDetail(element) {
-            const workflowItem = element.closest('.workflow-item');
-            const detailedView = workflowItem.querySelector('.workflow-detailed');
-            const toggleIcon = workflowItem.querySelector('.expand-toggle');
-            
-            if (detailedView.classList.contains('show')) {
-                detailedView.classList.remove('show');
-                toggleIcon.classList.remove('expanded');
-            } else {
-                detailedView.classList.add('show');
-                toggleIcon.classList.add('expanded');
-            }
-        }
-    </script>
 </body>
 </html>
