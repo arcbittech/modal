@@ -140,7 +140,7 @@
         }
 
         .requests-table tr.selected {
-            background: #e3f2fd;
+            background: #fff3cd;
         }
 
         /* Status Badge */
@@ -283,6 +283,11 @@
             flex-shrink: 0;
         }
 
+        .panel-header.edit-mode {
+            background: #f39c12;
+            border-bottom-color: #e67e22;
+        }
+
         .panel-header-left {
             display: flex;
             align-items: center;
@@ -298,6 +303,10 @@
             align-items: center;
             justify-content: center;
             font-size: 18px;
+        }
+
+        .panel-header.edit-mode .panel-icon {
+            background: rgba(255, 255, 255, 0.2);
         }
 
         .panel-title h2 {
@@ -513,6 +522,11 @@
             gap: 6px;
         }
 
+        .form-group label .required {
+            color: #e74c3c;
+            margin-left: 2px;
+        }
+
         .form-group input,
         .form-group select,
         .form-group textarea {
@@ -541,6 +555,18 @@
             cursor: not-allowed;
         }
 
+        .form-group input.editable,
+        .form-group select.editable {
+            border-color: #f39c12;
+            background: #fffbf0;
+        }
+
+        .form-group input.editable:focus,
+        .form-group select.editable:focus {
+            border-color: #f39c12;
+            box-shadow: 0 0 0 3px rgba(243,156,18,0.1);
+        }
+
         .text-content {
             background: white;
             padding: 12px;
@@ -560,57 +586,20 @@
             border-radius: 5px;
             font-size: 11px;
             font-weight: 600;
-            background: #fff3cd;
-            color: #856404;
+            background: rgba(255, 255, 255, 0.2);
+            color: white;
         }
 
-        /* Confidence Score */
-        .confidence-score {
-            display: flex;
-            align-items: center;
-            gap: 10px;
-        }
-
-        .confidence-bar {
-            flex: 1;
-            height: 8px;
-            background: #e9ecef;
-            border-radius: 4px;
-            overflow: hidden;
-            position: relative;
-        }
-
-        .confidence-fill {
-            height: 100%;
-            background: linear-gradient(90deg, #27ae60, #f39c12, #e74c3c);
-            border-radius: 4px;
-            transition: width 0.3s;
-        }
-
-        .confidence-percentage {
-            font-size: 13px;
-            font-weight: 600;
-            color: #2c3e50;
-            min-width: 45px;
-        }
-
-        /* Claim Lines */
-        .claim-lines {
-            display: flex;
-            flex-wrap: wrap;
-            gap: 8px;
-        }
-
-        .claim-line-tag {
-            display: inline-flex;
-            align-items: center;
-            gap: 6px;
-            padding: 5px 10px;
-            border-radius: 5px;
+        /* Field Help Text */
+        .field-help {
             font-size: 11px;
-            font-weight: 600;
-            background: #e3f2fd;
-            color: #1565c0;
+            color: #6c757d;
+            margin-top: 4px;
+            font-style: italic;
+        }
+
+        .field-help.editable {
+            color: #e67e22;
         }
 
         /* Responsive */
@@ -688,7 +677,7 @@
                                     </span>
                                 </td>
                                 <td>
-                                    <button class="btn-icon" onclick="openViewPanel()" title="View Details">
+                                    <button class="btn-icon" onclick="switchToViewMode()" title="View Details">
                                         <i class="fas fa-eye"></i>
                                     </button>
                                 </td>
@@ -803,9 +792,9 @@
             </div>
         </div>
 
-        <!-- Side Panel - View Mode (Shown on load) -->
-        <div class="side-panel open" id="viewPanel">
-            <div class="resize-handle" id="resizeHandle"></div>
+        <!-- Side Panel - View Mode -->
+        <div class="side-panel" id="viewPanel">
+            <div class="resize-handle" id="resizeHandleView"></div>
             
             <div class="panel-header">
                 <div class="panel-header-left">
@@ -828,7 +817,7 @@
             </div>
 
             <div class="panel-body">
-                <!-- Tracking & Identifiers -->
+                <!-- View mode content (same as before) -->
                 <div class="detail-section">
                     <div class="section-header">
                         <div class="section-icon-small">
@@ -845,153 +834,12 @@
                             <div class="info-value">REQ-2025-00123</div>
                         </div>
                         <div class="info-item">
-                            <div class="info-label"><i class="fas fa-folder-open"></i> Parent Call File ID</div>
-                            <div class="info-value">CALL-PARENT-456789</div>
-                        </div>
-                        <div class="info-item">
-                            <div class="info-label"><i class="fas fa-file"></i> Original Call File ID</div>
-                            <div class="info-value">CALL-789012</div>
-                        </div>
-                        <div class="info-item">
-                            <div class="info-label"><i class="fas fa-comments"></i> Interaction ID</div>
-                            <div class="info-value">INT-345678</div>
-                        </div>
-                        <div class="info-item">
                             <div class="info-label"><i class="fas fa-file-invoice"></i> Claim Number</div>
                             <div class="info-value">CLM-2025-987654</div>
                         </div>
-                        <div class="info-item">
-                            <div class="info-label"><i class="fas fa-list-ol"></i> Claim Lines</div>
-                            <div class="info-value">
-                                <div class="claim-lines">
-                                    <span class="claim-line-tag">
-                                        <i class="fas fa-hashtag"></i> Line 1
-                                    </span>
-                                    <span class="claim-line-tag">
-                                        <i class="fas fa-hashtag"></i> Line 2
-                                    </span>
-                                    <span class="claim-line-tag">
-                                        <i class="fas fa-hashtag"></i> Line 3
-                                    </span>
-                                </div>
-                            </div>
-                        </div>
                     </div>
                 </div>
 
-                <!-- Source Information -->
-                <div class="detail-section">
-                    <div class="section-header">
-                        <div class="section-icon-small">
-                            <i class="fas fa-sitemap"></i>
-                        </div>
-                        <div class="section-title">
-                            <h3>Source Information</h3>
-                            <p>Request origin and channel details</p>
-                        </div>
-                    </div>
-                    <div class="info-grid">
-                        <div class="info-item">
-                            <div class="info-label"><i class="fas fa-inbox"></i> Intake Source</div>
-                            <div class="info-value">Care Event</div>
-                        </div>
-                        <div class="info-item">
-                            <div class="info-label"><i class="fas fa-broadcast-tower"></i> Source Channel</div>
-                            <div class="info-value">Phone Call</div>
-                        </div>
-                        <div class="info-item">
-                            <div class="info-label"><i class="fas fa-fingerprint"></i> Source Identifier</div>
-                            <div class="info-value">PHONE-IVR-001</div>
-                        </div>
-                    </div>
-                </div>
-
-                <!-- Timing Information -->
-                <div class="detail-section">
-                    <div class="section-header">
-                        <div class="section-icon-small">
-                            <i class="fas fa-clock"></i>
-                        </div>
-                        <div class="section-title">
-                            <h3>Timing Information</h3>
-                            <p>Date and time details</p>
-                        </div>
-                    </div>
-                    <div class="info-grid">
-                        <div class="info-item">
-                            <div class="info-label"><i class="fas fa-calendar-day"></i> Received Date</div>
-                            <div class="info-value">12/28/2025</div>
-                        </div>
-                        <div class="info-item">
-                            <div class="info-label"><i class="fas fa-clock"></i> Time Received</div>
-                            <div class="info-value">14:35:22</div>
-                        </div>
-                        <div class="info-item">
-                            <div class="info-label"><i class="fas fa-calendar-plus"></i> Created Date</div>
-                            <div class="info-value">12/28/2025 2:35 PM</div>
-                        </div>
-                        <div class="info-item">
-                            <div class="info-label"><i class="fas fa-edit"></i> Modified Date</div>
-                            <div class="info-value">12/28/2025 3:20 PM</div>
-                        </div>
-                    </div>
-                </div>
-
-                <!-- Requestor Information -->
-                <div class="detail-section">
-                    <div class="section-header">
-                        <div class="section-icon-small">
-                            <i class="fas fa-user-circle"></i>
-                        </div>
-                        <div class="section-title">
-                            <h3>Requestor Information</h3>
-                            <p>Person submitting the request</p>
-                        </div>
-                    </div>
-                    <div class="info-grid">
-                        <div class="info-item">
-                            <div class="info-label"><i class="fas fa-user"></i> Requestor Name</div>
-                            <div class="info-value">Sarah Johnson</div>
-                        </div>
-                        <div class="info-item">
-                            <div class="info-label"><i class="fas fa-phone"></i> Requestor Phone</div>
-                            <div class="info-value">555-123-4567</div>
-                        </div>
-                        <div class="info-item">
-                            <div class="info-label"><i class="fas fa-bolt"></i> Expedited Review</div>
-                            <div class="info-value">
-                                <span class="status-badge status-yes">
-                                    <i class="fas fa-check-circle"></i> Yes
-                                </span>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-
-                <!-- Provider & Office -->
-                <div class="detail-section">
-                    <div class="section-header">
-                        <div class="section-icon-small">
-                            <i class="fas fa-user-md"></i>
-                        </div>
-                        <div class="section-title">
-                            <h3>Provider & Office Information</h3>
-                            <p>Healthcare provider details</p>
-                        </div>
-                    </div>
-                    <div class="info-grid">
-                        <div class="info-item">
-                            <div class="info-label"><i class="fas fa-id-card"></i> Provider Number</div>
-                            <div class="info-value">PRV-789456</div>
-                        </div>
-                        <div class="info-item">
-                            <div class="info-label"><i class="fas fa-building"></i> Office Number</div>
-                            <div class="info-value">OFF-123789</div>
-                        </div>
-                    </div>
-                </div>
-
-                <!-- Member Information -->
                 <div class="detail-section">
                     <div class="section-header">
                         <div class="section-icon-small">
@@ -1015,22 +863,17 @@
                             <div class="info-label"><i class="fas fa-user"></i> Last Name</div>
                             <div class="info-value">Smith</div>
                         </div>
-                        <div class="info-item">
-                            <div class="info-label"><i class="fas fa-id-badge"></i> Member ID</div>
-                            <div class="info-value">MID-987654</div>
-                        </div>
                     </div>
                 </div>
 
-                <!-- Group & LOB -->
                 <div class="detail-section">
                     <div class="section-header">
                         <div class="section-icon-small">
                             <i class="fas fa-users"></i>
                         </div>
                         <div class="section-title">
-                            <h3>Group & Line of Business</h3>
-                            <p>Group and LOB information</p>
+                            <h3>Group Information</h3>
+                            <p>Group details</p>
                         </div>
                     </div>
                     <div class="info-grid">
@@ -1042,116 +885,23 @@
                             <div class="info-label"><i class="fas fa-building"></i> Group Name</div>
                             <div class="info-value">Enterprise Health Group</div>
                         </div>
-                        <div class="info-item">
-                            <div class="info-label"><i class="fas fa-briefcase"></i> GA Secondary LOB</div>
-                            <div class="info-value">Commercial</div>
-                        </div>
-                        <div class="info-item">
-                            <div class="info-label"><i class="fas fa-users-cog"></i> GA Team</div>
-                            <div class="info-value">Team Alpha</div>
-                        </div>
                     </div>
                 </div>
 
-                <!-- Call Summary -->
                 <div class="detail-section">
                     <div class="section-header">
                         <div class="section-icon-small">
-                            <i class="fas fa-file-alt"></i>
+                            <i class="fas fa-building"></i>
                         </div>
                         <div class="section-title">
-                            <h3>Call Summary</h3>
-                            <p>Detailed call description</p>
-                        </div>
-                    </div>
-                    <div class="text-content">
-                        Member called regarding denial of service for physical therapy sessions. Member states that their provider recommended 12 sessions but only 6 were approved. Member is requesting appeal of the decision and wants expedited review due to deteriorating condition.
-                    </div>
-                </div>
-
-                <!-- AI Information -->
-                <div class="detail-section">
-                    <div class="section-header">
-                        <div class="section-icon-small">
-                            <i class="fas fa-robot"></i>
-                        </div>
-                        <div class="section-title">
-                            <h3>AI Processing Information</h3>
-                            <p>Artificial intelligence analysis</p>
+                            <h3>Office Information</h3>
+                            <p>Office details</p>
                         </div>
                     </div>
                     <div class="info-grid">
                         <div class="info-item">
-                            <div class="info-label"><i class="fas fa-brain"></i> AI Model</div>
-                            <div class="info-value">GPT-4-Turbo-Medical-v2</div>
-                        </div>
-                        <div class="info-item">
-                            <div class="info-label"><i class="fas fa-code-branch"></i> AI Version</div>
-                            <div class="info-value">v2.3.1</div>
-                        </div>
-                        <div class="info-item">
-                            <div class="info-label"><i class="fas fa-tag"></i> Request Type</div>
-                            <div class="info-value">Appeal - Medical Necessity</div>
-                        </div>
-                        <div class="info-item">
-                            <div class="info-label"><i class="fas fa-chart-line"></i> Confidence Score</div>
-                            <div class="confidence-score">
-                                <div class="confidence-bar">
-                                    <div class="confidence-fill" style="width: 87%;"></div>
-                                </div>
-                                <div class="confidence-percentage">87%</div>
-                            </div>
-                        </div>
-                        <div class="info-item">
-                            <div class="info-label"><i class="fas fa-thumbs-up"></i> AI Recommendation</div>
-                            <div class="info-value">
-                                <span class="status-badge status-yes">
-                                    <i class="fas fa-check-circle"></i> Recommended for Approval
-                                </span>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-
-                <!-- Status Information -->
-                <div class="detail-section">
-                    <div class="section-header">
-                        <div class="section-icon-small">
-                            <i class="fas fa-tasks"></i>
-                        </div>
-                        <div class="section-title">
-                            <h3>Status & Processing</h3>
-                            <p>Current status information</p>
-                        </div>
-                    </div>
-                    <div class="info-grid">
-                        <div class="info-item">
-                            <div class="info-label"><i class="fas fa-info-circle"></i> Request Status</div>
-                            <div class="info-value">
-                                <span class="status-badge status-pending">
-                                    <i class="fas fa-clock"></i> Pending Review
-                                </span>
-                            </div>
-                        </div>
-                        <div class="info-item">
-                            <div class="info-label"><i class="fas fa-check-double"></i> Validation Status</div>
-                            <div class="info-value">
-                                <span class="status-badge status-yes">
-                                    <i class="fas fa-check-circle"></i> Validated
-                                </span>
-                            </div>
-                        </div>
-                        <div class="info-item">
-                            <div class="info-label"><i class="fas fa-user-check"></i> Assigned To</div>
-                            <div class="info-value">analyst@careinsight.ai</div>
-                        </div>
-                        <div class="info-item">
-                            <div class="info-label"><i class="fas fa-toggle-on"></i> Active Status</div>
-                            <div class="info-value">
-                                <span class="status-badge status-yes">
-                                    <i class="fas fa-check-circle"></i> Active
-                                </span>
-                            </div>
+                            <div class="info-label"><i class="fas fa-building"></i> Office Number</div>
+                            <div class="info-value">OFF-123789</div>
                         </div>
                     </div>
                 </div>
@@ -1167,11 +917,11 @@
             </div>
         </div>
 
-        <!-- Side Panel - Edit Mode -->
-        <div class="side-panel" id="editPanel">
+        <!-- Side Panel - Edit Mode (Default on Load) -->
+        <div class="side-panel open" id="editPanel">
             <div class="resize-handle" id="resizeHandleEdit"></div>
             
-            <div class="panel-header">
+            <div class="panel-header edit-mode">
                 <div class="panel-header-left">
                     <div class="panel-icon">
                         <i class="fas fa-edit"></i>
@@ -1180,7 +930,7 @@
                         <h2>Edit Request Details</h2>
                         <p class="panel-subtitle">
                             <span class="edit-mode-badge">
-                                <i class="fas fa-exclamation-triangle"></i> Edit Mode
+                                <i class="fas fa-exclamation-triangle"></i> Edit Mode Active
                             </span>
                         </p>
                     </div>
@@ -1210,18 +960,25 @@
                     <div class="form-group">
                         <label><i class="fas fa-hashtag"></i> Request ID</label>
                         <input type="text" value="REQ-2025-00123" disabled>
+                        <div class="field-help">System generated - Read only</div>
                     </div>
                     <div class="form-group">
                         <label><i class="fas fa-folder-open"></i> Parent Call File ID</label>
                         <input type="text" value="CALL-PARENT-456789" disabled>
+                        <div class="field-help">System generated - Read only</div>
                     </div>
                     <div class="form-group">
                         <label><i class="fas fa-file"></i> Original Call File ID</label>
                         <input type="text" value="CALL-789012" disabled>
+                        <div class="field-help">System generated - Read only</div>
                     </div>
                     <div class="form-group">
-                        <label><i class="fas fa-file-invoice"></i> Claim Number</label>
-                        <input type="text" value="CLM-2025-987654" placeholder="Enter claim number">
+                        <label>
+                            <i class="fas fa-file-invoice"></i> Claim Number
+                            <span class="required">*</span>
+                        </label>
+                        <input type="text" class="editable" value="CLM-2025-987654" placeholder="Enter claim number">
+                        <div class="field-help editable">✏️ Editable field</div>
                     </div>
                 </div>
 
@@ -1237,20 +994,33 @@
                         </div>
                     </div>
                     <div class="form-group">
-                        <label><i class="fas fa-hashtag"></i> Member Number</label>
-                        <input type="text" value="MBR-456789" placeholder="Enter member number">
+                        <label>
+                            <i class="fas fa-hashtag"></i> Member Number
+                            <span class="required">*</span>
+                        </label>
+                        <input type="text" class="editable" value="MBR-456789" placeholder="Enter member number">
+                        <div class="field-help editable">✏️ Editable field</div>
                     </div>
                     <div class="form-group">
-                        <label><i class="fas fa-user"></i> First Name</label>
-                        <input type="text" value="John" placeholder="Enter first name">
+                        <label>
+                            <i class="fas fa-user"></i> First Name
+                            <span class="required">*</span>
+                        </label>
+                        <input type="text" class="editable" value="John" placeholder="Enter first name">
+                        <div class="field-help editable">✏️ Editable field</div>
                     </div>
                     <div class="form-group">
-                        <label><i class="fas fa-user"></i> Last Name</label>
-                        <input type="text" value="Smith" placeholder="Enter last name">
+                        <label>
+                            <i class="fas fa-user"></i> Last Name
+                            <span class="required">*</span>
+                        </label>
+                        <input type="text" class="editable" value="Smith" placeholder="Enter last name">
+                        <div class="field-help editable">✏️ Editable field</div>
                     </div>
                     <div class="form-group">
                         <label><i class="fas fa-id-badge"></i> Member ID</label>
                         <input type="text" value="MID-987654" disabled>
+                        <div class="field-help">System generated - Read only</div>
                     </div>
                 </div>
 
@@ -1266,12 +1036,20 @@
                         </div>
                     </div>
                     <div class="form-group">
-                        <label><i class="fas fa-hashtag"></i> Group Number</label>
-                        <input type="text" value="GRP-12345" placeholder="Enter group number">
+                        <label>
+                            <i class="fas fa-hashtag"></i> Group Number
+                            <span class="required">*</span>
+                        </label>
+                        <input type="text" class="editable" value="GRP-12345" placeholder="Enter group number">
+                        <div class="field-help editable">✏️ Editable field</div>
                     </div>
                     <div class="form-group">
-                        <label><i class="fas fa-building"></i> Group Name</label>
-                        <input type="text" value="Enterprise Health Group" placeholder="Enter group name">
+                        <label>
+                            <i class="fas fa-building"></i> Group Name
+                            <span class="required">*</span>
+                        </label>
+                        <input type="text" class="editable" value="Enterprise Health Group" placeholder="Enter group name">
+                        <div class="field-help editable">✏️ Editable field</div>
                     </div>
                 </div>
 
@@ -1287,8 +1065,12 @@
                         </div>
                     </div>
                     <div class="form-group">
-                        <label><i class="fas fa-building"></i> Office Number</label>
-                        <input type="text" value="OFF-123789" placeholder="Enter office number">
+                        <label>
+                            <i class="fas fa-building"></i> Office Number
+                            <span class="required">*</span>
+                        </label>
+                        <input type="text" class="editable" value="OFF-123789" placeholder="Enter office number">
+                        <div class="field-help editable">✏️ Editable field</div>
                     </div>
                 </div>
 
@@ -1300,26 +1082,37 @@
                         </div>
                         <div class="section-title">
                             <h3>Additional Information</h3>
-                            <p>Read-only fields</p>
+                            <p>Read-only system fields</p>
                         </div>
                     </div>
                     <div class="form-group">
                         <label><i class="fas fa-inbox"></i> Intake Source</label>
                         <input type="text" value="Care Event" disabled>
+                        <div class="field-help">System field - Read only</div>
                     </div>
                     <div class="form-group">
                         <label><i class="fas fa-broadcast-tower"></i> Source Channel</label>
                         <input type="text" value="Phone Call" disabled>
+                        <div class="field-help">System field - Read only</div>
                     </div>
                     <div class="form-group">
                         <label><i class="fas fa-calendar-day"></i> Received Date</label>
                         <input type="text" value="12/28/2025" disabled>
+                        <div class="field-help">System field - Read only</div>
+                    </div>
+                    <div class="form-group">
+                        <label><i class="fas fa-user-check"></i> Assigned To</label>
+                        <input type="text" value="analyst@careinsight.ai" disabled>
+                        <div class="field-help">System field - Read only</div>
                     </div>
                 </div>
             </div>
 
             <div class="panel-footer">
-                <button class="btn-secondary" onclick="cancelEdit()">
+                <button class="btn-secondary" onclick="switchToViewMode()">
+                    <i class="fas fa-eye"></i> View Mode
+                </button>
+                <button class="btn-secondary" onclick="closePanel('editPanel')">
                     <i class="fas fa-times"></i> Cancel
                 </button>
                 <button class="btn-success" onclick="saveChanges()">
@@ -1330,12 +1123,6 @@
     </div>
 
     <script>
-        // Open view panel (already open on load)
-        function openViewPanel() {
-            document.getElementById('viewPanel').classList.add('open');
-            document.getElementById('mainContent').classList.add('collapsed');
-        }
-
         // Close panel
         function closePanel(panelId) {
             document.getElementById(panelId).classList.remove('open');
@@ -1349,6 +1136,15 @@
             panel.classList.toggle('expanded');
         }
 
+        // Switch to view mode
+        function switchToViewMode() {
+            closePanel('editPanel');
+            setTimeout(() => {
+                document.getElementById('viewPanel').classList.add('open');
+                document.getElementById('mainContent').classList.add('collapsed');
+            }, 300);
+        }
+
         // Switch to edit mode
         function switchToEditMode() {
             closePanel('viewPanel');
@@ -1358,21 +1154,10 @@
             }, 300);
         }
 
-        // Cancel edit
-        function cancelEdit() {
-            closePanel('editPanel');
-            setTimeout(() => {
-                openViewPanel();
-            }, 300);
-        }
-
         // Save changes
         function saveChanges() {
             alert('Changes saved successfully!');
-            closePanel('editPanel');
-            setTimeout(() => {
-                openViewPanel();
-            }, 300);
+            switchToViewMode();
         }
 
         // Resize functionality
@@ -1411,12 +1196,13 @@
         });
 
         // Initialize resize handles
-        initResize('resizeHandle', 'viewPanel');
+        initResize('resizeHandleView', 'viewPanel');
         initResize('resizeHandleEdit', 'editPanel');
 
-        // Initialize view panel as open on page load
+        // Initialize edit panel as open on page load and collapse main content
         window.addEventListener('load', function() {
-            openViewPanel();
+            document.getElementById('editPanel').classList.add('open');
+            document.getElementById('mainContent').classList.add('collapsed');
         });
     </script>
 </body>
