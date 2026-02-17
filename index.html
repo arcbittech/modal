@@ -1,10 +1,9 @@
-html
 <!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Workflow - Progress Bar Pills</title>
+    <title>Request Dashboard - Medical Software</title>
     <link href="https://fonts.googleapis.com/css2?family=Open+Sans:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <style>
@@ -17,179 +16,147 @@ html
         body {
             font-family: 'Open Sans', sans-serif;
             background: #f5f7fa;
-            padding: 20px;
-        }
-
-        .container {
-            max-width: 1820px;
-            margin: 0 auto;
-            background: white;
-            border-radius: 12px;
-            box-shadow: 0 2px 8px rgba(0,0,0,0.08);
-            padding: 30px;
-        }
-
-        /* Workflow Section */
-        .workflow-section {
-            background: #f8f9fa;
-            border: 1px solid #e9ecef;
-            border-radius: 12px;
             overflow: hidden;
         }
 
-        .workflow-header {
-            padding: 20px 25px;
+        /* Dashboard Container */
+        .dashboard-container {
+            display: flex;
+            height: 100vh;
+            overflow: hidden;
+        }
+
+        /* Main Content Area */
+        .main-content {
+            flex: 1;
+            display: flex;
+            flex-direction: column;
+            transition: flex 0.3s ease;
+            min-width: 0;
+            background: #f5f7fa;
+        }
+
+        .main-content.collapsed {
+            flex: 0.3;
+        }
+
+        /* Header */
+        .page-header {
             background: white;
+            padding: 20px 30px;
             border-bottom: 1px solid #e9ecef;
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-        }
-
-        .workflow-header-left {
-            display: flex;
-            align-items: center;
-            gap: 12px;
-        }
-
-        .workflow-icon {
-            width: 40px;
-            height: 40px;
-            background: #e3f2fd;
-            color: #3498db;
-            border-radius: 8px;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            font-size: 18px;
-        }
-
-        .workflow-title h3 {
-            font-size: 16px;
-            color: #2c3e50;
-            margin-bottom: 4px;
-        }
-
-        .workflow-title p {
-            font-size: 12px;
-            color: #6c757d;
-        }
-
-        /* Workflow List */
-        .workflow-list {
-            padding: 20px 25px;
-        }
-
-        .workflow-item {
-            background: white;
-            border: 1px solid #e9ecef;
-            border-radius: 8px;
-            margin-bottom: 12px;
-            transition: all 0.3s;
-            overflow: hidden;
-        }
-
-        .workflow-item:hover {
-            box-shadow: 0 2px 8px rgba(0,0,0,0.08);
-        }
-
-        .workflow-item.completed {
-            border-left: 4px solid #27ae60;
-        }
-
-        .workflow-item.in-progress {
-            border-left: 4px solid #3498db;
-            background: #f8fbff;
-        }
-
-        .workflow-item.pending {
-            border-left: 4px solid #f39c12;
-            opacity: 0.7;
-        }
-
-        .workflow-main {
-            padding: 16px 20px;
-            cursor: pointer;
-            display: flex;
-            align-items: center;
-            gap: 15px;
-        }
-
-        .workflow-number {
-            width: 32px;
-            height: 32px;
-            border-radius: 50%;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            font-size: 13px;
-            font-weight: 700;
             flex-shrink: 0;
         }
 
-        .workflow-item.completed .workflow-number {
-            background: #d1f2eb;
-            color: #0a6c53;
-        }
-
-        .workflow-item.in-progress .workflow-number {
-            background: #e3f2fd;
-            color: #1565c0;
-        }
-
-        .workflow-item.pending .workflow-number {
-            background: #fff3cd;
-            color: #856404;
-        }
-
-        .workflow-content {
-            flex: 1;
-        }
-
-        .workflow-main-title {
-            font-size: 14px;
+        .page-header h1 {
+            font-size: 24px;
             font-weight: 600;
             color: #2c3e50;
-            margin-bottom: 4px;
+            margin-bottom: 5px;
         }
 
-        .workflow-main-desc {
-            font-size: 12px;
+        .page-subtitle {
+            font-size: 13px;
             color: #6c757d;
-            line-height: 1.4;
         }
 
-        .workflow-meta {
-            display: flex;
-            align-items: center;
-            gap: 15px;
+        /* Tabs */
+        .tabs-container {
+            background: white;
+            border-bottom: 2px solid #e9ecef;
+            padding: 0 30px;
             flex-shrink: 0;
         }
 
-        .workflow-date {
-            font-size: 11px;
-            color: #6c757d;
+        .tabs {
             display: flex;
-            align-items: center;
-            gap: 4px;
+            gap: 5px;
         }
 
-        .workflow-status {
+        .tab {
+            padding: 12px 20px;
+            background: transparent;
+            border: none;
+            border-bottom: 3px solid transparent;
+            color: #6c757d;
+            font-size: 14px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s;
+            white-space: nowrap;
+        }
+
+        .tab:hover {
+            color: #3498db;
+        }
+
+        .tab.active {
+            color: #3498db;
+            border-bottom-color: #3498db;
+        }
+
+        /* Table Container */
+        .table-container {
+            flex: 1;
+            overflow: auto;
+            padding: 20px 30px;
+        }
+
+        /* Table */
+        .requests-table {
+            width: 100%;
+            background: white;
+            border-radius: 8px;
+            overflow: hidden;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.08);
+        }
+
+        .requests-table table {
+            width: 100%;
+            border-collapse: collapse;
+        }
+
+        .requests-table th {
+            background: #f8f9fa;
+            padding: 12px;
+            text-align: left;
+            font-size: 11px;
+            font-weight: 600;
+            color: #495057;
+            text-transform: uppercase;
+            border-bottom: 2px solid #e9ecef;
+            white-space: nowrap;
+        }
+
+        .requests-table td {
+            padding: 12px;
+            font-size: 13px;
+            color: #2c3e50;
+            border-bottom: 1px solid #f8f9fa;
+        }
+
+        .requests-table tr:hover {
+            background: #f8f9fa;
+        }
+
+        .requests-table tr.selected {
+            background: #e3f2fd;
+        }
+
+        /* Status Badge */
+        .status-badge {
+            display: inline-flex;
+            align-items: center;
+            gap: 5px;
             padding: 4px 10px;
             border-radius: 4px;
             font-size: 11px;
             font-weight: 600;
-            text-transform: uppercase;
         }
 
-        .status-completed {
+        .status-yes {
             background: #d1f2eb;
             color: #0a6c53;
-        }
-
-        .status-in-progress {
-            background: #e3f2fd;
-            color: #1565c0;
         }
 
         .status-pending {
@@ -197,391 +164,1260 @@ html
             color: #856404;
         }
 
-        /* Sub-process Progress Bar Style */
-        .sub-process-progress {
-            padding: 12px 20px 16px 72px;
-            background: #fafbfc;
-            border-top: 1px solid #e9ecef;
+        /* Progress Bar */
+        .progress-bar {
+            width: 80px;
+            height: 6px;
+            background: #e9ecef;
+            border-radius: 3px;
+            overflow: hidden;
         }
 
-        .progress-header {
+        .progress-fill {
+            height: 100%;
+            background: #27ae60;
+            border-radius: 3px;
+        }
+
+        /* Buttons */
+        .btn-action {
+            padding: 6px 12px;
+            border: 1px solid #e9ecef;
+            border-radius: 4px;
+            font-size: 11px;
+            font-weight: 600;
+            cursor: pointer;
+            background: white;
+            color: #495057;
+            transition: all 0.3s;
+            display: inline-flex;
+            align-items: center;
+            gap: 5px;
+        }
+
+        .btn-action:hover {
+            background: #f8f9fa;
+            border-color: #3498db;
+            color: #3498db;
+        }
+
+        .btn-icon {
+            width: 30px;
+            height: 30px;
+            border: none;
+            background: transparent;
+            color: #6c757d;
+            cursor: pointer;
+            border-radius: 4px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            transition: all 0.3s;
+        }
+
+        .btn-icon:hover {
+            background: #e3f2fd;
+            color: #3498db;
+        }
+
+        /* Side Panel */
+        .side-panel {
+            width: 0;
+            display: flex;
+            flex-direction: column;
+            background: white;
+            border-left: 1px solid #e9ecef;
+            transition: all 0.3s ease;
+            overflow: hidden;
+            flex-shrink: 0;
+            position: relative;
+        }
+
+        .side-panel.open {
+            width: 600px;
+            flex: 0.7;
+        }
+
+        .side-panel.expanded {
+            flex: 2;
+        }
+
+        /* Resize Handle */
+        .resize-handle {
+            position: absolute;
+            left: 0;
+            top: 0;
+            bottom: 0;
+            width: 6px;
+            background: transparent;
+            cursor: ew-resize;
+            z-index: 10;
+            transition: background 0.2s;
+        }
+
+        .resize-handle:hover {
+            background: #3498db;
+        }
+
+        .resize-handle::before {
+            content: '';
+            position: absolute;
+            left: 50%;
+            top: 50%;
+            transform: translate(-50%, -50%);
+            width: 2px;
+            height: 40px;
+            background: #e9ecef;
+            border-radius: 2px;
+        }
+
+        /* Panel Header */
+        .panel-header {
+            background: #2c3e50;
+            color: white;
+            padding: 20px 25px;
             display: flex;
             justify-content: space-between;
             align-items: center;
-            margin-bottom: 8px;
+            border-bottom: 3px solid #3498db;
+            flex-shrink: 0;
         }
 
-        .progress-info {
+        .panel-header-left {
             display: flex;
             align-items: center;
             gap: 12px;
         }
 
-        .current-step-pill {
+        .panel-icon {
+            width: 40px;
+            height: 40px;
+            background: #3498db;
+            border-radius: 8px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 18px;
+        }
+
+        .panel-title h2 {
+            font-size: 18px;
+            font-weight: 600;
+            margin-bottom: 4px;
+        }
+
+        .panel-subtitle {
+            font-size: 12px;
+            opacity: 0.8;
+        }
+
+        .panel-actions {
+            display: flex;
+            gap: 8px;
+        }
+
+        .panel-btn {
+            width: 35px;
+            height: 35px;
+            background: rgba(255, 255, 255, 0.1);
+            border: none;
+            border-radius: 6px;
+            color: white;
+            font-size: 16px;
+            cursor: pointer;
+            transition: all 0.3s;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .panel-btn:hover {
+            background: rgba(255, 255, 255, 0.2);
+        }
+
+        /* Panel Body */
+        .panel-body {
+            flex: 1;
+            overflow-y: auto;
+            padding: 25px;
+        }
+
+        .panel-body::-webkit-scrollbar {
+            width: 8px;
+        }
+
+        .panel-body::-webkit-scrollbar-track {
+            background: #f1f1f1;
+        }
+
+        .panel-body::-webkit-scrollbar-thumb {
+            background: #3498db;
+            border-radius: 4px;
+        }
+
+        /* Panel Footer */
+        .panel-footer {
+            padding: 20px 25px;
+            border-top: 1px solid #e9ecef;
+            background: #f8f9fa;
+            display: flex;
+            justify-content: flex-end;
+            gap: 10px;
+            flex-shrink: 0;
+        }
+
+        .btn-primary {
+            padding: 10px 20px;
+            border: none;
+            border-radius: 6px;
+            font-size: 13px;
+            font-weight: 600;
+            cursor: pointer;
+            background: #3498db;
+            color: white;
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            transition: all 0.3s;
+        }
+
+        .btn-primary:hover {
+            background: #2980b9;
+        }
+
+        .btn-secondary {
+            padding: 10px 20px;
+            border: 1px solid #e9ecef;
+            border-radius: 6px;
+            font-size: 13px;
+            font-weight: 600;
+            cursor: pointer;
+            background: white;
+            color: #495057;
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            transition: all 0.3s;
+        }
+
+        .btn-secondary:hover {
+            background: #f8f9fa;
+        }
+
+        .btn-success {
+            padding: 10px 20px;
+            border: none;
+            border-radius: 6px;
+            font-size: 13px;
+            font-weight: 600;
+            cursor: pointer;
+            background: #27ae60;
+            color: white;
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            transition: all 0.3s;
+        }
+
+        .btn-success:hover {
+            background: #229954;
+        }
+
+        /* Detail Sections in Panel */
+        .detail-section {
+            background: #f8f9fa;
+            border: 1px solid #e9ecef;
+            border-radius: 8px;
+            padding: 20px;
+            margin-bottom: 20px;
+        }
+
+        .section-header {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            margin-bottom: 15px;
+            padding-bottom: 12px;
+            border-bottom: 2px solid #e9ecef;
+        }
+
+        .section-icon-small {
+            width: 32px;
+            height: 32px;
             background: #e3f2fd;
-            color: #1565c0;
-            padding: 4px 10px;
-            border-radius: 12px;
+            color: #3498db;
+            border-radius: 6px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 14px;
+            flex-shrink: 0;
+        }
+
+        .section-title h3 {
+            font-size: 14px;
+            color: #2c3e50;
+            margin-bottom: 2px;
+        }
+
+        .section-title p {
+            font-size: 11px;
+            color: #6c757d;
+        }
+
+        .info-grid {
+            display: grid;
+            grid-template-columns: 1fr;
+            gap: 15px;
+        }
+
+        .info-item {
+            background: white;
+            padding: 12px;
+            border-radius: 6px;
+            border: 1px solid #e9ecef;
+        }
+
+        .info-label {
             font-size: 11px;
             font-weight: 600;
-            display: inline-flex;
+            color: #6c757d;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+            margin-bottom: 6px;
+            display: flex;
             align-items: center;
             gap: 6px;
         }
 
-        .current-step-pill i {
-            font-size: 10px;
+        .info-value {
+            font-size: 13px;
+            color: #2c3e50;
+            font-weight: 500;
         }
 
-        .progress-counter {
+        /* Form Group */
+        .form-group {
+            margin-bottom: 15px;
+        }
+
+        .form-group label {
             font-size: 11px;
-            color: #6c757d;
             font-weight: 600;
+            color: #495057;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+            margin-bottom: 6px;
+            display: flex;
+            align-items: center;
+            gap: 6px;
         }
 
-        .progress-percentage {
-            font-size: 12px;
-            font-weight: 700;
-            color: #3498db;
+        .form-group input,
+        .form-group select,
+        .form-group textarea {
+            width: 100%;
+            padding: 10px 12px;
+            border: 1px solid #ced4da;
+            border-radius: 6px;
+            font-size: 13px;
+            font-family: 'Open Sans', sans-serif;
+            transition: all 0.3s;
         }
 
-        .progress-bar-container {
-            height: 6px;
+        .form-group input:focus,
+        .form-group select:focus,
+        .form-group textarea:focus {
+            outline: none;
+            border-color: #3498db;
+            box-shadow: 0 0 0 3px rgba(52,152,219,0.1);
+        }
+
+        .form-group input:disabled,
+        .form-group select:disabled,
+        .form-group textarea:disabled {
+            background: #f8f9fa;
+            color: #6c757d;
+            cursor: not-allowed;
+        }
+
+        .text-content {
+            background: white;
+            padding: 12px;
+            border-radius: 6px;
+            border: 1px solid #e9ecef;
+            font-size: 13px;
+            color: #495057;
+            line-height: 1.8;
+        }
+
+        /* Edit Mode Indicator */
+        .edit-mode-badge {
+            display: inline-flex;
+            align-items: center;
+            gap: 6px;
+            padding: 5px 10px;
+            border-radius: 5px;
+            font-size: 11px;
+            font-weight: 600;
+            background: #fff3cd;
+            color: #856404;
+        }
+
+        /* Confidence Score */
+        .confidence-score {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .confidence-bar {
+            flex: 1;
+            height: 8px;
             background: #e9ecef;
-            border-radius: 3px;
+            border-radius: 4px;
             overflow: hidden;
             position: relative;
         }
 
-        .progress-bar-fill {
+        .confidence-fill {
             height: 100%;
-            background: linear-gradient(90deg, #3498db, #5dade2);
-            border-radius: 3px;
-            transition: width 0.3s ease;
-            position: relative;
+            background: linear-gradient(90deg, #27ae60, #f39c12, #e74c3c);
+            border-radius: 4px;
+            transition: width 0.3s;
         }
 
-        .progress-bar-fill::after {
-            content: '';
-            position: absolute;
-            top: 0;
-            right: 0;
-            bottom: 0;
-            left: 0;
-            background: linear-gradient(
-                90deg,
-                transparent,
-                rgba(255, 255, 255, 0.3),
-                transparent
-            );
-            animation: shimmer 2s infinite;
+        .confidence-percentage {
+            font-size: 13px;
+            font-weight: 600;
+            color: #2c3e50;
+            min-width: 45px;
         }
 
-        @keyframes shimmer {
-            0% {
-                transform: translateX(-100%);
-            }
-            100% {
-                transform: translateX(100%);
-            }
-        }
-
-        .progress-bar-fill.completed {
-            background: linear-gradient(90deg, #27ae60, #2ecc71);
-        }
-
-        .sub-steps-pills {
+        /* Claim Lines */
+        .claim-lines {
             display: flex;
             flex-wrap: wrap;
-            gap: 6px;
-            margin-top: 10px;
+            gap: 8px;
         }
 
-        .step-pill {
-            padding: 3px 8px;
-            border-radius: 10px;
-            font-size: 10px;
-            font-weight: 600;
-            border: 1px solid #e9ecef;
-            background: white;
-            color: #95a5a6;
+        .claim-line-tag {
             display: inline-flex;
             align-items: center;
-            gap: 4px;
-        }
-
-        .step-pill.completed {
-            background: #d1f2eb;
-            color: #0a6c53;
-            border-color: #27ae60;
-        }
-
-        .step-pill.active {
+            gap: 6px;
+            padding: 5px 10px;
+            border-radius: 5px;
+            font-size: 11px;
+            font-weight: 600;
             background: #e3f2fd;
             color: #1565c0;
-            border-color: #3498db;
-            animation: pillPulse 2s infinite;
         }
 
-        @keyframes pillPulse {
-            0%, 100% {
-                box-shadow: 0 0 0 0 rgba(52, 152, 219, 0.4);
-            }
-            50% {
-                box-shadow: 0 0 0 3px rgba(52, 152, 219, 0.2);
+        /* Responsive */
+        @media (max-width: 1200px) {
+            .side-panel.open {
+                width: 500px;
             }
         }
 
-        .step-pill i {
-            font-size: 8px;
-        }
-
-        /* Expand Toggle */
-        .expand-toggle {
-            width: 24px;
-            height: 24px;
-            border-radius: 4px;
-            background: #f8f9fa;
-            border: 1px solid #e9ecef;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            cursor: pointer;
-            transition: all 0.3s;
-        }
-
-        .expand-toggle:hover {
-            background: #e9ecef;
-        }
-
-        .expand-toggle i {
-            font-size: 12px;
-            color: #6c757d;
+        @media (max-width: 992px) {
+            .side-panel.open {
+                width: 400px;
+            }
         }
     </style>
 </head>
 <body>
-    <div class="container">
-        <div class="workflow-section">
-            <div class="workflow-header">
-                <div class="workflow-header-left">
-                    <div class="workflow-icon">
-                        <i class="fas fa-project-diagram"></i>
-                    </div>
-                    <div class="workflow-title">
-                        <h3>Workflow Process</h3>
-                        <p>Case processing timeline and status</p>
-                    </div>
+    <div class="dashboard-container">
+        <!-- Main Content -->
+        <div class="main-content" id="mainContent">
+            <!-- Header -->
+            <div class="page-header">
+                <h1><i class="fas fa-clipboard-list"></i> Request Dashboard</h1>
+                <p class="page-subtitle">Manage and track all requests</p>
+            </div>
+
+            <!-- Tabs -->
+            <div class="tabs-container">
+                <div class="tabs">
+                    <button class="tab active">Pending Requests</button>
+                    <button class="tab">Approved Requests</button>
+                    <button class="tab">Denied Request Packet</button>
                 </div>
             </div>
 
-            <div class="workflow-list">
-                <!-- Workflow Item 1 - Completed -->
-                <div class="workflow-item completed">
-                    <div class="workflow-main">
-                        <div class="workflow-number">1</div>
-                        <div class="workflow-content">
-                            <div class="workflow-main-title">NEW - Appeal Created</div>
-                            <div class="workflow-main-desc">Appeal case created and initialized in the system</div>
-                        </div>
-                        <div class="workflow-meta">
-                            <div class="workflow-date">
-                                <i class="fas fa-clock"></i> Dec 28, 9:15 AM
-                            </div>
-                            <div class="workflow-status status-completed">
-                                <i class="fas fa-check-circle"></i> Completed
-                            </div>
-                        </div>
-                    </div>
-                    <div class="sub-process-progress">
-                        <div class="progress-header">
-                            <div class="progress-info">
-                                <div class="current-step-pill">
-                                    <i class="fas fa-check"></i> Appeal Created
-                                </div>
-                                <span class="progress-counter">2/2 steps</span>
-                            </div>
-                            <div class="progress-percentage">100%</div>
-                        </div>
-                        <div class="progress-bar-container">
-                            <div class="progress-bar-fill completed" style="width: 100%;"></div>
-                        </div>
-                        <div class="sub-steps-pills">
-                            <span class="step-pill completed">
-                                <i class="fas fa-check"></i> 1.1 Appeal Created
-                            </span>
-                            <span class="step-pill completed">
-                                <i class="fas fa-check"></i> 1.2 Grievance Created
-                            </span>
-                        </div>
-                    </div>
-                </div>
-
-                <!-- Workflow Item 2 - Completed -->
-                <div class="workflow-item completed">
-                    <div class="workflow-main">
-                        <div class="workflow-number">2</div>
-                        <div class="workflow-content">
-                            <div class="workflow-main-title">Delegation Check</div>
-                            <div class="workflow-main-desc">LDP delegation status verified - Case is Non-Delegated</div>
-                        </div>
-                        <div class="workflow-meta">
-                            <div class="workflow-date">
-                                <i class="fas fa-clock"></i> Dec 28, 9:20 AM
-                            </div>
-                            <div class="workflow-status status-completed">
-                                <i class="fas fa-check-circle"></i> Completed
-                            </div>
-                        </div>
-                    </div>
-                    <div class="sub-process-progress">
-                        <div class="progress-header">
-                            <div class="progress-info">
-                                <div class="current-step-pill">
-                                    <i class="fas fa-check"></i> Non-Delegated
-                                </div>
-                                <span class="progress-counter">1/2 steps</span>
-                            </div>
-                            <div class="progress-percentage">50%</div>
-                        </div>
-                        <div class="progress-bar-container">
-                            <div class="progress-bar-fill completed" style="width: 50%;"></div>
-                        </div>
-                        <div class="sub-steps-pills">
-                            <span class="step-pill">2.1 Delegated</span>
-                            <span class="step-pill completed">
-                                <i class="fas fa-check"></i> 2.2 Non-Delegated
-                            </span>
-                        </div>
-                    </div>
-                </div>
-
-                <!-- Workflow Item 3 - In Progress -->
-                <div class="workflow-item in-progress">
-                    <div class="workflow-main">
-                        <div class="workflow-number">3</div>
-                        <div class="workflow-content">
-                            <div class="workflow-main-title">AOR Check</div>
-                            <div class="workflow-main-desc">Authorization of Representative verification in progress</div>
-                        </div>
-                        <div class="workflow-meta">
-                            <div class="workflow-date">
-                                <i class="fas fa-clock"></i> Dec 28, 10:00 AM
-                            </div>
-                            <div class="workflow-status status-in-progress">
-                                <i class="fas fa-spinner"></i> In Progress
-                            </div>
-                            <div class="expand-toggle">
-                                <i class="fas fa-chevron-down"></i>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="sub-process-progress">
-                        <div class="progress-header">
-                            <div class="progress-info">
-                                <div class="current-step-pill">
-                                    <i class="fas fa-spinner fa-spin"></i> AOR Pending
-                                </div>
-                                <span class="progress-counter">2/6 steps</span>
-                            </div>
-                            <div class="progress-percentage">33%</div>
-                        </div>
-                        <div class="progress-bar-container">
-                            <div class="progress-bar-fill" style="width: 33%;"></div>
-                        </div>
-                        <div class="sub-steps-pills">
-                            <span class="step-pill completed">
-                                <i class="fas fa-check"></i> 3.0 Requested
-                            </span>
-                            <span class="step-pill active">
-                                <i class="fas fa-circle"></i> 3.1 Pending
-                            </span>
-                            <span class="step-pill">3.2 Received</span>
-                            <span class="step-pill">3.3 Approved</span>
-                            <span class="step-pill">3.4 Denied</span>
-                            <span class="step-pill">3.5 Not Received</span>
-                            <span class="step-pill">3.6 N/A</span>
-                        </div>
-                    </div>
-                </div>
-
-                <!-- Workflow Item 4 - Pending -->
-                <div class="workflow-item pending">
-                    <div class="workflow-main">
-                        <div class="workflow-number">4</div>
-                        <div class="workflow-content">
-                            <div class="workflow-main-title">Good Cause Check</div>
-                            <div class="workflow-main-desc">Verification of timeliness and good cause determination</div>
-                        </div>
-                        <div class="workflow-meta">
-                            <div class="workflow-date">
-                                <i class="fas fa-clock"></i> Pending
-                            </div>
-                            <div class="workflow-status status-pending">
-                                <i class="fas fa-hourglass-half"></i> Pending
-                            </div>
-                        </div>
-                    </div>
-                    <div class="sub-process-progress">
-                        <div class="progress-header">
-                            <div class="progress-info">
-                                <span class="progress-counter">0/7 steps</span>
-                            </div>
-                            <div class="progress-percentage">0%</div>
-                        </div>
-                        <div class="progress-bar-container">
-                            <div class="progress-bar-fill" style="width: 0%;"></div>
-                        </div>
-                        <div class="sub-steps-pills">
-                            <span class="step-pill">4.0 Requested</span>
-                            <span class="step-pill">4.1 Pending</span>
-                            <span class="step-pill">4.2 Received</span>
-                            <span class="step-pill">4.3 N/A</span>
-                            <span class="step-pill">4.4 Approved</span>
-                            <span class="step-pill">4.5 Denied</span>
-                            <span class="step-pill">4.6 Not Received</span>
-                        </div>
-                    </div>
-                </div>
-
-                <!-- Workflow Item 5 - Pending -->
-                <div class="workflow-item pending">
-                    <div class="workflow-main">
-                        <div class="workflow-number">5</div>
-                        <div class="workflow-content">
-                            <div class="workflow-main-title">Expedited Review Check</div>
-                            <div class="workflow-main-desc">Determination of expedited processing requirements</div>
-                        </div>
-                        <div class="workflow-meta">
-                            <div class="workflow-date">
-                                <i class="fas fa-clock"></i> Pending
-                            </div>
-                            <div class="workflow-status status-pending">
-                                <i class="fas fa-hourglass-half"></i> Pending
-                            </div>
-                        </div>
-                    </div>
-                    <div class="sub-process-progress">
-                        <div class="progress-header">
-                            <div class="progress-info">
-                                <span class="progress-counter">0/5 steps</span>
-                            </div>
-                            <div class="progress-percentage">0%</div>
-                        </div>
-                        <div class="progress-bar-container">
-                            <div class="progress-bar-fill" style="width: 0%;"></div>
-                        </div>
-                        <div class="sub-steps-pills">
-                            <span class="step-pill">5.1 Pending</span>
-                            <span class="step-pill">5.2 Approved</span>
-                            <span class="step-pill">5.3 Denied</span>
-                            <span class="step-pill">5.4 N/A</span>
-                            <span class="step-pill">5.5 Reclassified</span>
-                        </div>
-                    </div>
+            <!-- Table -->
+            <div class="table-container">
+                <div class="requests-table">
+                    <table>
+                        <thead>
+                            <tr>
+                                <th>#</th>
+                                <th>Auth/Claim Number</th>
+                                <th>Service Type</th>
+                                <th>Requestor Name</th>
+                                <th>Received Date</th>
+                                <th>Aging Days</th>
+                                <th>Status</th>
+                                <th>Documents</th>
+                                <th>Confidence</th>
+                                <th>Materials</th>
+                                <th>Recommendation</th>
+                                <th>Action</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr class="selected">
+                                <td>1</td>
+                                <td>AUTH998815</td>
+                                <td><i class="fas fa-envelope"></i> Email</td>
+                                <td>N/A</td>
+                                <td>11/06/2025</td>
+                                <td><span class="status-badge status-yes">0 D</span></td>
+                                <td>Medicare</td>
+                                <td><button class="btn-action"><i class="fas fa-paperclip"></i> View (1)</button></td>
+                                <td>
+                                    <div class="progress-bar">
+                                        <div class="progress-fill" style="width: 85%"></div>
+                                    </div>
+                                </td>
+                                <td>Treatment narrative in additional information...</td>
+                                <td>
+                                    <span class="status-badge status-yes">
+                                        <i class="fas fa-check"></i> APPROVAL
+                                    </span>
+                                </td>
+                                <td>
+                                    <button class="btn-icon" onclick="openViewPanel()" title="View Details">
+                                        <i class="fas fa-eye"></i>
+                                    </button>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>2</td>
+                                <td>AUTH998816</td>
+                                <td><i class="fas fa-envelope"></i> Email</td>
+                                <td>N/A</td>
+                                <td>11/06/2025</td>
+                                <td><span class="status-badge status-yes">0 D</span></td>
+                                <td>Medicare</td>
+                                <td><button class="btn-action"><i class="fas fa-paperclip"></i> View (1)</button></td>
+                                <td>
+                                    <div class="progress-bar">
+                                        <div class="progress-fill" style="width: 92%"></div>
+                                    </div>
+                                </td>
+                                <td>AI RECOMMENDATION: APPROVAL (SERVICES)</td>
+                                <td>
+                                    <span class="status-badge status-yes">
+                                        <i class="fas fa-check"></i> APPROVAL
+                                    </span>
+                                </td>
+                                <td>
+                                    <button class="btn-icon" title="View Details">
+                                        <i class="fas fa-eye"></i>
+                                    </button>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>3</td>
+                                <td>AUTH998817</td>
+                                <td><i class="fas fa-envelope"></i> Email</td>
+                                <td>N/A</td>
+                                <td>11/06/2025</td>
+                                <td><span class="status-badge status-yes">0 D</span></td>
+                                <td>Medicare</td>
+                                <td><button class="btn-action"><i class="fas fa-paperclip"></i> View (2)</button></td>
+                                <td>
+                                    <div class="progress-bar">
+                                        <div class="progress-fill" style="width: 78%"></div>
+                                    </div>
+                                </td>
+                                <td>AI RECOMMENDATION: APPROVAL</td>
+                                <td>
+                                    <span class="status-badge status-yes">
+                                        <i class="fas fa-check"></i> APPROVAL
+                                    </span>
+                                </td>
+                                <td>
+                                    <button class="btn-icon" title="View Details">
+                                        <i class="fas fa-eye"></i>
+                                    </button>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>4</td>
+                                <td>AUTH998818</td>
+                                <td><i class="fas fa-envelope"></i> Email</td>
+                                <td>N/A</td>
+                                <td>11/06/2025</td>
+                                <td><span class="status-badge status-yes">0 D</span></td>
+                                <td>Medicare</td>
+                                <td><button class="btn-action"><i class="fas fa-paperclip"></i> View (1)</button></td>
+                                <td>
+                                    <div class="progress-bar">
+                                        <div class="progress-fill" style="width: 90%"></div>
+                                    </div>
+                                </td>
+                                <td>AI RECOMMENDATION: APPROVAL</td>
+                                <td>
+                                    <span class="status-badge status-yes">
+                                        <i class="fas fa-check"></i> APPROVAL
+                                    </span>
+                                </td>
+                                <td>
+                                    <button class="btn-icon" title="View Details">
+                                        <i class="fas fa-eye"></i>
+                                    </button>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>5</td>
+                                <td>AUTH998819</td>
+                                <td><i class="fas fa-envelope"></i> Email</td>
+                                <td>N/A</td>
+                                <td>11/06/2025</td>
+                                <td><span class="status-badge status-yes">0 D</span></td>
+                                <td>Medicare</td>
+                                <td><button class="btn-action"><i class="fas fa-paperclip"></i> View (1)</button></td>
+                                <td>
+                                    <div class="progress-bar">
+                                        <div class="progress-fill" style="width: 88%"></div>
+                                    </div>
+                                </td>
+                                <td>AI RECOMMENDATION: APPROVAL</td>
+                                <td>
+                                    <span class="status-badge status-yes">
+                                        <i class="fas fa-check"></i> APPROVAL
+                                    </span>
+                                </td>
+                                <td>
+                                    <button class="btn-icon" title="View Details">
+                                        <i class="fas fa-eye"></i>
+                                    </button>
+                                </td>
+                            </tr>
+                        </tbody>
+                    </table>
                 </div>
             </div>
         </div>
+
+        <!-- Side Panel - View Mode (Shown on load) -->
+        <div class="side-panel open" id="viewPanel">
+            <div class="resize-handle" id="resizeHandle"></div>
+            
+            <div class="panel-header">
+                <div class="panel-header-left">
+                    <div class="panel-icon">
+                        <i class="fas fa-file-alt"></i>
+                    </div>
+                    <div class="panel-title">
+                        <h2>Request Details</h2>
+                        <p class="panel-subtitle">AUTH998815 - View Mode</p>
+                    </div>
+                </div>
+                <div class="panel-actions">
+                    <button class="panel-btn" onclick="togglePanelSize('viewPanel')" title="Expand/Collapse">
+                        <i class="fas fa-expand-arrows-alt"></i>
+                    </button>
+                    <button class="panel-btn" onclick="closePanel('viewPanel')" title="Close">
+                        <i class="fas fa-times"></i>
+                    </button>
+                </div>
+            </div>
+
+            <div class="panel-body">
+                <!-- Tracking & Identifiers -->
+                <div class="detail-section">
+                    <div class="section-header">
+                        <div class="section-icon-small">
+                            <i class="fas fa-barcode"></i>
+                        </div>
+                        <div class="section-title">
+                            <h3>Tracking & Identifiers</h3>
+                            <p>Request identification information</p>
+                        </div>
+                    </div>
+                    <div class="info-grid">
+                        <div class="info-item">
+                            <div class="info-label"><i class="fas fa-hashtag"></i> Request ID</div>
+                            <div class="info-value">REQ-2025-00123</div>
+                        </div>
+                        <div class="info-item">
+                            <div class="info-label"><i class="fas fa-folder-open"></i> Parent Call File ID</div>
+                            <div class="info-value">CALL-PARENT-456789</div>
+                        </div>
+                        <div class="info-item">
+                            <div class="info-label"><i class="fas fa-file"></i> Original Call File ID</div>
+                            <div class="info-value">CALL-789012</div>
+                        </div>
+                        <div class="info-item">
+                            <div class="info-label"><i class="fas fa-comments"></i> Interaction ID</div>
+                            <div class="info-value">INT-345678</div>
+                        </div>
+                        <div class="info-item">
+                            <div class="info-label"><i class="fas fa-file-invoice"></i> Claim Number</div>
+                            <div class="info-value">CLM-2025-987654</div>
+                        </div>
+                        <div class="info-item">
+                            <div class="info-label"><i class="fas fa-list-ol"></i> Claim Lines</div>
+                            <div class="info-value">
+                                <div class="claim-lines">
+                                    <span class="claim-line-tag">
+                                        <i class="fas fa-hashtag"></i> Line 1
+                                    </span>
+                                    <span class="claim-line-tag">
+                                        <i class="fas fa-hashtag"></i> Line 2
+                                    </span>
+                                    <span class="claim-line-tag">
+                                        <i class="fas fa-hashtag"></i> Line 3
+                                    </span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Source Information -->
+                <div class="detail-section">
+                    <div class="section-header">
+                        <div class="section-icon-small">
+                            <i class="fas fa-sitemap"></i>
+                        </div>
+                        <div class="section-title">
+                            <h3>Source Information</h3>
+                            <p>Request origin and channel details</p>
+                        </div>
+                    </div>
+                    <div class="info-grid">
+                        <div class="info-item">
+                            <div class="info-label"><i class="fas fa-inbox"></i> Intake Source</div>
+                            <div class="info-value">Care Event</div>
+                        </div>
+                        <div class="info-item">
+                            <div class="info-label"><i class="fas fa-broadcast-tower"></i> Source Channel</div>
+                            <div class="info-value">Phone Call</div>
+                        </div>
+                        <div class="info-item">
+                            <div class="info-label"><i class="fas fa-fingerprint"></i> Source Identifier</div>
+                            <div class="info-value">PHONE-IVR-001</div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Timing Information -->
+                <div class="detail-section">
+                    <div class="section-header">
+                        <div class="section-icon-small">
+                            <i class="fas fa-clock"></i>
+                        </div>
+                        <div class="section-title">
+                            <h3>Timing Information</h3>
+                            <p>Date and time details</p>
+                        </div>
+                    </div>
+                    <div class="info-grid">
+                        <div class="info-item">
+                            <div class="info-label"><i class="fas fa-calendar-day"></i> Received Date</div>
+                            <div class="info-value">12/28/2025</div>
+                        </div>
+                        <div class="info-item">
+                            <div class="info-label"><i class="fas fa-clock"></i> Time Received</div>
+                            <div class="info-value">14:35:22</div>
+                        </div>
+                        <div class="info-item">
+                            <div class="info-label"><i class="fas fa-calendar-plus"></i> Created Date</div>
+                            <div class="info-value">12/28/2025 2:35 PM</div>
+                        </div>
+                        <div class="info-item">
+                            <div class="info-label"><i class="fas fa-edit"></i> Modified Date</div>
+                            <div class="info-value">12/28/2025 3:20 PM</div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Requestor Information -->
+                <div class="detail-section">
+                    <div class="section-header">
+                        <div class="section-icon-small">
+                            <i class="fas fa-user-circle"></i>
+                        </div>
+                        <div class="section-title">
+                            <h3>Requestor Information</h3>
+                            <p>Person submitting the request</p>
+                        </div>
+                    </div>
+                    <div class="info-grid">
+                        <div class="info-item">
+                            <div class="info-label"><i class="fas fa-user"></i> Requestor Name</div>
+                            <div class="info-value">Sarah Johnson</div>
+                        </div>
+                        <div class="info-item">
+                            <div class="info-label"><i class="fas fa-phone"></i> Requestor Phone</div>
+                            <div class="info-value">555-123-4567</div>
+                        </div>
+                        <div class="info-item">
+                            <div class="info-label"><i class="fas fa-bolt"></i> Expedited Review</div>
+                            <div class="info-value">
+                                <span class="status-badge status-yes">
+                                    <i class="fas fa-check-circle"></i> Yes
+                                </span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Provider & Office -->
+                <div class="detail-section">
+                    <div class="section-header">
+                        <div class="section-icon-small">
+                            <i class="fas fa-user-md"></i>
+                        </div>
+                        <div class="section-title">
+                            <h3>Provider & Office Information</h3>
+                            <p>Healthcare provider details</p>
+                        </div>
+                    </div>
+                    <div class="info-grid">
+                        <div class="info-item">
+                            <div class="info-label"><i class="fas fa-id-card"></i> Provider Number</div>
+                            <div class="info-value">PRV-789456</div>
+                        </div>
+                        <div class="info-item">
+                            <div class="info-label"><i class="fas fa-building"></i> Office Number</div>
+                            <div class="info-value">OFF-123789</div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Member Information -->
+                <div class="detail-section">
+                    <div class="section-header">
+                        <div class="section-icon-small">
+                            <i class="fas fa-user"></i>
+                        </div>
+                        <div class="section-title">
+                            <h3>Member Information</h3>
+                            <p>Patient details</p>
+                        </div>
+                    </div>
+                    <div class="info-grid">
+                        <div class="info-item">
+                            <div class="info-label"><i class="fas fa-hashtag"></i> Member Number</div>
+                            <div class="info-value">MBR-456789</div>
+                        </div>
+                        <div class="info-item">
+                            <div class="info-label"><i class="fas fa-user"></i> First Name</div>
+                            <div class="info-value">John</div>
+                        </div>
+                        <div class="info-item">
+                            <div class="info-label"><i class="fas fa-user"></i> Last Name</div>
+                            <div class="info-value">Smith</div>
+                        </div>
+                        <div class="info-item">
+                            <div class="info-label"><i class="fas fa-id-badge"></i> Member ID</div>
+                            <div class="info-value">MID-987654</div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Group & LOB -->
+                <div class="detail-section">
+                    <div class="section-header">
+                        <div class="section-icon-small">
+                            <i class="fas fa-users"></i>
+                        </div>
+                        <div class="section-title">
+                            <h3>Group & Line of Business</h3>
+                            <p>Group and LOB information</p>
+                        </div>
+                    </div>
+                    <div class="info-grid">
+                        <div class="info-item">
+                            <div class="info-label"><i class="fas fa-hashtag"></i> Group Number</div>
+                            <div class="info-value">GRP-12345</div>
+                        </div>
+                        <div class="info-item">
+                            <div class="info-label"><i class="fas fa-building"></i> Group Name</div>
+                            <div class="info-value">Enterprise Health Group</div>
+                        </div>
+                        <div class="info-item">
+                            <div class="info-label"><i class="fas fa-briefcase"></i> GA Secondary LOB</div>
+                            <div class="info-value">Commercial</div>
+                        </div>
+                        <div class="info-item">
+                            <div class="info-label"><i class="fas fa-users-cog"></i> GA Team</div>
+                            <div class="info-value">Team Alpha</div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Call Summary -->
+                <div class="detail-section">
+                    <div class="section-header">
+                        <div class="section-icon-small">
+                            <i class="fas fa-file-alt"></i>
+                        </div>
+                        <div class="section-title">
+                            <h3>Call Summary</h3>
+                            <p>Detailed call description</p>
+                        </div>
+                    </div>
+                    <div class="text-content">
+                        Member called regarding denial of service for physical therapy sessions. Member states that their provider recommended 12 sessions but only 6 were approved. Member is requesting appeal of the decision and wants expedited review due to deteriorating condition.
+                    </div>
+                </div>
+
+                <!-- AI Information -->
+                <div class="detail-section">
+                    <div class="section-header">
+                        <div class="section-icon-small">
+                            <i class="fas fa-robot"></i>
+                        </div>
+                        <div class="section-title">
+                            <h3>AI Processing Information</h3>
+                            <p>Artificial intelligence analysis</p>
+                        </div>
+                    </div>
+                    <div class="info-grid">
+                        <div class="info-item">
+                            <div class="info-label"><i class="fas fa-brain"></i> AI Model</div>
+                            <div class="info-value">GPT-4-Turbo-Medical-v2</div>
+                        </div>
+                        <div class="info-item">
+                            <div class="info-label"><i class="fas fa-code-branch"></i> AI Version</div>
+                            <div class="info-value">v2.3.1</div>
+                        </div>
+                        <div class="info-item">
+                            <div class="info-label"><i class="fas fa-tag"></i> Request Type</div>
+                            <div class="info-value">Appeal - Medical Necessity</div>
+                        </div>
+                        <div class="info-item">
+                            <div class="info-label"><i class="fas fa-chart-line"></i> Confidence Score</div>
+                            <div class="confidence-score">
+                                <div class="confidence-bar">
+                                    <div class="confidence-fill" style="width: 87%;"></div>
+                                </div>
+                                <div class="confidence-percentage">87%</div>
+                            </div>
+                        </div>
+                        <div class="info-item">
+                            <div class="info-label"><i class="fas fa-thumbs-up"></i> AI Recommendation</div>
+                            <div class="info-value">
+                                <span class="status-badge status-yes">
+                                    <i class="fas fa-check-circle"></i> Recommended for Approval
+                                </span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Status Information -->
+                <div class="detail-section">
+                    <div class="section-header">
+                        <div class="section-icon-small">
+                            <i class="fas fa-tasks"></i>
+                        </div>
+                        <div class="section-title">
+                            <h3>Status & Processing</h3>
+                            <p>Current status information</p>
+                        </div>
+                    </div>
+                    <div class="info-grid">
+                        <div class="info-item">
+                            <div class="info-label"><i class="fas fa-info-circle"></i> Request Status</div>
+                            <div class="info-value">
+                                <span class="status-badge status-pending">
+                                    <i class="fas fa-clock"></i> Pending Review
+                                </span>
+                            </div>
+                        </div>
+                        <div class="info-item">
+                            <div class="info-label"><i class="fas fa-check-double"></i> Validation Status</div>
+                            <div class="info-value">
+                                <span class="status-badge status-yes">
+                                    <i class="fas fa-check-circle"></i> Validated
+                                </span>
+                            </div>
+                        </div>
+                        <div class="info-item">
+                            <div class="info-label"><i class="fas fa-user-check"></i> Assigned To</div>
+                            <div class="info-value">analyst@careinsight.ai</div>
+                        </div>
+                        <div class="info-item">
+                            <div class="info-label"><i class="fas fa-toggle-on"></i> Active Status</div>
+                            <div class="info-value">
+                                <span class="status-badge status-yes">
+                                    <i class="fas fa-check-circle"></i> Active
+                                </span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="panel-footer">
+                <button class="btn-secondary" onclick="closePanel('viewPanel')">
+                    <i class="fas fa-times"></i> Close
+                </button>
+                <button class="btn-primary" onclick="switchToEditMode()">
+                    <i class="fas fa-edit"></i> Edit Request
+                </button>
+            </div>
+        </div>
+
+        <!-- Side Panel - Edit Mode -->
+        <div class="side-panel" id="editPanel">
+            <div class="resize-handle" id="resizeHandleEdit"></div>
+            
+            <div class="panel-header">
+                <div class="panel-header-left">
+                    <div class="panel-icon">
+                        <i class="fas fa-edit"></i>
+                    </div>
+                    <div class="panel-title">
+                        <h2>Edit Request Details</h2>
+                        <p class="panel-subtitle">
+                            <span class="edit-mode-badge">
+                                <i class="fas fa-exclamation-triangle"></i> Edit Mode
+                            </span>
+                        </p>
+                    </div>
+                </div>
+                <div class="panel-actions">
+                    <button class="panel-btn" onclick="togglePanelSize('editPanel')" title="Expand/Collapse">
+                        <i class="fas fa-expand-arrows-alt"></i>
+                    </button>
+                    <button class="panel-btn" onclick="closePanel('editPanel')" title="Close">
+                        <i class="fas fa-times"></i>
+                    </button>
+                </div>
+            </div>
+
+            <div class="panel-body">
+                <!-- Tracking & Identifiers (Partially Editable) -->
+                <div class="detail-section">
+                    <div class="section-header">
+                        <div class="section-icon-small">
+                            <i class="fas fa-barcode"></i>
+                        </div>
+                        <div class="section-title">
+                            <h3>Tracking & Identifiers</h3>
+                            <p>Request identification</p>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label><i class="fas fa-hashtag"></i> Request ID</label>
+                        <input type="text" value="REQ-2025-00123" disabled>
+                    </div>
+                    <div class="form-group">
+                        <label><i class="fas fa-folder-open"></i> Parent Call File ID</label>
+                        <input type="text" value="CALL-PARENT-456789" disabled>
+                    </div>
+                    <div class="form-group">
+                        <label><i class="fas fa-file"></i> Original Call File ID</label>
+                        <input type="text" value="CALL-789012" disabled>
+                    </div>
+                    <div class="form-group">
+                        <label><i class="fas fa-file-invoice"></i> Claim Number</label>
+                        <input type="text" value="CLM-2025-987654" placeholder="Enter claim number">
+                    </div>
+                </div>
+
+                <!-- Member Information (Editable) -->
+                <div class="detail-section">
+                    <div class="section-header">
+                        <div class="section-icon-small">
+                            <i class="fas fa-user"></i>
+                        </div>
+                        <div class="section-title">
+                            <h3>Member Information</h3>
+                            <p>Editable patient details</p>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label><i class="fas fa-hashtag"></i> Member Number</label>
+                        <input type="text" value="MBR-456789" placeholder="Enter member number">
+                    </div>
+                    <div class="form-group">
+                        <label><i class="fas fa-user"></i> First Name</label>
+                        <input type="text" value="John" placeholder="Enter first name">
+                    </div>
+                    <div class="form-group">
+                        <label><i class="fas fa-user"></i> Last Name</label>
+                        <input type="text" value="Smith" placeholder="Enter last name">
+                    </div>
+                    <div class="form-group">
+                        <label><i class="fas fa-id-badge"></i> Member ID</label>
+                        <input type="text" value="MID-987654" disabled>
+                    </div>
+                </div>
+
+                <!-- Group Information (Editable) -->
+                <div class="detail-section">
+                    <div class="section-header">
+                        <div class="section-icon-small">
+                            <i class="fas fa-users"></i>
+                        </div>
+                        <div class="section-title">
+                            <h3>Group Information</h3>
+                            <p>Editable group details</p>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label><i class="fas fa-hashtag"></i> Group Number</label>
+                        <input type="text" value="GRP-12345" placeholder="Enter group number">
+                    </div>
+                    <div class="form-group">
+                        <label><i class="fas fa-building"></i> Group Name</label>
+                        <input type="text" value="Enterprise Health Group" placeholder="Enter group name">
+                    </div>
+                </div>
+
+                <!-- Office Information (Editable) -->
+                <div class="detail-section">
+                    <div class="section-header">
+                        <div class="section-icon-small">
+                            <i class="fas fa-building"></i>
+                        </div>
+                        <div class="section-title">
+                            <h3>Office Information</h3>
+                            <p>Editable office details</p>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label><i class="fas fa-building"></i> Office Number</label>
+                        <input type="text" value="OFF-123789" placeholder="Enter office number">
+                    </div>
+                </div>
+
+                <!-- Other Fields (Disabled) -->
+                <div class="detail-section">
+                    <div class="section-header">
+                        <div class="section-icon-small">
+                            <i class="fas fa-info-circle"></i>
+                        </div>
+                        <div class="section-title">
+                            <h3>Additional Information</h3>
+                            <p>Read-only fields</p>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label><i class="fas fa-inbox"></i> Intake Source</label>
+                        <input type="text" value="Care Event" disabled>
+                    </div>
+                    <div class="form-group">
+                        <label><i class="fas fa-broadcast-tower"></i> Source Channel</label>
+                        <input type="text" value="Phone Call" disabled>
+                    </div>
+                    <div class="form-group">
+                        <label><i class="fas fa-calendar-day"></i> Received Date</label>
+                        <input type="text" value="12/28/2025" disabled>
+                    </div>
+                </div>
+            </div>
+
+            <div class="panel-footer">
+                <button class="btn-secondary" onclick="cancelEdit()">
+                    <i class="fas fa-times"></i> Cancel
+                </button>
+                <button class="btn-success" onclick="saveChanges()">
+                    <i class="fas fa-save"></i> Save Changes
+                </button>
+            </div>
+        </div>
     </div>
+
+    <script>
+        // Open view panel (already open on load)
+        function openViewPanel() {
+            document.getElementById('viewPanel').classList.add('open');
+            document.getElementById('mainContent').classList.add('collapsed');
+        }
+
+        // Close panel
+        function closePanel(panelId) {
+            document.getElementById(panelId).classList.remove('open');
+            document.getElementById(panelId).classList.remove('expanded');
+            document.getElementById('mainContent').classList.remove('collapsed');
+        }
+
+        // Toggle panel size (expand/collapse)
+        function togglePanelSize(panelId) {
+            const panel = document.getElementById(panelId);
+            panel.classList.toggle('expanded');
+        }
+
+        // Switch to edit mode
+        function switchToEditMode() {
+            closePanel('viewPanel');
+            setTimeout(() => {
+                document.getElementById('editPanel').classList.add('open');
+                document.getElementById('mainContent').classList.add('collapsed');
+            }, 300);
+        }
+
+        // Cancel edit
+        function cancelEdit() {
+            closePanel('editPanel');
+            setTimeout(() => {
+                openViewPanel();
+            }, 300);
+        }
+
+        // Save changes
+        function saveChanges() {
+            alert('Changes saved successfully!');
+            closePanel('editPanel');
+            setTimeout(() => {
+                openViewPanel();
+            }, 300);
+        }
+
+        // Resize functionality
+        let isResizing = false;
+        let currentPanel = null;
+
+        function initResize(handleId, panelId) {
+            const handle = document.getElementById(handleId);
+            const panel = document.getElementById(panelId);
+            
+            handle.addEventListener('mousedown', function(e) {
+                isResizing = true;
+                currentPanel = panel;
+                document.body.style.cursor = 'ew-resize';
+                e.preventDefault();
+            });
+        }
+
+        document.addEventListener('mousemove', function(e) {
+            if (!isResizing || !currentPanel) return;
+            
+            const containerWidth = document.querySelector('.dashboard-container').offsetWidth;
+            const newWidth = containerWidth - e.clientX;
+            
+            if (newWidth >= 400 && newWidth <= containerWidth * 0.8) {
+                currentPanel.style.width = newWidth + 'px';
+            }
+        });
+
+        document.addEventListener('mouseup', function() {
+            if (isResizing) {
+                isResizing = false;
+                currentPanel = null;
+                document.body.style.cursor = 'default';
+            }
+        });
+
+        // Initialize resize handles
+        initResize('resizeHandle', 'viewPanel');
+        initResize('resizeHandleEdit', 'editPanel');
+
+        // Initialize view panel as open on page load
+        window.addEventListener('load', function() {
+            openViewPanel();
+        });
+    </script>
 </body>
 </html>
