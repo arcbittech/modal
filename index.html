@@ -205,12 +205,17 @@
             font-weight: 600;
         }
 
-        .status-approved {
-            background: #d1f2eb;
-            color: #0a6c53;
+        .status-open {
+            background: #e3f2fd;
+            color: #1565c0;
         }
 
-        .status-pending {
+        .status-closed {
+            background: #f8d7da;
+            color: #721c24;
+        }
+
+        .status-in-progress {
             background: #fff3cd;
             color: #856404;
         }
@@ -220,9 +225,30 @@
             color: #721c24;
         }
 
-        .status-submitted {
-            background: #e3f2fd;
-            color: #1565c0;
+        .status-approved {
+            background: #d1f2eb;
+            color: #0a6c53;
+        }
+
+        /* Toggle Badge */
+        .toggle-badge {
+            display: inline-flex;
+            align-items: center;
+            gap: 6px;
+            padding: 6px 12px;
+            border-radius: 6px;
+            font-size: 12px;
+            font-weight: 600;
+        }
+
+        .toggle-yes {
+            background: #d1f2eb;
+            color: #0a6c53;
+        }
+
+        .toggle-no {
+            background: #f8d7da;
+            color: #721c24;
         }
 
         /* Action Buttons */
@@ -285,13 +311,14 @@
             width: 100%;
             background: white;
             border-radius: 8px;
-            overflow: hidden;
+            overflow-x: auto;
             border: 1px solid #e9ecef;
         }
 
         .claim-lines-table table {
             width: 100%;
             border-collapse: collapse;
+            min-width: 1600px;
         }
 
         .claim-lines-table th {
@@ -303,6 +330,7 @@
             color: #495057;
             text-transform: uppercase;
             border-bottom: 2px solid #e9ecef;
+            white-space: nowrap;
         }
 
         .claim-lines-table td {
@@ -324,6 +352,81 @@
 
         .amount-denied {
             color: #e74c3c;
+        }
+
+        /* Notes List */
+        .notes-list {
+            display: flex;
+            flex-direction: column;
+            gap: 12px;
+        }
+
+        .note-item {
+            background: white;
+            padding: 15px;
+            border-radius: 8px;
+            border-left: 4px solid #3498db;
+            border: 1px solid #e9ecef;
+        }
+
+        .note-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: flex-start;
+            margin-bottom: 10px;
+        }
+
+        .note-category {
+            font-size: 11px;
+            font-weight: 600;
+            color: #3498db;
+            text-transform: uppercase;
+            display: flex;
+            align-items: center;
+            gap: 6px;
+        }
+
+        .note-meta {
+            font-size: 11px;
+            color: #6c757d;
+        }
+
+        .note-content {
+            font-size: 13px;
+            color: #495057;
+            line-height: 1.6;
+        }
+
+        /* Events Table */
+        .events-table {
+            width: 100%;
+            background: white;
+            border-radius: 8px;
+            overflow-x: auto;
+            border: 1px solid #e9ecef;
+        }
+
+        .events-table table {
+            width: 100%;
+            border-collapse: collapse;
+        }
+
+        .events-table th {
+            background: #f8f9fa;
+            padding: 12px;
+            text-align: left;
+            font-size: 11px;
+            font-weight: 600;
+            color: #495057;
+            text-transform: uppercase;
+            border-bottom: 2px solid #e9ecef;
+        }
+
+        .events-table td {
+            padding: 12px;
+            font-size: 13px;
+            color: #2c3e50;
+            border-bottom: 1px solid #f8f9fa;
         }
 
         /* Document List */
@@ -380,11 +483,6 @@
         .document-icon.word {
             background: #e3f2fd;
             color: #2196f3;
-        }
-
-        .document-icon.excel {
-            background: #e8f5e9;
-            color: #4caf50;
         }
 
         .document-details {
@@ -467,40 +565,6 @@
             color: #95a5a6;
         }
 
-        /* Filter Bar */
-        .filter-bar {
-            background: white;
-            padding: 15px;
-            border-radius: 8px;
-            border: 1px solid #e9ecef;
-            margin-bottom: 20px;
-            display: flex;
-            gap: 15px;
-            align-items: center;
-            flex-wrap: wrap;
-        }
-
-        .filter-item {
-            display: flex;
-            align-items: center;
-            gap: 8px;
-        }
-
-        .filter-item label {
-            font-size: 12px;
-            font-weight: 600;
-            color: #6c757d;
-        }
-
-        .filter-item select,
-        .filter-item input {
-            padding: 8px 12px;
-            border: 1px solid #ced4da;
-            border-radius: 6px;
-            font-size: 13px;
-            font-family: 'Open Sans', sans-serif;
-        }
-
         /* Summary Cards */
         .summary-cards {
             display: grid;
@@ -531,16 +595,16 @@
             background: #3498db;
         }
 
-        .summary-card.card-approved::before {
+        .summary-card.card-paid::before {
             background: #27ae60;
         }
 
-        .summary-card.card-pending::before {
+        .summary-card.card-member::before {
             background: #f39c12;
         }
 
-        .summary-card.card-denied::before {
-            background: #e74c3c;
+        .summary-card.card-provider::before {
+            background: #9b59b6;
         }
 
         .summary-card-label {
@@ -563,29 +627,43 @@
             color: #95a5a6;
         }
 
-        /* Empty State */
-        .empty-state {
-            text-align: center;
-            padding: 60px 20px;
-            color: #95a5a6;
-        }
-
-        .empty-state i {
-            font-size: 64px;
-            margin-bottom: 20px;
-            display: block;
-            opacity: 0.5;
-        }
-
-        .empty-state h3 {
-            font-size: 18px;
-            color: #6c757d;
-            margin-bottom: 10px;
-        }
-
-        .empty-state p {
+        /* Category Headers */
+        .category-header {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            padding: 12px 20px;
+            border-radius: 8px;
+            margin: 25px 0 15px 0;
             font-size: 14px;
-            margin-bottom: 20px;
+            font-weight: 600;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .category-header.screenshots {
+            background: linear-gradient(135deg, #f093fb 0%, #f5576c 100%);
+        }
+
+        .category-header.images {
+            background: linear-gradient(135deg, #4facfe 0%, #00f2fe 100%);
+        }
+
+        .category-header.attachments {
+            background: linear-gradient(135deg, #43e97b 0%, #38f9d7 100%);
+        }
+
+        .category-header.dental {
+            background: linear-gradient(135deg, #fa709a 0%, #fee140 100%);
+        }
+
+        .category-header.summaries {
+            background: linear-gradient(135deg, #30cfd0 0%, #330867 100%);
+        }
+
+        .category-header.financial {
+            background: linear-gradient(135deg, #a8edea 0%, #fed6e3 100%);
+            color: #2c3e50;
         }
 
         /* Responsive */
@@ -603,11 +681,6 @@
             .summary-cards {
                 grid-template-columns: 1fr;
             }
-
-            .filter-bar {
-                flex-direction: column;
-                align-items: stretch;
-            }
         }
     </style>
 </head>
@@ -619,19 +692,19 @@
             <div class="header-meta">
                 <div class="header-meta-item">
                     <span class="header-meta-label">Claim Number</span>
-                    <span class="header-meta-value">CLM-2025-001234</span>
+                    <span class="header-meta-value">CLM123456789</span>
                 </div>
                 <div class="header-meta-item">
                     <span class="header-meta-label">Member</span>
-                    <span class="header-meta-value">John Doe</span>
+                    <span class="header-meta-value">MBR00012345</span>
                 </div>
                 <div class="header-meta-item">
                     <span class="header-meta-label">Status</span>
-                    <span class="header-meta-value">Approved</span>
+                    <span class="header-meta-value">Open</span>
                 </div>
                 <div class="header-meta-item">
-                    <span class="header-meta-label">Total Amount</span>
-                    <span class="header-meta-value">$1,250.00</span>
+                    <span class="header-meta-label">Processing</span>
+                    <span class="header-meta-value">In Progress</span>
                 </div>
             </div>
         </div>
@@ -656,31 +729,31 @@
                 <div class="summary-cards">
                     <div class="summary-card card-total">
                         <div class="summary-card-label">
-                            <i class="fas fa-dollar-sign"></i> Total Billed Amount
+                            <i class="fas fa-dollar-sign"></i> Total Charges
                         </div>
-                        <div class="summary-card-value">$1,250.00</div>
-                        <div class="summary-card-subtext">Original claim amount</div>
+                        <div class="summary-card-value">$200.00</div>
+                        <div class="summary-card-subtext">Total billed amount</div>
                     </div>
-                    <div class="summary-card card-approved">
+                    <div class="summary-card card-paid">
                         <div class="summary-card-label">
-                            <i class="fas fa-check-circle"></i> Approved Amount
-                        </div>
-                        <div class="summary-card-value">$1,150.00</div>
-                        <div class="summary-card-subtext">Amount approved for payment</div>
-                    </div>
-                    <div class="summary-card card-pending">
-                        <div class="summary-card-label">
-                            <i class="fas fa-clock"></i> Pending Amount
+                            <i class="fas fa-money-check-alt"></i> Amount Paid
                         </div>
                         <div class="summary-card-value">$0.00</div>
-                        <div class="summary-card-subtext">Awaiting review</div>
+                        <div class="summary-card-subtext">Total amount paid</div>
                     </div>
-                    <div class="summary-card card-denied">
+                    <div class="summary-card card-member">
                         <div class="summary-card-label">
-                            <i class="fas fa-times-circle"></i> Denied Amount
+                            <i class="fas fa-user"></i> Member Paid
                         </div>
-                        <div class="summary-card-value">$100.00</div>
-                        <div class="summary-card-subtext">Not covered by plan</div>
+                        <div class="summary-card-value">$0.00</div>
+                        <div class="summary-card-subtext">Member responsibility</div>
+                    </div>
+                    <div class="summary-card card-provider">
+                        <div class="summary-card-label">
+                            <i class="fas fa-user-md"></i> Provider Paid
+                        </div>
+                        <div class="summary-card-value">$0.00</div>
+                        <div class="summary-card-subtext">Provider reimbursement</div>
                     </div>
                 </div>
 
@@ -708,48 +781,92 @@
                     <div class="info-grid">
                         <div class="info-item">
                             <div class="info-label"><i class="fas fa-hashtag"></i> Claim Number</div>
-                            <div class="info-value">CLM-2025-001234</div>
+                            <div class="info-value">CLM123456789</div>
                         </div>
                         <div class="info-item">
                             <div class="info-label"><i class="fas fa-file-alt"></i> Claim Type</div>
-                            <div class="info-value">Professional</div>
+                            <div class="info-value">CLAIM</div>
                         </div>
                         <div class="info-item">
-                            <div class="info-label"><i class="fas fa-calendar-plus"></i> Date of Service</div>
-                            <div class="info-value">12/15/2024</div>
-                        </div>
-                        <div class="info-item">
-                            <div class="info-label"><i class="fas fa-calendar-check"></i> Submitted Date</div>
-                            <div class="info-value">12/20/2024</div>
-                        </div>
-                        <div class="info-item">
-                            <div class="info-label"><i class="fas fa-calendar-day"></i> Processed Date</div>
-                            <div class="info-value">12/28/2024</div>
-                        </div>
-                        <div class="info-item">
-                            <div class="info-label"><i class="fas fa-check-circle"></i> Claim Status</div>
+                            <div class="info-label"><i class="fas fa-info-circle"></i> Claim Status</div>
                             <div class="info-value">
-                                <span class="status-badge status-approved">
-                                    <i class="fas fa-check-circle"></i> Approved
+                                <span class="status-badge status-open">
+                                    <i class="fas fa-folder-open"></i> Open
                                 </span>
                             </div>
                         </div>
                         <div class="info-item">
-                            <div class="info-label"><i class="fas fa-dollar-sign"></i> Total Billed</div>
-                            <div class="info-value amount-display">$1,250.00</div>
+                            <div class="info-label"><i class="fas fa-tasks"></i> Processing Status</div>
+                            <div class="info-value">
+                                <span class="status-badge status-in-progress">
+                                    <i class="fas fa-spinner"></i> In Progress
+                                </span>
+                            </div>
                         </div>
                         <div class="info-item">
-                            <div class="info-label"><i class="fas fa-money-check-alt"></i> Approved Amount</div>
-                            <div class="info-value amount-display">$1,150.00</div>
+                            <div class="info-label"><i class="fas fa-calendar-plus"></i> Date Received</div>
+                            <div class="info-value">01/11/2025</div>
                         </div>
                         <div class="info-item">
-                            <div class="info-label"><i class="fas fa-ban"></i> Denied Amount</div>
-                            <div class="info-value amount-denied">$100.00</div>
+                            <div class="info-label"><i class="fas fa-calendar-times"></i> Closed Date</div>
+                            <div class="info-value">-</div>
+                        </div>
+                        <div class="info-item">
+                            <div class="info-label"><i class="fas fa-calendar-check"></i> Check Date</div>
+                            <div class="info-value">01/20/2025</div>
+                        </div>
+                        <div class="info-item">
+                            <div class="info-label"><i class="fas fa-calendar-day"></i> Fulfilled At</div>
+                            <div class="info-value">01/21/2025</div>
+                        </div>
+                        <div class="info-item">
+                            <div class="info-label"><i class="fas fa-envelope"></i> Date Member Notice Sent</div>
+                            <div class="info-value">01/22/2025</div>
+                        </div>
+                        <div class="info-item">
+                            <div class="info-label"><i class="fas fa-print"></i> Date EOB Printed</div>
+                            <div class="info-value">01/22/2025</div>
+                        </div>
+                        <div class="info-item">
+                            <div class="info-label"><i class="fas fa-file-pdf"></i> Claim EOB Document Type</div>
+                            <div class="info-value">PDF</div>
+                        </div>
+                        <div class="info-item">
+                            <div class="info-label"><i class="fas fa-calculator"></i> Adjustment Version</div>
+                            <div class="info-value">3</div>
+                        </div>
+                        <div class="info-item">
+                            <div class="info-label"><i class="fas fa-ambulance"></i> Emergency Referral</div>
+                            <div class="info-value">
+                                <span class="toggle-badge toggle-yes">
+                                    <i class="fas fa-check-circle"></i> Yes
+                                </span>
+                            </div>
+                        </div>
+                        <div class="info-item">
+                            <div class="info-label"><i class="fas fa-file-medical"></i> Referring Pre-Estimate</div>
+                            <div class="info-value">
+                                <span class="toggle-badge toggle-no">
+                                    <i class="fas fa-times-circle"></i> No
+                                </span>
+                            </div>
+                        </div>
+                        <div class="info-item">
+                            <div class="info-label"><i class="fas fa-calendar-alt"></i> Pre-Estimate Date Received</div>
+                            <div class="info-value">01/09/2025</div>
+                        </div>
+                        <div class="info-item">
+                            <div class="info-label"><i class="fas fa-question-circle"></i> Inquiry</div>
+                            <div class="info-value">
+                                <span class="toggle-badge toggle-no">
+                                    <i class="fas fa-times-circle"></i> No
+                                </span>
+                            </div>
                         </div>
                     </div>
                 </div>
 
-                <!-- Member Information -->
+                <!-- Member & Group Information -->
                 <div class="detail-section">
                     <div class="section-header">
                         <div class="section-header-left">
@@ -757,8 +874,8 @@
                                 <i class="fas fa-user"></i>
                             </div>
                             <div class="section-title">
-                                <h3>Member Information</h3>
-                                <p>Patient demographic details</p>
+                                <h3>Member & Group Information</h3>
+                                <p>Patient and group details</p>
                             </div>
                         </div>
                         <div class="action-buttons">
@@ -769,29 +886,33 @@
                     </div>
                     <div class="info-grid">
                         <div class="info-item">
-                            <div class="info-label"><i class="fas fa-id-badge"></i> Member ID</div>
-                            <div class="info-value">MBR123456</div>
+                            <div class="info-label"><i class="fas fa-id-badge"></i> Member Number</div>
+                            <div class="info-value">MBR00012345</div>
                         </div>
                         <div class="info-item">
-                            <div class="info-label"><i class="fas fa-user"></i> Member Name</div>
-                            <div class="info-value">John Doe</div>
+                            <div class="info-label"><i class="fas fa-id-card"></i> Member ID</div>
+                            <div class="info-value">A1234567</div>
                         </div>
                         <div class="info-item">
-                            <div class="info-label"><i class="fas fa-birthday-cake"></i> Date of Birth</div>
-                            <div class="info-value">07/22/1985</div>
+                            <div class="info-label"><i class="fas fa-users"></i> Group Number</div>
+                            <div class="info-value">GRP000555</div>
                         </div>
                         <div class="info-item">
-                            <div class="info-label"><i class="fas fa-briefcase"></i> Plan Name</div>
-                            <div class="info-value">Health Advantage Plus</div>
+                            <div class="info-label"><i class="fas fa-building"></i> Group Name</div>
+                            <div class="info-value">ACME Group</div>
                         </div>
                         <div class="info-item">
-                            <div class="info-label"><i class="fas fa-hashtag"></i> Group Number</div>
-                            <div class="info-value">GRP789</div>
+                            <div class="info-label"><i class="fas fa-briefcase"></i> GA Primary LOB</div>
+                            <div class="info-value">Commercial</div>
+                        </div>
+                        <div class="info-item">
+                            <div class="info-label"><i class="fas fa-layer-group"></i> GA Secondary LOB</div>
+                            <div class="info-value">DHMO</div>
                         </div>
                     </div>
                 </div>
 
-                <!-- Provider Information -->
+                <!-- Provider & Office Information -->
                 <div class="detail-section">
                     <div class="section-header">
                         <div class="section-header-left">
@@ -799,40 +920,121 @@
                                 <i class="fas fa-user-md"></i>
                             </div>
                             <div class="section-title">
-                                <h3>Provider Information</h3>
-                                <p>Rendering and billing provider details</p>
+                                <h3>Provider & Office Information</h3>
+                                <p>Rendering provider and office details</p>
                             </div>
                         </div>
                         <div class="action-buttons">
                             <button class="btn-action btn-primary">
                                 <i class="fas fa-external-link-alt"></i> View Provider Profile
                             </button>
+                            <button class="btn-action btn-primary">
+                                <i class="fas fa-external-link-alt"></i> View Office Profile
+                            </button>
                         </div>
                     </div>
                     <div class="info-grid">
                         <div class="info-item">
-                            <div class="info-label"><i class="fas fa-user-md"></i> Provider Name</div>
-                            <div class="info-value">Dr. Jane Smith</div>
+                            <div class="info-label"><i class="fas fa-hashtag"></i> Provider Number</div>
+                            <div class="info-value">PRV000987</div>
+                        </div>
+                        <div class="info-item">
+                            <div class="info-label"><i class="fas fa-user"></i> Provider First Name</div>
+                            <div class="info-value">Jane</div>
+                        </div>
+                        <div class="info-item">
+                            <div class="info-label"><i class="fas fa-user"></i> Provider Last Name</div>
+                            <div class="info-value">Smith</div>
                         </div>
                         <div class="info-item">
                             <div class="info-label"><i class="fas fa-id-card"></i> Provider NPI</div>
                             <div class="info-value">1234567890</div>
                         </div>
                         <div class="info-item">
-                            <div class="info-label"><i class="fas fa-hashtag"></i> Provider Tax ID</div>
-                            <div class="info-value">XX-XXXXXXX</div>
+                            <div class="info-label"><i class="fas fa-stethoscope"></i> Provider Primary Specialty</div>
+                            <div class="info-value">Orthodontics</div>
                         </div>
                         <div class="info-item">
-                            <div class="info-label"><i class="fas fa-stethoscope"></i> Specialty</div>
-                            <div class="info-value">Primary Care Physician</div>
+                            <div class="info-label"><i class="fas fa-hashtag"></i> Office Number</div>
+                            <div class="info-value">OFF000111</div>
                         </div>
                         <div class="info-item">
-                            <div class="info-label"><i class="fas fa-building"></i> Billing Provider</div>
-                            <div class="info-value">Downtown Health Clinic</div>
+                            <div class="info-label"><i class="fas fa-clinic-medical"></i> Office Name</div>
+                            <div class="info-value">Downtown Dental</div>
                         </div>
                         <div class="info-item">
-                            <div class="info-label"><i class="fas fa-map-marker-alt"></i> Service Location</div>
-                            <div class="info-value">123 Main Street, Los Angeles, CA 90001</div>
+                            <div class="info-label"><i class="fas fa-id-badge"></i> Office NPI</div>
+                            <div class="info-value">0987654321</div>
+                        </div>
+                        <div class="info-item">
+                            <div class="info-label"><i class="fas fa-map-marker-alt"></i> Office Address</div>
+                            <div class="info-value">123 King St W</div>
+                        </div>
+                        <div class="info-item">
+                            <div class="info-label"><i class="fas fa-city"></i> Office City</div>
+                            <div class="info-value">Toronto</div>
+                        </div>
+                        <div class="info-item">
+                            <div class="info-label"><i class="fas fa-flag"></i> Office State</div>
+                            <div class="info-value">ON</div>
+                        </div>
+                        <div class="info-item">
+                            <div class="info-label"><i class="fas fa-mail-bulk"></i> Office Zip</div>
+                            <div class="info-value">M5H1A1</div>
+                        </div>
+                        <div class="info-item">
+                            <div class="info-label"><i class="fas fa-map"></i> Office County</div>
+                            <div class="info-value">Toronto</div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Place of Service -->
+                <div class="detail-section">
+                    <div class="section-header">
+                        <div class="section-header-left">
+                            <div class="section-icon">
+                                <i class="fas fa-map-marker-alt"></i>
+                            </div>
+                            <div class="section-title">
+                                <h3>Place of Service</h3>
+                                <p>Service location details</p>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="info-grid">
+                        <div class="info-item">
+                            <div class="info-label"><i class="fas fa-code"></i> Place of Service Code</div>
+                            <div class="info-value">11</div>
+                        </div>
+                        <div class="info-item">
+                            <div class="info-label"><i class="fas fa-map-pin"></i> Place of Service</div>
+                            <div class="info-value">Office</div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Financial Summary -->
+                <div class="detail-section">
+                    <div class="section-header">
+                        <div class="section-header-left">
+                            <div class="section-icon">
+                                <i class="fas fa-dollar-sign"></i>
+                            </div>
+                            <div class="section-title">
+                                <h3>Financial Summary</h3>
+                                <p>Payment and financial details</p>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="info-grid">
+                        <div class="info-item">
+                            <div class="info-label"><i class="fas fa-dollar-sign"></i> Total Provider Paid</div>
+                            <div class="info-value amount-display">$0.00</div>
+                        </div>
+                        <div class="info-item">
+                            <div class="info-label"><i class="fas fa-dollar-sign"></i> Total Member Paid</div>
+                            <div class="info-value amount-display">$0.00</div>
                         </div>
                     </div>
                 </div>
@@ -860,143 +1062,40 @@
                             <thead>
                                 <tr>
                                     <th><i class="fas fa-hashtag"></i> Line #</th>
-                                    <th><i class="fas fa-calendar-day"></i> Date of Service</th>
-                                    <th><i class="fas fa-procedures"></i> Procedure Code</th>
-                                    <th><i class="fas fa-file-alt"></i> Description</th>
-                                    <th><i class="fas fa-hashtag"></i> Units</th>
-                                    <th><i class="fas fa-dollar-sign"></i> Billed Amount</th>
-                                    <th><i class="fas fa-check-circle"></i> Approved Amount</th>
                                     <th><i class="fas fa-info-circle"></i> Status</th>
+                                    <th><i class="fas fa-file-contract"></i> Contract</th>
+                                    <th><i class="fas fa-procedures"></i> Procedure</th>
+                                    <th><i class="fas fa-tooth"></i> Tooth</th>
+                                    <th><i class="fas fa-layer-group"></i> Surface</th>
+                                    <th><i class="fas fa-hashtag"></i> Units</th>
+                                    <th><i class="fas fa-calendar-day"></i> Service Date</th>
+                                    <th><i class="fas fa-dollar-sign"></i> Charges</th>
+                                    <th><i class="fas fa-money-check-alt"></i> Paid</th>
+                                    <th><i class="fas fa-ban"></i> Denial</th>
                                     <th><i class="fas fa-cog"></i> Actions</th>
                                 </tr>
                             </thead>
                             <tbody>
                                 <tr>
                                     <td>1</td>
-                                    <td>12/15/2024</td>
-                                    <td>99213</td>
-                                    <td>Office/outpatient visit, established patient, 20-29 minutes</td>
-                                    <td>1</td>
-                                    <td class="amount-display">$150.00</td>
-                                    <td class="amount-display">$150.00</td>
-                                    <td>
-                                        <span class="status-badge status-approved">
-                                            <i class="fas fa-check"></i> Approved
-                                        </span>
-                                    </td>
-                                    <td>
-                                        <button class="btn-icon" style="background: #e3f2fd; color: #3498db;" title="View Details">
-                                            <i class="fas fa-eye"></i>
-                                        </button>
-                                    </td>
-                                </tr>
-                                <tr>
-                                    <td>2</td>
-                                    <td>12/15/2024</td>
-                                    <td>80053</td>
-                                    <td>Comprehensive metabolic panel</td>
-                                    <td>1</td>
-                                    <td class="amount-display">$85.00</td>
-                                    <td class="amount-display">$85.00</td>
-                                    <td>
-                                        <span class="status-badge status-approved">
-                                            <i class="fas fa-check"></i> Approved
-                                        </span>
-                                    </td>
-                                    <td>
-                                        <button class="btn-icon" style="background: #e3f2fd; color: #3498db;" title="View Details">
-                                            <i class="fas fa-eye"></i>
-                                        </button>
-                                    </td>
-                                </tr>
-                                <tr>
-                                    <td>3</td>
-                                    <td>12/15/2024</td>
-                                    <td>85025</td>
-                                    <td>Complete blood count (CBC) with differential</td>
-                                    <td>1</td>
-                                    <td class="amount-display">$65.00</td>
-                                    <td class="amount-display">$65.00</td>
-                                    <td>
-                                        <span class="status-badge status-approved">
-                                            <i class="fas fa-check"></i> Approved
-                                        </span>
-                                    </td>
-                                    <td>
-                                        <button class="btn-icon" style="background: #e3f2fd; color: #3498db;" title="View Details">
-                                            <i class="fas fa-eye"></i>
-                                        </button>
-                                    </td>
-                                </tr>
-                                <tr>
-                                    <td>4</td>
-                                    <td>12/15/2024</td>
-                                    <td>93000</td>
-                                    <td>Electrocardiogram, routine ECG with interpretation</td>
-                                    <td>1</td>
-                                    <td class="amount-display">$100.00</td>
-                                    <td class="amount-denied">$0.00</td>
                                     <td>
                                         <span class="status-badge status-denied">
                                             <i class="fas fa-times"></i> Denied
                                         </span>
                                     </td>
-                                    <td>
-                                        <button class="btn-icon" style="background: #e3f2fd; color: #3498db;" title="View Details">
-                                            <i class="fas fa-eye"></i>
-                                        </button>
-                                    </td>
-                                </tr>
-                                <tr>
-                                    <td>5</td>
-                                    <td>12/15/2024</td>
-                                    <td>36415</td>
-                                    <td>Collection of venous blood by venipuncture</td>
+                                    <td>Contract A</td>
+                                    <td>D0140</td>
+                                    <td>19</td>
+                                    <td>MO</td>
                                     <td>1</td>
-                                    <td class="amount-display">$15.00</td>
-                                    <td class="amount-display">$15.00</td>
+                                    <td>01/10/2025</td>
+                                    <td class="amount-display">$200.00</td>
+                                    <td class="amount-denied">$0.00</td>
                                     <td>
-                                        <span class="status-badge status-approved">
-                                            <i class="fas fa-check"></i> Approved
-                                        </span>
-                                    </td>
-                                    <td>
-                                        <button class="btn-icon" style="background: #e3f2fd; color: #3498db;" title="View Details">
-                                            <i class="fas fa-eye"></i>
-                                        </button>
-                                    </td>
-                                </tr>
-                                <tr>
-                                    <td>6</td>
-                                    <td>12/15/2024</td>
-                                    <td>99000</td>
-                                    <td>Handling and/or conveyance of specimen</td>
-                                    <td>1</td>
-                                    <td class="amount-display">$10.00</td>
-                                    <td class="amount-display">$10.00</td>
-                                    <td>
-                                        <span class="status-badge status-approved">
-                                            <i class="fas fa-check"></i> Approved
-                                        </span>
-                                    </td>
-                                    <td>
-                                        <button class="btn-icon" style="background: #e3f2fd; color: #3498db;" title="View Details">
-                                            <i class="fas fa-eye"></i>
-                                        </button>
-                                    </td>
-                                </tr>
-                                <tr>
-                                    <td>7</td>
-                                    <td>12/15/2024</td>
-                                    <td>J3490</td>
-                                    <td>Unclassified drugs</td>
-                                    <td>1</td>
-                                    <td class="amount-display">$825.00</td>
-                                    <td class="amount-display">$825.00</td>
-                                    <td>
-                                        <span class="status-badge status-approved">
-                                            <i class="fas fa-check"></i> Approved
-                                        </span>
+                                        <div style="font-size: 11px; line-height: 1.4;">
+                                            <strong>DA01</strong><br>
+                                            Not covered
+                                        </div>
                                     </td>
                                     <td>
                                         <button class="btn-icon" style="background: #e3f2fd; color: #3498db;" title="View Details">
@@ -1009,32 +1108,141 @@
                     </div>
                 </div>
 
-                <!-- Diagnosis Information -->
+                <!-- Line Item Details -->
                 <div class="detail-section">
                     <div class="section-header">
                         <div class="section-header-left">
                             <div class="section-icon">
-                                <i class="fas fa-stethoscope"></i>
+                                <i class="fas fa-file-invoice-dollar"></i>
                             </div>
                             <div class="section-title">
-                                <h3>Diagnosis Information</h3>
-                                <p>Associated diagnosis codes</p>
+                                <h3>Line Item Financial Details</h3>
+                                <p>Detailed breakdown of line item charges</p>
                             </div>
                         </div>
                     </div>
                     <div class="info-grid">
                         <div class="info-item">
-                            <div class="info-label"><i class="fas fa-code"></i> Primary Diagnosis</div>
-                            <div class="info-value">E11.9 - Type 2 diabetes mellitus without complications</div>
+                            <div class="info-label"><i class="fas fa-dollar-sign"></i> Total Charges</div>
+                            <div class="info-value amount-display">$200.00</div>
                         </div>
                         <div class="info-item">
-                            <div class="info-label"><i class="fas fa-code"></i> Secondary Diagnosis</div>
-                            <div class="info-value">I10 - Essential (primary) hypertension</div>
+                            <div class="info-label"><i class="fas fa-money-check-alt"></i> Amount Paid</div>
+                            <div class="info-value amount-denied">$0.00</div>
                         </div>
                         <div class="info-item">
-                            <div class="info-label"><i class="fas fa-code"></i> Additional Diagnosis</div>
-                            <div class="info-value">E78.5 - Hyperlipidemia, unspecified</div>
+                            <div class="info-label"><i class="fas fa-check-circle"></i> Amount Fee Allowed</div>
+                            <div class="info-value">$0.00</div>
                         </div>
+                        <div class="info-item">
+                            <div class="info-label"><i class="fas fa-user"></i> Amount Member Paid</div>
+                            <div class="info-value">$0.00</div>
+                        </div>
+                        <div class="info-item">
+                            <div class="info-label"><i class="fas fa-hand-holding-usd"></i> Amount Co-Pay</div>
+                            <div class="info-value">$0.00</div>
+                        </div>
+                        <div class="info-item">
+                            <div class="info-label"><i class="fas fa-percentage"></i> Amount Co-Insurance</div>
+                            <div class="info-value">$0.00</div>
+                        </div>
+                        <div class="info-item">
+                            <div class="info-label"><i class="fas fa-file-invoice"></i> Amount Deductible</div>
+                            <div class="info-value">$0.00</div>
+                        </div>
+                        <div class="info-item">
+                            <div class="info-label"><i class="fas fa-chart-line"></i> Amount UCR</div>
+                            <div class="info-value">$0.00</div>
+                        </div>
+                        <div class="info-item">
+                            <div class="info-label"><i class="fas fa-tag"></i> Payment Class Name</div>
+                            <div class="info-value">Standard</div>
+                        </div>
+                        <div class="info-item">
+                            <div class="info-label"><i class="fas fa-receipt"></i> Reimbursement Name</div>
+                            <div class="info-value">Reimb Type X</div>
+                        </div>
+                        <div class="info-item">
+                            <div class="info-label"><i class="fas fa-shield-alt"></i> Liability Level Name</div>
+                            <div class="info-value">Member</div>
+                        </div>
+                        <div class="info-item">
+                            <div class="info-label"><i class="fas fa-code"></i> Claim Abbreviation</div>
+                            <div class="info-value">ABBR</div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Override Explanations -->
+                <div class="detail-section">
+                    <div class="section-header">
+                        <div class="section-header-left">
+                            <div class="section-icon">
+                                <i class="fas fa-exclamation-triangle"></i>
+                            </div>
+                            <div class="section-title">
+                                <h3>Override Explanations</h3>
+                                <p>Claim override details and explanations</p>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="info-grid">
+                        <div class="info-item">
+                            <div class="info-label"><i class="fas fa-code"></i> Override Explanation 1</div>
+                            <div class="info-value">
+                                <strong>E01:</strong> Explanation text 1
+                            </div>
+                        </div>
+                        <div class="info-item">
+                            <div class="info-label"><i class="fas fa-code"></i> Override Explanation 2</div>
+                            <div class="info-value">
+                                <strong>E02:</strong> Explanation text 2
+                            </div>
+                        </div>
+                        <div class="info-item">
+                            <div class="info-label"><i class="fas fa-code"></i> Override Explanation 3</div>
+                            <div class="info-value">
+                                <strong>E03:</strong> Explanation text 3
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- COB Information -->
+                <div class="detail-section">
+                    <div class="section-header">
+                        <div class="section-header-left">
+                            <div class="section-icon">
+                                <i class="fas fa-exchange-alt"></i>
+                            </div>
+                            <div class="section-title">
+                                <h3>Coordination of Benefits (COB)</h3>
+                                <p>COB details and information</p>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="info-item">
+                        <div class="info-label"><i class="fas fa-info-circle"></i> COB Details</div>
+                        <div class="info-value">COB payload / details here</div>
+                    </div>
+                </div>
+
+                <!-- Procedure Description -->
+                <div class="detail-section">
+                    <div class="section-header">
+                        <div class="section-header-left">
+                            <div class="section-icon">
+                                <i class="fas fa-notes-medical"></i>
+                            </div>
+                            <div class="section-title">
+                                <h3>Procedure Description</h3>
+                                <p>Detailed procedure information</p>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="info-item">
+                        <div class="info-label"><i class="fas fa-file-alt"></i> Description</div>
+                        <div class="info-value">Example procedure description</div>
                     </div>
                 </div>
 
@@ -1047,7 +1255,7 @@
                             </div>
                             <div class="section-title">
                                 <h3>Claim Notes</h3>
-                                <p>Additional information and comments</p>
+                                <p>Additional information and comments (2 notes)</p>
                             </div>
                         </div>
                         <div class="action-buttons">
@@ -1056,11 +1264,95 @@
                             </button>
                         </div>
                     </div>
-                    <div class="info-item">
-                        <div class="info-label"><i class="fas fa-comment"></i> Claim Remarks</div>
-                        <div class="info-value">
-                            Routine follow-up visit for chronic condition management. Patient shows good compliance with treatment plan. ECG denied as not medically necessary for routine follow-up per plan guidelines.
+                    <div class="notes-list">
+                        <div class="note-item">
+                            <div class="note-header">
+                                <div class="note-category">
+                                    <i class="fas fa-tag"></i> Coverage Inquiry
+                                </div>
+                                <div class="note-meta">
+                                    <i class="fas fa-user"></i> j.smith | 
+                                    <i class="fas fa-clock"></i> 01/20/2026 2:32 PM
+                                </div>
+                            </div>
+                            <div class="note-content">
+                                Member requested clarification on coverage limits.
+                            </div>
                         </div>
+                        <div class="note-item">
+                            <div class="note-header">
+                                <div class="note-category">
+                                    <i class="fas fa-tag"></i> Coverage Inquiry
+                                </div>
+                                <div class="note-meta">
+                                    <i class="fas fa-user"></i> j.smith | 
+                                    <i class="fas fa-clock"></i> 01/20/2026 2:32 PM
+                                </div>
+                            </div>
+                            <div class="note-content">
+                                Member requested clarification on coverage limits.
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Events -->
+                <div class="detail-section">
+                    <div class="section-header">
+                        <div class="section-header-left">
+                            <div class="section-icon">
+                                <i class="fas fa-calendar-alt"></i>
+                            </div>
+                            <div class="section-title">
+                                <h3>Claim Events</h3>
+                                <p>Event history and tracking</p>
+                            </div>
+                        </div>
+                        <div class="action-buttons">
+                            <button class="btn-action btn-success">
+                                <i class="fas fa-plus"></i> Add Event
+                            </button>
+                        </div>
+                    </div>
+                    <div class="events-table">
+                        <table>
+                            <thead>
+                                <tr>
+                                    <th><i class="fas fa-hashtag"></i> Tracking #</th>
+                                    <th><i class="fas fa-info-circle"></i> Status</th>
+                                    <th><i class="fas fa-calendar-plus"></i> Date Opened</th>
+                                    <th><i class="fas fa-calendar-times"></i> Date Closed</th>
+                                    <th><i class="fas fa-tag"></i> Category</th>
+                                    <th><i class="fas fa-clipboard-list"></i> Reason</th>
+                                    <th><i class="fas fa-tasks"></i> Step</th>
+                                    <th><i class="fas fa-comment"></i> Subject</th>
+                                    <th><i class="fas fa-user"></i> Individual Type</th>
+                                    <th><i class="fas fa-id-badge"></i> Individual #</th>
+                                    <th><i class="fas fa-user-circle"></i> Individual Name</th>
+                                    <th><i class="fas fa-file-alt"></i> Transactions</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td>TRK123456</td>
+                                    <td>
+                                        <span class="status-badge status-open">
+                                            <i class="fas fa-folder-open"></i> Open
+                                        </span>
+                                    </td>
+                                    <td>01/15/2026</td>
+                                    <td>-</td>
+                                    <td>Customer Support</td>
+                                    <td>Billing Issue</td>
+                                    <td>Investigation</td>
+                                    <td>Invoice discrepancy for January</td>
+                                    <td>Account Holder</td>
+                                    <td>CUST98765</td>
+                                    <td>Ravi Kumar</td>
+                                    <td>Checked transactions of Jan 2026; discrepancy found in invoice #INV1023</td>
+                                </tr>
+                            </tbody>
+                        </table>
                     </div>
                 </div>
 
@@ -1096,76 +1388,145 @@
                     </div>
                 </div>
 
-                <!-- Filter Bar -->
-                <div class="filter-bar">
-                    <div class="filter-item">
-                        <label><i class="fas fa-filter"></i> Filter by Type:</label>
-                        <select>
-                            <option value="">All Types</option>
-                            <option value="medical-records">Medical Records</option>
-                            <option value="lab-results">Lab Results</option>
-                            <option value="imaging">Imaging</option>
-                            <option value="authorization">Authorization</option>
-                            <option value="other">Other</option>
-                        </select>
-                    </div>
-                    <div class="filter-item">
-                        <label><i class="fas fa-calendar"></i> Date Range:</label>
-                        <input type="date" placeholder="From">
-                        <input type="date" placeholder="To">
-                    </div>
-                    <div class="filter-item">
-                        <label><i class="fas fa-search"></i> Search:</label>
-                        <input type="text" placeholder="Search attachments...">
+                <!-- Claim Data Screenshots -->
+                <div class="category-header screenshots">
+                    <i class="fas fa-desktop"></i> Claim Data Screenshots
+                </div>
+                <div class="detail-section">
+                    <div class="document-list">
+                        <div class="document-item">
+                            <div class="document-info">
+                                <div class="document-icon image">
+                                    <i class="fas fa-file-image"></i>
+                                </div>
+                                <div class="document-details">
+                                    <div class="document-name">claim_screen_01.png</div>
+                                    <div class="document-meta">
+                                        <span class="document-meta-item">
+                                            <i class="fas fa-tag"></i> Screenshot
+                                        </span>
+                                        <span class="document-meta-item">
+                                            <i class="fas fa-file"></i> image/png
+                                        </span>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="document-actions">
+                                <button class="btn-icon" style="background: #e3f2fd; color: #3498db;" title="View" onclick="window.open('https://example.com/files/claim_screen_01.png', '_blank')">
+                                    <i class="fas fa-eye"></i>
+                                </button>
+                                <button class="btn-icon" style="background: #d1f2eb; color: #27ae60;" title="Download">
+                                    <i class="fas fa-download"></i>
+                                </button>
+                                <button class="btn-icon" style="background: #fff3cd; color: #856404;" title="Share">
+                                    <i class="fas fa-share-alt"></i>
+                                </button>
+                                <button class="btn-icon" style="background: #f8d7da; color: #e74c3c;" title="Delete">
+                                    <i class="fas fa-trash"></i>
+                                </button>
+                            </div>
+                        </div>
+                        <div class="document-item">
+                            <div class="document-info">
+                                <div class="document-icon image">
+                                    <i class="fas fa-file-image"></i>
+                                </div>
+                                <div class="document-details">
+                                    <div class="document-name">claim_screen_01.png</div>
+                                    <div class="document-meta">
+                                        <span class="document-meta-item">
+                                            <i class="fas fa-tag"></i> Screenshot
+                                        </span>
+                                        <span class="document-meta-item">
+                                            <i class="fas fa-file"></i> image/png
+                                        </span>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="document-actions">
+                                <button class="btn-icon" style="background: #e3f2fd; color: #3498db;" title="View" onclick="window.open('https://example.com/files/claim_screen_01.png', '_blank')">
+                                    <i class="fas fa-eye"></i>
+                                </button>
+                                <button class="btn-icon" style="background: #d1f2eb; color: #27ae60;" title="Download">
+                                    <i class="fas fa-download"></i>
+                                </button>
+                                <button class="btn-icon" style="background: #fff3cd; color: #856404;" title="Share">
+                                    <i class="fas fa-share-alt"></i>
+                                </button>
+                                <button class="btn-icon" style="background: #f8d7da; color: #e74c3c;" title="Delete">
+                                    <i class="fas fa-trash"></i>
+                                </button>
+                            </div>
+                        </div>
                     </div>
                 </div>
 
-                <!-- Attachments List -->
+                <!-- Images -->
+                <div class="category-header images">
+                    <i class="fas fa-images"></i> Images
+                </div>
                 <div class="detail-section">
-                    <div class="section-header">
-                        <div class="section-header-left">
-                            <div class="section-icon">
-                                <i class="fas fa-paperclip"></i>
+                    <div class="document-list">
+                        <div class="document-item">
+                            <div class="document-info">
+                                <div class="document-icon image">
+                                    <i class="fas fa-file-image"></i>
+                                </div>
+                                <div class="document-details">
+                                    <div class="document-name">claim_screen_01.png</div>
+                                    <div class="document-meta">
+                                        <span class="document-meta-item">
+                                            <i class="fas fa-tag"></i> Image
+                                        </span>
+                                        <span class="document-meta-item">
+                                            <i class="fas fa-file"></i> image/png
+                                        </span>
+                                    </div>
+                                </div>
                             </div>
-                            <div class="section-title">
-                                <h3>Claim Attachments</h3>
-                                <p>Supporting documents (7 files)</p>
+                            <div class="document-actions">
+                                <button class="btn-icon" style="background: #e3f2fd; color: #3498db;" title="View" onclick="window.open('https://example.com/files/claim_screen_01.png', '_blank')">
+                                    <i class="fas fa-eye"></i>
+                                </button>
+                                <button class="btn-icon" style="background: #d1f2eb; color: #27ae60;" title="Download">
+                                    <i class="fas fa-download"></i>
+                                </button>
+                                <button class="btn-icon" style="background: #fff3cd; color: #856404;" title="Share">
+                                    <i class="fas fa-share-alt"></i>
+                                </button>
+                                <button class="btn-icon" style="background: #f8d7da; color: #e74c3c;" title="Delete">
+                                    <i class="fas fa-trash"></i>
+                                </button>
                             </div>
-                        </div>
-                        <div class="action-buttons">
-                            <button class="btn-action btn-primary">
-                                <i class="fas fa-download"></i> Download All
-                            </button>
                         </div>
                     </div>
+                </div>
 
+                <!-- Attachments -->
+                <div class="category-header attachments">
+                    <i class="fas fa-paperclip"></i> Attachments
+                </div>
+                <div class="detail-section">
                     <div class="document-list">
-                        <!-- PDF Document -->
                         <div class="document-item">
                             <div class="document-info">
                                 <div class="document-icon pdf">
                                     <i class="fas fa-file-pdf"></i>
                                 </div>
                                 <div class="document-details">
-                                    <div class="document-name">Medical_Records_JohnDoe_12152024.pdf</div>
+                                    <div class="document-name">attachment_01.pdf</div>
                                     <div class="document-meta">
                                         <span class="document-meta-item">
-                                            <i class="fas fa-tag"></i> Medical Records
+                                            <i class="fas fa-tag"></i> Attachment
                                         </span>
                                         <span class="document-meta-item">
-                                            <i class="fas fa-file"></i> 2.4 MB
-                                        </span>
-                                        <span class="document-meta-item">
-                                            <i class="fas fa-calendar"></i> 12/20/2024
-                                        </span>
-                                        <span class="document-meta-item">
-                                            <i class="fas fa-user"></i> Dr. Jane Smith
+                                            <i class="fas fa-file"></i> application/pdf
                                         </span>
                                     </div>
                                 </div>
                             </div>
                             <div class="document-actions">
-                                <button class="btn-icon" style="background: #e3f2fd; color: #3498db;" title="View">
+                                <button class="btn-icon" style="background: #e3f2fd; color: #3498db;" title="View" onclick="window.open('https://example.com/files/attachment_01.pdf', '_blank')">
                                     <i class="fas fa-eye"></i>
                                 </button>
                                 <button class="btn-icon" style="background: #d1f2eb; color: #27ae60;" title="Download">
@@ -1179,113 +1540,34 @@
                                 </button>
                             </div>
                         </div>
+                    </div>
+                </div>
 
-                        <!-- Lab Results -->
-                        <div class="document-item">
-                            <div class="document-info">
-                                <div class="document-icon pdf">
-                                    <i class="fas fa-file-pdf"></i>
-                                </div>
-                                <div class="document-details">
-                                    <div class="document-name">Lab_Results_CBC_12152024.pdf</div>
-                                    <div class="document-meta">
-                                        <span class="document-meta-item">
-                                            <i class="fas fa-tag"></i> Lab Results
-                                        </span>
-                                        <span class="document-meta-item">
-                                            <i class="fas fa-file"></i> 1.2 MB
-                                        </span>
-                                        <span class="document-meta-item">
-                                            <i class="fas fa-calendar"></i> 12/20/2024
-                                        </span>
-                                        <span class="document-meta-item">
-                                            <i class="fas fa-user"></i> Quest Diagnostics
-                                        </span>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="document-actions">
-                                <button class="btn-icon" style="background: #e3f2fd; color: #3498db;" title="View">
-                                    <i class="fas fa-eye"></i>
-                                </button>
-                                <button class="btn-icon" style="background: #d1f2eb; color: #27ae60;" title="Download">
-                                    <i class="fas fa-download"></i>
-                                </button>
-                                <button class="btn-icon" style="background: #fff3cd; color: #856404;" title="Share">
-                                    <i class="fas fa-share-alt"></i>
-                                </button>
-                                <button class="btn-icon" style="background: #f8d7da; color: #e74c3c;" title="Delete">
-                                    <i class="fas fa-trash"></i>
-                                </button>
-                            </div>
-                        </div>
-
-                        <!-- Metabolic Panel Results -->
-                        <div class="document-item">
-                            <div class="document-info">
-                                <div class="document-icon pdf">
-                                    <i class="fas fa-file-pdf"></i>
-                                </div>
-                                <div class="document-details">
-                                    <div class="document-name">Lab_Results_Metabolic_Panel_12152024.pdf</div>
-                                    <div class="document-meta">
-                                        <span class="document-meta-item">
-                                            <i class="fas fa-tag"></i> Lab Results
-                                        </span>
-                                        <span class="document-meta-item">
-                                            <i class="fas fa-file"></i> 980 KB
-                                        </span>
-                                        <span class="document-meta-item">
-                                            <i class="fas fa-calendar"></i> 12/20/2024
-                                        </span>
-                                        <span class="document-meta-item">
-                                            <i class="fas fa-user"></i> Quest Diagnostics
-                                        </span>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="document-actions">
-                                <button class="btn-icon" style="background: #e3f2fd; color: #3498db;" title="View">
-                                    <i class="fas fa-eye"></i>
-                                </button>
-                                <button class="btn-icon" style="background: #d1f2eb; color: #27ae60;" title="Download">
-                                    <i class="fas fa-download"></i>
-                                </button>
-                                <button class="btn-icon" style="background: #fff3cd; color: #856404;" title="Share">
-                                    <i class="fas fa-share-alt"></i>
-                                </button>
-                                <button class="btn-icon" style="background: #f8d7da; color: #e74c3c;" title="Delete">
-                                    <i class="fas fa-trash"></i>
-                                </button>
-                            </div>
-                        </div>
-
-                        <!-- Prescription -->
+                <!-- Dental History -->
+                <div class="category-header dental">
+                    <i class="fas fa-tooth"></i> Dental History
+                </div>
+                <div class="detail-section">
+                    <div class="document-list">
                         <div class="document-item">
                             <div class="document-info">
                                 <div class="document-icon image">
                                     <i class="fas fa-file-image"></i>
                                 </div>
                                 <div class="document-details">
-                                    <div class="document-name">Prescription_Medication_12152024.jpg</div>
+                                    <div class="document-name">radiograph_01.jpg</div>
                                     <div class="document-meta">
                                         <span class="document-meta-item">
-                                            <i class="fas fa-tag"></i> Prescription
+                                            <i class="fas fa-tag"></i> Radiograph
                                         </span>
                                         <span class="document-meta-item">
-                                            <i class="fas fa-file"></i> 1.8 MB
-                                        </span>
-                                        <span class="document-meta-item">
-                                            <i class="fas fa-calendar"></i> 12/20/2024
-                                        </span>
-                                        <span class="document-meta-item">
-                                            <i class="fas fa-user"></i> Dr. Jane Smith
+                                            <i class="fas fa-file"></i> image/jpeg
                                         </span>
                                     </div>
                                 </div>
                             </div>
                             <div class="document-actions">
-                                <button class="btn-icon" style="background: #e3f2fd; color: #3498db;" title="View">
+                                <button class="btn-icon" style="background: #e3f2fd; color: #3498db;" title="View" onclick="window.open('https://example.com/files/radiograph_01.jpg', '_blank')">
                                     <i class="fas fa-eye"></i>
                                 </button>
                                 <button class="btn-icon" style="background: #d1f2eb; color: #27ae60;" title="Download">
@@ -1299,113 +1581,107 @@
                                 </button>
                             </div>
                         </div>
+                    </div>
+                </div>
 
-                        <!-- Treatment Plan -->
-                        <div class="document-item">
-                            <div class="document-info">
-                                <div class="document-icon word">
-                                    <i class="fas fa-file-word"></i>
-                                </div>
-                                <div class="document-details">
-                                    <div class="document-name">Treatment_Plan_JohnDoe_2024.docx</div>
-                                    <div class="document-meta">
-                                        <span class="document-meta-item">
-                                            <i class="fas fa-tag"></i> Treatment Plan
-                                        </span>
-                                        <span class="document-meta-item">
-                                            <i class="fas fa-file"></i> 450 KB
-                                        </span>
-                                        <span class="document-meta-item">
-                                            <i class="fas fa-calendar"></i> 12/20/2024
-                                        </span>
-                                        <span class="document-meta-item">
-                                            <i class="fas fa-user"></i> Dr. Jane Smith
-                                        </span>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="document-actions">
-                                <button class="btn-icon" style="background: #e3f2fd; color: #3498db;" title="View">
-                                    <i class="fas fa-eye"></i>
-                                </button>
-                                <button class="btn-icon" style="background: #d1f2eb; color: #27ae60;" title="Download">
-                                    <i class="fas fa-download"></i>
-                                </button>
-                                <button class="btn-icon" style="background: #fff3cd; color: #856404;" title="Share">
-                                    <i class="fas fa-share-alt"></i>
-                                </button>
-                                <button class="btn-icon" style="background: #f8d7da; color: #e74c3c;" title="Delete">
-                                    <i class="fas fa-trash"></i>
-                                </button>
-                            </div>
-                        </div>
-
-                        <!-- Insurance Card -->
-                        <div class="document-item">
-                            <div class="document-info">
-                                <div class="document-icon image">
-                                    <i class="fas fa-file-image"></i>
-                                </div>
-                                <div class="document-details">
-                                    <div class="document-name">Insurance_Card_Front.png</div>
-                                    <div class="document-meta">
-                                        <span class="document-meta-item">
-                                            <i class="fas fa-tag"></i> Insurance Verification
-                                        </span>
-                                        <span class="document-meta-item">
-                                            <i class="fas fa-file"></i> 1.5 MB
-                                        </span>
-                                        <span class="document-meta-item">
-                                            <i class="fas fa-calendar"></i> 12/15/2024
-                                        </span>
-                                        <span class="document-meta-item">
-                                            <i class="fas fa-user"></i> Front Desk
-                                        </span>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="document-actions">
-                                <button class="btn-icon" style="background: #e3f2fd; color: #3498db;" title="View">
-                                    <i class="fas fa-eye"></i>
-                                </button>
-                                <button class="btn-icon" style="background: #d1f2eb; color: #27ae60;" title="Download">
-                                    <i class="fas fa-download"></i>
-                                </button>
-                                <button class="btn-icon" style="background: #fff3cd; color: #856404;" title="Share">
-                                    <i class="fas fa-share-alt"></i>
-                                </button>
-                                <button class="btn-icon" style="background: #f8d7da; color: #e74c3c;" title="Delete">
-                                    <i class="fas fa-trash"></i>
-                                </button>
-                            </div>
-                        </div>
-
-                        <!-- Consent Form -->
+                <!-- Claims Summary Links -->
+                <div class="category-header summaries">
+                    <i class="fas fa-link"></i> Claims Summary Links
+                </div>
+                <div class="detail-section">
+                    <div class="document-list">
                         <div class="document-item">
                             <div class="document-info">
                                 <div class="document-icon pdf">
                                     <i class="fas fa-file-pdf"></i>
                                 </div>
                                 <div class="document-details">
-                                    <div class="document-name">Patient_Consent_Form_Signed.pdf</div>
+                                    <div class="document-name">clearinghouse_summary.pdf</div>
                                     <div class="document-meta">
                                         <span class="document-meta-item">
-                                            <i class="fas fa-tag"></i> Consent Form
+                                            <i class="fas fa-tag"></i> Clearinghouse Summary
                                         </span>
                                         <span class="document-meta-item">
-                                            <i class="fas fa-file"></i> 680 KB
-                                        </span>
-                                        <span class="document-meta-item">
-                                            <i class="fas fa-calendar"></i> 12/15/2024
-                                        </span>
-                                        <span class="document-meta-item">
-                                            <i class="fas fa-user"></i> John Doe
+                                            <i class="fas fa-file"></i> application/pdf
                                         </span>
                                     </div>
                                 </div>
                             </div>
                             <div class="document-actions">
-                                <button class="btn-icon" style="background: #e3f2fd; color: #3498db;" title="View">
+                                <button class="btn-icon" style="background: #e3f2fd; color: #3498db;" title="View" onclick="window.open('https://example.com/files/clearinghouse_summary.pdf', '_blank')">
+                                    <i class="fas fa-eye"></i>
+                                </button>
+                                <button class="btn-icon" style="background: #d1f2eb; color: #27ae60;" title="Download">
+                                    <i class="fas fa-download"></i>
+                                </button>
+                                <button class="btn-icon" style="background: #fff3cd; color: #856404;" title="Share">
+                                    <i class="fas fa-share-alt"></i>
+                                </button>
+                                <button class="btn-icon" style="background: #f8d7da; color: #e74c3c;" title="Delete">
+                                    <i class="fas fa-trash"></i>
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Financial Documents -->
+                <div class="category-header financial">
+                    <i class="fas fa-file-invoice-dollar"></i> Financial Documents
+                </div>
+                <div class="detail-section">
+                    <div class="document-list">
+                        <div class="document-item">
+                            <div class="document-info">
+                                <div class="document-icon pdf">
+                                    <i class="fas fa-file-pdf"></i>
+                                </div>
+                                <div class="document-details">
+                                    <div class="document-name">member_notice_01.pdf</div>
+                                    <div class="document-meta">
+                                        <span class="document-meta-item">
+                                            <i class="fas fa-tag"></i> Member Notice
+                                        </span>
+                                        <span class="document-meta-item">
+                                            <i class="fas fa-file"></i> application/pdf
+                                        </span>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="document-actions">
+                                <button class="btn-icon" style="background: #e3f2fd; color: #3498db;" title="View" onclick="window.open('https://example.com/files/member_notice_01.pdf', '_blank')">
+                                    <i class="fas fa-eye"></i>
+                                </button>
+                                <button class="btn-icon" style="background: #d1f2eb; color: #27ae60;" title="Download">
+                                    <i class="fas fa-download"></i>
+                                </button>
+                                <button class="btn-icon" style="background: #fff3cd; color: #856404;" title="Share">
+                                    <i class="fas fa-share-alt"></i>
+                                </button>
+                                <button class="btn-icon" style="background: #f8d7da; color: #e74c3c;" title="Delete">
+                                    <i class="fas fa-trash"></i>
+                                </button>
+                            </div>
+                        </div>
+                        <div class="document-item">
+                            <div class="document-info">
+                                <div class="document-icon pdf">
+                                    <i class="fas fa-file-pdf"></i>
+                                </div>
+                                <div class="document-details">
+                                    <div class="document-name">provider_notice_01.pdf</div>
+                                    <div class="document-meta">
+                                        <span class="document-meta-item">
+                                            <i class="fas fa-tag"></i> Provider Notice
+                                        </span>
+                                        <span class="document-meta-item">
+                                            <i class="fas fa-file"></i> application/pdf
+                                        </span>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="document-actions">
+                                <button class="btn-icon" style="background: #e3f2fd; color: #3498db;" title="View" onclick="window.open('https://example.com/files/provider_notice_01.pdf', '_blank')">
                                     <i class="fas fa-eye"></i>
                                 </button>
                                 <button class="btn-icon" style="background: #d1f2eb; color: #27ae60;" title="Download">
