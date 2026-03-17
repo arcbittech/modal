@@ -772,13 +772,13 @@
                         <i class="fas fa-tools"></i> Corrective Action Options
                     </h4>
 
-                    <!-- Referring to PQI -->
+                    <!-- Referring to PQI - PRE-SELECTED -->
                     <div class="corrective-action-item">
                         <div class="corrective-action-header">
-                            <input type="checkbox" id="action-pqi" onchange="toggleCorrectiveFields('pqi')">
+                            <input type="checkbox" id="action-pqi" onchange="toggleCorrectiveFields('pqi')" checked>
                             <label for="action-pqi">Referring to PQI</label>
                         </div>
-                        <div class="corrective-action-fields" id="fields-pqi">
+                        <div class="corrective-action-fields show" id="fields-pqi">
                             <div class="form-group">
                                 <label><i class="fas fa-clipboard-list"></i> Services *</label>
                                 <input type="text" placeholder="Enter services..." required>
@@ -850,13 +850,13 @@
                         </div>
                     </div>
 
-                    <!-- Cease and Desist -->
+                    <!-- Cease and Desist - PRE-SELECTED -->
                     <div class="corrective-action-item">
                         <div class="corrective-action-header">
-                            <input type="checkbox" id="action-cease-desist" onchange="toggleCorrectiveFields('cease-desist')">
+                            <input type="checkbox" id="action-cease-desist" onchange="toggleCorrectiveFields('cease-desist')" checked>
                             <label for="action-cease-desist">Cease and Desist</label>
                         </div>
-                        <div class="corrective-action-fields" id="fields-cease-desist">
+                        <div class="corrective-action-fields show" id="fields-cease-desist">
                             <div class="form-group">
                                 <label><i class="fas fa-dollar-sign"></i> Amount Billed to Office *</label>
                                 <input type="number" step="0.01" placeholder="0.00" required>
