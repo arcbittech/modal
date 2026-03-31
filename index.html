@@ -1,390 +1,556 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Override History Modal</title>
-    <style>
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
-        }
+<meta charset="UTF-8">
+<title>Procedure History</title>
 
-        body {
-            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen', 'Ubuntu', 'Cantarell', sans-serif;
-            background: #f5f7fa;
-            padding: 40px 20px;
-            min-height: 100vh;
-        }
+<!-- Font Awesome 6 Free -->
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css" integrity="sha512-DTOQO9RWCH3ppGqcWaEA1BIZOC6xxalwEsw9c2QQeAIftl+Vegovlnee1c9QX4TctnWMn13TZye+giMm8e2LwA==" crossorigin="anonymous" referrerpolicy="no-referrer">
 
-        .container {
-            max-width: 700px;
-            margin: 0 auto;
-        }
+<!-- Fonts -->
+<link href="https://fonts.googleapis.com/css?family=Open+Sans:400,600" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700&display=swap" rel="stylesheet">
 
-        .modal {
-            background: white;
-            border-radius: 12px;
-            box-shadow: 0 10px 40px rgba(0, 0, 0, 0.12);
-            overflow: hidden;
-        }
+<style>
+/* ================= GLOBAL ================= */
+*{box-sizing:border-box}
+body{
+  margin:0;
+  font-family:"Open Sans", sans-serif;
+  background:#f5f5f5;
+}
 
-        .modal-header {
-            padding: 30px;
-            border-bottom: 1px solid #f0f0f0;
-            display: flex;
-            justify-content: space-between;
-            align-items: flex-start;
-        }
+::-webkit-scrollbar{width:5px;height:5px}
+::-webkit-scrollbar-track{box-shadow:inset 0 0 2px grey;border-radius:4px}
+::-webkit-scrollbar-thumb{background:grey;border-radius:4px}
 
-        .modal-header-content h2 {
-            font-size: 24px;
-            font-weight: 600;
-            color: #1a1a1a;
-            margin-bottom: 8px;
-        }
+/* ================= LAYOUT ================= */
+.right-section{
+  background:whitesmoke;
+  width:100%;
+  min-height:100vh;
+}
 
-        .modal-header-content p {
-            font-size: 14px;
-            color: #6b7280;
-            font-weight: 400;
-        }
+.main-container{
+  width:1855px;
+  margin:0 auto;
+  padding:16px 16px 0 16px;
+}
 
-        .close-icon {
-            font-size: 28px;
-            cursor: pointer;
-            color: #9ca3af;
-            line-height: 1;
-            user-select: none;
-        }
+/* ================= TITLE ================= */
+.title-container{
+  font-family:"Poppins";
+  font-weight:600;
+  font-size:24px;
+  color:#1A1A1A;
+  margin-bottom:16px;
+}
 
-        .modal-body {
-            padding: 30px;
-            max-height: 600px;
-            overflow-y: auto;
-        }
+/* ================= TABS ================= */
+.tabs-container{
+  border-bottom:1px solid #E5E7EB;
+  margin-bottom:16px;
+}
 
-        .history-item {
-            margin-bottom: 24px;
-            border: 1px solid #e5e7eb;
-            border-radius: 8px;
-            overflow: hidden;
-        }
+.tabs{
+  display:flex;
+  gap:8px;
+}
 
-        .history-item:last-child {
-            margin-bottom: 0;
-        }
+.tab{
+  padding:0 20px;
+  height:32px;
+  display:flex;
+  align-items:center;
+  font-family:"Open Sans";
+  font-size:14px;
+  font-weight:600;
+  color:#6B7280;
+  cursor:pointer;
+}
 
-        .history-item-header {
-            background: #f9fafb;
-            padding: 14px 16px;
-            border-bottom: 1px solid #e5e7eb;
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-        }
+.tab.active{
+  color:#5830AD;
+  position:relative;
+}
 
-        .history-candidate {
-            font-size: 14px;
-            font-weight: 600;
-            color: #1a1a1a;
-        }
+.tab.active::after{
+  content:"";
+  position:absolute;
+  bottom:-10px;
+  left:0;
+  width:100%;
+  height:3px;
+  background:#5830AD;
+  border-radius:2px 2px 0 0;
+}
 
-        .history-datetime {
-            font-size: 12px;
-            color: #9ca3af;
-        }
+/* ================= FILTERS ================= */
+.filters{
+  display:flex;
+  gap:16px;
+  margin-bottom:16px;
+  flex-wrap:wrap;
+}
 
-        .history-item-content {
-            padding: 16px;
-        }
+.search-input,
+.select{
+  height:40px;
+  background:#fff;
+  border:1px solid #D1D5DB;
+  border-radius:4px;
+  padding:0 12px;
+  font-family:"Open Sans";
+  font-size:14px;
+  color:#2E2E2E;
+}
 
-        .change-row {
-            display: flex;
-            margin-bottom: 12px;
-            font-size: 13px;
-            align-items: flex-start;
-            gap: 12px;
-        }
+.search-input{width:320px}
+.select{width:220px}
 
-        .change-row:last-child {
-            margin-bottom: 0;
-        }
+.search-input::placeholder,
+.select::placeholder{
+  color:#9CA3AF;
+}
 
-        .change-label {
-            font-weight: 500;
-            color: #6b7280;
-            min-width: 120px;
-            flex-shrink: 0;
-        }
+.select{
+  appearance:none;
+  background-image:url("data:image/svg+xml;charset=UTF-8,%3csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='currentColor' stroke-width='2'%3e%3cpolyline points='6 9 12 15 18 9'%3e%3c/polyline%3e%3c/svg%3e");
+  background-repeat:no-repeat;
+  background-position:right 10px center;
+  background-size:20px;
+  padding-right:40px;
+  cursor:pointer;
+}
 
-        .change-separator {
-            color: #d1d5db;
-            flex-shrink: 0;
-        }
+/* ================= CARD ================= */
+.card-container{
+  background:#fff;
+  border-radius:8px;
+  padding:16px;
+  box-shadow:0 4px 10px rgba(0,0,0,.25);
+}
 
-        .change-value {
-            color: #1a1a1a;
-            flex: 1;
-            word-break: break-word;
-        }
+/* ================= TABLE ================= */
+.table-wrapper{
+  overflow-x:auto;
+}
 
-        .change-new-value {
-            color: #059669;
-            font-weight: 500;
-        }
+table{
+  width:100%;
+  min-width:2200px;
+  border-collapse:collapse;
+  font-family:"Open Sans";
+  font-size:14px;
+  border:1px solid rgba(0,0,0,.1);
+}
 
-        .change-old-value {
-            color: #9ca3af;
-            text-decoration: line-through;
-        }
+th{
+  background:#f8f8f8;
+  color:#424242;
+  font-weight:600;
+  padding:10px;
+  height:60px;
+  text-align:left;
+  white-space:nowrap;
+}
 
-        .no-change {
-            color: #9ca3af;
-            font-style: italic;
-        }
+td{
+  padding:.7rem .6rem;
+  color:#2E2E2E;
+  font-weight:400;
+  white-space:nowrap;
+}
 
-        .empty-state {
-            text-align: center;
-            padding: 60px 20px;
-            color: #9ca3af;
-        }
+tr:nth-child(even){background:#f8f8f8}
 
-        .empty-state-icon {
-            font-size: 48px;
-            margin-bottom: 16px;
-            opacity: 0.5;
-        }
+/* ================= CELLS ================= */
+.claim-id{color:#2E2E2E;font-weight:600}
 
-        .empty-state-text {
-            font-size: 14px;
-        }
+.flex{display:flex;align-items:center;gap:6px}
 
-        .modal-footer {
-            padding: 20px 30px;
-            border-top: 1px solid #f0f0f0;
-            display: flex;
-            justify-content: flex-end;
-            gap: 12px;
-        }
+.badge{
+  display:inline-flex;
+  align-items:center;
+  gap:4px;
+  padding:6px 12px;
+  border-radius:6px;
+  font-size:12px;
+  font-weight:600;
+  white-space:nowrap;
+}
 
-        .btn {
-            padding: 10px 24px;
-            border-radius: 6px;
-            font-size: 14px;
-            font-weight: 500;
-            cursor: pointer;
-            border: 1px solid #e5e7eb;
-            background: white;
-            color: #6b7280;
-        }
+.badge-preauth{
+  background:#e0e7ff;
+  color:#3730a3;
+}
 
-        .btn:hover {
-            background: #f9fafb;
-            border-color: #d1d5db;
-        }
+.badge-claim{
+  background:#e0e7ff;
+  color:#3730a3;
+}
 
-        /* Scrollbar styling */
-        .modal-body::-webkit-scrollbar {
-            width: 6px;
-        }
+.badge-approved{
+  background:#dcfce7;
+  color:#166534;
+}
 
-        .modal-body::-webkit-scrollbar-track {
-            background: #f1f5f9;
-        }
+.badge-denied{
+  background:#fee2e2;
+  color:#991b1b;
+}
 
-        .modal-body::-webkit-scrollbar-thumb {
-            background: #cbd5e1;
-            border-radius: 3px;
-        }
+.badge-pending{
+  background:#fef3c7;
+  color:#92400e;
+}
 
-        .modal-body::-webkit-scrollbar-thumb:hover {
-            background: #94a3b8;
-        }
+.tooth-badge{
+  background:#f3e8ff;
+  color:#6b21a8;
+  padding:4px 10px;
+  border-radius:6px;
+  font-size:12px;
+  font-weight:600;
+  display:inline-block;
+}
 
-        @media (max-width: 600px) {
-            body {
-                padding: 20px;
-            }
+.table-lob{
+  background:#e8f1ff;
+  color:#0b5cff;
+  padding:6px 12px;
+  font-family:"Open Sans";
+  font-size:12px;
+  border-radius:10px;
+  font-weight:600;
+  display:inline-block;
+}
 
-            .modal-header,
-            .modal-body,
-            .modal-footer {
-                padding: 20px;
-            }
+.cdt-code{
+  color:#2E2E2E;
+  font-weight:600;
+}
 
-            .modal-header {
-                flex-direction: column;
-                gap: 12px;
-            }
+.provider-name{
+  font-weight:600;
+  color:#1A1A1A;
+  font-size:13px;
+}
 
-            .modal-header-content h2 {
-                font-size: 20px;
-            }
+.provider-license{
+  color:#6B7280;
+  font-size:11px;
+  margin-top:2px;
+}
 
-            .history-item-header {
-                flex-direction: column;
-                align-items: flex-start;
-                gap: 8px;
-            }
+.office-name{
+  font-weight:600;
+  color:#1A1A1A;
+  font-size:13px;
+}
 
-            .change-row {
-                flex-direction: column;
-            }
+.office-number{
+  color:#6B7280;
+  font-size:11px;
+  margin-top:2px;
+}
 
-            .change-label {
-                min-width: auto;
-            }
+.group-info{
+  font-size:13px;
+  color:#2E2E2E;
+  line-height:1.4;
+}
 
-            .change-separator {
-                display: none;
-            }
-        }
-    </style>
+.group-number{
+  font-weight:600;
+  color:#1A1A1A;
+}
+
+.null-text{
+  color:#9CA3AF;
+  font-style:italic;
+}
+
+.denial-code{
+  background:#fee2e2;
+  color:#991b1b;
+  padding:6px 10px;
+  border-radius:4px;
+  font-size:11px;
+  max-width:180px;
+  white-space:normal;
+  line-height:1.3;
+  display:block;
+}
+
+.notes-text{
+  color:#6B7280;
+  font-size:13px;
+  max-width:200px;
+  white-space:normal;
+  line-height:1.3;
+}
+
+/* ================= PAGINATION ================= */
+.pagination{
+  display:flex;
+  justify-content:center;
+  margin:24px 0;
+}
+
+.page{
+  width:48px;
+  height:48px;
+  border-radius:50%;
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  font-family:"Poppins";
+  font-weight:600;
+  font-size:16px;
+}
+
+.page.active{background:#EFEAF9;color:#5830AD}
+
+/* ================= FOOTER ================= */
+.footer{
+  text-align:center;
+  padding:40px 16px;
+  font-family:"Open Sans";
+  color:#595959;
+}
+
+/* ================= RESPONSIVE ================= */
+@media(max-width:768px){
+  .main-container{
+    width:100%;
+  }
+  
+  table{
+    min-width:100%;
+    font-size:12px;
+  }
+  
+  th, td{
+    padding:8px 6px;
+  }
+}
+
+</style>
+
 </head>
 <body>
-    <div class="container">
-        <div class="modal">
-            <!-- Modal Header -->
-            <div class="modal-header">
-                <div class="modal-header-content">
-                    <h2>Override History</h2>
-                    <p>View all override actions and changes</p>
-                </div>
-                <span class="close-icon">×</span>
-            </div>
 
-            <!-- Modal Body -->
-            <div class="modal-body">
-                
-                <!-- History Item 1 -->
-                <div class="history-item">
-                    <div class="history-item-header">
-                        <span class="history-candidate">John Smith</span>
-                        <span class="history-datetime">Dec 15, 2024 - 2:30 PM</span>
-                    </div>
-                    <div class="history-item-content">
-                        <div class="change-row">
-                            <span class="change-label">Review Required By:</span>
-                            <span class="change-separator">→</span>
-                            <span class="change-value"><span class="change-old-value">Manager</span> <span class="change-new-value">Director</span></span>
-                        </div>
-                        <div class="change-row">
-                            <span class="change-label">Decision:</span>
-                            <span class="change-separator">→</span>
-                            <span class="change-value"><span class="change-old-value">Pending</span> <span class="change-new-value">Approved</span></span>
-                        </div>
-                        <div class="change-row">
-                            <span class="change-label">Decision Basics:</span>
-                            <span class="change-separator">→</span>
-                            <span class="change-value"><span class="change-new-value">Added</span></span>
-                        </div>
-                        <div class="change-row">
-                            <span class="change-label">Rationale:</span>
-                            <span class="change-separator">→</span>
-                            <span class="change-value"><span class="change-new-value">Candidate exceeded all criteria</span></span>
-                        </div>
-                    </div>
-                </div>
+<div class="right-section">
+  <div class="main-container">
 
-                <!-- History Item 2 -->
-                <div class="history-item">
-                    <div class="history-item-header">
-                        <span class="history-candidate">Sarah Johnson</span>
-                        <span class="history-datetime">Dec 14, 2024 - 10:15 AM</span>
-                    </div>
-                    <div class="history-item-content">
-                        <div class="change-row">
-                            <span class="change-label">Review Required By:</span>
-                            <span class="change-separator">→</span>
-                            <span class="change-value"><span class="no-change">No change</span></span>
-                        </div>
-                        <div class="change-row">
-                            <span class="change-label">Decision:</span>
-                            <span class="change-separator">→</span>
-                            <span class="change-value"><span class="change-old-value">Approved</span> <span class="change-new-value">Under Review</span></span>
-                        </div>
-                        <div class="change-row">
-                            <span class="change-label">Decision Basics:</span>
-                            <span class="change-separator">→</span>
-                            <span class="change-value"><span class="change-new-value">Updated</span></span>
-                        </div>
-                        <div class="change-row">
-                            <span class="change-label">Rationale:</span>
-                            <span class="change-separator">→</span>
-                            <span class="change-value"><span class="change-new-value">Needs additional verification</span></span>
-                        </div>
-                    </div>
-                </div>
+    <!-- Title -->
+    <div class="title-container">Procedure History</div>
 
-                <!-- History Item 3 -->
-                <div class="history-item">
-                    <div class="history-item-header">
-                        <span class="history-candidate">Michael Brown</span>
-                        <span class="history-datetime">Dec 13, 2024 - 4:45 PM</span>
-                    </div>
-                    <div class="history-item-content">
-                        <div class="change-row">
-                            <span class="change-label">Review Required By:</span>
-                            <span class="change-separator">→</span>
-                            <span class="change-value"><span class="change-old-value">Hiring Manager</span> <span class="change-new-value">HR Lead</span></span>
-                        </div>
-                        <div class="change-row">
-                            <span class="change-label">Decision:</span>
-                            <span class="change-separator">→</span>
-                            <span class="change-value"><span class="change-old-value">Pending</span> <span class="change-new-value">Rejected</span></span>
-                        </div>
-                        <div class="change-row">
-                            <span class="change-label">Decision Basics:</span>
-                            <span class="change-separator">→</span>
-                            <span class="change-value"><span class="change-new-value">Added</span></span>
-                        </div>
-                        <div class="change-row">
-                            <span class="change-label">Rationale:</span>
-                            <span class="change-separator">→</span>
-                            <span class="change-value"><span class="change-new-value">Failed to meet technical requirements</span></span>
-                        </div>
-                    </div>
-                </div>
-
-                <!-- History Item 4 -->
-                <div class="history-item">
-                    <div class="history-item-header">
-                        <span class="history-candidate">Emily Davis</span>
-                        <span class="history-datetime">Dec 12, 2024 - 1:20 PM</span>
-                    </div>
-                    <div class="history-item-content">
-                        <div class="change-row">
-                            <span class="change-label">Review Required By:</span>
-                            <span class="change-separator">→</span>
-                            <span class="change-value"><span class="no-change">No change</span></span>
-                        </div>
-                        <div class="change-row">
-                            <span class="change-label">Decision:</span>
-                            <span class="change-separator">→</span>
-                            <span class="change-value"><span class="no-change">No change</span></span>
-                        </div>
-                        <div class="change-row">
-                            <span class="change-label">Decision Basics:</span>
-                            <span class="change-separator">→</span>
-                            <span class="change-value"><span class="no-change">No change</span></span>
-                        </div>
-                        <div class="change-row">
-                            <span class="change-label">Rationale:</span>
-                            <span class="change-separator">→</span>
-                            <span class="change-value"><span class="change-new-value">Strong communication skills demonstrated in interview</span></span>
-                        </div>
-                    </div>
-                </div>
-
-            </div>
-
-            <!-- Modal Footer -->
-            <div class="modal-footer">
-                <button class="btn">Close</button>
-            </div>
-        </div>
+    <!-- Tabs -->
+    <div class="tabs-container">
+      <div class="tabs">
+        <div class="tab active">All Procedures</div>
+        <div class="tab">Approved</div>
+        <div class="tab">Denied</div>
+        <div class="tab">Pending</div>
+      </div>
     </div>
+
+    <!-- Filters -->
+    <div class="filters">
+      <input class="search-input" placeholder="Type to search">
+      <input class="select" placeholder="Tooth Number">
+      <input class="select" placeholder="CDT Code">
+      <input class="select" placeholder="CDT Category">
+      <input class="select" placeholder="Claim vs PreAuth">
+      <input class="select" placeholder="Status">
+      <input class="select" placeholder="Date Range">
+    </div>
+
+    <!-- Table Card -->
+    <div class="card-container">
+      <div class="table-wrapper">
+        <table>
+          <thead>
+            <tr>
+              <th>Claim #</th>
+              <th>Claim Type</th>
+              <th>Date of Receipt</th>
+              <th>Date of Service</th>
+              <th>Line #</th>
+              <th>Tooth Number</th>
+              <th>Surface</th>
+              <th>Service Units</th>
+              <th>CDT Code</th>
+              <th>CDT Description</th>
+              <th>Line Status</th>
+              <th>Denial Code</th>
+              <th>Reviewer & Notes</th>
+              <th>Rendering Provider</th>
+              <th>Service Office</th>
+              <th>Group Info</th>
+            </tr>
+          </thead>
+          <tbody>
+            <!-- Row 1 -->
+            <tr>
+              <td class="claim-id">CLM-2024-001</td>
+              <td><span class="badge badge-claim">Post Service Claim</span></td>
+              <td><span class="flex"><i class="fa-regular fa-calendar"></i> 11/15/2024</span></td>
+              <td><span class="flex"><i class="fa-regular fa-calendar"></i> 11/10/2024</span></td>
+              <td>1</td>
+              <td><span class="tooth-badge">#14</span></td>
+              <td>O</td>
+              <td>1</td>
+              <td class="cdt-code">D0120</td>
+              <td>Periodic Oral Evaluation</td>
+              <td><span class="badge badge-approved">Approved</span></td>
+              <td class="null-text">—</td>
+              <td class="notes-text"><strong>Dr. Smith</strong><br>Routine checkup</td>
+              <td>
+                <div class="provider-name">Dr. Michael Johnson, DDS</div>
+                <div class="provider-license">License: #123456</div>
+              </td>
+              <td>
+                <div class="office-name">New York Dental Office</div>
+                <div class="office-number">#NY-002</div>
+              </td>
+              <td class="group-info">
+                <div class="group-number">G-5001</div>
+                <div>Dental Plus Network</div>
+              </td>
+            </tr>
+
+            <!-- Row 2 -->
+            <tr>
+              <td class="claim-id">CLM-2024-002</td>
+              <td><span class="badge badge-claim">Post Service Claim</span></td>
+              <td><span class="flex"><i class="fa-regular fa-calendar"></i> 11/16/2024</span></td>
+              <td><span class="flex"><i class="fa-regular fa-calendar"></i> 11/08/2024</span></td>
+              <td>1</td>
+              <td><span class="tooth-badge">#3</span></td>
+              <td>MOBL</td>
+              <td>2</td>
+              <td class="cdt-code">D2390</td>
+              <td>Resin-based Composite - Two Surfaces</td>
+              <td><span class="badge badge-denied">Denied</span></td>
+              <td><span class="denial-code"><strong>D0001</strong><br>Not Medically Necessary</span></td>
+              <td class="notes-text"><strong>Dr. Lee</strong><br>Pre-existing condition</td>
+              <td>
+                <div class="provider-name">Dr. Sarah Williams, DDS</div>
+                <div class="provider-license">License: #234567</div>
+              </td>
+              <td>
+                <div class="office-name">Boston Dental Center</div>
+                <div class="office-number">#MA-005</div>
+              </td>
+              <td class="group-info">
+                <div class="group-number">G-5002</div>
+                <div>Premier Dental Group</div>
+              </td>
+            </tr>
+
+            <!-- Row 3 -->
+            <tr>
+              <td class="claim-id">PRE-2024-103</td>
+              <td><span class="badge badge-preauth">Pre-Auth Request</span></td>
+              <td><span class="flex"><i class="fa-regular fa-calendar"></i> 11/18/2024</span></td>
+              <td class="null-text">—</td>
+              <td>1</td>
+              <td><span class="tooth-badge">#8</span></td>
+              <td class="null-text">—</td>
+              <td>1</td>
+              <td class="cdt-code">D5110</td>
+              <td>Complete Denture - Upper</td>
+              <td><span class="badge badge-pending">Pending Review</span></td>
+              <td class="null-text">—</td>
+              <td class="notes-text">Awaiting review</td>
+              <td>
+                <div class="provider-name">Dr. James Chen, DDS</div>
+                <div class="provider-license">License: #345678</div>
+              </td>
+              <td>
+                <div class="office-name">San Francisco Dental</div>
+                <div class="office-number">#CA-010</div>
+              </td>
+              <td class="group-info">
+                <div class="group-number">G-5003</div>
+                <div>West Coast Dental</div>
+              </td>
+            </tr>
+
+            <!-- Row 4 -->
+            <tr>
+              <td class="claim-id">CLM-2024-004</td>
+              <td><span class="badge badge-claim">Post Service Claim</span></td>
+              <td><span class="flex"><i class="fa-regular fa-calendar"></i> 11/19/2024</span></td>
+              <td><span class="flex"><i class="fa-regular fa-calendar"></i> 11/12/2024</span></td>
+              <td>1</td>
+              <td><span class="tooth-badge">#30</span></td>
+              <td>MOD</td>
+              <td>3</td>
+              <td class="cdt-code">D2394</td>
+              <td>Resin-based Composite - Four+ Surfaces</td>
+              <td><span class="badge badge-approved">Approved</span></td>
+              <td class="null-text">—</td>
+              <td class="notes-text"><strong>Dr. Martinez</strong><br>Complex restoration</td>
+              <td>
+                <div class="provider-name">Dr. Patricia Martinez, DDS</div>
+                <div class="provider-license">License: #456789</div>
+              </td>
+              <td>
+                <div class="office-name">Miami Dental Studio</div>
+                <div class="office-number">#FL-015</div>
+              </td>
+              <td class="group-info">
+                <div class="group-number">G-5004</div>
+                <div>Southeast Dental Alliance</div>
+              </td>
+            </tr>
+
+            <!-- Row 5 -->
+            <tr>
+              <td class="claim-id">CLM-2024-005</td>
+              <td><span class="badge badge-claim">Post Service Claim</span></td>
+              <td><span class="flex"><i class="fa-regular fa-calendar"></i> 11/20/2024</span></td>
+              <td><span class="flex"><i class="fa-regular fa-calendar"></i> 11/05/2024</span></td>
+              <td>2</td>
+              <td><span class="tooth-badge">#12</span></td>
+              <td>O</td>
+              <td>1</td>
+              <td class="cdt-code">D1110</td>
+              <td>Prophylaxis - Adult</td>
+              <td><span class="badge badge-denied">Denied</span></td>
+              <td><span class="denial-code"><strong>D0002</strong><br>Missing Documentation</span></td>
+              <td class="notes-text"><strong>Dr. Kumar</strong><br>Missing x-rays</td>
+              <td>
+                <div class="provider-name">Dr. Rajesh Kumar, DDS</div>
+                <div class="provider-license">License: #567890</div>
+              </td>
+              <td>
+                <div class="office-name">Chicago Dental Practice</div>
+                <div class="office-number">#IL-008</div>
+              </td>
+              <td class="group-info">
+                <div class="group-number">G-5005</div>
+                <div>Midwest Dental Partners</div>
+              </td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+
+      <!-- Pagination -->
+      <div class="pagination">
+        <div class="page active">1</div>
+      </div>
+    </div>
+
+  </div>
+
+  <div class="footer">© 2026 Care Insight All Rights Reserved</div>
+</div>
+
 </body>
 </html>
