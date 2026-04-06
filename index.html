@@ -1,556 +1,1004 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-<meta charset="UTF-8">
-<title>Procedure History</title>
-
-<!-- Font Awesome 6 Free -->
-<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css" integrity="sha512-DTOQO9RWCH3ppGqcWaEA1BIZOC6xxalwEsw9c2QQeAIftl+Vegovlnee1c9QX4TctnWMn13TZye+giMm8e2LwA==" crossorigin="anonymous" referrerpolicy="no-referrer">
-
-<!-- Fonts -->
-<link href="https://fonts.googleapis.com/css?family=Open+Sans:400,600" rel="stylesheet">
-<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700&display=swap" rel="stylesheet">
-
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+<title>Outbound Communication – Email Preview</title>
+<link href="https://fonts.googleapis.com/css2?family=Open+Sans:wght@400;500;600;700&display=swap" rel="stylesheet"/>
 <style>
-/* ================= GLOBAL ================= */
-*{box-sizing:border-box}
-body{
-  margin:0;
-  font-family:"Open Sans", sans-serif;
-  background:#f5f5f5;
-}
-
-::-webkit-scrollbar{width:5px;height:5px}
-::-webkit-scrollbar-track{box-shadow:inset 0 0 2px grey;border-radius:4px}
-::-webkit-scrollbar-thumb{background:grey;border-radius:4px}
-
-/* ================= LAYOUT ================= */
-.right-section{
-  background:whitesmoke;
-  width:100%;
-  min-height:100vh;
-}
-
-.main-container{
-  width:1855px;
-  margin:0 auto;
-  padding:16px 16px 0 16px;
-}
-
-/* ================= TITLE ================= */
-.title-container{
-  font-family:"Poppins";
-  font-weight:600;
-  font-size:24px;
-  color:#1A1A1A;
-  margin-bottom:16px;
-}
-
-/* ================= TABS ================= */
-.tabs-container{
-  border-bottom:1px solid #E5E7EB;
-  margin-bottom:16px;
-}
-
-.tabs{
-  display:flex;
-  gap:8px;
-}
-
-.tab{
-  padding:0 20px;
-  height:32px;
-  display:flex;
-  align-items:center;
-  font-family:"Open Sans";
-  font-size:14px;
-  font-weight:600;
-  color:#6B7280;
-  cursor:pointer;
-}
-
-.tab.active{
-  color:#5830AD;
-  position:relative;
-}
-
-.tab.active::after{
-  content:"";
-  position:absolute;
-  bottom:-10px;
-  left:0;
-  width:100%;
-  height:3px;
-  background:#5830AD;
-  border-radius:2px 2px 0 0;
-}
-
-/* ================= FILTERS ================= */
-.filters{
-  display:flex;
-  gap:16px;
-  margin-bottom:16px;
-  flex-wrap:wrap;
-}
-
-.search-input,
-.select{
-  height:40px;
-  background:#fff;
-  border:1px solid #D1D5DB;
-  border-radius:4px;
-  padding:0 12px;
-  font-family:"Open Sans";
-  font-size:14px;
-  color:#2E2E2E;
-}
-
-.search-input{width:320px}
-.select{width:220px}
-
-.search-input::placeholder,
-.select::placeholder{
-  color:#9CA3AF;
-}
-
-.select{
-  appearance:none;
-  background-image:url("data:image/svg+xml;charset=UTF-8,%3csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='currentColor' stroke-width='2'%3e%3cpolyline points='6 9 12 15 18 9'%3e%3c/polyline%3e%3c/svg%3e");
-  background-repeat:no-repeat;
-  background-position:right 10px center;
-  background-size:20px;
-  padding-right:40px;
-  cursor:pointer;
-}
-
-/* ================= CARD ================= */
-.card-container{
-  background:#fff;
-  border-radius:8px;
-  padding:16px;
-  box-shadow:0 4px 10px rgba(0,0,0,.25);
-}
-
-/* ================= TABLE ================= */
-.table-wrapper{
-  overflow-x:auto;
-}
-
-table{
-  width:100%;
-  min-width:2200px;
-  border-collapse:collapse;
-  font-family:"Open Sans";
-  font-size:14px;
-  border:1px solid rgba(0,0,0,.1);
-}
-
-th{
-  background:#f8f8f8;
-  color:#424242;
-  font-weight:600;
-  padding:10px;
-  height:60px;
-  text-align:left;
-  white-space:nowrap;
-}
-
-td{
-  padding:.7rem .6rem;
-  color:#2E2E2E;
-  font-weight:400;
-  white-space:nowrap;
-}
-
-tr:nth-child(even){background:#f8f8f8}
-
-/* ================= CELLS ================= */
-.claim-id{color:#2E2E2E;font-weight:600}
-
-.flex{display:flex;align-items:center;gap:6px}
-
-.badge{
-  display:inline-flex;
-  align-items:center;
-  gap:4px;
-  padding:6px 12px;
-  border-radius:6px;
-  font-size:12px;
-  font-weight:600;
-  white-space:nowrap;
-}
-
-.badge-preauth{
-  background:#e0e7ff;
-  color:#3730a3;
-}
-
-.badge-claim{
-  background:#e0e7ff;
-  color:#3730a3;
-}
-
-.badge-approved{
-  background:#dcfce7;
-  color:#166534;
-}
-
-.badge-denied{
-  background:#fee2e2;
-  color:#991b1b;
-}
-
-.badge-pending{
-  background:#fef3c7;
-  color:#92400e;
-}
-
-.tooth-badge{
-  background:#f3e8ff;
-  color:#6b21a8;
-  padding:4px 10px;
-  border-radius:6px;
-  font-size:12px;
-  font-weight:600;
-  display:inline-block;
-}
-
-.table-lob{
-  background:#e8f1ff;
-  color:#0b5cff;
-  padding:6px 12px;
-  font-family:"Open Sans";
-  font-size:12px;
-  border-radius:10px;
-  font-weight:600;
-  display:inline-block;
-}
-
-.cdt-code{
-  color:#2E2E2E;
-  font-weight:600;
-}
-
-.provider-name{
-  font-weight:600;
-  color:#1A1A1A;
-  font-size:13px;
-}
-
-.provider-license{
-  color:#6B7280;
-  font-size:11px;
-  margin-top:2px;
-}
-
-.office-name{
-  font-weight:600;
-  color:#1A1A1A;
-  font-size:13px;
-}
-
-.office-number{
-  color:#6B7280;
-  font-size:11px;
-  margin-top:2px;
-}
-
-.group-info{
-  font-size:13px;
-  color:#2E2E2E;
-  line-height:1.4;
-}
-
-.group-number{
-  font-weight:600;
-  color:#1A1A1A;
-}
-
-.null-text{
-  color:#9CA3AF;
-  font-style:italic;
-}
-
-.denial-code{
-  background:#fee2e2;
-  color:#991b1b;
-  padding:6px 10px;
-  border-radius:4px;
-  font-size:11px;
-  max-width:180px;
-  white-space:normal;
-  line-height:1.3;
-  display:block;
-}
-
-.notes-text{
-  color:#6B7280;
-  font-size:13px;
-  max-width:200px;
-  white-space:normal;
-  line-height:1.3;
-}
-
-/* ================= PAGINATION ================= */
-.pagination{
-  display:flex;
-  justify-content:center;
-  margin:24px 0;
-}
-
-.page{
-  width:48px;
-  height:48px;
-  border-radius:50%;
-  display:flex;
-  align-items:center;
-  justify-content:center;
-  font-family:"Poppins";
-  font-weight:600;
-  font-size:16px;
-}
-
-.page.active{background:#EFEAF9;color:#5830AD}
-
-/* ================= FOOTER ================= */
-.footer{
-  text-align:center;
-  padding:40px 16px;
-  font-family:"Open Sans";
-  color:#595959;
-}
-
-/* ================= RESPONSIVE ================= */
-@media(max-width:768px){
-  .main-container{
-    width:100%;
+  /* ── Reset & Base ── */
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+  body {
+    font-family: 'Open Sans', sans-serif;
+    font-size: 13px;
+    color: #1a1a2e;
+    background: #f4f6fb;
+    display: flex;
+    height: 100vh;
+    overflow: hidden;
   }
-  
-  table{
-    min-width:100%;
-    font-size:12px;
-  }
-  
-  th, td{
-    padding:8px 6px;
-  }
-}
 
+  /* ── Sidebar ── */
+  .sidebar {
+    width: 200px;
+    min-width: 200px;
+    background: #ffffff;
+    border-right: 1px solid #e2e8f0;
+    display: flex;
+    flex-direction: column;
+    height: 100vh;
+    overflow-y: auto;
+  }
+  .sidebar-logo {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    padding: 14px 16px;
+    border-bottom: 1px solid #e2e8f0;
+  }
+  .sidebar-logo .logo-icon {
+    width: 28px; height: 28px;
+    background: linear-gradient(135deg, #4f46e5, #7c3aed);
+    border-radius: 6px;
+    display: flex; align-items: center; justify-content: center;
+    color: #fff; font-size: 14px; font-weight: 700;
+  }
+  .sidebar-logo span {
+    font-size: 12px; font-weight: 700; color: #1a1a2e; line-height: 1.2;
+  }
+  .nav-item {
+    display: flex; align-items: center; gap: 10px;
+    padding: 9px 16px;
+    font-size: 12.5px; color: #4a5568; cursor: pointer;
+    border-left: 3px solid transparent;
+    transition: all .15s;
+  }
+  .nav-item:hover { background: #f0f0ff; color: #4f46e5; }
+  .nav-item.active {
+    background: #ede9fe; color: #4f46e5;
+    border-left-color: #4f46e5; font-weight: 600;
+  }
+  .nav-item svg { width: 15px; height: 15px; flex-shrink: 0; }
+  .sidebar-footer {
+    margin-top: auto;
+    padding: 12px 16px;
+    border-top: 1px solid #e2e8f0;
+    font-size: 11px; color: #9ca3af; display: flex; align-items: center; gap: 6px;
+    cursor: pointer;
+  }
+
+  /* ── Main ── */
+  .main {
+    flex: 1; display: flex; flex-direction: column; overflow: hidden;
+  }
+  .topbar {
+    background: #fff;
+    border-bottom: 1px solid #e2e8f0;
+    padding: 0 24px;
+    height: 52px;
+    display: flex; align-items: center; justify-content: space-between;
+    flex-shrink: 0;
+  }
+  .topbar-title {
+    font-size: 15px; font-weight: 700; color: #1a1a2e;
+    display: flex; align-items: center; gap: 8px;
+  }
+  .topbar-title svg { color: #4f46e5; }
+  .topbar-right { display: flex; align-items: center; gap: 10px; }
+  .avatar {
+    width: 32px; height: 32px; background: #4f46e5;
+    border-radius: 50%; color: #fff;
+    display: flex; align-items: center; justify-content: center;
+    font-size: 12px; font-weight: 700;
+  }
+
+  .content {
+    flex: 1; overflow-y: auto; padding: 24px;
+    display: flex; flex-direction: column; gap: 20px;
+  }
+
+  /* ── Page Header ── */
+  .page-header { font-size: 18px; font-weight: 700; color: #1a1a2e; }
+  .page-sub { font-size: 12.5px; color: #6b7280; margin-top: 3px; }
+
+  /* ── Card ── */
+  .card {
+    background: #fff;
+    border: 1px solid #e2e8f0;
+    border-radius: 10px;
+    padding: 20px 24px;
+  }
+  .card-header {
+    display: flex; align-items: center; justify-content: space-between;
+    margin-bottom: 6px;
+  }
+  .card-title {
+    display: flex; align-items: center; gap: 8px;
+    font-size: 14px; font-weight: 700; color: #1a1a2e;
+  }
+  .card-title svg { color: #4f46e5; }
+  .card-desc { font-size: 12px; color: #6b7280; margin-bottom: 18px; }
+  .divider { border: none; border-top: 1px solid #e2e8f0; margin: 16px 0; }
+
+  /* ── Status Badges ── */
+  .badge {
+    display: inline-flex; align-items: center; gap: 5px;
+    padding: 3px 10px; border-radius: 20px;
+    font-size: 11px; font-weight: 600;
+  }
+  .badge-success { background: #d1fae5; color: #065f46; }
+  .badge-pending { background: #fef3c7; color: #92400e; }
+  .badge-negative { background: #fee2e2; color: #991b1b; }
+  .badge-info    { background: #ede9fe; color: #4f46e5; }
+
+  /* ── Buttons ── */
+  .btn {
+    display: inline-flex; align-items: center; gap: 6px;
+    padding: 7px 16px; border-radius: 6px;
+    font-family: 'Open Sans', sans-serif;
+    font-size: 12.5px; font-weight: 600; cursor: pointer;
+    border: none; transition: all .15s;
+  }
+  .btn svg { width: 13px; height: 13px; }
+  .btn-primary { background: #4f46e5; color: #fff; }
+  .btn-primary:hover { background: #4338ca; }
+  .btn-secondary { background: #fff; color: #374151; border: 1px solid #d1d5db; }
+  .btn-secondary:hover { background: #f9fafb; }
+  .btn-danger { background: #fff; color: #dc2626; border: 1px solid #fca5a5; }
+  .btn-danger:hover { background: #fee2e2; }
+  .btn-success { background: #059669; color: #fff; }
+  .btn-success:hover { background: #047857; }
+  .btn-sm { padding: 5px 12px; font-size: 11.5px; }
+  .btn-icon {
+    background: none; border: 1px solid #e2e8f0; border-radius: 6px;
+    padding: 5px 8px; cursor: pointer; color: #6b7280;
+    display: inline-flex; align-items: center; justify-content: center;
+    font-family: 'Open Sans', sans-serif; font-size: 12px;
+    transition: all .15s;
+  }
+  .btn-icon:hover { background: #f0f0ff; color: #4f46e5; border-color: #c4b5fd; }
+
+  /* ── Form fields ── */
+  label { font-size: 12px; font-weight: 600; color: #374151; display: block; margin-bottom: 5px; }
+  .required::after { content: ' *'; color: #dc2626; }
+  input[type="text"], input[type="email"], select, textarea {
+    width: 100%; padding: 8px 12px;
+    border: 1px solid #d1d5db; border-radius: 6px;
+    font-family: 'Open Sans', sans-serif; font-size: 12.5px; color: #1a1a2e;
+    background: #fff; outline: none; transition: border .15s;
+  }
+  input:focus, select:focus, textarea:focus { border-color: #4f46e5; box-shadow: 0 0 0 3px rgba(79,70,229,.08); }
+  .field-group { margin-bottom: 14px; }
+  .field-row { display: flex; gap: 14px; }
+  .field-row .field-group { flex: 1; }
+  .input-with-icon { position: relative; }
+  .input-with-icon svg { position: absolute; left: 10px; top: 50%; transform: translateY(-50%); color: #9ca3af; width: 14px; height: 14px; }
+  .input-with-icon input { padding-left: 32px; }
+  .tag-input {
+    min-height: 36px; border: 1px solid #d1d5db; border-radius: 6px;
+    padding: 4px 8px; display: flex; flex-wrap: wrap; gap: 4px; align-items: center; cursor: text;
+    background: #fff;
+  }
+  .tag-input:focus-within { border-color: #4f46e5; box-shadow: 0 0 0 3px rgba(79,70,229,.08); }
+  .tag {
+    background: #ede9fe; color: #4f46e5; border-radius: 4px;
+    padding: 2px 8px; font-size: 11.5px; font-weight: 600;
+    display: flex; align-items: center; gap: 4px;
+  }
+  .tag .tag-remove { cursor: pointer; color: #7c3aed; font-size: 13px; line-height: 1; }
+  .tag-input input { border: none; outline: none; font-size: 12.5px; min-width: 80px; flex: 1; padding: 2px 4px; font-family: 'Open Sans', sans-serif; }
+
+  /* ── Email Preview Panel ── */
+  .email-preview-wrap {
+    display: flex; gap: 20px;
+  }
+  .email-list-panel {
+    width: 260px; min-width: 260px;
+    background: #fff;
+    border: 1px solid #e2e8f0;
+    border-radius: 10px;
+    display: flex; flex-direction: column; overflow: hidden;
+  }
+  .email-list-header {
+    padding: 14px 16px 10px;
+    border-bottom: 1px solid #e2e8f0;
+    font-size: 13px; font-weight: 700; color: #1a1a2e;
+    display: flex; align-items: center; justify-content: space-between;
+  }
+  .email-list-search { padding: 10px 12px; border-bottom: 1px solid #e2e8f0; }
+  .email-list-search input { font-size: 12px; padding: 6px 10px 6px 30px; }
+  .email-list-search .input-with-icon svg { top: 50%; transform: translateY(-50%); }
+  .email-item {
+    padding: 12px 14px; border-bottom: 1px solid #f1f5f9; cursor: pointer;
+    transition: background .12s;
+  }
+  .email-item:hover { background: #f8f7ff; }
+  .email-item.active { background: #ede9fe; }
+  .email-item-top { display: flex; justify-content: space-between; align-items: center; margin-bottom: 3px; }
+  .email-item-name { font-size: 12.5px; font-weight: 600; color: #1a1a2e; }
+  .email-item-time { font-size: 10.5px; color: #9ca3af; }
+  .email-item-subject { font-size: 12px; color: #4b5563; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+  .email-item-preview { font-size: 11.5px; color: #9ca3af; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; margin-top: 2px; }
+  .unread-dot { width: 7px; height: 7px; background: #4f46e5; border-radius: 50%; flex-shrink: 0; }
+
+  /* ── Email Detail ── */
+  .email-detail-panel {
+    flex: 1;
+    background: #fff;
+    border: 1px solid #e2e8f0;
+    border-radius: 10px;
+    display: flex; flex-direction: column; overflow: hidden;
+    min-height: 0;
+  }
+  .email-detail-toolbar {
+    display: flex; align-items: center; justify-content: space-between;
+    padding: 12px 18px;
+    border-bottom: 1px solid #e2e8f0;
+    gap: 8px;
+  }
+  .toolbar-left { display: flex; align-items: center; gap: 6px; }
+  .toolbar-right { display: flex; align-items: center; gap: 6px; }
+
+  .email-subject-bar {
+    padding: 14px 20px 10px;
+    border-bottom: 1px solid #f1f5f9;
+  }
+  .email-subject-bar h2 { font-size: 15px; font-weight: 700; color: #1a1a2e; margin-bottom: 8px; }
+  .email-meta { display: flex; align-items: center; gap: 16px; flex-wrap: wrap; }
+  .email-meta-item { display: flex; align-items: center; gap: 5px; font-size: 12px; color: #4b5563; }
+  .email-meta-item strong { color: #1a1a2e; }
+  .email-meta-item svg { width: 13px; height: 13px; color: #6b7280; }
+
+  .email-body {
+    flex: 1; overflow-y: auto; padding: 20px;
+    font-size: 13px; line-height: 1.7; color: #374151;
+  }
+  .email-body p { margin-bottom: 12px; }
+  .email-body .highlight { background: #fef9c3; padding: 1px 3px; border-radius: 3px; }
+
+  /* ── Attachments ── */
+  .attachments-bar {
+    padding: 12px 20px;
+    border-top: 1px solid #e2e8f0;
+    background: #f8f9fc;
+  }
+  .attachments-title { font-size: 11.5px; font-weight: 600; color: #6b7280; margin-bottom: 8px; text-transform: uppercase; letter-spacing: .5px; }
+  .attachment-list { display: flex; flex-wrap: wrap; gap: 8px; }
+  .attachment-chip {
+    display: flex; align-items: center; gap: 7px;
+    background: #fff; border: 1px solid #e2e8f0; border-radius: 6px;
+    padding: 6px 10px; font-size: 12px; color: #374151; cursor: pointer;
+    transition: border-color .12s;
+  }
+  .attachment-chip:hover { border-color: #4f46e5; color: #4f46e5; }
+  .attachment-chip svg { width: 14px; height: 14px; }
+  .attachment-chip .file-size { color: #9ca3af; font-size: 11px; }
+
+  /* ── Reply / Compose Area ── */
+  .compose-section {
+    border-top: 1px solid #e2e8f0;
+    padding: 16px 20px;
+    display: flex; flex-direction: column; gap: 10px;
+  }
+  .compose-header { font-size: 12.5px; font-weight: 700; color: #1a1a2e; display: flex; align-items: center; gap: 6px; }
+
+  /* ── Rich Text Toolbar (Outlook-style) ── */
+  .rte-toolbar {
+    display: flex; flex-wrap: wrap; align-items: center; gap: 2px;
+    background: #f8f9fc; border: 1px solid #e2e8f0;
+    border-radius: 6px 6px 0 0; padding: 6px 8px; border-bottom: none;
+  }
+  .rte-group { display: flex; align-items: center; gap: 1px; }
+  .rte-sep { width: 1px; height: 20px; background: #d1d5db; margin: 0 5px; }
+  .rte-btn {
+    width: 28px; height: 28px; display: flex; align-items: center; justify-content: center;
+    border: none; background: none; border-radius: 4px; cursor: pointer; color: #374151;
+    font-family: 'Open Sans', sans-serif; font-size: 12px; font-weight: 700;
+    transition: background .12s;
+  }
+  .rte-btn:hover { background: #ede9fe; color: #4f46e5; }
+  .rte-btn.active { background: #ede9fe; color: #4f46e5; }
+  .rte-btn svg { width: 13px; height: 13px; }
+  .rte-select {
+    height: 26px; border: 1px solid #d1d5db; border-radius: 4px;
+    font-size: 11.5px; font-family: 'Open Sans', sans-serif; padding: 0 4px;
+    color: #374151; background: #fff; cursor: pointer;
+  }
+  .rte-color-btn {
+    width: 28px; height: 28px; display: flex; flex-direction: column;
+    align-items: center; justify-content: center; gap: 1px;
+    border: none; background: none; border-radius: 4px; cursor: pointer; padding: 3px;
+  }
+  .rte-color-btn:hover { background: #ede9fe; }
+  .rte-color-bar { width: 16px; height: 3px; border-radius: 2px; }
+
+  .rte-body {
+    min-height: 120px; border: 1px solid #e2e8f0; border-radius: 0 0 6px 6px;
+    padding: 10px 12px; font-size: 13px; line-height: 1.6; color: #1a1a2e;
+    outline: none; background: #fff;
+    font-family: 'Open Sans', sans-serif;
+  }
+  .rte-body[contenteditable]:focus { border-color: #4f46e5; box-shadow: 0 0 0 3px rgba(79,70,229,.08); }
+
+  /* ── Attachment Upload Zone ── */
+  .upload-zone {
+    border: 1.5px dashed #c4b5fd; border-radius: 6px;
+    padding: 14px 16px; text-align: center; cursor: pointer;
+    background: #faf5ff; transition: border-color .15s, background .15s;
+    display: flex; align-items: center; justify-content: center; gap: 10px;
+  }
+  .upload-zone:hover { border-color: #7c3aed; background: #ede9fe; }
+  .upload-zone svg { color: #7c3aed; width: 18px; height: 18px; }
+  .upload-zone-text { font-size: 12px; color: #5b21b6; }
+  .upload-zone-text strong { font-weight: 600; }
+
+  .attached-files { display: flex; flex-wrap: wrap; gap: 6px; margin-top: 6px; }
+  .attached-file {
+    display: flex; align-items: center; gap: 6px;
+    background: #ede9fe; border: 1px solid #c4b5fd; border-radius: 5px;
+    padding: 4px 8px; font-size: 11.5px; color: #4f46e5; font-weight: 500;
+  }
+  .attached-file .remove-file { cursor: pointer; color: #7c3aed; font-size: 13px; }
+
+  .compose-actions {
+    display: flex; align-items: center; justify-content: space-between; flex-wrap: wrap; gap: 8px;
+  }
+  .compose-actions-left { display: flex; gap: 8px; align-items: center; }
+
+  /* ── Send Modal / Overlay simulation ── */
+  .modal-overlay {
+    position: fixed; inset: 0; background: rgba(0,0,0,.35);
+    display: flex; align-items: center; justify-content: center; z-index: 100;
+  }
+  .modal {
+    background: #fff; border-radius: 12px; width: 560px; max-width: 96vw;
+    box-shadow: 0 20px 60px rgba(0,0,0,.18);
+    display: flex; flex-direction: column; overflow: hidden;
+  }
+  .modal-header {
+    padding: 16px 22px; border-bottom: 1px solid #e2e8f0;
+    display: flex; align-items: center; justify-content: space-between;
+  }
+  .modal-title { font-size: 14px; font-weight: 700; color: #1a1a2e; display: flex; align-items: center; gap: 7px; }
+  .modal-title svg { color: #4f46e5; }
+  .modal-close {
+    background: none; border: none; font-size: 18px; cursor: pointer; color: #9ca3af;
+    line-height: 1;
+  }
+  .modal-close:hover { color: #374151; }
+  .modal-body { padding: 20px 22px; display: flex; flex-direction: column; gap: 14px; }
+  .modal-footer {
+    padding: 14px 22px; border-top: 1px solid #e2e8f0;
+    display: flex; gap: 10px; justify-content: flex-end;
+  }
+
+  /* ── Info / Alert boxes ── */
+  .info-box {
+    border-radius: 6px; padding: 10px 14px; font-size: 12px;
+    display: flex; gap: 8px; align-items: flex-start;
+  }
+  .info-box svg { width: 14px; height: 14px; flex-shrink: 0; margin-top: 1px; }
+  .info-box-blue { background: #eff6ff; border: 1px solid #bfdbfe; color: #1d4ed8; }
+  .info-box-yellow { background: #fefce8; border: 1px solid #fde68a; color: #92400e; }
+  .info-box-green { background: #d1fae5; border: 1px solid #a7f3d0; color: #065f46; }
+  .info-box-red { background: #fee2e2; border: 1px solid #fecaca; color: #991b1b; }
+
+  /* ── Tabs ── */
+  .tabs { display: flex; gap: 0; border-bottom: 2px solid #e2e8f0; margin-bottom: 16px; }
+  .tab {
+    padding: 8px 18px; font-size: 12.5px; font-weight: 600; color: #6b7280;
+    cursor: pointer; border-bottom: 2px solid transparent; margin-bottom: -2px;
+    transition: all .15s;
+  }
+  .tab:hover { color: #4f46e5; }
+  .tab.active { color: #4f46e5; border-bottom-color: #4f46e5; }
+
+  /* Scrollbar */
+  ::-webkit-scrollbar { width: 5px; }
+  ::-webkit-scrollbar-track { background: transparent; }
+  ::-webkit-scrollbar-thumb { background: #d1d5db; border-radius: 10px; }
+
+  /* Utility */
+  .flex { display: flex; }
+  .items-center { align-items: center; }
+  .gap-2 { gap: 8px; }
+  .ml-auto { margin-left: auto; }
+  .text-xs { font-size: 11.5px; }
+  .text-gray { color: #6b7280; }
+  .fw-600 { font-weight: 600; }
+  .hidden { display: none; }
 </style>
-
 </head>
 <body>
 
-<div class="right-section">
-  <div class="main-container">
-
-    <!-- Title -->
-    <div class="title-container">Procedure History</div>
-
-    <!-- Tabs -->
-    <div class="tabs-container">
-      <div class="tabs">
-        <div class="tab active">All Procedures</div>
-        <div class="tab">Approved</div>
-        <div class="tab">Denied</div>
-        <div class="tab">Pending</div>
-      </div>
-    </div>
-
-    <!-- Filters -->
-    <div class="filters">
-      <input class="search-input" placeholder="Type to search">
-      <input class="select" placeholder="Tooth Number">
-      <input class="select" placeholder="CDT Code">
-      <input class="select" placeholder="CDT Category">
-      <input class="select" placeholder="Claim vs PreAuth">
-      <input class="select" placeholder="Status">
-      <input class="select" placeholder="Date Range">
-    </div>
-
-    <!-- Table Card -->
-    <div class="card-container">
-      <div class="table-wrapper">
-        <table>
-          <thead>
-            <tr>
-              <th>Claim #</th>
-              <th>Claim Type</th>
-              <th>Date of Receipt</th>
-              <th>Date of Service</th>
-              <th>Line #</th>
-              <th>Tooth Number</th>
-              <th>Surface</th>
-              <th>Service Units</th>
-              <th>CDT Code</th>
-              <th>CDT Description</th>
-              <th>Line Status</th>
-              <th>Denial Code</th>
-              <th>Reviewer & Notes</th>
-              <th>Rendering Provider</th>
-              <th>Service Office</th>
-              <th>Group Info</th>
-            </tr>
-          </thead>
-          <tbody>
-            <!-- Row 1 -->
-            <tr>
-              <td class="claim-id">CLM-2024-001</td>
-              <td><span class="badge badge-claim">Post Service Claim</span></td>
-              <td><span class="flex"><i class="fa-regular fa-calendar"></i> 11/15/2024</span></td>
-              <td><span class="flex"><i class="fa-regular fa-calendar"></i> 11/10/2024</span></td>
-              <td>1</td>
-              <td><span class="tooth-badge">#14</span></td>
-              <td>O</td>
-              <td>1</td>
-              <td class="cdt-code">D0120</td>
-              <td>Periodic Oral Evaluation</td>
-              <td><span class="badge badge-approved">Approved</span></td>
-              <td class="null-text">—</td>
-              <td class="notes-text"><strong>Dr. Smith</strong><br>Routine checkup</td>
-              <td>
-                <div class="provider-name">Dr. Michael Johnson, DDS</div>
-                <div class="provider-license">License: #123456</div>
-              </td>
-              <td>
-                <div class="office-name">New York Dental Office</div>
-                <div class="office-number">#NY-002</div>
-              </td>
-              <td class="group-info">
-                <div class="group-number">G-5001</div>
-                <div>Dental Plus Network</div>
-              </td>
-            </tr>
-
-            <!-- Row 2 -->
-            <tr>
-              <td class="claim-id">CLM-2024-002</td>
-              <td><span class="badge badge-claim">Post Service Claim</span></td>
-              <td><span class="flex"><i class="fa-regular fa-calendar"></i> 11/16/2024</span></td>
-              <td><span class="flex"><i class="fa-regular fa-calendar"></i> 11/08/2024</span></td>
-              <td>1</td>
-              <td><span class="tooth-badge">#3</span></td>
-              <td>MOBL</td>
-              <td>2</td>
-              <td class="cdt-code">D2390</td>
-              <td>Resin-based Composite - Two Surfaces</td>
-              <td><span class="badge badge-denied">Denied</span></td>
-              <td><span class="denial-code"><strong>D0001</strong><br>Not Medically Necessary</span></td>
-              <td class="notes-text"><strong>Dr. Lee</strong><br>Pre-existing condition</td>
-              <td>
-                <div class="provider-name">Dr. Sarah Williams, DDS</div>
-                <div class="provider-license">License: #234567</div>
-              </td>
-              <td>
-                <div class="office-name">Boston Dental Center</div>
-                <div class="office-number">#MA-005</div>
-              </td>
-              <td class="group-info">
-                <div class="group-number">G-5002</div>
-                <div>Premier Dental Group</div>
-              </td>
-            </tr>
-
-            <!-- Row 3 -->
-            <tr>
-              <td class="claim-id">PRE-2024-103</td>
-              <td><span class="badge badge-preauth">Pre-Auth Request</span></td>
-              <td><span class="flex"><i class="fa-regular fa-calendar"></i> 11/18/2024</span></td>
-              <td class="null-text">—</td>
-              <td>1</td>
-              <td><span class="tooth-badge">#8</span></td>
-              <td class="null-text">—</td>
-              <td>1</td>
-              <td class="cdt-code">D5110</td>
-              <td>Complete Denture - Upper</td>
-              <td><span class="badge badge-pending">Pending Review</span></td>
-              <td class="null-text">—</td>
-              <td class="notes-text">Awaiting review</td>
-              <td>
-                <div class="provider-name">Dr. James Chen, DDS</div>
-                <div class="provider-license">License: #345678</div>
-              </td>
-              <td>
-                <div class="office-name">San Francisco Dental</div>
-                <div class="office-number">#CA-010</div>
-              </td>
-              <td class="group-info">
-                <div class="group-number">G-5003</div>
-                <div>West Coast Dental</div>
-              </td>
-            </tr>
-
-            <!-- Row 4 -->
-            <tr>
-              <td class="claim-id">CLM-2024-004</td>
-              <td><span class="badge badge-claim">Post Service Claim</span></td>
-              <td><span class="flex"><i class="fa-regular fa-calendar"></i> 11/19/2024</span></td>
-              <td><span class="flex"><i class="fa-regular fa-calendar"></i> 11/12/2024</span></td>
-              <td>1</td>
-              <td><span class="tooth-badge">#30</span></td>
-              <td>MOD</td>
-              <td>3</td>
-              <td class="cdt-code">D2394</td>
-              <td>Resin-based Composite - Four+ Surfaces</td>
-              <td><span class="badge badge-approved">Approved</span></td>
-              <td class="null-text">—</td>
-              <td class="notes-text"><strong>Dr. Martinez</strong><br>Complex restoration</td>
-              <td>
-                <div class="provider-name">Dr. Patricia Martinez, DDS</div>
-                <div class="provider-license">License: #456789</div>
-              </td>
-              <td>
-                <div class="office-name">Miami Dental Studio</div>
-                <div class="office-number">#FL-015</div>
-              </td>
-              <td class="group-info">
-                <div class="group-number">G-5004</div>
-                <div>Southeast Dental Alliance</div>
-              </td>
-            </tr>
-
-            <!-- Row 5 -->
-            <tr>
-              <td class="claim-id">CLM-2024-005</td>
-              <td><span class="badge badge-claim">Post Service Claim</span></td>
-              <td><span class="flex"><i class="fa-regular fa-calendar"></i> 11/20/2024</span></td>
-              <td><span class="flex"><i class="fa-regular fa-calendar"></i> 11/05/2024</span></td>
-              <td>2</td>
-              <td><span class="tooth-badge">#12</span></td>
-              <td>O</td>
-              <td>1</td>
-              <td class="cdt-code">D1110</td>
-              <td>Prophylaxis - Adult</td>
-              <td><span class="badge badge-denied">Denied</span></td>
-              <td><span class="denial-code"><strong>D0002</strong><br>Missing Documentation</span></td>
-              <td class="notes-text"><strong>Dr. Kumar</strong><br>Missing x-rays</td>
-              <td>
-                <div class="provider-name">Dr. Rajesh Kumar, DDS</div>
-                <div class="provider-license">License: #567890</div>
-              </td>
-              <td>
-                <div class="office-name">Chicago Dental Practice</div>
-                <div class="office-number">#IL-008</div>
-              </td>
-              <td class="group-info">
-                <div class="group-number">G-5005</div>
-                <div>Midwest Dental Partners</div>
-              </td>
-            </tr>
-          </tbody>
-        </table>
-      </div>
-
-      <!-- Pagination -->
-      <div class="pagination">
-        <div class="page active">1</div>
-      </div>
-    </div>
-
+<!-- ════════════════════════════════════════════
+     SIDEBAR
+════════════════════════════════════════════ -->
+<aside class="sidebar">
+  <div class="sidebar-logo">
+    <div class="logo-icon">C</div>
+    <span>Appeals and<br/>Grievances</span>
   </div>
 
-  <div class="footer">© 2026 Care Insight All Rights Reserved</div>
-</div>
+  <!-- nav items -->
+  <div class="nav-item">
+    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="3" width="7" height="7"/><rect x="14" y="3" width="7" height="7"/><rect x="14" y="14" width="7" height="7"/><rect x="3" y="14" width="7" height="7"/></svg>
+    Settings
+  </div>
+  <div class="nav-item">
+    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="3"/><path d="M19.07 4.93a10 10 0 0 1 0 14.14M4.93 4.93a10 10 0 0 0 0 14.14"/></svg>
+    AI Determination
+  </div>
+  <div class="nav-item">
+    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/></svg>
+    New Cases
+  </div>
+  <div class="nav-item">
+    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg>
+    Case Search
+  </div>
+  <div class="nav-item active">
+    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/><polyline points="22,6 12,13 2,6"/></svg>
+    Outbound Communication
+  </div>
+  <div class="nav-item">
+    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="2" y="3" width="20" height="14" rx="2"/><line x1="8" y1="21" x2="16" y2="21"/><line x1="12" y1="17" x2="12" y2="21"/></svg>
+    Pega Case
+  </div>
+  <div class="nav-item">
+    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="18" y1="20" x2="18" y2="10"/><line x1="12" y1="20" x2="12" y2="4"/><line x1="6" y1="20" x2="6" y2="14"/></svg>
+    Report
+  </div>
+  <div class="nav-item">
+    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 16V8a2 2 0 0 0-1-1.73l-7-4a2 2 0 0 0-2 0l-7 4A2 2 0 0 0 3 8v8a2 2 0 0 0 1 1.73l7 4a2 2 0 0 0 2 0l7-4A2 2 0 0 0 21 16z"/></svg>
+    Package Details
+  </div>
+  <div class="nav-item">
+    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"/><circle cx="12" cy="12" r="3"/></svg>
+    View Case
+  </div>
+  <div class="nav-item">
+    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 0 0-3-3.87"/><path d="M16 3.13a4 4 0 0 1 0 7.75"/></svg>
+    Agent Skill Configuration
+  </div>
+  <div class="nav-item">
+    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="4" width="18" height="18" rx="2"/><line x1="16" y1="2" x2="16" y2="6"/><line x1="8" y1="2" x2="8" y2="6"/><line x1="3" y1="10" x2="21" y2="10"/></svg>
+    Manage Leave
+  </div>
+  <div class="nav-item">
+    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="17 1 21 5 17 9"/><path d="M3 11V9a4 4 0 0 1 4-4h14"/><polyline points="7 23 3 19 7 15"/><path d="M21 13v2a4 4 0 0 1-4 4H3"/></svg>
+    Bulk Transfer
+  </div>
+  <div class="nav-item">
+    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71"/><path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71"/></svg>
+    Useful Links
+  </div>
 
-</body>
-</html>
+  <div class="sidebar-footer">
+    <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="15 18 9 12 15 6"/></svg>
+    Collapse
+  </div>
+</aside>
+
+<!-- ════════════════════════════════════════════
+     MAIN
+════════════════════════════════════════════ -->
+<div class="main">
+  <!-- Topbar -->
+  <div class="topbar">
+    <div class="topbar-title">
+      <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/><polyline points="22,6 12,13 2,6"/></svg>
+      Appeals and Grievances Management
+    </div>
+    <div class="topbar-right">
+      <div class="avatar">IM</div>
+    </div>
+  </div>
+
+  <!-- Content -->
+  <div class="content">
+    <!-- Page title -->
+    <div>
+      <div class="page-header">Outbound Communication</div>
+      <div class="page-sub">Compose, preview and send emails with attachments to members, providers, and internal teams.</div>
+    </div>
+
+    <!-- ── Tabs ── -->
+    <div class="tabs">
+      <div class="tab active">📧 Email Preview & Send</div>
+      <div class="tab">📁 Sent Emails</div>
+      <div class="tab">📋 Templates</div>
+    </div>
+
+    <!-- ── Two-pane Email Layout ── -->
+    <div class="email-preview-wrap" style="flex:1; min-height:0;">
+
+      <!-- Left: Email List -->
+      <div class="email-list-panel">
+        <div class="email-list-header">
+          Inbox
+          <span class="badge badge-info">4 New</span>
+        </div>
+        <div class="email-list-search">
+          <div class="input-with-icon">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg>
+            <input type="text" placeholder="Search emails…"/>
+          </div>
+        </div>
+        <div style="overflow-y:auto; flex:1;">
+
+          <div class="email-item active">
+            <div class="email-item-top">
+              <span class="email-item-name">Dr. Sarah Johnson</span>
+              <span class="email-item-time">10:32 AM</span>
+            </div>
+            <div class="email-item-subject">RE: Appeal Case #AGM-2024-0892</div>
+            <div style="display:flex; align-items:center; gap:6px; margin-top:3px;">
+              <div class="unread-dot"></div>
+              <div class="email-item-preview">Please find the updated medical records attached…</div>
+            </div>
+          </div>
+
+          <div class="email-item">
+            <div class="email-item-top">
+              <span class="email-item-name">Member: J. Williams</span>
+              <span class="email-item-time">9:14 AM</span>
+            </div>
+            <div class="email-item-subject">Grievance Submission – Policy #PL99210</div>
+            <div style="display:flex; align-items:center; gap:6px; margin-top:3px;">
+              <div class="unread-dot"></div>
+              <div class="email-item-preview">I am writing to formally submit a grievance regarding…</div>
+            </div>
+          </div>
+
+          <div class="email-item">
+            <div class="email-item-top">
+              <span class="email-item-name">Blue Cross Admin</span>
+              <span class="email-item-time">Yesterday</span>
+            </div>
+            <div class="email-item-subject">Authorization Request – Case #AGM-2024-0785</div>
+            <div class="email-item-preview" style="margin-top:3px;">Forwarding the authorization documentation for your review…</div>
+          </div>
+
+          <div class="email-item">
+            <div class="email-item-top">
+              <span class="email-item-name">Internal – QA Team</span>
+              <span class="email-item-time">Yesterday</span>
+            </div>
+            <div class="email-item-subject">Weekly Case Review Summary</div>
+            <div class="email-item-preview" style="margin-top:3px;">Attached is the weekly review summary for Q4 2024…</div>
+          </div>
+
+          <div class="email-item">
+            <div class="email-item-top">
+              <span class="email-item-name">Cigna Provider Relations</span>
+              <span class="email-item-time">Dec 18</span>
+            </div>
+            <div class="email-item-subject">Provider Dispute – Claim #CLM-58820</div>
+            <div class="email-item-preview" style="margin-top:3px;">We are disputing the denial of claim number CLM-58820…</div>
+          </div>
+
+        </div>
+        <!-- Compose Button -->
+        <div style="padding:12px;">
+          <button class="btn btn-primary" style="width:100%; justify-content:center;" onclick="openCompose()">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><line x1="12" y1="5" x2="12" y2="19"/><line x1="5" y1="12" x2="19" y2="12"/></svg>
+            Compose New Email
+          </button>
+        </div>
+      </div>
+
+      <!-- Right: Email Detail + Reply -->
+      <div class="email-detail-panel">
+
+        <!-- Toolbar -->
+        <div class="email-detail-toolbar">
+          <div class="toolbar-left">
+            <button class="btn-icon" title="Back">
+              <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="15 18 9 12 15 6"/></svg>
+            </button>
+            <button class="btn btn-secondary btn-sm" onclick="openReply()">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="9 17 4 12 9 7"/><path d="M20 18v-2a4 4 0 0 0-4-4H4"/></svg>
+              Reply
+            </button>
+            <button class="btn btn-secondary btn-sm">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="15 17 20 12 15 7"/><path d="M4 18v-2a4 4 0 0 1 4-4h12"/></svg>
+              Forward
+            </button>
+            <button class="btn btn-secondary btn-sm" onclick="openCompose()">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M11 4H4a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2v-7"/><path d="M18.5 2.5a2.121 2.121 0 0 1 3 3L12 15l-4 1 1-4 9.5-9.5z"/></svg>
+              Edit &amp; Send
+            </button>
+          </div>
+          <div class="toolbar-right">
+            <span class="badge badge-pending">Pending Response</span>
+            <button class="btn-icon" title="Archive">
+              <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="21 8 21 21 3 21 3 8"/><rect x="1" y="3" width="22" height="5"/><line x1="10" y1="12" x2="14" y2="12"/></svg>
+            </button>
+            <button class="btn-icon btn-danger" title="Delete">
+              <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="3 6 5 6 21 6"/><path d="M19 6l-1 14H6L5 6"/><path d="M10 11v6"/><path d="M14 11v6"/><path d="M9 6V4h6v2"/></svg>
+            </button>
+          </div>
+        </div>
+
+        <!-- Subject & Meta -->
+        <div class="email-subject-bar">
+          <h2>RE: Appeal Case #AGM-2024-0892 – Additional Medical Records</h2>
+          <div class="email-meta">
+            <div class="email-meta-item">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"/><circle cx="12" cy="7" r="4"/></svg>
+              <span><strong>From:</strong> dr.johnson@healthproviders.com</span>
+            </div>
+            <div class="email-meta-item">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/><polyline points="22,6 12,13 2,6"/></svg>
+              <span><strong>To:</strong> mail@careinsight.ai</span>
+            </div>
+            <div class="email-meta-item">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="4" width="18" height="18" rx="2"/><line x1="16" y1="2" x2="16" y2="6"/><line x1="8" y1="2" x2="8" y2="6"/><line x1="3" y1="10" x2="21" y2="10"/></svg>
+              <span><strong>Date:</strong> December 19, 2024 – 10:32 AM</span>
+            </div>
+            <div class="email-meta-item">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21.44 11.05l-9.19 9.19a6 6 0 0 1-8.49-8.49l9.19-9.19a4 4 0 0 1 5.66 5.66l-9.2 9.19a2 2 0 0 1-2.83-2.83l8.49-8.48"/></svg>
+              <span><strong>3 Attachments</strong></span>
+            </div>
+          </div>
+        </div>
+
+        <!-- Email Body -->
+        <div class="email-body">
+          <p>Dear Care Insight Appeals Team,</p>
+          <p>Thank you for your prompt attention to the appeal case <span class="highlight">#AGM-2024-0892</span> for our patient, Mr. Robert Davis. As requested, please find attached the updated medical records and supporting documentation to substantiate the medical necessity of the requested treatment.</p>
+          <p>The attached documents include:</p>
+          <ul style="margin-left:20px; margin-bottom:12px; line-height:2;">
+            <li>Complete medical history and treatment timeline</li>
+            <li>Specialist consultation report dated December 15, 2024</li>
+            <li>Laboratory test results confirming the diagnosis</li>
+          </ul>
+          <p>We strongly believe that the requested procedure is medically necessary given the patient's current condition and the failure of alternative treatments. Please review the attached documentation and advise on the next steps in the appeals process.</p>
+          <p>We appreciate your cooperation and look forward to a favorable resolution for our patient.</p>
+          <p>Best regards,<br/>
+          <strong>Dr. Sarah Johnson, MD</strong><br/>
+          <span style="color:#6b7280;">Attending Physician – Cardiology Department</span><br/>
+          <span style="color:#6b7280;">Health Providers Network | (555) 204-8820</span></p>
+        </div>
+
+        <!-- Attachments bar -->
+        <div class="attachments-bar">
+          <div class="attachments-title">📎 Attachments (3)</div>
+          <div class="attachment-list">
+            <div class="attachment-chip">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/></svg>
+              Medical_Records_Davis.pdf
+              <span class="file-size">2.4 MB</span>
+            </div>
+            <div class="attachment-chip">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/></svg>
+              Specialist_Report_Dec2024.pdf
+              <span class="file-size">1.1 MB</span>
+            </div>
+            <div class="attachment-chip">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/></svg>
+              Lab_Results_Q4.xlsx
+              <span class="file-size">340 KB</span>
+            </div>
+          </div>
+        </div>
+
+        <!-- Reply Section -->
+        <div class="compose-section" id="replySection" style="display:none;">
+          <div class="compose-header">
+            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="#4f46e5" stroke-width="2"><polyline points="9 17 4 12 9 7"/><path d="M20 18v-2a4 4 0 0 0-4-4H4"/></svg>
+            Reply to Dr. Sarah Johnson
+          </div>
+          <!-- RTE Toolbar -->
+          <div>
+            <div class="rte-toolbar">
+              <!-- Font -->
+              <div class="rte-group">
+                <select class="rte-select" style="width:90px;">
+                  <option>Open Sans</option>
+                  <option>Arial</option>
+                  <option>Calibri</option>
+                  <option>Times New Roman</option>
+                </select>
+                <select class="rte-select" style="width:46px;">
+                  <option>11</option><option>12</option><option selected>13</option>
+                  <option>14</option><option>16</option><option>18</option><option>24</option>
+                </select>
+              </div>
+              <div class="rte-sep"></div>
+              <!-- Format -->
+              <div class="rte-group">
+                <button class="rte-btn active" title="Bold" onclick="execCmd('bold',this)"><strong>B</strong></button>
+                <button class="rte-btn" title="Italic" onclick="execCmd('italic',this)"><em>I</em></button>
+                <button class="rte-btn" title="Underline" onclick="execCmd('underline',this)"><u>U</u></button>
+                <button class="rte-btn" title="Strikethrough" onclick="execCmd('strikethrough',this)"><s>S</s></button>
+              </div>
+              <div class="rte-sep"></div>
+              <!-- Text Color -->
+              <div class="rte-group">
+                <button class="rte-color-btn" title="Font Color">
+                  <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" width="13" height="13"><path d="M4 20h4l10-10-4-4L4 16v4z"/><line x1="13.5" y1="6.5" x2="17.5" y2="10.5"/></svg>
+                  <div class="rte-color-bar" style="background:#1a1a2e;"></div>
+                </button>
+                <button class="rte-color-btn" title="Highlight Color">
+                  <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" width="13" height="13"><path d="M12 20h9"/><path d="M16.5 3.5a2.121 2.121 0 0 1 3 3L7 19l-4 1 1-4L16.5 3.5z"/></svg>
+                  <div class="rte-color-bar" style="background:#fbbf24;"></div>
+                </button>
+              </div>
+              <div class="rte-sep"></div>
+              <!-- Alignment -->
+              <div class="rte-group">
+                <button class="rte-btn active" title="Align Left" onclick="execCmd('justifyLeft',this)">
+                  <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="17" y1="10" x2="3" y2="10"/><line x1="21" y1="6" x2="3" y2="6"/><line x1="21" y1="14" x2="3" y2="14"/><line x1="17" y1="18" x2="3" y2="18"/></svg>
+                </button>
+                <button class="rte-btn" title="Align Center" onclick="execCmd('justifyCenter',this)">
+                  <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="18" y1="10" x2="6" y2="10"/><line x1="21" y1="6" x2="3" y2="6"/><line x1="21" y1="14" x2="3" y2="14"/><line x1="18" y1="18" x2="6" y2="18"/></svg>
+                </button>
+                <button class="rte-btn" title="Align Right" onclick="execCmd('justifyRight',this)">
+                  <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="21" y1="10" x2="7" y2="10"/><line x1="21" y1="6" x2="3" y2="6"/><line x1="21" y1="14" x2="3" y2="14"/><line x1="21" y1="18" x2="7" y2="18"/></svg>
+                </button>
+              </div>
+              <div class="rte-sep"></div>
+              <!-- Lists -->
+              <div class="rte-group">
+                <button class="rte-btn" title="Bullet List" onclick="execCmd('insertUnorderedList',this)">
+                  <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="9" y1="6" x2="20" y2="6"/><line x1="9" y1="12" x2="20" y2="12"/><line x1="9" y1="18" x2="20" y2="18"/><circle cx="4" cy="6" r="1.5" fill="currentColor" stroke="none"/><circle cx="4" cy="12" r="1.5" fill="currentColor" stroke="none"/><circle cx="4" cy="18" r="1.5" fill="currentColor" stroke="none"/></svg>
+                </button>
+                <button class="rte-btn" title="Numbered List" onclick="execCmd('insertOrderedList',this)">
+                  <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="10" y1="6" x2="21" y2="6"/><line x1="10" y1="12" x2="21" y2="12"/><line x1="10" y1="18" x2="21" y2="18"/><path d="M4 6h1v4" stroke="currentColor" stroke-width="1.5"/><path d="M4 10h2" stroke="currentColor" stroke-width="1.5"/><path d="M6 18H4c0-1 2-2 2-3s-1-1.5-2-1" stroke="currentColor" stroke-width="1.5"/></svg>
+                </button>
+                <button class="rte-btn" title="Indent">
+                  <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="3" y1="8" x2="21" y2="8"/><line x1="3" y1="16" x2="21" y2="16"/><polyline points="9 12 3 12"/><polyline points="3 10 7 12 3 14"/></svg>
+                </button>
+              </div>
+              <div class="rte-sep"></div>
+              <!-- Insert -->
+              <div class="rte-group">
+                <button class="rte-btn" title="Insert Link" onclick="execCmd('createLink',this)">
+                  <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71"/><path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71"/></svg>
+                </button>
+                <button class="rte-btn" title="Insert Table">
+                  <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="3" width="18" height="18" rx="2"/><line x1="3" y1="9" x2="21" y2="9"/><line x1="3" y1="15" x2="21" y2="15"/><line x1="9" y1="3" x2="9" y2="21"/><line x1="15" y1="3" x2="15" y2="21"/></svg>
+                </button>
+                <button class="rte-btn" title="Insert Image">
+                  <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="3" width="18" height="18" rx="2"/><circle cx="8.5" cy="8.5" r="1.5"/><polyline points="21 15 16 10 5 21"/></svg>
+                </button>
+                <button class="rte-btn" title="Insert Signature">
+                  <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M3 17c3.333-5.333 5-8 5-8s.667 2.667 2 8c1.333-5.333 2.333-8 3-8s1.333 2.667 2 8"/><line x1="3" y1="21" x2="21" y2="21"/></svg>
+                </button>
+              </div>
+              <div class="rte-sep"></div>
+              <!-- Undo/Redo -->
+              <div class="rte-group">
+                <button class="rte-btn" title="Undo" onclick="document.execCommand('undo')">
+                  <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="1 4 1 10 7 10"/><path d="M3.51 15a9 9 0 1 0 .49-4.95"/></svg>
+                </button>
+                <button class="rte-btn" title="Redo" onclick="document.execCommand('redo')">
+                  <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="23 4 23 10 17 10"/><path d="M20.49 15a9 9 0 1 1-.49-4.95"/></svg>
+                </button>
+              </div>
+            </div>
+
+            <!-- Editable area -->
+            <div class="rte-body" contenteditable="true" id="replyEditor">
+              <p>Dear Dr. Johnson,</p>
+              <p>Thank you for providing the additional documentation for Appeal Case #AGM-2024-0892. We have received your submission and will review the attached records promptly.</p>
+              <p>Our clinical review team will assess the provided documentation and you can expect a formal response within <strong>5 business days</strong> as required under our appeals process guidelines.</p>
+              <p>Please do not hesitate to contact us if you require any further information.</p>
+              <p>Best regards,<br/><strong>Appeals & Grievances Team</strong><br/>Care Insight | mail@careinsight.ai</p>
+            </div>
+          </div>
+
+          <!-- Attachment Upload -->
+          <div>
+            <label>Attach Documents</label>
+            <div class="upload-zone" onclick="triggerUpload()">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21.44 11.05l-9.19 9.19a6 6 0 0 1-8.49-8.49l9.19-9.19a4 4 0 0 1 5.66 5.66l-9.2 9.19a2 2 0 0 1-2.83-2.83l8.49-8.48"/></svg>
+              <div class="upload-zone-text">
+                <strong>Click to attach</strong> or drag & drop files here<br/>
+                <span style="color:#7c3aed; font-size:11px;">PDF, DOCX, XLSX, PNG, JPG – Max 25MB per file</span>
+              </div>
+            </div>
+            <input type="file" id="fileInput" multiple style="display:none;" onchange="handleFiles(event)"/>
+            <div class="attached-files" id="attachedFiles">
+              <div class="attached-file">
+                <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/></svg>
+                Appeal_Decision_Template.pdf
+                <span class="remove-file" onclick="this.parentElement.remove()">×</span>
+              </div>
+            </div>
+          </div>
+
+          <!-- Actions -->
+          <div class="compose-actions">
+            <div class="compose-actions-left">
+              <button class="btn btn-success" onclick="openSendConfirm()">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><line x1="22" y1="2" x2="11" y2="13"/><polygon points="22 2 15 22 11 13 2 9 22 2"/></svg>
+                Send Email
+              </button>
+              <button class="btn btn-secondary" onclick="saveDraft()">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M19 21H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h11l5 5v11a2 2 0 0 1-2 2z"/><polyline points="17 21 17 13 7 13 7 21"/><polyline points="7 3 7 8 15 8"/></svg>
+                Save Draft
+              </button>
+              <button class="btn btn-secondary" onclick="document.getElementById('replySection').style.display='none'">
+                Discard
+              </button>
+            </div>
+            <div class="flex items-center gap-2">
+              <span class="text-xs text-gray">Priority:</span>
+              <select style="width:auto; font-size:12px; padding:5px 8px;">
+                <option>Normal</option>
+                <option>High</option>
+                <option>Urgent</option>
+              </select>
+            </div>
+          </div>
+        </div>
+
+      </div><!-- /email-detail-panel -->
+    </div><!-- /email-preview-wrap -->
+
+    <!-- Footer -->
+    <div style="text-align:center; font-size:11.5px; color:#9ca3af; padding:6px 0;">
+      © 2024 Care Insight All Rights Reserved
+    </div>
+  </div><!-- /content -->
+</div><!-- /main -->
+
+<!-- ════════════════════════════════════════════
+     COMPOSE MODAL (New Email / Edit Email)
+════════════════════════════════════════════ -->
+<div class="modal-overlay hidden" id="composeModal">
+  <div class="modal" style="width:680px; max-height:92vh; overflow-y:auto;">
+    <div class="modal-header">
+      <div class="modal-title">
+        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M11 4H4a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2v-7"/><path d="M18.5 2.5a2.121 2.121 0 0 1 3 3L12 15l-4 1 1-4 9.5-9.5z"/></svg>
+        Compose / Edit Email
+      </div>
+      <button class="modal-close" onclick="closeCompose()">×</button>
+    </div>
+
+    <div class="modal-body">
+      <!-- Info -->
+      <div class="info-box info-box-blue">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><line x1="12" y1="8" x2="12" y2="12"/><line x1="12" y1="16" x2="12.01" y2="16"/></svg>
+        Use the formatting toolbar below to style your email exactly as you would in Outlook. Attach supporting documents before sending.
+      </div>
+
+      <!-- To / CC / BCC -->
+      <div class="field-group">
+        <label class="required">To</label>
+        <div class="tag-input" id="toField" onclick="this.querySelector('input').focus()">
+          <div class="tag">dr.johnson@healthproviders.com <span class="tag-remove" onclick="this.parentElement.remove()">×</span></div>
+          <input type="text" placeholder="Add recipient…" onkeydown="addTag(event,'toField')"/>
+        </div>
+      </div>
+      <div class="field-row">
+        <div class="field-group">
+          <label>CC</label>
+          <div class="tag-input" id="ccField" onclick="this.querySelector('input').focus()">
+            <input type="text" placeholder="Add CC…" onkeydown="addTag(event,'ccField')"/>
+          </div>
+        </div>
+        <div class="field-group">
+          <label>BCC</label>
+          <div class="tag-input" id="bccField" onclick="this.querySelector('input').focus()">
+            <input type="text" placeholder="Add BCC…" onkeydown="addTag(event,'bccField')"/>
+          </div>
+        </div>
+      </div>
+      <div class="field-row">
+        <div class="field-group">
+          <label class="required">Subject</label>
+          <input type="text" value="RE: Appeal Case #AGM-2024-0892 – Decision Notice"/>
+        </div>
+        <div class="field-group" style="max-width:160px;">
+          <label>Priority</label>
+          <select>
+            <option>Normal</option>
+            <option>High</option>
+            <option>Urgent</option>
+          </select>
+        </div>
+      </div>
+
+      <div class="field-row">
+        <div class="field-group">
+          <label>Case Reference</label>
+          <div class="input-with-icon">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/></svg>
+            <input type="text" value="AGM-2024-0892"/>
+          </div>
+        </div>
+        <div class="field-group">
+          <label>Template</label>
+          <select>
+            <option>-- No template --</option>
+            <option>Appeal Decision – Approved</option>
+            <option>Appeal Decision – Denied</option>
+            <option>Acknowledgement Letter</option>
+            <option>Request for Information</option>
+          </select>
+        </div>
+      </div>
+
+      <hr class="divider"/>
+
+      <!-- Rich Text Toolbar -->
+      <div>
+        <label class="required">Email Body</label>
+        <div class="rte-toolbar">
+          <div class="rte-group">
+            <select class="rte-select" style="width:90px;">
+              <option>Open Sans</option><option>Arial</option><option>Calibri</option><option>Times New Roman</option>
+            </select>
+            <select class="rte-select" style="width:46px;">
+              <option>11</option><option>12</option><option selected>13</option><option>14</option><option>16</option><option>18</option><option>24</option>
+            </select>
+          </div>
+          <div class="rte-sep"></div>
+          <div class="rte-group">
+            <button class="rte-btn" title="Bold" onclick="execCmd2('bold',this)"><strong>B</strong></button>
+            <button class="rte-btn" title="Italic" onclick="execCmd2('italic',this)"><em>I</em></button>
+            <button class="rte-btn" title="Underline" onclick="execCmd2('underline',this)"><u>U</u></button>
+            <button class="rte-btn" title="Strikethrough" onclick="execCmd2('strikethrough',this)"><s>S</s></button>
+          </div>
+          <div class="rte-sep"></div>
+          <div class="rte-group">
+            <button class="rte-color-btn" title="Font Color">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" width="13" height="13"><path d="M4 20h4l10-10-4-4L4 16v4z"/></svg>
+              <div class="rte-color-bar" style="background:#4f46e5;"></div>
+            </button>
+            <button class="rte-color-btn" title="Highlight">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" width="13" height="13"><path d="M12 20h9"/><path d="M16.5 3.5a2.121 2.121 0 0 1 3 3L7 19l-4 1 1-4L16.5 3.5z"/></svg>
+              <div class="rte-color-bar" style="background:#fbbf24;"></div>
+            </button>
+          </div>
+          <div class="rte-sep"></div>
+          <div class="rte-group">
+            <button class="rte-btn active" title="Align Left">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="17" y1="10" x2="3" y2="10"/><line x1="21" y1="6" x2="3" y2="6"/><line x1="21" y1="14" x2="3" y2="14"/><line x1="17" y1="18" x2="3" y2="18"/></svg>
+            </button>
+            <button class="rte-btn" title="Center">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="18" y1="10" x2="6" y2="10"/><line x1="21" y1="6" x2="3" y2="6"/><line x1="21" y1="14" x2="3" y2="14"/><line x1="18" y1="18" x2="6" y2="18"/></svg>
+            </button>
+            <button class="rte-btn" title="Right">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="21" y1="10" x2="7" y2="10"/><line x1="21" y1="6" x2="3" y2="6"/><line x1="21" y1="14" x2="3" y2="14"/><line x1="21" y1="18" x2="7" y2="18"/></svg>
+            </button>
+          </div>
+          <div class="rte-sep"></div>
+          <div class="rte-group">
+            <button class="rte-btn" title="Bullet List">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="9" y1="6" x2="20" y2="6"/><line x1="9" y1="12" x2="20" y2="12"/><line x1="9" y1="18" x2="20" y2="18"/><circle cx="4" cy="6" r="1.5" fill="currentColor" stroke="none"/><circle cx="4" cy="12" r="1.5" fill="currentColor" stroke="none"/><circle cx="4" cy="18" r="1.5" fill="currentColor" stroke="none"/></svg>
+            </button>
+            <button class="rte-btn" title="Numbered List">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="10" y1="6" x2="21" y2="6"/><line x1="10" y1="12" x2="21" y2="12"/><line x1="10" y1="18" x2="21" y2="18"/></svg>
+            </button>
+            <button class="rte-btn" title="Indent Left">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="3" y1="8" x2="21" y2="8"/><line x1="3" y1="16" x2="21" y2="16"/><polyline points="9 12 3 12"/><polyline points="3 10 7 12 3 14"/></svg>
+            </button>
+          </div>
+          <div class="rte-sep"></div>
+          <div class="rte-group">
+            <button class="rte-btn" title="Link">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71"/><path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71"/></svg>
+            </button>
+            <button class="rte-btn" title="Table">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="3" width="18" height="18" rx="2"/><line x1="3" y1="9" x2="21" y2="9"/><line x1="3" y1="15" x2="21" y2="15"/><line x1="9" y1="3" x2="9" y2="21"/><line x1="15" y1="3" x2="15" y2="21"/></svg>
+            </button>
+            <button class="rte-btn" title="Signature">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M3 17c3.333-5.333 5-8 5-8s.667 2.667 2 8c1.333-5.333 2.333-8 3-8s1.333 2.667 2 8"/><line x1="3" y1="21" x2="21" y2="21"/></svg>
+            </button>
+          </div>
+          <div class="rte-sep"></div>
+          <div class="rte-group">
+            <button class="rte-btn" title="Undo">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="1 4 1 10 7 10"/><path d="M3.51 15a9 9 0 1 0 .49-4.95"/></svg>
+            </button>
+            <button class="rte-btn" title="Redo">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="23 4 23 10 17 10"/><path d="M20.49 15a9 9 0 1 1-.49-4.95"/></svg>
+            </button>
+          </div>
+        </div>
+        <div class="rte-body" contenteditable="true" id="composeEditor"
