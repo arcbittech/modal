@@ -1,9 +1,9 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-<meta charset="UTF-8" />
+<meta charset="UTF-8"/>
 <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-<title>Edit & Send Email – Outbound Communication</title>
+<title>LOB Scripts – Appeals and Grievances Management</title>
 <link href="https://fonts.googleapis.com/css2?family=Open+Sans:wght@400;500;600;700&display=swap" rel="stylesheet"/>
 <style>
   *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
@@ -14,38 +14,38 @@
     color: #1a1a2e;
     background: #f4f6fb;
     display: flex;
-    min-height: 100vh;
     height: 100vh;
     overflow: hidden;
   }
 
-  /* ── Sidebar ── */
+  /* ── Scrollbar ── */
+  ::-webkit-scrollbar { width: 5px; height: 5px; }
+  ::-webkit-scrollbar-track { background: transparent; }
+  ::-webkit-scrollbar-thumb { background: #d1d5db; border-radius: 10px; }
+
+  /* ════════════════════════════
+     SIDEBAR
+  ════════════════════════════ */
   .sidebar {
-    width: 200px;
-    min-width: 200px;
-    background: #ffffff;
+    width: 200px; min-width: 200px;
+    background: #fff;
     border-right: 1px solid #e2e8f0;
-    display: flex;
-    flex-direction: column;
-    height: 100vh;
-    overflow-y: auto;
+    display: flex; flex-direction: column;
+    height: 100vh; overflow-y: auto;
     flex-shrink: 0;
   }
   .sidebar-logo {
-    display: flex;
-    align-items: center;
-    gap: 8px;
+    display: flex; align-items: center; gap: 8px;
     padding: 14px 16px;
     border-bottom: 1px solid #e2e8f0;
     flex-shrink: 0;
   }
-  .sidebar-logo .logo-icon {
+  .logo-icon {
     width: 28px; height: 28px;
     background: linear-gradient(135deg, #4f46e5, #7c3aed);
     border-radius: 6px;
     display: flex; align-items: center; justify-content: center;
-    color: #fff; font-size: 14px; font-weight: 700;
-    flex-shrink: 0;
+    color: #fff; font-size: 14px; font-weight: 700; flex-shrink: 0;
   }
   .sidebar-logo span { font-size: 12px; font-weight: 700; color: #1a1a2e; line-height: 1.2; }
 
@@ -56,6 +56,7 @@
     border-left: 3px solid transparent;
     flex-shrink: 0;
   }
+  .nav-item:hover { background: #f0f0ff; color: #4f46e5; }
   .nav-item.active {
     background: #ede9fe; color: #4f46e5;
     border-left-color: #4f46e5; font-weight: 600;
@@ -63,31 +64,25 @@
   .nav-item svg { width: 15px; height: 15px; flex-shrink: 0; }
 
   .sidebar-footer {
-    margin-top: auto;
-    padding: 12px 16px;
+    margin-top: auto; padding: 12px 16px;
     border-top: 1px solid #e2e8f0;
     font-size: 11px; color: #9ca3af;
     display: flex; align-items: center; gap: 6px;
     flex-shrink: 0;
   }
 
-  /* ── Main wrapper ── */
+  /* ════════════════════════════
+     MAIN
+  ════════════════════════════ */
   .main {
-    flex: 1;
-    display: flex;
-    flex-direction: column;
-    height: 100vh;
-    overflow: hidden;
-    min-width: 0;
+    flex: 1; display: flex; flex-direction: column;
+    height: 100vh; overflow: hidden; min-width: 0;
   }
 
-  /* ── Topbar ── */
+  /* Topbar */
   .topbar {
-    background: #fff;
-    border-bottom: 1px solid #e2e8f0;
-    padding: 0 24px;
-    height: 52px;
-    min-height: 52px;
+    background: #fff; border-bottom: 1px solid #e2e8f0;
+    padding: 0 24px; height: 52px; min-height: 52px;
     display: flex; align-items: center; justify-content: space-between;
     flex-shrink: 0;
   }
@@ -95,6 +90,7 @@
     font-size: 15px; font-weight: 700; color: #1a1a2e;
     display: flex; align-items: center; gap: 8px;
   }
+  .topbar-title svg { color: #4f46e5; }
   .avatar {
     width: 32px; height: 32px; background: #4f46e5;
     border-radius: 50%; color: #fff;
@@ -102,346 +98,356 @@
     font-size: 12px; font-weight: 700;
   }
 
-  /* ── Scrollable content area ── */
+  /* Scrollable content */
   .content {
-    flex: 1;
-    overflow-y: auto;
-    overflow-x: hidden;
+    flex: 1; overflow-y: auto; overflow-x: hidden;
     padding: 24px;
-    display: flex;
-    flex-direction: column;
-    gap: 16px;
+    display: flex; flex-direction: column; gap: 16px;
     min-height: 0;
   }
 
-  /* ── Breadcrumb ── */
-  .breadcrumb {
-    display: flex; align-items: center; gap: 6px;
-    font-size: 12px; color: #6b7280;
+  /* ════════════════════════════
+     BADGES
+  ════════════════════════════ */
+  .badge {
+    display: inline-flex; align-items: center; gap: 4px;
+    padding: 3px 9px; border-radius: 20px;
+    font-size: 11px; font-weight: 600; white-space: nowrap;
+  }
+  .badge svg { width: 8px; height: 8px; }
+  .badge-draft    { background: #fef3c7; color: #92400e; }
+  .badge-approved { background: #d1fae5; color: #065f46; }
+  .badge-denied   { background: #fee2e2; color: #991b1b; }
+  .badge-active   { background: #d1fae5; color: #065f46; }
+  .badge-inactive { background: #f1f5f9; color: #64748b; }
+  .badge-info     { background: #ede9fe; color: #4f46e5; }
+  .badge-call     { background: #dbeafe; color: #1d4ed8; }
+  .badge-email    { background: #ede9fe; color: #4f46e5; }
+  .badge-delegated     { background: #fef3c7; color: #92400e; }
+  .badge-nondelegated  { background: #f0fdf4; color: #065f46; border: 1px solid #a7f3d0; }
+
+  /* ════════════════════════════
+     BUTTONS
+  ════════════════════════════ */
+  .btn {
+    display: inline-flex; align-items: center; gap: 6px;
+    padding: 7px 14px; border-radius: 6px;
+    font-family: 'Open Sans', sans-serif;
+    font-size: 12px; font-weight: 600; cursor: pointer;
+    border: none; white-space: nowrap; flex-shrink: 0;
+  }
+  .btn svg { width: 13px; height: 13px; flex-shrink: 0; }
+  .btn-primary   { background: #4f46e5; color: #fff; }
+  .btn-primary:hover { background: #4338ca; }
+  .btn-secondary { background: #fff; color: #374151; border: 1px solid #d1d5db; }
+  .btn-secondary:hover { background: #f9fafb; }
+  .btn-success   { background: #059669; color: #fff; }
+  .btn-success:hover { background: #047857; }
+  .btn-danger    { background: #fff; color: #dc2626; border: 1px solid #fca5a5; }
+  .btn-danger:hover { background: #fee2e2; }
+  .btn-ghost     { background: none; border: none; color: #6b7280; padding: 5px 8px; cursor: pointer; border-radius: 5px; display: inline-flex; align-items: center; gap: 5px; font-size: 12px; font-family: 'Open Sans', sans-serif; }
+  .btn-ghost:hover { background: #f0f0ff; color: #4f46e5; }
+  .btn-sm { padding: 5px 11px; font-size: 11.5px; }
+  .btn-xs { padding: 4px 9px; font-size: 11px; }
+
+  /* Icon button */
+  .icon-btn {
+    width: 30px; height: 30px;
+    display: inline-flex; align-items: center; justify-content: center;
+    border-radius: 6px; border: 1px solid #e2e8f0;
+    background: #fff; cursor: pointer; color: #6b7280;
     flex-shrink: 0;
   }
-  .breadcrumb a { color: #4f46e5; text-decoration: none; font-weight: 600; }
-  .breadcrumb svg { width: 12px; height: 12px; color: #9ca3af; }
+  .icon-btn:hover { background: #f0f0ff; color: #4f46e5; border-color: #c4b5fd; }
+  .icon-btn svg { width: 13px; height: 13px; }
 
-  /* ── Page header ── */
+  /* ════════════════════════════
+     PAGE HEADER
+  ════════════════════════════ */
   .page-header-row {
     display: flex; align-items: flex-start; justify-content: space-between;
     gap: 12px; flex-shrink: 0;
   }
   .page-header { font-size: 18px; font-weight: 700; color: #1a1a2e; }
   .page-sub { font-size: 12.5px; color: #6b7280; margin-top: 3px; }
+  .page-header-actions { display: flex; align-items: center; gap: 8px; flex-shrink: 0; }
 
-  /* ── Badges ── */
-  .badge {
-    display: inline-flex; align-items: center; gap: 5px;
-    padding: 3px 10px; border-radius: 20px;
-    font-size: 11px; font-weight: 600;
-  }
-  .badge-pending { background: #fef3c7; color: #92400e; }
-  .badge-success { background: #d1fae5; color: #065f46; }
-  .badge-negative { background: #fee2e2; color: #991b1b; }
-  .badge-info { background: #ede9fe; color: #4f46e5; }
-
-  /* ── Buttons ── */
-  .btn {
-    display: inline-flex; align-items: center; gap: 6px;
-    padding: 8px 16px; border-radius: 6px;
-    font-family: 'Open Sans', sans-serif;
-    font-size: 12.5px; font-weight: 600; cursor: pointer;
-    border: none; white-space: nowrap;
-  }
-  .btn svg { width: 13px; height: 13px; flex-shrink: 0; }
-  .btn-primary { background: #4f46e5; color: #fff; }
-  .btn-secondary { background: #fff; color: #374151; border: 1px solid #d1d5db; }
-  .btn-success { background: #059669; color: #fff; }
-  .btn-danger-outline { background: #fff; color: #dc2626; border: 1px solid #fca5a5; }
-  .btn-sm { padding: 6px 12px; font-size: 12px; }
-
-  /* ── Meta summary ── */
-  .meta-summary {
-    display: flex; flex-wrap: wrap; gap: 12px;
-    background: #f8f9fc; border: 1px solid #e2e8f0; border-radius: 8px;
+  /* ════════════════════════════
+     FILTER / TOOLBAR BAR
+  ════════════════════════════ */
+  .toolbar-bar {
+    background: #fff; border: 1px solid #e2e8f0; border-radius: 10px;
     padding: 12px 16px;
-    flex-shrink: 0;
+    display: flex; align-items: center; gap: 10px; flex-wrap: wrap;
   }
-  .meta-item { display: flex; align-items: center; gap: 6px; font-size: 12px; color: #4b5563; }
-  .meta-item svg { width: 13px; height: 13px; color: #6b7280; flex-shrink: 0; }
-  .meta-item strong { color: #1a1a2e; font-weight: 600; }
+  .search-wrap {
+    position: relative; flex: 1; min-width: 180px;
+  }
+  .search-wrap svg {
+    position: absolute; left: 10px; top: 50%; transform: translateY(-50%);
+    color: #9ca3af; width: 14px; height: 14px; pointer-events: none;
+  }
+  .search-wrap input {
+    width: 100%; padding: 7px 12px 7px 32px;
+    border: 1px solid #d1d5db; border-radius: 6px;
+    font-family: 'Open Sans', sans-serif; font-size: 12.5px; color: #1a1a2e;
+    outline: none;
+  }
+  .search-wrap input:focus { border-color: #4f46e5; box-shadow: 0 0 0 3px rgba(79,70,229,.08); }
 
-  /* ── Main edit card ── */
-  .edit-card {
-    background: #fff;
-    border: 1px solid #e2e8f0;
-    border-radius: 12px;
-    overflow: visible;
-    display: flex;
-    flex-direction: column;
-    flex-shrink: 0;
+  .filter-select {
+    height: 34px; border: 1px solid #d1d5db; border-radius: 6px;
+    font-size: 12px; font-family: 'Open Sans', sans-serif;
+    padding: 0 10px; color: #374151; background: #fff; cursor: pointer; outline: none;
+    min-width: 130px;
   }
+  .filter-select:focus { border-color: #4f46e5; }
 
-  /* ── Card header ── */
-  .edit-card-header {
-    background: linear-gradient(135deg, #4f46e5 0%, #7c3aed 100%);
-    padding: 18px 24px;
-    border-radius: 12px 12px 0 0;
-    display: flex; align-items: center; justify-content: space-between;
+  .toolbar-divider { width: 1px; height: 24px; background: #e2e8f0; flex-shrink: 0; }
+
+  /* ════════════════════════════
+     STATS ROW
+  ════════════════════════════ */
+  .stats-row {
+    display: grid; grid-template-columns: repeat(4, 1fr); gap: 12px;
     flex-shrink: 0;
   }
-  .edit-card-header-left { display: flex; align-items: center; gap: 12px; }
-  .edit-card-header-icon {
-    width: 40px; height: 40px;
-    background: rgba(255,255,255,0.2);
-    border-radius: 8px;
+  .stat-card {
+    background: #fff; border: 1px solid #e2e8f0; border-radius: 10px;
+    padding: 14px 16px;
+    display: flex; align-items: center; gap: 12px;
+  }
+  .stat-icon {
+    width: 38px; height: 38px; border-radius: 8px;
     display: flex; align-items: center; justify-content: center; flex-shrink: 0;
   }
-  .edit-card-header-icon svg { width: 20px; height: 20px; color: #fff; }
-  .edit-card-header-title { font-size: 15px; font-weight: 700; color: #fff; }
-  .edit-card-header-sub { font-size: 12px; color: rgba(255,255,255,0.75); margin-top: 2px; }
-  .header-badge {
-    background: rgba(255,255,255,0.2); color: #fff;
-    border: 1px solid rgba(255,255,255,0.35);
-    padding: 4px 12px; border-radius: 20px;
-    font-size: 11px; font-weight: 600;
-    display: flex; align-items: center; gap: 5px;
+  .stat-icon svg { width: 18px; height: 18px; }
+  .stat-icon-purple { background: #ede9fe; color: #4f46e5; }
+  .stat-icon-yellow { background: #fef3c7; color: #d97706; }
+  .stat-icon-green  { background: #d1fae5; color: #059669; }
+  .stat-icon-blue   { background: #dbeafe; color: #2563eb; }
+  .stat-num  { font-size: 20px; font-weight: 700; color: #1a1a2e; line-height: 1; }
+  .stat-label { font-size: 11.5px; color: #6b7280; margin-top: 2px; }
+
+  /* ════════════════════════════
+     CATEGORY CARD
+  ════════════════════════════ */
+  .category-card {
+    background: #fff; border: 1px solid #e2e8f0; border-radius: 10px;
+    overflow: hidden; flex-shrink: 0;
   }
 
-  /* ── Form area ── */
-  .form-area {
-    padding: 24px;
-    display: flex;
-    flex-direction: column;
-    gap: 16px;
+  /* Category header */
+  .cat-header {
+    padding: 14px 18px;
+    display: flex; align-items: center; gap: 12px;
+    border-bottom: 1px solid #e2e8f0;
+    cursor: pointer;
+    background: #fafbff;
+  }
+  .cat-header:hover { background: #f5f3ff; }
+
+  .cat-expand-btn {
+    width: 22px; height: 22px; border-radius: 5px;
+    background: #ede9fe; border: none; cursor: pointer;
+    display: flex; align-items: center; justify-content: center;
+    flex-shrink: 0; color: #4f46e5;
+  }
+  .cat-expand-btn svg { width: 12px; height: 12px; }
+
+  .cat-icon {
+    width: 36px; height: 36px; border-radius: 8px;
+    background: linear-gradient(135deg, #4f46e5, #7c3aed);
+    display: flex; align-items: center; justify-content: center;
+    flex-shrink: 0;
+  }
+  .cat-icon svg { width: 17px; height: 17px; color: #fff; }
+
+  .cat-info { flex: 1; min-width: 0; }
+  .cat-name { font-size: 13.5px; font-weight: 700; color: #1a1a2e; }
+  .cat-meta {
+    display: flex; align-items: center; gap: 10px;
+    margin-top: 4px; flex-wrap: wrap;
+  }
+  .cat-meta-item {
+    display: flex; align-items: center; gap: 4px;
+    font-size: 11.5px; color: #6b7280;
+  }
+  .cat-meta-item svg { width: 12px; height: 12px; }
+
+  .cat-actions { display: flex; align-items: center; gap: 6px; flex-shrink: 0; }
+
+  /* Template count bubble */
+  .tpl-count {
+    background: #ede9fe; color: #4f46e5;
+    font-size: 11px; font-weight: 700;
+    padding: 2px 8px; border-radius: 12px;
+    white-space: nowrap;
+  }
+  .tpl-count-empty {
+    background: #f1f5f9; color: #94a3b8;
   }
 
-  /* ── Info box ── */
+  /* ════════════════════════════
+     TEMPLATES TABLE
+  ════════════════════════════ */
+  .templates-area {
+    border-top: 1px solid #f1f5f9;
+  }
+
+  /* Add template row */
+  .add-template-row {
+    padding: 10px 18px 10px 56px;
+    border-bottom: 1px solid #f1f5f9;
+    display: flex; align-items: center; gap: 8px;
+    background: #fafbff;
+  }
+  .add-template-label { font-size: 12px; color: #6b7280; font-style: italic; }
+
+  /* Table */
+  .tpl-table { width: 100%; border-collapse: collapse; }
+  .tpl-table thead tr {
+    background: #f8f9fc;
+    border-bottom: 1px solid #e2e8f0;
+  }
+  .tpl-table th {
+    padding: 9px 14px;
+    font-size: 11px; font-weight: 700; color: #6b7280;
+    text-transform: uppercase; letter-spacing: 0.5px;
+    text-align: left; white-space: nowrap;
+  }
+  .tpl-table th:first-child { padding-left: 56px; }
+
+  .tpl-table tbody tr {
+    border-bottom: 1px solid #f1f5f9;
+  }
+  .tpl-table tbody tr:last-child { border-bottom: none; }
+  .tpl-table tbody tr:hover { background: #faf8ff; }
+
+  .tpl-table td {
+    padding: 11px 14px;
+    font-size: 12.5px; color: #374151;
+    vertical-align: middle;
+  }
+  .tpl-table td:first-child { padding-left: 56px; }
+
+  .tpl-code {
+    font-family: 'Courier New', monospace;
+    font-size: 11.5px; color: #4f46e5;
+    background: #ede9fe; padding: 2px 7px; border-radius: 4px;
+    word-break: break-all;
+  }
+
+  .tpl-subject {
+    font-size: 12.5px; color: #1a1a2e; font-weight: 500;
+    max-width: 200px; overflow: hidden; text-overflow: ellipsis; white-space: nowrap;
+  }
+
+  .version-select {
+    height: 28px; border: 1px solid #d1d5db; border-radius: 5px;
+    font-size: 11.5px; font-family: 'Open Sans', sans-serif;
+    padding: 0 6px; color: #374151; background: #fff; cursor: pointer; outline: none;
+  }
+  .version-select:focus { border-color: #4f46e5; }
+
+  /* Row action buttons */
+  .row-actions { display: flex; align-items: center; gap: 4px; }
+
+  /* ════════════════════════════
+     EMPTY STATE
+  ════════════════════════════ */
+  .empty-state {
+    padding: 32px 20px; text-align: center;
+    display: flex; flex-direction: column; align-items: center; gap: 10px;
+  }
+  .empty-icon {
+    width: 48px; height: 48px; border-radius: 12px;
+    background: #f1f5f9; display: flex; align-items: center; justify-content: center;
+  }
+  .empty-icon svg { width: 22px; height: 22px; color: #94a3b8; }
+  .empty-title { font-size: 13px; font-weight: 600; color: #374151; }
+  .empty-sub { font-size: 12px; color: #9ca3af; max-width: 280px; }
+
+  /* ════════════════════════════
+     INFO BOX
+  ════════════════════════════ */
   .info-box {
     border-radius: 6px; padding: 10px 14px; font-size: 12px;
     display: flex; gap: 8px; align-items: flex-start;
   }
   .info-box svg { width: 14px; height: 14px; flex-shrink: 0; margin-top: 1px; }
   .info-box-blue { background: #eff6ff; border: 1px solid #bfdbfe; color: #1d4ed8; }
-  .info-box-green { background: #d1fae5; border: 1px solid #a7f3d0; color: #065f46; }
 
-  /* ── Section label ── */
-  .section-label {
-    font-size: 11px; font-weight: 700; color: #6b7280;
-    text-transform: uppercase; letter-spacing: 0.6px;
+  /* ════════════════════════════
+     VARIABLES CHIP
+  ════════════════════════════ */
+  .var-chips { display: flex; flex-wrap: wrap; gap: 3px; max-width: 220px; }
+  .var-chip {
+    background: #f0fdf4; border: 1px solid #a7f3d0;
+    color: #065f46; font-size: 10.5px; font-weight: 500;
+    padding: 1px 6px; border-radius: 4px;
+  }
+
+  /* ════════════════════════════
+     MODAL OVERLAY (Add Template)
+  ════════════════════════════ */
+  .modal-overlay {
+    position: fixed; inset: 0; background: rgba(0,0,0,.38);
+    display: flex; align-items: center; justify-content: center; z-index: 200;
+  }
+  .modal {
+    background: #fff; border-radius: 12px;
+    width: 580px; max-width: 96vw; max-height: 92vh;
+    display: flex; flex-direction: column; overflow: hidden;
+    box-shadow: 0 20px 60px rgba(0,0,0,.2);
+  }
+  .modal-header {
+    padding: 16px 22px; border-bottom: 1px solid #e2e8f0;
+    display: flex; align-items: center; justify-content: space-between;
+    flex-shrink: 0;
+  }
+  .modal-title {
+    font-size: 14px; font-weight: 700; color: #1a1a2e;
     display: flex; align-items: center; gap: 8px;
   }
-  .section-label::after {
-    content: ''; flex: 1; height: 1px; background: #e2e8f0;
+  .modal-title svg { color: #4f46e5; width: 16px; height: 16px; }
+  .modal-close {
+    background: none; border: none; font-size: 20px; cursor: pointer; color: #9ca3af;
+    line-height: 1; padding: 2px 6px; border-radius: 4px;
+  }
+  .modal-close:hover { color: #374151; background: #f1f5f9; }
+  .modal-body {
+    padding: 20px 22px; overflow-y: auto;
+    display: flex; flex-direction: column; gap: 14px;
+  }
+  .modal-footer {
+    padding: 14px 22px; border-top: 1px solid #e2e8f0;
+    display: flex; gap: 10px; justify-content: flex-end;
+    flex-shrink: 0;
   }
 
-  /* ── Form fields ── */
-  label {
-    font-size: 12px; font-weight: 600; color: #374151;
-    display: block; margin-bottom: 5px;
-  }
-  .required::after { content: ' *'; color: #dc2626; }
-
-  input[type="text"], input[type="email"], select {
+  /* form inside modal */
+  .field-group { display: flex; flex-direction: column; gap: 5px; }
+  .field-row { display: flex; gap: 14px; }
+  .field-row .field-group { flex: 1; min-width: 0; }
+  label { font-size: 12px; font-weight: 600; color: #374151; }
+  .req::after { content: ' *'; color: #dc2626; }
+  input[type="text"], textarea, select {
     width: 100%; padding: 8px 12px;
     border: 1px solid #d1d5db; border-radius: 6px;
     font-family: 'Open Sans', sans-serif; font-size: 12.5px; color: #1a1a2e;
     background: #fff; outline: none;
   }
-  input:focus, select:focus {
-    border-color: #4f46e5;
-    box-shadow: 0 0 0 3px rgba(79,70,229,.08);
+  input:focus, textarea:focus, select:focus {
+    border-color: #4f46e5; box-shadow: 0 0 0 3px rgba(79,70,229,.08);
   }
+  textarea { resize: vertical; min-height: 80px; line-height: 1.6; }
 
-  .field-group { display: flex; flex-direction: column; }
-  .field-row { display: flex; gap: 14px; }
-  .field-row .field-group { flex: 1; min-width: 0; }
-
-  .input-with-icon { position: relative; }
-  .input-with-icon .icon {
-    position: absolute; left: 10px; top: 50%; transform: translateY(-50%);
-    color: #9ca3af; width: 14px; height: 14px; pointer-events: none;
-    display: flex; align-items: center; justify-content: center;
-  }
-  .input-with-icon .icon svg { width: 14px; height: 14px; }
-  .input-with-icon input { padding-left: 32px; }
-
-  /* ── Tag input ── */
-  .tag-input {
-    min-height: 36px; border: 1px solid #d1d5db; border-radius: 6px;
-    padding: 4px 8px; display: flex; flex-wrap: wrap; gap: 4px;
-    align-items: center; cursor: text; background: #fff;
-  }
-  .tag-input:focus-within {
-    border-color: #4f46e5;
-    box-shadow: 0 0 0 3px rgba(79,70,229,.08);
-  }
-  .tag {
-    background: #ede9fe; color: #4f46e5; border-radius: 4px;
-    padding: 2px 8px; font-size: 11.5px; font-weight: 600;
-    display: flex; align-items: center; gap: 4px; white-space: nowrap;
-  }
-  .tag .tag-x { cursor: pointer; color: #7c3aed; font-size: 14px; line-height: 1; }
-  .tag-input input {
-    border: none; outline: none; font-size: 12.5px;
-    min-width: 80px; flex: 1; padding: 2px 4px;
-    font-family: 'Open Sans', sans-serif; background: transparent;
-  }
-
-  /* ══════════════════════════════
-     RICH TEXT EDITOR
-  ══════════════════════════════ */
-  .rte-wrapper {
-    border: 1px solid #d1d5db;
-    border-radius: 8px;
-    overflow: hidden;
-    display: flex;
-    flex-direction: column;
-  }
-  .rte-wrapper:focus-within {
-    border-color: #4f46e5;
-    box-shadow: 0 0 0 3px rgba(79,70,229,.08);
-  }
-
-  .rte-toolbar-outer {
-    background: #f8f9fc;
-    border-bottom: 1px solid #e2e8f0;
-    flex-shrink: 0;
-  }
-
-  .rte-row {
-    display: flex; align-items: center; flex-wrap: wrap;
-    gap: 2px; padding: 5px 8px;
-    border-bottom: 1px solid #edf0f4;
-  }
-  .rte-row:last-child { border-bottom: none; }
-
-  .rte-group { display: flex; align-items: center; gap: 1px; }
-  .rte-sep { width: 1px; height: 20px; background: #d1d5db; margin: 0 4px; flex-shrink: 0; }
-
-  .rte-btn {
-    width: 27px; height: 27px;
-    display: flex; align-items: center; justify-content: center;
-    border: none; background: none; border-radius: 4px;
-    cursor: pointer; color: #374151;
-    font-family: 'Open Sans', sans-serif; font-size: 12px; font-weight: 700;
-    flex-shrink: 0;
-  }
-  .rte-btn:hover { background: #ede9fe; color: #4f46e5; }
-  .rte-btn.active { background: #ede9fe; color: #4f46e5; }
-  .rte-btn svg { width: 13px; height: 13px; }
-
-  .rte-select {
-    height: 26px; border: 1px solid #d1d5db; border-radius: 4px;
-    font-size: 11.5px; font-family: 'Open Sans', sans-serif;
-    padding: 0 4px; color: #374151; background: #fff; cursor: pointer; outline: none;
-  }
-  .rte-select:focus { border-color: #4f46e5; }
-
-  .rte-color-wrap {
-    width: 27px; height: 27px;
-    display: flex; flex-direction: column; align-items: center; justify-content: center;
-    border-radius: 4px; cursor: pointer; border: none; background: none; gap: 2px; padding: 4px;
-    flex-shrink: 0;
-  }
-  .rte-color-wrap:hover { background: #ede9fe; }
-  .rte-color-wrap svg { width: 12px; height: 12px; }
-  .color-bar { width: 16px; height: 3px; border-radius: 2px; }
-
-  /* ── Editable body ── */
-  .rte-body {
-    min-height: 220px;
-    padding: 16px 18px;
-    font-size: 13px; line-height: 1.75; color: #1a1a2e;
-    outline: none; background: #fff;
-    font-family: 'Open Sans', sans-serif;
-  }
-  .rte-body p { margin-bottom: 10px; }
-  .rte-body ul { margin-left: 22px; margin-bottom: 12px; }
-  .rte-body li { line-height: 2; }
-
-  .signature-block {
-    border-top: 1px dashed #c4b5fd;
-    padding-top: 10px; margin-top: 10px;
-    color: #374151; font-size: 12.5px; line-height: 1.7;
-  }
-  .signature-block strong { color: #1a1a2e; }
-  .signature-block .sig-meta { color: #6b7280; font-size: 12px; }
-  .signature-block .sig-legal { color: #9ca3af; font-size: 11px; margin-top: 4px; }
-
-  /* ── Attachments ── */
-  .upload-zone {
-    border: 2px dashed #c4b5fd; border-radius: 8px;
-    padding: 16px 20px; cursor: pointer;
-    background: #faf5ff;
-    display: flex; align-items: center; gap: 14px;
-  }
-  .upload-zone:hover { border-color: #7c3aed; background: #ede9fe; }
-  .upload-zone-icon {
-    width: 40px; height: 40px; min-width: 40px;
-    background: #ede9fe; border-radius: 8px;
-    display: flex; align-items: center; justify-content: center;
-  }
-  .upload-zone-icon svg { width: 20px; height: 20px; color: #7c3aed; }
-  .upload-zone-text { flex: 1; }
-  .upload-zone-text strong { font-size: 12.5px; color: #4f46e5; display: block; margin-bottom: 2px; }
-  .upload-zone-text span { font-size: 11.5px; color: #7c3aed; }
-
-  .attached-files { display: flex; flex-wrap: wrap; gap: 8px; }
-
-  .attached-file {
-    display: flex; align-items: center; gap: 7px;
-    border-radius: 6px; padding: 6px 10px;
-    font-size: 12px; font-weight: 500;
-  }
-  .attached-file svg { width: 13px; height: 13px; flex-shrink: 0; }
-  .attached-file .file-size { color: #6b7280; font-size: 11px; }
-  .attached-file .remove-file { cursor: pointer; font-size: 15px; font-weight: 700; margin-left: 2px; }
-
-  .file-done { background: #f0fdf4; border: 1px solid #a7f3d0; color: #065f46; }
-  .file-done svg { color: #059669; }
-  .file-done .remove-file { color: #dc2626; }
-
-  .file-pending { background: #fef9c3; border: 1px solid #fde68a; color: #92400e; }
-  .file-pending svg { color: #d97706; }
-  .file-pending .remove-file { color: #dc2626; }
-
-  /* ── Send options ── */
-  .send-options-grid {
-    display: grid;
-    grid-template-columns: repeat(3, 1fr);
-    gap: 14px;
-  }
-
-  /* ── Ready banner ── */
-  .ready-banner {
-    background: #d1fae5; border: 1px solid #6ee7b7; border-radius: 8px;
-    padding: 14px 18px;
-    display: flex; align-items: center; gap: 12px; flex-wrap: wrap;
-  }
-  .ready-banner svg { width: 20px; height: 20px; color: #059669; flex-shrink: 0; }
-  .ready-banner-text strong { font-size: 13px; color: #065f46; display: block; }
-  .ready-banner-text span { font-size: 12px; color: #047857; }
-
-  /* ── Action footer ── */
-  .action-footer {
-    background: #f8f9fc; border-top: 1px solid #e2e8f0;
-    padding: 14px 24px;
-    display: flex; align-items: center; justify-content: space-between;
-    gap: 12px; flex-wrap: wrap;
-    border-radius: 0 0 12px 12px;
-    flex-shrink: 0;
-  }
-  .action-footer-left { display: flex; align-items: center; gap: 10px; flex-wrap: wrap; }
-  .action-footer-right { display: flex; align-items: center; gap: 10px; }
-
-  /* ── Page footer ── */
+  /* page footer */
   .page-footer {
     text-align: center; font-size: 11.5px; color: #9ca3af;
     padding: 12px 0 4px; flex-shrink: 0;
   }
-
-  /* Scrollbar */
-  ::-webkit-scrollbar { width: 5px; }
-  ::-webkit-scrollbar-track { background: transparent; }
-  ::-webkit-scrollbar-thumb { background: #d1d5db; border-radius: 10px; }
 </style>
 </head>
 <body>
@@ -465,7 +471,7 @@
   <div class="nav-item">
     <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg>Case Search
   </div>
-  <div class="nav-item active">
+  <div class="nav-item">
     <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/><polyline points="22,6 12,13 2,6"/></svg>Outbound Communication
   </div>
   <div class="nav-item">
@@ -473,6 +479,9 @@
   </div>
   <div class="nav-item">
     <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="18" y1="20" x2="18" y2="10"/><line x1="12" y1="20" x2="12" y2="4"/><line x1="6" y1="20" x2="6" y2="14"/></svg>Report
+  </div>
+  <div class="nav-item active">
+    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/><line x1="16" y1="13" x2="8" y2="13"/><line x1="16" y1="17" x2="8" y2="17"/><polyline points="10 9 9 9 8 9"/></svg>LOB Scripts
   </div>
   <div class="nav-item">
     <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 16V8a2 2 0 0 0-1-1.73l-7-4a2 2 0 0 0-2 0l-7 4A2 2 0 0 0 3 8v8a2 2 0 0 0 1 1.73l7 4a2 2 0 0 0 2 0l7-4A2 2 0 0 0 21 16z"/></svg>Package Details
@@ -505,493 +514,636 @@
   <!-- Topbar -->
   <div class="topbar">
     <div class="topbar-title">
-      <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#4f46e5" stroke-width="2"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/><polyline points="22,6 12,13 2,6"/></svg>
+      <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/></svg>
       Appeals and Grievances Management
     </div>
     <div class="avatar">IM</div>
   </div>
 
-  <!-- ═══════ SCROLLABLE CONTENT ═══════ -->
+  <!-- ═══ SCROLLABLE CONTENT ═══ -->
   <div class="content">
 
-    <!-- Breadcrumb -->
-    <div class="breadcrumb">
-      <a href="#">Outbound Communication</a>
-      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="9 18 15 12 9 6"/></svg>
-      <span>Edit &amp; Send Email</span>
-    </div>
-
-    <!-- Page header -->
+    <!-- Page Header -->
     <div class="page-header-row">
       <div>
-        <div class="page-header">Edit &amp; Send Email</div>
-        <div class="page-sub">Compose your reply with full formatting, attach documents and send — Case #AGM-2024-0892</div>
+        <div class="page-header">LOB Scripts</div>
+        <div class="page-sub">Manage Line-of-Business script templates by category — edit, approve, deny and version control</div>
       </div>
-      <div style="display:flex; align-items:center; gap:8px; flex-shrink:0;">
-        <span class="badge badge-pending">
-          <svg width="8" height="8" viewBox="0 0 8 8"><circle cx="4" cy="4" r="4" fill="#d97706"/></svg>
-          Pending Response
-        </span>
+      <div class="page-header-actions">
         <button class="btn btn-secondary btn-sm">
-          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="15 18 9 12 15 6"/></svg>
-          Back to Inbox
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="23 4 23 10 17 10"/><path d="M20.49 15a9 9 0 1 1-.49-4.95"/></svg>
+          Refresh
+        </button>
+        <button class="btn btn-secondary btn-sm">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="21 15 21 21 3 21 3 15"/><polyline points="17 8 12 3 7 8"/><line x1="12" y1="3" x2="12" y2="15"/></svg>
+          Export
+        </button>
+        <button class="btn btn-primary" onclick="openAddCategory()">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="12" y1="5" x2="12" y2="19"/><line x1="5" y1="12" x2="19" y2="12"/></svg>
+          Add Category
         </button>
       </div>
     </div>
 
-    <!-- Meta summary -->
-    <div class="meta-summary">
-      <div class="meta-item">
-        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/></svg>
-        <strong>Case:</strong>&nbsp;#AGM-2024-0892
+    <!-- Stats Row -->
+    <div class="stats-row">
+      <div class="stat-card">
+        <div class="stat-icon stat-icon-purple">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/></svg>
+        </div>
+        <div>
+          <div class="stat-num">2</div>
+          <div class="stat-label">Total Categories</div>
+        </div>
       </div>
-      <div class="meta-item">
-        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"/><circle cx="12" cy="7" r="4"/></svg>
-        <strong>Member:</strong>&nbsp;Robert Davis
+      <div class="stat-card">
+        <div class="stat-icon stat-icon-blue">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="3" width="18" height="18" rx="2"/><line x1="3" y1="9" x2="21" y2="9"/><line x1="9" y1="21" x2="9" y2="9"/></svg>
+        </div>
+        <div>
+          <div class="stat-num">2</div>
+          <div class="stat-label">Total Templates</div>
+        </div>
       </div>
-      <div class="meta-item">
-        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="4" width="18" height="18" rx="2"/><line x1="16" y1="2" x2="16" y2="6"/><line x1="8" y1="2" x2="8" y2="6"/><line x1="3" y1="10" x2="21" y2="10"/></svg>
-        <strong>Due Date:</strong>&nbsp;Dec 24, 2024
+      <div class="stat-card">
+        <div class="stat-icon stat-icon-yellow">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><line x1="12" y1="8" x2="12" y2="12"/><line x1="12" y1="16" x2="12.01" y2="16"/></svg>
+        </div>
+        <div>
+          <div class="stat-num">2</div>
+          <div class="stat-label">Draft Templates</div>
+        </div>
       </div>
-      <div class="meta-item">
-        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="9 17 4 12 9 7"/><path d="M20 18v-2a4 4 0 0 0-4-4H4"/></svg>
-        <strong>Replying to:</strong>&nbsp;dr.johnson@healthproviders.com
-      </div>
-      <div class="meta-item">
-        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/></svg>
-        <strong>From:</strong>&nbsp;mail@careinsight.ai
+      <div class="stat-card">
+        <div class="stat-icon stat-icon-green">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"/><polyline points="22 4 12 14.01 9 11.01"/></svg>
+        </div>
+        <div>
+          <div class="stat-num">0</div>
+          <div class="stat-label">Approved Templates</div>
+        </div>
       </div>
     </div>
 
-    <!-- ═══════════════════════════════════════
-         MAIN EDIT CARD
-    ═══════════════════════════════════════ -->
-    <div class="edit-card">
+    <!-- Filter / Toolbar -->
+    <div class="toolbar-bar">
+      <div class="search-wrap">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg>
+        <input type="text" placeholder="Search categories or templates…"/>
+      </div>
+      <div class="toolbar-divider"></div>
+      <select class="filter-select">
+        <option value="">All LOBs</option>
+        <option selected>DHMO</option>
+        <option>PPO</option>
+        <option>HMO</option>
+        <option>Medicare</option>
+      </select>
+      <select class="filter-select">
+        <option value="">All Delegation Types</option>
+        <option>DELEGATED</option>
+        <option>NON DELEGATED</option>
+      </select>
+      <select class="filter-select">
+        <option value="">All Statuses</option>
+        <option>DRAFT</option>
+        <option>APPROVED</option>
+        <option>DENIED</option>
+      </select>
+      <select class="filter-select">
+        <option value="">All Channels</option>
+        <option>CALL</option>
+        <option>EMAIL</option>
+        <option>LETTER</option>
+      </select>
+      <div class="toolbar-divider"></div>
+      <button class="btn btn-secondary btn-sm">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="4" y1="6" x2="20" y2="6"/><line x1="8" y1="12" x2="16" y2="12"/><line x1="11" y1="18" x2="13" y2="18"/></svg>
+        Filters
+      </button>
+    </div>
 
-      <!-- Card header -->
-      <div class="edit-card-header">
-        <div class="edit-card-header-left">
-          <div class="edit-card-header-icon">
+    <!-- Info bar -->
+    <div class="info-box info-box-blue">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><line x1="12" y1="8" x2="12" y2="12"/><line x1="12" y1="16" x2="12.01" y2="16"/></svg>
+      <div>Showing <strong>2 categories</strong> for LOB: <strong>DHMO</strong>. Click a category row to expand templates. Use <strong>Edit</strong>, <strong>Approve</strong> or <strong>Deny</strong> actions per template. Switch versions using the version dropdown.</div>
+    </div>
+
+    <!-- ═══════════════════════════════════════════════
+         CATEGORY 1 — 2nd Opinion Grievance (expanded)
+    ═══════════════════════════════════════════════ -->
+    <div class="category-card">
+
+      <!-- Category Header -->
+      <div class="cat-header">
+        <button class="cat-expand-btn">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="6 9 12 15 18 9"/></svg>
+        </button>
+        <div class="cat-icon">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/><line x1="16" y1="13" x2="8" y2="13"/><line x1="16" y1="17" x2="8" y2="17"/></svg>
+        </div>
+        <div class="cat-info">
+          <div class="cat-name">2nd Opinion Grievance</div>
+          <div class="cat-meta">
+            <div class="cat-meta-item">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="2" y="7" width="20" height="14" rx="2"/><path d="M16 7V5a2 2 0 0 0-2-2h-4a2 2 0 0 0-2 2v2"/></svg>
+              LOB: <strong style="color:#1a1a2e; margin-left:2px;">DHMO</strong>
+            </div>
+            <div class="cat-meta-item">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg>
+              Workflow: <strong style="color:#1a1a2e; margin-left:2px;">grievance_filed</strong>
+            </div>
+            <div class="cat-meta-item">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="4" width="18" height="18" rx="2"/><line x1="16" y1="2" x2="16" y2="6"/><line x1="8" y1="2" x2="8" y2="6"/><line x1="3" y1="10" x2="21" y2="10"/></svg>
+              Created: Apr 21, 2026
+            </div>
+            <span class="badge badge-delegated">DELEGATED</span>
+            <span class="badge badge-active">
+              <svg viewBox="0 0 8 8"><circle cx="4" cy="4" r="4" fill="#059669"/></svg>
+              Active
+            </span>
+          </div>
+        </div>
+        <div class="cat-actions">
+          <span class="tpl-count">2 Templates</span>
+          <button class="btn btn-secondary btn-sm" onclick="openAddTemplate(1,'2nd Opinion Grievance')">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="12" y1="5" x2="12" y2="19"/><line x1="5" y1="12" x2="19" y2="12"/></svg>
+            Add Template
+          </button>
+          <div class="icon-btn" title="Edit Category">
             <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M11 4H4a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2v-7"/><path d="M18.5 2.5a2.121 2.121 0 0 1 3 3L12 15l-4 1 1-4 9.5-9.5z"/></svg>
           </div>
-          <div>
-            <div class="edit-card-header-title">Compose &amp; Edit Email</div>
-            <div class="edit-card-header-sub">Outlook-style editor with full formatting, attachments and send controls</div>
+          <div class="icon-btn" title="More options" style="color:#6b7280;">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="5" r="1"/><circle cx="12" cy="12" r="1"/><circle cx="12" cy="19" r="1"/></svg>
           </div>
-        </div>
-        <div class="header-badge">
-          <svg width="10" height="10" viewBox="0 0 10 10"><circle cx="5" cy="5" r="5" fill="#34d399"/></svg>
-          Auto-save ON
         </div>
       </div>
 
-      <!-- ═══ FORM AREA ═══ -->
-      <div class="form-area">
+      <!-- Templates Area -->
+      <div class="templates-area">
 
-        <!-- Info notice -->
-        <div class="info-box info-box-blue">
-          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><line x1="12" y1="8" x2="12" y2="12"/><line x1="12" y1="16" x2="12.01" y2="16"/></svg>
-          <div>Use the <strong>formatting toolbar</strong> below to style your message — bold, italic, lists, colors, tables and more. Attach relevant case documents before sending.</div>
-        </div>
+        <!-- Table -->
+        <table class="tpl-table">
+          <thead>
+            <tr>
+              <th>Template Code</th>
+              <th>Subject</th>
+              <th>Channel</th>
+              <th>Recipient</th>
+              <th>Version</th>
+              <th>Status</th>
+              <th>Variables</th>
+              <th>Actions</th>
+            </tr>
+          </thead>
+          <tbody>
 
-        <!-- ══ SECTION: Recipients ══ -->
-        <div class="section-label">Recipients</div>
-
-        <!-- To + Priority -->
-        <div class="field-row">
-          <div class="field-group" style="flex:2;">
-            <label class="required">To</label>
-            <div class="tag-input">
-              <div class="tag">dr.johnson@healthproviders.com <span class="tag-x">×</span></div>
-              <input type="text" placeholder="Add recipient email…"/>
-            </div>
-          </div>
-          <div class="field-group" style="flex:1;">
-            <label>Priority</label>
-            <select>
-              <option>Normal</option>
-              <option>High Priority</option>
-              <option>Urgent</option>
-            </select>
-          </div>
-        </div>
-
-        <!-- CC + BCC -->
-        <div class="field-row">
-          <div class="field-group">
-            <label>CC</label>
-            <div class="tag-input">
-              <div class="tag">appeals.supervisor@careinsight.ai <span class="tag-x">×</span></div>
-              <input type="text" placeholder="Add CC email…"/>
-            </div>
-          </div>
-          <div class="field-group">
-            <label>BCC</label>
-            <div class="tag-input">
-              <input type="text" placeholder="Add BCC email…"/>
-            </div>
-          </div>
-        </div>
-
-        <!-- ══ SECTION: Email Details ══ -->
-        <div class="section-label">Email Details</div>
-
-        <!-- Subject + Template -->
-        <div class="field-row">
-          <div class="field-group" style="flex:2;">
-            <label class="required">Subject</label>
-            <div class="input-with-icon">
-              <span class="icon">
-                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/></svg>
-              </span>
-              <input type="text" value="RE: Appeal Decision Notice – Case #AGM-2024-0892"/>
-            </div>
-          </div>
-          <div class="field-group" style="flex:1;">
-            <label>Template</label>
-            <select>
-              <option>-- No Template --</option>
-              <option selected>Appeal Acknowledgement</option>
-              <option>Appeal Decision – Approved</option>
-              <option>Appeal Decision – Denied</option>
-              <option>Request for Information</option>
-              <option>Extension Notice</option>
-            </select>
-          </div>
-        </div>
-
-        <!-- Case Reference + From -->
-        <div class="field-row">
-          <div class="field-group">
-            <label>Case Reference</label>
-            <div class="input-with-icon">
-              <span class="icon">
-                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/></svg>
-              </span>
-              <input type="text" value="AGM-2024-0892"/>
-            </div>
-          </div>
-          <div class="field-group">
-            <label>From (Sender)</label>
-            <div class="input-with-icon">
-              <span class="icon">
-                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"/><circle cx="12" cy="7" r="4"/></svg>
-              </span>
-              <input type="text" value="mail@careinsight.ai"/>
-            </div>
-          </div>
-        </div>
-
-        <!-- ══ SECTION: Email Body ══ -->
-        <div class="section-label">Email Body &amp; Formatting</div>
-
-        <!-- Rich Text Editor -->
-        <div class="rte-wrapper">
-
-          <!-- Toolbar Row 1 — Font & character -->
-          <div class="rte-toolbar-outer">
-            <div class="rte-row">
-              <div class="rte-group">
-                <select class="rte-select" style="width:96px;">
-                  <option selected>Open Sans</option>
-                  <option>Arial</option>
-                  <option>Calibri</option>
-                  <option>Georgia</option>
-                  <option>Times New Roman</option>
-                  <option>Verdana</option>
+            <!-- Template Row 1 -->
+            <tr>
+              <td>
+                <div style="display:flex; flex-direction:column; gap:4px;">
+                  <span class="tpl-code">2nd_opinion_approved_member_outreach_interactive</span>
+                  <span style="font-size:11px; color:#9ca3af;">ID: 2 &nbsp;·&nbsp; MARKUP</span>
+                </div>
+              </td>
+              <td>
+                <div class="tpl-subject" title="2nd Opinion Approved – Member Facing Outreach">
+                  2nd Opinion Approved – Member Facing Outreach
+                </div>
+              </td>
+              <td><span class="badge badge-call">📞 CALL</span></td>
+              <td>
+                <div style="display:flex; align-items:center; gap:5px; font-size:12px;">
+                  <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="#6b7280" stroke-width="2"><path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"/><circle cx="12" cy="7" r="4"/></svg>
+                  Member
+                </div>
+              </td>
+              <td>
+                <select class="version-select">
+                  <option selected>v1 (Current)</option>
+                  <option>v2</option>
+                  <option>v3</option>
                 </select>
-              </div>
-              <div class="rte-group" style="margin-left:3px;">
-                <select class="rte-select" style="width:48px;">
-                  <option>8</option><option>9</option><option>10</option>
-                  <option>11</option><option selected>12</option><option>13</option>
-                  <option>14</option><option>16</option><option>18</option>
-                  <option>20</option><option>24</option><option>28</option><option>36</option>
+              </td>
+              <td>
+                <span class="badge badge-draft">
+                  <svg viewBox="0 0 8 8"><circle cx="4" cy="4" r="4" fill="#d97706"/></svg>
+                  DRAFT
+                </span>
+              </td>
+              <td>
+                <div class="var-chips">
+                  <span class="var-chip">member_name</span>
+                  <span class="var-chip">second_opinion_office_name</span>
+                  <span class="var-chip">+3 more</span>
+                </div>
+              </td>
+              <td>
+                <div class="row-actions">
+                  <button class="btn btn-secondary btn-xs" title="Edit template">
+                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M11 4H4a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2v-7"/><path d="M18.5 2.5a2.121 2.121 0 0 1 3 3L12 15l-4 1 1-4 9.5-9.5z"/></svg>
+                    Edit
+                  </button>
+                  <button class="btn btn-success btn-xs" title="Approve template">
+                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="20 6 9 17 4 12"/></svg>
+                    Approve
+                  </button>
+                  <button class="btn btn-danger btn-xs" title="Deny template">
+                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg>
+                    Deny
+                  </button>
+                  <div class="icon-btn" title="View file">
+                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"/><circle cx="12" cy="12" r="3"/></svg>
+                  </div>
+                  <div class="icon-btn" title="Download">
+                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="8 17 12 21 16 17"/><line x1="12" y1="12" x2="12" y2="21"/><path d="M20.88 18.09A5 5 0 0 0 18 9h-1.26A8 8 0 1 0 3 16.29"/></svg>
+                  </div>
+                </div>
+              </td>
+            </tr>
+
+            <!-- Template Row 2 -->
+            <tr>
+              <td>
+                <div style="display:flex; flex-direction:column; gap:4px;">
+                  <span class="tpl-code">2nd_opinion_approved_member_outreach_interactive_followup</span>
+                  <span style="font-size:11px; color:#9ca3af;">ID: 1 &nbsp;·&nbsp; MARKUP</span>
+                </div>
+              </td>
+              <td>
+                <div class="tpl-subject" title="2nd Opinion Approved – Member Facing Outreach (Follow-up)">
+                  2nd Opinion Approved – Member Facing Outreach (Follow-up)
+                </div>
+              </td>
+              <td><span class="badge badge-call">📞 CALL</span></td>
+              <td>
+                <div style="display:flex; align-items:center; gap:5px; font-size:12px;">
+                  <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="#6b7280" stroke-width="2"><path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"/><circle cx="12" cy="7" r="4"/></svg>
+                  Member
+                </div>
+              </td>
+              <td>
+                <select class="version-select">
+                  <option selected>v1 (Current)</option>
+                  <option>v2</option>
                 </select>
-              </div>
-              <div class="rte-group" style="margin-left:2px;">
-                <button class="rte-btn" title="Grow Font">
-                  <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="17 11 12 6 7 11"/><polyline points="17 18 12 13 7 18"/></svg>
-                </button>
-                <button class="rte-btn" title="Shrink Font">
-                  <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="7 11 12 16 17 11"/><polyline points="7 4 12 9 17 4"/></svg>
-                </button>
-              </div>
+              </td>
+              <td>
+                <span class="badge badge-draft">
+                  <svg viewBox="0 0 8 8"><circle cx="4" cy="4" r="4" fill="#d97706"/></svg>
+                  DRAFT
+                </span>
+              </td>
+              <td>
+                <div class="var-chips">
+                  <span class="var-chip">member_name</span>
+                  <span class="var-chip">opinion_office_phone_number</span>
+                  <span class="var-chip">+3 more</span>
+                </div>
+              </td>
+              <td>
+                <div class="row-actions">
+                  <button class="btn btn-secondary btn-xs">
+                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M11 4H4a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2v-7"/><path d="M18.5 2.5a2.121 2.121 0 0 1 3 3L12 15l-4 1 1-4 9.5-9.5z"/></svg>
+                    Edit
+                  </button>
+                  <button class="btn btn-success btn-xs">
+                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="20 6 9 17 4 12"/></svg>
+                    Approve
+                  </button>
+                  <button class="btn btn-danger btn-xs">
+                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg>
+                    Deny
+                  </button>
+                  <div class="icon-btn" title="View file">
+                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"/><circle cx="12" cy="12" r="3"/></svg>
+                  </div>
+                  <div class="icon-btn" title="Download">
+                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="8 17 12 21 16 17"/><line x1="12" y1="12" x2="12" y2="21"/><path d="M20.88 18.09A5 5 0 0 0 18 9h-1.26A8 8 0 1 0 3 16.29"/></svg>
+                  </div>
+                </div>
+              </td>
+            </tr>
 
-              <div class="rte-sep"></div>
+          </tbody>
+        </table>
 
-              <!-- Bold / Italic / Underline / Strike / Sub / Super -->
-              <div class="rte-group">
-                <button class="rte-btn active" title="Bold"><strong>B</strong></button>
-                <button class="rte-btn" title="Italic"><em>I</em></button>
-                <button class="rte-btn" title="Underline"><u>U</u></button>
-                <button class="rte-btn" title="Strikethrough"><s>S</s></button>
-                <button class="rte-btn" title="Subscript" style="font-size:10px;">X<sub>2</sub></button>
-                <button class="rte-btn" title="Superscript" style="font-size:10px;">X<sup>2</sup></button>
-              </div>
+      </div>
+    </div><!-- /category card 1 -->
 
-              <div class="rte-sep"></div>
+    <!-- ═══════════════════════════════════════════════
+         CATEGORY 2 — Acknowledgement (collapsed / empty)
+    ═══════════════════════════════════════════════ -->
+    <div class="category-card">
 
-              <!-- Font color / Highlight -->
-              <div class="rte-group">
-                <button class="rte-color-wrap" title="Font Color">
-                  <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M4 20h4l10-10-4-4L4 16v4z"/><line x1="13.5" y1="6.5" x2="17.5" y2="10.5"/></svg>
-                  <div class="color-bar" style="background:#1a1a2e;"></div>
-                </button>
-                <button class="rte-color-wrap" title="Highlight Color">
-                  <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 20h9"/><path d="M16.5 3.5a2.121 2.121 0 0 1 3 3L7 19l-4 1 1-4L16.5 3.5z"/></svg>
-                  <div class="color-bar" style="background:#fbbf24;"></div>
-                </button>
-              </div>
-
-              <div class="rte-sep"></div>
-
-              <!-- Clear formatting -->
-              <div class="rte-group">
-                <button class="rte-btn" title="Clear Formatting">
-                  <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M4 20h4l10-10-4-4L4 16v4z"/><line x1="2" y1="22" x2="22" y2="2" stroke="#dc2626" stroke-width="1.5"/></svg>
-                </button>
-              </div>
-
-              <div class="rte-sep"></div>
-
-              <!-- Undo / Redo -->
-              <div class="rte-group">
-                <button class="rte-btn" title="Undo (Ctrl+Z)">
-                  <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="1 4 1 10 7 10"/><path d="M3.51 15a9 9 0 1 0 .49-4.95"/></svg>
-                </button>
-                <button class="rte-btn" title="Redo (Ctrl+Y)">
-                  <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="23 4 23 10 17 10"/><path d="M20.49 15a9 9 0 1 1-.49-4.95"/></svg>
-                </button>
-              </div>
-            </div>
-
-            <!-- Toolbar Row 2 — Paragraph & Insert -->
-            <div class="rte-row">
-              <!-- Alignment -->
-              <div class="rte-group">
-                <button class="rte-btn active" title="Align Left">
-                  <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="17" y1="10" x2="3" y2="10"/><line x1="21" y1="6" x2="3" y2="6"/><line x1="21" y1="14" x2="3" y2="14"/><line x1="17" y1="18" x2="3" y2="18"/></svg>
-                </button>
-                <button class="rte-btn" title="Align Center">
-                  <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="18" y1="10" x2="6" y2="10"/><line x1="21" y1="6" x2="3" y2="6"/><line x1="21" y1="14" x2="3" y2="14"/><line x1="18" y1="18" x2="6" y2="18"/></svg>
-                </button>
-                <button class="rte-btn" title="Align Right">
-                  <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="21" y1="10" x2="7" y2="10"/><line x1="21" y1="6" x2="3" y2="6"/><line x1="21" y1="14" x2="3" y2="14"/><line x1="21" y1="18" x2="7" y2="18"/></svg>
-                </button>
-                <button class="rte-btn" title="Justify">
-                  <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="21" y1="10" x2="3" y2="10"/><line x1="21" y1="6" x2="3" y2="6"/><line x1="21" y1="14" x2="3" y2="14"/><line x1="21" y1="18" x2="3" y2="18"/></svg>
-                </button>
-              </div>
-
-              <div class="rte-sep"></div>
-
-              <!-- Lists & Indent -->
-              <div class="rte-group">
-                <button class="rte-btn" title="Bullet List">
-                  <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="9" y1="6" x2="20" y2="6"/><line x1="9" y1="12" x2="20" y2="12"/><line x1="9" y1="18" x2="20" y2="18"/><circle cx="4" cy="6" r="1.5" fill="currentColor" stroke="none"/><circle cx="4" cy="12" r="1.5" fill="currentColor" stroke="none"/><circle cx="4" cy="18" r="1.5" fill="currentColor" stroke="none"/></svg>
-                </button>
-                <button class="rte-btn" title="Numbered List">
-                  <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="10" y1="6" x2="21" y2="6"/><line x1="10" y1="12" x2="21" y2="12"/><line x1="10" y1="18" x2="21" y2="18"/><path d="M4 6h1v4" stroke="currentColor" stroke-width="1.5" fill="none"/><path d="M4 10h2" stroke="currentColor" stroke-width="1.5"/></svg>
-                </button>
-                <button class="rte-btn" title="Decrease Indent">
-                  <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="3" y1="8" x2="21" y2="8"/><line x1="3" y1="16" x2="21" y2="16"/><polyline points="11 12 7 12"/><polyline points="7 10 7 14"/></svg>
-                </button>
-                <button class="rte-btn" title="Increase Indent">
-                  <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="3" y1="8" x2="21" y2="8"/><line x1="3" y1="16" x2="21" y2="16"/><polyline points="9 12 13 12"/><polyline points="3 10 7 12 3 14"/></svg>
-                </button>
-              </div>
-
-              <div class="rte-sep"></div>
-
-              <!-- Line spacing -->
-              <div class="rte-group">
-                <button class="rte-btn" title="Line Spacing">
-                  <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="21" y1="6" x2="9" y2="6"/><line x1="21" y1="12" x2="9" y2="12"/><line x1="21" y1="18" x2="9" y2="18"/><polyline points="3 8 3 4 1 6"/><polyline points="3 16 3 20 1 18"/></svg>
-                </button>
-              </div>
-
-              <div class="rte-sep"></div>
-
-              <!-- Insert elements -->
-              <div class="rte-group">
-                <button class="rte-btn" title="Insert Hyperlink">
-                  <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71"/><path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71"/></svg>
-                </button>
-                <button class="rte-btn" title="Insert Image">
-                  <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="3" width="18" height="18" rx="2"/><circle cx="8.5" cy="8.5" r="1.5"/><polyline points="21 15 16 10 5 21"/></svg>
-                </button>
-                <button class="rte-btn" title="Insert Table">
-                  <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="3" width="18" height="18" rx="2"/><line x1="3" y1="9" x2="21" y2="9"/><line x1="3" y1="15" x2="21" y2="15"/><line x1="9" y1="3" x2="9" y2="21"/><line x1="15" y1="3" x2="15" y2="21"/></svg>
-                </button>
-                <button class="rte-btn" title="Insert Horizontal Rule">
-                  <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="3" y1="12" x2="21" y2="12" stroke-width="3"/><line x1="3" y1="6" x2="21" y2="6"/><line x1="3" y1="18" x2="21" y2="18"/></svg>
-                </button>
-                <button class="rte-btn" title="Emoji" style="font-size:14px;">☺</button>
-              </div>
-
-              <div class="rte-sep"></div>
-
-              <!-- Special -->
-              <div class="rte-group">
-                <button class="rte-btn" title="Blockquote">
-                  <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M3 21c3 0 7-1 7-8V5c0-1.25-.756-2.017-2-2H4c-1.25 0-2 .75-2 1.972V11c0 1.25.75 2 2 2 1 0 1 0 1 1v1c0 1-1 2-2 2s-1 .008-1 1.031V20c0 1 0 1 1 1z"/><path d="M15 21c3 0 7-1 7-8V5c0-1.25-.757-2.017-2-2h-4c-1.25 0-2 .75-2 1.972V11c0 1.25.75 2 2 2h.75c0 2.25.25 4-2.75 4v3c0 1 0 1 1 1z"/></svg>
-                </button>
-                <button class="rte-btn" title="Code">
-                  <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="16 18 22 12 16 6"/><polyline points="8 6 2 12 8 18"/></svg>
-                </button>
-                <button class="rte-btn" title="Insert Signature">
-                  <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M3 17c3.333-5.333 5-8 5-8s.667 2.667 2 8c1.333-5.333 2.333-8 3-8s1.333 2.667 2 8"/><line x1="3" y1="21" x2="21" y2="21"/></svg>
-                </button>
-                <button class="rte-btn" title="Spell Check">
-                  <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 8h8M5 12h6M5 16h3"/><circle cx="17" cy="16" r="4"/><line x1="20" y1="19" x2="22" y2="21"/></svg>
-                </button>
-                <button class="rte-btn" title="Print">
-                  <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="6 9 6 2 18 2 18 9"/><path d="M6 18H4a2 2 0 0 1-2-2v-5a2 2 0 0 1 2-2h16a2 2 0 0 1 2 2v5a2 2 0 0 1-2 2h-2"/><rect x="6" y="14" width="12" height="8"/></svg>
-                </button>
-              </div>
-            </div>
-          </div><!-- /rte-toolbar-outer -->
-
-          <!-- Editable body -->
-          <div class="rte-body" contenteditable="true" spellcheck="true">
-            <p>Dear Dr. Johnson,</p>
-            <p>Thank you for submitting the additional documentation in support of the appeal for your patient, Mr. <strong>Robert Davis</strong> — Appeal Case <strong>#AGM-2024-0892</strong>.</p>
-            <p>We have received and reviewed the following documents you provided:</p>
-            <ul>
-              <li>Complete medical history and treatment timeline</li>
-              <li>Specialist consultation report dated December 15, 2024</li>
-              <li>Laboratory test results confirming the diagnosis</li>
-            </ul>
-            <p>Our clinical review panel will assess the submitted records against the applicable coverage criteria. Per our appeals process guidelines, you will receive a formal written response within <strong>5 business days</strong> from the date of this acknowledgement.</p>
-            <p>Should you need to provide any additional documentation or have questions regarding the status of this appeal, please do not hesitate to contact our Appeals &amp; Grievances team at <span style="color:#4f46e5;">appeals@careinsight.ai</span> or call <strong>(800) 555-0199</strong>.</p>
-            <p>We appreciate your cooperation and commitment to your patient's care.</p>
-            <div class="signature-block">
-              <p>Warm regards,</p>
-              <p><strong>Isabella Martinez</strong></p>
-              <div class="sig-meta">Appeals &amp; Grievances Coordinator</div>
-              <div class="sig-meta">Care Insight &nbsp;|&nbsp; mail@careinsight.ai &nbsp;|&nbsp; (800) 555-0199</div>
-              <div class="sig-legal">This email and any attachments are confidential and intended solely for the use of the individual or entity to whom they are addressed.</div>
-            </div>
-          </div>
-
-        </div><!-- /rte-wrapper -->
-
-        <!-- ══ SECTION: Attachments ══ -->
-        <div class="section-label">Attachments</div>
-
-        <!-- Upload zone -->
-        <div class="upload-zone">
-          <div class="upload-zone-icon">
-            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21.44 11.05l-9.19 9.19a6 6 0 0 1-8.49-8.49l9.19-9.19a4 4 0 0 1 5.66 5.66l-9.2 9.19a2 2 0 0 1-2.83-2.83l8.49-8.48"/></svg>
-          </div>
-          <div class="upload-zone-text">
-            <strong>Click to attach files or drag &amp; drop here</strong>
-            <span>PDF, DOCX, XLSX, PNG, JPG, TIFF &nbsp;—&nbsp; Max 25 MB per file</span>
-          </div>
-          <button class="btn btn-secondary btn-sm" style="flex-shrink:0;">
-            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21.44 11.05l-9.19 9.19a6 6 0 0 1-8.49-8.49l9.19-9.19a4 4 0 0 1 5.66 5.66l-9.2 9.19a2 2 0 0 1-2.83-2.83l8.49-8.48"/></svg>
-            Browse Files
-          </button>
+      <!-- Category Header -->
+      <div class="cat-header">
+        <button class="cat-expand-btn" style="background:#f1f5f9; color:#94a3b8;">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="9 18 15 12 9 6"/></svg>
+        </button>
+        <div class="cat-icon" style="background: linear-gradient(135deg, #64748b, #94a3b8);">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/><line x1="16" y1="13" x2="8" y2="13"/><line x1="16" y1="17" x2="8" y2="17"/></svg>
         </div>
+        <div class="cat-info">
+          <div class="cat-name">Acknowledgement</div>
+          <div class="cat-meta">
+            <div class="cat-meta-item">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="2" y="7" width="20" height="14" rx="2"/><path d="M16 7V5a2 2 0 0 0-2-2h-4a2 2 0 0 0-2 2v2"/></svg>
+              LOB: <strong style="color:#1a1a2e; margin-left:2px;">DHMO</strong>
+            </div>
+            <div class="cat-meta-item">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><line x1="12" y1="8" x2="12" y2="12"/><line x1="12" y1="16" x2="12.01" y2="16"/></svg>
+              Workflow: <span style="color:#9ca3af; font-style:italic; margin-left:2px;">Not set</span>
+            </div>
+            <div class="cat-meta-item">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="4" width="18" height="18" rx="2"/><line x1="16" y1="2" x2="16" y2="6"/><line x1="8" y1="2" x2="8" y2="6"/><line x1="3" y1="10" x2="21" y2="10"/></svg>
+              Created: Apr 21, 2026
+            </div>
+            <span class="badge badge-nondelegated">NON DELEGATED</span>
+            <span class="badge badge-active">
+              <svg viewBox="0 0 8 8"><circle cx="4" cy="4" r="4" fill="#059669"/></svg>
+              Active
+            </span>
+          </div>
+        </div>
+        <div class="cat-actions">
+          <span class="tpl-count tpl-count-empty">0 Templates</span>
+          <button class="btn btn-secondary btn-sm" onclick="openAddTemplate(2,'Acknowledgement')">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="12" y1="5" x2="12" y2="19"/><line x1="5" y1="12" x2="19" y2="12"/></svg>
+            Add Template
+          </button>
+          <div class="icon-btn" title="Edit Category">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M11 4H4a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2v-7"/><path d="M18.5 2.5a2.121 2.121 0 0 1 3 3L12 15l-4 1 1-4 9.5-9.5z"/></svg>
+          </div>
+          <div class="icon-btn" title="More options" style="color:#6b7280;">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="5" r="1"/><circle cx="12" cy="12" r="1"/><circle cx="12" cy="19" r="1"/></svg>
+          </div>
+        </div>
+      </div>
 
-        <!-- Attached files list -->
-        <div class="attached-files">
-          <div class="attached-file file-done">
+      <!-- Empty State (collapsed — shown on expand) -->
+      <div class="templates-area" style="display:none;">
+        <div class="empty-state">
+          <div class="empty-icon">
             <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/></svg>
-            Appeal_Decision_Notice.pdf
-            <span class="file-size">1.2 MB</span>
-            <span class="remove-file">×</span>
           </div>
-          <div class="attached-file file-done">
-            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/></svg>
-            Clinical_Review_Summary_Q4.docx
-            <span class="file-size">845 KB</span>
-            <span class="remove-file">×</span>
-          </div>
-          <div class="attached-file file-pending">
-            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="1 4 1 10 7 10"/><path d="M3.51 15a9 9 0 1 0 .49-4.95"/></svg>
-            Coverage_Policy_2024.pdf
-            <span class="file-size">Uploading…</span>
-            <span class="remove-file">×</span>
-          </div>
-        </div>
-
-        <!-- ══ SECTION: Send Options ══ -->
-        <div class="section-label">Send Options</div>
-
-        <div class="send-options-grid">
-          <div class="field-group">
-            <label>Schedule Send</label>
-            <select>
-              <option selected>Send Immediately</option>
-              <option>Schedule for Later</option>
-              <option>Next Business Day – 9:00 AM</option>
-            </select>
-          </div>
-          <div class="field-group">
-            <label>Read Receipt</label>
-            <select>
-              <option selected>Request Read Receipt</option>
-              <option>Do Not Request</option>
-            </select>
-          </div>
-          <div class="field-group">
-            <label>Delivery Receipt</label>
-            <select>
-              <option selected>Request Delivery Receipt</option>
-              <option>Do Not Request</option>
-            </select>
-          </div>
-        </div>
-
-        <!-- Ready banner -->
-        <div class="ready-banner">
-          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"/><polyline points="22 4 12 14.01 9 11.01"/></svg>
-          <div class="ready-banner-text">
-            <strong>Ready to send — Email validated successfully</strong>
-            <span>Recipient verified &nbsp;·&nbsp; Subject present &nbsp;·&nbsp; 2 attachments ready &nbsp;·&nbsp; Signature included</span>
-          </div>
-          <button class="btn btn-success" style="margin-left:auto; flex-shrink:0;">
-            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><line x1="22" y1="2" x2="11" y2="13"/><polygon points="22 2 15 22 11 13 2 9 22 2"/></svg>
-            Send Email Now
-          </button>
-        </div>
-
-      </div><!-- /form-area -->
-
-      <!-- Action footer -->
-      <div class="action-footer">
-        <div class="action-footer-left">
-          <button class="btn btn-success">
-            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><line x1="22" y1="2" x2="11" y2="13"/><polygon points="22 2 15 22 11 13 2 9 22 2"/></svg>
-            Send Email
-          </button>
-          <button class="btn btn-primary">
-            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M19 21H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h11l5 5v11a2 2 0 0 1-2 2z"/><polyline points="17 21 17 13 7 13 7 21"/><polyline points="7 3 7 8 15 8"/></svg>
-            Save as Draft
-          </button>
-          <button class="btn btn-secondary">
-            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"/><circle cx="12" cy="12" r="3"/></svg>
-            Preview
-          </button>
-        </div>
-        <div class="action-footer-right">
-          <span style="font-size:11.5px; color:#9ca3af;">Last auto-saved: 2 min ago</span>
-          <button class="btn btn-danger-outline btn-sm">
-            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="3 6 5 6 21 6"/><path d="M19 6l-1 14H6L5 6"/><path d="M10 11v6"/><path d="M14 11v6"/><path d="M9 6V4h6v2"/></svg>
-            Discard
+          <div class="empty-title">No templates yet</div>
+          <div class="empty-sub">This category has no script templates. Add the first one to get started.</div>
+          <button class="btn btn-primary btn-sm" onclick="openAddTemplate(2,'Acknowledgement')">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="12" y1="5" x2="12" y2="19"/><line x1="5" y1="12" x2="19" y2="12"/></svg>
+            Add First Template
           </button>
         </div>
       </div>
 
-    </div><!-- /edit-card -->
+    </div><!-- /category card 2 -->
 
     <!-- Page footer -->
     <div class="page-footer">© 2024 Care Insight All Rights Reserved</div>
 
   </div><!-- /content -->
 </div><!-- /main -->
+
+<!-- ═══════════════════════════════════════════════
+     MODAL — Add Template
+═══════════════════════════════════════════════ -->
+<div class="modal-overlay" id="addTemplateModal" style="display:none;">
+  <div class="modal">
+    <div class="modal-header">
+      <div class="modal-title">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="12" y1="5" x2="12" y2="19"/><line x1="5" y1="12" x2="19" y2="12"/></svg>
+        Add New Template — <span id="modalCatName" style="color:#4f46e5; margin-left:4px;"></span>
+      </div>
+      <button class="modal-close" onclick="closeAddTemplate()">×</button>
+    </div>
+    <div class="modal-body">
+
+      <!-- Category (read-only) -->
+      <div class="field-row">
+        <div class="field-group">
+          <label>Category</label>
+          <input type="text" id="modalCatField" readonly style="background:#f8f9fc; color:#6b7280;"/>
+        </div>
+        <div class="field-group">
+          <label>LOB</label>
+          <select>
+            <option selected>DHMO</option>
+            <option>PPO</option>
+            <option>HMO</option>
+            <option>Medicare</option>
+          </select>
+        </div>
+      </div>
+
+      <div class="field-group">
+        <label class="req">Template Code</label>
+        <input type="text" placeholder="e.g. acknowledgement_member_outreach_v1"/>
+      </div>
+
+      <div class="field-group">
+        <label class="req">Subject</label>
+        <input type="text" placeholder="Email/letter subject line"/>
+      </div>
+
+      <div class="field-row">
+        <div class="field-group">
+          <label class="req">Channel</label>
+          <select>
+            <option>CALL</option>
+            <option>EMAIL</option>
+            <option>LETTER</option>
+            <option>FAX</option>
+          </select>
+        </div>
+        <div class="field-group">
+          <label class="req">Recipient</label>
+          <select>
+            <option>Member</option>
+            <option>Provider</option>
+            <option>Internal</option>
+          </select>
+        </div>
+        <div class="field-group">
+          <label>Script Markup Type</label>
+          <select>
+            <option selected>MARKUP</option>
+            <option>PLAIN</option>
+            <option>HTML</option>
+          </select>
+        </div>
+      </div>
+
+      <div class="field-group">
+        <label>Variables (comma-separated)</label>
+        <input type="text" placeholder="member_name, plan_name, toll_free_number"/>
+      </div>
+
+      <div class="field-group">
+        <label>Workflow Trigger</label>
+        <select>
+          <option value="">-- None --</option>
+          <option>grievance_filed</option>
+          <option>appeal_submitted</option>
+          <option>acknowledgement_sent</option>
+          <option>decision_rendered</option>
+        </select>
+      </div>
+
+      <div class="field-group">
+        <label class="req">Body / Script</label>
+        <textarea placeholder="Enter the script body or template markup here…" style="min-height:120px;"></textarea>
+      </div>
+
+      <div class="field-group">
+        <label>Upload Template File (.docx, .pdf)</label>
+        <div style="border:2px dashed #c4b5fd; border-radius:8px; padding:14px 16px; background:#faf5ff; display:flex; align-items:center; gap:12px; cursor:pointer;">
+          <div style="width:36px; height:36px; background:#ede9fe; border-radius:7px; display:flex; align-items:center; justify-content:center; flex-shrink:0;">
+            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#7c3aed" stroke-width="2"><path d="M21.44 11.05l-9.19 9.19a6 6 0 0 1-8.49-8.49l9.19-9.19a4 4 0 0 1 5.66 5.66l-9.2 9.19a2 2 0 0 1-2.83-2.83l8.49-8.48"/></svg>
+          </div>
+          <div>
+            <div style="font-size:12.5px; font-weight:600; color:#4f46e5;">Click to upload or drag &amp; drop</div>
+            <div style="font-size:11.5px; color:#7c3aed;">DOCX, PDF — Max 10 MB</div>
+          </div>
+        </div>
+      </div>
+
+      <div class="field-row">
+        <div class="field-group">
+          <label>Version Number</label>
+          <input type="text" value="1" placeholder="1"/>
+        </div>
+        <div class="field-group">
+          <label>Status</label>
+          <select>
+            <option selected>DRAFT</option>
+            <option>APPROVED</option>
+          </select>
+        </div>
+        <div class="field-group">
+          <label>Active</label>
+          <select>
+            <option selected>Yes</option>
+            <option>No</option>
+          </select>
+        </div>
+      </div>
+
+    </div>
+    <div class="modal-footer">
+      <button class="btn btn-secondary" onclick="closeAddTemplate()">Cancel</button>
+      <button class="btn btn-primary">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M19 21H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h11l5 5v11a2 2 0 0 1-2 2z"/><polyline points="17 21 17 13 7 13 7 21"/><polyline points="7 3 7 8 15 8"/></svg>
+        Save Template
+      </button>
+    </div>
+  </div>
+</div>
+
+<!-- ═══════════════════════════════════════════════
+     MODAL — Add Category
+═══════════════════════════════════════════════ -->
+<div class="modal-overlay" id="addCategoryModal" style="display:none;">
+  <div class="modal" style="width:480px;">
+    <div class="modal-header">
+      <div class="modal-title">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="12" y1="5" x2="12" y2="19"/><line x1="5" y1="12" x2="19" y2="12"/></svg>
+        Add New Category
+      </div>
+      <button class="modal-close" onclick="closeAddCategory()">×</button>
+    </div>
+    <div class="modal-body">
+
+      <div class="field-row">
+        <div class="field-group" style="flex:2;">
+          <label class="req">Category Name</label>
+          <input type="text" placeholder="e.g. 2nd Opinion Grievance"/>
+        </div>
+        <div class="field-group" style="flex:1;">
+          <label class="req">LOB</label>
+          <select>
+            <option selected>DHMO</option>
+            <option>PPO</option>
+            <option>HMO</option>
+            <option>Medicare</option>
+          </select>
+        </div>
+      </div>
+
+      <div class="field-row">
+        <div class="field-group">
+          <label class="req">Delegation Type</label>
+          <select>
+            <option>DELEGATED</option>
+            <option>NON DELEGATED</option>
+          </select>
+        </div>
+        <div class="field-group">
+          <label>Workflow Trigger</label>
+          <select>
+            <option value="">-- None --</option>
+            <option>grievance_filed</option>
+            <option>appeal_submitted</option>
+            <option>acknowledgement_sent</option>
+            <option>decision_rendered</option>
+          </select>
+        </div>
+      </div>
+
+      <div class="field-group">
+        <label>Active</label>
+        <select>
+          <option selected>Yes</option>
+          <option>No</option>
+        </select>
+      </div>
+
+    </div>
+    <div class="modal-footer">
+      <button class="btn btn-secondary" onclick="closeAddCategory()">Cancel</button>
+      <button class="btn btn-primary">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M19 21H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h11l5 5v11a2 2 0 0 1-2 2z"/><polyline points="17 21 17 13 7 13 7 21"/><polyline points="7 3 7 8 15 8"/></svg>
+        Save Category
+      </button>
+    </div>
+  </div>
+</div>
+
+<script>
+  function openAddTemplate(catId, catName) {
+    document.getElementById('modalCatName').textContent = catName;
+    document.getElementById('modalCatField').value = catName;
+    document.getElementById('addTemplateModal').style.display = 'flex';
+  }
+  function closeAddTemplate() {
+    document.getElementById('addTemplateModal').style.display = 'none';
+  }
+  function openAddCategory() {
+    document.getElementById('addCategoryModal').style.display = 'flex';
+  }
+  function closeAddCategory() {
+    document.getElementById('addCategoryModal').style.display = 'none';
+  }
+
+  /* Toggle expand on category headers */
+  document.querySelectorAll('.cat-header').forEach(function(header) {
+    header.addEventListener('click', function(e) {
+      if (e.target.closest('.cat-actions')) return;
+      var area = header.nextElementSibling;
+      var btn  = header.querySelector('.cat-expand-btn svg');
+      if (!area) return;
+      var expanded = area.style.display !== 'none';
+      area.style.display = expanded ? 'none' : 'block';
+      btn.style.transform = expanded ? '' : 'rotate(90deg)';
+    });
+  });
+
+  /* Close modals on overlay click */
+  document.querySelectorAll('.modal-overlay').forEach(function(overlay) {
+    overlay.addEventListener('click', function(e) {
+      if (e.target === overlay) overlay.style.display = 'none';
+    });
+  });
+</script>
 
 </body>
 </html>
