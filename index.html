@@ -1,3 +1,4 @@
+```html
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -13,444 +14,521 @@
     font-size: 13px;
     color: #1a1a2e;
     background: #f4f6fb;
-    display: flex;
-    height: 100vh;
-    overflow: hidden;
+    width: 1920px;
+    min-width: 1920px;
   }
 
-  /* ── Scrollbar ── */
   ::-webkit-scrollbar { width: 5px; height: 5px; }
   ::-webkit-scrollbar-track { background: transparent; }
   ::-webkit-scrollbar-thumb { background: #d1d5db; border-radius: 10px; }
 
-  /* ════════════════════════════
+  /* ════════════════════════════════
+     LAYOUT WRAPPER
+  ════════════════════════════════ */
+  .app-shell {
+    display: flex;
+    width: 1920px;
+    min-height: 100vh;
+  }
+
+  /* ════════════════════════════════
      SIDEBAR
-  ════════════════════════════ */
+  ════════════════════════════════ */
   .sidebar {
-    width: 200px; min-width: 200px;
+    width: 220px;
+    min-width: 220px;
     background: #fff;
     border-right: 1px solid #e2e8f0;
-    display: flex; flex-direction: column;
-    height: 100vh; overflow-y: auto;
+    display: flex;
+    flex-direction: column;
+    min-height: 100vh;
     flex-shrink: 0;
   }
   .sidebar-logo {
-    display: flex; align-items: center; gap: 8px;
-    padding: 14px 16px;
+    display: flex; align-items: center; gap: 10px;
+    padding: 16px 18px;
     border-bottom: 1px solid #e2e8f0;
-    flex-shrink: 0;
   }
   .logo-icon {
-    width: 28px; height: 28px;
+    width: 32px; height: 32px;
     background: linear-gradient(135deg, #4f46e5, #7c3aed);
-    border-radius: 6px;
+    border-radius: 8px;
     display: flex; align-items: center; justify-content: center;
-    color: #fff; font-size: 14px; font-weight: 700; flex-shrink: 0;
+    color: #fff; font-size: 16px; font-weight: 700; flex-shrink: 0;
   }
-  .sidebar-logo span { font-size: 12px; font-weight: 700; color: #1a1a2e; line-height: 1.2; }
+  .sidebar-logo span { font-size: 12.5px; font-weight: 700; color: #1a1a2e; line-height: 1.3; }
 
   .nav-item {
     display: flex; align-items: center; gap: 10px;
-    padding: 9px 16px;
-    font-size: 12.5px; color: #4a5568; cursor: pointer;
+    padding: 10px 18px;
+    font-size: 13px; color: #4a5568; cursor: pointer;
     border-left: 3px solid transparent;
-    flex-shrink: 0;
   }
   .nav-item:hover { background: #f0f0ff; color: #4f46e5; }
   .nav-item.active {
     background: #ede9fe; color: #4f46e5;
     border-left-color: #4f46e5; font-weight: 600;
   }
-  .nav-item svg { width: 15px; height: 15px; flex-shrink: 0; }
+  .nav-item svg { width: 16px; height: 16px; flex-shrink: 0; }
 
   .sidebar-footer {
-    margin-top: auto; padding: 12px 16px;
+    margin-top: auto; padding: 14px 18px;
     border-top: 1px solid #e2e8f0;
-    font-size: 11px; color: #9ca3af;
+    font-size: 12px; color: #9ca3af;
     display: flex; align-items: center; gap: 6px;
-    flex-shrink: 0;
   }
 
-  /* ════════════════════════════
+  /* ════════════════════════════════
      MAIN
-  ════════════════════════════ */
+  ════════════════════════════════ */
   .main {
-    flex: 1; display: flex; flex-direction: column;
-    height: 100vh; overflow: hidden; min-width: 0;
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    min-width: 0;
+    background: #f4f6fb;
   }
 
   /* Topbar */
   .topbar {
-    background: #fff; border-bottom: 1px solid #e2e8f0;
-    padding: 0 24px; height: 52px; min-height: 52px;
+    background: #fff;
+    border-bottom: 1px solid #e2e8f0;
+    padding: 0 32px;
+    height: 56px;
     display: flex; align-items: center; justify-content: space-between;
     flex-shrink: 0;
   }
   .topbar-title {
-    font-size: 15px; font-weight: 700; color: #1a1a2e;
-    display: flex; align-items: center; gap: 8px;
+    font-size: 16px; font-weight: 700; color: #1a1a2e;
+    display: flex; align-items: center; gap: 10px;
   }
-  .topbar-title svg { color: #4f46e5; }
+  .topbar-title svg { color: #4f46e5; width: 20px; height: 20px; }
   .avatar {
-    width: 32px; height: 32px; background: #4f46e5;
+    width: 36px; height: 36px; background: #4f46e5;
     border-radius: 50%; color: #fff;
     display: flex; align-items: center; justify-content: center;
-    font-size: 12px; font-weight: 700;
+    font-size: 13px; font-weight: 700;
   }
 
-  /* Scrollable content */
+  /* Content */
   .content {
-    flex: 1; overflow-y: auto; overflow-x: hidden;
-    padding: 24px;
-    display: flex; flex-direction: column; gap: 16px;
-    min-height: 0;
+    padding: 28px 32px;
+    display: flex;
+    flex-direction: column;
+    gap: 18px;
   }
 
-  /* ════════════════════════════
+  /* ════════════════════════════════
      BADGES
-  ════════════════════════════ */
+  ════════════════════════════════ */
   .badge {
     display: inline-flex; align-items: center; gap: 4px;
-    padding: 3px 9px; border-radius: 20px;
-    font-size: 11px; font-weight: 600; white-space: nowrap;
+    padding: 3px 10px; border-radius: 20px;
+    font-size: 11.5px; font-weight: 600; white-space: nowrap;
   }
   .badge svg { width: 8px; height: 8px; }
   .badge-draft    { background: #fef3c7; color: #92400e; }
   .badge-approved { background: #d1fae5; color: #065f46; }
   .badge-denied   { background: #fee2e2; color: #991b1b; }
   .badge-active   { background: #d1fae5; color: #065f46; }
-  .badge-inactive { background: #f1f5f9; color: #64748b; }
   .badge-info     { background: #ede9fe; color: #4f46e5; }
   .badge-call     { background: #dbeafe; color: #1d4ed8; }
   .badge-email    { background: #ede9fe; color: #4f46e5; }
-  .badge-delegated     { background: #fef3c7; color: #92400e; }
-  .badge-nondelegated  { background: #f0fdf4; color: #065f46; border: 1px solid #a7f3d0; }
+  .badge-delegated    { background: #fef3c7; color: #92400e; }
+  .badge-nondelegated { background: #f0fdf4; color: #065f46; border: 1px solid #a7f3d0; }
 
-  /* ════════════════════════════
+  /* ════════════════════════════════
      BUTTONS
-  ════════════════════════════ */
+  ════════════════════════════════ */
   .btn {
     display: inline-flex; align-items: center; gap: 6px;
-    padding: 7px 14px; border-radius: 6px;
+    padding: 8px 16px; border-radius: 6px;
     font-family: 'Open Sans', sans-serif;
-    font-size: 12px; font-weight: 600; cursor: pointer;
+    font-size: 13px; font-weight: 600; cursor: pointer;
     border: none; white-space: nowrap; flex-shrink: 0;
   }
-  .btn svg { width: 13px; height: 13px; flex-shrink: 0; }
+  .btn svg { width: 14px; height: 14px; flex-shrink: 0; }
   .btn-primary   { background: #4f46e5; color: #fff; }
-  .btn-primary:hover { background: #4338ca; }
   .btn-secondary { background: #fff; color: #374151; border: 1px solid #d1d5db; }
-  .btn-secondary:hover { background: #f9fafb; }
   .btn-success   { background: #059669; color: #fff; }
-  .btn-success:hover { background: #047857; }
   .btn-danger    { background: #fff; color: #dc2626; border: 1px solid #fca5a5; }
-  .btn-danger:hover { background: #fee2e2; }
-  .btn-ghost     { background: none; border: none; color: #6b7280; padding: 5px 8px; cursor: pointer; border-radius: 5px; display: inline-flex; align-items: center; gap: 5px; font-size: 12px; font-family: 'Open Sans', sans-serif; }
-  .btn-ghost:hover { background: #f0f0ff; color: #4f46e5; }
-  .btn-sm { padding: 5px 11px; font-size: 11.5px; }
-  .btn-xs { padding: 4px 9px; font-size: 11px; }
+  .btn-sm  { padding: 6px 13px; font-size: 12px; }
+  .btn-xs  { padding: 4px 10px; font-size: 11.5px; }
 
-  /* Icon button */
   .icon-btn {
-    width: 30px; height: 30px;
+    width: 32px; height: 32px;
     display: inline-flex; align-items: center; justify-content: center;
     border-radius: 6px; border: 1px solid #e2e8f0;
-    background: #fff; cursor: pointer; color: #6b7280;
-    flex-shrink: 0;
+    background: #fff; cursor: pointer; color: #6b7280; flex-shrink: 0;
   }
   .icon-btn:hover { background: #f0f0ff; color: #4f46e5; border-color: #c4b5fd; }
-  .icon-btn svg { width: 13px; height: 13px; }
+  .icon-btn svg { width: 14px; height: 14px; }
 
-  /* ════════════════════════════
+  /* ════════════════════════════════
      PAGE HEADER
-  ════════════════════════════ */
+  ════════════════════════════════ */
   .page-header-row {
-    display: flex; align-items: flex-start; justify-content: space-between;
-    gap: 12px; flex-shrink: 0;
+    display: flex; align-items: flex-start; justify-content: space-between; gap: 16px;
   }
-  .page-header { font-size: 18px; font-weight: 700; color: #1a1a2e; }
-  .page-sub { font-size: 12.5px; color: #6b7280; margin-top: 3px; }
-  .page-header-actions { display: flex; align-items: center; gap: 8px; flex-shrink: 0; }
+  .page-header { font-size: 22px; font-weight: 700; color: #1a1a2e; }
+  .page-sub { font-size: 13px; color: #6b7280; margin-top: 4px; }
+  .page-header-actions { display: flex; align-items: center; gap: 10px; }
 
-  /* ════════════════════════════
-     FILTER / TOOLBAR BAR
-  ════════════════════════════ */
-  .toolbar-bar {
-    background: #fff; border: 1px solid #e2e8f0; border-radius: 10px;
-    padding: 12px 16px;
-    display: flex; align-items: center; gap: 10px; flex-wrap: wrap;
-  }
-  .search-wrap {
-    position: relative; flex: 1; min-width: 180px;
-  }
-  .search-wrap svg {
-    position: absolute; left: 10px; top: 50%; transform: translateY(-50%);
-    color: #9ca3af; width: 14px; height: 14px; pointer-events: none;
-  }
-  .search-wrap input {
-    width: 100%; padding: 7px 12px 7px 32px;
-    border: 1px solid #d1d5db; border-radius: 6px;
-    font-family: 'Open Sans', sans-serif; font-size: 12.5px; color: #1a1a2e;
-    outline: none;
-  }
-  .search-wrap input:focus { border-color: #4f46e5; box-shadow: 0 0 0 3px rgba(79,70,229,.08); }
-
-  .filter-select {
-    height: 34px; border: 1px solid #d1d5db; border-radius: 6px;
-    font-size: 12px; font-family: 'Open Sans', sans-serif;
-    padding: 0 10px; color: #374151; background: #fff; cursor: pointer; outline: none;
-    min-width: 130px;
-  }
-  .filter-select:focus { border-color: #4f46e5; }
-
-  .toolbar-divider { width: 1px; height: 24px; background: #e2e8f0; flex-shrink: 0; }
-
-  /* ════════════════════════════
-     STATS ROW
-  ════════════════════════════ */
+  /* ════════════════════════════════
+     STATS
+  ════════════════════════════════ */
   .stats-row {
-    display: grid; grid-template-columns: repeat(4, 1fr); gap: 12px;
-    flex-shrink: 0;
+    display: grid; grid-template-columns: repeat(4, 1fr); gap: 16px;
   }
   .stat-card {
     background: #fff; border: 1px solid #e2e8f0; border-radius: 10px;
-    padding: 14px 16px;
-    display: flex; align-items: center; gap: 12px;
+    padding: 16px 20px;
+    display: flex; align-items: center; gap: 14px;
   }
   .stat-icon {
-    width: 38px; height: 38px; border-radius: 8px;
+    width: 44px; height: 44px; border-radius: 10px;
     display: flex; align-items: center; justify-content: center; flex-shrink: 0;
   }
-  .stat-icon svg { width: 18px; height: 18px; }
+  .stat-icon svg { width: 20px; height: 20px; }
   .stat-icon-purple { background: #ede9fe; color: #4f46e5; }
   .stat-icon-yellow { background: #fef3c7; color: #d97706; }
   .stat-icon-green  { background: #d1fae5; color: #059669; }
   .stat-icon-blue   { background: #dbeafe; color: #2563eb; }
-  .stat-num  { font-size: 20px; font-weight: 700; color: #1a1a2e; line-height: 1; }
-  .stat-label { font-size: 11.5px; color: #6b7280; margin-top: 2px; }
+  .stat-num   { font-size: 24px; font-weight: 700; color: #1a1a2e; line-height: 1; }
+  .stat-label { font-size: 12px; color: #6b7280; margin-top: 3px; }
 
-  /* ════════════════════════════
-     CATEGORY CARD
-  ════════════════════════════ */
-  .category-card {
+  /* ════════════════════════════════
+     TOOLBAR BAR
+  ════════════════════════════════ */
+  .toolbar-bar {
     background: #fff; border: 1px solid #e2e8f0; border-radius: 10px;
-    overflow: hidden; flex-shrink: 0;
+    padding: 14px 18px;
+    display: flex; align-items: center; gap: 12px; flex-wrap: wrap;
+  }
+  .search-wrap { position: relative; flex: 1; min-width: 240px; }
+  .search-wrap svg {
+    position: absolute; left: 11px; top: 50%; transform: translateY(-50%);
+    color: #9ca3af; width: 15px; height: 15px; pointer-events: none;
+  }
+  .search-wrap input {
+    width: 100%; padding: 8px 12px 8px 34px;
+    border: 1px solid #d1d5db; border-radius: 6px;
+    font-family: 'Open Sans', sans-serif; font-size: 13px; color: #1a1a2e; outline: none;
+  }
+  .search-wrap input:focus { border-color: #4f46e5; box-shadow: 0 0 0 3px rgba(79,70,229,.08); }
+
+  .filter-select {
+    height: 36px; border: 1px solid #d1d5db; border-radius: 6px;
+    font-size: 12.5px; font-family: 'Open Sans', sans-serif;
+    padding: 0 12px; color: #374151; background: #fff; cursor: pointer; outline: none;
+    min-width: 150px;
+  }
+  .filter-select:focus { border-color: #4f46e5; }
+  .toolbar-divider { width: 1px; height: 26px; background: #e2e8f0; flex-shrink: 0; }
+
+  /* ════════════════════════════════
+     INFO BOX
+  ════════════════════════════════ */
+  .info-box {
+    border-radius: 8px; padding: 12px 16px; font-size: 12.5px;
+    display: flex; gap: 10px; align-items: flex-start;
+  }
+  .info-box svg { width: 15px; height: 15px; flex-shrink: 0; margin-top: 1px; }
+  .info-box-blue { background: #eff6ff; border: 1px solid #bfdbfe; color: #1d4ed8; }
+
+  /* ════════════════════════════════
+     CATEGORY CARD
+  ════════════════════════════════ */
+  .category-card {
+    background: #fff; border: 1px solid #e2e8f0; border-radius: 12px;
+    overflow: hidden;
   }
 
-  /* Category header */
   .cat-header {
-    padding: 14px 18px;
-    display: flex; align-items: center; gap: 12px;
+    padding: 16px 22px;
+    display: flex; align-items: center; gap: 14px;
     border-bottom: 1px solid #e2e8f0;
-    cursor: pointer;
     background: #fafbff;
   }
-  .cat-header:hover { background: #f5f3ff; }
-
   .cat-expand-btn {
-    width: 22px; height: 22px; border-radius: 5px;
+    width: 24px; height: 24px; border-radius: 6px;
     background: #ede9fe; border: none; cursor: pointer;
     display: flex; align-items: center; justify-content: center;
     flex-shrink: 0; color: #4f46e5;
   }
-  .cat-expand-btn svg { width: 12px; height: 12px; }
+  .cat-expand-btn svg { width: 13px; height: 13px; }
 
   .cat-icon {
-    width: 36px; height: 36px; border-radius: 8px;
+    width: 40px; height: 40px; border-radius: 10px;
     background: linear-gradient(135deg, #4f46e5, #7c3aed);
-    display: flex; align-items: center; justify-content: center;
-    flex-shrink: 0;
+    display: flex; align-items: center; justify-content: center; flex-shrink: 0;
   }
-  .cat-icon svg { width: 17px; height: 17px; color: #fff; }
+  .cat-icon svg { width: 18px; height: 18px; color: #fff; }
+  .cat-icon-gray { background: linear-gradient(135deg, #64748b, #94a3b8); }
 
   .cat-info { flex: 1; min-width: 0; }
-  .cat-name { font-size: 13.5px; font-weight: 700; color: #1a1a2e; }
+  .cat-name { font-size: 14px; font-weight: 700; color: #1a1a2e; }
   .cat-meta {
-    display: flex; align-items: center; gap: 10px;
-    margin-top: 4px; flex-wrap: wrap;
+    display: flex; align-items: center; gap: 14px;
+    margin-top: 5px; flex-wrap: wrap;
   }
   .cat-meta-item {
-    display: flex; align-items: center; gap: 4px;
-    font-size: 11.5px; color: #6b7280;
+    display: flex; align-items: center; gap: 5px;
+    font-size: 12px; color: #6b7280;
   }
-  .cat-meta-item svg { width: 12px; height: 12px; }
+  .cat-meta-item svg { width: 13px; height: 13px; }
+  .cat-actions { display: flex; align-items: center; gap: 8px; flex-shrink: 0; }
 
-  .cat-actions { display: flex; align-items: center; gap: 6px; flex-shrink: 0; }
-
-  /* Template count bubble */
   .tpl-count {
     background: #ede9fe; color: #4f46e5;
-    font-size: 11px; font-weight: 700;
-    padding: 2px 8px; border-radius: 12px;
-    white-space: nowrap;
+    font-size: 11.5px; font-weight: 700;
+    padding: 3px 10px; border-radius: 14px; white-space: nowrap;
   }
-  .tpl-count-empty {
-    background: #f1f5f9; color: #94a3b8;
-  }
+  .tpl-count-empty { background: #f1f5f9; color: #94a3b8; }
 
-  /* ════════════════════════════
+  /* ════════════════════════════════
      TEMPLATES TABLE
-  ════════════════════════════ */
-  .templates-area {
-    border-top: 1px solid #f1f5f9;
-  }
+  ════════════════════════════════ */
+  .templates-area { border-top: 1px solid #f1f5f9; }
 
-  /* Add template row */
-  .add-template-row {
-    padding: 10px 18px 10px 56px;
-    border-bottom: 1px solid #f1f5f9;
-    display: flex; align-items: center; gap: 8px;
-    background: #fafbff;
-  }
-  .add-template-label { font-size: 12px; color: #6b7280; font-style: italic; }
-
-  /* Table */
   .tpl-table { width: 100%; border-collapse: collapse; }
   .tpl-table thead tr {
-    background: #f8f9fc;
-    border-bottom: 1px solid #e2e8f0;
+    background: #f8f9fc; border-bottom: 1px solid #e2e8f0;
   }
   .tpl-table th {
-    padding: 9px 14px;
-    font-size: 11px; font-weight: 700; color: #6b7280;
+    padding: 10px 16px;
+    font-size: 11.5px; font-weight: 700; color: #6b7280;
     text-transform: uppercase; letter-spacing: 0.5px;
     text-align: left; white-space: nowrap;
   }
-  .tpl-table th:first-child { padding-left: 56px; }
-
-  .tpl-table tbody tr {
-    border-bottom: 1px solid #f1f5f9;
-  }
+  .tpl-table th:first-child { padding-left: 60px; }
+  .tpl-table tbody tr { border-bottom: 1px solid #f1f5f9; }
   .tpl-table tbody tr:last-child { border-bottom: none; }
   .tpl-table tbody tr:hover { background: #faf8ff; }
-
   .tpl-table td {
-    padding: 11px 14px;
-    font-size: 12.5px; color: #374151;
-    vertical-align: middle;
+    padding: 13px 16px;
+    font-size: 13px; color: #374151; vertical-align: middle;
   }
-  .tpl-table td:first-child { padding-left: 56px; }
+  .tpl-table td:first-child { padding-left: 60px; }
 
   .tpl-code {
     font-family: 'Courier New', monospace;
     font-size: 11.5px; color: #4f46e5;
-    background: #ede9fe; padding: 2px 7px; border-radius: 4px;
-    word-break: break-all;
+    background: #ede9fe; padding: 2px 8px; border-radius: 4px;
+    word-break: break-all; display: inline-block; max-width: 320px;
   }
-
   .tpl-subject {
-    font-size: 12.5px; color: #1a1a2e; font-weight: 500;
-    max-width: 200px; overflow: hidden; text-overflow: ellipsis; white-space: nowrap;
+    font-size: 13px; color: #1a1a2e; font-weight: 500;
+    max-width: 260px; overflow: hidden; text-overflow: ellipsis; white-space: nowrap;
   }
 
   .version-select {
-    height: 28px; border: 1px solid #d1d5db; border-radius: 5px;
-    font-size: 11.5px; font-family: 'Open Sans', sans-serif;
-    padding: 0 6px; color: #374151; background: #fff; cursor: pointer; outline: none;
+    height: 30px; border: 1px solid #d1d5db; border-radius: 5px;
+    font-size: 12px; font-family: 'Open Sans', sans-serif;
+    padding: 0 8px; color: #374151; background: #fff; cursor: pointer; outline: none;
   }
   .version-select:focus { border-color: #4f46e5; }
 
-  /* Row action buttons */
-  .row-actions { display: flex; align-items: center; gap: 4px; }
+  .row-actions { display: flex; align-items: center; gap: 5px; }
 
-  /* ════════════════════════════
-     EMPTY STATE
-  ════════════════════════════ */
-  .empty-state {
-    padding: 32px 20px; text-align: center;
-    display: flex; flex-direction: column; align-items: center; gap: 10px;
-  }
-  .empty-icon {
-    width: 48px; height: 48px; border-radius: 12px;
-    background: #f1f5f9; display: flex; align-items: center; justify-content: center;
-  }
-  .empty-icon svg { width: 22px; height: 22px; color: #94a3b8; }
-  .empty-title { font-size: 13px; font-weight: 600; color: #374151; }
-  .empty-sub { font-size: 12px; color: #9ca3af; max-width: 280px; }
-
-  /* ════════════════════════════
-     INFO BOX
-  ════════════════════════════ */
-  .info-box {
-    border-radius: 6px; padding: 10px 14px; font-size: 12px;
-    display: flex; gap: 8px; align-items: flex-start;
-  }
-  .info-box svg { width: 14px; height: 14px; flex-shrink: 0; margin-top: 1px; }
-  .info-box-blue { background: #eff6ff; border: 1px solid #bfdbfe; color: #1d4ed8; }
-
-  /* ════════════════════════════
-     VARIABLES CHIP
-  ════════════════════════════ */
-  .var-chips { display: flex; flex-wrap: wrap; gap: 3px; max-width: 220px; }
+  .var-chips { display: flex; flex-wrap: wrap; gap: 4px; max-width: 260px; }
   .var-chip {
     background: #f0fdf4; border: 1px solid #a7f3d0;
-    color: #065f46; font-size: 10.5px; font-weight: 500;
-    padding: 1px 6px; border-radius: 4px;
+    color: #065f46; font-size: 11px; font-weight: 500;
+    padding: 2px 7px; border-radius: 4px;
   }
 
-  /* ════════════════════════════
-     MODAL OVERLAY (Add Template)
-  ════════════════════════════ */
-  .modal-overlay {
-    position: fixed; inset: 0; background: rgba(0,0,0,.38);
-    display: flex; align-items: center; justify-content: center; z-index: 200;
+  /* ════════════════════════════════
+     EMPTY STATE
+  ════════════════════════════════ */
+  .empty-state {
+    padding: 40px 24px; text-align: center;
+    display: flex; flex-direction: column; align-items: center; gap: 12px;
   }
-  .modal {
-    background: #fff; border-radius: 12px;
-    width: 580px; max-width: 96vw; max-height: 92vh;
-    display: flex; flex-direction: column; overflow: hidden;
-    box-shadow: 0 20px 60px rgba(0,0,0,.2);
+  .empty-icon {
+    width: 54px; height: 54px; border-radius: 14px;
+    background: #f1f5f9; display: flex; align-items: center; justify-content: center;
+  }
+  .empty-icon svg { width: 24px; height: 24px; color: #94a3b8; }
+  .empty-title { font-size: 14px; font-weight: 600; color: #374151; }
+  .empty-sub { font-size: 12.5px; color: #9ca3af; max-width: 300px; }
+
+  /* ════════════════════════════════
+     SECTION DIVIDER
+  ════════════════════════════════ */
+  .section-divider {
+    font-size: 11.5px; font-weight: 700; color: #6b7280;
+    text-transform: uppercase; letter-spacing: 0.6px;
+    display: flex; align-items: center; gap: 10px; margin-bottom: 6px;
+  }
+  .section-divider::after { content: ''; flex: 1; height: 1px; background: #e2e8f0; }
+
+  /* ════════════════════════════════
+     PAGE FOOTER
+  ════════════════════════════════ */
+  .page-footer {
+    text-align: center; font-size: 12px; color: #9ca3af; padding: 20px 0 12px;
+  }
+
+  /* ════════════════════════════════════════════════════════
+     MODAL SECTIONS  (rendered inline, not as overlays,
+     so web2figma captures them in the same document flow)
+  ════════════════════════════════════════════════════════ */
+  .modals-section {
+    padding: 28px 32px;
+    display: flex;
+    flex-direction: column;
+    gap: 32px;
+    background: #eef0f8;
+    border-top: 3px solid #c4b5fd;
+  }
+  .modals-section-label {
+    font-size: 13px; font-weight: 700; color: #4f46e5;
+    letter-spacing: 0.5px; text-transform: uppercase;
+    display: flex; align-items: center; gap: 8px;
+    margin-bottom: 4px;
+  }
+  .modals-section-label::after { content: '(Design Reference – Modals)'; font-size: 11px; font-weight: 400; color: #9ca3af; text-transform: none; letter-spacing: 0; }
+
+  .modals-row {
+    display: flex; gap: 28px; flex-wrap: wrap; align-items: flex-start;
+  }
+
+  /* Inline modal card */
+  .modal-card {
+    background: #fff;
+    border-radius: 14px;
+    box-shadow: 0 8px 32px rgba(79,70,229,.13), 0 2px 8px rgba(0,0,0,.07);
+    overflow: hidden;
+    flex-shrink: 0;
   }
   .modal-header {
-    padding: 16px 22px; border-bottom: 1px solid #e2e8f0;
+    padding: 18px 24px; border-bottom: 1px solid #e2e8f0;
     display: flex; align-items: center; justify-content: space-between;
-    flex-shrink: 0;
   }
   .modal-title {
     font-size: 14px; font-weight: 700; color: #1a1a2e;
     display: flex; align-items: center; gap: 8px;
   }
-  .modal-title svg { color: #4f46e5; width: 16px; height: 16px; }
-  .modal-close {
-    background: none; border: none; font-size: 20px; cursor: pointer; color: #9ca3af;
-    line-height: 1; padding: 2px 6px; border-radius: 4px;
+  .modal-title svg { color: #4f46e5; width: 17px; height: 17px; }
+  .modal-close-btn {
+    width: 30px; height: 30px; border-radius: 6px;
+    background: #f1f5f9; border: none; cursor: pointer;
+    display: flex; align-items: center; justify-content: center;
+    font-size: 18px; color: #6b7280; line-height: 1;
   }
-  .modal-close:hover { color: #374151; background: #f1f5f9; }
   .modal-body {
-    padding: 20px 22px; overflow-y: auto;
-    display: flex; flex-direction: column; gap: 14px;
+    padding: 22px 24px;
+    display: flex; flex-direction: column; gap: 16px;
   }
   .modal-footer {
-    padding: 14px 22px; border-top: 1px solid #e2e8f0;
+    padding: 16px 24px; border-top: 1px solid #e2e8f0;
     display: flex; gap: 10px; justify-content: flex-end;
-    flex-shrink: 0;
   }
 
-  /* form inside modal */
-  .field-group { display: flex; flex-direction: column; gap: 5px; }
-  .field-row { display: flex; gap: 14px; }
+  /* Form inside modals */
+  .field-group  { display: flex; flex-direction: column; gap: 5px; }
+  .field-row    { display: flex; gap: 14px; }
   .field-row .field-group { flex: 1; min-width: 0; }
-  label { font-size: 12px; font-weight: 600; color: #374151; }
+  label { font-size: 12.5px; font-weight: 600; color: #374151; }
   .req::after { content: ' *'; color: #dc2626; }
+
   input[type="text"], textarea, select {
     width: 100%; padding: 8px 12px;
     border: 1px solid #d1d5db; border-radius: 6px;
-    font-family: 'Open Sans', sans-serif; font-size: 12.5px; color: #1a1a2e;
+    font-family: 'Open Sans', sans-serif; font-size: 13px; color: #1a1a2e;
     background: #fff; outline: none;
   }
   input:focus, textarea:focus, select:focus {
     border-color: #4f46e5; box-shadow: 0 0 0 3px rgba(79,70,229,.08);
   }
-  textarea { resize: vertical; min-height: 80px; line-height: 1.6; }
+  textarea { resize: vertical; min-height: 90px; line-height: 1.6; }
 
-  /* page footer */
-  .page-footer {
-    text-align: center; font-size: 11.5px; color: #9ca3af;
-    padding: 12px 0 4px; flex-shrink: 0;
+  .upload-zone {
+    border: 2px dashed #c4b5fd; border-radius: 8px;
+    padding: 16px 18px; cursor: pointer; background: #faf5ff;
+    display: flex; align-items: center; gap: 14px;
   }
+  .upload-zone-icon {
+    width: 40px; height: 40px; background: #ede9fe;
+    border-radius: 8px; display: flex; align-items: center; justify-content: center; flex-shrink: 0;
+  }
+  .upload-zone-icon svg { width: 20px; height: 20px; color: #7c3aed; }
+  .upload-zone-text strong { font-size: 13px; color: #4f46e5; display: block; margin-bottom: 2px; }
+  .upload-zone-text span   { font-size: 12px; color: #7c3aed; }
+
+  /* ════════════════════════════════
+     APPROVE / DENY CONFIRMATION MODAL
+  ════════════════════════════════ */
+  .confirm-icon-wrap {
+    display: flex; align-items: center; justify-content: center;
+    width: 60px; height: 60px; border-radius: 50%; margin: 0 auto 4px;
+  }
+  .confirm-icon-wrap svg { width: 28px; height: 28px; }
+  .confirm-icon-green { background: #d1fae5; color: #059669; }
+  .confirm-icon-red   { background: #fee2e2; color: #dc2626; }
+  .confirm-text-center { text-align: center; }
+  .confirm-text-center h3 { font-size: 16px; font-weight: 700; color: #1a1a2e; margin-bottom: 6px; }
+  .confirm-text-center p  { font-size: 13px; color: #6b7280; line-height: 1.6; }
+  .confirm-detail-box {
+    background: #f8f9fc; border: 1px solid #e2e8f0; border-radius: 8px;
+    padding: 12px 16px; display: flex; flex-direction: column; gap: 8px;
+  }
+  .confirm-detail-row { display: flex; justify-content: space-between; font-size: 12.5px; }
+  .confirm-detail-row span:first-child { color: #6b7280; }
+  .confirm-detail-row span:last-child  { color: #1a1a2e; font-weight: 600; }
+
+  /* ════════════════════════════════
+     VERSION HISTORY MODAL
+  ════════════════════════════════ */
+  .version-timeline { display: flex; flex-direction: column; gap: 0; }
+  .version-row {
+    display: flex; gap: 14px; padding: 14px 0;
+    border-bottom: 1px solid #f1f5f9; position: relative;
+  }
+  .version-row:last-child { border-bottom: none; }
+  .version-dot-col { display: flex; flex-direction: column; align-items: center; gap: 0; flex-shrink: 0; }
+  .version-dot {
+    width: 14px; height: 14px; border-radius: 50%;
+    border: 2px solid #4f46e5; background: #ede9fe; flex-shrink: 0; margin-top: 3px;
+  }
+  .version-dot.current { background: #4f46e5; }
+  .version-line { flex: 1; width: 2px; background: #e2e8f0; margin-top: 2px; }
+  .version-content { flex: 1; min-width: 0; }
+  .version-top { display: flex; align-items: center; gap: 8px; margin-bottom: 4px; }
+  .version-label { font-size: 13px; font-weight: 700; color: #1a1a2e; }
+  .version-date  { font-size: 12px; color: #9ca3af; }
+  .version-by    { font-size: 12px; color: #6b7280; }
+  .version-notes { font-size: 12.5px; color: #374151; margin-top: 4px; }
+
+  /* ════════════════════════════════
+     VIEW TEMPLATE MODAL
+  ════════════════════════════════ */
+  .tpl-preview-body {
+    background: #f8f9fc; border: 1px solid #e2e8f0; border-radius: 8px;
+    padding: 18px 20px;
+    font-size: 13px; line-height: 1.75; color: #374151;
+    min-height: 160px;
+  }
+  .tpl-preview-body p { margin-bottom: 10px; }
+  .tpl-preview-body .tpl-var {
+    background: #fef3c7; color: #92400e;
+    padding: 1px 6px; border-radius: 4px; font-weight: 600; font-size: 12px;
+    border: 1px solid #fde68a;
+  }
+  .meta-grid {
+    display: grid; grid-template-columns: 1fr 1fr; gap: 10px;
+  }
+  .meta-cell {
+    background: #f8f9fc; border: 1px solid #e2e8f0; border-radius: 7px;
+    padding: 10px 14px;
+  }
+  .meta-cell-label { font-size: 11px; font-weight: 700; color: #9ca3af; text-transform: uppercase; letter-spacing: 0.4px; margin-bottom: 4px; }
+  .meta-cell-value { font-size: 13px; font-weight: 600; color: #1a1a2e; }
 </style>
 </head>
 <body>
+<div class="app-shell">
 
 <!-- ═══════════════ SIDEBAR ═══════════════ -->
 <aside class="sidebar">
@@ -458,53 +536,22 @@
     <div class="logo-icon">C</div>
     <span>Appeals and<br/>Grievances</span>
   </div>
-
-  <div class="nav-item">
-    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="3" width="7" height="7"/><rect x="14" y="3" width="7" height="7"/><rect x="14" y="14" width="7" height="7"/><rect x="3" y="14" width="7" height="7"/></svg>Settings
-  </div>
-  <div class="nav-item">
-    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="3"/><path d="M19.07 4.93a10 10 0 0 1 0 14.14M4.93 4.93a10 10 0 0 0 0 14.14"/></svg>AI Determination
-  </div>
-  <div class="nav-item">
-    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/></svg>New Cases
-  </div>
-  <div class="nav-item">
-    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg>Case Search
-  </div>
-  <div class="nav-item">
-    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/><polyline points="22,6 12,13 2,6"/></svg>Outbound Communication
-  </div>
-  <div class="nav-item">
-    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="2" y="3" width="20" height="14" rx="2"/><line x1="8" y1="21" x2="16" y2="21"/><line x1="12" y1="17" x2="12" y2="21"/></svg>Pega Case
-  </div>
-  <div class="nav-item">
-    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="18" y1="20" x2="18" y2="10"/><line x1="12" y1="20" x2="12" y2="4"/><line x1="6" y1="20" x2="6" y2="14"/></svg>Report
-  </div>
-  <div class="nav-item active">
-    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/><line x1="16" y1="13" x2="8" y2="13"/><line x1="16" y1="17" x2="8" y2="17"/><polyline points="10 9 9 9 8 9"/></svg>LOB Scripts
-  </div>
-  <div class="nav-item">
-    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 16V8a2 2 0 0 0-1-1.73l-7-4a2 2 0 0 0-2 0l-7 4A2 2 0 0 0 3 8v8a2 2 0 0 0 1 1.73l7 4a2 2 0 0 0 2 0l7-4A2 2 0 0 0 21 16z"/></svg>Package Details
-  </div>
-  <div class="nav-item">
-    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"/><circle cx="12" cy="12" r="3"/></svg>View Case
-  </div>
-  <div class="nav-item">
-    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 0 0-3-3.87"/><path d="M16 3.13a4 4 0 0 1 0 7.75"/></svg>Agent Skill Configuration
-  </div>
-  <div class="nav-item">
-    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="4" width="18" height="18" rx="2"/><line x1="16" y1="2" x2="16" y2="6"/><line x1="8" y1="2" x2="8" y2="6"/><line x1="3" y1="10" x2="21" y2="10"/></svg>Manage Leave
-  </div>
-  <div class="nav-item">
-    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="17 1 21 5 17 9"/><path d="M3 11V9a4 4 0 0 1 4-4h14"/><polyline points="7 23 3 19 7 15"/><path d="M21 13v2a4 4 0 0 1-4 4H3"/></svg>Bulk Transfer
-  </div>
-  <div class="nav-item">
-    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71"/><path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71"/></svg>Useful Links
-  </div>
-
+  <div class="nav-item"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="3" width="7" height="7"/><rect x="14" y="3" width="7" height="7"/><rect x="14" y="14" width="7" height="7"/><rect x="3" y="14" width="7" height="7"/></svg>Settings</div>
+  <div class="nav-item"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="3"/><path d="M19.07 4.93a10 10 0 0 1 0 14.14M4.93 4.93a10 10 0 0 0 0 14.14"/></svg>AI Determination</div>
+  <div class="nav-item"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/></svg>New Cases</div>
+  <div class="nav-item"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg>Case Search</div>
+  <div class="nav-item"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/><polyline points="22,6 12,13 2,6"/></svg>Outbound Communication</div>
+  <div class="nav-item"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="2" y="3" width="20" height="14" rx="2"/><line x1="8" y1="21" x2="16" y2="21"/><line x1="12" y1="17" x2="12" y2="21"/></svg>Pega Case</div>
+  <div class="nav-item"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="18" y1="20" x2="18" y2="10"/><line x1="12" y1="20" x2="12" y2="4"/><line x1="6" y1="20" x2="6" y2="14"/></svg>Report</div>
+  <div class="nav-item active"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/><line x1="16" y1="13" x2="8" y2="13"/><line x1="16" y1="17" x2="8" y2="17"/></svg>LOB Scripts</div>
+  <div class="nav-item"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 16V8a2 2 0 0 0-1-1.73l-7-4a2 2 0 0 0-2 0l-7 4A2 2 0 0 0 3 8v8a2 2 0 0 0 1 1.73l7 4a2 2 0 0 0 2 0l7-4A2 2 0 0 0 21 16z"/></svg>Package Details</div>
+  <div class="nav-item"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"/><circle cx="12" cy="12" r="3"/></svg>View Case</div>
+  <div class="nav-item"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 0 0-3-3.87"/></svg>Agent Skill Configuration</div>
+  <div class="nav-item"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="4" width="18" height="18" rx="2"/><line x1="16" y1="2" x2="16" y2="6"/><line x1="8" y1="2" x2="8" y2="6"/><line x1="3" y1="10" x2="21" y2="10"/></svg>Manage Leave</div>
+  <div class="nav-item"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="17 1 21 5 17 9"/><path d="M3 11V9a4 4 0 0 1 4-4h14"/><polyline points="7 23 3 19 7 15"/></svg>Bulk Transfer</div>
+  <div class="nav-item"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71"/><path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71"/></svg>Useful Links</div>
   <div class="sidebar-footer">
-    <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="15 18 9 12 15 6"/></svg>
-    Collapse
+    <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="15 18 9 12 15 6"/></svg>Collapse
   </div>
 </aside>
 
@@ -514,13 +561,15 @@
   <!-- Topbar -->
   <div class="topbar">
     <div class="topbar-title">
-      <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/></svg>
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/></svg>
       Appeals and Grievances Management
     </div>
     <div class="avatar">IM</div>
   </div>
 
-  <!-- ═══ SCROLLABLE CONTENT ═══ -->
+  <!-- ══════════════════════════════
+       MAIN PAGE CONTENT
+  ══════════════════════════════ -->
   <div class="content">
 
     <!-- Page Header -->
@@ -531,110 +580,62 @@
       </div>
       <div class="page-header-actions">
         <button class="btn btn-secondary btn-sm">
-          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="23 4 23 10 17 10"/><path d="M20.49 15a9 9 0 1 1-.49-4.95"/></svg>
-          Refresh
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="23 4 23 10 17 10"/><path d="M20.49 15a9 9 0 1 1-.49-4.95"/></svg>Refresh
         </button>
         <button class="btn btn-secondary btn-sm">
-          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="21 15 21 21 3 21 3 15"/><polyline points="17 8 12 3 7 8"/><line x1="12" y1="3" x2="12" y2="15"/></svg>
-          Export
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="21 15 21 21 3 21 3 15"/><polyline points="17 8 12 3 7 8"/><line x1="12" y1="3" x2="12" y2="15"/></svg>Export
         </button>
-        <button class="btn btn-primary" onclick="openAddCategory()">
-          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="12" y1="5" x2="12" y2="19"/><line x1="5" y1="12" x2="19" y2="12"/></svg>
-          Add Category
+        <button class="btn btn-primary">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="12" y1="5" x2="12" y2="19"/><line x1="5" y1="12" x2="19" y2="12"/></svg>Add Category
         </button>
       </div>
     </div>
 
-    <!-- Stats Row -->
+    <!-- Stats -->
     <div class="stats-row">
       <div class="stat-card">
-        <div class="stat-icon stat-icon-purple">
-          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/></svg>
-        </div>
-        <div>
-          <div class="stat-num">2</div>
-          <div class="stat-label">Total Categories</div>
-        </div>
+        <div class="stat-icon stat-icon-purple"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/></svg></div>
+        <div><div class="stat-num">2</div><div class="stat-label">Total Categories</div></div>
       </div>
       <div class="stat-card">
-        <div class="stat-icon stat-icon-blue">
-          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="3" width="18" height="18" rx="2"/><line x1="3" y1="9" x2="21" y2="9"/><line x1="9" y1="21" x2="9" y2="9"/></svg>
-        </div>
-        <div>
-          <div class="stat-num">2</div>
-          <div class="stat-label">Total Templates</div>
-        </div>
+        <div class="stat-icon stat-icon-blue"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="3" width="18" height="18" rx="2"/><line x1="3" y1="9" x2="21" y2="9"/><line x1="9" y1="21" x2="9" y2="9"/></svg></div>
+        <div><div class="stat-num">2</div><div class="stat-label">Total Templates</div></div>
       </div>
       <div class="stat-card">
-        <div class="stat-icon stat-icon-yellow">
-          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><line x1="12" y1="8" x2="12" y2="12"/><line x1="12" y1="16" x2="12.01" y2="16"/></svg>
-        </div>
-        <div>
-          <div class="stat-num">2</div>
-          <div class="stat-label">Draft Templates</div>
-        </div>
+        <div class="stat-icon stat-icon-yellow"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><line x1="12" y1="8" x2="12" y2="12"/><line x1="12" y1="16" x2="12.01" y2="16"/></svg></div>
+        <div><div class="stat-num">2</div><div class="stat-label">Draft Templates</div></div>
       </div>
       <div class="stat-card">
-        <div class="stat-icon stat-icon-green">
-          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"/><polyline points="22 4 12 14.01 9 11.01"/></svg>
-        </div>
-        <div>
-          <div class="stat-num">0</div>
-          <div class="stat-label">Approved Templates</div>
-        </div>
+        <div class="stat-icon stat-icon-green"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"/><polyline points="22 4 12 14.01 9 11.01"/></svg></div>
+        <div><div class="stat-num">0</div><div class="stat-label">Approved Templates</div></div>
       </div>
     </div>
 
-    <!-- Filter / Toolbar -->
+    <!-- Filter Toolbar -->
     <div class="toolbar-bar">
       <div class="search-wrap">
         <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg>
         <input type="text" placeholder="Search categories or templates…"/>
       </div>
       <div class="toolbar-divider"></div>
-      <select class="filter-select">
-        <option value="">All LOBs</option>
-        <option selected>DHMO</option>
-        <option>PPO</option>
-        <option>HMO</option>
-        <option>Medicare</option>
-      </select>
-      <select class="filter-select">
-        <option value="">All Delegation Types</option>
-        <option>DELEGATED</option>
-        <option>NON DELEGATED</option>
-      </select>
-      <select class="filter-select">
-        <option value="">All Statuses</option>
-        <option>DRAFT</option>
-        <option>APPROVED</option>
-        <option>DENIED</option>
-      </select>
-      <select class="filter-select">
-        <option value="">All Channels</option>
-        <option>CALL</option>
-        <option>EMAIL</option>
-        <option>LETTER</option>
-      </select>
+      <select class="filter-select"><option>All LOBs</option><option selected>DHMO</option><option>PPO</option><option>HMO</option><option>Medicare</option></select>
+      <select class="filter-select"><option>All Delegation Types</option><option>DELEGATED</option><option>NON DELEGATED</option></select>
+      <select class="filter-select"><option>All Statuses</option><option>DRAFT</option><option>APPROVED</option><option>DENIED</option></select>
+      <select class="filter-select"><option>All Channels</option><option>CALL</option><option>EMAIL</option><option>LETTER</option></select>
       <div class="toolbar-divider"></div>
       <button class="btn btn-secondary btn-sm">
-        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="4" y1="6" x2="20" y2="6"/><line x1="8" y1="12" x2="16" y2="12"/><line x1="11" y1="18" x2="13" y2="18"/></svg>
-        Filters
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="4" y1="6" x2="20" y2="6"/><line x1="8" y1="12" x2="16" y2="12"/><line x1="11" y1="18" x2="13" y2="18"/></svg>Filters
       </button>
     </div>
 
-    <!-- Info bar -->
+    <!-- Info Bar -->
     <div class="info-box info-box-blue">
       <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><line x1="12" y1="8" x2="12" y2="12"/><line x1="12" y1="16" x2="12.01" y2="16"/></svg>
-      <div>Showing <strong>2 categories</strong> for LOB: <strong>DHMO</strong>. Click a category row to expand templates. Use <strong>Edit</strong>, <strong>Approve</strong> or <strong>Deny</strong> actions per template. Switch versions using the version dropdown.</div>
+      <div>Showing <strong>2 categories</strong> for LOB: <strong>DHMO</strong>. Click a category row to expand/collapse templates. Use <strong>Edit</strong>, <strong>Approve</strong> or <strong>Deny</strong> per template. Switch versions using the version dropdown on each row.</div>
     </div>
 
-    <!-- ═══════════════════════════════════════════════
-         CATEGORY 1 — 2nd Opinion Grievance (expanded)
-    ═══════════════════════════════════════════════ -->
+    <!-- ── CATEGORY 1: 2nd Opinion Grievance ── -->
     <div class="category-card">
-
-      <!-- Category Header -->
       <div class="cat-header">
         <button class="cat-expand-btn">
           <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="6 9 12 15 18 9"/></svg>
@@ -645,44 +646,25 @@
         <div class="cat-info">
           <div class="cat-name">2nd Opinion Grievance</div>
           <div class="cat-meta">
-            <div class="cat-meta-item">
-              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="2" y="7" width="20" height="14" rx="2"/><path d="M16 7V5a2 2 0 0 0-2-2h-4a2 2 0 0 0-2 2v2"/></svg>
-              LOB: <strong style="color:#1a1a2e; margin-left:2px;">DHMO</strong>
-            </div>
-            <div class="cat-meta-item">
-              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg>
-              Workflow: <strong style="color:#1a1a2e; margin-left:2px;">grievance_filed</strong>
-            </div>
-            <div class="cat-meta-item">
-              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="4" width="18" height="18" rx="2"/><line x1="16" y1="2" x2="16" y2="6"/><line x1="8" y1="2" x2="8" y2="6"/><line x1="3" y1="10" x2="21" y2="10"/></svg>
-              Created: Apr 21, 2026
-            </div>
+            <div class="cat-meta-item"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="2" y="7" width="20" height="14" rx="2"/><path d="M16 7V5a2 2 0 0 0-2-2h-4a2 2 0 0 0-2 2v2"/></svg>LOB: <strong style="color:#1a1a2e; margin-left:3px;">DHMO</strong></div>
+            <div class="cat-meta-item"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg>Workflow: <strong style="color:#1a1a2e; margin-left:3px;">grievance_filed</strong></div>
+            <div class="cat-meta-item"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="4" width="18" height="18" rx="2"/><line x1="16" y1="2" x2="16" y2="6"/><line x1="8" y1="2" x2="8" y2="6"/><line x1="3" y1="10" x2="21" y2="10"/></svg>Created: Apr 21, 2026</div>
+            <div class="cat-meta-item"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="4" width="18" height="18" rx="2"/><line x1="16" y1="2" x2="16" y2="6"/><line x1="8" y1="2" x2="8" y2="6"/><line x1="3" y1="10" x2="21" y2="10"/></svg>Category ID: 1</div>
             <span class="badge badge-delegated">DELEGATED</span>
-            <span class="badge badge-active">
-              <svg viewBox="0 0 8 8"><circle cx="4" cy="4" r="4" fill="#059669"/></svg>
-              Active
-            </span>
+            <span class="badge badge-active"><svg viewBox="0 0 8 8"><circle cx="4" cy="4" r="4" fill="#059669"/></svg>Active</span>
           </div>
         </div>
         <div class="cat-actions">
           <span class="tpl-count">2 Templates</span>
-          <button class="btn btn-secondary btn-sm" onclick="openAddTemplate(1,'2nd Opinion Grievance')">
-            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="12" y1="5" x2="12" y2="19"/><line x1="5" y1="12" x2="19" y2="12"/></svg>
-            Add Template
+          <button class="btn btn-secondary btn-sm">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="12" y1="5" x2="12" y2="19"/><line x1="5" y1="12" x2="19" y2="12"/></svg>Add Template
           </button>
-          <div class="icon-btn" title="Edit Category">
-            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M11 4H4a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2v-7"/><path d="M18.5 2.5a2.121 2.121 0 0 1 3 3L12 15l-4 1 1-4 9.5-9.5z"/></svg>
-          </div>
-          <div class="icon-btn" title="More options" style="color:#6b7280;">
-            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="5" r="1"/><circle cx="12" cy="12" r="1"/><circle cx="12" cy="19" r="1"/></svg>
-          </div>
+          <div class="icon-btn" title="Edit Category"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M11 4H4a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2v-7"/><path d="M18.5 2.5a2.121 2.121 0 0 1 3 3L12 15l-4 1 1-4 9.5-9.5z"/></svg></div>
+          <div class="icon-btn"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="5" r="1"/><circle cx="12" cy="12" r="1"/><circle cx="12" cy="19" r="1"/></svg></div>
         </div>
       </div>
 
-      <!-- Templates Area -->
       <div class="templates-area">
-
-        <!-- Table -->
         <table class="tpl-table">
           <thead>
             <tr>
@@ -693,29 +675,24 @@
               <th>Version</th>
               <th>Status</th>
               <th>Variables</th>
+              <th>Approved By</th>
               <th>Actions</th>
             </tr>
           </thead>
           <tbody>
-
-            <!-- Template Row 1 -->
+            <!-- Row 1 -->
             <tr>
               <td>
-                <div style="display:flex; flex-direction:column; gap:4px;">
+                <div style="display:flex; flex-direction:column; gap:5px;">
                   <span class="tpl-code">2nd_opinion_approved_member_outreach_interactive</span>
                   <span style="font-size:11px; color:#9ca3af;">ID: 2 &nbsp;·&nbsp; MARKUP</span>
                 </div>
               </td>
-              <td>
-                <div class="tpl-subject" title="2nd Opinion Approved – Member Facing Outreach">
-                  2nd Opinion Approved – Member Facing Outreach
-                </div>
-              </td>
+              <td><div class="tpl-subject" title="2nd Opinion Approved – Member Facing Outreach">2nd Opinion Approved – Member Facing Outreach</div></td>
               <td><span class="badge badge-call">📞 CALL</span></td>
               <td>
-                <div style="display:flex; align-items:center; gap:5px; font-size:12px;">
-                  <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="#6b7280" stroke-width="2"><path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"/><circle cx="12" cy="7" r="4"/></svg>
-                  Member
+                <div style="display:flex; align-items:center; gap:5px; font-size:12.5px;">
+                  <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="#6b7280" stroke-width="2"><path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"/><circle cx="12" cy="7" r="4"/></svg>Member
                 </div>
               </td>
               <td>
@@ -725,61 +702,46 @@
                   <option>v3</option>
                 </select>
               </td>
-              <td>
-                <span class="badge badge-draft">
-                  <svg viewBox="0 0 8 8"><circle cx="4" cy="4" r="4" fill="#d97706"/></svg>
-                  DRAFT
-                </span>
-              </td>
+              <td><span class="badge badge-draft"><svg viewBox="0 0 8 8"><circle cx="4" cy="4" r="4" fill="#d97706"/></svg>DRAFT</span></td>
               <td>
                 <div class="var-chips">
                   <span class="var-chip">member_name</span>
                   <span class="var-chip">second_opinion_office_name</span>
-                  <span class="var-chip">+3 more</span>
+                  <span class="var-chip">second_opinion_office_address</span>
+                  <span class="var-chip">+2 more</span>
                 </div>
               </td>
+              <td><span style="font-size:12px; color:#9ca3af; font-style:italic;">— Not approved yet</span></td>
               <td>
                 <div class="row-actions">
-                  <button class="btn btn-secondary btn-xs" title="Edit template">
-                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M11 4H4a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2v-7"/><path d="M18.5 2.5a2.121 2.121 0 0 1 3 3L12 15l-4 1 1-4 9.5-9.5z"/></svg>
-                    Edit
+                  <button class="btn btn-secondary btn-xs">
+                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M11 4H4a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2v-7"/><path d="M18.5 2.5a2.121 2.121 0 0 1 3 3L12 15l-4 1 1-4 9.5-9.5z"/></svg>Edit
                   </button>
-                  <button class="btn btn-success btn-xs" title="Approve template">
-                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="20 6 9 17 4 12"/></svg>
-                    Approve
+                  <button class="btn btn-success btn-xs">
+                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="20 6 9 17 4 12"/></svg>Approve
                   </button>
-                  <button class="btn btn-danger btn-xs" title="Deny template">
-                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg>
-                    Deny
+                  <button class="btn btn-danger btn-xs">
+                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg>Deny
                   </button>
-                  <div class="icon-btn" title="View file">
-                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"/><circle cx="12" cy="12" r="3"/></svg>
-                  </div>
-                  <div class="icon-btn" title="Download">
-                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="8 17 12 21 16 17"/><line x1="12" y1="12" x2="12" y2="21"/><path d="M20.88 18.09A5 5 0 0 0 18 9h-1.26A8 8 0 1 0 3 16.29"/></svg>
-                  </div>
+                  <div class="icon-btn" title="View"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"/><circle cx="12" cy="12" r="3"/></svg></div>
+                  <div class="icon-btn" title="Version History"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="23 4 23 10 17 10"/><path d="M20.49 15a9 9 0 1 1-.49-4.95"/></svg></div>
+                  <div class="icon-btn" title="Download"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="8 17 12 21 16 17"/><line x1="12" y1="12" x2="12" y2="21"/><path d="M20.88 18.09A5 5 0 0 0 18 9h-1.26A8 8 0 1 0 3 16.29"/></svg></div>
                 </div>
               </td>
             </tr>
-
-            <!-- Template Row 2 -->
+            <!-- Row 2 -->
             <tr>
               <td>
-                <div style="display:flex; flex-direction:column; gap:4px;">
+                <div style="display:flex; flex-direction:column; gap:5px;">
                   <span class="tpl-code">2nd_opinion_approved_member_outreach_interactive_followup</span>
                   <span style="font-size:11px; color:#9ca3af;">ID: 1 &nbsp;·&nbsp; MARKUP</span>
                 </div>
               </td>
-              <td>
-                <div class="tpl-subject" title="2nd Opinion Approved – Member Facing Outreach (Follow-up)">
-                  2nd Opinion Approved – Member Facing Outreach (Follow-up)
-                </div>
-              </td>
+              <td><div class="tpl-subject" title="2nd Opinion Approved – Member Facing Outreach (Follow-up)">2nd Opinion Approved – Member Facing Outreach (Follow-up)</div></td>
               <td><span class="badge badge-call">📞 CALL</span></td>
               <td>
-                <div style="display:flex; align-items:center; gap:5px; font-size:12px;">
-                  <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="#6b7280" stroke-width="2"><path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"/><circle cx="12" cy="7" r="4"/></svg>
-                  Member
+                <div style="display:flex; align-items:center; gap:5px; font-size:12.5px;">
+                  <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="#6b7280" stroke-width="2"><path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"/><circle cx="12" cy="7" r="4"/></svg>Member
                 </div>
               </td>
               <td>
@@ -788,362 +750,750 @@
                   <option>v2</option>
                 </select>
               </td>
-              <td>
-                <span class="badge badge-draft">
-                  <svg viewBox="0 0 8 8"><circle cx="4" cy="4" r="4" fill="#d97706"/></svg>
-                  DRAFT
-                </span>
-              </td>
+              <td><span class="badge badge-draft"><svg viewBox="0 0 8 8"><circle cx="4" cy="4" r="4" fill="#d97706"/></svg>DRAFT</span></td>
               <td>
                 <div class="var-chips">
                   <span class="var-chip">member_name</span>
                   <span class="var-chip">opinion_office_phone_number</span>
-                  <span class="var-chip">+3 more</span>
+                  <span class="var-chip">ldp_toll_free_number</span>
+                  <span class="var-chip">+2 more</span>
                 </div>
               </td>
+              <td><span style="font-size:12px; color:#9ca3af; font-style:italic;">— Not approved yet</span></td>
               <td>
                 <div class="row-actions">
                   <button class="btn btn-secondary btn-xs">
-                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M11 4H4a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2v-7"/><path d="M18.5 2.5a2.121 2.121 0 0 1 3 3L12 15l-4 1 1-4 9.5-9.5z"/></svg>
-                    Edit
+                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M11 4H4a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2v-7"/><path d="M18.5 2.5a2.121 2.121 0 0 1 3 3L12 15l-4 1 1-4 9.5-9.5z"/></svg>Edit
                   </button>
                   <button class="btn btn-success btn-xs">
-                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="20 6 9 17 4 12"/></svg>
-                    Approve
+                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="20 6 9 17 4 12"/></svg>Approve
                   </button>
                   <button class="btn btn-danger btn-xs">
-                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg>
-                    Deny
+                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg>Deny
                   </button>
-                  <div class="icon-btn" title="View file">
-                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"/><circle cx="12" cy="12" r="3"/></svg>
-                  </div>
-                  <div class="icon-btn" title="Download">
-                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="8 17 12 21 16 17"/><line x1="12" y1="12" x2="12" y2="21"/><path d="M20.88 18.09A5 5 0 0 0 18 9h-1.26A8 8 0 1 0 3 16.29"/></svg>
-                  </div>
+                  <div class="icon-btn" title="View"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"/><circle cx="12" cy="12" r="3"/></svg></div>
+                  <div class="icon-btn" title="Version History"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="23 4 23 10 17 10"/><path d="M20.49 15a9 9 0 1 1-.49-4.95"/></svg></div>
+                  <div class="icon-btn" title="Download"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="8 17 12 21 16 17"/><line x1="12" y1="12" x2="12" y2="21"/><path d="M20.88 18.09A5 5 0 0 0 18 9h-1.26A8 8 0 1 0 3 16.29"/></svg></div>
                 </div>
               </td>
             </tr>
-
           </tbody>
         </table>
-
       </div>
-    </div><!-- /category card 1 -->
+    </div>
 
-    <!-- ═══════════════════════════════════════════════
-         CATEGORY 2 — Acknowledgement (collapsed / empty)
-    ═══════════════════════════════════════════════ -->
+    <!-- ── CATEGORY 2: Acknowledgement (empty / collapsed) ── -->
     <div class="category-card">
-
-      <!-- Category Header -->
       <div class="cat-header">
         <button class="cat-expand-btn" style="background:#f1f5f9; color:#94a3b8;">
           <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="9 18 15 12 9 6"/></svg>
         </button>
-        <div class="cat-icon" style="background: linear-gradient(135deg, #64748b, #94a3b8);">
+        <div class="cat-icon cat-icon-gray">
           <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/><line x1="16" y1="13" x2="8" y2="13"/><line x1="16" y1="17" x2="8" y2="17"/></svg>
         </div>
         <div class="cat-info">
           <div class="cat-name">Acknowledgement</div>
           <div class="cat-meta">
-            <div class="cat-meta-item">
-              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="2" y="7" width="20" height="14" rx="2"/><path d="M16 7V5a2 2 0 0 0-2-2h-4a2 2 0 0 0-2 2v2"/></svg>
-              LOB: <strong style="color:#1a1a2e; margin-left:2px;">DHMO</strong>
-            </div>
-            <div class="cat-meta-item">
-              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><line x1="12" y1="8" x2="12" y2="12"/><line x1="12" y1="16" x2="12.01" y2="16"/></svg>
-              Workflow: <span style="color:#9ca3af; font-style:italic; margin-left:2px;">Not set</span>
-            </div>
-            <div class="cat-meta-item">
-              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="4" width="18" height="18" rx="2"/><line x1="16" y1="2" x2="16" y2="6"/><line x1="8" y1="2" x2="8" y2="6"/><line x1="3" y1="10" x2="21" y2="10"/></svg>
-              Created: Apr 21, 2026
-            </div>
+            <div class="cat-meta-item"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="2" y="7" width="20" height="14" rx="2"/><path d="M16 7V5a2 2 0 0 0-2-2h-4a2 2 0 0 0-2 2v2"/></svg>LOB: <strong style="color:#1a1a2e; margin-left:3px;">DHMO</strong></div>
+            <div class="cat-meta-item"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><line x1="12" y1="8" x2="12" y2="12"/><line x1="12" y1="16" x2="12.01" y2="16"/></svg>Workflow: <span style="color:#9ca3af; font-style:italic; margin-left:3px;">Not set</span></div>
+            <div class="cat-meta-item"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="4" width="18" height="18" rx="2"/><line x1="16" y1="2" x2="16" y2="6"/><line x1="8" y1="2" x2="8" y2="6"/><line x1="3" y1="10" x2="21" y2="10"/></svg>Created: Apr 21, 2026</div>
+            <div class="cat-meta-item"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="4" width="18" height="18" rx="2"/><line x1="16" y1="2" x2="16" y2="6"/><line x1="8" y1="2" x2="8" y2="6"/><line x1="3" y1="10" x2="21" y2="10"/></svg>Category ID: 2</div>
             <span class="badge badge-nondelegated">NON DELEGATED</span>
-            <span class="badge badge-active">
-              <svg viewBox="0 0 8 8"><circle cx="4" cy="4" r="4" fill="#059669"/></svg>
-              Active
-            </span>
+            <span class="badge badge-active"><svg viewBox="0 0 8 8"><circle cx="4" cy="4" r="4" fill="#059669"/></svg>Active</span>
           </div>
         </div>
         <div class="cat-actions">
           <span class="tpl-count tpl-count-empty">0 Templates</span>
-          <button class="btn btn-secondary btn-sm" onclick="openAddTemplate(2,'Acknowledgement')">
-            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="12" y1="5" x2="12" y2="19"/><line x1="5" y1="12" x2="19" y2="12"/></svg>
-            Add Template
+          <button class="btn btn-secondary btn-sm">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="12" y1="5" x2="12" y2="19"/><line x1="5" y1="12" x2="19" y2="12"/></svg>Add Template
           </button>
-          <div class="icon-btn" title="Edit Category">
-            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M11 4H4a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2v-7"/><path d="M18.5 2.5a2.121 2.121 0 0 1 3 3L12 15l-4 1 1-4 9.5-9.5z"/></svg>
-          </div>
-          <div class="icon-btn" title="More options" style="color:#6b7280;">
-            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="5" r="1"/><circle cx="12" cy="12" r="1"/><circle cx="12" cy="19" r="1"/></svg>
-          </div>
+          <div class="icon-btn"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M11 4H4a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2v-7"/><path d="M18.5 2.5a2.121 2.121 0 0 1 3 3L12 15l-4 1 1-4 9.5-9.5z"/></svg></div>
+          <div class="icon-btn"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="5" r="1"/><circle cx="12" cy="12" r="1"/><circle cx="12" cy="19" r="1"/></svg></div>
         </div>
       </div>
-
-      <!-- Empty State (collapsed — shown on expand) -->
-      <div class="templates-area" style="display:none;">
+      <!-- Expanded empty state -->
+      <div class="templates-area">
         <div class="empty-state">
-          <div class="empty-icon">
-            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/></svg>
-          </div>
-          <div class="empty-title">No templates yet</div>
-          <div class="empty-sub">This category has no script templates. Add the first one to get started.</div>
-          <button class="btn btn-primary btn-sm" onclick="openAddTemplate(2,'Acknowledgement')">
+          <div class="empty-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/></svg></div>
+          <div class="empty-title">No templates in this category</div>
+          <div class="empty-sub">This category has no script templates yet. Add the first one to get started.</div>
+          <button class="btn btn-primary btn-sm">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="12" y1="5" x2="12" y2="19"/><line x1="5" y1="12" x2="19" y2="12"/></svg>Add First Template
+          </button>
+        </div>
+      </div>
+    </div>
+
+    <div class="page-footer">© 2024 Care Insight All Rights Reserved</div>
+  </div>
+
+  <!-- ══════════════════════════════════════════════════════════════
+       MODALS SECTION — Rendered inline for web2figma capture
+  ══════════════════════════════════════════════════════════════ -->
+  <div class="modals-section">
+    <div class="modals-section-label">Modals</div>
+
+    <!-- ═══════════ ROW 1: Add Category + Add Template ═══════════ -->
+    <div class="modals-row">
+
+      <!-- MODAL 1: Add Category -->
+      <div class="modal-card" style="width:520px;">
+        <div class="modal-header">
+          <div class="modal-title">
             <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="12" y1="5" x2="12" y2="19"/><line x1="5" y1="12" x2="19" y2="12"/></svg>
-            Add First Template
+            Add New Category
+          </div>
+          <button class="modal-close-btn">×</button>
+        </div>
+        <div class="modal-body">
+          <div class="info-box info-box-blue">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><line x1="12" y1="8" x2="12" y2="12"/><line x1="12" y1="16" x2="12.01" y2="16"/></svg>
+            <div>Categories group LOB script templates. Assign a LOB, delegation type and optional workflow trigger.</div>
+          </div>
+          <div class="field-row">
+            <div class="field-group" style="flex:2;">
+              <label class="req">Category Name</label>
+              <input type="text" placeholder="e.g. 2nd Opinion Grievance"/>
+            </div>
+            <div class="field-group" style="flex:1;">
+              <label class="req">LOB</label>
+              <select><option selected>DHMO</option><option>PPO</option><option>HMO</option><option>Medicare</option></select>
+            </div>
+          </div>
+          <div class="field-row">
+            <div class="field-group">
+              <label class="req">Delegation Type</label>
+              <select><option>DELEGATED</option><option>NON DELEGATED</option></select>
+            </div>
+            <div class="field-group">
+              <label>Workflow Trigger</label>
+              <select><option value="">-- None --</option><option>grievance_filed</option><option>appeal_submitted</option><option>acknowledgement_sent</option><option>decision_rendered</option></select>
+            </div>
+          </div>
+          <div class="field-group">
+            <label>Active</label>
+            <select><option selected>Yes</option><option>No</option></select>
+          </div>
+        </div>
+        <div class="modal-footer">
+          <button class="btn btn-secondary">Cancel</button>
+          <button class="btn btn-primary">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M19 21H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h11l5 5v11a2 2 0 0 1-2 2z"/><polyline points="17 21 17 13 7 13 7 21"/><polyline points="7 3 7 8 15 8"/></svg>Save Category
           </button>
         </div>
       </div>
 
-    </div><!-- /category card 2 -->
+      <!-- MODAL 2: Add New Template -->
+      <div class="modal-card" style="width:640px;">
+        <div class="modal-header">
+          <div class="modal-title">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="12" y1="5" x2="12" y2="19"/><line x1="5" y1="12" x2="19" y2="12"/></svg>
+            Add New Template —
+            <span style="color:#4f46e5; margin-left:4px;">2nd Opinion Grievance</span>
+          </div>
+          <button class="modal-close-btn">×</button>
+        </div>
+        <div class="modal-body">
+          <div class="info-box info-box-blue">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><line x1="12" y1="8" x2="12" y2="12"/><line x1="12" y1="16" x2="12.01" y2="16"/></svg>
+            <div>Templates are script files linked to a category. Specify channel, recipient, variables and upload the source file.</div>
+          </div>
+          <div class="field-row">
+            <div class="field-group" style="flex:2;">
+              <label>Category</label>
+              <input type="text" value="2nd Opinion Grievance" readonly style="background:#f8f9fc; color:#6b7280;"/>
+            </div>
+            <div class="field-group" style="flex:1;">
+              <label>LOB</label>
+              <select><option selected>DHMO</option><option>PPO</option><option>HMO</option></select>
+            </div>
+          </div>
+          <div class="field-group">
+            <label class="req">Template Code</label>
+            <input type="text" placeholder="e.g. 2nd_opinion_approved_member_outreach_v2"/>
+          </div>
+          <div class="field-group">
+            <label class="req">Subject</label>
+            <input type="text" placeholder="Email / call subject line"/>
+          </div>
+          <div class="field-row">
+            <div class="field-group">
+              <label class="req">Channel</label>
+              <select><option>CALL</option><option>EMAIL</option><option>LETTER</option><option>FAX</option></select>
+            </div>
+            <div class="field-group">
+              <label class="req">Recipient</label>
+              <select><option>Member</option><option>Provider</option><option>Internal</option></select>
+            </div>
+            <div class="field-group">
+              <label>Script Markup Type</label>
+              <select><option selected>MARKUP</option><option>PLAIN</option><option>HTML</option></select>
+            </div>
+          </div>
+          <div class="field-group">
+            <label>Variables (comma-separated)</label>
+            <input type="text" placeholder="member_name, plan_name, toll_free_number"/>
+          </div>
+          <div class="field-group">
+            <label>Body / Script</label>
+            <textarea placeholder="Enter the script body or template markup…"></textarea>
+          </div>
+          <div class="field-group">
+            <label>Upload Template File</label>
+            <div class="upload-zone">
+              <div class="upload-zone-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21.44 11.05l-9.19 9.19a6 6 0 0 1-8.49-8.49l9.19-9.19a4 4 0 0 1 5.66 5.66l-9.2 9.19a2 2 0 0 1-2.83-2.83l8.49-8.48"/></svg></div>
+              <div class="upload-zone-text">
+                <strong>Click to upload or drag &amp; drop</strong>
+                <span>DOCX, PDF — Max 10 MB</span>
+              </div>
+            </div>
+          </div>
+          <div class="field-row">
+            <div class="field-group">
+              <label>Version Number</label>
+              <input type="text" value="1"/>
+            </div>
+            <div class="field-group">
+              <label>Status</label>
+              <select><option selected>DRAFT</option><option>APPROVED</option></select>
+            </div>
+            <div class="field-group">
+              <label>Active</label>
+              <select><option selected>Yes</option><option>No</option></select>
+            </div>
+          </div>
+        </div>
+        <div class="modal-footer">
+          <button class="btn btn-secondary">Cancel</button>
+          <button class="btn btn-primary">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M19 21H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h11l5 5v11a2 2 0 0 1-2 2z"/><polyline points="17 21 17 13 7 13 7 21"/><polyline points="7 3 7 8 15 8"/></svg>Save Template
+          </button>
+        </div>
+      </div>
 
-    <!-- Page footer -->
-    <div class="page-footer">© 2024 Care Insight All Rights Reserved</div>
+    </div><!-- /modals-row 1 -->
 
-  </div><!-- /content -->
+    <!-- ═══════════ ROW 2: Approve + Deny + Edit Template ═══════════ -->
+    <div class="modals-row">
+
+      <!-- MODAL 3: Approve Confirmation -->
+      <div class="modal-card" style="width:440px;">
+        <div class="modal-header">
+          <div class="modal-title">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"/><polyline points="22 4 12 14.01 9 11.01"/></svg>
+            Approve Template
+          </div>
+          <button class="modal-close-btn">
+            </button>
+        </div>
+        <div class="modal-body">
+          <div class="confirm-icon-wrap confirm-icon-green">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"/><polyline points="22 4 12 14.01 9 11.01"/></svg>
+          </div>
+          <div class="confirm-text-center">
+            <h3>Approve This Template?</h3>
+            <p>You are about to approve this template. Once approved, it will be available for use in outbound communications.</p>
+          </div>
+          <div class="confirm-detail-box">
+            <div class="confirm-detail-row">
+              <span>Template Code</span>
+              <span>2nd_opinion_approved_member_outreach_interactive</span>
+            </div>
+            <div class="confirm-detail-row">
+              <span>Category</span>
+              <span>2nd Opinion Grievance</span>
+            </div>
+            <div class="confirm-detail-row">
+              <span>Channel</span>
+              <span>CALL</span>
+            </div>
+            <div class="confirm-detail-row">
+              <span>Recipient</span>
+              <span>Member</span>
+            </div>
+            <div class="confirm-detail-row">
+              <span>Version</span>
+              <span>v1 (Current)</span>
+            </div>
+            <div class="confirm-detail-row">
+              <span>Current Status</span>
+              <span><span class="badge badge-draft"><svg viewBox="0 0 8 8"><circle cx="4" cy="4" r="4" fill="#d97706"/></svg>DRAFT</span></span>
+            </div>
+          </div>
+          <div class="field-group">
+            <label>Approval Notes (Optional)</label>
+            <textarea placeholder="Add any notes for this approval…" style="min-height:70px;"></textarea>
+          </div>
+        </div>
+        <div class="modal-footer">
+          <button class="btn btn-secondary">Cancel</button>
+          <button class="btn btn-success">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="20 6 9 17 4 12"/></svg>
+            Confirm Approve
+          </button>
+        </div>
+      </div>
+
+      <!-- MODAL 4: Deny Confirmation -->
+      <div class="modal-card" style="width:440px;">
+        <div class="modal-header">
+          <div class="modal-title" style="color:#dc2626;">
+            <svg viewBox="0 0 24 24" fill="none" stroke="#dc2626" stroke-width="2"><circle cx="12" cy="12" r="10"/><line x1="15" y1="9" x2="9" y2="15"/><line x1="9" y1="9" x2="15" y2="15"/></svg>
+            Deny Template
+          </div>
+          <button class="modal-close-btn">×</button>
+        </div>
+        <div class="modal-body">
+          <div class="confirm-icon-wrap confirm-icon-red">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><circle cx="12" cy="12" r="10"/><line x1="15" y1="9" x2="9" y2="15"/><line x1="9" y1="9" x2="15" y2="15"/></svg>
+          </div>
+          <div class="confirm-text-center">
+            <h3>Deny This Template?</h3>
+            <p>You are about to deny this template. It will be marked as denied and will not be available for use until revised and re-submitted.</p>
+          </div>
+          <div class="confirm-detail-box">
+            <div class="confirm-detail-row">
+              <span>Template Code</span>
+              <span>2nd_opinion_approved_member_outreach_interactive</span>
+            </div>
+            <div class="confirm-detail-row">
+              <span>Category</span>
+              <span>2nd Opinion Grievance</span>
+            </div>
+            <div class="confirm-detail-row">
+              <span>Channel</span>
+              <span>CALL</span>
+            </div>
+            <div class="confirm-detail-row">
+              <span>Recipient</span>
+              <span>Member</span>
+            </div>
+            <div class="confirm-detail-row">
+              <span>Version</span>
+              <span>v1 (Current)</span>
+            </div>
+            <div class="confirm-detail-row">
+              <span>Current Status</span>
+              <span><span class="badge badge-draft"><svg viewBox="0 0 8 8"><circle cx="4" cy="4" r="4" fill="#d97706"/></svg>DRAFT</span></span>
+            </div>
+          </div>
+          <div class="field-group">
+            <label class="req">Reason for Denial</label>
+            <textarea placeholder="Provide a reason for denying this template…" style="min-height:80px;"></textarea>
+          </div>
+          <div style="background:#fee2e2; border:1px solid #fecaca; border-radius:8px; padding:10px 14px; font-size:12.5px; color:#991b1b; display:flex; gap:8px; align-items:flex-start;">
+            <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" style="flex-shrink:0; margin-top:1px;"><circle cx="12" cy="12" r="10"/><line x1="12" y1="8" x2="12" y2="12"/><line x1="12" y1="16" x2="12.01" y2="16"/></svg>
+            <div>This action will notify the template creator. A reason is required to proceed with denial.</div>
+          </div>
+        </div>
+        <div class="modal-footer">
+          <button class="btn btn-secondary">Cancel</button>
+          <button class="btn btn-danger" style="background:#dc2626; color:#fff; border:none;">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg>
+            Confirm Deny
+          </button>
+        </div>
+      </div>
+
+      <!-- MODAL 5: Edit Template -->
+      <div class="modal-card" style="width:660px;">
+        <div class="modal-header">
+          <div class="modal-title">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M11 4H4a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2v-7"/><path d="M18.5 2.5a2.121 2.121 0 0 1 3 3L12 15l-4 1 1-4 9.5-9.5z"/></svg>
+            Edit Template
+          </div>
+          <button class="modal-close-btn">×</button>
+        </div>
+        <div class="modal-body">
+          <div style="background:#fef3c7; border:1px solid #fde68a; border-radius:8px; padding:10px 14px; font-size:12.5px; color:#92400e; display:flex; gap:8px; align-items:flex-start;">
+            <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" style="flex-shrink:0; margin-top:1px;"><circle cx="12" cy="12" r="10"/><line x1="12" y1="8" x2="12" y2="12"/><line x1="12" y1="16" x2="12.01" y2="16"/></svg>
+            <div>Editing will create a <strong>new version</strong> of this template. Previous versions will be preserved in version history.</div>
+          </div>
+          <div class="field-row">
+            <div class="field-group" style="flex:2;">
+              <label>Category</label>
+              <input type="text" value="2nd Opinion Grievance" readonly style="background:#f8f9fc; color:#6b7280;"/>
+            </div>
+            <div class="field-group" style="flex:1;">
+              <label>LOB</label>
+              <input type="text" value="DHMO" readonly style="background:#f8f9fc; color:#6b7280;"/>
+            </div>
+          </div>
+          <div class="field-group">
+            <label class="req">Template Code</label>
+            <input type="text" value="2nd_opinion_approved_member_outreach_interactive"/>
+          </div>
+          <div class="field-group">
+            <label class="req">Subject</label>
+            <input type="text" value="2nd Opinion Approved – Member Facing Outreach"/>
+          </div>
+          <div class="field-row">
+            <div class="field-group">
+              <label class="req">Channel</label>
+              <select><option selected>CALL</option><option>EMAIL</option><option>LETTER</option><option>FAX</option></select>
+            </div>
+            <div class="field-group">
+              <label class="req">Recipient</label>
+              <select><option selected>Member</option><option>Provider</option><option>Internal</option></select>
+            </div>
+            <div class="field-group">
+              <label>Script Markup Type</label>
+              <select><option selected>MARKUP</option><option>PLAIN</option><option>HTML</option></select>
+            </div>
+          </div>
+          <div class="field-group">
+            <label>Variables (comma-separated)</label>
+            <input type="text" value="member_name, second_opinion_office_name, second_opinion_office_address, opinion_office_phone_number, ldp_toll_free_number"/>
+          </div>
+          <div class="field-group">
+            <label>Body / Script</label>
+            <textarea style="min-height:100px;">Hello [member_name], we are reaching out regarding your second opinion request. Your appointment at [second_opinion_office_name] located at [second_opinion_office_address] has been approved. Please contact the office at [opinion_office_phone_number] to schedule your visit. For further assistance, call us at [ldp_toll_free_number].</textarea>
+          </div>
+          <div class="field-group">
+            <label>Replace Template File (Optional)</label>
+            <div class="upload-zone">
+              <div class="upload-zone-icon">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21.44 11.05l-9.19 9.19a6 6 0 0 1-8.49-8.49l9.19-9.19a4 4 0 0 1 5.66 5.66l-9.2 9.19a2 2 0 0 1-2.83-2.83l8.49-8.48"/></svg>
+              </div>
+              <div class="upload-zone-text">
+                <strong>Click to upload new file or drag &amp; drop</strong>
+                <span>Current: 2nd_opinion_approved_member_outreach_interactive_v1.docx</span>
+              </div>
+            </div>
+          </div>
+          <div class="field-row">
+            <div class="field-group">
+              <label>New Version Number</label>
+              <input type="text" value="2"/>
+            </div>
+            <div class="field-group">
+              <label>Status</label>
+              <select><option selected>DRAFT</option><option>APPROVED</option></select>
+            </div>
+            <div class="field-group">
+              <label>Active</label>
+              <select><option selected>Yes</option><option>No</option></select>
+            </div>
+          </div>
+        </div>
+        <div class="modal-footer">
+          <button class="btn btn-secondary">Cancel</button>
+          <button class="btn btn-primary">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M19 21H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h11l5 5v11a2 2 0 0 1-2 2z"/><polyline points="17 21 17 13 7 13 7 21"/><polyline points="7 3 7 8 15 8"/></svg>
+            Save as New Version
+          </button>
+        </div>
+      </div>
+
+    </div><!-- /modals-row 2 -->
+
+    <!-- ═══════════ ROW 3: View Template + Version History ═══════════ -->
+    <div class="modals-row">
+
+      <!-- MODAL 6: View Template -->
+      <div class="modal-card" style="width:640px;">
+        <div class="modal-header">
+          <div class="modal-title">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"/><circle cx="12" cy="12" r="3"/></svg>
+            View Template
+          </div>
+          <button class="modal-close-btn">×</button>
+        </div>
+        <div class="modal-body">
+
+          <!-- Meta grid -->
+          <div class="meta-grid">
+            <div class="meta-cell">
+              <div class="meta-cell-label">Template ID</div>
+              <div class="meta-cell-value">2</div>
+            </div>
+            <div class="meta-cell">
+              <div class="meta-cell-label">Version</div>
+              <div class="meta-cell-value">v1 (Current)</div>
+            </div>
+            <div class="meta-cell">
+              <div class="meta-cell-label">Channel</div>
+              <div class="meta-cell-value"><span class="badge badge-call">📞 CALL</span></div>
+            </div>
+            <div class="meta-cell">
+              <div class="meta-cell-label">Recipient</div>
+              <div class="meta-cell-value">Member</div>
+            </div>
+            <div class="meta-cell">
+              <div class="meta-cell-label">Status</div>
+              <div class="meta-cell-value"><span class="badge badge-draft"><svg viewBox="0 0 8 8"><circle cx="4" cy="4" r="4" fill="#d97706"/></svg>DRAFT</span></div>
+            </div>
+            <div class="meta-cell">
+              <div class="meta-cell-label">Markup Type</div>
+              <div class="meta-cell-value">MARKUP</div>
+            </div>
+            <div class="meta-cell">
+              <div class="meta-cell-label">Category</div>
+              <div class="meta-cell-value">2nd Opinion Grievance</div>
+            </div>
+            <div class="meta-cell">
+              <div class="meta-cell-label">LOB</div>
+              <div class="meta-cell-value">DHMO</div>
+            </div>
+          </div>
+
+          <!-- Subject -->
+          <div class="field-group">
+            <label>Subject</label>
+            <div style="background:#f8f9fc; border:1px solid #e2e8f0; border-radius:6px; padding:10px 14px; font-size:13px; color:#1a1a2e; font-weight:600;">
+              2nd Opinion Approved – Member Facing Outreach
+            </div>
+          </div>
+
+          <!-- Template Code -->
+          <div class="field-group">
+            <label>Template Code</label>
+            <div style="background:#f8f9fc; border:1px solid #e2e8f0; border-radius:6px; padding:10px 14px;">
+              <span class="tpl-code">2nd_opinion_approved_member_outreach_interactive</span>
+            </div>
+          </div>
+
+          <!-- Body preview -->
+          <div class="field-group">
+            <label>Script Body</label>
+            <div class="tpl-preview-body">
+              <p>Hello <span class="tpl-var">[member_name]</span>, we are reaching out regarding your second opinion request.</p>
+              <p>Your appointment at <span class="tpl-var">[second_opinion_office_name]</span>, located at <span class="tpl-var">[second_opinion_office_address]</span>, has been <strong>approved</strong>.</p>
+              <p>Please contact the office at <span class="tpl-var">[opinion_office_phone_number]</span> to schedule your visit at your earliest convenience.</p>
+              <p>For further assistance, please call us at our toll-free number: <span class="tpl-var">[ldp_toll_free_number]</span>.</p>
+              <p>Thank you for choosing our services.</p>
+            </div>
+          </div>
+
+          <!-- Variables -->
+          <div class="field-group">
+            <label>Template Variables</label>
+            <div style="display:flex; flex-wrap:wrap; gap:6px; padding:10px 0;">
+              <span class="var-chip">member_name</span>
+              <span class="var-chip">second_opinion_office_name</span>
+              <span class="var-chip">second_opinion_office_address</span>
+              <span class="var-chip">opinion_office_phone_number</span>
+              <span class="var-chip">ldp_toll_free_number</span>
+            </div>
+          </div>
+
+          <!-- File path -->
+          <div class="field-group">
+            <label>File Path</label>
+            <div style="background:#f8f9fc; border:1px solid #e2e8f0; border-radius:6px; padding:10px 14px; font-size:12px; color:#6b7280; word-break:break-all;">
+              Templates/lob-scripts/2nd Opinion Grievance/2nd_opinion_approved_member_outreach_interactive_v1.docx
+            </div>
+          </div>
+
+          <!-- Approval info -->
+          <div style="display:flex; gap:12px;">
+            <div style="flex:1; background:#f8f9fc; border:1px solid #e2e8f0; border-radius:7px; padding:10px 14px;">
+              <div class="meta-cell-label">Approved By</div>
+              <div style="font-size:13px; color:#9ca3af; font-style:italic; margin-top:4px;">— Not yet approved</div>
+            </div>
+            <div style="flex:1; background:#f8f9fc; border:1px solid #e2e8f0; border-radius:7px; padding:10px 14px;">
+              <div class="meta-cell-label">Approved At</div>
+              <div style="font-size:13px; color:#9ca3af; font-style:italic; margin-top:4px;">— Not yet approved</div>
+            </div>
+          </div>
+        </div>
+        <div class="modal-footer">
+          <button class="btn btn-secondary">Close</button>
+          <button class="btn btn-secondary">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="8 17 12 21 16 17"/><line x1="12" y1="12" x2="12" y2="21"/><path d="M20.88 18.09A5 5 0 0 0 18 9h-1.26A8 8 0 1 0 3 16.29"/></svg>
+            Download File
+          </button>
+          <button class="btn btn-primary">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M11 4H4a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2v-7"/><path d="M18.5 2.5a2.121 2.121 0 0 1 3 3L12 15l-4 1 1-4 9.5-9.5z"/></svg>
+            Edit Template
+          </button>
+        </div>
+      </div>
+
+      <!-- MODAL 7: Version History -->
+      <div class="modal-card" style="width:540px;">
+        <div class="modal-header">
+          <div class="modal-title">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="23 4 23 10 17 10"/><path d="M20.49 15a9 9 0 1 1-.49-4.95"/></svg>
+            Version History
+          </div>
+          <button class="modal-close-btn">×</button>
+        </div>
+        <div class="modal-body">
+
+          <!-- Template identifier -->
+          <div style="background:#f8f9fc; border:1px solid #e2e8f0; border-radius:8px; padding:12px 16px; display:flex; align-items:center; gap:12px;">
+            <div style="width:36px; height:36px; background:#ede9fe; border-radius:8px; display:flex; align-items:center; justify-content:center; flex-shrink:0;">
+              <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#4f46e5" stroke-width="2"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/></svg>
+            </div>
+            <div>
+              <div style="font-size:13px; font-weight:700; color:#1a1a2e;">2nd_opinion_approved_member_outreach_interactive</div>
+              <div style="font-size:12px; color:#6b7280; margin-top:2px;">2nd Opinion Grievance &nbsp;·&nbsp; DHMO &nbsp;·&nbsp; CALL &nbsp;·&nbsp; Member</div>
+            </div>
+          </div>
+
+          <div style="font-size:12px; font-weight:700; color:#6b7280; text-transform:uppercase; letter-spacing:0.5px;">3 Versions</div>
+
+          <!-- Timeline -->
+          <div class="version-timeline">
+
+            <!-- v3 — Current -->
+            <div class="version-row">
+              <div class="version-dot-col">
+                <div class="version-dot current"></div>
+                <div class="version-line"></div>
+              </div>
+              <div class="version-content">
+                <div class="version-top">
+                  <span class="version-label">Version 3</span>
+                  <span class="badge badge-draft"><svg viewBox="0 0 8 8"><circle cx="4" cy="4" r="4" fill="#d97706"/></svg>DRAFT</span>
+                  <span class="badge badge-info">Current</span>
+                </div>
+                <div class="version-date">Apr 25, 2026 &nbsp;·&nbsp; 02:14 PM</div>
+                <div class="version-by">Modified by: <strong>isabella.martinez@careinsight.ai</strong></div>
+                <div class="version-notes">Updated office address variable and added toll-free fallback number. Subject line revised for clarity.</div>
+                <div style="display:flex; gap:6px; margin-top:8px;">
+                  <button class="btn btn-secondary btn-xs">
+                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"/><circle cx="12" cy="12" r="3"/></svg>View
+                  </button>
+                  <button class="btn btn-secondary btn-xs">
+                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="8 17 12 21 16 17"/><line x1="12" y1="12" x2="12" y2="21"/></svg>Download
+                  </button>
+                </div>
+              </div>
+            </div>
+
+            <!-- v2 -->
+            <div class="version-row">
+              <div class="version-dot-col">
+                <div class="version-dot"></div>
+                <div class="version-line"></div>
+              </div>
+              <div class="version-content">
+                <div class="version-top">
+                  <span class="version-label">Version 2</span>
+                  <span class="badge badge-denied"><svg viewBox="0 0 8 8"><circle cx="4" cy="4" r="4" fill="#dc2626"/></svg>DENIED</span>
+                </div>
+                <div class="version-date">Apr 23, 2026 &nbsp;·&nbsp; 10:45 AM</div>
+                <div class="version-by">Modified by: <strong>john.smith@careinsight.ai</strong></div>
+                <div class="version-notes">Revised script body. Denied reason: Missing required disclosure statement at the end of the call script.</div>
+                <div style="display:flex; gap:6px; margin-top:8px;">
+                  <button class="btn btn-secondary btn-xs">
+                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"/><circle cx="12" cy="12" r="3"/></svg>View
+                  </button>
+                  <button class="btn btn-secondary btn-xs">
+                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="8 17 12 21 16 17"/><line x1="12" y1="12" x2="12" y2="21"/></svg>Download
+                  </button>
+                  <button class="btn btn-primary btn-xs">
+                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="23 4 23 10 17 10"/><path d="M20.49 15a9 9 0 1 1-.49-4.95"/></svg>Restore
+                  </button>
+                </div>
+              </div>
+            </div>
+
+            <!-- v1 -->
+            <div class="version-row">
+              <div class="version-dot-col">
+                <div class="version-dot"></div>
+              </div>
+              <div class="version-content">
+                <div class="version-top">
+                  <span class="version-label">Version 1</span>
+                  <span class="badge badge-approved"><svg viewBox="0 0 8 8"><circle cx="4" cy="4" r="4" fill="#059669"/></svg>APPROVED</span>
+                  <span style="font-size:11.5px; color:#6b7280;">Initial</span>
+                </div>
+                <div class="version-date">Apr 21, 2026 &nbsp;·&nbsp; 08:15 AM</div>
+                <div class="version-by">Created by: <strong>sarah.jones@careinsight.ai</strong></div>
+                <div class="version-by" style="margin-top:2px;">Approved by: <strong>michael.brown@careinsight.ai</strong> &nbsp;·&nbsp; Apr 22, 2026</div>
+                <div class="version-notes">Initial template creation for 2nd opinion member outreach call script.</div>
+                <div style="display:flex; gap:6px; margin-top:8px;">
+                  <button class="btn btn-secondary btn-xs">
+                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"/><circle cx="12" cy="12" r="3"/></svg>View
+                  </button>
+                  <button class="btn btn-secondary btn-xs">
+                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="8 17 12 21 16 17"/><line x1="12" y1="12" x2="12" y2="21"/></svg>Download
+                  </button>
+                  <button class="btn btn-primary btn-xs">
+                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="23 4 23 10 17 10"/><path d="M20.49 15a9 9 0 1 1-.49-4.95"/></svg>Restore
+                  </button>
+                </div>
+              </div>
+            </div>
+
+          </div><!-- /version-timeline -->
+        </div>
+        <div class="modal-footer">
+          <button class="btn btn-secondary">Close</button>
+          <button class="btn btn-primary">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="12" y1="5" x2="12" y2="19"/><line x1="5" y1="12" x2="19" y2="12"/></svg>
+            Create New Version
+          </button>
+        </div>
+      </div>
+
+    </div><!-- /modals-row 3 -->
+
+    <!-- ═══════════ ROW 4: Success Toast States ═══════════ -->
+    <div>
+      <div style="font-size:12px; font-weight:700; color:#6b7280; text-transform:uppercase; letter-spacing:0.5px; margin-bottom:12px;">Toast / Notification States</div>
+      <div style="display:flex; flex-direction:column; gap:10px; max-width:480px;">
+
+        <!-- Success toast -->
+        <div style="background:#fff; border:1px solid #a7f3d0; border-left:4px solid #059669; border-radius:8px; padding:14px 16px; display:flex; align-items:flex-start; gap:12px; box-shadow:0 2px 8px rgba(0,0,0,.07);">
+          <div style="width:32px; height:32px; background:#d1fae5; border-radius:8px; display:flex; align-items:center; justify-content:center; flex-shrink:0;">
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#059669" stroke-width="2.5"><path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"/><polyline points="22 4 12 14.01 9 11.01"/></svg>
+          </div>
+          <div style="flex:1;">
+            <div style="font-size:13px; font-weight:700; color:#065f46;">Template Approved Successfully</div>
+            <div style="font-size:12px; color:#047857; margin-top:2px;">Template "2nd_opinion_approved_member_outreach_interactive" has been approved and is now active.</div>
+          </div>
+          <button style="background:none; border:none; cursor:pointer; color:#9ca3af; font-size:18px; line-height:1; padding:0;">×</button>
+        </div>
+
+        <!-- Error toast -->
+        <div style="background:#fff; border:1px solid #fecaca; border-left:4px solid #dc2626; border-radius:8px; padding:14px 16px; display:flex; align-items:flex-start; gap:12px; box-shadow:0 2px 8px rgba(0,0,0,.07);">
+          <div style="width:32px; height:32px; background:#fee2e2; border-radius:8px; display:flex; align-items:center; justify-content:center; flex-shrink:0;">
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#dc2626" stroke-width="2.5"><circle cx="12" cy="12" r="10"/><line x1="15" y1="9" x2="9" y2="15"/><line x1="9" y1="9" x2="15" y2="15"/></svg>
+          </div>
+          <div style="flex:1;">
+            <div style="font-size:13px; font-weight:700; color:#991b1b;">Template Denied</div>
+            <div style="font-size:12px; color:#dc2626; margin-top:2px;">Template has been denied. The creator will be notified with your provided reason.</div>
+          </div>
+          <button style="background:none; border:none; cursor:pointer; color:#9ca3af; font-size:18px; line-height:1; padding:0;">×</button>
+        </div>
+
+        <!-- Info toast -->
+        <div style="background:#fff; border:1px solid #bfdbfe; border-left:4px solid #3b82f6; border-radius:8px; padding:14px 16px; display:flex; align-items:flex-start; gap:12px; box-shadow:0 2px 8px rgba(0,0,0,.07);">
+          <div style="width:32px; height:32px; background:#dbeafe; border-radius:8px; display:flex; align-items:center; justify-content:center; flex-shrink:0;">
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#2563eb" stroke-width="2.5"><circle cx="12" cy="12" r="10"/><line x1="12" y1="8" x2="12" y2="12"/><line x1="12" y1="16" x2="12.01" y2="16"/></svg>
+          </div>
+          <div style="flex:1;">
+            <div style="font-size:13px; font-weight:700; color:#1d4ed8;">New Version Created</div>
+            <div style="font-size:12px; color:#2563eb; margin-top:2px;">Version 2 has been created as a draft. Previous version v1 is preserved in history.</div>
+          </div>
+          <button style="background:none; border:none; cursor:pointer; color:#9ca3af; font-size:18px; line-height:1; padding:0;">×</button>
+        </div>
+
+        <!-- Warning toast -->
+        <div style="background:#fff; border:1px solid #fde68a; border-left:4px solid #d97706; border-radius:8px; padding:14px 16px; display:flex; align-items:flex-start; gap:12px; box-shadow:0 2px 8px rgba(0,0,0,.07);">
+          <div style="width:32px; height:32px; background:#fef3c7; border-radius:8px; display:flex; align-items:center; justify-content:center; flex-shrink:0;">
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#d97706" stroke-width="2.5"><path d="M10.29 3.86L1.82 18a2 2 0 0 0 1.71 3h16.94a2 2 0 0 0 1.71-3L13.71 3.86a2 2 0 0 0-3.42 0z"/><line x1="12" y1="9" x2="12" y2="13"/><line x1="12" y1="17" x2="12.01" y2="17"/></svg>
+          </div>
+          <div style="flex:1;">
+            <div style="font-size:13px; font-weight:700; color:#92400e;">Unsaved Changes</div>
+            <div style="font-size:12px; color:#d97706; margin-top:2px;">You have unsaved changes. Please save or discard before leaving this page.</div>
+          </div>
+          <button style="background:none; border:none; cursor:pointer; color:#9ca3af; font-size:18px; line-height:1; padding:0;">×</button>
+        </div>
+
+      </div>
+    </div>
+
+    <div class="page-footer" style="padding-top:8px;">© 2024 Care Insight All Rights Reserved</div>
+
+  </div><!-- /modals-section -->
+
 </div><!-- /main -->
-
-<!-- ═══════════════════════════════════════════════
-     MODAL — Add Template
-═══════════════════════════════════════════════ -->
-<div class="modal-overlay" id="addTemplateModal" style="display:none;">
-  <div class="modal">
-    <div class="modal-header">
-      <div class="modal-title">
-        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="12" y1="5" x2="12" y2="19"/><line x1="5" y1="12" x2="19" y2="12"/></svg>
-        Add New Template — <span id="modalCatName" style="color:#4f46e5; margin-left:4px;"></span>
-      </div>
-      <button class="modal-close" onclick="closeAddTemplate()">×</button>
-    </div>
-    <div class="modal-body">
-
-      <!-- Category (read-only) -->
-      <div class="field-row">
-        <div class="field-group">
-          <label>Category</label>
-          <input type="text" id="modalCatField" readonly style="background:#f8f9fc; color:#6b7280;"/>
-        </div>
-        <div class="field-group">
-          <label>LOB</label>
-          <select>
-            <option selected>DHMO</option>
-            <option>PPO</option>
-            <option>HMO</option>
-            <option>Medicare</option>
-          </select>
-        </div>
-      </div>
-
-      <div class="field-group">
-        <label class="req">Template Code</label>
-        <input type="text" placeholder="e.g. acknowledgement_member_outreach_v1"/>
-      </div>
-
-      <div class="field-group">
-        <label class="req">Subject</label>
-        <input type="text" placeholder="Email/letter subject line"/>
-      </div>
-
-      <div class="field-row">
-        <div class="field-group">
-          <label class="req">Channel</label>
-          <select>
-            <option>CALL</option>
-            <option>EMAIL</option>
-            <option>LETTER</option>
-            <option>FAX</option>
-          </select>
-        </div>
-        <div class="field-group">
-          <label class="req">Recipient</label>
-          <select>
-            <option>Member</option>
-            <option>Provider</option>
-            <option>Internal</option>
-          </select>
-        </div>
-        <div class="field-group">
-          <label>Script Markup Type</label>
-          <select>
-            <option selected>MARKUP</option>
-            <option>PLAIN</option>
-            <option>HTML</option>
-          </select>
-        </div>
-      </div>
-
-      <div class="field-group">
-        <label>Variables (comma-separated)</label>
-        <input type="text" placeholder="member_name, plan_name, toll_free_number"/>
-      </div>
-
-      <div class="field-group">
-        <label>Workflow Trigger</label>
-        <select>
-          <option value="">-- None --</option>
-          <option>grievance_filed</option>
-          <option>appeal_submitted</option>
-          <option>acknowledgement_sent</option>
-          <option>decision_rendered</option>
-        </select>
-      </div>
-
-      <div class="field-group">
-        <label class="req">Body / Script</label>
-        <textarea placeholder="Enter the script body or template markup here…" style="min-height:120px;"></textarea>
-      </div>
-
-      <div class="field-group">
-        <label>Upload Template File (.docx, .pdf)</label>
-        <div style="border:2px dashed #c4b5fd; border-radius:8px; padding:14px 16px; background:#faf5ff; display:flex; align-items:center; gap:12px; cursor:pointer;">
-          <div style="width:36px; height:36px; background:#ede9fe; border-radius:7px; display:flex; align-items:center; justify-content:center; flex-shrink:0;">
-            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#7c3aed" stroke-width="2"><path d="M21.44 11.05l-9.19 9.19a6 6 0 0 1-8.49-8.49l9.19-9.19a4 4 0 0 1 5.66 5.66l-9.2 9.19a2 2 0 0 1-2.83-2.83l8.49-8.48"/></svg>
-          </div>
-          <div>
-            <div style="font-size:12.5px; font-weight:600; color:#4f46e5;">Click to upload or drag &amp; drop</div>
-            <div style="font-size:11.5px; color:#7c3aed;">DOCX, PDF — Max 10 MB</div>
-          </div>
-        </div>
-      </div>
-
-      <div class="field-row">
-        <div class="field-group">
-          <label>Version Number</label>
-          <input type="text" value="1" placeholder="1"/>
-        </div>
-        <div class="field-group">
-          <label>Status</label>
-          <select>
-            <option selected>DRAFT</option>
-            <option>APPROVED</option>
-          </select>
-        </div>
-        <div class="field-group">
-          <label>Active</label>
-          <select>
-            <option selected>Yes</option>
-            <option>No</option>
-          </select>
-        </div>
-      </div>
-
-    </div>
-    <div class="modal-footer">
-      <button class="btn btn-secondary" onclick="closeAddTemplate()">Cancel</button>
-      <button class="btn btn-primary">
-        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M19 21H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h11l5 5v11a2 2 0 0 1-2 2z"/><polyline points="17 21 17 13 7 13 7 21"/><polyline points="7 3 7 8 15 8"/></svg>
-        Save Template
-      </button>
-    </div>
-  </div>
-</div>
-
-<!-- ═══════════════════════════════════════════════
-     MODAL — Add Category
-═══════════════════════════════════════════════ -->
-<div class="modal-overlay" id="addCategoryModal" style="display:none;">
-  <div class="modal" style="width:480px;">
-    <div class="modal-header">
-      <div class="modal-title">
-        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="12" y1="5" x2="12" y2="19"/><line x1="5" y1="12" x2="19" y2="12"/></svg>
-        Add New Category
-      </div>
-      <button class="modal-close" onclick="closeAddCategory()">×</button>
-    </div>
-    <div class="modal-body">
-
-      <div class="field-row">
-        <div class="field-group" style="flex:2;">
-          <label class="req">Category Name</label>
-          <input type="text" placeholder="e.g. 2nd Opinion Grievance"/>
-        </div>
-        <div class="field-group" style="flex:1;">
-          <label class="req">LOB</label>
-          <select>
-            <option selected>DHMO</option>
-            <option>PPO</option>
-            <option>HMO</option>
-            <option>Medicare</option>
-          </select>
-        </div>
-      </div>
-
-      <div class="field-row">
-        <div class="field-group">
-          <label class="req">Delegation Type</label>
-          <select>
-            <option>DELEGATED</option>
-            <option>NON DELEGATED</option>
-          </select>
-        </div>
-        <div class="field-group">
-          <label>Workflow Trigger</label>
-          <select>
-            <option value="">-- None --</option>
-            <option>grievance_filed</option>
-            <option>appeal_submitted</option>
-            <option>acknowledgement_sent</option>
-            <option>decision_rendered</option>
-          </select>
-        </div>
-      </div>
-
-      <div class="field-group">
-        <label>Active</label>
-        <select>
-          <option selected>Yes</option>
-          <option>No</option>
-        </select>
-      </div>
-
-    </div>
-    <div class="modal-footer">
-      <button class="btn btn-secondary" onclick="closeAddCategory()">Cancel</button>
-      <button class="btn btn-primary">
-        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M19 21H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h11l5 5v11a2 2 0 0 1-2 2z"/><polyline points="17 21 17 13 7 13 7 21"/><polyline points="7 3 7 8 15 8"/></svg>
-        Save Category
-      </button>
-    </div>
-  </div>
-</div>
-
-<script>
-  function openAddTemplate(catId, catName) {
-    document.getElementById('modalCatName').textContent = catName;
-    document.getElementById('modalCatField').value = catName;
-    document.getElementById('addTemplateModal').style.display = 'flex';
-  }
-  function closeAddTemplate() {
-    document.getElementById('addTemplateModal').style.display = 'none';
-  }
-  function openAddCategory() {
-    document.getElementById('addCategoryModal').style.display = 'flex';
-  }
-  function closeAddCategory() {
-    document.getElementById('addCategoryModal').style.display = 'none';
-  }
-
-  /* Toggle expand on category headers */
-  document.querySelectorAll('.cat-header').forEach(function(header) {
-    header.addEventListener('click', function(e) {
-      if (e.target.closest('.cat-actions')) return;
-      var area = header.nextElementSibling;
-      var btn  = header.querySelector('.cat-expand-btn svg');
-      if (!area) return;
-      var expanded = area.style.display !== 'none';
-      area.style.display = expanded ? 'none' : 'block';
-      btn.style.transform = expanded ? '' : 'rotate(90deg)';
-    });
-  });
-
-  /* Close modals on overlay click */
-  document.querySelectorAll('.modal-overlay').forEach(function(overlay) {
-    overlay.addEventListener('click', function(e) {
-      if (e.target === overlay) overlay.style.display = 'none';
-    });
-  });
-</script>
-
+</div><!-- /app-shell -->
 </body>
 </html>
